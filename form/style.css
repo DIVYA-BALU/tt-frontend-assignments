@@ -1,0 +1,27 @@
+.container{
+    background-color: rgb(148, 170, 146);
+    color: rgb(173, 58, 50);
+    display: flex;
+    justify-content: center;
+    width: 30%;
+    margin-top: 50px;
+    margin-left: 35%;
+}
+.container label{
+    font-size: 25px;
+}
+.container input{
+    height: 30px;
+    padding: 5px 5px 5px 5px;
+    border-radius: 10px;
+    margin: 20px 20px 20px 0;
+}
+
+.submit{
+    color: white;
+    background-color: black;
+    height: 50px;
+    width: 100px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}

@@ -1,0 +1,62 @@
+*{
+    background-color:honeydew;
+}
+
+.container{
+    margin-top: 50px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.quiz,.quiz p, .quiz div{
+    font-size: 20px;
+    background-color: ivory;
+    margin-top: 5px;
+}
+.quiz{
+    padding: 0px 20px 0px 20px;
+}
+h1{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.quiz div label{
+    font-size: 20px;
+    margin-right: 20px;
+    background-color: rgb(189, 168, 214);
+    color: white;
+}
+
+.quiz div a{
+    margin-left: 20px;
+    font-size: 20px;
+    background-color: ivory;
+}
+
+.quiz div input:checked + label{
+    background-color: rgb(119, 192, 149);
+}
+
+button{
+    border: 1px solid black;
+    border-radius: 1px;
+    margin-left: 50%;
+    background-color: ivory;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 40px;
+    width: 80px;
+    font-size: 20px;
+}
+
+button:hover{
+    color: #fff;
+    background-color: rgb(67, 28, 85);
+}
+
+.quiz div input, .quiz div label{
+    cursor: pointer;
+}

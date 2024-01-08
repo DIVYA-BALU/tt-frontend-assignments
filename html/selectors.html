@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container:hover{
+            display: grid;
+            grid-template-columns: auto auto auto;
+            column-gap: 10px;
+            row-gap: 50px;
+        }
+        *{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        .container .item{
+            background-color: beige;
+        }
+        div.item-1{
+            background-color: brown;
+        }
+        div,p{
+            border: 1px solid burlywood;
+        }
+        div p{
+            background-color: cadetblue;
+        }
+        div > p{
+            font-style: italic;
+        }
+        div + p{
+            font-family: cursive;
+        }
+        input:disabled{
+            visibility:unset;
+        }
+        h1~p{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <label for="name">Name:</label>
+    <input type="text" class="name">
+    <input type="submit" value="submit" disabled>
+    <p>testing p element</p>
+    <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+        <div class="item">6</div>
+        <div class="item">7</div>
+        <div class="item">8</div>
+        <h1><p>child of h1</p></h1>
+        <div class="item">9</div>
+        <p>p element inside div</p>
+    </div>
+</body>
+</html>
