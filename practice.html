@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Practice</title>
+    <style>
+        p {
+            color: brown;
+            font-size: 20px;
+            font-family: fantasy;
+        }
+
+        pre::first-letter {
+            /* pseudo element selector */
+            color: blue;
+            font-size: 20px;
+        }
+
+        #container {
+            font-size: 30px;
+            font-family: sans-serif;
+        }
+
+        input[type=text] {
+            font-family: cursive;
+        }
+
+        input[type=submit] {
+            height: 30px;
+            width: 120px;
+        }
+
+        a:hover {
+            /* pseudo class selector */
+            color: blueviolet;
+        }
+
+        a:visited {
+            color: green
+        }
+
+        a:active {
+            font-size: 30px;
+            color: brown;
+        }
+
+        p[data-myattribute] {
+            font-size: 40px;
+        }
+
+        header,
+        footer {
+            height: 50px;
+            background-color: rgba(0, 0, 255, 0.196);
+            text-align: center;
+            padding-top: 20px;
+            font-size: 30px;
+        }
+
+        table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            border: 1px solid;
+            width: 100%;
+        }
+
+        th {
+            border: 1px solid;
+            height: 100px;
+        }
+
+        td {
+            border: 1px solid;
+        }
+
+        img,
+        a {
+            padding-top: 20px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>Header</header>
+
+    <h1>heading1</h1>
+    <p data-myattribute="myattribute">Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, iure nisi
+        voluptatum dolore ab.</p>
+    <h2>heading2</h2>
+    <h3>heading3</h3>
+    <h4>heading4</h4>
+    <h5>heading5</h5>
+    <h6>heading6</h6>
+
+    <hr>
+
+    
+    <p>a<sup>2</sup></p>
+    <p>a<sub>2</sub></p>
+
+    <hr>
+
+    <!-- <div id="container">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam voluptate, eius iste, ut odit
+        ipsum.</div> -->
+
+    <pre><b>bold word</b>  <u>underlined word</u>  <i>italic word</i></pre>
+
+    <hr>
+
+    <a href="form.html" target="_blank">Form</a>
+
+    <table>
+        <caption>Student's Details</caption>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Willing Sports</th>
+        </tr>
+        <tr>
+            <td>Grace</td>
+            <td>20</td>
+            <td>Female</td>
+            <td>Tennis</td>
+        </tr>
+        <tr>
+            <td>Anita</td>
+            <td>30</td>
+            <td>Female</td>
+            <td>Tennis,Volleyball</td>
+        </tr>
+        <tr>
+            <td>Somu</td>
+            <td>32</td>
+            <td>Male</td>
+            <td>Cricket</td>
+        </tr>
+        <tr>
+            <td>Divya</td>
+            <td>22</td>
+            <td>Female</td>
+            <td>Tennis,Cricket</td>
+        </tr>
+    </table>
+
+    <!-- <img src="demo.jpg" alt="demo"> -->
+
+    <footer>Footer</footer>
+
+    <script>
+        let admin;
+        let name;
+
+        name = "John";
+        admin = name;
+
+        console.log(`admin is ${admin}`);
+
+        let planet = "Earth";
+        let user = "Grace";
+
+        console.log("Planet is " + `${planet}`);
+        console.log("user is " + user);
+
+        let guests = `Guests:
+            * John
+ * Pete
+ * Mary
+`;
+        console.log(guests);
+
+        let str = "Hello\nWorld";
+        console.log(str);
+
+        let string = "HelloWorld";
+
+        console.log("character at index 1 : " + string[1]); //at index :1
+        console.log("Value is " + string.valueOf());
+        console.log("character at index 3 : " + string.charAt(3));
+        console.log("last character : " + string.at(-1)); //last character
+        console.log("length of string " + str.length);
+
+        console.log("uppercase".toUpperCase());
+        console.log("lowercase".toLowerCase());
+
+        let str1 = "world world hello hello";
+
+        console.log("index of hello : " + str1.indexOf("hello"));
+        console.log("index of 'he' after position 2 : " + str1.indexOf("he",2));
+
+        console.log("length of str1 " + str1.length);
+
+        console.log(str1.lastIndexOf("h"));
+
+        console.log(str1.includes("wor"));
+        console.log(str1.startsWith('he'));
+        console.log(str1.endsWith('he'));
+
+        console.log(str1.slice(1,3));
+        console.log(str1.substring(1,3));
+        console.log(str1.substr(3,4));//4 is total characters
+
+        
+        console.log(str1.charCodeAt(1));       
+        console.log(String.fromCharCode(97));
+
+        console.log("abc".localeCompare("abc"));//equal 0
+        console.log("abc".localeCompare("123"));//abc > 123
+        console.log("abc".localeCompare("grt"));//abc < grt
+
+        console.log("      abc".trim());
+        console.log("abc".repeat(2));
+
+        let arr = new Array("cucumber");
+        arr[0]="apple",
+        arr[1]="orange";
+        console.log(arr);
+
+        let arr1 = [];
+        arr1[0]="apple",
+        arr1[1]="orange";
+        console.log(arr1);
+
+        let numbers = [0,1,2,3,4,5];
+        console.log(numbers);
+
+        numbers[2]=10;
+        console.log(numbers);
+
+        numbers[-3] = 6;
+        console.log(numbers);
+
+        console.log("Length of numbers array: " + numbers.length);
+
+        let array = [{name : "grace" , place : "namakkal"}];
+        console.log(array[0].name);
+
+        let fruits = ["apple","orange","cucumber"];
+        fruits.push("watermelon");//end
+        console.log(fruits);
+
+       fruits.pop();
+       console.log(fruits);
+
+       fruits.shift();//beginning
+       console.log(fruits);
+
+       fruits.unshift("banana");
+       console.log(fruits);
+
+       let arr3 = [];
+       arr3[3] = 1;
+       console.log(arr3);
+       arr3.unshift("demo");
+       console.log(arr3);
+
+       console.log(String(arr3));
+
+       console.log("pi :" + Math.PI);
+       console.log("sqrt2 :" + Math.SQRT2);
+       console.log("ceil :" + Math.ceil(1.1));//greater
+       console.log("floor :" + Math.floor(1.2));//small
+       console.log("random :" + Math.random());
+       console.log("round :" + Math.round(1.5));
+       console.log("trunc :" + Math.trunc(3.5));
+       console.log("pow :" + Math.pow(2,3));
+       console.log("sqrt :" + Math.sqrt(4));
+       console.log("min :" + Math.min(1,2,0,4));
+       console.log("max :" + Math.max(1,2,0,4));
+
+       let d = new Date("2023-02-25");
+       console.log("Year :" + d.getFullYear());
+       console.log("Date :" + d.getDate());
+       console.log("Day :" + d.getDay());//weekday
+       console.log("Month :" + d.getMonth());//0-11
+       console.log("Minute :" + d.getMinutes());
+
+    </script>
+</body>
+
+</html>

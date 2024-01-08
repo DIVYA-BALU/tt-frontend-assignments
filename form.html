@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Form</title>
+    <style>
+        .div1 {
+            background-color: aqua;
+            text-align: center;
+            height: 310px;
+            padding-top: 1px;
+        }
+
+        .div1 #stu-name {
+            color: blue;
+        }
+
+        div>h1 {
+            color: blue;
+        }
+
+        h1+p {
+            color: blue;
+        }
+
+        div~h1 {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="div1">
+        <h1>Sports Willing Form</h1>
+        <form method="post" name="sports_form">
+
+            <label for="stu-name">Name</label>
+            <input type="text" name="stu_name" id="stu-name" class="stu-name" required><br>
+
+            <label for="age">Age</label>
+            <input type="text" name="age" id="age" class="age" required><br><br>
+
+            <input type="radio" name="gender" id="gender-female" class="gender" value="female">
+            <label for="gender-female">Female</label><br>
+
+            <input type="radio" name="gender" id="gender-male" class="gender" value="male">
+            <label for="gender-male">Male</label><br><br>
+
+            <div class="div2">
+                <label for="sport-volleyball">Volleyball</label>
+                <input type="checkbox" name="sports[]" id="sport-volleyball" class="sport" value="volleyball"><br>
+                
+                <label for="sport-tennis">Tennis</label>
+                <input type="checkbox" name="sports[]" id="sport-tennis" class="sport" value="tennis"><br>
+                
+                <label for="sport-cricket">Cricket</label>
+                <input type="checkbox" name="sports[]" id="sport-cricket" class="sport" value="cricket">
+            </div><br>
+
+            <input type="submit" name="sub-but" id="sub-but" class="sub-but">
+        </form>
+    </div>
+</body>
+
+</html>

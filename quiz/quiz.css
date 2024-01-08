@@ -1,0 +1,59 @@
+#container {
+    margin-left: 300px;
+    margin-top: 50px;
+    padding: 50px;
+    width: 50%;
+    background-color: rgb(234, 224, 224);
+    font-size: 20px;
+}
+
+#container h1 {
+    text-align: center;
+    color: rgb(89, 89, 141);
+}
+
+#container .question {
+    margin-bottom: 20px;
+}
+
+#container .question p{
+    font-weight: bold;
+}
+
+#container .button input{
+    display: block;
+    height: 40px;
+    width: 80px;
+    margin-left: 250px;
+    border: none;
+    background-color: rgb(188, 188, 207);
+}
+
+#container .button input:focus{
+    display: block;
+    height: 40px;
+    width: 80px;
+    margin-left: 250px;
+    border: none;
+    background-color: rgb(103, 103, 176);
+}
+
+#container .question .correct{
+    display: inline-block;
+    text-align:center;
+    padding-left:25px ;
+    color: green;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#container .question .wrong{
+    display: inline-block;
+    text-align:center;
+    padding-left:25px ;
+    color: red;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#container .button-disable input{
+    display: none;
+}
