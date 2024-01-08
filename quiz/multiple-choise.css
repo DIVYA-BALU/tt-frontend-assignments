@@ -1,0 +1,109 @@
+
+body{
+    background-color: #348660e3;
+}
+.form-design {
+  background-color: #ecf5fd;
+  width: 60%;
+  margin: 20px;
+  margin-left: 30%;
+  float: right;
+  padding: 10px;
+}
+.info{
+    width: 35%;
+    position: fixed;
+    height: 100%;
+    float: left;
+    
+}
+p{
+font-size: 25px;
+}
+label{
+    font-size: 20px;
+}
+.welcome{
+    font-size: 50px;
+    color: whitesmoke;
+    text-align: center;
+    margin-top: 10%;
+    margin-bottom: 30px;
+}
+.quiz-information{
+    margin: 15px;
+    font-size: 25px;
+    text-align: justify;
+    color: whitesmoke;
+}
+.quiz-block-correct {
+    background-color: rgb(27, 214, 27);
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+}
+.quiz-block-incorrect {
+    background-color: rgb(255, 34, 34);
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+}
+.option-box{
+    
+    display: inline-block;
+    margin: 10px;
+    width: 40%;
+    height: 40px;
+    border: 1px solid;
+    background-color: rgb(170, 165, 165);
+    text-align: left;
+    border-radius: 20px;
+    padding-top: 5px;
+    cursor: pointer;
+    
+}
+.option-block {
+    margin-left: 30px;
+    text-align: center;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+.answer-block-hidden{
+    display: none;
+}
+.answer-block-show{
+    display: block;
+    margin-left: 30px;
+    padding: 20px;
+    text-align: left;
+    background-color: #3ddb5f;
+    font-size: 25px;
+    border-radius: 10px;
+}
+button{
+    margin: 30px;
+    font-size: 25px;
+    background-color: #3ddb5f;
+    border-radius: 10px;
+    padding: 10px;
+    width: 150px;
+}
+.grettings{
+    font-size: 50px;
+    color: whitesmoke;
+    text-align: center;
+    margin-top: 30%;
+    margin-bottom: 30px;
+}
+.result{
+    font-size: 30px;
+    color: whitesmoke;
+    text-align: center;
+    margin-bottom: 10px;
+}
+img{
+    margin-left: 20px;
+    height: 300px;
+    width: 400px;
+}

@@ -1,0 +1,46 @@
+.class-selector{
+    background-color: yellowgreen;
+}
+#id-selector{
+    background-color: yellow;
+}
+*{
+    background-color: black;
+}
+div{
+    height: 40px;
+    width: 100%;
+    border: 1px solid snow;
+}
+div.element-1{
+    color: whitesmoke;
+    width: 60%;
+}
+.element-2 .element-3{
+    border: none;
+    background-color: violet;
+}/*class inside another class*/
+div p{
+    background-color: aliceblue;
+}/*p tag inside div tag */
+div+p{
+    background-color: thistle;
+}/*Selects the first <p> element that is placed immediately after <div> elements*/
+div>p{
+    background-color: tomato;
+}/*p tag whose direct parent is div*/
+p~h2{
+background-color: tan;
+}/*every h2 tags comes after a <p> tag will get this property*/
+[width]{
+    background-color: steelblue;
+}/*every element with width attribute apply this css*/
+[width="80%"]{
+    background-color: springgreen;
+}
+h2:hover{
+    background-color: slateblue;
+}
+[name~="name"]{
+    color: white;
+}
