@@ -6,15 +6,12 @@ function randomString(lenString) {
     lenString = lenString === undefined ? 7 : lenString;
     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
     let res = "";
-
     for (var i = 0; i < lenString; i++) {
         let rnum = Math.floor(Math.random() * characters.length);
         res += characters.substring(rnum, rnum + 1);
     }
-
     return res;
 }
-
 
 const bodyEl = document.getElementById('body');
 const divEl = document.createElement('div');
@@ -283,7 +280,7 @@ for (let i = 0; i < numbers.length; i++) {
         inputEl.name = `Q${no}`;
         inputEl.value = currEl.options[j].value;
 
-        // inputEl.setAttribute('required', '');
+        inputEl.setAttribute('required', '');
 
         const labelEl = document.createElement('label');
         const flabelEl = document.createElement('label');
@@ -302,9 +299,7 @@ for (let i = 0; i < numbers.length; i++) {
         optionBox.appendChild(labelEl);
         optionBox.appendChild(breakEl);
         formEl.appendChild(optionBox)
-
     }
-
 }
 
 let CorrectAnswerCount = 0;
@@ -320,8 +315,8 @@ formEl.addEventListener("submit", function (e) {
         }
         else {
             optionEl.className = "show-block-wrong";
-            const el = document.getElementById(key + correctAnswer);
-            el.className = "show-block-correct";
+            const correctEl = document.getElementById(key + correctAnswer);
+            correctEl.className = "show-block-correct";
         }
     });
     console.log("corCount:" + CorrectAnswerCount);
