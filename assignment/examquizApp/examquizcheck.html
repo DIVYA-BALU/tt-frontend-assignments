@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       body {
+    background-color: #12ccd9;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #9af3f9;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 50vh;
+}
+
+img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    margin: 10px;
+}
+
+.firstrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+button {
+    background-color: white;
+    border: 2px solid;
+    padding: 5px 10px;
+    margin-top: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: 32px;
+}
+
+button:hover {
+    background-color: rgb(255, 0, 0);
+}
+
+.NextButton button:active{
+    transform: translateY(10px);
+}
+
+button:visited {
+    background-color: rgb(248, 250, 245);
+    color: rgb(65, 249, 9);
+}
+button:active {
+    background-color: #0bfc13;
+}
+
+button.green {
+    background-color: green;
+    color: white;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.Nextbutton {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-top: 20px;
+}
+
+.Nextbutton a {
+    text-decoration: none;
+}
+
+.Nextbutton button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.Nextbutton button:hover {
+    background-color: #45a049;
+}
+
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+        <div class="firstrow">
+        <div class="speakeroff"><img src="speaker-off.jpg" alt=""><br>
+            <button id="speakerbutton" type="button">Allow</button>
+        </div>
+        <div class="microphoneoff"><img src="microphone-off.jpg" alt=""><br>
+            <button id="microphonebutton" type="button">Allow</button></div>
+        <div class="cameroff"><img src="camer-off.jpg" alt=""><br><button id="camerabutton" type="button">Allow</button></div>
+        </div>
+        <!-- <div class="secondrow">
+        <div class="speakeron"><img src="speaker-on.jpg" alt=""></div>
+        <div class="microphoneon"><img src="microphone-on.jpg" alt=""></div>
+        <div class="cameron"><img src="camer-on.jpg" alt=""></div> -->
+        </div>
+        </div>
+    </div>
+    <div id="popup" class="popup">
+        <p id="popupText">message</p>
+        <button onclick="closePopup()">Allow</button>
+    </div>
+    <div id="overlay" class="overlay"></div>
+
+    <div class="Nextbutton"><a href="examquizquestions.html"><button type="button">Next</button></a></div>
+
+
+    <script>
+        function showPopup() {
+            document.getElementById('popupText').innerText = `Allow access.`;
+            document.getElementById('popup').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        // Add click event listeners to each button
+        document.getElementById('speakerbutton').addEventListener('click', function() {
+            showPopup('Speaker');
+        });
+
+        document.getElementById('microphonebutton').addEventListener('click', function() {
+            showPopup('Microphone');
+        });
+
+        document.getElementById('camerabutton').addEventListener('click', function() {
+            showPopup('Camera');
+        });
+    </script>
+    
+</body>
+</html>

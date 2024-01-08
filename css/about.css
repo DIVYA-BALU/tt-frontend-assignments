@@ -1,0 +1,17 @@
+.headerindex{
+    background-image: url(/images/2.1.jpg);
+    background-size: auto;
+    width: 100%;
+    height: 150px;
+
+
+}
+.headerindex h1{
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    color: rgb(146, 255, 4)
+}
+.resto{
+    color: #000;
+}

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="headsupplychain">
+      <h1>SUPPLY CHAIN <sub>management</sub></h1>
+      <div>
+        <a href="supplychain.html">HOME</a>
+        <a href="product.html">PRODUCT</a>
+      </div>
+      <div id="dataContainer"></div>
+
+      <form action="styleget" method="get"   id="userForm">
+        <label for="_id">_id:</label>
+        <input type="number" id="_id" name="_id" placeholder="eg: 41235671" />
+        <div>
+          <label for="availability">Availability:</label>
+          <input
+            type="number"
+            id="availability"
+            name="availability"
+            placeholder="amount"
+          />
+        </div>
+        <div>
+          <label for="amount">Amount:</label>
+          <input
+            type="text"
+            id="amount"
+            name="amount"
+            placeholder="Enter amount"
+          />
+        </div>
+        <div>
+          <label for="required_certificate">required_certificate:</label>
+          <input
+            type="text"
+            id="required_certificate"
+            name="required_certificate"
+            placeholder="Enter"
+          />
+        </div>
+        <div>
+          <label for="season">Season:</label>
+          <input
+            type="text"
+            id="season"
+            name="season"
+            placeholder="Enter season eg:ss23,fv23"
+          />
+        </div>
+        <div>
+          <label for="style_number">Style_number:</label>
+          <input
+            type="text"
+            id="style_number"
+            name="style_number"
+            placeholder="Enter"
+          />
+        </div>
+        <div>
+          <label for="supplier_name">supplier_name:</label>
+          <input
+            type="text"
+            id="supplier_name"
+            name="supplier_name"
+            placeholder="Enter Name"
+          />
+        </div>
+        <div>
+          <label for="type">Type:</label>
+          <input
+            type="text"
+            id="type"
+            name="type"
+            placeholder="Enter type"
+          />
+        </div>
+        <div>
+          <label for="amount">Amount:</label>
+          <input
+            type="text"
+            id="amount"
+            name="amount"
+            placeholder="Enter amount"
+          />
+        </div>
+        <div>
+          <label for="amount">Amount:</label>
+          <input
+            type="text"
+            id="amount"
+            name="amount"
+            placeholder="Enter amount"
+          />
+        </div>
+        <div>
+          <label for="amount">Amount:</label>
+          <input
+            type="text"
+            id="amount"
+            name="amount"
+            placeholder="Enter amount"
+          />
+        </div>
+        <div>
+          <label for="amount">Amount:</label>
+          <input
+            type="text"
+            id="amount"
+            name="amount"
+            placeholder="Enter amount"
+          />
+        </div>
+        <div>
+          <label for="amount">Amount:</label>
+          <input
+            type="text"
+            id="amount"
+            name="amount"
+            placeholder="Enter amount"
+          />
+        </div>
+        <div>
+          <label for="amount">Amount:</label>
+          <input
+            type="text"
+            id="amount"
+            name="amount"
+            placeholder="Enter amount"
+          />
+        </div>
+
+        <label for="supplierName">Supplier Name:</label>
+        <input
+          type="text"
+          id="supplierName"
+          name="supplierName"
+          placeholder="Enter supplier name"
+        />
+
+        <button type="submit" onclick="addUser()">Add User</button>
+      </form>
+
+      <script>
+        // Initial data object with an array of users
+        var data = {
+          users: [],
+        };
+
+        // Function to add a new user with an auto-incremented ID
+        function addUser() {
+          // Get user input from the form
+          var amount = document.getElementById("amount").value;
+          var supplierName = document.getElementById("supplierName").value;
+
+          // Create a new user with an auto-incremented ID
+          var newUser = {
+            _id: getAutoIncrementedId(),
+            amount: amount,
+            supplier_name: supplierName,
+            // Add more properties as needed
+          };
+
+          // Add the new user to the data
+          data.users.push(newUser);
+
+          // Optionally, you can clear the form fields for the next entry
+          document.getElementById("amount").value = "";
+          document.getElementById("supplierName").value = "";
+        }
+
+        // Function to get an auto-incremented ID
+        function getAutoIncrementedId() {
+          if (!localStorage.autoIncrementId) {
+            localStorage.autoIncrementId = 1;
+          } else {
+            localStorage.autoIncrementId =
+              parseInt(localStorage.autoIncrementId) + 1;
+          }
+          return localStorage.autoIncrementId;
+        }
+      </script>
+    </div>
+  </body>
+</html>

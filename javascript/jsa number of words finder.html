@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="jsa.css">
+    <title>Document</title>
+</head>
+<body><div class="body2">
+    <div class="head1">
+    <h1>TYPE THE SENTENCE</h1>
+    </div>
+    <div class="input1">
+        <textarea name="i" id="input" cols="30" rows="10" required placeholder="type u r text here "></textarea>
+        
+    </div>
+    <div class="submit">
+        <button><input type="submit" onclick="convert()"></button>
+        <input type="reset">
+    </div>
+    <div class="result" id="result">
+
+    </div>
+    </div>
+    <script>
+        function convert(){
+            let a=document.getElementById("input").value
+            let arr=a.split(" ")
+            let b=arr.length
+            let result=document.getElementById("result")
+            result.innerHTML=b +" words"
+        }
+    </script>
+
+    
+</body>
+</html>

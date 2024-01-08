@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="js.css">
+    <title>Document</title>
+</head>
+<body>    
+    <div class="body1">
+    <div class="head1">
+    <h1>Meter to inches</h1>
+    </div>
+   <div class="box1"> <input type="text" name="m to i" id="input" placeholder="Enter the value in meters" required>
+    </div>
+    <div class="box2">
+        <button type="submit" onclick="convert()">submit</button>
+    
+    <input type="reset">
+</div>
+<div class="fore">
+    <p>
+        note:        
+        1 meter=39.3701 inches
+        
+    </p>
+    <p>formula:  multiply the length value by 39.37
+    </p>
+</div>
+
+<div class="result1" id="result">
+    <p>
+        inches=
+    </p>
+</div>
+</div>
+<script>
+    function convert(){
+        let a=Number(document.getElementById("input").value)
+    let b=a*39.3701
+    let result=document.getElementById("result")
+    result.innerHTML=b.toFixed(3)+" inches"
+
+
+    }
+</script>
+
+
+<script>
+    let meg=`hffgfg
+    dffgfgfg`
+    console.log(meg)
+</script>
+
+    
+</body>
+</html>

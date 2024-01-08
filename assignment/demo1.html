@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="css/demo.css">
+    <title>Document</title>
+    <style>
+        *{
+            font-family: 'Courier New', Courier, monospace
+        }
+        body{
+            background-color: rgb(14, 142, 151);
+        }
+        form{
+            
+            margin-top: 100px;
+            margin-left: 70px;
+            margin-right: 70px;
+            background-color: aqua;
+            text-align: center;
+            padding: 20px;
+        }
+.USER_NAME_BOX [name]{
+    font-size: medium;
+    /* height: 100px; */
+}
+
+#sign-up{
+    color:green;
+}
+
+
+    </style>
+</head>
+<body>
+    <form>
+        <h1>sign-up</h1>
+        <div class="USER_NAME_BOX">
+            <!-- <label for="user-name">
+                user name:
+            </label> -->
+            <input type="text" id="user-name" name="user_name" required placeholder="user name or email">
+        </div>
+        <div>
+            <!-- <label for="password">
+                password :
+            </label> -->
+            <input type="password" id="password" name="password" minlength="8" required placeholder="password">
+        </div>
+    
+        <div>
+            <input type="date" placeholder="DOB">
+        </div>
+        <div>
+            <label for="email"></label>
+            <input type="email" id="email" name="email" placeholder="Email" required> 
+        </div>
+        <div >
+            <label for="MALE">MALE</label>
+            <input type="radio" id="MALE" name="gender" required>
+            <label for="FEMALE">FEMALE</label>
+            <input type="radio" id="FEMALE" name="gender">
+            
+        </div>
+        <div>
+            <input type="color">
+            <input type="checkbox">
+            <input type="time">
+            
+
+        </div>
+        <!-- <div>
+            <label for="content-us" style="color: blue;">
+                content us
+            </label>
+            <input type="">
+            
+        </div> -->
+        <div>
+            <!-- <div><label for="sign up"></label> -->
+                <input type="submit" id="sign-up" value="sign up">
+                <input type="reset">
+            </div>
+
+    </form>
+    <script>
+        // let name = "Hemanath";
+        // console.log(name)
+        // name = name + " Dhandapani";
+        // name += " Dhandapani";
+        // name = `${name} Dhandapani`;
+    //    name = name.concat(" Dhandapani");
+    //    let firstName = ""
+
+    //     console.log(name)
+    //    let a = 10;
+    // let b = 50;
+    // function name(a){
+        // let a = 9;
+    //     console.log(a+b);
+    //     return "hi"
+    // }
+    // name(8);
+    // let v = name(a);
+    // console.log(name(a));
+
+    // let s = "Hemanath";
+    // let d = ' Mango, kiwi, apple';
+    // let f = ` HEMANATH  `;
+    // console.log(s+d+f);
+    // console.log(s[1]);
+    // console.log(f.at(-3));
+    // console.log(s.length);
+    // console.log(d.toUpperCase());
+    // console.log(f.toLowerCase());
+    // console.log(s.slice(4));
+    // console.log(d.slice(4,7));
+    // console.log(d.concat("" + f));
+    // console.log(f.trim());
+      
+    // for(let i=10;i>0;i--){
+    //     console.log(i);
+    // }
+
+
+
+
+
+
+
+
+    
+
+
+    
+        
+
+    </script>
+</body>
+</html>

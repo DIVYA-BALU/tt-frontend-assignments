@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #12ccd9;
+        height: 100vh;
+    }
+
+    .container {
+        width: 1200px;
+        height: 620px;
+        background-color: #9af3f9;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .questions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    .radio-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 70px;
+    }
+
+    form button {
+        width: 500px;
+        height: 50px;
+        margin-right: 5px;
+        cursor: pointer;
+    }
+
+    label {
+        text-align: left;
+        margin-left: 5px;
+    }
+    .Nextbutton {
+    margin-left: 850px;
+    text-align: right;
+}
+
+.Nextbutton button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 105px;
+    border: none;
+    border-radius: 56px;
+    cursor: pointer;
+    display: none;
+    transition: background-color 3ms;
+
+}
+
+.Nextbutton button:hover {
+    background-color: #45a049;
+    
+}
+.Nextbutton button:active{
+    transform: translateY(10px);
+}
+.correct{
+    background: #16fc6e;
+}
+.incorrect{
+    background: #ed1f1f;
+}
+
+
+</style>
+
+<body>
+    <div class="container">
+        <div class="questions">
+                <form action="">
+                    <h1 id="question" class="question">Who got 490! marks in 10th?</h1>
+                    <div id="answerbuttons" class="answerbuttons">
+                        <div class="radio-group">
+                            <!-- <input type="radio" name="q1" id="q1a" value="q1a">
+                            <label for="q1a">SRI HARYI</label> -->
+                            <!-- <button class="button">SRI HARI</button> -->
+                        </div>
+                        <!-- <div class="radio-group">
+                            <!-- <input type="radio" name="q1" id="q1b" value="q1b">
+                            <label for="q1b">SAI VARUN</label> -->
+                            <!-- <button class="button">SAI VARUN</button> -->
+                        <!-- </div>
+                        <div class="radio-group"> -->
+                            <!-- <input type="radio" name="q1" id="q1c" value="q1c">
+                            <label for="q1c">DIVYA</label> -->
+                            <!-- <button class="button">DIVYA</button> -->
+                        <!-- </div>
+                        <div class="radio-group"> --> -->
+                            <!-- <input type="radio" name="q1" id="q1d" value="q1d">
+                            <label for="q1d">SUDHAKAR</label> -->
+                            <!-- <button class="button">SUDHAKAR</button> -->
+                        </div>
+                    </div>
+                </form>
+                <div class="Nextbutton"><button type="button" id="Nextbutton">Next</button></div>
+            </div>
+            <!-- <div id="secontquestiondiv" class="secondquestion">
+                <form action="">
+                    <h1>Who created the Ben-10 game in our gang?</h1>
+                    <div class="radioq1">
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1a" value="q1a">
+                            <label for="q1a">HEMANATH</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1b" value="q1b">
+                            <label for="q1b">GRACE</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1c" value="q1c">
+                            <label for="q1c">DIVYA</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1d" value="q1d">
+                            <label for="q1d">SONTHOSH</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="firstquestiondiv" class="firstquestion">
+                <form action="">
+                    <h1>Who is our first gym guy?</h1>
+                    <div class="radioq1">
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1a" value="q1a">
+                            <label for="q1a">SRI HARYI</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1b" value="q1b">
+                            <label for="q1b">TAMIL</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1c" value="q1c">
+                            <label for="q1c">UDHAYA</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1d" value="q1d">
+                            <label for="q1d">NATHIS</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="firstquestiondiv" class="firstquestion">
+                <form action="">
+                    <h1>Who always ate fried rice?</h1>
+                    <div class="radioq1">
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1a" value="q1a">
+                            <label for="q1a">HEMANATH</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1b" value="q1b">
+                            <label for="q1b">SAI VARUN</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1c" value="q1c">
+                            <label for="q1c">SONTHOSH</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1d" value="q1d">
+                            <label for="q1d">SUDHAKAR</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="firstquestiondiv" class="firstquestion">
+                <form action="">
+                    <h1>Who solved around 3000 coding problems?</h1>
+                    <div class="radioq1">
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1a" value="q1a">
+                            <label for="q1a">SRI HARYI</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1b" value="q1b">
+                            <label for="q1b">SUDHAKAR</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1c" value="q1c">
+                            <label for="q1c">DIVYA</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1d" value="q1d">
+                            <label for="q1d">SAI VARUN</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="firstquestiondiv" class="firstquestion">
+                <form action="">
+                    <h1>Who speaks mostly with eyes?</h1>
+                    <div class="radioq1">
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1a" value="q1a">
+                            <label for="q1a">NATHIS</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1b" value="q1b">
+                            <label for="q1b">SAI VARUN</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1c" value="q1c">
+                            <label for="q1c">GRACE</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1d" value="q1d">
+                            <label for="q1d">BALA</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="firstquestiondiv" class="firstquestion">
+                <form action="">
+                    <h1>Who has 70-acre land, including a dam?</h1>
+                    <div class="radioq1">
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1a" value="q1a">
+                            <label for="q1a">GRACE</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1b" value="q1b">
+                            <label for="q1b">SAI VARUN</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1c" value="q1c">
+                            <label for="q1c">HARI</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1d" value="q1d">
+                            <label for="q1d">SACHIN</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="firstquestiondiv" class="firstquestion">
+                <form action="">
+                    <h1>Who closed office most of the time?</h1>   
+                    <div class="radioq1">
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1a" value="q1a">
+                            <label for="q1a">SRI HARYI</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1b" value="q1b">
+                            <label for="q1b">SAI VARUN</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1c" value="q1c">
+                            <label for="q1c">DIVYA</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1d" value="q1d">
+                            <label for="q1d">SUDHAKAR</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="firstquestiondiv" class="firstquestion">
+                <form action="">
+                    <h1>Who is a die-hard fan of Rajini?</h1>
+                    <div class="radioq1">
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1a" value="q1a">
+                            <label for="q1a">HARI</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1b" value="q1b">
+                            <label for="q1b">GRACE</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1c" value="q1c">
+                            <label for="q1c">SUDHAKAR</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1d" value="q1d">
+                            <label for="q1d">SACHIN</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="firstquestiondiv" class="firstquestion">
+                <form action="">
+                    <h1>Who always studies till morning in Bala's room?</h1>
+                    <div class="radioq1">
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1a" value="q1a">
+                            <label for="q1a">SRI HARYI</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1b" value="q1b">
+                            <label for="q1b">NATHIS</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1c" value="q1c">
+                            <label for="q1c">UDHAYA</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="q1" id="q1d" value="q1d">
+                            <label for="q1d">Bala</label>
+                        </div> -->
+                    <!-- </div>
+                </form>
+            </div> -->
+        </div>
+    </div>
+    <script>
+          
+      const questions = [
+        {
+            question: "Who created the Ben-10 game in our gang?",
+            answers: [
+                {text: "SRI HARYI", correct: false},
+                {text: "Bala", correct: false},
+                {text: "SONTHOSH", correct: true},
+                {text: "SACHIN", correct: false},
+            ]
+        },
+        {
+            question: "Who always studies till morning in Bala's room?",
+            answers: [
+                {text: "UDHAYA", correct: false},
+                {text: "HEMANATH", correct: false},
+                {text: "Bala", correct: false},
+                {text: "NATHIS", correct: true},
+            ]
+        },
+        {
+            question: "Who is a die-hard fan of Rajini?",
+            answers: [
+                {text: "HARI", correct: true},
+                {text: "DIVYA", correct: false},
+                {text: "GRACE", correct: false},
+                {text: "NATHIS", correct: false},
+            ]
+        },
+        {
+            question: "Who closed office most of the time?",
+            answers: [
+                {text: "SONTHOSH", correct: false},
+                {text: "Bala", correct: false},
+                {text: "SRI HARYI", correct: true},
+                {text: "HARI", correct: false},
+            ]
+        },
+        {
+            question: "Who has 70-acre land, including a dam?",
+            answers: [
+                {text: "SONTHOSH", correct: false},
+                {text: "GRACE", correct: true},
+                {text: "SRI HARYI", correct: false},
+                {text: "HEMANATH", correct: false},
+            ]
+        },
+        {
+            question: "Who speaks mostly with eyes?",
+            answers: [
+                {text: "SACHIN", correct: false},
+                {text: "NATHIS", correct: false},
+                {text: "SAI VARUN", correct: true},
+                {text: "HEMANATH", correct: false},
+            ]
+        },
+        {
+            question: "Who solved around 3000 coding problems?",
+            answers: [
+                {text: "SUDHAKAR", correct: true},
+                {text: "DIVYA", correct: false},
+                {text: "GRACE", correct: false},
+                {text: "SONTHOSH", correct: false},
+            ]
+        },
+        {
+            question: "Who always ate fried rice?",
+            answers: [
+                {text: "HARI", correct: false},
+                {text: "SRI HARYI", correct: false},
+                {text: "GRACE", correct: false},
+                {text: "HEMANATH", correct: true},
+            ]
+        },
+        {
+            question: "Who is our first gym guy?",
+            answers: [
+                {text: "HEMANATH", correct: false},
+                {text: "TAMIL", correct: true},
+                {text: "SAI VARUN", correct: false},
+                {text: "BALA", correct: false},
+            ]
+        },
+        {
+            question: "Who plays cricket well?",
+            answers: [
+                {text: "SAI VARUN", correct: false},
+                {text: "SONTHOSH", correct: false},
+                {text: "HARI", correct: false},
+                {text: "SACHIN", correct: true},
+            ]
+        },
+        {
+            question: "Who got 490! marks in 10th?",
+            answers: [
+                {text: "SAI VARUN", correct: false},
+                {text: "GRACE", correct: false},
+                {text: "HARI", correct: false},
+                {text: "DIVYA", correct: true},
+            ]
+        }
+      ];
+       
+      const questionEl = document.getElementById("question");
+      const answerbuttonsEl  = document.getElementById("answerbuttons");
+      const NextbuttonEl = document.getElementById("Nextbutton");
+        let currentQuestionIndex = 0; 
+      let score = 0;
+
+      
+      function startQuiz() {
+          currentQuestionIndex = 0;
+          score = 0;
+          NextbuttonEl.innerHTML = "Next";
+          shuffleArray(questions);
+          showQuestion();
+        }
+        function shuffleArray(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [array[i], array[j]] = [array[j], array[i]];
+          }
+      }
+        
+      function showQuestion() {
+        restState();
+        let currentQuestion = questions[currentQuestionIndex];
+        let questionNo = currentQuestionIndex +1;
+        questionEl.innerHTML = questionNo + ". " + currentQuestion.question;
+
+       
+     currentQuestion.answers.forEach(answer => {
+        const button = document.createElement("button");
+        button.innerHTML = answer.text;
+        button.classList.add("radio-group");
+        answerbuttonsEl.appendChild(button); 
+        if(answer.correct) {
+            button.dataset.correct = answer.correct;
+        }
+        button.addEventListener("click",selectAnswer);
+
+     });
+      }
+
+      function restState() {
+        NextbuttonEl.style.display = "none";
+        while(answerbuttonsEl.firstChild){
+            answerbuttonsEl.removeChild(answerbuttonsEl.firstChild);
+        }
+      }
+
+     
+      function selectAnswer(e) {
+        const selectedButton = e.target;
+        const isCorrect = selectedButton.dataset.correct === "true";
+        if(isCorrect){
+            selectedButton.classList.add("correct");
+            score++;
+        }else{
+            selectedButton.classList.add("incorrect");
+        }
+
+    //     const answerButtons = document.querySelectorAll('.radio-group button');
+    // answerButtons.forEach(button => {
+    //     button.removeEventListener('click', selectAnswer);
+    // });
+
+
+        NextbuttonEl.style.display = "block";
+        e.preventDefault();
+}
+        NextbuttonEl.addEventListener ("click", () => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            showQuestion();
+        } else {
+            endQuiz();
+        }
+    });
+      
+      function endQuiz() {
+
+        if (score>7) {
+            alert("good " + "your score :" + score);
+        }else{
+            alert("try again " + "your score :" + score);
+        }
+    
+    // alert("Quiz completed! Your score: " + score);
+}
+
+
+
+
+      startQuiz();
+
+
+
+
+    </script>
+</body>
+
+</html>

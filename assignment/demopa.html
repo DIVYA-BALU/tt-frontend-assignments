@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="content">
+
+
+    </div>
+
+    <script>
+         const divEL = document.getElementById("content");
+        const h1El = document.createElement("h1");
+        h1El.textContent = "Signup";
+        divEL.appendChild(h1El);
+        const formEl = document.createElement("form");
+        const nameLableEl = document.createElement("lable");
+        nameLableEl.textContent = "type something :";
+        const nameInput = document.createElement("input");
+        nameInput.type = "text";
+        nameInput.placeholder = "type your name";
+        nameLableEl.appendChild(nameInput);
+        formEl.appendChild(nameLableEl);
+        const brEL = document.createElement("br");
+        formEl.appendChild(brEL);
+        const passLable = document.createElement("lable");
+        passLable.textContent = "password :";
+        const passInput = document.createElement("input");
+        passInput.type = "password"
+        passInput.placeholder = "typr u r password"
+        passLable.appendChild(passInput);
+        formEl.appendChild(passLable);
+        divEL.appendChild(formEl);
+
+
+    </script>
+</body>
+</html>
