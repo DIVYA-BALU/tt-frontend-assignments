@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+/* unvisited link */
+div p{
+  color:blue
+}
+div > p{
+  font-style: italic;
+}
+div + p{
+  background-color: yellow;
+}
+div ~ p{
+  font-weight: bold;
+}
+a:link {
+  color: red;
+}
+
+/* visited link */
+a:visited {
+  color: green;
+}
+
+/* mouse over link */
+a:hover {
+  color: hotpink;
+}
+
+/* selected link */
+a:active {
+  color: blue;
+}
+</style>
+</head>
+<body>
+
+<p><b><a href="https://www.w3schools.com/css/tryit.asp?filename=trycss_pseudo-class_links" target="_blank">This is a link</a></b></p>
+<div>
+  <p>this is div > p{} for italic font & div p for blue color</p>
+  </div>
+  <p>this is outside div but immediate sibiling to div + p{}</p>
+  <p> this is div ~ p {} example for bold fon</p>
+</body>
+</html>
+

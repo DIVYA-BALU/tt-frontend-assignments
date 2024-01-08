@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      button {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      // const person = { name: "John", age: 30, job: "Developer" };
+      // for (let key in person) {
+      //     console.log(key + ": " + person[key]);
+      //     }
+
+      //substring,slice,substr are same
+      //concat joins orderly
+      // const str1 = "Hello";
+      // const str2 = "World";
+      // const result = str1.concat(", ", str2, "!");
+      // console.log(result); // Output: Hello, World!
+      // console.log(result.substring(0,5))//Output:Hello
+
+      //push add element at last & Pop remove element at last
+      // const fruits = ["apple", "banana", "orange"];
+      // console.log(fruits);
+      // console.log("after push");
+      // fruits.push("grape"); // Adds "grape" to the end
+      // for(let key of fruits){
+      //    console.log(key);
+      // }
+      // fruits.pop();
+      // console.log("after pop");
+      // console.log(fruits);
+
+      //unshift add element to beginning
+      //shift remove element at beginning
+      // const fruits = ["apple", "banana", "orange"];
+      // fruits.unshift("grape"); // Adds "grape" to the beginning
+      // fruits.shift();// Removes the first element
+
+      //Array Splicing (splice method):
+      // Adds or removes elements from a specific position in the array.
+      // const fruits = ["apple", "banana", "orange"];
+      // fruits.splice(1, 0, "grape", "kiwi"); // Inserts "grape" and "kiwi" at index 1
+
+      // Array Concatenation (concat method):
+      // Concatenates two or more arrays.
+      // const fruits = ["apple", "banana"];
+      // const vegetables = ["carrot", "broccoli"];
+      // const combined = fruits.concat(vegetables);
+
+      // Array Filtering (filter method):
+      // Creates a new array with elements that pass a certain condition.
+      // const numbers = [1, 2, 3, 4, 5];
+      // const evens = numbers.filter(function (num) {
+      // return num % 2 === 0;
+      // });
+
+      // Array Mapping (map method):
+      // Creates a new array by applying a function to each element of an existing array.
+      // const numbers = [1, 2, 3, 4, 5];
+      // const doubled = numbers.map(function (num) {
+      //   return num * 2;
+      // });
+
+      // Array Reducing (reduce method):
+      // Reduces an array to a single value by applying a function to each element.
+      // const numbers = [1, 2, 3, 4, 5];
+      // const sum = numbers.reduce(function (accumulator, currentValue) {
+      // return accumulator + currentValue;
+      // }, 0);
+
+      //math functions
+      // console.log(Math.PI); // Output: 3.141592653589793
+      // console.log(Math.E);  // Output: 2.718281828459045
+      //basic:
+      // console.log(Math.abs(-5));       // Output: 5
+      // console.log(Math.ceil(4.25));    // Output: 5
+      // console.log(Math.floor(4.75));   // Output: 4
+      // console.log(Math.round(4.5));    // Output: 5
+      //expo & log:
+      // console.log(Math.pow(2, 3));     // Output: 8
+      // console.log(Math.sqrt(25));      // Output: 5
+      // console.log(Math.exp(2));        // Output: 7.3890560989306495
+      // console.log(Math.log(Math.E));   // Output: 1
+      // console.log(Math.log10(100));    // Output: 2
+      //trigno:
+      // console.log(Math.sin(Math.PI / 2));   // Output: 1 (sin of 90 degrees)
+      // console.log(Math.cos(0));             // Output: 1 (cos of 0 degrees)
+      // console.log(Math.tan(Math.PI / 4));   // Output: 1 (tan of 45 degrees)
+
+      //random function
+      // const randomInt = Math.floor(Math.random() * (max - min + 1)) + min;
+      //    const currentDate= new Date();
+      //const currentDate = new Date("2022-01-01T12:00:00");
+      //    console.log(currentDate);
+      // console.log(currentDate.getFullYear());
+      // console.log(currentDate.getUTCFullYear());
+      //    console.log(currentDate.getMonth());
+      //    console.log(currentDate.getUTCMonth());
+      //    console.log(currentDate.getDate());
+      //    console.log(currentDate.getUTCDate());
+      //    console.log(currentDate.getTime());
+      //    console.log(currentDate.getHours());
+      //    console.log(currentDate.getMinutes());
+      //    console.log(currentDate.getMilliseconds());
+      //    console.log(currentDate.toLocaleString());
+
+      //   const startDate = new Date("2024-01-01");
+      //   const endDate = new Date("2024-01-06");
+      //   const timeDifference = endDate - startDate; // Result in milliseconds
+      //   const daysDifference = timeDifference / (1000 * 60 * 60 * 24);
+      //   console.log(daysDifference);
+      //   console.log(timeDifference);
+
+      // document.write('hello mf');
+    </script>
+    <script src="js/function.js"></script>
+    <img id="img" src="image/download.jpg" style="width: 100px" />
+    <!-- <button type="button" onclick="document.getElementById('img').src = 'img.jpg'">click here to change img</button> -->
+    <button type="button" onclick="Change()">click here to change img</button>
+    <button type="button" id="button" onclick="Hide()">
+      click here to hide
+    </button>
+    <!-- <button type="button" onclick="Show()">click here to show</button> -->
+    <p>
+      when html is loaded write method delete and write on html.<br />write
+      method writtern in script before loading will display on html page.
+    </p>
+    <button type="button" onclick="document.write('all deleted')">
+      don't click
+    </button>
+    <button type="button" onclick="alert('Submited')">submit</button>
+    <button type="button" onclick="print()">print page</button>
+  </body>
+</html>

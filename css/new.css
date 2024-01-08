@@ -1,0 +1,113 @@
+table{
+    border-collapse: collapse;
+    padding: 0px;
+}
+tr{
+    text-align: center;
+    border-collapse: collapse;
+    padding: 0px;
+}
+td{
+    border:1px solid black;
+    text-align: center;
+    border-collapse: collapse;
+    padding: 0px;
+}
+
+.grid-container{
+    display:grid;
+    grid-template-columns: 100px 100px;
+    /* grid-template-columns: minmax(100px,auto); */
+    grid-gap: 20px;
+    grid-template-rows: repeat(3,30px);
+    justify-content: center;
+    /* align-content: center; */
+     border:1px solid red;
+}
+.grid-item1,.grid-item2{
+    text-align: center;
+    background-color: aquamarine;
+    border:1px solid black;
+     /* grid-column: 1/2; where to start and end  */
+}
+.grid-item3{
+    text-align: center;
+    background-color: aquamarine;
+    border:1px solid black;
+}
+.grid-item4{
+    text-align: center;
+    background-color: aquamarine;
+    border:1px solid black;
+}
+.grid-item5{
+    text-align: center;
+    background-color: aquamarine;
+    border:1px solid black;
+}
+.grid-item6{
+    text-align: center;
+    background-color: aquamarine;
+    border:1px solid black;
+}
+
+
+
+.flex-container{
+    display:flex;
+     border:1px solid black;
+     height:50vh;
+     align-items: center;/* vertical aligin */
+     justify-content: center;/*horizontal aligin*/
+     /* flex-direction:column-reverse; */
+     flex-wrap: wrap;
+}
+*{
+    background-color: yellow;
+}
+.flex-item{
+    text-align: center;
+    background-color: aquamarine;
+    border:1px solid black;
+    height: 100px;
+    width:100px;
+    margin:5px
+     /* grid-column: 1/2; where to start and end  */
+}
+.flex-item2{
+    height: 100px;
+    width:100px;
+    margin:5px;
+    text-align: center;
+    background-color: rgb(122, 90, 210);
+    border:1px solid black;
+}
+div>div#item3{
+    height: 100px;
+    width:100px;
+    margin:5px;
+    text-align: center;
+    background-color: rgb(127, 255, 146);
+    border:1px solid black;
+}
+div[class="flex-item4"]{
+    height: 100px;
+    width:100px;
+    margin:5px;
+    text-align: center;
+    background-color: rgb(255, 127, 227);
+    border:1px solid black;
+}
+.flex-item5{
+    height: 100px;
+    width:100px;
+    margin:5px;
+    text-align: center;
+    background-color: rgb(255, 127, 127);
+    border:1px solid black;
+}
+#i6{
+    text-align: center;
+    background-color: rgb(127, 176, 255);
+    border:1px solid black;
+}
