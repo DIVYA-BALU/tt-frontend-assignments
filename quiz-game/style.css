@@ -1,0 +1,21 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+#h1-head {
+    color: #333;
+}
+
+input[type="button"] {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #525352;
+    color: #fff; 
+    border: none;
+    border-radius: 5px;
+}
