@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;1,300&display=swap');
+
+* {
+    margin: 0;
+}
+
+body {
+    background-color: #f1f1f1;
+    font-family: 'Poppins', sans-serif;
+}
+
+#main-body {
+    width: 80%;
+    margin: 50px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+#main-body h1 {
+    text-align: center;
+    padding: 10px;
+    color: rgb(253, 181, 27);
+}
+
+#quiz-container {
+    padding: 20px;
+    height: 750px;
+}
+
+#quiz-container .question {
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+#quiz-container .options {
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+#quiz-container .options input {
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+#quiz-container {
+    position: relative;
+}
+
+#quiz-container .next-btn {
+    position: fixed;
+    bottom: 80px;
+    left: 200px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(253, 181, 27);
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+#quiz-container .submit-btn {
+    margin-left: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(253, 181, 27);
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
