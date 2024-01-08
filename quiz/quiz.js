@@ -283,7 +283,7 @@ for (let i = 0; i < numbers.length; i++) {
         inputEl.name = `Q${no}`;
         inputEl.value = currEl.options[j].value;
 
-        inputEl.setAttribute('required', '');
+        // inputEl.setAttribute('required', '');
 
         const labelEl = document.createElement('label');
         const flabelEl = document.createElement('label');
@@ -295,6 +295,8 @@ for (let i = 0; i < numbers.length; i++) {
         optionBox.addEventListener('click', () => {
             inputEl.checked = true;
         })
+        optionBox.setAttribute('ans', currEl.correctans);
+        optionBox.setAttribute('id', `Q${no}${currEl.options[j].value}`);
         optionBox.appendChild(inputEl);
         optionBox.appendChild(flabelEl);
         optionBox.appendChild(labelEl);
@@ -303,13 +305,6 @@ for (let i = 0; i < numbers.length; i++) {
 
     }
 
-    const divEl = document.createElement('div');
-    divEl.setAttribute('class', 'hidden-block');
-    divEl.setAttribute('id', `Q${no}`);
-    const labelEl = document.createElement('label');
-    labelEl.innerText = "Correct Answer: " + currEl.correctans + "." + currEl.options[currEl.correctans - 1].label;
-    divEl.appendChild(labelEl);
-    formEl.appendChild(divEl);
 }
 
 let CorrectAnswerCount = 0;
@@ -317,19 +312,21 @@ formEl.addEventListener("submit", function (e) {
     e.preventDefault();
     const formData = new FormData(formEl);
     formData.forEach(function (value, key) {
-        console.log(key, value);
-        const divEl = document.getElementById(key);
-        const correctAnswer = divEl.innerText.substring(16, 17);
+        const optionEl = document.getElementById(key + value);
+        const correctAnswer = optionEl.getAttribute("ans");
         if (correctAnswer === value) {
             CorrectAnswerCount++;
-            divEl.className = "show-block-correct";
-            result.innerHTML = "Total no of Wrong Answers: " + (15 - CorrectAnswerCount) + "<br>" + " Total no of Correct Answers: " + CorrectAnswerCount + " <br>Total Score: " + Math.round((CorrectAnswerCount / 10) * 100) + "%";
+            optionEl.className = "show-block-correct";
         }
         else {
-            divEl.className = "show-block-wrong";
+            optionEl.className = "show-block-wrong";
+            const el = document.getElementById(key + correctAnswer);
+            el.className = "show-block-correct";
         }
     });
-    console.log(CorrectAnswerCount);
+    console.log("corCount:" + CorrectAnswerCount);
+    result.innerHTML = "Total no of Wrong Answers: " + (10 - CorrectAnswerCount) + "<br>" + " Total no of Correct Answers: " + CorrectAnswerCount + " <br>Total Score: " + Math.round((CorrectAnswerCount / 10) * 100) + "%";
+    result.className = "result";
 })
 const breakEl = document.createElement('br');
 const result = document.createElement('div');
@@ -337,7 +334,7 @@ const divEl2 = document.createElement('div');
 
 divEl2.setAttribute('class', 'form2');
 divEl2.innerHTML = "Welcome to Genral Knowledge Quiz<br><br>Instructions:<br> Total 10 question will be given.<br> User must attempt all 10 questions. <br> Score will be displayed below.";
-result.setAttribute('class', 'result');
+result.setAttribute('class', 'hidden-block');
 formEl.appendChild(breakEl);
 formEl.appendChild(buttonEl);
 divEl2.appendChild(result);
