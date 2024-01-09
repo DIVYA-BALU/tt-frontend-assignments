@@ -1,19 +1,3 @@
-//Generate random strings
-function randomString(lenString) {
-    lenString = lenString === undefined ? 7 : lenString;
-    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
-
-    let resultRandomString = '';
-
-    for (let i = 0; i < lenString; i++) {
-        let randomNumber = Math.floor(Math.random() * characters.length);
-        resultRandomString += characters.substring(randomNumber, randomNumber + 1);
-    }
-
-    return resultRandomString;
-}
-
-
 const questions = [
     {
         "question": "The elements between the <td> and </td> tags of an HTML table are ______ by default.",
@@ -769,6 +753,9 @@ const questions = [
     }
 ]
 
+//next question waiting seconds
+const timer = 5;
+
 //Generate random array ranges from 0 to question.length-1;
 const randomIndices = [];
 
@@ -808,14 +795,16 @@ function displayQuestion() {
     questionDivEl.appendChild(questionLabelEl);
 
     const optionDivEl = document.createElement("div");
-
+    const optionClassName = 'quiz-option';
     question.options.forEach(option => {
+
         const inputEl = document.createElement("input");
         const randomName = randomString(10);
         inputEl.type = question.type;
         inputEl.value = option.value;
+        inputEl.addEventListener('click', buttonWithTimer('.quiz-next'));
         inputEl.id = randomName;
-        inputEl.className = "quiz-option";
+        inputEl.className = optionClassName;
         inputEl.name = `Q${randomIndices[currentQuestionIndex] + 1}`;
 
         const optionLabel = document.createElement("label");
@@ -837,8 +826,33 @@ function displayQuestion() {
     else {
         displayNextButton();
     }
+    
+    window.scroll(0, document.body.scrollHeight);
 }
+let timerValue = timer;
+let timerInterval;
+function buttonWithTimer(id) {
+    timerValue = timer;
+    return function () {
+        const buttonWithTimer = document.querySelector(id);
+        if (buttonWithTimer) {
+            buttonWithTimer.textContent = `Next (${timerValue}s)`;
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+            timerInterval = setInterval(() => {
+                timerValue--;
 
+                if (timerValue <= 0) {
+                    buttonWithTimer.textContent = 'Next';
+                    buttonWithTimer.click();
+                } else {
+                    buttonWithTimer.textContent = `Next (${timerValue}s)`;
+                }
+            }, 1000);
+        }
+    }
+}
 function displayNextButton() {
     const nextBtn = document.createElement('button');
     nextBtn.type = 'button';
@@ -847,7 +861,6 @@ function displayNextButton() {
     nextBtn.disabled = 'true';
 
     const options = document.querySelectorAll(`input[name="Q${randomIndices[currentQuestionIndex] + 1}"]`);
-    console.log(options);
     options.forEach(option => {
         option.addEventListener('change', () => {
             const selectedOptions = document.querySelectorAll(`input[name="Q${randomIndices[currentQuestionIndex] + 1}"]:checked`);
@@ -856,46 +869,77 @@ function displayNextButton() {
     });
 
     nextBtn.addEventListener('click', () => {
+        clearInterval(timerInterval);
         nextBtn.remove();
+        const radioOptions = document.querySelectorAll(`input[name="Q${randomIndices[currentQuestionIndex] + 1}"]`);
+        radioOptions.forEach(option => {
+            option.disabled = true;
+        });
         const selectedOption = document.querySelector(`input[name="Q${randomIndices[currentQuestionIndex] + 1}"]:checked`);
-
-        if (selectedOption) {
-            const selectedValue = parseInt(selectedOption.value);
-            const currentQuestion = questions[randomIndices[currentQuestionIndex]];
-
-            const selectedAnswerLabel = document.querySelector('label[for=' + selectedOption.id + ']');
-            if (currentQuestion.options.find(option => option.value === selectedValue && option.is_correct)) {
-                selectedAnswerLabel.classList = 'correct-answer';
-                score++;
-            }
-            else {
-                selectedAnswerLabel.classList = 'incorrect-answer';
-            }
-        }
+        calculateScore(selectedOption, currentQuestionIndex);
 
         currentQuestionIndex++;
 
         if (currentQuestionIndex !== randomIndices.length) {
             displayQuestion();
         }
+
     });
 
     quizFormEl.appendChild(nextBtn);
 }
 
+let intervalStarted = false;
 function displaySubmitButton() {
     const submitBtn = document.createElement('button');
     submitBtn.type = 'submit';
     submitBtn.className = 'quiz-submit';
     submitBtn.textContent = 'Submit Quiz';
+    submitBtn.disabled = 'true';
+
+    const options = document.querySelectorAll(`input[name="Q${randomIndices[currentQuestionIndex] + 1}"]`);
+    options.forEach(option => {
+        option.addEventListener('change', () => {
+            const selectedOptions = document.querySelectorAll(`input[name="Q${randomIndices[currentQuestionIndex] + 1}"]:checked`);
+            submitBtn.disabled = selectedOptions.length === 0;
+            setTimeout(() => {
+
+                if (selectedOptions.length > 0 && !intervalStarted) {
+                    intervalStarted = true;
+                    timerValue = timer;
+                    submitBtn.textContent = `Submit Quiz (${timerValue})`;
+                    intervalId = setInterval(() => {
+                        timerValue--;
+
+                        if (timerValue <= 0) {
+                            clearInterval(intervalId);
+                            submitBtn.textContent = `Submit Quiz`;
+                            quizFormEl.dispatchEvent(new Event('submit'));
+                        }
+                        else {
+                            submitBtn.textContent = `Submit Quiz (${timerValue})`;
+                        }
+
+                    }, 1000);
+                }
+
+            });
+        }, 0);
+    });
+
     quizFormEl.appendChild(submitBtn);
 }
 
 quizFormEl.addEventListener('submit', calculateQuizScore);
 
+
 function calculateQuizScore(e) {
     e.preventDefault();
+    const selectedOption = document.querySelector(`input[name="Q${randomIndices[currentQuestionIndex] + 1}"]:checked`);
 
+    calculateScore(selectedOption, currentQuestionIndex);
+
+    window.scroll(0, 0);
     scoreDivEl.className = "quiz-score";
     scoreDivEl.textContent = (`Your score: ${score}/${randomIndices.length}`);
 
@@ -913,6 +957,21 @@ function calculateQuizScore(e) {
         quizFormEl.removeChild(button);
     }
     displayRestartButton();
+}
+
+function calculateScore(selectedOption, currentQuestionIndex) {
+    if (selectedOption) {
+        const selectedValue = parseInt(selectedOption.value);
+        const currentQuestion = questions[randomIndices[currentQuestionIndex]];
+
+        const selectedAnswerLabel = document.querySelector('label[for=' + selectedOption.id + ']');
+        if (currentQuestion.options.find(option => option.value === selectedValue && option.is_correct)) {
+            selectedAnswerLabel.classList = 'correct-answer';
+            score++;
+        } else {
+            selectedAnswerLabel.classList = 'incorrect-answer';
+        }
+    }
 }
 
 function displayStartButton() {
@@ -942,4 +1001,18 @@ function restartQuiz(e) {
 }
 divEl.appendChild(quizFormEl);
 document.body.appendChild(divEl);
+
+function randomString(lenString) {
+    lenString = lenString === undefined ? 7 : lenString;
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+
+    let resultRandomString = '';
+
+    for (let i = 0; i < lenString; i++) {
+        let randomNumber = Math.floor(Math.random() * characters.length);
+        resultRandomString += characters.substring(randomNumber, randomNumber + 1);
+    }
+
+    return resultRandomString;
+}
 

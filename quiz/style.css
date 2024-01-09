@@ -6,16 +6,14 @@ body {
     margin: 0;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    width: auto;
-    border: 40px solid white;
+#form-div {
+    width: 800px;
+    margin: 20px;
     padding: 20px;
-    border-left: 6px solid orange;
-    border-right: 6px solid orange;
-    border-radius: 8px;
-    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 label {
@@ -25,6 +23,7 @@ label {
 }
 
 button {
+    align-self: center;
     margin: auto;
     padding: 12px;
     background-color: orange;
@@ -40,7 +39,7 @@ div {
 
 input {
     padding: 10px;
-    margin-bottom: px;
+    margin-bottom: 10px;
     box-sizing: border-box;
     border: 1px solid orange;
     background-color: #fdf2e7;
@@ -115,7 +114,13 @@ h1 {
     margin: 10px;
 }
 
-.quiz-next:disabled {
+.quiz-option label{
+    display: inline-block;
+    width : 200px;
+}
+
+.quiz-next:disabled, .quiz-submit:disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }
+
