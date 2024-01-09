@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+
+    const object = {
+        name : "sriharyi",
+        regular_function : function(val1, val2){
+            console.log(this);
+            console.log(val1+val2);
+            const object2 = {
+                age : 10,
+                arrow_function : () => {
+                    console.log(this);
+                }
+            }
+            object2.arrow_function();
+        },
+        arrow_function : () => {
+            console.log(this);
+        }
+    }
+
+    object.regular_function(10, 20);
+    object.arrow_function();
+
+</script>
+</html>

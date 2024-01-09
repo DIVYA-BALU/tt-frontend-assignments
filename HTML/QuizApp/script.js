@@ -187,6 +187,10 @@ const quizContainer = document.querySelector("#quiz-container");
 
 const noOfQuestions = javascriptQuizs.length;
 
+const nextButton = document.querySelector(".next-btn");
+
+const submitButton = document.querySelector(".submit-btn");
+
 let noOfGeneratedQuiz = 0;
 
 let score = 0;
@@ -199,6 +203,11 @@ function generateQuiz() {
   formElement.id = "quiz-form";
   shuffleArray(javascriptQuizs);
   const generatedQuiz = javascriptQuizs.slice(0, 3);
+  if(javascriptQuizs.length<=3){
+      nextButton.classList.add("hide");
+      const list = submitButton.classList;
+      list.remove("hide");
+  }
 
   for (let iterator = 0; iterator < generatedQuiz.length; iterator++) {
     const item = generatedQuiz[iterator];
@@ -206,10 +215,15 @@ function generateQuiz() {
     const questionDiv = document.createElement("div");
     questionDiv.className = "question";
     const questionEl = document.createElement("h3");
-    questionEl.textContent = item.question;
+    noOfGeneratedQuiz++;
+    questionEl.textContent = `${noOfGeneratedQuiz}. ${item.question}`;
     questionDiv.appendChild(questionEl);
 
     const optionsDiv = document.createElement("div");
+
+    let columnDiv = document.createElement("div");
+    columnDiv.className = "column";
+
     optionsDiv.className = "options";
     const optioncharacter = "abcd";
 
@@ -217,6 +231,7 @@ function generateQuiz() {
       const inputEl = document.createElement("input");
       const labelEl = document.createElement("label");
       const brEl = document.createElement("br");
+
       const uniqueid = randomGenerator();
       const nameAttribute = `question${item.value}`;
       answerObjects[nameAttribute] = item.correctAnswer;
@@ -228,16 +243,24 @@ function generateQuiz() {
       labelEl.setAttribute("for", uniqueid);
       labelEl.textContent = item.options[j];
 
-      optionsDiv.appendChild(inputEl);
-      optionsDiv.appendChild(labelEl);
-      optionsDiv.appendChild(brEl);
+      columnDiv.appendChild(inputEl);
+      columnDiv.appendChild(labelEl);
+      columnDiv.appendChild(brEl);
+
+      if(j===1){
+        optionsDiv.appendChild(columnDiv);
+        columnDiv = document.createElement("div");
+        columnDiv.className = "column";
+      }
     }
+    optionsDiv.appendChild(columnDiv);
+
 
     formElement.appendChild(questionDiv);
     formElement.appendChild(optionsDiv);
   }
   quizContainer.replaceChild(formElement, quizForm);
-  noOfGeneratedQuiz += generatedQuiz.length;
+  // noOfGeneratedQuiz += generatedQuiz.length;
   javascriptQuizs.splice(0, generatedQuiz.length);
 }
 

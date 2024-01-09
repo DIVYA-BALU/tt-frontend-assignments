@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        section {
+            width: 700px;
+            height: 700px;
+            background-color: red;
+              padding-top: 0px; /*why we need to use padding here */
+            /* to avoid the margin collapse */
+            /*also if we use margin the whole section will move down */
+            /*but if we use padding the content will move down */
+            /*so we need to use padding here */
+        }
+        .box {
+            /*why we need to use auto here */
+            /*if we use 100% it will take the whole width of the section */ 
+            /*then if i add margin and border the content will be out of the section */
+            /* so we need to use auto to make the width of the box equal to the content */
+             /* width: 550px;  */
+             /*if we are going to use border margin padding and */
+             border: 30px solid green;
+             padding: 25px;
+             margin: 25px;
+            background-color: lightblue;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <!-- <p>hello world</p> -->
+        <div class="box">
+            <span>This is a box. It has a border, padding, and margin.</span>
+        </div>
+    </section>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+body {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+h1 {
+    font-size: 50px;
+    font-weight: bold;
+    color: blue;
+}
+h2{
+    font-size: 30px;
+    font-weight: bold;
+    color: green;
+
+}
+
+h3 {
+    font-size: 100px;
+    font-weight: bold;
+    color: red;
+}
+.clock-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.ist-time {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #ccc;
+    padding: 10px;
+    margin: 10px;
+}
+
+.kst-time {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #ccc;
+    padding: 10px;
+    margin: 10px;
+}
+
+.sgt-time {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #ccc;
+    padding: 10px;
+    margin: 10px;
+}

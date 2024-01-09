@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Name in Random</title>
+    <style>
+        body{
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+        h1{
+            font-size: 50px;
+            font-weight: bold;
+            color: blue;
+        }
+
+        .button{
+            background-color: yellow;
+            font-size: 30px;
+            font-weight: bold;
+            color: green;
+            padding: 10px;
+            margin: 10px;
+        }
+        p{
+            font-size: 50px;
+            font-weight: bold;
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Choose Name in Random</h1>
+    <div class="name-container">
+        <p class="name"></p>
+    </div>
+    <button type="button" class="button" onclick="startUpdating()">Random</button>
+</body>
+<script>
+
+        const names = ["saivarun", "divya", "bala", "hemanath", "hari", "grace", "nathish", "sachin", "thamil", "udhaya", "santhosh", "sriharyi", "sudhakar"];
+
+
+        function randomName() {
+            const randomIndex = Math.floor(Math.random() * names.length);
+            const chosenName = names[randomIndex];
+            document.querySelector('.name').textContent = chosenName;
+        }
+
+        function startUpdating() {
+            // Update every 3 seconds
+           const intervalId = setInterval(randomName, 100);
+
+            // Stop updating after 15 seconds (adjust as needed)
+            setTimeout(() => {
+                clearInterval(intervalId);
+            }, 3000);
+        }
+</script>
+</html>

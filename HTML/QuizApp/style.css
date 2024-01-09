@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #f1f1f1;
+    background-color:  rgba(253, 181, 27, 0.7);
     font-family: 'Poppins', sans-serif;
 }
 
@@ -26,7 +26,7 @@ body {
 
 #quiz-container {
     padding: 20px;
-    height: 750px;
+    height: 700px;
 }
 
 #quiz-container .question {
@@ -37,8 +37,55 @@ body {
 
 #quiz-container .options {
     padding: 10px;
-    font-size: 20px;
-    font-weight: 500;
+    height: 140px;
+    font-size: 18px;
+    font-weight:500;
+    border-top: 5px solid #3498db;
+    border-left: 5px solid #3498db;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.column {
+    width: 48%; /* Adjust the width as needed */
+    box-sizing: border-box;
+}
+
+/* Optional: Add some spacing and styling for better visual separation */
+.options label {
+    margin-bottom: 10px;
+    display: block;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Add transition for smooth hover effect */
+}
+
+.options label:hover {
+    background-color: #f0f0f0; /* Change the background color on hover */
+}
+
+.options input[type="radio"] {
+    display: none; /* Hide the default radio button */
+}
+
+.options input[type="radio"]:checked+label {
+    background-color:  #3498db; /* Change the background color when selected */
+    color: #fff; /* Change the text color when selected */
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    .options {
+        flex-direction: column;
+    }
+
+    .column {
+        width: 100%;
+    }
 }
 
 #quiz-container .options input {
@@ -51,24 +98,41 @@ body {
 }
 
 #quiz-container .next-btn {
-    position: fixed;
-    bottom: 80px;
-    left: 200px;
-    padding: 10px;
+    position: absolute;
+    bottom: 0px;
+    right: 20px;
+    padding: 15px;
     border-radius: 10px;
-    background-color: rgb(253, 181, 27);
+    background-color: #2ecc71;
     border: none;
     color: white;
     font-size: 20px;
     cursor: pointer;
 }
+
 #quiz-container .submit-btn {
-    margin-left: 20px;
-    padding: 10px;
+    position: absolute;
+    bottom: 0px;
+    right: 20px;
+    padding: 15px;
     border-radius: 10px;
-    background-color: rgb(253, 181, 27);
+    background-color: #2ecc71;
     border: none;
     color: white;
     font-size: 20px;
     cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+
+#quiz-container .submit-btn:hover {
+    background-color: #27ae60;
+}
+
+#quiz-container .next-btn:hover {
+    background-color: #27ae60;
+}
+
+.hide {
+    display: none;
 }
