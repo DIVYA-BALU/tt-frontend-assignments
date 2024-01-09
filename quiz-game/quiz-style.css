@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0;
     background-color: #cccbcb;
+    font-family: 'Poppins', sans-serif;
 }
 
 #quizBody {
@@ -46,7 +49,7 @@ h4 {
     cursor: pointer;
 }
 
-input[type="button"] {
+input[type="submit"] {
     margin-left: 240px;
     margin-top: 20px;
     padding: 10px 20px;
@@ -64,6 +67,33 @@ input[type="button"] {
 
 .wrong-answer {
     background-color: rgb(240, 127, 127);
+}
+
+.multiple-dropdown{
+    height: 100px;
+    width: 550px;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 2px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.dropdown{
+    width: 550px;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 2px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.input{
+    width: 550px;
+    padding: 10px;
+    border: none;
+}
+
+.input:focus{
+    outline: none;
 }
 
 #result {

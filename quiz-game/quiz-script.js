@@ -1,6 +1,6 @@
 const body = document.body;
 
-const quizBody = document.createElement("div");
+const quizBody = document.createElement("form");
 quizBody.id = "quizBody";
 
 const quizQuestions = [
@@ -8,6 +8,7 @@ const quizQuestions = [
         question: "Who is making the web standards?",
         options: ["Mozilla", "Microsoft", "The World Wide Web Consortium"],
         answer: "The World Wide Web Consortium",
+        type: "radio",
         name: "question1"
 
     },
@@ -15,6 +16,7 @@ const quizQuestions = [
         question: "How can you open a link in a new browser window?",
         options: ["_blank", "target", "same"],
         answer: "_blank",
+        type: "radio",
         name: "question2"
 
     },
@@ -22,6 +24,7 @@ const quizQuestions = [
         question: "What does HTML stands for?",
         options: ["Hyperlinks and Text Markup Language", "Hyper Text Markup Language", "Home Tool Markup Language"],
         answer: "Hyper Text Markup Language",
+        type: "radio",
         name: "question3"
 
     },
@@ -29,6 +32,7 @@ const quizQuestions = [
         question: "How to remove the underline from hyperlinks using CSS?",
         options: ["a {underline:none}", "a {text-decoration:no underline}", "a {text-decoration:none}"],
         answer: "a {text-decoration:none}",
+        type: "radio",
         name: "question4"
 
     },
@@ -36,6 +40,7 @@ const quizQuestions = [
         question: "What tag do you use to put a title on a table?",
         options: ["<tr>", "<caption>", "<title>"],
         answer: "<caption>",
+        type: "radio",
         name: "question5"
 
     },
@@ -43,6 +48,7 @@ const quizQuestions = [
         question: "What tag adds comments to your HTML code?",
         options: ["<!-->", "<comment>", "<title>"],
         answer: "<!-->",
+        type: "radio",
         name: "question6"
 
     },
@@ -50,6 +56,7 @@ const quizQuestions = [
         question: "What is a CSS inline style?",
         options: ["CSS code in a style attribute", "CSS code in a style tag", "CSS code in an external css file"],
         answer: "CSS code in a style attribute",
+        type: "radio",
         name: "question7"
 
     },
@@ -57,6 +64,7 @@ const quizQuestions = [
         question: "What HTML tag makes a link?",
         options: ["<a>", "<tr>", "<img>"],
         answer: "<a>",
+        type: "radio",
         name: "question8"
 
     },
@@ -64,6 +72,7 @@ const quizQuestions = [
         question: "What HTML tag makes a new line?",
         options: ["<a>", "<br>", "<img>"],
         answer: "<br>",
+        type: "radio",
         name: "question9"
 
     },
@@ -71,6 +80,7 @@ const quizQuestions = [
         question: "Who is making the web standards?",
         options: ["Mozilla", "Microsoft", "The World Wide Web Consortium"],
         answer: "The World Wide Web Consortium",
+        type: "radio",
         name: "question10"
 
     },
@@ -78,12 +88,14 @@ const quizQuestions = [
         question: "In HTML, what element is used to define the structure of an HTML document, such as headings and paragraphs?",
         options: ["<body>", "<header>", "<section>"],
         answer: "<body>",
+        type: "radio",
         name: "question11"
     },
     {
         question: "Which CSS property is used to control the space between elements inside the content box?",
         options: ["margin", "padding", "border"],
         answer: "padding",
+        type: "radio",
         name: "question12"
 
     },
@@ -91,6 +103,7 @@ const quizQuestions = [
         question: "Which HTML tag is used to create an unordered list?",
         options: ["<ul>", "<ol>", "<li>"],
         answer: "<ul>",
+        type: "radio",
         name: "question13"
 
     },
@@ -98,6 +111,7 @@ const quizQuestions = [
         question: "In CSS, what property is used to control the size of text?",
         options: ["font-size", "text-size", "size"],
         answer: "font-size",
+        type: "radio",
         name: "question14"
 
     },
@@ -105,6 +119,7 @@ const quizQuestions = [
         question: "What does the JavaScript `console.log()` function do?",
         options: ["Display a message in the console", "Create a new variable", "Define a function"],
         answer: "Display a message in the console",
+        type: "radio",
         name: "question15"
 
     },
@@ -112,6 +127,7 @@ const quizQuestions = [
         question: "Which HTML attribute is used to provide additional information about an element?",
         options: ["data-info", "extra", "class"],
         answer: "class",
+        type: "radio",
         name: "question16"
 
     },
@@ -119,6 +135,7 @@ const quizQuestions = [
         question: "In CSS, what property is used to set the text alignment within an element?",
         options: ["text-align", "alignment", "align"],
         answer: "text-align",
+        type: "radio",
         name: "question17"
 
     },
@@ -126,6 +143,7 @@ const quizQuestions = [
         question: "What is the purpose of the `for` loop in JavaScript?",
         options: ["To create a conditional statement", "To iterate over a sequence of values", "To select elements with CSS selectors"],
         answer: "To iterate over a sequence of values",
+        type: "radio",
         name: "question18"
 
     },
@@ -133,6 +151,7 @@ const quizQuestions = [
         question: "Which HTML tag is used to create a hyperlink to another webpage?",
         options: ["<link>", "<a>", "<url>"],
         answer: "<a>",
+        type: "radio",
         name: "question19"
 
     },
@@ -140,6 +159,7 @@ const quizQuestions = [
         question: "In CSS, how do you select all paragraphs within a div with the class 'content'?",
         options: [".content p", "div.content p", "#content p"],
         answer: "div.content p",
+        type: "radio",
         name: "question20"
 
     },
@@ -147,6 +167,7 @@ const quizQuestions = [
         question: "What is the purpose of the `JSON.stringify` method in JavaScript?",
         options: ["To parse JSON data", "To convert a JavaScript object to a JSON string", "To fetch data from an API"],
         answer: "To convert a JavaScript object to a JSON string",
+        type: "radio",
         name: "question21"
 
     },
@@ -154,6 +175,7 @@ const quizQuestions = [
         question: "Which HTML attribute is used to specify alternative text for an image?",
         options: ["alt", "description", "text"],
         answer: "alt",
+        type: "radio",
         name: "question22"
 
     },
@@ -161,12 +183,14 @@ const quizQuestions = [
         question: "What HTML tag do you put things in if you want them to appear on the page?",
         options: ["<HTML>", "<p>", "<body>"],
         answer: "<body>",
+        type: "radio",
         name: "question23"
     },
     {
         question: "In CSS, what property is used to set the font weight of text?",
         options: ["font-weight", "text-weight", "weight"],
         answer: "font-weight",
+        type: "radio",
         name: "question24"
 
     },
@@ -174,9 +198,173 @@ const quizQuestions = [
         question: "Which HTML tag is used to create a table?",
         options: ["<table>", "<tr>", "<td>"],
         answer: "<table>",
+        type: "radio",
         name: "question25"
 
+    },
+    {
+        question: "Select the programming languages:",
+        options: ["JavaScript", "Python", "Java", "C++", "Ruby"],
+        answer: ["JavaScript", "Python", "Java"],
+        type: "checkbox",
+        name: "question26"
+    },
+    {
+        question: "Select the capital of France:",
+        options: ["Berlin", "Paris", "London", "Madrid"],
+        answer: "Paris",
+        type: "dropdown",
+        name: "question27"
+    },
+    {
+        question: "Select the capital of France:",
+        options: ["Berlin", "Paris", "London", "Madrid"],
+        answer: "Paris",
+        type: "dropdown",
+        name: "question27"
+    },
+    {
+        question: "Select the capital of France:",
+        options: ["Berlin", "Paris", "London", "Madrid"],
+        answer: "Paris",
+        type: "dropdown",
+        name: "question27"
+    },
+    {
+        question: "Select the web development frameworks:",
+        options: ["React", "Angular", "Vue", "Django", "Spring"],
+        answer: ["React", "Angular", "Vue", "Django"],
+        type: "checkbox",
+        name: "question28"
+    },
+    {
+        question: "Select the web development frameworks:",
+        options: ["React", "Angular", "Vue", "Django", "Spring"],
+        answer: ["React", "Angular", "Vue", "Django"],
+        type: "checkbox",
+        name: "question29"
+    },
+    {
+        question: "Choose the front-end languages:",
+        options: ["HTML", "CSS", "JavaScript", "Java", "Python"],
+        answer: ["HTML", "CSS", "JavaScript"],
+        type: "checkbox",
+        name: "question30"
+    },
+    {
+        question: "Select the databases:",
+        options: ["MySQL", "MongoDB", "Oracle", "SQLite", "PostgreSQL"],
+        answer: ["MySQL", "MongoDB", "Oracle", "PostgreSQL"],
+        type: "checkbox",
+        name: "question31"
+    },
+    {
+        question: "Choose the programming paradigms:",
+        options: ["Object-Oriented", "Functional", "Imperative", "Declarative", "Procedural"],
+        answer: ["Object-Oriented", "Functional", "Imperative", "Procedural"],
+        type: "checkbox",
+        name: "question32"
+    },
+    {
+        question: "Select the cloud computing platforms:",
+        options: ["AWS", "Azure", "Google Cloud", "IBM Cloud", "Heroku"],
+        answer: ["AWS", "Azure", "Google Cloud", "Heroku"],
+        type: "checkbox",
+        name: "question33"
+    },
+    {
+        question: "Choose the colors of the rainbow:",
+        options: ["Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"],
+        answer: ["Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"],
+        type: "multiple-dropdown",
+        name: "question34"
+    },
+    {
+        question: "Select the continents:",
+        options: ["Africa", "Asia", "Europe", "North America", "South America", "Australia", "Antarctica"],
+        answer: ["Africa", "Asia", "Europe", "North America", "South America", "Australia", "Antarctica"],
+        type: "multiple-dropdown",
+        name: "question35"
+    },
+    {
+        question: "Choose the planets in our solar system:",
+        options: ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"],
+        answer: ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"],
+        type: "multiple-dropdown",
+        name: "question36"
+    },
+    {
+        question: "Select programming languages with 'Script' in their name:",
+        options: ["JavaScript", "Python", "Java", "C++", "TypeScript"],
+        answer: ["JavaScript", "TypeScript"],
+        type: "multiple-dropdown",
+        name: "question37"
+    },
+    {
+        question: "Choose the largest planet in our solar system:",
+        options: ["Mercury", "Venus", "Earth", "Jupiter", "Saturn"],
+        answer: "Jupiter",
+        type: "dropdown",
+        name: "question38"
+    },
+    {
+        question: "Select the primary colors:",
+        options: ["Red", "Blue", "Yellow", "Green"],
+        answer: "Red",
+        type: "dropdown",
+        name: "question39"
+    },
+    {
+        question: "Choose the main programming language for web development:",
+        options: ["Python", "Java", "JavaScript", "C++"],
+        answer: "JavaScript",
+        type: "dropdown",
+        name: "question40"
+    },
+    {
+        question: "Select the capital of Japan:",
+        options: ["Beijing", "Seoul", "Tokyo", "Bangkok"],
+        answer: "Tokyo",
+        type: "dropdown",
+        name: "question41"
+    },
+    {
+        question: "capital of Japan:",
+        options: ["Tokyo"],
+        answer: "Tokyo",
+        type: "text",
+        name: "question42"
+    },
+    {
+        question: "capital of Japan:",
+        options: ["Tokyo"],
+        answer: "Tokyo",
+        type: "text",
+        name: "question42"
+    },
+    {
+        question: "capital of Japan:",
+        options: ["Tokyo"],
+        answer: "Tokyo",
+        type: "text",
+        name: "question42"
+    },
+    {
+        question: "capital of Japan:",
+        options: ["Tokyo"],
+        answer: "Tokyo",
+        type: "text",
+        name: "question42"
+    },
+    {
+        question: "capital of Japan:",
+        options: ["Tokyo"],
+        answer: "Tokyo",
+        type: "text",
+        name: "question42"
     }
+
+
 ];
 
 
@@ -194,85 +382,114 @@ while (questionCount) {
         const question = quizQuestions[questionIndex];
 
         const h4El = document.createElement("h4");
-        h4El.textContent = ++count + ". " + question.question;
+        h4El.textContent = `${++count}.  ${question.question}`;
         div.appendChild(h4El);
 
         const options = question.options;
 
+        let iterated = false;
+        let inputIterated = false;
         options.map((option, index) => {
             const innerDiv = document.createElement("div");
             innerDiv.classList.add("inner-div");
-            const inputEl = document.createElement("input");
-            inputEl.type = "radio";
-            inputEl.name = question.name;
 
-            const labelEl = document.createElement("label");
-            labelEl.textContent = option;
-            // const breakEl = document.createElement("br");
+            if (question.type === "checkbox" || question.type === "radio") {
+                const inputEl = document.createElement("input");
+                inputEl.type = question.type === "checkbox" ? "checkbox" : "radio";
+                inputEl.name = question.type === "checkbox" ? `${question.name}-${index}` : question.name;
+                if (question.type === "radio")
+                    inputEl.required = "required";
 
-            // innerDiv.appendChild(breakEl);
-            innerDiv.appendChild(inputEl);
-            innerDiv.appendChild(labelEl);
-            div.appendChild(innerDiv);
+                const labelEl = document.createElement("label");
+                inputEl.value = option;
+                labelEl.textContent = option;
+                innerDiv.appendChild(inputEl);
+                innerDiv.appendChild(labelEl);
+            } else if (question.type === "dropdown" || question.type === "multiple-dropdown") {
+                if (!iterated) {
+
+                    iterated = true;
+                    const selectEl = document.createElement("select");
+                    selectEl.name = question.name;
+
+                    if (question.type === "multiple-dropdown") {
+                        selectEl.multiple = true;
+                        selectEl.classList.add("multiple-dropdown");
+                    } else {
+                        selectEl.classList.add("dropdown");
+                    }
+                    question.options.forEach((opt) => {
+                        const optionEl = document.createElement("option");
+                        optionEl.value = opt;
+                        optionEl.textContent = opt;
+                        selectEl.appendChild(optionEl);
+                    });
+                    innerDiv.appendChild(selectEl);
+                    div.appendChild(innerDiv);
+                } else {
+                    innerDiv.remove();
+                }
+
+            } else if (question.type === "text") {
+                if (!inputIterated) {
+                    inputIterated = true;
+                    const inputEl = document.createElement("input");
+                    inputEl.classList.add("input");
+                    inputEl.type = question.type;
+                    inputEl.name = question.name;
+                    inputEl.required = true;
+                    inputEl.placeholder = "your answers here";
+                    innerDiv.appendChild(inputEl);
+                }
+            }
+            if (!(question.type === "dropdown" || question.type === "multiple-dropdown"))
+                div.appendChild(innerDiv);
             quizBody.appendChild(div);
+        });
 
-
-        })
     };
 }
 
-
-function isQuizComplete() {
-    for (let i = 0; i < indexOfQuestionsSelected.length; i++) {
-        const questionIndex = indexOfQuestionsSelected[i];
-        const question = quizQuestions[questionIndex];
-        const selectedOption = document.querySelector(`input[name='${question.name}']:checked`);
-        if (!selectedOption) {
-            return false;
-        }
-    }
-    return true;
-}
-
 let mark = 0;
-let calculateCount = 0;
 function dispalyAnswers() {
-    if (!isQuizComplete()) {
-        alert("Please answer all questions");
-        return;
-    }
-    calculateCount++;
     for (let i = 0; i < indexOfQuestionsSelected.length; i++) {
         const questionIndex = indexOfQuestionsSelected[i];
         const question = quizQuestions[questionIndex];
 
-        const selectedOption = document.querySelector(`input[name='${question.name}']:checked`);
+        if (question.type === "radio") {
+            const selectedOption = document.querySelector(`input[name='${question.name}']:checked`);
 
-        if (selectedOption) {
-            const ansDiv = selectedOption.closest('.inner-div');
-            const labelEl = ansDiv.querySelector('label');
+            if (selectedOption) {
+                const ansDiv = selectedOption.closest('.inner-div');
+                const labelEl = ansDiv.querySelector('label');
 
 
-            if (labelEl.textContent === question.answer) {
-                mark++;
-                ansDiv.classList.add("correct-answer");
-            } else {
-                ansDiv.classList.add("wrong-answer");
-                const correctOptionIndex = question.options.indexOf(question.answer);
-                const correctOptionDiv = ansDiv.parentNode.children[correctOptionIndex + 1];
-                correctOptionDiv.classList.add("correct-answer");
+                if (labelEl.textContent === question.answer) {
+                    mark++;
+                    ansDiv.classList.add("correct-answer");
+                } else {
+                    ansDiv.classList.add("wrong-answer");
+                    const correctOptionIndex = question.options.indexOf(question.answer);
+                    const correctOptionDiv = ansDiv.parentNode.children[correctOptionIndex + 1];
+                    correctOptionDiv.classList.add("correct-answer");
+                }
             }
+        }else if(question.type === "checkbox"){
+
         }
     }
-    if (calculateCount === 1)
-        quizMarks();
 }
 const buttonEl = document.createElement("input");
-buttonEl.type = "button";
+buttonEl.type = "submit";
 buttonEl.value = "submit";
 
-buttonEl.addEventListener("click", () => {
+let displayCount = 0;
+quizBody.addEventListener("submit", (e) => {
+    e.preventDefault();
     dispalyAnswers();
+    displayCount++;
+    if (displayCount === 1)
+        quizMarks();
 
 });
 
@@ -285,6 +502,15 @@ function quizMarks() {
     quizBody.appendChild(resultDiv);
 }
 
-
 quizBody.appendChild(buttonEl);
 body.appendChild(quizBody);
+
+
+
+
+
+// const checkboxes = document.querySelectorAll(`input[name^='question']:checked`);
+// if (checkboxes.length === 0) {
+//     alert("Please select at least one option.");
+//     return;
+// }
