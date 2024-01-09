@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // at()
+        const fruits = ["Banana", "Orange", "Apple", "Mango"];
+        let index = 2;
+        let fruit = fruits.at(index);
+        console.log(fruit);
+
+        // concat()
+        const arr1 = ["Cecilie", "Lone"];
+        const arr2 = ["Emil", "Tobias", "Linus"];
+        const children = arr1.concat(arr2);
+        console.log(children);
+
+        // constructor
+        const fruits2 = ["Banana", "Orange", "Apple", "Mango"];
+        let text = fruits2.constructor;
+        console.log(text);
+
+        // copyWithin()         from index 2 it starts replacing the elements from 0
+        const fruits3 = ["Banana", "Orange", "Apple", "Mango", "Grapes"];
+        fruits3.copyWithin(2, 0);
+        console.log(fruits3);
+
+        // push()
+        const fruits4 = ["Banana", "Orange", "Apple", "Mango"];
+        fruits4.push("Kiwi");
+
+        // pop()
+        const fruits5 = ["Banana", "Orange", "Apple", "Mango"];
+        fruits5.pop();
+        console.log(fruits5);
+
+        // entries()
+        const fruits6 = ["Banana", "Orange", "Apple", "Mango"];
+        const res=fruits6.entries();
+        for(let s of res){
+            console.log(s);
+        }
+
+
+    </script>
+</body>
+</html>

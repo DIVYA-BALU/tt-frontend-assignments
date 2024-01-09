@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<head>
+    <title>Document</title>
+    <style>
+        *{
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* combination selectors */
+        div.span.b{
+            background-color: aqua;
+        }
+
+        /* selects any child inside div tag- it may be nested child*/
+        div b{
+            background-color: red;
+        }
+        p,div b{
+            background-color: brown;
+        }
+
+
+        /* siblings selectors */
+        /* selects all the sibling after the sapn t ag*/
+        span~p{
+            text-align: center;
+        }
+        
+        /* select only current tag after span tag */
+        span+p{
+            height: 50px;
+        }
+
+        /* pseudo selectors */
+        a:visited {
+            color: rgb(24, 177, 88);
+        }
+        input:active{
+            background-color: rgb(107, 107, 172);
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <p>This is para3</p>
+        <span>
+            <b>
+                This is bold
+            </b>
+        </span>
+        <p>
+            This is para1
+        </p>
+        <p>
+            This is para4
+        </p>
+    </div>
+    <div>
+        <p>This is para2</p>
+    </div>
+    <a href="https://mail.google.com/mail/u/0/#inbox/FMfcgzGwJcXrzVKLbzDHZHrnhMLFPPlb">Link</a>
+
+    <br><br>
+    <input type="text">
+</body>
+</html>
