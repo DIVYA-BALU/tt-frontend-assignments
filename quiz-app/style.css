@@ -1,0 +1,115 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+    background-attachment: fixed;
+    margin: 0;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#title {
+    text-align: center;
+    color: rgb(211, 116, 230);
+    margin: 10vh auto 0 auto;
+}
+
+.questions {
+    width: 600px;
+    margin: 2vh auto 0 auto;
+    background-color: rgb(226, 248, 248);
+    border-radius: 10px;
+    padding: 50px;
+}
+
+#question {
+    margin-bottom: 1rem;
+}
+
+.option {
+    border-radius: 5px;
+    font-size: 20px;
+    margin-top: 5px;
+    padding: 10px;
+    border: 1px solid rgb(180, 186, 234);
+    cursor: pointer;
+}
+
+.option:hover {
+    color: white;
+    background-color: rgb(180, 186, 234);
+}
+
+ol {
+    position: relative;
+    padding: 0 1.5rem;
+    color: rgb(0, 15, 15);
+}
+
+span {
+    display: block;
+    padding: 0.1rem 0.7rem;
+    border-radius: 10rem;
+}
+
+#start {
+    margin-top: 1rem;
+    color: rgb(0, 0, 0);
+}
+
+.buttons {
+    text-align: center;
+}
+
+button {
+    background-color: rgb(211, 116, 230);
+    color: rgb(5, 5, 5);
+    border: 1px solid rgb(211, 116, 230);
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+button:active {
+    background: white;
+}
+
+#scoreboard,
+#answerBank {
+    width: 20rem;
+    background: rgba(255, 255, 255, 0.77);
+    padding: 2rem;
+    text-align: center;
+    margin: auto;
+    position: relative;
+    top: 5rem;
+    display: none;
+}
+
+#score-title {
+    margin: 1rem 0;
+}
+
+#score-btn,
+#check-answer {
+    margin-top: 1rem;
+}
+
+#score {
+    font-size: 2.5rem;
+}
+
+#answerBank li {
+    text-align: left;
+    margin-bottom: 0.2rem;
+    font-size: larger;
+}
+
+#answers {
+    margin-top: 1rem;
+}
