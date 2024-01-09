@@ -1,10 +1,9 @@
-const zone1 = document.getElementById("zone1");
 
 function getTime(timeZone, zone) {
     const date = new Date();
-    const formattedTime = date.toLocaleTimeString('en-US', { timeZone: `${timeZone}` });
-    const zone1 = document.getElementById(zone);
-    zone1.textContent = `${formattedTime}`;
+    const formattedTime = date.toLocaleString('en-US', { timeZone: `${timeZone}` });
+    const zoneId = document.getElementById(zone);
+    zoneId.textContent = formattedTime;
 }
 
 
