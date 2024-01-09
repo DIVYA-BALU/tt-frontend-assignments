@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Html App </title>
+
+        <style>
+            /* UNIVERSAL SELECTOR */
+            * {
+                background: rgb(253, 199, 199);
+            }
+
+            /* APPLY FOR ONLY CERTAIN */
+            div.red {
+                background: red;
+            }
+
+            /* APPLY FOR MULTIPLE */
+            span, li {
+                background: rgb(225, 50, 50);
+            }
+
+            /* ID SELECTOR */
+            #blue {
+                background: blue;
+            }
+
+            /* NESTED TEXT */
+            div b {
+                background: yellow;
+            }
+
+            ul > li {
+                font-style: italic;
+            }
+
+            /* SIBLINGS "~" used for all the other sibling, "+" used only for the next sibling */
+            li.after ~ li {
+                background-color: aqua;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <h1>Heading 1</h1>
+        <h2>Heading 2</h2>
+        <h3>Heading 3</h3>
+        <h4>Heading 4</h4>
+        <h5>Heading 5</h5>
+        <h6>Heading 6</h6>
+
+        <img style="width: 30%;" src="background.png" alt="image">
+        
+        <h3 class="red"> SELECTORS </h3>
+        
+        <div class="red">Div Tag 1</div>
+        <div>Div Tag 2</div>
+        <span id="blue">Span tag</span>
+
+        <div>
+            <span>
+                <b>Bold Text</b>
+            </span>
+        </div>
+
+        <ul>
+            <li class="after">Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+            <li>Item 4</li>
+        </ul>
+
+    </body>
+</html>
+
+
