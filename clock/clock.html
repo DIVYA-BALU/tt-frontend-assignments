@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="clock.css">
+</head>
+
+<body>
+    <div>
+        <p id="indiaclock"></p>
+        <p id="europeclock"></p>
+        <p id="afganclock"></p>
+    </div>
+    <script>
+        const indiaClockEl = document.getElementById("indiaclock");
+
+        function indianClock() {
+            const date = new Date();
+            const dateTime = date.toLocaleString();
+            indiaClockEl.textContent = `INDIA TIME : ${dateTime}`;
+        }
+
+        const europeClockEl = document.getElementById("europeclock");
+
+        function europeClock() {
+            const date = new Date();
+            const dateTime = date.toLocaleString('CH', {timeZone : "Europe/Zurich"});
+            europeClockEl.textContent = `EUROPE TIME : ${dateTime}`;
+        }
+
+        const afganClockEl = document.getElementById("afganclock");
+
+        function afganClock() {
+            const date = new Date();
+            const dateTime = date.toLocaleString('AF', {timeZone : "Asia/Kabul"});
+            afganClockEl.textContent = `AFGANISTAN TIME : ${dateTime}`;
+        }
+
+        setInterval(() => {
+            indianClock();
+            europeClock();
+            afganClock();
+        }, 1000);
+
+    </script>
+</body>
+
+</html>

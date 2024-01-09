@@ -1,10 +1,69 @@
 
-let randomNumbers = [];
-function randomNumber() {   
+document.addEventListener("DOMContentLoaded", () => {
+
+    countDown();
+
+    document.addEventListener("click", (event) => {
+
+        if (event.target.getAttribute("for")) { // check for both input and label     
+            event.stopPropagation();
+        } else {
+            const selected = event.target;
+            const name = selected.name;
+
+            selected.className = "checked";
+
+            const inputEl = document.getElementsByName(name);
+
+            for (let i = 0; i < inputEl.length; i++) {
+                const input = inputEl[i];
+
+                const id = input.getAttribute("id");
+                const labelEl = document.querySelector(`label[for="${id}"]`);
+
+                setTimeout(() => {
+                    input.disabled = "disabled";
+                    labelEl.className = "disable";
+                }, 10000);
+            }
+        }
+    });
+});
+
+let timeLeft = 60;
+
+const containerEl = document.getElementById("container");
+const spanElement = document.createElement("span");
+spanElement.className = "countdown";
+containerEl.appendChild(spanElement);
+
+function countDown() {
+
+    if (timeLeft > -1) {
+        spanElement.textContent = timeLeft--;
+        setTimeout(() => {
+            countDown();
+        }, 1000);
+    } else {
+        spanElement.textContent = "Time out";
+        getAllInputs();
+        document.querySelector(`input[type='submit']`).click();
+    }
+}
+
+function getAllInputs() {
+    const inputs = document.querySelectorAll(`input[type='radio']`);
+    for (let i = 0; i < inputs.length; i++) {
+        inputs[i].disabled = "disabled";
+    }
+}
+
+const randomNumbers = [];
+function randomNumber() {
     let number;
     do {
         number = Math.round(Math.random() * 24);
-    } while (contains(number));   
+    } while (contains(number));
     randomNumbers.push(number);
     return number;
 }
@@ -33,16 +92,7 @@ function randomString(lenString) {
     return res;
 }
 
-const divEl = document.getElementById("container");
-
-const formEl = document.createElement("form");
-formEl.setAttribute("id", "quiz_form");
-
-const headingEl = document.createElement("h1");
-headingEl.textContent = "HTML Quiz";
-formEl.appendChild(headingEl);
-
-let questions = [{
+const questions = [{
     question: "What does HTML stand for?",
     options: ["HyperText Markup Language", "HotMail", "How to Make Lasagna"],
     name: "quiz_one",
@@ -160,7 +210,7 @@ let questions = [{
     question: "Which of the following tag is used to make the underlined text?",
     options: ["<b>", "<ul>", "<u>"],
     name: "quiz_twenty",
-    answer: 2
+    answer: 3
 },
 {
     question: "How to create a checkbox in HTML?",
@@ -194,11 +244,17 @@ let questions = [{
 },
 ];
 
-let answerIds = [];
+const divEl = document.getElementById("container");
+
+const formEl = document.createElement("form");
+formEl.setAttribute("id", "quiz_form");
+
+const headingEl = document.createElement("h1");
+headingEl.textContent = "HTML Quiz";
+formEl.appendChild(headingEl);
 
 for (let index = 0; index < 10; index++) {
     const randomIndex = randomNumber();
-    console.log(randomIndex);
 
     const divEl = document.createElement("div");
     divEl.setAttribute("class", "question");
@@ -206,7 +262,7 @@ for (let index = 0; index < 10; index++) {
     formEl.appendChild(divEl);
 
     const paraEl = document.createElement("p");
-    paraEl.textContent = `Q${index+1} . ${questions[randomIndex].question}`;
+    paraEl.textContent = `Q${index + 1} . ${questions[randomIndex].question}`;
 
     divEl.appendChild(paraEl);
 
@@ -218,6 +274,7 @@ for (let index = 0; index < 10; index++) {
         inputEl.id = randomIdName;
         inputEl.setAttribute("name", questions[randomIndex].name);
         inputEl.setAttribute("value", j);
+        inputEl.required = "required";
 
         const labelEl = document.createElement("label");
         labelEl.setAttribute("for", randomIdName);
@@ -225,133 +282,97 @@ for (let index = 0; index < 10; index++) {
 
         const breakEl = document.createElement("br");
 
-        divEl.appendChild(inputEl); 
+        divEl.appendChild(inputEl);
         divEl.appendChild(labelEl);
         divEl.appendChild(breakEl);
-
-        if (questions[randomIndex - 1].answer-1 === j) {
-            answerIds[index] = randomIdName;
-        }
-    }
-}
-console.log(answerIds);
-let answers = [
-    function () {
-        if (document.getElementById(answerIds[0]).checked) {
-            return true;
-        } else {
-            return false;
-        }
-    },
-    function () {
-        if (document.getElementById(answerIds[1]).checked) {
-            return true;
-        } else {
-            return false;
-        }
-    },
-    function () {
-        if (document.getElementById(answerIds[2]).checked) {
-            return true;
-        } else {
-            return false;
-        }
-    },
-    function () {
-        if (document.getElementById(answerIds[3]).checked) {
-            return true;
-        } else {
-            return false;
-        }
-    },
-    function () {
-        if (document.getElementById(answerIds[4]).checked) {
-            return true;
-        } else {
-            return false;
-        }
-    },
-    function () {
-        if (document.getElementById(answerIds[5]).checked) {
-            return true;
-        } else {
-            return false;
-        }
-    },
-    function () {
-        if (document.getElementById(answerIds[6]).checked) {
-            return true;
-        } else {
-            return false;
-        }
-    },
-    function () {
-        if (document.getElementById(answerIds[7]).checked) {
-            return true;
-        } else {
-            return false;
-        }
-    },
-    function () {
-        if (document.getElementById(answerIds[8]).checked) {
-            return true;
-        } else {
-            return false;
-        }
-    },
-    function () {
-        if (document.getElementById(answerIds[9]).checked) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-];
-
-const questionEl = document.getElementsByTagName("p");
-let count = 0;
-
-function answer() {
-    for (let index = 0; index < questionEl.length; index++) {
-        const element = questionEl[index];
-        const spanEl = document.createElement("span");
-        element.appendChild(spanEl);
-        if (answers[index]()) {
-            spanEl.setAttribute("class", "correct");
-            spanEl.textContent = "Correct";
-            count++;
-        } else {
-            spanEl.setAttribute("class", "wrong");
-            spanEl.textContent = "Wrong";
-        }
     }
 }
 
 const buttonDivEl = document.createElement("div");
 buttonDivEl.setAttribute("class", "button");
-
 const inputEl = document.createElement("input");
 inputEl.type = "submit";
-
 buttonDivEl.appendChild(inputEl);
+formEl.appendChild(buttonDivEl);
+
+const questionEl = document.getElementsByTagName("p");
+let count = 0;
+
+function checkAns() {
+    for (let index = 0; index < randomNumbers.length; index++) {
+
+        const paraElement = questionEl[index];
+        const spanEl = document.createElement("span");
+        paraElement.appendChild(spanEl);
+
+        const randomIndex = randomNumbers[index];
+        const name = questions[randomIndex].name;
+
+        const selectedAnswers = document.
+            querySelectorAll(`input[name="${name}"]`);
+
+        for (let j = 0; j < selectedAnswers.length; j++) {
+            const selectedAnswer = selectedAnswers[j];
+
+            const selector = 'label[for=' + selectedAnswer.id + ']';
+            const labelEl = document.querySelector(selector);
+
+            if (Number(selectedAnswer.value) === questions[randomIndex].answer - 1) {
+                labelEl.className = "correct-text";
+                if (selectedAnswer.checked) {
+                    spanEl.setAttribute("class", "correct");
+                    spanEl.textContent = "Correct";
+                    count++;
+                }
+            } else {
+                if (selectedAnswer.checked) {
+                    spanEl.setAttribute("class", "wrong");
+                    spanEl.textContent = "Wrong";
+                    labelEl.className = "wrong-text";
+                }
+            }
+        }
+    }
+}
+
+function explanation() {
+    const divSelected = document.getElementsByClassName("question");
+    console.log(divSelected);
+    for (let i = 0; i < divSelected.length; i++) {
+        const divEl = document.createElement("div");
+        divEl.className = "explanation";
+        divEl.textContent = "Explanation :";
+        divSelected[i].id = "explain";
+        divSelected[i].appendChild(divEl);
+    }
+}
 
 function submitDisable() {
     buttonDivEl.setAttribute("class", "button-disable");
     const paraEl = document.createElement("p");
-    paraEl.textContent = "Total Score : " + count;
+    let result;
+    if (count > 5) {
+        result = "Passed";
+        paraEl.setAttribute("class", "pass");
+    } else {
+        result = "Failed";
+        paraEl.setAttribute("class", "fail");
+    }
+    paraEl.textContent = `Total Score : ${count} out of 10 ${result}`;
+
     buttonDivEl.appendChild(paraEl);
 
     const inputEl = document.createElement("a");
-    inputEl.setAttribute("href","index.html");
-    inputEl.textContent = "Restart Quiz";
+    inputEl.setAttribute("href", "index.html");
+    inputEl.textContent = "Retake";
     buttonDivEl.appendChild(inputEl);
 }
 
-formEl.appendChild(buttonDivEl);
 divEl.appendChild(formEl);
 
 formEl.addEventListener("submit", (e) => {
     e.preventDefault();
-    answer();
+    checkAns();
+    explanation();
     submitDisable();
 });
