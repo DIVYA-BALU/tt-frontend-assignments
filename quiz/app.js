@@ -270,6 +270,9 @@ for (let i = 0; i < numbers.length; i++) {
     const no = i + 1;
     p.innerText = `Q${no}:${currEl.question}`;
     formEl.appendChild(p);
+    const optionHolder = document.createElement('div');
+    optionHolder.setAttribute('id', `Q${no}holder`);
+
     for (let j = 0; j < currEl.options.length; j++) {
         const optionBox = document.createElement('div');
         optionBox.setAttribute('class', 'option-box');
@@ -298,12 +301,25 @@ for (let i = 0; i < numbers.length; i++) {
         optionBox.appendChild(flabelEl);
         optionBox.appendChild(labelEl);
         optionBox.appendChild(breakEl);
-        formEl.appendChild(optionBox)
+        optionHolder.appendChild(optionBox);
     }
+    optionHolder.addEventListener('click', function (e) { });
+
+    // optionHolder.addEventListener('click', function (e) {
+
+    //     console.log(e.target.value);
+    // const selectedEl = document.getElementById(`Q${no}val`);
+    // setTimeout(() => {
+    //     selectedEl.disabled = true;
+    //     console.log("Selected option locked!");
+    // }, 3000);
+    // })
+    formEl.appendChild(optionHolder);
 }
 
-let CorrectAnswerCount = 0;
+let CorrectAnswerCount;
 formEl.addEventListener("submit", function (e) {
+    CorrectAnswerCount = 0;
     e.preventDefault();
     const formData = new FormData(formEl);
     formData.forEach(function (value, key) {

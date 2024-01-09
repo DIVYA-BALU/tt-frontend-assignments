@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>random</title>
+</head>
+
+<body>
+
+    <p id="p"></p>
+
+    <script>
+        const element = document.getElementById("p");
+        const names = ['Hari', 'Santhosh', 'Sudhakar', 'Nathis', 'Divya', 'Shrihari', 'Bala', 'Udhaya', 'Sachin', 'Grace', 'Sai', 'Thamil', 'Heamnath'];
+        element.innerText = names[Math.floor(Math.random() * names.length)];
+    </script>
+
+</body>
+
+</html>

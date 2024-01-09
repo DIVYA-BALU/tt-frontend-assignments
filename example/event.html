@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Listener Examples</title>
+</head>
+
+<body>
+
+    <input type="text" id="myInput" placeholder="Type something">
+
+    <script>
+        var myInput = document.getElementById("myInput");
+
+        // Keydown event
+        myInput.addEventListener("keydown", function (event) {
+            console.log("Key pressed:", event.key);
+        });
+    </script>
+
+</body>
+
+</html>

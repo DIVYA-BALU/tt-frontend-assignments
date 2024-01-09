@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lock Selected Option Example</title>
+</head>
+
+<body>
+
+    <select id="mySelect">
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+    </select>
+
+    <script>
+        // Get the select element
+        const mySelect = document.getElementById("mySelect");
+
+        // Function to lock the selected option after a delay
+        function lockSelectedOption() {
+            // Get the selected option
+            const selectedOption = mySelect.options[mySelect.selectedIndex];
+
+            // Disable the selected option after 3000 milliseconds (3 seconds)
+            setTimeout(() => {
+                selectedOption.disabled = true;
+                console.log("Selected option locked!");
+            }, 3000);
+        }
+
+        // Attach the lockSelectedOption function to the change event of the select element
+        mySelect.addEventListener("change", lockSelectedOption);
+    </script>
+
+</body>
+
+</html>
