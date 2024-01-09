@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Time</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<style>
+    *{
+        background-color: gainsboro;
+    }
+    div, p{
+        display: flex;
+        justify-content: center;
+        font-size: 50px;
+        font-family: 'Roboto Slab', serif;
+    }
+</style>
+<body>
+    
+</body>
+<script>
+    const localDate = document.createElement("div");
+    const localLabel = document.createElement("p");
+    localLabel.textContent = "India : ";
+    document.body.appendChild(localLabel);
+    localDate.className = "local-date";
+    document.body.appendChild(localDate);
+
+    const ausDate = document.createElement("div");
+    const ausLabel = document.createElement("p");
+    ausLabel.textContent = "Australia : ";
+    document.body.appendChild(ausLabel);
+    ausDate.className = "aus-date";
+    document.body.appendChild(ausDate);
+
+    const canDate = document.createElement("div");
+    const canLabel = document.createElement("p");
+    canLabel.textContent = "Canada : ";
+    document.body.appendChild(canLabel);
+    canDate.className = "can-date";
+    document.body.appendChild(canDate);
+
+    function dataTimeGenerator(divElement, zone) {
+        let dateTime = new Date().toLocaleString("en-AU", {timeZone: zone})
+        dateTime = dateTime.replace("am","AM");
+        dateTime = dateTime.replace("pm","PM");
+        divElement.textContent = dateTime; 
+    }
+    
+    const timeZones = [
+        {
+            class : "local",
+            country : "India",
+            zone : "Asia/Kolkata",
+        }, 
+        {
+            class : "aus",
+            country : "Australia",
+            zone : "Australia/Sydney",
+        }, 
+        {
+            class : "can",
+            country : "Canada",
+            zone : "Canada/Central",
+        },
+    ]
+    setInterval(() =>{
+        // let localDate = document.querySelector(".local-date");
+        // const dateLocal = new Date();
+        // let date = dateLocal.getDate();
+        // let month = dateLocal.getMonth() + 1;
+        // let year = dateLocal.getFullYear();
+        // let hour = dateLocal.getHours();
+        // let minutes = dateLocal.getMinutes();
+        // let seconds = dateLocal.getSeconds();
+        // let ampm = "AM"
+        
+        // if (date < 10){
+        //     date = `0${date}`
+        // }
+
+        // if(month < 10){
+        //     month = `0${month}`
+        // }
+
+        // if(hour === 0){
+        //     hour = 12;
+        // }
+
+        // if(minutes < 10){
+        //     minutes = `0${minutes}`;
+        // }
+
+        // if(seconds < 10){
+        //     seconds = `0${seconds}`;
+        // }
+
+        // if(hour >= 12){
+        //     ampm = "PM";
+        // }
+
+        // localDate.textContent = `INDIA: ${date}/${month}/${year}  ${hour}:${minutes}:${seconds} ${ampm}`;
+        
+        // let ausDate = document.querySelector(".aus-date");
+        // let ausdateLocal = new Date().toLocaleString("en-AU", {timeZone: "Australia/Sydney"})
+        // ausdateLocal = ausdateLocal.replace("am","AM");
+        // ausdateLocal = ausdateLocal.replace("pm","PM");
+        // ausDate.textContent = `AUS: ${ausdateLocal}`;
+
+        // let canDate = document.querySelector(".can-date");
+        // let candateLocal = new Date().toLocaleString("en-AU", {timeZone: "Canada/Central"})
+        // candateLocal = candateLocal.replace("am","AM");
+        // candateLocal = candateLocal.replace("pm","PM");
+        // canDate.textContent = `CANADA: ${candateLocal}`;
+
+        timeZones.forEach((item) => {
+            dataTimeGenerator(document.querySelector(`.${item.class}-date`), item.zone)
+        })
+    },1000)
+</script>
+</html> 

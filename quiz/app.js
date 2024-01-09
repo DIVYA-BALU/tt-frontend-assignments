@@ -1,4 +1,3 @@
-// https://mcqquestions.net/practice/ms-excel-mcq
 const questions = [
     {
         question: "Each cell in a Microsoft Office Excel document is referred to by its cell address, which is the ____________ ?",
@@ -288,164 +287,128 @@ const questions = [
         ]
     },
     {
-        question: "Which planet is known as the 'Red Planet'?",
-        options_type: "radio",
+        question: "Explain the process of photosynthesis.",
+        options_type: "text",
+        answer: ""
+    },
+    {
+        question: "Describe the impact of climate change on biodiversity.",
+        options_type: "text",
+        answer: ""
+    },
+    {
+        question: "Which is the largest planet in our solar system?",
+        options_type: "dropdown",
+        multiple : false,
         options: [
             {
                 value: 1,
                 option: "Jupiter",
-                is_answer: false
+                is_answer: true
             },
             {
                 value: 2,
                 option: "Mars",
-                is_answer: true
+                is_answer: false
             },
             {
                 value: 3,
+                option: "Earth",
+                is_answer: false
+            },
+            {
+                value: 4,
                 option: "Venus",
                 is_answer: false
-            },
-            {
-                value: 4,
-                option: "Saturn",
-                is_answer: false
             }
         ]
     },
     {
-        question: "Who painted the Mona Lisa?",
-        options_type: "radio",
+        question: "Select the primary colors.",
+        options_type: "dropdown",
+        multiple : true,
         options: [
             {
                 value: 1,
-                option: "Vincent van Gogh",
-                is_answer: false
-            },
-            {
-                value: 2,
-                option: "Leonardo da Vinci",
-                is_answer: true
-            },
-            {
-                value: 3,
-                option: "Pablo Picasso",
-                is_answer: false
-            },
-            {
-                value: 4,
-                option: "Michelangelo",
-                is_answer: false
-            }
-        ]
-    },
-    {
-        question: "Which is the longest river in the world?",
-        options_type: "radio",
-        options: [
-            {
-                value: 1,
-                option: "Nile",
+                option: "Red",
                 is_answer: true
             },
             {
                 value: 2,
-                option: "Amazon",
-                is_answer: false
-            },
-            {
-                value: 3,
-                option: "Yangtze",
-                is_answer: false
-            },
-            {
-                value: 4,
-                option: "Mississippi",
-                is_answer: false
-            }
-        ]
-    },
-    {
-        question: "In which year did World War I begin?",
-        options_type: "radio",
-        options: [
-            {
-                value: 1,
-                option: "1914",
+                option: "Blue",
                 is_answer: true
             },
             {
-                value: 2,
-                option: "1918",
-                is_answer: false
-            },
-            {
                 value: 3,
-                option: "1939",
-                is_answer: false
-            },
-            {
-                value: 4,
-                option: "1945",
-                is_answer: false
-            }
-        ]
-    },
-    {
-        question: "Who wrote the play 'Romeo and Juliet'?",
-        options_type: "radio",
-        options: [
-            {
-                value: 1,
-                option: "William Shakespeare",
+                option: "Green",
                 is_answer: true
             },
             {
-                value: 2,
-                option: "Jane Austen",
-                is_answer: false
-            },
-            {
-                value: 3,
-                option: "Charles Dickens",
-                is_answer: false
-            },
-            {
                 value: 4,
-                option: "Mark Twain",
+                option: "Yellow",
                 is_answer: false
             }
         ]
     },
     {
-        question: "What is the chemical symbol for gold?",
-        options_type: "radio",
+        question: "Which programming language is often used for data analysis?",
+        options_type: "dropdown",
+        multiple : false,
         options: [
             {
                 value: 1,
-                option: "Au",
-                is_answer: true
-            },
-            {
-                value: 2,
-                option: "Ag",
+                option: "JavaScript",
                 is_answer: false
             },
             {
+                value: 2,
+                option: "Python",
+                is_answer: true
+            },
+            {
                 value: 3,
-                option: "Fe",
+                option: "Java",
                 is_answer: false
             },
             {
                 value: 4,
-                option: "Pt",
+                option: "C++",
                 is_answer: false
             }
         ]
     },
     {
-        question: "Which famous scientist developed the theory of relativity?",
-        options_type: "radio",
+        question: "Select the continents of the Southern Hemisphere.",
+        options_type: "dropdown",
+        multiple : true,
+        options: [
+            {
+                value: 1,
+                option: "Africa",
+                is_answer: false
+            },
+            {
+                value: 2,
+                option: "Australia",
+                is_answer: true
+            },
+            {
+                value: 3,
+                option: "Asia",
+                is_answer: false
+            },
+            {
+                value: 4,
+                option: "South America",
+                is_answer: true
+            }
+        ]
+    }
+    ,
+    {
+        question: "Who developed the theory of general relativity?",
+        options_type: "dropdown",
+        multiple : false,
         options: [
             {
                 value: 1,
@@ -459,12 +422,12 @@ const questions = [
             },
             {
                 value: 3,
-                option: "Stephen Hawking",
+                option: "Galileo Galilei",
                 is_answer: false
             },
             {
                 value: 4,
-                option: "Galileo Galilei",
+                option: "Stephen Hawking",
                 is_answer: false
             }
         ]
@@ -548,131 +511,131 @@ const questions = [
         ]
     },
     {
-        question: "What is the smallest planet in our solar system?",
-        options_type: "radio",
+        question : "What is the capital of Japan?",
+        options_type : "checkbox",
+        options: [
+            {
+                value: 1,
+                option: "Tokyo",
+                is_answer: true
+            },
+            {
+                value: 2,
+                option: "Seoul",
+                is_answer: false
+            },
+            {
+                value: 3,
+                option: "Beijing",
+                is_answer: false
+            },
+            {
+                value: 4,
+                option: "Bangkok",
+                is_answer: false
+            }
+        ]
+    },
+    {
+        question : "Which of the following are primary colors?",
+        options_type : "checkbox",
+        options: [
+            {
+                value: 1,
+                option: "Red",
+                is_answer: true
+            },
+            {
+                value: 2,
+                option: "Green",
+                is_answer: true
+            },
+            {
+                value: 3,
+                option: "Blue",
+                is_answer: true
+            },
+            {
+                value: 4,
+                option: "Yellow",
+                is_answer: true
+            }
+        ]
+    },
+    {
+        question : "Which programming languages are used for web development?",
+        options_type : "checkbox",
+        options: [
+            {
+                value: 1,
+                option: "Java",
+                is_answer: false
+            },
+            {
+                value: 2,
+                option: "Python",
+                is_answer: false
+            },
+            {
+                value: 3,
+                option: "HTML",
+                is_answer: true
+            },
+            {
+                value: 4,
+                option: "JavaScript",
+                is_answer: true
+            }
+        ]
+    },
+    {
+        question : "Which planets are part of the inner solar system?",
+        options_type : "checkbox",
         options: [
             {
                 value: 1,
                 option: "Mars",
-                is_answer: false
-            },
-            {
-                value: 2,
-                option: "Mercury",
                 is_answer: true
             },
             {
-                value: 3,
-                option: "Venus",
+                value: 2,
+                option: "Jupiter",
                 is_answer: false
             },
             {
-                value: 4,
+                value: 3,
                 option: "Earth",
+                is_answer: true
+            },
+            {
+                value: 4,
+                option: "Saturn",
                 is_answer: false
             }
         ]
     },
     {
-        question: "Who painted the famous artwork 'Starry Night'?",
-        options_type: "radio",
+        question : "Which of the following are common programming paradigms?",
+        options_type : "checkbox",
         options: [
             {
                 value: 1,
-                option: "Pablo Picasso",
-                is_answer: false
-            },
-            {
-                value: 2,
-                option: "Vincent van Gogh",
-                is_answer: true
-            },
-            {
-                value: 3,
-                option: "Leonardo da Vinci",
-                is_answer: false
-            },
-            {
-                value: 4,
-                option: "Claude Monet",
-                is_answer: false
-            }
-        ]
-    },
-    {
-        question: "Which country is the largest by land area?",
-        options_type: "radio",
-        options: [
-            {
-                value: 1,
-                option: "Russia",
+                option: "Imperative",
                 is_answer: true
             },
             {
                 value: 2,
-                option: "Canada",
-                is_answer: false
-            },
-            {
-                value: 3,
-                option: "China",
-                is_answer: false
-            },
-            {
-                value: 4,
-                option: "United States",
-                is_answer: false
-            }
-        ]
-    },
-    {
-        question: "What is the largest organ in the human body?",
-        options_type: "radio",
-        options: [
-            {
-                value: 1,
-                option: "Heart",
-                is_answer: false
-            },
-            {
-                value: 2,
-                option: "Liver",
-                is_answer: false
-            },
-            {
-                value: 3,
-                option: "Skin",
-                is_answer: true
-            },
-            {
-                value: 4,
-                option: "Lungs",
-                is_answer: false
-            }
-        ]
-    },
-    {
-        question: "Which is the tallest mountain in the world?",
-        options_type: "radio",
-        options: [
-            {
-                value: 1,
-                option: "Mount Kilimanjaro",
-                is_answer: false
-            },
-            {
-                value: 2,
-                option: "Mount Everest",
+                option: "Functional",
                 is_answer: true
             },
             {
                 value: 3,
-                option: "K2",
-                is_answer: false
+                option: "Procedural",
+                is_answer: true
             },
             {
                 value: 4,
-                option: "Mount McKinley",
+                option: "Random",
                 is_answer: false
             }
         ]
@@ -695,7 +658,7 @@ function randomIndex(arrLength,limit) {
     return indexarr;
 }
 
-function startQuiz(){
+function startQuiz () {
 
     function linebreaker() {
         const linebreak = document.createElement("br");
@@ -712,15 +675,41 @@ function startQuiz(){
     const answersForQuestions = [];
     const valueOfAnswer = []; 
 
-    randomIndices.forEach((value)=>{
+    randomIndices.forEach((value) => {
         questionToDisplay.push(questions[value]);
-        answerOptions = questions[value].options;
-        answerOptions.forEach((item) => {
-            if(item.is_answer){
-                answersForQuestions.push(item.option);
-                valueOfAnswer.push(item.value.toString());
-            }
-        })
+        let answerOptions = questions[value].options;
+        
+        console.log("ans opt "+ answerOptions);
+        
+        if (answerOptions === undefined){
+            answersForQuestions.push(questions[value].answer);
+            valueOfAnswer.push(questions[value].answer);
+        }
+
+        if(questions[value].options_type === "checkbox" || questions[value].options_type === "dropdown"){
+            let answers = [];
+            let values = [];
+            answerOptions.forEach((item) => {
+                if(item.is_answer){
+                    answers.push(item.option);
+                    values.push(item.value.toString());
+                }
+    
+            })
+            answersForQuestions.push(answers);
+            valueOfAnswer.push(values);
+        }
+        else if(questions[value].options_type === "radio"){
+            answerOptions.forEach((item) => {
+
+                if(item.is_answer){
+                    answersForQuestions.push(item.option);
+                    valueOfAnswer.push(item.value.toString());
+                }
+    
+            })
+        }
+
     })
 
     for(let i = 0,j=0; i<questionToDisplay.length;i++){
@@ -732,58 +721,118 @@ function startQuiz(){
         let optionsDiv = document.createElement("div");
         optionsDiv.className = `options-div${(i + 1)}`;
         
-        qna.options.forEach((option)=>{
-            let optionsRadio = document.createElement("input");
-            optionsRadio.type = "radio";
-            optionsRadio.value = option.value;
-            optionsRadio.name = `options-for-${(i + 1)}`;
-            optionsRadio.id = j;
-            optionsRadio.required = true;
+        if (qna.options_type === "radio" || qna.options_type === "checkbox"){
+            qna.options.forEach((option) => {
+                let optionsElement = document.createElement("input");
+                optionsElement.type = qna.options_type;
+                optionsElement.value = option.value;
+                optionsElement.name = `options-for-${(i + 1)}`;
+                optionsElement.id = j;
+                
+                if (qna.options_type === "radio") {
+                    optionsElement.required = true;
+                }
+    
+                optionsElement.addEventListener("click",() => {
+                    let timer = document.querySelector(".timer");
+                    const time = timer.textContent.split(" ");
+    
+                    // five second rule 
+                    if(parseInt(time[time.length - 1]) % 10 <= 5){
+                        return;
+                    }
+                    else{
+                        optionsElement.parentNode.childNodes.forEach((node) =>{
+                            node.disabled = true;
+                        });
+                    }
+                    
+                })
+    
+                optionsDiv.appendChild(optionsElement);
+    
+                let labelElement = document.createElement("label");
+                labelElement.textContent = option.option;
+                labelElement.setAttribute("for",j);
+                optionsDiv.appendChild(labelElement);
+                j += 1;
+    
+                const linebreak = document.createElement("br");
+                optionsDiv.appendChild(linebreak);
+            })
 
-            optionsRadio.addEventListener("click",() => {
+        }
+        else if (qna.options_type === "text"){
+            let optionsElement = document.createElement("input");
+            optionsElement.type = qna.options_type;
+            optionsElement.name = `options-for-${(i + 1)}`;
+            optionsElement.id = j;
+            
+            optionsElement.addEventListener("click",() => {
                 let timer = document.querySelector(".timer");
                 const time = timer.textContent.split(" ");
-                console.log(time[time.length - 1]);
 
                 // five second rule 
                 if(parseInt(time[time.length - 1]) % 10 <= 5){
                     return;
                 }
                 else{
-                    optionsRadio.parentNode.childNodes.forEach((node) =>{
+                    optionsElement.parentNode.childNodes.forEach((node) =>{
                         node.disabled = true;
                     });
                 }
                 
             })
 
-            optionsDiv.appendChild(optionsRadio);
-
-            let labelElement = document.createElement("label");
-            labelElement.textContent = option.option;
-            labelElement.setAttribute("for",j);
-            optionsDiv.appendChild(labelElement);
             j += 1;
+            optionsDiv.appendChild(optionsElement);
+        }
+        else if (qna.options_type === "dropdown"){
+            let optionsSelect= document.createElement("select");
+            optionsSelect.className = `options-for-${(i + 1)}`;
+            optionsSelect.required = true;
 
-            const linebreak = document.createElement("br");
-            optionsDiv.appendChild(linebreak);
-        })
+            if(qna.multiple){
+                optionsSelect.multiple = true;
+            }
+            
+            let firstOption = document.createElement("option");
+            firstOption.value = 0;
+            firstOption.textContent = "Select from below options";
+            firstOption.id = j;
 
-        // clear attribute
-        // let clear = document.createElement("a");
-        // clear.textContent = "Clear";
-        // clear.className = `clear${(i + 1)}`;
-        // clear.href = "";
-        // clear.addEventListener("click",(e)=>{
-        //     e.preventDefault();
-        //     optionsDiv.childNodes.forEach((node)=>{
-        //         if(node.checked){
-        //             node.checked = false;
-        //         }
-        //     })
-        // })
-        // optionsDiv.appendChild(clear);
-        
+            optionsSelect.appendChild(firstOption);
+
+
+            j += 1;
+            qna.options.forEach((option) => {
+                let optionsElement = document.createElement("option");
+                optionsElement.value = option.value;
+                optionsElement.textContent = option.option;
+                optionsElement.id = j;
+    
+                optionsElement.addEventListener("click",() => {
+                    let timer = document.querySelector(".timer");
+                    const time = timer.textContent.split(" ");
+    
+                    // five second rule 
+                    if(parseInt(time[time.length - 1]) % 10 <= 5){
+                        return;
+                    }
+                    else{
+                        optionsElement.parentNode.childNodes.forEach((node) =>{
+                            node.disabled = true;
+                        });
+                    }
+                    
+                })
+    
+                optionsSelect.appendChild(optionsElement);
+                j+=1
+            })
+            optionsDiv.appendChild(optionsSelect);
+        }
+
         formElement.appendChild(optionsDiv);
         linebreaker();
     }
@@ -792,28 +841,68 @@ function startQuiz(){
     submit.className = "submit";
     submit.textContent = "Submit";
     submit.type = "submit";
-    formElement.addEventListener("submit",(e)=>{
+
+    formElement.addEventListener("submit", (e) => {     
         e.preventDefault();
         let userSelection = [];
+        let userSelectionText = [];
         
         for(let j = 0; j < questionToDisplay.length; j++){
             let flag = 0;
             let selectedOption = document.getElementsByName(`options-for-${(j + 1)}`);
-        
-            selectedOption.forEach((selected)=>{
+            let boxSelections = [];
+            
+            if(selectedOption.length === 0) {
+                let upperDiv = document.querySelector(`.options-div${(j + 1)}`)
                 
-                if(selected.checked){
+                upperDiv.childNodes.forEach((node) => {
                     flag = 1;
-                    userSelection.push(selected.value);
-                    selected.checked = false; // do we uncheck after submitted or not
-                }
-        
-            })
+                    boxSelections.push(node.selectedIndex.toString())
+                })
+
+            }
+            else{
+                
+                selectedOption.forEach((selected)=>{
+                    if (selected.type === "checkbox") {
+                        
+                        if(selected.checked){
+                            flag = 1;
+                            boxSelections.push(selected.value);
+                            selected.checked = false;
+                        }
+
+                    }
+                    else if (selected.type === "radio"){
+                        
+                        if(selected.checked){
+                            flag = 1;
+                            userSelection.push(selected.value);
+                            userSelectionText.push(selected.innerText);
+                            selected.checked = false; // do we uncheck after submitted or not
+                        }
+
+                    }
+                    else if (selected.type === "text"){
+                        
+                        if(selected.value !== ""){
+                            userSelection.push(selected.value);
+                            selected.value = "";
+                        }
+
+                    }
+                })
+
+            }
             
             if(flag === 0){
                 userSelection.push("");
             }
-        
+
+            if(boxSelections.length > 0){
+                userSelection.push(boxSelections);
+            }
+
         }
 
         console.log(answersForQuestions);
@@ -823,9 +912,21 @@ function startQuiz(){
         let score = 0;
         
         for(let k = 0; k < valueOfAnswer.length;k++){
-        
-            if(valueOfAnswer[k] === userSelection[k]){
-                score += 1;
+            
+            if(Array.isArray(valueOfAnswer[k])){
+                let answerEquals = valueOfAnswer[k].every((value,index) => { 
+                    return value === userSelection[k][index];
+                });
+
+                console.log(answerEquals);
+                if(answerEquals){
+                    score += 1;
+                }
+            }
+            else{
+                if(valueOfAnswer[k] === userSelection[k]){
+                    score += 1;
+                }
             }
         
         }
@@ -837,7 +938,7 @@ function startQuiz(){
         reload.textContent = "Reload";
         reload.type = "reset";
         
-        reload.addEventListener("click",()=>{
+        reload.addEventListener("click",() => {
             window.location.reload();
         })
         // display q and a?
@@ -857,22 +958,26 @@ function startQuiz(){
 
 let seconds = 0;
 const secondsPerQuestion = 10;
-function timekeeper(){
+function timekeeper () {
     seconds++;
+
     if(seconds % secondsPerQuestion == 0){
         let currentQuestion = document.querySelector(`.options-div${seconds / 10}`);
+
         if (currentQuestion === null){
-            // document.querySelector(".timer").textContent = "Time's Up!!!";
             alert("Time's Up!!!");
             clearInterval(interval);
             document.querySelector(".timer").remove();
             document.querySelector(".submit").click(); 
             return;
         }
+
         currentQuestion.childNodes.forEach((node) => {
             node.disabled = true;
         })
+
     }
+
     document.querySelector(".timer").textContent = `Time in Seconds: ${seconds}`;
 }
 
@@ -890,6 +995,7 @@ let interval;
 const start = document.createElement("button");
 start.className = "start";
 start.textContent = "Start";
+
 start.addEventListener("click",() => {
     interval = setInterval(timekeeper,1000);
     timer.hidden = false;
