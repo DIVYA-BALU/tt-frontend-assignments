@@ -30,17 +30,17 @@ h1{
     color: white;
 }
 
-.quiz div a{
+/* .quiz div a{
     margin-left: 20px;
     font-size: 20px;
     background-color: ivory;
-}
+} */
 
 .quiz div input:checked + label{
     background-color: rgb(119, 192, 149);
 }
 
-button{
+.submit,.reload{
     border: 1px solid black;
     border-radius: 1px;
     margin-left: 50%;
@@ -59,4 +59,30 @@ button:hover{
 
 .quiz div input, .quiz div label{
     cursor: pointer;
+}
+
+.start{
+    display: flex;
+    justify-content: center;
+    color: black;
+    border: 1px solid black;
+    border-radius: 1px;
+    padding: 3px;
+    margin-top: 10px;
+    margin-bottom: 10px; 
+    height: 30px;
+    width: 80px;
+    font-size: 20px;
+}
+
+.quiz div input:disabled label{
+    text-decoration: line-through;
+}
+
+.timer{
+    padding: 10px;
+    margin-right: 20px;
+    background-color:blanchedalmond;
+    width: 10%;
+    height: 30px;
 }
