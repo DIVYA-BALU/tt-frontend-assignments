@@ -679,8 +679,6 @@ function startQuiz () {
         questionToDisplay.push(questions[value]);
         let answerOptions = questions[value].options;
         
-        console.log("ans opt "+ answerOptions);
-        
         if (answerOptions === undefined){
             answersForQuestions.push(questions[value].answer);
             valueOfAnswer.push(questions[value].answer);
@@ -732,23 +730,6 @@ function startQuiz () {
                 if (qna.options_type === "radio") {
                     optionsElement.required = true;
                 }
-    
-                optionsElement.addEventListener("click",() => {
-                    let timer = document.querySelector(".timer");
-                    const time = timer.textContent.split(" ");
-    
-                    // five second rule 
-                    if(parseInt(time[time.length - 1]) % 10 <= 5){
-                        return;
-                    }
-                    else{
-                        optionsElement.parentNode.childNodes.forEach((node) =>{
-                            node.disabled = true;
-                        });
-                    }
-                    
-                })
-    
                 optionsDiv.appendChild(optionsElement);
     
                 let labelElement = document.createElement("label");
@@ -767,23 +748,6 @@ function startQuiz () {
             optionsElement.type = qna.options_type;
             optionsElement.name = `options-for-${(i + 1)}`;
             optionsElement.id = j;
-            
-            optionsElement.addEventListener("click",() => {
-                let timer = document.querySelector(".timer");
-                const time = timer.textContent.split(" ");
-
-                // five second rule 
-                if(parseInt(time[time.length - 1]) % 10 <= 5){
-                    return;
-                }
-                else{
-                    optionsElement.parentNode.childNodes.forEach((node) =>{
-                        node.disabled = true;
-                    });
-                }
-                
-            })
-
             j += 1;
             optionsDiv.appendChild(optionsElement);
         }
@@ -810,23 +774,6 @@ function startQuiz () {
                 optionsElement.value = option.value;
                 optionsElement.textContent = option.option;
                 optionsElement.id = j;
-    
-                optionsElement.addEventListener("click",() => {
-                    let timer = document.querySelector(".timer");
-                    const time = timer.textContent.split(" ");
-    
-                    // five second rule 
-                    if(parseInt(time[time.length - 1]) % 10 <= 5){
-                        return;
-                    }
-                    else{
-                        optionsElement.parentNode.childNodes.forEach((node) =>{
-                            node.disabled = true;
-                        });
-                    }
-                    
-                })
-    
                 optionsSelect.appendChild(optionsElement);
                 j+=1
             })
@@ -857,7 +804,12 @@ function startQuiz () {
                 
                 upperDiv.childNodes.forEach((node) => {
                     flag = 1;
-                    boxSelections.push(node.selectedIndex.toString())
+                    
+                    Array.from(node.selectedOptions).map((option) => { 
+                        boxSelections.push(option.index.toString());
+                    })
+
+                    node.selectedIndex = 0;
                 })
 
             }
@@ -958,11 +910,13 @@ function startQuiz () {
 
 let seconds = 0;
 const secondsPerQuestion = 10;
+const timeLimitForChange = 5;
+let divNumber = 1;
 function timekeeper () {
     seconds++;
-
+    let currentQuestion = document.querySelector(`.options-div${divNumber}`);
+    
     if(seconds % secondsPerQuestion == 0){
-        let currentQuestion = document.querySelector(`.options-div${seconds / 10}`);
 
         if (currentQuestion === null){
             alert("Time's Up!!!");
@@ -975,8 +929,43 @@ function timekeeper () {
         currentQuestion.childNodes.forEach((node) => {
             node.disabled = true;
         })
-
+        divNumber += 1;
     }
+
+    currentQuestion.childNodes.forEach((childNode) => {
+
+        childNode.onclick = function(){
+            // five second rule 
+            if(seconds % 10 <= timeLimitForChange){
+                return;
+            }
+            else{
+
+                if (childNode.tagName.toLowerCase() === "select"){
+                    
+                    if (childNode.multiple){
+                        return;
+                    }
+                    
+                    childNode.disabled = true;
+                }
+
+                let elementFromLabel = document.getElementById(childNode.getAttribute("for"));
+                
+                if (elementFromLabel !== undefined || elementFromLabel !== null){
+                    childNode = elementFromLabel;
+                }
+
+                if (childNode.type === "checkbox" || childNode.type === "radio"){
+                    childNode.checked = true;
+                }
+
+                childNode.parentNode.childNodes.forEach((node) =>{
+                    node.disabled = true;
+                });
+            }
+        }
+    })
 
     document.querySelector(".timer").textContent = `Time in Seconds: ${seconds}`;
 }
