@@ -9,8 +9,7 @@
     font-size: 20px;
     border: 1px solid black;
     background-color: aliceblue;
-    background-color: rgba(153, 239, 25, 0.813);
-    border-radius: 10px;
+    background-color: rgb(27, 248, 24);
 }
 
 label {
@@ -25,7 +24,6 @@ label {
     border: 1px solid black;
     background-color: aliceblue;
     background-color: rgb(234, 86, 60);
-    border-radius: 10px;
 }
 
 #body {
@@ -45,15 +43,27 @@ p {
     margin-left: 5%;
     font-size: 20px;
     border: 1px solid black;
-    background-color: rgb(5, 209, 255);
     margin-bottom: 5px;
-    border-radius: 10px;
+
+}
+
+.option-holder :hover {
+    background-color: rgb(180, 180, 180);
+}
+
+.selector {
+    cursor: pointer;
+    width: 60%;
+    margin-left: 5%;
+    font-size: 20px;
+    margin-left: 5%;
 }
 
 form {
     width: 60%;
     float: left;
     background-color: aliceblue;
+    margin-left: 2%;
     margin-top: 20px;
     border-radius: 30px;
 }
@@ -63,7 +73,7 @@ form {
     width: fit-content;
     position: fixed;
     margin-top: 4%;
-    margin-left: 62%;
+    margin-left: 63%;
     font-size: 25px;
     text-align: left;
     padding: 30px 60px 5px 10px;
@@ -75,7 +85,6 @@ form {
 
     font-size: 25px;
     border: 1px solid black;
-    background-color: rgb(5, 209, 255);
     margin: 40px -50px 50px 0px;
     margin-left: 5px;
     padding: 20px;
