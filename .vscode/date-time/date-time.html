@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="date-time.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Rubik+Maps&display=swap" rel="stylesheet">
+</head>
+<body>
+  <script>
+    const divEl = document.createElement('div');
+    divEl.className = 'divEl';
+    document.body.appendChild(divEl);
+
+    const currentDate = document.createElement('p');
+    currentDate.className = 'current-date';
+    
+    const newZealandCurrentDate = document.createElement('p');
+    newZealandCurrentDate.className = 'newZealand-current-date';
+    
+    const malaysiaCurrentDate = document.createElement('p');
+    malaysiaCurrentDate.className = 'malaysia-current-date';
+
+    divEl.appendChild(currentDate);
+    divEl.appendChild(newZealandCurrentDate);
+    divEl.appendChild(malaysiaCurrentDate);
+
+    setInterval(timeDisplay, 1000);
+    
+    function timeDisplay() {
+
+      let date = new Date().toLocaleString("en-IN", {timeZone: "Asia/Kolkata"});
+      currentDate.textContent = `India  :  ${date}`;
+
+      let malaysiaDate = new Date().toLocaleString("en-MY", {timeZone: "Asia/Kuala_Lumpur"});
+      malaysiaCurrentDate.textContent = `Malaysia  :  ${malaysiaDate} `;
+      
+      let newZealandDate = new Date().toLocaleString("en-NZ", {timeZone: "Pacific/Auckland"});
+      newZealandCurrentDate.textContent = `NewZealand  :  ${newZealandDate} `;
+
+    }
+
+
+  </script>
+</body>
+</html>

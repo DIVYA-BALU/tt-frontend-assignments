@@ -1,5 +1,7 @@
 .form-div{
-  background-color: rgb(241, 214, 214);
+  background-color: rgb(242, 230, 230);
+  display: flex;
+  justify-content: center;
 }
 .quiz-start-button{
   color: white;
@@ -14,12 +16,33 @@
   text-align: center;
 }
 .quiz-form{
+  align-items: center;
+  background-color: rgb(255, 208, 208);
   border: 3px solid;
   border-color: black;
+  width: 800px;
+  padding-left: 40px;
+  padding-bottom: 40px;
 }
 .question-container{
   margin-top: 20px;
 }
 .qlabel{
   margin-bottom: 10px;
+}
+.choice-label:hover{
+  cursor: pointer;
+}
+.correct-answer{
+  border: 2px black solid;
+  border-radius: 2px;
+  background-color: rgb(139, 248, 139);
+}
+.wrong-answer{
+  border: 2px black solid;
+  border-radius: 2px;
+  background-color: rgb(248, 139, 139);
+}
+.qlabel{
+  font-weight: bold;
 }

@@ -1,0 +1,23 @@
+.divEl{
+  background-color: azure;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 4px solid brown;
+  border-radius: 30px;
+  padding-left: 30px;
+  flex-direction: column;
+  font-weight: bolder;
+  font-family: 'Bungee Spice', sans-serif;
+  width: 800px;
+  height: 500px;
+}  
+.current-date{
+  margin-top: 30px;
+}
+.newZealand-current-date{
+  margin-top: 30px;
+}
+.malaysia-current-date{
+  margin-top: 30px;
+}
