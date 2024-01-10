@@ -205,28 +205,28 @@ const quizQuestions = [
     {
         question: "Select the programming languages:",
         options: ["JavaScript", "Python", "Java", "C++", "Ruby"],
-        answer: ["JavaScript", "Python", "Java"],
+        answer: ["JavaScript", "Python", "Java","C++", "Ruby"],
         type: "checkbox",
         name: "question26"
     },
     {
         question: "Select the capital of France:",
         options: ["Berlin", "Paris", "London", "Madrid"],
-        answer: "Paris",
+        answer: ["Paris"],
         type: "dropdown",
         name: "question27"
     },
     {
         question: "Select the capital of France:",
         options: ["Berlin", "Paris", "London", "Madrid"],
-        answer: "Paris",
+        answer: ["Paris"],
         type: "dropdown",
         name: "question27"
     },
     {
         question: "Select the capital of France:",
         options: ["Berlin", "Paris", "London", "Madrid"],
-        answer: "Paris",
+        answer: ["Paris"],
         type: "dropdown",
         name: "question27"
     },
@@ -303,28 +303,28 @@ const quizQuestions = [
     {
         question: "Choose the largest planet in our solar system:",
         options: ["Mercury", "Venus", "Earth", "Jupiter", "Saturn"],
-        answer: "Jupiter",
+        answer: ["Jupiter"],
         type: "dropdown",
         name: "question38"
     },
     {
         question: "Select the primary colors:",
         options: ["Red", "Blue", "Yellow", "Green"],
-        answer: "Red",
+        answer: ["Red"],
         type: "dropdown",
         name: "question39"
     },
     {
         question: "Choose the main programming language for web development:",
         options: ["Python", "Java", "JavaScript", "C++"],
-        answer: "JavaScript",
+        answer: ["JavaScript"],
         type: "dropdown",
         name: "question40"
     },
     {
         question: "Select the capital of Japan:",
         options: ["Beijing", "Seoul", "Tokyo", "Bangkok"],
-        answer: "Tokyo",
+        answer: ["Tokyo"],
         type: "dropdown",
         name: "question41"
     },
@@ -397,8 +397,8 @@ while (questionCount) {
                 const inputEl = document.createElement("input");
                 inputEl.type = question.type === "checkbox" ? "checkbox" : "radio";
                 inputEl.name = question.type === "checkbox" ? `${question.name}-${index}` : question.name;
-                if (question.type === "radio")
-                    inputEl.required = "required";
+                // if (question.type === "radio")
+                // inputEl.required = "required";
 
                 const labelEl = document.createElement("label");
                 inputEl.value = option;
@@ -450,9 +450,11 @@ while (questionCount) {
     };
 }
 
+
 let mark = 0;
 function dispalyAnswers() {
     for (let i = 0; i < indexOfQuestionsSelected.length; i++) {
+        let index = 0;
         const questionIndex = indexOfQuestionsSelected[i];
         const question = quizQuestions[questionIndex];
 
@@ -466,44 +468,48 @@ function dispalyAnswers() {
 
                 if (labelEl.textContent === question.answer) {
                     mark++;
-                    ansDiv.classList.add("correct-answer");
-                } else {
-                    ansDiv.classList.add("wrong-answer");
-                    const correctOptionIndex = question.options.indexOf(question.answer);
-                    const correctOptionDiv = ansDiv.parentNode.children[correctOptionIndex + 1];
-                    correctOptionDiv.classList.add("correct-answer");
                 }
             }
         } else if (question.type === "checkbox") {
-            // const checkboxes = document.querySelectorAll(`input[name^='question']:checked`);
-            // const correctOptions = question.answer;
-            // const selectedOptions = Array.from(checkboxes).map((checkbox) => checkbox.value);
-
-            // const ansDivs = Array.from(document.querySelectorAll(`input[name^='question']`))
-            //     .map((checkbox) => checkbox.closest('.inner-div'));
-
-            // const isAllCorrect = selectedOptions.length === correctOptions.length &&
-            //     selectedOptions.every((option) => correctOptions.includes(option));
-
-            // if (isAllCorrect) {
-            //     mark++;
-            // }  
-            //     ansDivs.forEach((ansDiv) => {    
-            //         console.log("hai");
-            //         const labelEl = ansDiv.querySelector('label');
-            //         if (selectedOptions.includes(labelEl.textContent)) {
-
-            //                 ansDiv.classList.add("correct-answer");
-            //             } else {
-            //                 ansDiv.classList.add("wrong-answer");
-            //             }
-            //         if (correctOptions.includes(labelEl.textContent)) {
-            //             const correctOptionDiv = ansDiv.parentNode.children[correctOptions.indexOf(labelEl.textContent) + 1];
-            //             correctOptionDiv.classList.add("correct-answer");
-            //         }
-            //     });
+            const selectedOptions = [];
+            const checkboxes = [];
+            for (let index = 0; index < question.options.length; index++) {
+                const el = (document.querySelector(`input[name="${question.name}-${index}"]`));
+                if (el.checked)
+                    checkboxes.push(el);
+            }
+            let inc = 0;
+            checkboxes.forEach(() => {
+                selectedOptions.push(checkboxes[inc].value)
+                inc++;
+            });
 
 
+            const correctOptions = question.answer;
+            const isAllCorrect = selectedOptions.length === correctOptions.length &&
+                selectedOptions.every((option) => correctOptions.includes(option));
+
+            if (isAllCorrect) {
+                mark++;
+            }
+        }else if(question.type === "text"){
+            const userInput = document.querySelector(`input[name="${question.name}"]`).value.trim();
+            const correctAnswer = question.answer.toLowerCase().trim(); 
+
+            if (userInput === correctAnswer) {
+                mark++;
+            }
+        }else if(question.type === "dropdown" || question.type === "multiple-dropdown"){
+            const selectedOptions = Array.from(document.querySelectorAll(`select[name="${question.name}"] option:checked`))
+                .map(option => option.value);
+            console.log(selectedOptions);
+            const correctOptions = question.answer;
+            console.log(correctOptions);
+            const isAllCorrect = selectedOptions.length === correctOptions.length &&
+                selectedOptions.every((option) => correctOptions.includes(option));
+
+            if (isAllCorrect) 
+                mark++;
         }
     }
 }
@@ -531,14 +537,7 @@ function quizMarks() {
 }
 
 quizBody.appendChild(buttonEl);
+
 body.appendChild(quizBody);
 
 
-
-
-
-// const checkboxes = document.querySelectorAll(`input[name^='question']:checked`);
-// if (checkboxes.length === 0) {
-//     alert("Please select at least one option.");
-//     return;
-// }
