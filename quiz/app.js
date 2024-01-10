@@ -660,6 +660,7 @@ function randomIndex(arrLength,limit) {
 
 function startQuiz() {
 
+
     function linebreaker() {
         const linebreak = document.createElement("br");
         formElement.appendChild(linebreak);
@@ -669,7 +670,7 @@ function startQuiz() {
     formElement.className = "quiz";
     divElement.appendChild(formElement);
 
-    const limit = 10;
+    const limit = 5;
     const randomIndices = randomIndex(questions.length,limit);
     const questionToDisplay = [];
     const answersForQuestions = [];
@@ -804,7 +805,7 @@ function startQuiz() {
             let flag = 0;
             let selectedOption = document.getElementsByName(`options-for-${(j + 1)}`);
             let boxSelections = [];
-            
+            let boxSelectionsText = []
             if(selectedOption.length === 0) {
                 let upperDiv = document.querySelector(`.options-div${(j + 1)}`)
                 
@@ -813,6 +814,7 @@ function startQuiz() {
                     
                     Array.from(node.selectedOptions).map((option) => { 
                         boxSelections.push(option.index.toString());
+                        boxSelectionsText.push(option.textContent);
                     })
 
                     // node.selectedIndex = 0; // do we uncheck after submitted or not
@@ -828,6 +830,7 @@ function startQuiz() {
                         if(selected.checked){
                             flag = 1;
                             boxSelections.push(selected.value);
+                            boxSelectionsText.push(document.querySelector("label[for='" + selected.id + "']").innerText);
                             // selected.checked = false; // do we uncheck after submitted or not
                         }
 
@@ -837,7 +840,7 @@ function startQuiz() {
                         if(selected.checked){
                             flag = 1;
                             userSelection.push(selected.value);
-                            userSelectionText.push(selected.innerText);
+                            userSelectionText.push(document.querySelector("label[for='" + selected.id + "']").innerText);
                             // selected.checked = false; // do we uncheck after submitted or not
                         }
 
@@ -846,6 +849,7 @@ function startQuiz() {
                         
                         if(selected.value !== ""){
                             userSelection.push(selected.value);
+                            userSelectionText.push(selected.innerText);
                             // selected.value = ""; // do we uncheck after submitted or not
                         }
 
@@ -857,10 +861,12 @@ function startQuiz() {
             
             if(flag === 0){
                 userSelection.push("");
+                userSelectionText.push(boxSelectionsText);
             }
 
             if(boxSelections.length > 0){
                 userSelection.push(boxSelections);
+                userSelectionText.push(boxSelectionsText);
             }
 
         }
@@ -903,9 +909,48 @@ function startQuiz() {
         reload.addEventListener("click",() => {
             window.location.reload();
         })
+
         // display q and a?
+        const analytics = document.createElement("button");
+        analytics.className = "analytics";
+        analytics.textContent = "Analytics";
+        analytics.type = "button";
+        
+        analytics.addEventListener("click", () => {
+
+            function linebreakerDiv() {
+                const linebreak = document.createElement("br");
+                innerDivElement.appendChild(linebreak);
+            }
+
+            divElement.innerHTML = "";
+            let innerDivElement = document.createElement("div");
+            innerDivElement.className = "qna";
+
+            let headingElement = document.querySelector("h1");
+            headingElement.textContent += "-Analytics"
+            
+            for(let x = 0; x < questionToDisplay.length; x++){
+                const questionElement = document.createElement("p");
+                const answerElement = document.createElement("p");
+                const usersAnswerElement = document.createElement("p");
+                questionElement.textContent = `${x + 1}. ${questionToDisplay[x].question}`;
+                answerElement.textContent = `Answer : ${answersForQuestions[x]}`;
+                usersAnswerElement.textContent = `Your Answer : ${userSelectionText[x]}`
+                innerDivElement.appendChild(questionElement);
+                innerDivElement.appendChild(answerElement);
+                innerDivElement.appendChild(usersAnswerElement);
+                linebreakerDiv();
+            }
+            
+            reload.className = "reload-analytics";
+            innerDivElement.appendChild(reload);
+            divElement.appendChild(innerDivElement)
+
+        })
 
         formElement.appendChild(reload);
+        formElement.appendChild(analytics);
         clearInterval(interval);
 
         if(document.querySelector(".timer") !== null){

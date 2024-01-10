@@ -17,6 +17,7 @@
 }
 
 .quiz{
+    /* display: inline-block; */
     padding: 0px 20px 0px 20px;
 }
 
@@ -44,15 +45,45 @@ h1{
     background-color: rgb(147, 206, 171);
 }
 
-.submit,.reload{
+.submit, .reload{
     border: 1px solid black;
     border-radius: 1px;
-    margin-left: 50%;
+    /* display: inline-block;
+    align-items: center; */
+    margin-left: 43%;
     background-color: ivory;
     margin-top: 10px;
     margin-bottom: 10px;
     height: 40px;
     width: 80px;
+    font-size: 20px;
+}
+
+.reload{
+    margin-left: 30%;
+}
+
+.reload-analytics{
+    border: 1px solid black;
+    border-radius: 1px;
+    margin-left: 43%;
+    background-color: ivory;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 40px;
+    width: 80px;
+    font-size: 20px;
+}
+
+.analytics{
+    border: 1px solid black;
+    border-radius: 1px;
+    margin-left: 20px;
+    background-color: ivory;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 40px;
+    width: 110px;
     font-size: 20px;
 }
 
@@ -80,10 +111,6 @@ button:hover{
     width: 80px;
     font-size: 20px;
 }
-
-/* .quiz div input:disabled label{
-    text-decoration: line-through;
-} */
 
 .timer{
     padding: 10px;
