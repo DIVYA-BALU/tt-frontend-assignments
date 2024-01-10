@@ -15,30 +15,33 @@
     background-color: ivory;
     margin-top: 5px;
 }
+
 .quiz{
     padding: 0px 20px 0px 20px;
 }
+
 h1{
     margin-top: 50px;
     display: flex;
     justify-content: center;
 }
 
-.quiz div label{
+.quiz div label, .quiz div input{
     font-size: 20px;
     margin-right: 20px;
-    background-color: rgb(189, 168, 214);
+    background-color: rgb(205, 191, 221);
     color: white;
 }
 
-/* .quiz div a{
-    margin-left: 20px;
+.quiz div select option, .quiz div select{
     font-size: 20px;
-    background-color: ivory;
-} */
+    background-color: rgb(205, 191, 221);
+    color: white;
+}
 
-.quiz div input:checked + label{
-    background-color: rgb(119, 192, 149);
+.quiz div input:checked + label, .quiz div select:focus > option:checked,
+.quiz div select:hover, .quiz div select:disabled, .quiz div select:disabled > option:checked,  .quiz div select option:hover, .quiz div input:disabled{
+    background-color: rgb(147, 206, 171);
 }
 
 .submit,.reload{
@@ -58,10 +61,13 @@ button:hover{
     background-color: rgb(67, 28, 85);
 }
 
-.quiz div input, .quiz div label{
+.quiz div input, .quiz div label, .quiz div select, .quiz div select > option{
     cursor: pointer;
 }
 
+.quiz div input:disabled, .quiz div input:disabled + label, .quiz div select:disabled, .quiz div select:disabled > option{
+    cursor: not-allowed;
+}
 .start{
     display: flex;
     justify-content: center;
@@ -75,9 +81,9 @@ button:hover{
     font-size: 20px;
 }
 
-.quiz div input:disabled label{
+/* .quiz div input:disabled label{
     text-decoration: line-through;
-}
+} */
 
 .timer{
     padding: 10px;

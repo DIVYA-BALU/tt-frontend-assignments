@@ -4,22 +4,22 @@ const questions = [
         options_type: "radio",
         options: [
             {
-                value : 1,
+                value: 1,
                 option: "cell's column label",
                 is_answer: false
             },
             {
-                value : 2,
+                value: 2,
                 option: "cell's column label and worksheet tab name",
                 is_answer: false
             },
             {
-                value : 3,
+                value: 3,
                 option: "cell's row label",
                 is_answer: false
             },
             {
-                value : 4,
+                value: 4,
                 option: "cell's row and column labels",
                 is_answer: true
             },
@@ -299,7 +299,7 @@ const questions = [
     {
         question: "Which is the largest planet in our solar system?",
         options_type: "dropdown",
-        multiple : false,
+        multiple: false,
         options: [
             {
                 value: 1,
@@ -326,7 +326,7 @@ const questions = [
     {
         question: "Select the primary colors.",
         options_type: "dropdown",
-        multiple : true,
+        multiple: true,
         options: [
             {
                 value: 1,
@@ -353,7 +353,7 @@ const questions = [
     {
         question: "Which programming language is often used for data analysis?",
         options_type: "dropdown",
-        multiple : false,
+        multiple: false,
         options: [
             {
                 value: 1,
@@ -380,7 +380,7 @@ const questions = [
     {
         question: "Select the continents of the Southern Hemisphere.",
         options_type: "dropdown",
-        multiple : true,
+        multiple: true,
         options: [
             {
                 value: 1,
@@ -408,7 +408,7 @@ const questions = [
     {
         question: "Who developed the theory of general relativity?",
         options_type: "dropdown",
-        multiple : false,
+        multiple: false,
         options: [
             {
                 value: 1,
@@ -511,8 +511,8 @@ const questions = [
         ]
     },
     {
-        question : "What is the capital of Japan?",
-        options_type : "checkbox",
+        question: "What is the capital of Japan?",
+        options_type: "checkbox",
         options: [
             {
                 value: 1,
@@ -537,8 +537,8 @@ const questions = [
         ]
     },
     {
-        question : "Which of the following are primary colors?",
-        options_type : "checkbox",
+        question: "Which of the following are primary colors?",
+        options_type: "checkbox",
         options: [
             {
                 value: 1,
@@ -563,8 +563,8 @@ const questions = [
         ]
     },
     {
-        question : "Which programming languages are used for web development?",
-        options_type : "checkbox",
+        question: "Which programming languages are used for web development?",
+        options_type: "checkbox",
         options: [
             {
                 value: 1,
@@ -589,8 +589,8 @@ const questions = [
         ]
     },
     {
-        question : "Which planets are part of the inner solar system?",
-        options_type : "checkbox",
+        question: "Which planets are part of the inner solar system?",
+        options_type: "checkbox",
         options: [
             {
                 value: 1,
@@ -615,8 +615,8 @@ const questions = [
         ]
     },
     {
-        question : "Which of the following are common programming paradigms?",
-        options_type : "checkbox",
+        question: "Which of the following are common programming paradigms?",
+        options_type: "checkbox",
         options: [
             {
                 value: 1,
@@ -658,7 +658,7 @@ function randomIndex(arrLength,limit) {
     return indexarr;
 }
 
-function startQuiz () {
+function startQuiz() {
 
     function linebreaker() {
         const linebreak = document.createElement("br");
@@ -687,7 +687,9 @@ function startQuiz () {
         if(questions[value].options_type === "checkbox" || questions[value].options_type === "dropdown"){
             let answers = [];
             let values = [];
+            
             answerOptions.forEach((item) => {
+
                 if(item.is_answer){
                     answers.push(item.option);
                     values.push(item.value.toString());
@@ -698,6 +700,7 @@ function startQuiz () {
             valueOfAnswer.push(values);
         }
         else if(questions[value].options_type === "radio"){
+            
             answerOptions.forEach((item) => {
 
                 if(item.is_answer){
@@ -707,6 +710,7 @@ function startQuiz () {
     
             })
         }
+
 
     })
 
@@ -730,6 +734,7 @@ function startQuiz () {
                 if (qna.options_type === "radio") {
                     optionsElement.required = true;
                 }
+
                 optionsDiv.appendChild(optionsElement);
     
                 let labelElement = document.createElement("label");
@@ -777,6 +782,7 @@ function startQuiz () {
                 optionsSelect.appendChild(optionsElement);
                 j+=1
             })
+
             optionsDiv.appendChild(optionsSelect);
         }
 
@@ -816,6 +822,7 @@ function startQuiz () {
             else{
                 
                 selectedOption.forEach((selected)=>{
+
                     if (selected.type === "checkbox") {
                         
                         if(selected.checked){
@@ -843,6 +850,7 @@ function startQuiz () {
                         }
 
                     }
+
                 })
 
             }
@@ -870,15 +878,17 @@ function startQuiz () {
                     return value === userSelection[k][index];
                 });
 
-                console.log(answerEquals);
                 if(answerEquals){
                     score += 1;
                 }
+
             }
             else{
+
                 if(valueOfAnswer[k] === userSelection[k]){
                     score += 1;
                 }
+
             }
         
         }
@@ -929,6 +939,7 @@ function timekeeper () {
         currentQuestion.childNodes.forEach((node) => {
             node.disabled = true;
         })
+
         divNumber += 1;
     }
 
@@ -964,7 +975,9 @@ function timekeeper () {
                     node.disabled = true;
                 });
             }
+
         }
+
     })
 
     document.querySelector(".timer").textContent = `Time in Seconds: ${seconds}`;
@@ -991,4 +1004,5 @@ start.addEventListener("click",() => {
     start.remove();
     startQuiz();
 })
+
 divElement.appendChild(start);
