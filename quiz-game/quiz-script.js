@@ -474,7 +474,35 @@ function dispalyAnswers() {
                     correctOptionDiv.classList.add("correct-answer");
                 }
             }
-        }else if(question.type === "checkbox"){
+        } else if (question.type === "checkbox") {
+            // const checkboxes = document.querySelectorAll(`input[name^='question']:checked`);
+            // const correctOptions = question.answer;
+            // const selectedOptions = Array.from(checkboxes).map((checkbox) => checkbox.value);
+
+            // const ansDivs = Array.from(document.querySelectorAll(`input[name^='question']`))
+            //     .map((checkbox) => checkbox.closest('.inner-div'));
+
+            // const isAllCorrect = selectedOptions.length === correctOptions.length &&
+            //     selectedOptions.every((option) => correctOptions.includes(option));
+
+            // if (isAllCorrect) {
+            //     mark++;
+            // }  
+            //     ansDivs.forEach((ansDiv) => {    
+            //         console.log("hai");
+            //         const labelEl = ansDiv.querySelector('label');
+            //         if (selectedOptions.includes(labelEl.textContent)) {
+
+            //                 ansDiv.classList.add("correct-answer");
+            //             } else {
+            //                 ansDiv.classList.add("wrong-answer");
+            //             }
+            //         if (correctOptions.includes(labelEl.textContent)) {
+            //             const correctOptionDiv = ansDiv.parentNode.children[correctOptions.indexOf(labelEl.textContent) + 1];
+            //             correctOptionDiv.classList.add("correct-answer");
+            //         }
+            //     });
+
 
         }
     }
