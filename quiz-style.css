@@ -1,23 +1,22 @@
-*{
+* {
     font-size: 18px;
     font-family: Georgia;
 }
 
-.body-tag{
-    background-image: url(7246092.jpg);
-    background-size: cover; 
-    filter: blur();
+.body-tag {
+    background-image: url(bakgroundimg5.jpg);
+    background-size: cover;
 }
 
-.outer-div{
+.outer-div {
     margin-top: 5%;
     margin-left: 27%;
     margin-bottom: 5%;
     margin-right: 25%;
 }
 
-.quiz-form{
-    background-color: rgb(186, 224, 173);
+.quiz-form {
+    background-color: rgb(255, 255, 255);
     padding-top: 5%;
     padding-left: 5%;
     padding-right: 5%;
@@ -25,42 +24,80 @@
     border-radius: 20px;
 }
 
-.section-div{
+.section-div {
     margin-bottom: 40px;
 }
 
-.question-div{
+.question-div {
+    font-weight: bold;
     margin-bottom: 10px;
 }
 
-.question-div label{
-    font-weight: bold;
-    /* margin: 10px 2px 10px 2px; */
-    /* margin-bottom: 500px; */
+.options-div div{
+    display: grid;
+    grid-template-columns: 0.25fr 1fr;
+    row-gap: 500px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    margin-right: 30%;
 }
 
-.options-div{
-    display: grid;    
-    grid-template-columns: 15% 1fr;
-    row-gap: 10px
-    ;
+input::target-text{
+    
 }
 
-.answer-div{
+input:hover {
+    cursor: pointer;
+}
+
+label:hover {
+    cursor: pointer;
+}
+
+.answer-div {
     margin-top: 20px;
-    /* margin-bottom: 20px; */
+    font-style: oblique;
+    font-weight: 550;
+    color: rgb(91, 126, 56);
 }
 
-.score-div{
-    margin-top: 30px;
+.score-div {
+    font-size: 40px;
+    margin-top: 40px;
     text-align: center;
 }
 
-.hidden{
+.hidden {
     display: none;
 }
 
-.
+.hidden-correct{
+    background-color: rgb(57, 173, 57);
+}
+
+.hidden-wrong{
+    background-color: rgb(228, 84, 84);
+}
+
+button {
+    color: white;
+    background-color: rgb(45, 97, 45);
+    border: none;
+    padding-top: 13px;
+    padding-left: 20px;
+    padding-bottom: 13px;
+    padding-right: 20px;
+    margin-top: 25px;
+    margin-left: 12%;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+button:hover {
+    cursor: pointer;
+}
+
 /* 
 @media only screen and (max-width: 600px) {
     .body-tag{

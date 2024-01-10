@@ -1,7 +1,10 @@
-function outerFun() {
-    const name = "Nathis";
-    function innerFun() {
-      console.log(name);
+const obj1={
+  fun1:function(){  
+    const fun2=function(){
+      console.log(this);
     }
-    return innerFun();
+    fun2();
+  }
+  // fun2();
 }
+obj1.fun1();
