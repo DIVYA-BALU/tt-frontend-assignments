@@ -809,7 +809,7 @@ function startQuiz () {
                         boxSelections.push(option.index.toString());
                     })
 
-                    node.selectedIndex = 0;
+                    // node.selectedIndex = 0; // do we uncheck after submitted or not
                 })
 
             }
@@ -821,7 +821,7 @@ function startQuiz () {
                         if(selected.checked){
                             flag = 1;
                             boxSelections.push(selected.value);
-                            selected.checked = false;
+                            // selected.checked = false; // do we uncheck after submitted or not
                         }
 
                     }
@@ -831,7 +831,7 @@ function startQuiz () {
                             flag = 1;
                             userSelection.push(selected.value);
                             userSelectionText.push(selected.innerText);
-                            selected.checked = false; // do we uncheck after submitted or not
+                            // selected.checked = false; // do we uncheck after submitted or not
                         }
 
                     }
@@ -839,7 +839,7 @@ function startQuiz () {
                         
                         if(selected.value !== ""){
                             userSelection.push(selected.value);
-                            selected.value = "";
+                            // selected.value = ""; // do we uncheck after submitted or not
                         }
 
                     }
@@ -946,7 +946,7 @@ function timekeeper () {
                     if (childNode.multiple){
                         return;
                     }
-                    
+
                     childNode.disabled = true;
                 }
 
