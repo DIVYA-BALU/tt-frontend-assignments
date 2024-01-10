@@ -2,6 +2,12 @@
     display: none;
 }
 
+.start-button {
+    margin-left: 45%;
+    margin-top: 20%;
+    font-size: 30px;
+}
+
 .show-block-correct {
     margin-bottom: 5px;
     width: 60%;
