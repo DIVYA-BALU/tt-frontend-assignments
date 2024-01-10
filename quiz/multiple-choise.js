@@ -15,186 +15,291 @@ function generateRandomNumber(num) {
   return Math.floor(Math.random() * num);
 }
 
-const content = [
+function createRadioButton(name, value, id){
+  const inputEl = document.createElement("input");
+  inputEl.type = "radio";
+  inputEl.name = name;
+  inputEl.value = value;
+  inputEl.id = id;
+  inputEl.setAttribute("required", "");
+  return inputEl;
+}
+
+function createLabel(name, label){
+  const labelEl = document.createElement("label");
+  labelEl.setAttribute("for", name);
+  labelEl.innerText = label;
+  return labelEl;
+}
+
+function disableRadioButton(inputEl){
+  const radioButtons = document.getElementsByName(inputEl.name);
+  for (let index = 0; index < radioButtons.length; index++) {
+    radioButtons[index].disabled = true;
+    console.log(radioButtons[index]);
+  }
+}
+
+const contents = [
   {
     question: "What is the capital of France?",
-    options: ["London", "Paris", "Berlin", "Madrid"],
-    correct_option: "Paris",
+    options: [
+      { value: 1, label: "London" },
+      { value: 2, label: "Paris" },
+      { value: 3, label: "Berlin" },
+      { value: 4, label: "Madrid" },
+    ],
+    correct_option: 2,
   },
   {
     question: "Which planet is known as the 'Red Planet'?",
-    options: ["Jupiter", "Mars", "Venus", "Saturn"],
-    correct_option: "Mars",
+    options: [
+      { value: 1, label: "Jupiter" },
+      { value: 2, label: "Mars" },
+      { value: 3, label: "Venus" },
+      { value: 4, label: "Saturn" },
+    ],
+    correct_option: 2,
   },
   {
     question: "Who painted the Mona Lisa?",
     options: [
-      "Vincent van Gogh",
-      "Leonardo da Vinci",
-      "Pablo Picasso",
-      "Michelangelo",
+      { value: 1, label: "Vincent van Gogh" },
+      { value: 2, label: "Leonardo da Vinci" },
+      { value: 3, label: "Pablo Picasso" },
+      { value: 4, label: "Michelangelo" },
     ],
-    correct_option: "Leonardo da Vinci",
+    correct_option: 2,
   },
   {
     question: "Which is the longest river in the world?",
-    options: ["Nile", "Amazon", "Yangtze", "Mississippi"],
-    correct_option: "Nile",
+    options: [
+      { value: 1, label: "Nile" },
+      { value: 2, label: "Amazon" },
+      { value: 3, label: "Yangtze" },
+      { value: 4, label: "Mississippi" },
+    ],
+    correct_option: 1,
   },
   {
     question: "In which year did World War I begin?",
-    options: ["1914", "1918", "1939", "1945"],
-    correct_option: "1914",
+    options: [
+      { value: 1, label: "1914" },
+      { value: 2, label: "1918" },
+      { value: 3, label: "1939" },
+      { value: 4, label: "1945" },
+    ],
+    correct_option: 1,
   },
   {
     question: "Who wrote the play 'Romeo and Juliet'?",
     options: [
-      "William Shakespeare",
-      "Jane Austen",
-      "Charles Dickens",
-      "Mark Twain",
+      { value: 1, label: "William Shakespeare" },
+      { value: 2, label: "Jane Austen" },
+      { value: 3, label: "Charles Dickens" },
+      { value: 4, label: "Mark Twain" },
     ],
-    correct_option: "William Shakespeare",
+    correct_option: 1,
   },
   {
     question: "What is the chemical symbol for gold?",
-    options: ["Au", "Ag", "Fe", "Pt"],
-    correct_option: "Au",
+    options: [
+      { value: 1, label: "Au" },
+      { value: 2, label: "Ag" },
+      { value: 3, label: "Fe" },
+      { value: 4, label: "Pt" },
+    ],
+    correct_option: 1,
   },
   {
     question: "Which famous scientist developed the theory of relativity?",
     options: [
-      "Isaac Newton",
-      "Albert Einstein",
-      "Stephen Hawking",
-      "Galileo Galilei",
+      { value: 1, label: "Isaac Newton" },
+      { value: 2, label: "Albert Einstein" },
+      { value: 3, label: "Stephen Hawking" },
+      { value: 4, label: "Galileo Galilei" },
     ],
-    correct_option: "Albert Einstein",
+    correct_option: 2,
   },
   {
     question: "What is the largest mammal in the world?",
-    options: ["African Elephant", "Blue Whale", "Giraffe", "Hippopotamus"],
-    correct_option: "Blue Whale",
+    options: [
+      { value: 1, label: "African Elephant" },
+      { value: 2, label: "Blue Whale" },
+      { value: 3, label: "Giraffe" },
+      { value: 4, label: "Hippopotamus" },
+    ],
+    correct_option: 2,
   },
   {
     question: "Who is known as the 'Father of the Computer'?",
-    options: ["Charles Babbage", "Alan Turing", "Bill Gates", "Steve Jobs"],
-    correct_option: "Charles Babbage",
+    options: [
+      { value: 1, label: "Charles Babbage" },
+      { value: 2, label: "Alan Turing" },
+      { value: 3, label: "Bill Gates" },
+      { value: 4, label: "Steve Jobs" },
+    ],
+    correct_option: 1,
   },
   {
     question: "Which country is famous for producing maple syrup?",
-    options: ["United States", "France", "Canada", "Australia"],
-    correct_option: "Canada",
+    options: [
+      { value: 1, label: "United States" },
+      { value: 2, label: "France" },
+      { value: 3, label: "Canada" },
+      { value: 4, label: "Australia" },
+    ],
+    correct_option: 3,
   },
   {
     question: "What is the smallest planet in our solar system?",
-    options: ["Mars", "Mercury", "Venus", "Earth"],
-    correct_option: "Mercury",
+    options: [
+      { value: 1, label: "Mars" },
+      { value: 2, label: "Mercury" },
+      { value: 3, label: "Venus" },
+      { value: 4, label: "Earth" },
+    ],
+    correct_option: 2,
   },
   {
     question: "Who painted the famous artwork 'Starry Night'?",
     options: [
-      "Pablo Picasso",
-      "Vincent van Gogh",
-      "Leonardo da Vinci",
-      "Claude Monet",
+      { value: 1, label: "Pablo Picasso" },
+      { value: 2, label: "Vincent van Gogh" },
+      { value: 3, label: "Leonardo da Vinci" },
+      { value: 4, label: "Claude Monet" },
     ],
-    correct_option: "Vincent van Gogh",
+    correct_option: 2,
   },
   {
     question: "Which country is the largest by land area?",
-    options: ["Russia", "Canada", "China", "United States"],
-    correct_option: "Russia",
+    options: [
+      { value: 1, label: "Russia" },
+      { value: 2, label: "Canada" },
+      { value: 3, label: "China" },
+      { value: 4, label: "United States" },
+    ],
+    correct_option: 1,
   },
   {
     question: "What is the largest organ in the human body?",
-    options: ["Heart", "Liver", "Skin", "Lungs"],
-    correct_option: "Skin",
+    options: [
+      { value: 1, label: "Heart" },
+      { value: 2, label: "Liver" },
+      { value: 3, label: "Skin" },
+      { value: 4, label: "Lungs" },
+    ],
+    correct_option: 3,
   },
   {
     question: "Which is the tallest mountain in the world?",
-    options: ["Mount Kilimanjaro", "Mount Everest", "K2", "Mount McKinley"],
-    correct_option: "Mount Everest",
+    options: [
+      { value: 1, label: "Mount Kilimanjaro" },
+      { value: 2, label: "Mount Everest" },
+      { value: 3, label: "K2" },
+      { value: 4, label: "Mount McKinley" },
+    ],
+    correct_option: 2,
   },
   {
     question: "Who wrote the novel '1984'?",
     options: [
-      "Aldous Huxley",
-      "George Orwell",
-      "J.R.R. Tolkien",
-      "Ray Bradbury",
+      { value: 1, label: "Aldous Huxley" },
+      { value: 2, label: "George Orwell" },
+      { value: 3, label: "J.R.R. Tolkien" },
+      { value: 4, label: "Ray Bradbury" },
     ],
-    correct_option: "George Orwell",
+    correct_option: 2,
   },
   {
     question: "Which gas is most abundant in Earth's atmosphere?",
-    options: ["Carbon Dioxide", "Nitrogen", "Oxygen", "Methane"],
-    correct_option: "Nitrogen",
+    options: [
+      { value: 1, label: "Carbon Dioxide" },
+      { value: 2, label: "Nitrogen" },
+      { value: 3, label: "Oxygen" },
+      { value: 4, label: "Methane" },
+    ],
+    correct_option: 2,
   },
   {
     question: "What is the capital of Japan?",
-    options: ["Seoul", "Shanghai", "Tokyo", "Beijing"],
-    correct_option: "Tokyo",
+    options: [
+      { value: 1, label: "Seoul" },
+      { value: 2, label: "Shanghai" },
+      { value: 3, label: "Tokyo" },
+      { value: 4, label: "Beijing" },
+    ],
+    correct_option: 3,
   },
   {
     question: "Who discovered penicillin?",
     options: [
-      "Alexander Fleming",
-      "Marie Curie",
-      "Louis Pasteur",
-      "Robert Koch",
+      { value: 1, label: "Alexander Fleming" },
+      { value: 2, label: "Marie Curie" },
+      { value: 3, label: "Louis Pasteur" },
+      { value: 4, label: "Robert Koch" },
     ],
-    correct_option: "Alexander Fleming",
+    correct_option: 1,
   },
   {
     question: "What is the largest ocean in the world?",
     options: [
-      "Indian Ocean",
-      "Atlantic Ocean",
-      "Arctic Ocean",
-      "Pacific Ocean",
+      { value: 1, label: "Indian Ocean" },
+      { value: 2, label: "Atlantic Ocean" },
+      { value: 3, label: "Arctic Ocean" },
+      { value: 4, label: "Pacific Ocean" },
     ],
-    correct_option: "Pacific Ocean",
+    correct_option: 4,
   },
   {
     question: "Which planet is closest to the Sun?",
-    options: ["Mars", "Earth", "Venus", "Mercury"],
-    correct_option: "Mercury",
+    options: [
+      { value: 1, label: "Mars" },
+      { value: 2, label: "Earth" },
+      { value: 3, label: "Venus" },
+      { value: 4, label: "Mercury" },
+    ],
+    correct_option: 4,
   },
   {
     question: "Who is the author of 'To Kill a Mockingbird'?",
     options: [
-      "John Steinbeck",
-      "Harper Lee",
-      "F. Scott Fitzgerald",
-      "Ernest Hemingway",
+      { value: 1, label: "John Steinbeck" },
+      { value: 2, label: "Harper Lee" },
+      { value: 3, label: "F. Scott Fitzgerald" },
+      { value: 4, label: "Ernest Hemingway" },
     ],
-    correct_option: "Harper Lee",
+    correct_option: 2,
   },
   {
     question: "Which is the largest desert in the world?",
     options: [
-      "Sahara Desert",
-      "Arabian Desert",
-      "Gobi Desert",
-      "Kalahari Desert",
+      { value: 1, label: "Sahara Desert" },
+      { value: 2, label: "Arabian Desert" },
+      { value: 3, label: "Gobi Desert" },
+      { value: 4, label: "Kalahari Desert" },
     ],
-    correct_option: "Sahara Desert",
+    correct_option: 1,
   },
   {
     question: "Who invented the telephone?",
     options: [
-      "Nikola Tesla",
-      "Thomas Edison",
-      "Alexander Graham Bell",
-      "James Watt",
+      { value: 1, label: "Nikola Tesla" },
+      { value: 2, label: "Thomas Edison" },
+      { value: 3, label: "Alexander Graham Bell" },
+      { value: 4, label: "James Watt" },
     ],
-    correct_option: "Alexander Graham Bell",
+    correct_option: 3,
   },
   {
     question: "What is the chemical symbol for silver?",
-    options: ["Si", "Ag", "Au", "Sr"],
-    correct_option: "Ag",
+    options: [
+      { value: 1, label: "Si" },
+      { value: 2, label: "Ag" },
+      { value: 3, label: "Au" },
+      { value: 4, label: "Sr" },
+    ],
+    correct_option: 2,
   },
 ];
 
@@ -209,7 +314,8 @@ welcomeEl.innerText = "Welcome To The General Knowledge Quiz";
 
 const informationEl = document.createElement("p");
 informationEl.className = "quiz-information";
-informationEl.innerText = "In this quiz there is 10 general knowledge question. You have to answer each question without completing every question you can not submit the test";
+informationEl.innerText =
+  "In this quiz there is 10 general knowledge question. You have to answer each question without completing every question you can not submit the test";
 
 const imgEl = document.createElement("img");
 imgEl.src = "welcome.gif";
@@ -230,53 +336,69 @@ divForm.appendChild(formEl);
 const headEl = document.createElement("h1");
 headEl.innerText = "Here You Go, All The Best!";
 formEl.appendChild(headEl);
+const noOfQusetion = 2;
 
-for (let i = 1; i <= 10; i++) {
-  let generatedNum = generateRandomNumber(content.length);
+for (let i = 1; i <= noOfQusetion; i++) {
+  let generatedNum = generateRandomNumber(contents.length);
 
   while (generatedNumbers.includes(generatedNum)) {
-    generatedNum = generateRandomNumber(content.length);
+    generatedNum = generateRandomNumber(contents.length);
   }
 
   generatedNumbers.push(generatedNum);
   const quizBlock = document.createElement("div");
   const questionEl = document.createElement("p");
-  questionEl.innerText = "Q" + i.toString() + ") " + content[generatedNum].question;
+  questionEl.innerText = `Q${i}) ${contents[generatedNum].question}`;
   quizBlock.appendChild(questionEl);
+
+  const timeEl = document.createElement("div");
+  timeEl.className = "hide";
+  timeEl.id = `T${i}`;
+  quizBlock.appendChild(timeEl);
 
   const optionBlock = document.createElement("div");
   optionBlock.className = "option-block";
-  const items = content[generatedNum].options;
+  const items = contents[generatedNum].options;
 
   items.map((item, index) => {
+    
     const randomName = randomString(30);
-    const inputEl = document.createElement("input");
     const optionBox = document.createElement("div");
+    const insideOptionBox = document.createElement("div");
+    insideOptionBox.className = "option-box-inside";
     optionBox.className = "option-box";
     optionBox.setAttribute("data-unique-id", randomName);
-    inputEl.type = "radio";
-    inputEl.name = "Q" + i.toString();
-    inputEl.value = item;
-    inputEl.id = randomName;
-    inputEl.setAttribute("required", "");
-    optionBox.appendChild(inputEl);
-    const labelEl = document.createElement("label");
-    labelEl.setAttribute("for", randomName);
-    labelEl.innerText = item;
-    optionBox.appendChild(labelEl);
+    const inputEl = createRadioButton(`Q${i}`, item.value, randomName);
+    insideOptionBox.appendChild(inputEl);
+    const labelEl = createLabel(randomName, item.label);
+    insideOptionBox.appendChild(labelEl);
     const breakEl = document.createElement("br");
-    if (index === 1) {
-      console.log(item, index);
-      optionBox.appendChild(breakEl);
-    }
 
-    optionBox.addEventListener("click",() => {
-      inputEl.checked = true;
-      optionBox.style.backgroundColor = "blue"
-    });
+    optionBox.appendChild(insideOptionBox);
+    
+    // let myInterval;
+    // let time = 10;
+    // optionBox.addEventListener("click", () => {
+    //   clearInterval(myInterval);
+    //   if (inputEl.disabled === false) {
+    //     inputEl.checked = true;
+    //   }
+    //   if(timeEl.className !== "show-time"){
+    //   timeEl.className = "show-time";
+    //   myInterval = setInterval(() => {
+    //     timeEl.innerText = `time left to change answer ${time} sec`;
+    //     time--;
+    //     if (time < 0) {
+    //       clearInterval(myInterval);
+    //       document.getElementById(`T${i}`).remove();
+    //       disableRadioButton(inputEl);
+          
+    //     }
+    //   }, 1000);
+    // }
+    // });
+
     optionBlock.appendChild(optionBox);
-
-
   });
 
   quizBlock.appendChild(optionBlock);
@@ -297,22 +419,28 @@ formEl.addEventListener("submit", function (e) {
   let noOfCorrectAnswer = 0;
   let formData = new FormData(formEl);
   let index = 0;
-
-  formData.forEach(function (value, key) {
-    let answer = content[generatedNumbers[index]].correct_option;
-    index++;
+  for (let i = 1; i <= noOfQusetion; i++) {
+    const userSelectedAnswer = document.querySelector(
+      `input[name="Q${i}"]:checked`
+    );
+    const answer = contents[generatedNumbers[i - 1]].correct_option.toString();
     console.log(answer);
-    let divEl = document.getElementById(key);
+    const value = userSelectedAnswer.value;
+    let divEl = document.getElementById(`Q${i}`);
     divEl.className = "answer-block-show";
-    divEl.innerText = "Correct Answer : " + answer;
+    divEl.innerText = `Correct Option : ${answer}`;
     const element = divEl.parentElement;
-    console.log(element);
     if (answer === value) {
       noOfCorrectAnswer++;
       element.className = "quiz-block-correct";
     } else {
       element.className = "quiz-block-incorrect";
     }
+  }
+  formData.forEach(function (value, key) {
+    console.log(key, value);
+
+    index++;
   });
 
   headEl.innerText = "Well Done, Here You Can Check Your Answer";
@@ -323,10 +451,10 @@ formEl.addEventListener("submit", function (e) {
   divInfo.appendChild(textEl);
   const resultEl = document.createElement("p");
   resultEl.className = "result";
-  resultEl.innerText = "Your score is " + noOfCorrectAnswer + "/ 10";
+  resultEl.innerText = `Your score is ${noOfCorrectAnswer}/${noOfQusetion}`;
   const gifEl = document.createElement("img");
   gifEl.src = "celb.gif";
   divInfo.appendChild(resultEl);
   divInfo.appendChild(gifEl);
-  window.scroll(0,0);
+  window.scroll(0, 0);
 });

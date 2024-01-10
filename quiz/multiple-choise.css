@@ -48,9 +48,15 @@ label{
     margin: 10px;
     border-radius: 10px;
 }
+.option-box-inside{
+    display: flex;
+    height: 40px;
+    align-items: center;
+}
 .option-box{
     
     display: inline-block;
+    
     margin: 10px;
     width: 40%;
     height: 40px;
@@ -58,7 +64,7 @@ label{
     background-color: rgb(170, 165, 165);
     text-align: left;
     border-radius: 20px;
-    padding-top: 5px;
+    align-self: center;
     cursor: pointer;
     
 }
@@ -66,13 +72,21 @@ label{
     margin-left: 30px;
     text-align: center;
     background-color: #ffffff;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     border-radius: 10px;
 }
 .answer-block-hidden{
     display: none;
 }
+.hide{
+    display: none;
+}
+.show-time{
+    display: block;
+    background-color: rgb(243, 43, 43);
+}
 .answer-block-show{
+    margin-top: 10px;
     display: block;
     margin-left: 30px;
     padding: 20px;
