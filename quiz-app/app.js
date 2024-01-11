@@ -1,278 +1,704 @@
-const questionBank = [
-    {
-        question: 'Which of the following languages is more suited to a structured program?',
-        option: ['PL/1', 'FORTRAN', 'BASIC', 'PASCAL'],
-        answer: 'PASCAL'
-    },
-    {
-        question: 'A computer-assisted method for the recording and analyzing of existing or hypothetical systems is?',
-        option: ['Data transmission', 'Data flow', 'Data capture', 'Data processing'],
-        answer: 'Data flow'
-    },
-    {
-        question: 'For which of the following disciplines is Nobel Prize awarded?',
-        option: ['Physics and Chemistry', 'Physiology or Medicine', 'Literature, Peace and Economics', 'All of the above'],
-        answer: 'All of the above'
-    },
-    {
-        question: 'What difference does the 5th generation computer have from other generation computers?',
-        option: ['Technological advancement', 'Scientific code', 'Object-Oriented Programming', 'All of the above'],
-        answer: 'Technological advancement'
-    },
-    {
-        question: 'Which of the following computer languages is used for artificial intelligence?',
-        option: ['FORTRAN', 'PROLOG', 'COBOL', 'None of the above'],
-        answer: 'PROLOG'
-    },
-    {
-        question: 'The input and output devices are located away from the central computer facility in which particular type of processing?',
-        option: ['Time sharing', 'Batch processing', 'Interactive mode', 'Real-time processing'],
-        answer: 'Batch processing'
-    },
-    {
-        question: 'Which swapping device is used to hold the images of pages in main memory?',
-        option: ['Plex', 'Paging drum', 'Card punch', 'Optical mark reader'],
-        answer: 'Paging drum'
-    },
-    {
-        question: 'A section of code that may only be executed by one process at any one time is?',
-        option: ['CPM', 'Critical resource', 'Critical region', 'Gray code'],
-        answer: 'Critical region'
-    },
-    {
-        question: 'A step-by-step procedure used to solve a problem is called?',
-        option: ['Operating system', 'Algorithm', 'Application program', 'All of the above'],
-        answer: 'Algorithm'
-    },
-    {
-        question: 'As compared to diskettes, the hard disks are?',
-        option: ['more expensive', 'more portable', 'less rigid', 'slowly accessed'],
-        answer: 'more expensive'
-    },
-    {
-        question: 'As compared to diskettes, the hard disks are?',
-        option: ['more expensive', 'more portable', 'less rigid', 'slowly accessed'],
-        answer: 'more expensive'
-    }
-];
+document.addEventListener("DOMContentLoaded", () => {
+    startCountdown();
 
-let body = document.body;
-
-let usedIndexes = []; // Array to keep track of used question indexes
-
-// Creating title element
-const title = document.createElement('h1');
-title.id = 'title';
-title.innerText = "Today's Quiz";
-body.appendChild(title);
-
-// Creating quiz container
-const quizContainer = document.createElement('div');
-quizContainer.id = 'quiz-container';
-body.appendChild(quizContainer);
-
-// Creating question container
-const questionContainer = document.createElement('div');
-questionContainer.className = 'questions';
-quizContainer.appendChild(questionContainer);
-
-// Creating question element
-const questionElement = document.createElement('h2');
-questionElement.id = 'question';
-questionContainer.appendChild(questionElement);
-
-// Creating options list
-const optionsList = document.createElement('ol');
-optionsList.type = 'A';
-
-for (let i = 0; i < 4; i++) {
-    let listItem = document.createElement('li');
-    listItem.className = 'option';
-    let span = document.createElement('span');
-    span.id = 'option' + i;
-    span.onclick = function () {
-        calcScore(this);
-    };
-    listItem.appendChild(span);
-    optionsList.appendChild(listItem);
-}
-
-questionContainer.appendChild(optionsList);
-
-// Creating start element
-const startElement = document.createElement('h4');
-startElement.id = 'start';
-questionContainer.appendChild(startElement);
-
-// Creating buttons container
-const buttonsContainer = document.createElement('div');
-buttonsContainer.className = 'buttons';
-quizContainer.appendChild(buttonsContainer);
-
-// Creating next button
-const nextButton = document.createElement('button');
-nextButton.type = 'button';
-nextButton.className = 'next';
-nextButton.innerText = 'Next';
-buttonsContainer.appendChild(nextButton);
-
-// Creating scoreboard section
-const scoreboard = document.createElement('div');
-scoreboard.id = 'scoreboard';
-body.appendChild(scoreboard);
-
-// Creating score title
-const scoreTitle = document.createElement('h2');
-scoreTitle.id = 'score-title';
-scoreTitle.innerText = 'Your Score';
-scoreboard.appendChild(scoreTitle);
-
-// Creating score element
-const scoreElement = document.createElement('h2');
-scoreElement.id = 'score';
-scoreboard.appendChild(scoreElement);
-
-// Creating score button
-const scoreButton = document.createElement('button');
-scoreButton.type = 'button';
-scoreButton.id = 'score-btn';
-scoreButton.onclick = function () {
-    backToQuiz();
-};
-scoreButton.innerText = 'Back to Quiz';
-scoreboard.appendChild(scoreButton);
-
-// Creating check answer button
-const checkAnswerButton = document.createElement('button');
-checkAnswerButton.type = 'button';
-checkAnswerButton.id = 'check-answer';
-checkAnswerButton.onclick = function () {
-    checkAnswer();
-};
-checkAnswerButton.innerText = 'Check Answers';
-scoreboard.appendChild(checkAnswerButton);
-
-// Creating answers section
-const answerBank = document.createElement('div');
-answerBank.id = 'answerBank';
-body.appendChild(answerBank);
-
-// Creating answers title
-const answersTitle = document.createElement('h2');
-answersTitle.innerText = 'Answers :';
-answerBank.appendChild(answersTitle);
-
-// Creating answers list
-const answersList = document.createElement('ol');
-answersList.type = '1';
-answersList.id = 'answers';
-answerBank.appendChild(answersList);
-
-// Creating score button (Back to Quiz)
-const scoreButtonBack = document.createElement('button');
-scoreButtonBack.type = 'button';
-scoreButtonBack.id = 'score-btn';
-scoreButtonBack.onclick = function () {
-    backToQuiz();
-};
-scoreButtonBack.innerText = 'Back to Quiz';
-answerBank.appendChild(scoreButtonBack);
-
-// Reference to HTML elements
-const question = document.getElementById('question');
-const option0 = document.getElementById('option0');
-const option1 = document.getElementById('option1');
-const option2 = document.getElementById('option2');
-const option3 = document.getElementById('option3');
-const start = document.getElementById('start');
-const next = document.querySelector('.next');
-const points = document.getElementById('score');
-const span = document.querySelectorAll('span');
-let i = 0;
-let score = 0;
-
-const randomNum = 7;
-// Function to display a random set of 5 questions
-function displayRandomQuestionSet() {
-    while (usedIndexes.length < randomNum) {
-        let randomIndex = Math.floor(Math.random() * questionBank.length);
-        if (!usedIndexes.includes(randomIndex))
-            usedIndexes.push(randomIndex);
-    }
-}
-
-nextButton.addEventListener('click', displayRandomQuestionSet);
-
-// Function to display questions
-function displayQuestion() {
-    for (let a = 0; a < span.length; a++) {
-        span[a].style.background = 'none';
-    }
-    const questionValue = question
-    question.innerHTML = 'Q.' + (i + 1) + ' ' + questionBank[usedIndexes[i]].question;
-    // If the question has only two options
-    if (questionBank[usedIndexes[i]].option.length === 2) {
-        // Displaying only two options
-        option0.innerHTML = 'True';
-        option1.innerHTML = 'False';
-        option2.innerHTML = ''; // You can hide the other options if needed
-        option3.innerHTML = '';
-    } else {
-        // Displaying all four options
-        option0.innerHTML = questionBank[usedIndexes[i]].option[0];
-        option1.innerHTML = questionBank[usedIndexes[i]].option[1];
-        option2.innerHTML = questionBank[usedIndexes[i]].option[2];
-        option3.innerHTML = questionBank[usedIndexes[i]].option[3];
-    }
-
-    start.innerHTML = 'Question' + ' ' + (i + 1) + ' ' + 'of' + ' ' + usedIndexes.length;
-}
-
-// Function to calculate scores
-function calcScore(e) {
-    if (e.innerHTML === questionBank[usedIndexes[i]].answer && score < usedIndexes.length) {
-        score = score + 1;
-        document.getElementById(e.id).style.background = 'green';
-    } else {
-        document.getElementById(e.id).style.background = 'red';
+    document.addEventListener("click", (event) => {
+        if (event.target.getAttribute("for")) {
+            event.stopPropagation();
+        } else if (event.target.getAttribute("type")) {
+            handleInputSelection(event);
         }
-    setTimeout(nextQuestion, 300);
+    });
+});
+
+let timeLeft = 10;
+let correctAnswersCount = 0;
+
+const containerElement = document.getElementById("container");
+const countdownSpanElement = document.createElement("span");
+countdownSpanElement.className = "countdown";
+containerElement.appendChild(countdownSpanElement);
+
+function startCountdown() {
+    const countdownInterval = setInterval(() => {
+        if (timeLeft > -1) {
+            countdownSpanElement.textContent = timeLeft--;
+        } else {
+            countdownSpanElement.textContent = "Time out";
+            disableAllInputs();
+            document.querySelector(`input[type='submit']`).click();
+            clearInterval(countdownInterval);
+        }
+    }, 1000);
 }
 
-// Function to display next question
-function nextQuestion() {
-    console.log(888);
-    if (i < usedIndexes.length - 1) {
-        i = i + 1;
-        displayQuestion();
+function handleInputSelection(event) {
+    const selectedElement = event.target;
+    const name = selectedElement.name;
+    const inputElements = document.getElementsByName(name);
+
+    for (let i = 0; i < inputElements.length; i++) {
+        const input = inputElements[i];
+        const id = input.getAttribute("id");
+        const labelElement = document.querySelector(`label[for="${id}"]`);
+
+        setTimeout(() => {
+            input.disabled = "disabled";
+            labelElement.id = "disable";
+        }, 5000);
+    }
+}
+
+function disableAllInputs() {
+    disableInputsByType("radio");
+    disableInputsByType("checkbox");
+}
+
+function disableInputsByType(type) {
+    const inputs = document.querySelectorAll(`input[type='${type}']`);
+    for (let i = 0; i < inputs.length; i++) {
+        inputs[i].disabled = "disabled";
+    }
+}
+
+const randomNumbers = [];
+
+function generateRandomNumber() {
+    let number;
+    do {
+        number = Math.round(Math.random() * 26);
+    } while (containsNumber(number));
+    randomNumbers.push(number);
+    return number;
+}
+
+function containsNumber(number) {
+    return randomNumbers.includes(number);
+}
+
+function generateRandomString(length) {
+    length = length === undefined ? 7 : length;
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+    let result = '';
+    for (let i = 0; i < length; i++) {
+        let randomNum = Math.floor(Math.random() * characters.length);
+        result += characters.substring(randomNum, randomNum + 1);
+    }
+    return result;
+}
+
+
+const questions = [{
+    question: "What does HTML stand for?",
+    name: "quiz_one",
+    options: [{
+        option: "HyperText Markup Language",
+        answer: true
+    },
+    {
+        option: "HotMail",
+        answer: false
+    },
+    {
+        option: "How to Make Lasagna",
+        answer: false
+    }],
+    type: "radio",
+},
+{
+    question: "How many tags are in a regular HTML element?",
+    name: "quiz_two",
+    options: [{
+        option: 2,
+        answer: true
+    },
+    {
+        option: 1,
+        answer: false
+    },
+    {
+        option: 3,
+        answer: false
+    }],
+    type: "radio"
+},
+{
+    question: "What is the difference between an opening tag and a closing tag?",
+    name: "quiz_three",
+    options: [{
+        option: "Opening tag has a / in front.",
+        answer: false
+    },
+    {
+        option: "Closing tag has a / in front.",
+        answer: true
+    },
+    {
+        option: "There is no difference.",
+        answer: false
+    }],
+    type: "radio"
+},
+{
+    question: "<br> What type of tag is this?",
+    name: "quiz_four",
+    options: [{
+        option: "Break tag",
+        answer: true
+    },
+    {
+        option: "A broken one",
+        answer: false
+    },
+    {
+        option: "An opening tag",
+        answer: false
+    }],
+    type: "radio"
+},
+{
+    question: "In which section or part of an HTML document is the meta tag typically located?",
+    name: "quiz_five",
+    options: [{
+        option: "The last page",
+        answer: false
+    },
+    {
+        option: "Any page",
+        answer: true
+    },
+    {
+        option: "The second page",
+        answer: false
+    }],
+    type: "radio"
+},
+{
+    question: "What is the smallest header in HTML by default?",
+    name: "quiz_six",
+    options: [{
+        option: "h1",
+        answer: false
+    },
+    {
+        option: "h6",
+        answer: true
+    },
+    {
+        option: "h5",
+        answer: false
+    }],
+    type: "radio"
+},
+{
+    question: "What are the types of lists available in HTML?",
+    name: "quiz_seven",
+    options: [{
+        option: "Ordered,Unordered lists",
+        answer: true
+    },
+    {
+        option: "Bulleted,Numbered lists",
+        answer: false
+    },
+    {
+        option: "Named,Unamed lists",
+        answer: false
+    }],
+    type: "radio"
+},
+{
+    question: "The correct sequence of HTML tags for starting a webpage is -",
+    name: "quiz_eight",
+    options: [{
+        option: "Head, Title, HTML, body",
+        answer: false
+    },
+    {
+        option: "HTML, Head, Title, Body",
+        answer: true
+    },
+    {
+        option: "HTML, Body, Title, Head",
+        answer: false
+    }],
+    type: "radio"
+},
+{
+    question: "Types of CSS",
+    name: "quiz_nine",
+    options: [{
+        option: "2",
+        answer: false
+    },
+    {
+        option: "3",
+        answer: true
+    },
+    {
+        option: "4",
+        answer: false
+    }],
+    type: "radio"
+},
+{
+    question: "Which of the following element is responsible for making the text bold in HTML?",
+    name: "quiz_ten",
+    options: [{
+        option: "<pre>",
+        answer: false
+    },
+    {
+        option: "<b>",
+        answer: true
+    },
+    {
+        option: "<br>",
+        answer: false
+    }],
+    type: "radio"
+},
+{
+    question: "Which of the following tag is used for inserting the largest heading in HTML?",
+    name: "quiz_eleven",
+    options: [{
+        option: "<h6>",
+        answer: false
+    },
+    {
+        option: "<h1>",
+        answer: true
+    },
+    {
+        option: "<h3>",
+        answer: false
+    }],
+    type: "radio"
+},
+{
+    question: "Which of the following tag is used to insert a line-break in HTML?",
+    name: "quiz_twelve",
+    options: [{
+        option: "<b>",
+        answer: false
+    },
+    {
+        option: "<pre>",
+        answer: false
+    },
+    {
+        option: "<br>",
+        answer: true
+    }],
+    type: "radio",
+    answer: 3
+},
+{
+    question: "How to create an unordered list (a list with the list items in bullets) in HTML?",
+    name: "quiz_thirteen",
+    options: [{
+        option: "<ul>",
+        answer: true
+    },
+    {
+        option: "<ol>",
+        answer: false
+    },
+    {
+        option: "<li>",
+        answer: false
+    }],
+    type: "radio"
+},
+{
+    question: "Which character is used to represent the closing of a tag in HTML?",
+    name: "quiz_fourteen",
+    options: [{
+        option: "/",
+        answer: true
+    },
+    {
+        option: "!",
+        answer: false
+    },
+    {
+        option: "?",
+        answer: false
+    }],
+    type: "radio"
+},
+{
+    question: "How to create a hyperlink in HTML?",
+    name: "quiz_fifteen",
+    options: [{
+        option: "<a href = 'www.javatpoint.com'> javaTpoint.com </a>",
+        answer: true
+    },
+    {
+        option: "<a url = 'www.javatpoint.com' javaTpoint.com /a>",
+        answer: false
+    },
+    {
+        option: "<a link = 'www.javatpoint.com'> javaTpoint.com </a>",
+        answer: false
+    }],
+    type: "radio"
+},
+{
+    question: "How to create an ordered list (a list with the list items in numbers) in HTML?",
+    name: "quiz_sixteen",
+    options: [{
+        option: "ul",
+        answer: false
+    },
+    {
+        option: "li",
+        answer: false
+    },
+    {
+        option: "ol",
+        answer: true
+    }],
+
+    type: "radio",
+    answer: 3
+},
+{
+    question: "Which of the following element is responsible for making the text italic in HTML?",
+    name: "quiz_seventeen",
+    options: [{
+        option: "<b>",
+        answer: false
+    },
+    {
+        option: "<p>",
+        answer: false
+    },
+    {
+        option: "<i>",
+        answer: true
+    }],
+    type: "radio"
+},
+{
+    question: "How to insert an image in HTML?",
+    name: "quiz_eighteen",
+    options: [{
+        option: "<img href = 'jtp.png' />",
+        answer: false
+    },
+    {
+        option: "<img url = 'jtp.png' />",
+        answer: false
+    },
+    {
+        option: "<img src = 'jtp.png' />",
+        answer: true
+    }],
+    type: "radio"
+},
+{
+    question: "How to add a background color in HTML?",
+    name: "quiz_ninteen",
+    options: [{
+        option: "<marquee bg color: 'red'>",
+        answer: false
+    },
+    {
+        option: "<marquee bgcolor: 'red'>",
+        answer: true
+    },
+    {
+        option: "<marquee bg-color: 'red'>",
+        answer: false
+    }],
+    type: "radio"
+},
+{
+    question: "Which of the following tag is used to make the underlined text?",
+    name: "quiz_twenty",
+    options: [{
+        option: "<b>",
+        answer: false
+    },
+    {
+        option: "<ul>",
+        answer: false
+    },
+    {
+        option: "<u>",
+        answer: true
+    }],
+    type: "radio"
+},
+{
+    question: "How to create a checkbox in HTML?",
+    name: "quiz_twentyone",
+    options: [{
+        option: "<input type='checkbox'>",
+        answer: true
+    },
+    {
+        option: "<input type='check'>",
+        answer: false
+    },
+    {
+        option: "<checkbox>",
+        answer: false
+    }],
+    type: "radio"
+},
+{
+    question: "Which of the following tag is used to define options in a drop-down selection list?",
+    name: "quiz_twentytwo",
+    options: [{
+        option: "<select>",
+        answer: false
+    },
+    {
+        option: "<dropdown>",
+        answer: false
+    },
+    {
+        option: "<option>",
+        answer: true
+    }],
+    type: "radio"
+},
+{
+    question: "HTML tags are enclosed in-",
+    name: "quiz_twentythree",
+    options: [{
+        option: "{and}",
+        answer: false
+    },
+    {
+        option: "<and>",
+        answer: true
+    },
+    {
+        option: "!and!",
+        answer: false
+    }],
+    type: "radio"
+},
+{
+    question: "Which of the following tag is used to add rows in the table?",
+    name: "quiz_twentyfour",
+    options: [{
+        option: "<td> and </td>",
+        answer: false
+    },
+    {
+        option: "<tr> and </tr>",
+        answer: true
+    },
+    {
+        option: "<th> and </th>",
+        answer: false
+    }],
+    type: "radio"
+},
+{
+    question: "The <hr> tag in HTML is used for -",
+    name: "quiz_twentyfive",
+    options: [{
+        option: "new line",
+        answer: false
+    },
+    {
+        option: "horizontal ruler",
+        answer: true
+    },
+    {
+        option: "new paragraph",
+        answer: false
+    }],
+    type: "radio"
+},
+{
+    question: "What do you understand by HTML?",
+    name: "quiz_twentysix",
+    options: [{
+        option: "HTML describes the structure of a webpage",
+        answer: true
+    },
+    {
+        option: "HTML is the standard markup language mainly used to create web pages",
+        answer: true
+    },
+    {
+        option: "HTML consists of a set of elements that helps the browser how to view the content",
+        answer: true
+    }],
+    type: "checkbox"
+},
+{
+    question: "Which of the following tags are inline elements in HTML? (Select all that apply)",
+    name: "quiz_twentyseven",
+    options: [{
+        option: "<div>",
+        answer: false
+    },
+    {
+        option: "<span>",
+        answer: true
+    },
+    {
+        option: "<p>",
+        answer: true
+    },
+    {
+        option: "<h1>",
+        answer: false
+    },
+    {
+        option: "<ul></ul>",
+        answer: false
+    }],
+    type: "checkbox"
+}];
+
+// let skip = 5;
+const quizContainerElement = document.getElementById("container");
+const quizFormElement = document.createElement("form");
+quizFormElement.setAttribute("id", "quiz_form");
+const quizHeadingElement = document.createElement("h1");
+quizHeadingElement.textContent = "HTML Quiz";
+quizFormElement.appendChild(quizHeadingElement);
+
+for (let index = 0; index < questions.length; index++) {
+    const randomIndex = generateRandomNumber();
+    const divEl = document.createElement("div");
+    divEl.setAttribute("class", "question");
+    quizFormElement.appendChild(divEl);
+    const paraEl = document.createElement("p");
+    paraEl.textContent = `Q${index + 1} . ${questions[randomIndex].question}`;
+    divEl.appendChild(paraEl);
+
+    for (let j = 0; j < questions[randomIndex].options.length; j++) {
+
+        if (questions[randomIndex].type === "radio" || questions[randomIndex].type === "checkbox") {
+            const randomIdName = generateRandomString(5);
+            const inputEl = document.createElement("input");
+            inputEl.setAttribute("type", questions[randomIndex].type);
+            inputEl.id = randomIdName;
+            inputEl.setAttribute("name", questions[randomIndex].name);
+            inputEl.setAttribute("value", j);
+            if (questions[randomIndex].type === "radio") {
+                inputEl.required = "required";
+            }
+            const labelEl = document.createElement("label");
+            labelEl.setAttribute("for", randomIdName);
+            labelEl.textContent = questions[randomIndex].options[j].option;
+            const breakEl = document.createElement("br");
+            divEl.appendChild(inputEl);
+            divEl.appendChild(labelEl);
+            divEl.appendChild(breakEl);
+        }
+    }
+}
+
+const buttonContainerElement = document.createElement("div");
+buttonContainerElement.setAttribute("class", "button");
+const submitButtonElement = document.createElement("input");
+submitButtonElement.type = "submit";
+buttonContainerElement.appendChild(submitButtonElement);
+quizFormElement.appendChild(buttonContainerElement);
+
+const questionEl = document.getElementsByTagName("p");
+
+function checkAnswers() {
+    for (let index = 0; index < randomNumbers.length; index++) {
+
+        const paraElement = questionEl[index];
+        const spanEl = document.createElement("span");
+        spanEl.id = "answer";
+        paraElement.appendChild(spanEl);
+
+        const randomIndex = randomNumbers[index];
+        const name = questions[randomIndex].name;
+        const selectedAnswers = document.
+        querySelectorAll(`input[name="${name}"]`);
+
+        let checkCount = 0;
+
+        for (let j = 0; j < selectedAnswers.length; j++) {
+            const selectedAnswer = selectedAnswers[j];
+            const selector = `label[for="${selectedAnswer.id}"]`;
+            const labelEl = document.querySelector(selector);
+            const isChecked = selectedAnswer.checked;
+
+            if (questions[randomIndex].options[j].answer === true) {
+                labelEl.className = "correct-text";
+                if (isChecked && questions[randomIndex].type === "radio") {
+                    spanEl.setAttribute("class", "correct");
+                    spanEl.textContent = "Correct";
+                    correctAnswersCount++;
+                }
+                if ((isChecked === false) && questions[randomIndex].type === "checkbox") {
+                    checkCount++;
+                }
+            } else {
+                if (isChecked) {
+                    spanEl.setAttribute("class", "wrong");
+                    spanEl.textContent = "Wrong";
+                    labelEl.className = "wrong-text";
+                }
+            }
+        }
+        if (checkCount === 0 && questions[randomIndex].type === "checkbox") {
+            spanEl.setAttribute("class", "correct");
+            spanEl.textContent = "Correct";
+            correctAnswersCount++;
+        }
+    }
+}
+
+function displayCorrectAnswers() {
+    const questionDivElements = document.getElementsByClassName("question");
+
+    for (let i = 0; i < questionDivElements.length; i++) {
+        const correctAnswerDivElement = document.createElement("div");
+        correctAnswerDivElement.className = "explanation";
+        correctAnswerDivElement.textContent = "Correct Answer: ";
+
+        const randomIndex = randomNumbers[i];
+        const correctAnswerIndex = questions[randomIndex].options.findIndex(option => option.answer === true);
+
+        const correctAnswerLabel = document.createElement("span");
+        correctAnswerLabel.textContent = questions[randomIndex].options[correctAnswerIndex].option;
+
+        correctAnswerDivElement.appendChild(correctAnswerLabel);
+        questionDivElements[i].id = "explain";
+        questionDivElements[i].appendChild(correctAnswerDivElement);
+    }
+}
+
+
+function disableSubmitButton() {
+    buttonContainerElement.setAttribute("class", "button-disable");
+    const resultParagraphElement = document.createElement("p");
+    let result;
+    if (correctAnswersCount > 5) {
+        result = "Passed";
+        resultParagraphElement.setAttribute("class", "pass");
     } else {
-        points.innerHTML = score + '/' + usedIndexes.length;
-        quizContainer.style.display = 'none';
-        scoreboard.style.display = 'block';
+        result = "Failed";
+        resultParagraphElement.setAttribute("class", "fail");
     }
+    resultParagraphElement.textContent = `Total Score : ${correctAnswersCount} out of 10 ${result}`;
+    buttonContainerElement.appendChild(resultParagraphElement);
+    const retakeLinkElement = document.createElement("a");
+    retakeLinkElement.setAttribute("href", "index.html");
+    retakeLinkElement.textContent = "Retake";
+    buttonContainerElement.appendChild(retakeLinkElement);
 }
 
-// Click event for next button
-next.addEventListener('click', nextQuestion);
+quizContainerElement.appendChild(quizFormElement);
 
-// Back to Quiz button event
-function backToQuiz() {
-    location.reload();
-}
-
-// Function to check answers
-function checkAnswer() {
-    const answerBank = document.getElementById('answerBank');
-    const answers = document.getElementById('answers');
-    answerBank.style.display = 'block';
-    scoreboard.style.display = 'none';
-    for (let a = 0; a < usedIndexes.length; a++) {
-        let list = document.createElement('li');
-        list.innerHTML = questionBank[usedIndexes[a]].answer;
-        answers.appendChild(list);
-    }
-}
-
-displayRandomQuestionSet();
-// Initial display of the first question
-displayQuestion();
+quizFormElement.addEventListener("submit", (event) => {
+    event.preventDefault();
+    checkAnswers();
+    displayCorrectAnswers(); // Changed the function name
+    disableSubmitButton();
+});
