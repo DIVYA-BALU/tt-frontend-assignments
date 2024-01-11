@@ -82,8 +82,15 @@ label{
     display: none;
 }
 .show-time{
-    display: block;
+    margin-left: 30px;
+    margin-top: 2px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    display: flex;
     background-color: rgb(243, 43, 43);
+    color: white;
+    align-items: center;
+    justify-content: space-between;
 }
 .answer-block-show{
     margin-top: 10px;
@@ -120,4 +127,22 @@ img{
     margin-left: 20px;
     height: 300px;
     width: 400px;
+}
+.edit-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+    font-size: 20px;
+    background-color: #3ddb5f;
+    border-radius: 10px;
+    padding: 5px;
+    width: 100px;
+}
+.edit-button:hover{
+    cursor: pointer;
+}
+h4{
+    font-size: 25;
+    margin-left: 20px;
 }

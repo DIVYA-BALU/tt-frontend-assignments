@@ -1,0 +1,29 @@
+body{
+    background-image: url("bg.png");
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+#root{
+    width: 100%;
+    padding-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content{  
+    padding: 10px;
+    width: 80%;
+    height: 600px;
+    border-radius: 20px;
+    background-color:rgb(255, 221, 212, 0.5);
+}
+
+.welcome{
+    opacity: 1;
+}
