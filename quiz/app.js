@@ -1,5 +1,315 @@
 const questions = [
     {
+        question: "JavaScript is a ________-side programming language.",
+        answer: "client",
+        type: "text"
+    },
+    {
+        question: "The ________ method of an Array object adds one or more elements to the end of an array and returns the new length of the array.",
+        answer: "push",
+        type: "text"
+    },
+    {
+        question: "In JavaScript, the ________ statement is used to declare a variable.",
+        answer: "var",
+        type: "text"
+    },
+    {
+        question: "The ________ operator in JavaScript returns true if the two operands are equal, otherwise, it returns false.",
+        answer: "==",
+        type: "text"
+    },
+    {
+        question: "The ________ method is used to remove the last element from an array and returns that element.",
+        answer: "pop",
+        type: "text"
+    },
+    {
+        question: "JavaScript uses a ________-based indexing system to access array elements.",
+        answer: "zero",
+        type: "text"
+    },
+    {
+        question: "The ________ function is used to execute a block of code multiple times.",
+        answer: "for",
+        type: "text"
+    },
+    {
+        question: "A ________ is a special variable that can hold multiple values at once.",
+        answer: "array",
+        type: "text"
+    },
+    {
+        question: "The ________ method is used to convert a string to uppercase letters.",
+        answer: "toUpperCase",
+        type: "text"
+    },
+    {
+        question: "The ________ statement is used to terminate a loop and transfer control to the statement immediately following the loop.",
+        answer: "break",
+        type: "text"
+    },
+    {
+        "question": "Which of the following are valid HTML tags?",
+        "type": "checkbox",
+        "options": [
+            {
+                "label": "<div>",
+                "value": 1,
+                "is_correct": true
+            },
+            {
+                "label": "<header>",
+                "value": 2,
+                "is_correct": true
+            },
+            {
+                "label": "<span>",
+                "value": 3,
+                "is_correct": false
+            },
+            {
+                "label": "<article>",
+                "value": 4,
+                "is_correct": true
+            },
+        ],
+    },
+    {
+        "question": "Select the properties used for styling in CSS:",
+        "type": "checkbox",
+        "options": [
+            {
+                "label": "color",
+                "value": 1,
+                "is_correct": true
+            },
+            {
+                "label": "margin",
+                "value": 2,
+                "is_correct": true
+            },
+            {
+                "label": "src",
+                "value": 3,
+                "is_correct": false
+            },
+            {
+                "label": "padding",
+                "value": 4,
+                "is_correct": true
+            },
+        ],
+    },
+    {
+        "question": "In JavaScript, what is the purpose of the 'typeof' operator?",
+        "type": "checkbox",
+        "options": [
+            {
+                "label": "Checking the type of a variable",
+                "value": 1,
+                "is_correct": true
+            },
+            {
+                "label": "Defining a new variable",
+                "value": 2,
+                "is_correct": false
+            },
+            {
+                "label": "Looping through an array",
+                "value": 3,
+                "is_correct": false
+            },
+            {
+                "label": "Importing external libraries",
+                "value": 4,
+                "is_correct": false
+            },
+        ],
+    },
+    {
+        "question": "Which CSS property is used to control the spacing between elements?",
+        "type": "checkbox",
+        "options": [
+            {
+                "label": "margin",
+                "value": 1,
+                "is_correct": true
+            },
+            {
+                "label": "padding",
+                "value": 2,
+                "is_correct": true
+            },
+            {
+                "label": "border",
+                "value": 3,
+                "is_correct": false
+            },
+            {
+                "label": "height",
+                "value": 4,
+                "is_correct": false
+            },
+        ],
+    },
+    {
+        "question": "What does HTML stand for?",
+        "type": "checkbox",
+        "options": [
+            {
+                "label": "Hyper Text Markup Language",
+                "value": 1,
+                "is_correct": true
+            },
+            {
+                "label": "Highly Typed Machine Learning",
+                "value": 2,
+                "is_correct": false
+            },
+            {
+                "label": "Home Tool Markup Language",
+                "value": 3,
+                "is_correct": false
+            },
+            {
+                "label": "Hyper Transfer Markup Language",
+                "value": 4,
+                "is_correct": false
+            },
+        ],
+    },
+    {
+        "question": "Which event is triggered when a user clicks on an HTML element?",
+        "type": "checkbox",
+        "options": [
+            {
+                "label": "onclick",
+                "value": 1,
+                "is_correct": true
+            },
+            {
+                "label": "onmouseover",
+                "value": 2,
+                "is_correct": false
+            },
+            {
+                "label": "onchange",
+                "value": 3,
+                "is_correct": false
+            },
+            {
+                "label": "ondoubleclick",
+                "value": 4,
+                "is_correct": false
+            },
+        ],
+    },
+    {
+        "question": "What does CSS stand for?",
+        "type": "checkbox",
+        "options": [
+            {
+                "label": "Cascading Style Sheets",
+                "value": 1,
+                "is_correct": true
+            },
+            {
+                "label": "Computer Style Sheets",
+                "value": 2,
+                "is_correct": false
+            },
+            {
+                "label": "Creative Style Sheets",
+                "value": 3,
+                "is_correct": false
+            },
+            {
+                "label": "Colorful Style Sheets",
+                "value": 4,
+                "is_correct": false
+            },
+        ],
+    },
+    {
+        "question": "Which built-in method adds one or more elements to the end of an array and returns the new length?",
+        "type": "checkbox",
+        "options": [
+            {
+                "label": "push()",
+                "value": 1,
+                "is_correct": true
+            },
+            {
+                "label": "pop()",
+                "value": 2,
+                "is_correct": false
+            },
+            {
+                "label": "join()",
+                "value": 3,
+                "is_correct": false
+            },
+            {
+                "label": "splice()",
+                "value": 4,
+                "is_correct": false
+            },
+        ],
+    },
+    {
+        "question": "In JavaScript, what is a closure?",
+        "type": "checkbox",
+        "options": [
+            {
+                "label": "A function that has access to variables in its lexical scope, even when it's executed outside that scope",
+                "value": 1,
+                "is_correct": true
+            },
+            {
+                "label": "An object that holds key-value pairs",
+                "value": 2,
+                "is_correct": false
+            },
+            {
+                "label": "A type of loop",
+                "value": 3,
+                "is_correct": false
+            },
+            {
+                "label": "A way to declare variables",
+                "value": 4,
+                "is_correct": false
+            },
+        ],
+    },
+    {
+        "question": "Which HTML tag is used to create an ordered list?",
+        "type": "checkbox",
+        "options": [
+            {
+                "label": "<ol>",
+                "value": 1,
+                "is_correct": true
+            },
+            {
+                "label": "<ul>",
+                "value": 2,
+                "is_correct": false
+            },
+            {
+                "label": "<li>",
+                "value": 3,
+                "is_correct": false
+            },
+            {
+                "label": "<dl>",
+                "value": 4,
+                "is_correct": false
+            },
+        ],
+    },
+    {
         "question": "The elements between the <td> and </td> tags of an HTML table are ______ by default.",
         "type": "radio",
         "options": [
@@ -465,293 +775,8 @@ const questions = [
             }
         ]
     },
-    {
-        "question": "Which of the following is the correct syntax for referring the external style sheet?",
-        "type": "radio",
-        "options": [
-            {
-                "label": "<style src = example.css>",
-                "value": 1,
-                "is_correct": false
-            },
-            {
-                "label": '<style src = "example.css" >',
-                "value": 2,
-                "is_correct": false
-            },
-            {
-                "label": "<stylesheet> example.css </stylesheet>",
-                "value": 3,
-                "is_correct": false
-            },
-            {
-                "label": '<link rel="stylesheet" type="text/css" href="example.css">',
-                "value": 4,
-                "is_correct": true
-            }
-        ]
-    },
-    {
-        "question": "The property in CSS used to change the text color of an element is -",
-        "type": "radio",
-        "options": [
-            {
-                "label": "bgcolor",
-                "value": 1,
-                "is_correct": false
-            },
-            {
-                "label": "color",
-                "value": 2,
-                "is_correct": true
-            },
-            {
-                "label": "background-color",
-                "value": 3,
-                "is_correct": false
-            },
-            {
-                "label": "All of the above",
-                "value": 4,
-                "is_correct": false
-            }
-        ]
-    },
-    {
-        "question": "Which type of JavaScript language is ___",
-        "type": "radio",
-        "options": [
-            {
-                "label": "Object-Oriented",
-                "value": 1,
-                "is_correct": false
-            },
-            {
-                "label": "Object-Based",
-                "value": 2,
-                "is_correct": true
-            },
-            {
-                "label": "Assembly-language",
-                "value": 3,
-                "is_correct": false
-            },
-            {
-                "label": "High-level",
-                "value": 4,
-                "is_correct": false
-            }
-        ]
-    },
-    {
-        "question": "Which one of the following also known as Conditional Expression:",
-        "type": "radio",
-        "options": [
-            {
-                "label": "Alternative to if-else",
-                "value": 1,
-                "is_correct": false
-            },
-            {
-                "label": "Switch statement",
-                "value": 2,
-                "is_correct": false
-            },
-            {
-                "label": "If-then-else statement",
-                "value": 3,
-                "is_correct": false
-            },
-            {
-                "label": "Immediate if",
-                "value": 4,
-                "is_correct": true
-            }
-        ]
-    },
-    {
-        "question": "In JavaScript, what is a block of statement?",
-        "type": "radio",
-        "options": [
-            {
-                "label": "Conditional block",
-                "value": 1,
-                "is_correct": false
-            },
-            {
-                "label": "Block that combines a number of statements into a single compound statement",
-                "value": 2,
-                "is_correct": true
-            },
-            {
-                "label": "Both conditional block and a single statement",
-                "value": 3,
-                "is_correct": false
-            },
-            {
-                "label": "Block that contains a single statement",
-                "value": 4,
-                "is_correct": false
-            }
-        ]
-    },
-    {
-        "question": 'The "function" and " var" are known as:',
-        "type": "radio",
-        "options": [
-            {
-                "label": "Keywords",
-                "value": 1,
-                "is_correct": false
-            },
-            {
-                "label": "Data types",
-                "value": 2,
-                "is_correct": false
-            },
-            {
-                "label": "Declaration statements",
-                "value": 3,
-                "is_correct": true
-            },
-            {
-                "label": "Prototypes",
-                "value": 4,
-                "is_correct": false
-            }
-        ]
-    },
-    {
-        "question": "Which of the following variables takes precedence over the others if the names are the same?",
-        "type": "radio",
-        "options": [
-            {
-                "label": "Global variable",
-                "value": 1,
-                "is_correct": false
-            },
-            {
-                "label": "The local element",
-                "value": 2,
-                "is_correct": true
-            },
-            {
-                "label": "The two of the above",
-                "value": 3,
-                "is_correct": false
-            },
-            {
-                "label": "None of the above",
-                "value": 4,
-                "is_correct": false
-            }
-        ]
-    },
-    {
-        "question": "Which one of the following is the correct way for calling the JavaScript code?",
-        "type": "radio",
-        "options": [
-            {
-                "label": "Preprocessor",
-                "value": 1,
-                "is_correct": false
-            },
-            {
-                "label": "Triggering Event",
-                "value": 2,
-                "is_correct": false
-            },
-            {
-                "label": "RMI",
-                "value": 3,
-                "is_correct": false
-            },
-            {
-                "label": "Function/Method",
-                "value": 4,
-                "is_correct": true
-            }
-        ]
-    },
-    {
-        "question": "Which of the following type of a variable is volatile?",
-        "type": "radio",
-        "options": [
-            {
-                "label": "Mutable variable",
-                "value": 1,
-                "is_correct": true
-            },
-            {
-                "label": "Dynamic variable",
-                "value": 2,
-                "is_correct": false
-            },
-            {
-                "label": "Volatile variable",
-                "value": 3,
-                "is_correct": false
-            },
-            {
-                "label": "Immutable variable",
-                "value": 4,
-                "is_correct": false
-            }
-        ]
-    },
-    {
-        "question": "Which of the following option is used as hexadecimal literal beginning?",
-        "type": "radio",
-        "options": [
-            {
-                "label": "00",
-                "value": 1,
-                "is_correct": false
-            },
-            {
-                "label": "0x",
-                "value": 2,
-                "is_correct": false
-            },
-            {
-                "label": "0X",
-                "value": 3,
-                "is_correct": false
-            },
-            {
-                "label": "Both 0x and 0X",
-                "value": 4,
-                "is_correct": true
-            }
-        ]
-    },
-    {
-        "question": "When there is an indefinite or an infinite value during an arithmetic computation in a program, then JavaScript prints______.",
-        "type": "radio",
-        "options": [
-            {
-                "label": "Prints an exception error",
-                "value": 1,
-                "is_correct": false
-            },
-            {
-                "label": "Prints an overflow error",
-                "value": 2,
-                "is_correct": false
-            },
-            {
-                "label": 'Displays "Infinity"',
-                "value": 3,
-                "is_correct": true
-            },
-            {
-                "label": 'Prints the value as such',
-                "value": 4,
-                "is_correct": false
-            }
-        ]
-    }
-]
+];
+
 
 //next question waiting seconds
 const timer = 5;
@@ -772,7 +797,6 @@ const scoreDivEl = document.createElement('div');
 divEl.appendChild(scoreDivEl);
 
 const quizFormEl = document.createElement('form');
-quizFormEl.id = 'quizForm';
 quizFormEl.method = 'post';
 quizFormEl.action = 'javascript:void(0)';
 
@@ -784,6 +808,7 @@ displayStartButton();
 let currentQuestionIndex = 0;
 let score = 0;
 
+
 function displayQuestion() {
     const question = questions[randomIndices[currentQuestionIndex]];
 
@@ -794,29 +819,54 @@ function displayQuestion() {
     questionLabelEl.textContent = `Q${currentQuestionIndex + 1}. ${question.question}`;
     questionDivEl.appendChild(questionLabelEl);
 
-    const optionDivEl = document.createElement("div");
-    const optionClassName = 'quiz-option';
-    question.options.forEach(option => {
+    // if (question.type === 'select') {
+    //     const selectEl = document.createElement('select');
+    //     selectEl.className = 'quiz-select-input';
+    //     selectEl.addEventListener('change', nextButtonWithTimer('.quiz-next'));
 
+    //     question.options.forEach(option => {
+    //         const optionEl = document.createElement('option');
+    //         optionEl.value = option.value;
+    //         optionEl.textContent = option.label;
+    //         selectEl.appendChild(optionEl);
+    //     })
+    //     questionDivEl.appendChild(selectEl);
+    // }
+    // else
+    if (question.type === 'text') {
         const inputEl = document.createElement("input");
-        const randomName = randomString(10);
-        inputEl.type = question.type;
-        inputEl.value = option.value;
-        inputEl.addEventListener('click', buttonWithTimer('.quiz-next'));
-        inputEl.id = randomName;
-        inputEl.className = optionClassName;
-        inputEl.name = `Q${randomIndices[currentQuestionIndex] + 1}`;
+        inputEl.type = 'text';
+        inputEl.className = 'quiz-text-input';
 
-        const optionLabel = document.createElement("label");
-        optionLabel.textContent = option.label;
-        optionLabel.setAttribute("for", randomName);
+        inputEl.addEventListener('keyup', nextButtonWithTimer('.quiz-next'));
+        questionDivEl.appendChild(inputEl);
+    }
+    else {
+        const optionDivEl = document.createElement("div");
+        const optionClassName = 'quiz-option';
+        question.options.forEach(option => {
 
-        optionDivEl.appendChild(inputEl);
-        optionDivEl.appendChild(optionLabel);
-        optionDivEl.appendChild(document.createElement('br'));
-    });
+            const inputEl = document.createElement("input");
+            const randomName = randomString(10);
+            inputEl.type = question.type;
+            inputEl.value = option.value;
+            inputEl.addEventListener('click', nextButtonWithTimer('.quiz-next'));
+            inputEl.id = randomName;
+            inputEl.className = optionClassName;
+            inputEl.name = `Q${randomIndices[currentQuestionIndex] + 1}`;
 
-    questionDivEl.appendChild(optionDivEl);
+            const optionLabel = document.createElement("label");
+            optionLabel.textContent = option.label;
+            optionLabel.setAttribute("for", randomName);
+
+            optionDivEl.appendChild(inputEl);
+            optionDivEl.appendChild(optionLabel);
+            optionDivEl.appendChild(document.createElement('br'));
+        });
+
+        questionDivEl.appendChild(optionDivEl);
+    }
+
     quizFormEl.appendChild(questionDivEl);
     quizFormEl.appendChild(document.createElement('br'));
 
@@ -826,33 +876,12 @@ function displayQuestion() {
     else {
         displayNextButton();
     }
-    
+
     window.scroll(0, document.body.scrollHeight);
 }
 let timerValue = timer;
 let timerInterval;
-function buttonWithTimer(id) {
-    timerValue = timer;
-    return function () {
-        const buttonWithTimer = document.querySelector(id);
-        if (buttonWithTimer) {
-            buttonWithTimer.textContent = `Next (${timerValue}s)`;
-            if (timerInterval) {
-                clearInterval(timerInterval);
-            }
-            timerInterval = setInterval(() => {
-                timerValue--;
 
-                if (timerValue <= 0) {
-                    buttonWithTimer.textContent = 'Next';
-                    buttonWithTimer.click();
-                } else {
-                    buttonWithTimer.textContent = `Next (${timerValue}s)`;
-                }
-            }, 1000);
-        }
-    }
-}
 function displayNextButton() {
     const nextBtn = document.createElement('button');
     nextBtn.type = 'button';
@@ -861,22 +890,52 @@ function displayNextButton() {
     nextBtn.disabled = 'true';
 
     const options = document.querySelectorAll(`input[name="Q${randomIndices[currentQuestionIndex] + 1}"]`);
-    options.forEach(option => {
-        option.addEventListener('change', () => {
-            const selectedOptions = document.querySelectorAll(`input[name="Q${randomIndices[currentQuestionIndex] + 1}"]:checked`);
-            nextBtn.disabled = selectedOptions.length === 0;
+
+    if (questions[randomIndices[currentQuestionIndex]].type === 'select') {
+
+        const userSelect = document.querySelector('.quiz-select-input');
+        console.log(userSelect.value);
+
+    } else if (questions[randomIndices[currentQuestionIndex]].type === 'text') {
+
+        const textInput = document.querySelector('.quiz-text-input');
+        textInput.addEventListener('input', () => {
+            nextBtn.disabled = textInput.value.trim() === '';
         });
-    });
+
+    } else {
+
+        options.forEach(option => {
+            option.addEventListener('change', () => {
+                const selectedOptions = document.querySelectorAll(`input[name="Q${randomIndices[currentQuestionIndex] + 1}"]:checked`);
+                nextBtn.disabled = selectedOptions.length === 0;
+            });
+        });
+
+    }
 
     nextBtn.addEventListener('click', () => {
-        clearInterval(timerInterval);
+        console.log(88);
+        if (timerInterval) {
+            clearInterval(timerInterval);
+        }
         nextBtn.remove();
-        const radioOptions = document.querySelectorAll(`input[name="Q${randomIndices[currentQuestionIndex] + 1}"]`);
-        radioOptions.forEach(option => {
-            option.disabled = true;
-        });
-        const selectedOption = document.querySelector(`input[name="Q${randomIndices[currentQuestionIndex] + 1}"]:checked`);
-        calculateScore(selectedOption, currentQuestionIndex);
+
+        if (questions[randomIndices[currentQuestionIndex]].type === 'text') {
+            const textInput = document.querySelector('.quiz-text-input');
+            console.log(textInput.value);
+            console.log(questions[randomIndices[currentQuestionIndex]].answer);
+            validateTextAnswer(textInput.value, questions[randomIndices[currentQuestionIndex]]);
+        }
+        else {
+            const radioOptions = document.querySelectorAll(`input[name="Q${randomIndices[currentQuestionIndex] + 1}"]`);
+            radioOptions.forEach(option => {
+                option.disabled = true;
+            });
+            const selectedOptions = document.querySelectorAll(`input[name="Q${randomIndices[currentQuestionIndex] + 1}"]:checked`);
+            //console.log(selectedOptions);
+            calculateScore(selectedOptions, currentQuestionIndex);
+        }
 
         currentQuestionIndex++;
 
@@ -898,35 +957,23 @@ function displaySubmitButton() {
     submitBtn.disabled = 'true';
 
     const options = document.querySelectorAll(`input[name="Q${randomIndices[currentQuestionIndex] + 1}"]`);
-    options.forEach(option => {
-        option.addEventListener('change', () => {
-            const selectedOptions = document.querySelectorAll(`input[name="Q${randomIndices[currentQuestionIndex] + 1}"]:checked`);
-            submitBtn.disabled = selectedOptions.length === 0;
-            setTimeout(() => {
-
-                if (selectedOptions.length > 0 && !intervalStarted) {
-                    intervalStarted = true;
-                    timerValue = timer;
-                    submitBtn.textContent = `Submit Quiz (${timerValue})`;
-                    intervalId = setInterval(() => {
-                        timerValue--;
-
-                        if (timerValue <= 0) {
-                            clearInterval(intervalId);
-                            submitBtn.textContent = `Submit Quiz`;
-                            quizFormEl.dispatchEvent(new Event('submit'));
-                        }
-                        else {
-                            submitBtn.textContent = `Submit Quiz (${timerValue})`;
-                        }
-
-                    }, 1000);
-                }
-
+    setTimeout(() => {
+        if (questions[randomIndices[currentQuestionIndex]].type === 'text') {
+            const textInput = document.querySelector('.quiz-text-input');
+            textInput.addEventListener('keyup', () => {
+                submitBtn.disabled = textInput.length === 0;
+                submitButtonWithTimer(submitBtn);
+            })
+        } else {
+            options.forEach(option => {
+                option.addEventListener('change', () => {
+                    const selectedOptions = document.querySelectorAll(`input[name="Q${randomIndices[currentQuestionIndex] + 1}"]:checked`);
+                    submitBtn.disabled = selectedOptions.length === 0;
+                    submitButtonWithTimer(submitBtn);
+                });
             });
-        }, 0);
-    });
-
+        }
+    }, 0);
     quizFormEl.appendChild(submitBtn);
 }
 
@@ -935,9 +982,20 @@ quizFormEl.addEventListener('submit', calculateQuizScore);
 
 function calculateQuizScore(e) {
     e.preventDefault();
-    const selectedOption = document.querySelector(`input[name="Q${randomIndices[currentQuestionIndex] + 1}"]:checked`);
 
-    calculateScore(selectedOption, currentQuestionIndex);
+    if (clearInterval) {
+        clearInterval(intervalId);
+    }
+
+    if (questions[randomIndices[currentQuestionIndex]].type === 'text') {
+        const textInput = document.querySelector('.quiz-text-input');
+        validateTextAnswer(textInput.value, questions[randomIndices[currentQuestionIndex]]);
+    }
+    else {
+        const selectedOptions = document.querySelectorAll(`input[name="Q${randomIndices[currentQuestionIndex] + 1}"]:checked`);
+
+        calculateScore(selectedOptions, currentQuestionIndex);
+    }
 
     window.scroll(0, 0);
     scoreDivEl.className = "quiz-score";
@@ -959,20 +1017,47 @@ function calculateQuizScore(e) {
     displayRestartButton();
 }
 
-function calculateScore(selectedOption, currentQuestionIndex) {
-    if (selectedOption) {
-        const selectedValue = parseInt(selectedOption.value);
-        const currentQuestion = questions[randomIndices[currentQuestionIndex]];
+let scoreForEachQuestion = 0;
 
+function calculateScore(selectedOptions, currentQuestionIndex) {
+
+    const currentQuestion = questions[randomIndices[currentQuestionIndex]];
+    const correctOptions = currentQuestion.options
+        .filter(option => option.is_correct)
+        .map(option => option.value);
+
+    for (let index = 0; index < selectedOptions.length; index++) {
+        const selectedOption = selectedOptions[index];
+        const selectedValue = parseInt(selectedOption.value);
         const selectedAnswerLabel = document.querySelector('label[for=' + selectedOption.id + ']');
-        if (currentQuestion.options.find(option => option.value === selectedValue && option.is_correct)) {
+
+        if (correctOptions.includes(selectedValue)) {
             selectedAnswerLabel.classList = 'correct-answer';
-            score++;
         } else {
             selectedAnswerLabel.classList = 'incorrect-answer';
         }
     }
+
+    if (arraysEqual(correctOptions, Array.from(selectedOptions, option => parseInt(option.value)))) {
+        score++;
+    }
 }
+
+function arraysEqual(arr1, arr2) {
+    if (arr1.length !== arr2.length) {
+        return false;
+    }
+
+    for (let i = 0; i < arr1.length; i++) {
+        if (arr1[i] !== arr2[i]) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+
 
 function displayStartButton() {
     const startBtn = document.createElement("button");
@@ -1016,3 +1101,58 @@ function randomString(lenString) {
     return resultRandomString;
 }
 
+function validateTextAnswer(userInput, question) {
+    const correctAnswer = question.answer.toLowerCase();
+    const userInputBox = document.querySelector('.quiz-text-input');
+    userInputBox.disabled = true;
+    if (userInput.toLowerCase() === correctAnswer) {
+        score++;
+        console.log(score);
+        userInputBox.classList = 'correct-answer';
+    } else {
+        userInputBox.classList = 'incorrect-answer';
+    }
+}
+
+function submitButtonWithTimer(submitBtn) {
+    if (!intervalStarted) {
+        intervalStarted = true;
+        timerValue = timer;
+
+        intervalId = setInterval(() => {
+
+            if (timerValue <= 0) {
+                clearInterval(intervalId);
+                submitBtn.textContent = `Submit Quiz`;
+                quizFormEl.dispatchEvent(new Event('submit'));
+            } else {
+                submitBtn.textContent = `Submit Quiz (${timerValue})`;
+            }
+
+            timerValue--;
+        }, 1000);
+    }
+}
+function nextButtonWithTimer(id) {
+    timerValue = timer;
+    return function () {
+        const nextButtonWithTimer = document.querySelector(id);
+        if (nextButtonWithTimer) {
+            nextButtonWithTimer.textContent = `Next (${timerValue}s)`;
+
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+            timerInterval = setInterval(() => {
+                timerValue--;
+
+                if (timerValue <= 0) {
+                    nextButtonWithTimer.textContent = 'Next';
+                    nextButtonWithTimer.click();
+                } else {
+                    nextButtonWithTimer.textContent = `Next (${timerValue}s)`;
+                }
+            }, 1000);
+        }
+    }
+}
