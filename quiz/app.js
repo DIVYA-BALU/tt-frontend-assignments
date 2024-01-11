@@ -670,7 +670,7 @@ function startQuiz() {
     formElement.className = "quiz";
     divElement.appendChild(formElement);
 
-    const limit = 5;
+    const limit = 10;
     const randomIndices = randomIndex(questions.length,limit);
     const questionToDisplay = [];
     const answersForQuestions = [];
