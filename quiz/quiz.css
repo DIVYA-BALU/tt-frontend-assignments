@@ -8,6 +8,12 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
+@media only screen and (max-width: 412px) {
+    [id*="container"] {
+        width: 100%;
+      }
+}
+
 #container h1,h4 {
     text-align: center;
     color: rgb(89, 89, 141);
@@ -15,32 +21,33 @@
 
 #container .question {
     background-color: rgb(202, 186, 186);
-    height: 170px;
+    height: 210px;
     margin-bottom: 20px;
     padding: 15px;
     cursor: pointer;
 }
 
 #container #explain{
-    height: 250px;
+    height: 300px;
 }
 
 #container #explain .explanation{
     padding-top: 10px;
 }
 
-#container .question input:hover{
+#container .question input:hover,label:hover{
     transform: scale(1.2);
+    cursor: pointer;
 }
 
-#container .question input[disabled],label[class=disable]{
+#container .question input[disabled],label[id=disable]{
     cursor: not-allowed;
 }
-
+/* 
 #container .question input[class=checked]{
     width: 18px;
     height: 18px;
-}
+} */
 
 #container .question p{
     font-weight: bold;
@@ -53,6 +60,7 @@
     height: 40px;
     padding-top: 11px;
     margin-left: 650px;
+    color: red;
 }
 
 #container .button input{
@@ -149,7 +157,7 @@ a:hover{
     margin-top: 50px;
     padding: 50px;
     width: 50%;
-    height: 440px;
+    height: 550px;
     background-color: rgb(234, 224, 224);
     font-size: 20px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -162,6 +170,13 @@ a:hover{
 
 #container-index p {
     text-align: justify;
+}
+
+#container-index pre {
+    border: 1px solid;
+    padding: 10px;
+    color: red;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .pass{
