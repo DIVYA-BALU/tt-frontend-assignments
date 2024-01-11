@@ -1,53 +1,53 @@
 const questions = [
     {
-        question: "JavaScript is a ________-side programming language.",
-        answer: "client",
-        type: "text"
+        "question": "JavaScript is a ________-side programming language.",
+        "answer": "client",
+        "type": "text"
     },
     {
-        question: "The ________ method of an Array object adds one or more elements to the end of an array and returns the new length of the array.",
-        answer: "push",
-        type: "text"
+        "question": "The ________ method of an Array object adds one or more elements to the end of an array and returns the new length of the array.",
+        "answer": "push",
+        "type": "text"
     },
     {
-        question: "In JavaScript, the ________ statement is used to declare a variable.",
-        answer: "var",
-        type: "text"
+        "question": "In JavaScript, the ________ statement is used to declare a variable.",
+        "answer": "var",
+        "type": "text"
     },
     {
-        question: "The ________ operator in JavaScript returns true if the two operands are equal, otherwise, it returns false.",
-        answer: "==",
-        type: "text"
+        "question": "The ________ operator in JavaScript returns true if the two operands are equal, otherwise, it returns false.",
+        "answer": "==",
+        "type": "text"
     },
     {
-        question: "The ________ method is used to remove the last element from an array and returns that element.",
-        answer: "pop",
-        type: "text"
+        "question": "The ________ method is used to remove the last element from an array and returns that element.",
+        "answer": "pop",
+        "type": "text"
     },
     {
-        question: "JavaScript uses a ________-based indexing system to access array elements.",
-        answer: "zero",
-        type: "text"
+        "question": "JavaScript uses a ________-based indexing system to access array elements.",
+        "answer": "zero",
+        "type": "text"
     },
     {
-        question: "The ________ function is used to execute a block of code multiple times.",
-        answer: "for",
-        type: "text"
+        "question": "The ________ function is used to execute a block of code multiple times.",
+        "answer": "for",
+        "type": "text"
     },
     {
-        question: "A ________ is a special variable that can hold multiple values at once.",
-        answer: "array",
-        type: "text"
+        "question": "A ________ is a special variable that can hold multiple values at once.",
+        "answer": "array",
+        "type": "text"
     },
     {
-        question: "The ________ method is used to convert a string to uppercase letters.",
-        answer: "toUpperCase",
-        type: "text"
+        "question": "The ________ method is used to convert a string to uppercase letters.",
+        "answer": "toUpperCase",
+        "type": "text"
     },
     {
-        question: "The ________ statement is used to terminate a loop and transfer control to the statement immediately following the loop.",
-        answer: "break",
-        type: "text"
+        "question": "The ________ statement is used to terminate a loop and transfer control to the statement immediately following the loop.",
+        "answer": "break",
+        "type": "text"
     },
     {
         "question": "Which of the following are valid HTML tags?",
@@ -310,135 +310,6 @@ const questions = [
         ],
     },
     {
-        "question": "The elements between the <td> and </td> tags of an HTML table are ______ by default.",
-        "type": "radio",
-        "options": [
-            {
-                "label": "Justified",
-                "value": 1,
-                "is_correct": false
-            },
-            {
-                "label": "Left aligned",
-                "value": 2,
-                "is_correct": true
-            },
-            {
-                "label": "Centrally aligned",
-                "value": 3, "is_correct": false
-            },
-            {
-                "label": "Right aligned",
-                "value": 4,
-                "is_correct": false
-            }
-        ]
-    },
-    {
-        "question": ".NET Framework was designed and developed by _______.",
-        "type": "radio",
-        "options": [
-            {
-                "label": "Microsoft",
-                "value": 1,
-                "is_correct": true
-            },
-            {
-                "label": "IBM",
-                "value": 2,
-                "is_correct": false
-            },
-            {
-                "label": "Oracle",
-                "value": 3,
-                "is_correct": false
-            },
-            {
-                "label": "Google",
-                "value": 4,
-                "is_correct": false
-            }
-        ]
-    },
-    {
-        "question": "The basic elements of a form are called :",
-        "type": "radio",
-        "options": [
-            {
-                "label": "Objects",
-                "value": 1,
-                "is_correct": false
-            },
-            {
-                "label": "Table",
-                "value": 2,
-                "is_correct": false
-            },
-            {
-                "label": "Record",
-                "value": 3,
-                "is_correct": false
-            },
-            {
-                "label": "Controls",
-                "value": 4,
-                "is_correct": true
-            }
-        ]
-    },
-    {
-        "question": "The stylesheet file will not be loaded by the browser if you omit ______",
-        "type": "radio",
-        "options": [
-            {
-                "label": "REL",
-                "value": 1,
-                "is_correct": true
-            },
-            {
-                "label": "STYLE",
-                "value": 2,
-                "is_correct": false
-            },
-            {
-                "label": "BODY",
-                "value": 3,
-                "is_correct": false
-            },
-            {
-                "label": "HTML",
-                "value": 4,
-                "is_correct": false
-            }
-        ]
-    },
-    {
-        "question": "Which of the following multimedia text-based features generalize the concepts of footnotes and cross-references for accessing text documents?",
-        "type": "radio",
-        "options": [
-            {
-                "label": "Text importing and exporting",
-                "value": 1,
-                "is_correct": false
-            },
-            {
-                "label": "Text style",
-                "value": 2,
-                "is_correct": false
-            },
-            {
-                "label": "Hypertext",
-                "value": 3,
-                "is_correct": true
-            },
-            {
-                "label": "Text search",
-                "value": 4,
-                "is_correct": false
-            }
-        ]
-    },
-    {
         "question": "What is the latest version of CSS available?",
         "type": "radio",
         "options": [
@@ -568,58 +439,6 @@ const questions = [
         ]
     },
     {
-        "question": "How to create an unordered list (a list with the list items in bullets) in HTML?",
-        "type": "radio",
-        "options": [
-            {
-                "label": "<ul>",
-                "value": 1,
-                "is_correct": true
-            },
-            {
-                "label": "<ol>",
-                "value": 2,
-                "is_correct": false
-            },
-            {
-                "label": "<li>",
-                "value": 3,
-                "is_correct": false
-            },
-            {
-                "label": "<i>",
-                "value": 4,
-                "is_correct": false
-            }
-        ]
-    },
-    {
-        "question": "Which of the following tag is used to define options in a drop-down selection list?",
-        "type": "radio",
-        "options": [
-            {
-                "label": "<select>",
-                "value": 1,
-                "is_correct": false
-            },
-            {
-                "label": "<list>",
-                "value": 2,
-                "is_correct": false
-            },
-            {
-                "label": "<dropdown>",
-                "value": 3,
-                "is_correct": false
-            },
-            {
-                "label": "<option>",
-                "value": 4,
-                "is_correct": true
-            }
-        ]
-    },
-    {
         "question": "HTML tags are enclosed in-",
         "type": "radio",
         "options": [
@@ -698,32 +517,6 @@ const questions = [
         ]
     },
     {
-        "question": "Which of the following attribute is used to provide a unique name to an element?",
-        "type": "radio",
-        "options": [
-            {
-                "label": "class",
-                "value": 1,
-                "is_correct": false
-            },
-            {
-                "label": "id",
-                "value": 2,
-                "is_correct": true
-            },
-            {
-                "label": "type",
-                "value": 3,
-                "is_correct": false
-            },
-            {
-                "label": "None of the above",
-                "value": 4,
-                "is_correct": false
-            }
-        ]
-    },
-    {
         "question": "What are the types of unordered or bulleted list in HTML?",
         "type": "radio",
         "options": [
@@ -744,32 +537,6 @@ const questions = [
             },
             {
                 "label": "All of the above",
-                "value": 4,
-                "is_correct": false
-            }
-        ]
-    },
-    {
-        "question": "CSS stands for -",
-        "type": "radio",
-        "options": [
-            {
-                "label": "Cascade style sheets",
-                "value": 1,
-                "is_correct": false
-            },
-            {
-                "label": "Color and style sheets",
-                "value": 2,
-                "is_correct": false
-            },
-            {
-                "label": "Cascading style sheets",
-                "value": 3,
-                "is_correct": true
-            },
-            {
-                "label": "None of the above",
                 "value": 4,
                 "is_correct": false
             }
@@ -860,37 +627,6 @@ const questions = [
                 "label": "High-level",
                 "value": 4,
                 "is_correct": false
-            }
-        ]
-    },
-    {
-        "question": "Which one of the following also known as Conditional Expression:",
-        "type": "select",
-        "options": [
-            {
-                "label": "Select correct answer",
-                "value": "",
-                "is_correct": ""
-            },
-            {
-                "label": "Alternative to if-else",
-                "value": 1,
-                "is_correct": false
-            },
-            {
-                "label": "Switch statement",
-                "value": 2,
-                "is_correct": false
-            },
-            {
-                "label": "If-then-else statement",
-                "value": 3,
-                "is_correct": false
-            },
-            {
-                "label": "Immediate if",
-                "value": 4,
-                "is_correct": true
             }
         ]
     },
@@ -1110,27 +846,292 @@ const questions = [
                 "is_correct": false
             }
         ]
+    },
+    {
+        "question": "Which programming language is commonly used for web development?",
+        "type": "multiple",
+        "options": [
+            {
+                "value": 1,
+                "label": "JavaScript",
+                "is_correct": true
+            },
+            {
+                "value": 2,
+                "label": "Python",
+                "is_correct": true
+            },
+            {
+                "value": 3,
+                "label": "Java",
+                "is_correct": false
+            },
+            {
+                "value": 4,
+                "label": "HTML",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "question": "What are the correct ways to include CSS in an HTML document?",
+        "type": "multiple",
+        "options": [
+            {
+                "value": 1,
+                "label": "Inline style attribute",
+                "is_correct": true
+            },
+            {
+                "value": 2,
+                "label": "External stylesheet file",
+                "is_correct": true
+            },
+            {
+                "value": 3,
+                "label": "JavaScript code",
+                "is_correct": false
+            },
+            {
+                "value": 4,
+                "label": "<style> tag in the body",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "question": "Which HTML tags are used to create a hyperlink?",
+        "type": "multiple",
+        "options": [
+            {
+                "value": 1,
+                "label": "<a>",
+                "is_correct": true
+            },
+            {
+                "value": 2,
+                "label": "<link>",
+                "is_correct": false
+            },
+            {
+                "value": 3,
+                "label": "<href>",
+                "is_correct": true
+            },
+            {
+                "value": 4,
+                "label": "<p>",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "question": "What does the 'border-box' value for the CSS 'box-sizing' property do?",
+        "type": "multiple",
+        "options": [
+            {
+                "value": 1,
+                "label": "Includes padding and border in the element's total width and height",
+                "is_correct": true
+            },
+            {
+                "value": 2,
+                "label": "Excludes padding and border from the element's total width and height",
+                "is_correct": false
+            },
+            {
+                "value": 3,
+                "label": "Includes margin in the element's total width and height",
+                "is_correct": false
+            },
+            {
+                "value": 4,
+                "label": "Excludes margin from the element's total width and height",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "question": "Which of the following are valid HTML5 semantic elements?",
+        "type": "multiple",
+        "options": [
+            {
+                "value": 1,
+                "label": "<section>",
+                "is_correct": true
+            },
+            {
+                "value": 2,
+                "label": "<div>",
+                "is_correct": false
+            },
+            {
+                "value": 3,
+                "label": "<header>",
+                "is_correct": true
+            },
+            {
+                "value": 4,
+                "label": "<span>",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "question": "What are the correct ways to declare a variable in JavaScript?",
+        "type": "multiple",
+        "options": [
+            {
+                "value": 1,
+                "label": "var",
+                "is_correct": true
+            },
+            {
+                "value": 2,
+                "label": "let",
+                "is_correct": true
+            },
+            {
+                "value": 3,
+                "label": "const",
+                "is_correct": true
+            },
+            {
+                "value": 4,
+                "label": "variable",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "question": "Which of the following are valid CSS positioning values?",
+        "type": "multiple",
+        "options": [
+            {
+                "value": 1,
+                "label": "relative",
+                "is_correct": true
+            },
+            {
+                "value": 2,
+                "label": "static",
+                "is_correct": true
+            },
+            {
+                "value": 3,
+                "label": "center",
+                "is_correct": false
+            },
+            {
+                "value": 4,
+                "label": "absolute",
+                "is_correct": true
+            }
+        ]
+    },
+    {
+        "question": "What does the 'localStorage' object in JavaScript allow you to do?",
+        "type": "multiple",
+        "options": [
+            {
+                "value": 1,
+                "label": "Store data with no expiration time",
+                "is_correct": true
+            },
+            {
+                "value": 2,
+                "label": "Store data that will be cleared when the browser is closed",
+                "is_correct": false
+            },
+            {
+                "value": 3,
+                "label": "Store data with session expiration time",
+                "is_correct": false
+            },
+            {
+                "value": 4,
+                "label": "Store data on the server",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "question": "Which events are fired when a user interacts with an HTML input field?",
+        "type": "multiple",
+        "options": [
+            {
+                "value": 1,
+                "label": "change",
+                "is_correct": true
+            },
+            {
+                "value": 2,
+                "label": "input",
+                "is_correct": true
+            },
+            {
+                "value": 3,
+                "label": "click",
+                "is_correct": false
+            },
+            {
+                "value": 4,
+                "label": "submit",
+                "is_correct": false
+            }
+        ]
+    },
+    {
+        "question": "What are the correct ways to define a function in JavaScript?",
+        "type": "multiple",
+        "options": [
+            {
+                "value": 1,
+                "label": "function expression",
+                "is_correct": true
+            },
+            {
+                "value": 2,
+                "label": "function declaration",
+                "is_correct": true
+            },
+            {
+                "value": 3,
+                "label": "method",
+                "is_correct": false
+            },
+            {
+                "value": 4,
+                "label": "func",
+                "is_correct": false
+            }
+        ]
     }
 ];
 
-const overallTimer = 10; // Overall timer in seconds (adjust as needed)
+const quizTimer = document.createElement('h2');
+quizTimer.className = 'quiz-timer';
+// Overall timer in seconds (adjust as needed)
+const overallTimer = 100;
+//next question waiting seconds
+const timer = 5;
 let overallTimerValue = overallTimer;
 let overallTimerInterval;
 let intervalId;
 
 function startOverallTimer() {
+    quizTimer.textContent = `Remaining Time : ${overallTimerValue} seconds`;
     overallTimerInterval = setInterval(() => {
+        overallTimerValue--;
         if (overallTimerValue <= 0) {
+            quizTimer.textContent = 'Time ran out, Sorry!';
             clearInterval(overallTimerInterval);
             quizFormEl.dispatchEvent(new Event('submit'));
         } else {
-            overallTimerValue--;
+            quizTimer.textContent = `Remaining Time : ${overallTimerValue} seconds`;
         }
     }, 1000);
 }
-
-//next question waiting seconds
-const timer = 5;
 
 //Generate random array ranges from 0 to question.length-1;
 const randomIndices = [];
@@ -1146,10 +1147,12 @@ const divEl = document.createElement('div');
 divEl.id = "form-div";
 const scoreDivEl = document.createElement('div');
 divEl.appendChild(scoreDivEl);
+divEl.appendChild(quizTimer);
 
 const quizFormEl = document.createElement('form');
 quizFormEl.method = 'post';
 quizFormEl.action = 'javascript:void(0)';
+
 
 const quizHeadingEl = document.createElement('h1');
 quizHeadingEl.textContent = 'Quiz: Test Your Knowledge';
@@ -1198,11 +1201,13 @@ function displayNextButton() {
 
     const options = document.querySelectorAll(`input[name="Q${randomIndices[currentQuestionIndex] + 1}"]`);
 
-    if (questions[randomIndices[currentQuestionIndex]].type === 'select') {
+    if (questions[randomIndices[currentQuestionIndex]].type === 'select' || questions[randomIndices[currentQuestionIndex]].type === 'multiple') {
 
-        const userSelect = document.querySelector('.quiz-select-input');
-        userSelect.addEventListener('input', () => {
-            nextBtn.disabled = userSelect.value.trim() === '';
+        const userSelects = document.querySelectorAll('.quiz-select-input');
+        userSelects.forEach(userSelect => {
+            userSelect.addEventListener('change', () => {
+                nextBtn.disabled = Array.from(userSelects).every(select => select.value.trim() === '');
+            });
         });
 
     } else if (questions[randomIndices[currentQuestionIndex]].type === 'text') {
@@ -1230,29 +1235,29 @@ let intervalStarted = false;
 
 function displaySubmitButton() {
     const submitBtn = createSubmitButton();
+    const currentQuestion = questions[randomIndices[currentQuestionIndex]];
 
-    setTimeout(() => {
-        const currentQuestion = questions[randomIndices[currentQuestionIndex]];
-
-        if (currentQuestion.type === 'text') {
-            const textInput = document.querySelector('.quiz-text-input');
-            addTextChangeListener(textInput, submitBtn);
-        } else if (currentQuestion.type === 'select') {
-            const selectInput = document.querySelector(`select[name="Q${randomIndices[currentQuestionIndex] + 1}"]`);
-            addSelectChangeListener(selectInput, submitBtn);
-        } else {
-            const options = document.querySelectorAll(`input[name="Q${randomIndices[currentQuestionIndex] + 1}"]`);
-            addOptionsChangeListener(options, submitBtn);
-        }
-    }, 0);
+    if (currentQuestion.type === 'text') {
+        const textInput = document.querySelector('.quiz-text-input');
+        addTextChangeListener(textInput, submitBtn);
+    } else if (currentQuestion.type === 'select' || currentQuestion.type === 'multiple') {
+        const selectInputs = document.querySelectorAll(`select[name="Q${randomIndices[currentQuestionIndex] + 1}"]`);
+        console.log(selectInputs);
+        addSelectChangeListener(selectInputs, submitBtn);
+    } else {
+        const options = document.querySelectorAll(`input[name="Q${randomIndices[currentQuestionIndex] + 1}"]`);
+        addOptionsChangeListener(options, submitBtn);
+    }
 
     quizFormEl.appendChild(submitBtn);
 }
 
-function addSelectChangeListener(selectInput, submitBtn) {
-    selectInput.addEventListener('change', () => {
-        submitBtn.disabled = selectInput.value === '';
-        submitButtonWithTimer(submitBtn);
+function addSelectChangeListener(selectInputs, submitBtn) {
+    selectInputs.forEach(selectInput => {
+        selectInput.addEventListener('change', () => {
+            submitBtn.disabled = Array.from(selectInputs).every(select => select.value.trim() === '');
+            submitButtonWithTimer(submitBtn);
+        });
     });
 }
 
@@ -1281,12 +1286,15 @@ function calculateQuizScore(e) {
     if (clearInterval) {
         clearInterval(intervalId);
     }
+    if(overallTimerInterval){
+        clearInterval(overallTimerInterval);
+    }
 
     const currentQuestion = questions[randomIndices[currentQuestionIndex]];
 
     if (currentQuestion.type === 'text') {
         handleTextQuestion();
-    } else if (currentQuestion.type === 'select') {
+    } else if (currentQuestion.type === 'select' || currentQuestion.type === 'multiple') {
         handleSelectQuestion();
     } else {
         handleOptionsQuestion();
@@ -1370,10 +1378,14 @@ function validateTextAnswer(userInput, question) {
 }
 
 function validateSelectAnswer(userSelectValue, question) {
-    const correctAnswer = question.options.find(option => option.is_correct).value;
+
+    const selectedValues = Array.from(userSelectValue.selectedOptions).map(option => parseInt(option.value));
+    const correctOptions = question.options
+        .filter(option => option.is_correct)
+        .map(option => option.value);
     userSelectValue.disabled = true;
 
-    if (parseInt(userSelectValue.value) === correctAnswer) {
+    if (arraysEqual(selectedValues, correctOptions)) {
         score++;
         userSelectValue.classList = 'correct-answer';
     } else {
@@ -1390,7 +1402,9 @@ function displayStartButton() {
     startBtn.addEventListener("click", () => {
         quizFormEl.removeChild(startBtn);
         displayQuestion();
-        startOverallTimer();
+        setTimeout(() => {
+            startOverallTimer();
+        }, 0);
     });
 
     quizFormEl.appendChild(startBtn);
@@ -1424,25 +1438,23 @@ function randomString(lenString) {
 }
 
 function submitButtonWithTimer(submitBtn) {
-    setTimeout(() => {
-        if (!intervalStarted) {
-            intervalStarted = true;
-            timerValue = timer;
+    if (!intervalStarted) {
+        intervalStarted = true;
+        timerValue = timer;
+        submitBtn.textContent = `Submit Quiz (${timerValue})`;
+        intervalId = setInterval(() => {
+            timerValue--;
 
-            intervalId = setInterval(() => {
+            if (timerValue <= 0) {
+                clearInterval(intervalId);
+                submitBtn.textContent = `Submit Quiz`;
+                quizFormEl.dispatchEvent(new Event('submit'));
+            } else {
+                submitBtn.textContent = `Submit Quiz (${timerValue})`;
+            }
 
-                if (timerValue <= 0) {
-                    clearInterval(intervalId);
-                    submitBtn.textContent = `Submit Quiz`;
-                    quizFormEl.dispatchEvent(new Event('submit'));
-                } else {
-                    submitBtn.textContent = `Submit Quiz (${timerValue})`;
-                }
-
-                timerValue--;
-            }, 1000);
-        }
-    }, 0);
+        }, 1000);
+    }
 }
 
 function nextButtonWithTimer(id) {
@@ -1484,9 +1496,10 @@ function displayOptionsQuestion(container) {
 
     const question = questions[randomIndices[currentQuestionIndex]];
 
-    if (question.type === 'select') {
-        const selectEl = document.createElement("select");
-        selectEl.className = 'quiz-select-input';
+    if (question.type === 'select' || question.type === 'multiple') {
+        const selectEl = document.createElement('select');
+        selectEl.multiple = question.type === 'multiple';
+        selectEl.className = `quiz-select-input`;
         selectEl.name = `Q${randomIndices[currentQuestionIndex] + 1}`;
         selectEl.addEventListener('change', nextButtonWithTimer('.quiz-next'));
 
@@ -1532,7 +1545,7 @@ function onNextButtonClick() {
     if (questions[randomIndices[currentQuestionIndex]].type === 'text') {
         handleTextQuestion();
     }
-    else if (questions[randomIndices[currentQuestionIndex]].type === 'select') {
+    else if (questions[randomIndices[currentQuestionIndex]].type === 'select' || questions[randomIndices[currentQuestionIndex]].type === 'multiple') {
         handleSelectQuestion();
     }
     else {
