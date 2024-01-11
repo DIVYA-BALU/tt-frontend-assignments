@@ -84,6 +84,12 @@ h1 {
     cursor: pointer;
 }
 
+.question-container select {
+    font-size: 15px;
+    padding: 5px;
+    margin-left: 50px;
+}
+
 .question-container input:checked+label {
     background-color: #375bce;
     color: #fff;
@@ -92,24 +98,32 @@ h1 {
 }
 
 .question-container input:checked+label.correct-answer,
-.question-container input[type='text'].correct-answer {
+.question-container input[type='text'].correct-answer,
+.question-container select.correct-answer {
     background-color: #128715;
     color: #fff;
 }
 
 .question-container input:checked+label.incorrect-answer,
-.question-container input[type='text'].incorrect-answer {
+.question-container input[type='text'].incorrect-answer,
+.question-container select.incorrect-answer {
     background-color: rgb(255, 38, 0);
     color: #fff;
 }
 
 .quiz-score {
+    padding-left: 20px;
     font-size: 50px;
-    margin-top: 20px;
     margin-bottom: 10px;
     background-color: bisque;
-    box-sizing: border-box;
-    border-style: groove
+    border-radius: 20px;
+    box-sizing: content-box;
+    border-style: groove;
+}
+
+.quiz-score p {
+    font-size: 20px;
+    padding-left: 20px;
 }
 
 .quiz-option {
