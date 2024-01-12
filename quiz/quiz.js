@@ -14,16 +14,32 @@ document.addEventListener("DOMContentLoaded", () => {
                 const input = inputEls[i];
                 const id = input.getAttribute("id");
                 const labelEl = document.querySelector(`label[for="${id}"]`);
-                setTimeout(() => {
-                    input.disabled = "disabled";
-                    labelEl.id = "disable";
-                }, 5000);
+
+                if (selected.type === "text") {
+                    setTimeout(() => {
+                        input.disabled = "disabled";
+                        labelEl.id = "disable";
+                    }, 10000);
+                } else {
+                    setTimeout(() => {
+                        input.disabled = "disabled";
+                        labelEl.id = "disable";
+                    }, 5000);
+                }
             }
+        } else if (event.target.getElementsByTagName("select")) {
+            const selected = event.target;
+            const id = selected.getAttribute("id");
+            const labelEl = document.querySelector(`label[for="${id}"]`);
+            setTimeout(() => {
+                selected.disabled = "disabled";
+                labelEl.id = "disable";
+            }, 5000);
         }
     });
 });
 
-let timeLeft = 10;
+let timeLeft = 20;
 
 const containerEl = document.getElementById("container");
 const spanElement = document.createElement("span");
@@ -46,13 +62,33 @@ const countdown = setInterval(() => {
 }, 1000);
 
 function getAllInputs() {
-    const radioInputs = document.querySelectorAll(`input[type='radio']`);
+    const radioInputs = document.querySelectorAll(`input[type="radio"]`);
     for (let i = 0; i < radioInputs.length; i++) {
+        const id = radioInputs[i].getAttribute("id");
+        const labelEl = document.querySelector(`label[for="${id}"]`);
         radioInputs[i].disabled = "disabled";
+        labelEl.id = "disable";
     }
-    const checkboxInputs = document.querySelectorAll(`input[type='checkbox']`);
+    const checkboxInputs = document.querySelectorAll(`input[type="checkbox"]`);
     for (let i = 0; i < checkboxInputs.length; i++) {
+        const id = checkboxInputs[i].getAttribute("id");
+        const labelEl = document.querySelector(`label[for="${id}"]`);
         checkboxInputs[i].disabled = "disabled";
+        labelEl.id = "disable";
+    }
+    const textInputs = document.querySelectorAll(`input[type="text"]`);
+    for (let i = 0; i < textInputs.length; i++) {
+        const id = textInputs[i].getAttribute("id");
+        const labelEl = document.querySelector(`label[for="${id}"]`);
+        textInputs[i].disabled = "disabled";
+        labelEl.id = "disable";
+    }
+    const selectInputs = document.querySelectorAll(`select`);
+    for (let i = 0; i < selectInputs.length; i++) {
+        const id = selectInputs[i].getAttribute("id");
+        const labelEl = document.querySelector(`label[for="${id}"]`);
+        selectInputs[i].disabled = "disabled";
+        labelEl.id = "disable";
     }
 }
 
@@ -60,7 +96,7 @@ const randomNumbers = [];
 function randomNumber() {
     let number;
     do {
-        number = Math.round(Math.random() * 26);
+        number = Math.round(Math.random() * 30);
     } while (contains(number));
     randomNumbers.push(number);
     return number;
@@ -556,7 +592,95 @@ const questions = [{
         answer: false
     }],
     type: "checkbox"
-}];
+},
+{
+    question: "Select the HTML tags used for creating a form. (Select all that apply)",
+    name: "quiz_twentyeight",
+    options: [{
+        option: "<form>",
+        answer: true
+    },
+    {
+        option: "<input>",
+        answer: true
+    },
+    {
+        option: "<label>",
+        answer: true
+    },
+    {
+        option: "<div>",
+        answer: false
+    },
+    {
+        option: "<select>",
+        answer: true
+    }],
+    type: "checkbox"
+},
+{
+    question: "Which HTML tag is used to define the structure of an HTML document, including the head and body sections?",
+    name: "quiz_twentynine",
+    options: [
+        {
+            option: "Select",
+            answer: false
+        },
+        {
+            option: "<header>",
+            answer: false
+        },
+        {
+            option: "<section>",
+            answer: false
+        },
+        {
+            option: "<html>",
+            answer: true
+        },
+        {
+            option: "<div>",
+            answer: false
+        }],
+    type: "select"
+},
+{
+    question: "In HTML, what is the purpose of the <meta> tag?",
+    name: "quiz_thirty",
+    options: [
+        {
+            option: "Select",
+            answer: false
+        },
+        {
+            option: "To create hyperlinks",
+            answer: false
+        },
+        {
+            option: "To define a table",
+            answer: false
+        },
+        {
+            option: "To provide metadata about the document",
+            answer: true
+        },
+        {
+            option: "To embed audio files",
+            answer: false
+        }],
+    type: "select"
+},
+{
+    question: "What does HTML stand for?",
+    name: "quiz_thirtyone",
+    options: [
+        {
+            option: "Hypertext Markup Language",
+            answer: true
+        }],
+    type: "text"
+}
+];
 
 // let skip = 5;
 
@@ -567,34 +691,83 @@ const headingEl = document.createElement("h1");
 headingEl.textContent = "HTML Quiz";
 formEl.appendChild(headingEl);
 
-for (let index = 0; index < 10; index++) {
-    const randomIndex = randomNumber();
-    const divEl = document.createElement("div");
-    divEl.setAttribute("class", "question");
-    formEl.appendChild(divEl);
-    const paraEl = document.createElement("p");
-    paraEl.textContent = `Q${index + 1} . ${questions[randomIndex].question}`;
-    divEl.appendChild(paraEl);
+start();
 
-    for (let j = 0; j < questions[randomIndex].options.length; j++) {
+function start() {
+    for (let index = 0; index < 10; index++) {
+        const randomIndex = randomNumber();
 
-        if (questions[j].type === "radio" || questions[j].type === "checkbox") {
-            const randomIdName = randomString(5);
-            const inputEl = document.createElement("input");
-            inputEl.setAttribute("type", questions[randomIndex].type);
-            inputEl.id = randomIdName;
-            inputEl.setAttribute("name", questions[randomIndex].name);
-            inputEl.setAttribute("value", j);
-            if (questions[randomIndex].type === "radio") {
-                inputEl.required = "required";
+        const divEl = document.createElement("div");
+        divEl.setAttribute("class", "question");
+        formEl.appendChild(divEl);
+
+        const paraEl = document.createElement("p");
+        paraEl.textContent = `Q${index + 1} . ${questions[randomIndex].question}`;
+        divEl.appendChild(paraEl);
+
+        if (questions[randomIndex].type === "radio" || questions[randomIndex].type === "checkbox") {
+
+            for (let j = 0; j < questions[randomIndex].options.length; j++) {
+
+                const randomIdName = randomString(5);
+
+                const inputEl = document.createElement("input");
+                inputEl.type = questions[randomIndex].type;
+                inputEl.id = randomIdName;
+                inputEl.name = questions[randomIndex].name;
+                inputEl.value = j;
+
+                if (questions[randomIndex].type === "radio") {
+                    inputEl.required = "required";
+                }
+
+                const labelEl = document.createElement("label");
+                labelEl.setAttribute("for", randomIdName)
+                labelEl.textContent = questions[randomIndex].options[j].option;
+                divEl.appendChild(inputEl);
+                divEl.appendChild(labelEl);
+
+                const breakEl = document.createElement("br");
+                divEl.appendChild(breakEl);
+
             }
+        } else if (questions[randomIndex].type === "select") {
+
+            const randomIdName = randomString(5);
+
             const labelEl = document.createElement("label");
-            labelEl.setAttribute("for", randomIdName);
-            labelEl.textContent = questions[randomIndex].options[j].option;
-            const breakEl = document.createElement("br");
-            divEl.appendChild(inputEl);
+            labelEl.setAttribute("for", randomIdName)
+            labelEl.textContent = `Choose one option : `;
             divEl.appendChild(labelEl);
-            divEl.appendChild(breakEl);
+
+
+            const inputEl = document.createElement("select");
+            inputEl.id = randomIdName;
+            inputEl.name = questions[randomIndex].name;
+
+            for (let k = 0; k < questions[randomIndex].options.length; k++) {
+
+                const optionEl = document.createElement("option");
+                optionEl.textContent = questions[randomIndex].options[k].option;
+                optionEl.value = k;
+                inputEl.appendChild(optionEl);
+
+            }
+            divEl.appendChild(inputEl);
+        } else if (questions[randomIndex].type === "text") {
+
+            const randomIdName = randomString(5);
+
+            const labelEl = document.createElement("label");
+            labelEl.setAttribute("for", randomIdName)
+            labelEl.textContent = `Type here : `;
+            divEl.appendChild(labelEl);
+
+            const inputEl = document.createElement("input");
+            inputEl.type = questions[randomIndex].type;
+            inputEl.id = randomIdName;
+            inputEl.name = questions[randomIndex].name;
+            divEl.appendChild(inputEl);
         }
     }
     // if(skip > 0){
@@ -622,39 +795,73 @@ function checkAns() {
 
         const randomIndex = randomNumbers[index];
         const name = questions[randomIndex].name;
-        const selectedAnswers = document.
-            querySelectorAll(`input[name="${name}"]`);
 
-        let checkCount = 0;
+        if (questions[randomIndex].type === "radio" || questions[randomIndex].type === "checkbox") {
 
-        for (let j = 0; j < selectedAnswers.length; j++) {
-            const selectedAnswer = selectedAnswers[j];
-            const selector = `label[for="${selectedAnswer.id}"]`;
-            const labelEl = document.querySelector(selector);
-            const isChecked = selectedAnswer.checked;
+            const selectedAnswers = document.
+                querySelectorAll(`input[name="${name}"]`);
 
-            if (questions[randomIndex].options[j].answer === true) {
-                labelEl.className = "correct-text";
-                if (isChecked && questions[randomIndex].type === "radio") {
-                    spanEl.setAttribute("class", "correct");
-                    spanEl.textContent = "Correct";
-                    count++;
+            let checkCount = 0;
+
+            for (let j = 0; j < selectedAnswers.length; j++) {
+                const selectedAnswer = selectedAnswers[j];
+                const selector = `label[for="${selectedAnswer.id}"]`;
+                const labelEl = document.querySelector(selector);
+                const isChecked = selectedAnswer.checked;
+
+                if (questions[randomIndex].options[j].answer === true) {
+                    labelEl.className = "correct-text";
+                    if (isChecked && questions[randomIndex].type === "radio") {
+                        spanEl.setAttribute("class", "correct");
+                        spanEl.textContent = "Correct";
+                        count++;
+                    }
+                    if ((isChecked === false) && questions[randomIndex].type === "checkbox") {
+                        checkCount++;
+                    }
+                } else {
+                    if (isChecked) {
+                        spanEl.setAttribute("class", "wrong");
+                        spanEl.textContent = "Wrong";
+                        labelEl.className = "wrong-text";
+                    }
                 }
-                if ((isChecked === false) && questions[randomIndex].type === "checkbox") {
-                    checkCount++;
-                }
-            } else {
-                if (isChecked) {
-                    spanEl.setAttribute("class", "wrong");
-                    spanEl.textContent = "Wrong";
-                    labelEl.className = "wrong-text";
+            }
+            if (checkCount === 0 && questions[randomIndex].type === "checkbox") {
+                spanEl.setAttribute("class", "correct");
+                spanEl.textContent = "Correct";
+                count++;
+            }
+        } else if (questions[randomIndex].type === "select") {
+
+            const selectedAnswer = document.
+                querySelector(`select[name="${name}"]`);
+
+            for (let i = 0; i < questions[randomIndex].options.length; i++) {
+
+                if (questions[randomIndex].options[i].answer === true) {
+                    if (Number(selectedAnswer.value) === i && (Number(selectedAnswer.value) != 0)) {
+                        spanEl.setAttribute("class", "correct");
+                        spanEl.textContent = "Correct";
+                        count++;
+                        break;
+                    } else if (Number(selectedAnswer.value) != 0) {
+                        spanEl.setAttribute("class", "wrong");
+                        spanEl.textContent = "Wrong";
+                        break;
+                    }
                 }
             }
         }
-        if (checkCount === 0 && questions[randomIndex].type === "checkbox") {
-            spanEl.setAttribute("class", "correct");
-            spanEl.textContent = "Correct";
-            count++;
+        else if (questions[randomIndex].type === "text") {
+            const selectedAnswer = document.
+                querySelector(`input[name="${name}"]`);
+
+            if ((selectedAnswer.value != "") && ((selectedAnswer.value.toLowerCase()) === (questions[randomIndex].options[0].option.toLowerCase()))) {
+                spanEl.setAttribute("class", "correct");
+                spanEl.textContent = "Correct";
+                count++;
+            }
         }
     }
 }

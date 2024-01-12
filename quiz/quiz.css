@@ -35,13 +35,28 @@
     padding-top: 10px;
 }
 
-#container .question input:hover,label:hover{
+#container .question input[type="radio"]:hover,input[type="checkbox"]:hover{
     transform: scale(1.2);
     cursor: pointer;
 }
 
-#container .question input[disabled],label[id=disable]{
+#container .question input[disabled],label[id=disable],select[disabled]{
     cursor: not-allowed;
+}
+
+#container .question input[type="text"]{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid;
+    width: 60%;
+    height: 30px;
+    padding-left: 10px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#container .question input[type="text"]:focus{
+    outline: none;
 }
 /* 
 #container .question input[class=checked]{
@@ -51,6 +66,14 @@
 
 #container .question p{
     font-weight: bold;
+}
+
+#container .question select{
+    width: 100px;
+    height: 30px;
+    font-size: 15px;
+    border: none;
+    outline: none;
 }
 
 #container .countdown{
