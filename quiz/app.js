@@ -1112,7 +1112,7 @@ const questions = [
 const quizTimer = document.createElement('h2');
 quizTimer.className = 'quiz-timer';
 // Overall timer in seconds (adjust as needed)
-const overallTimer = 100;
+const overallTimer = 30;
 //next question waiting seconds
 const timer = 5;
 let overallTimerValue = overallTimer;
@@ -1123,6 +1123,15 @@ function startOverallTimer() {
     quizTimer.textContent = `Remaining Time : ${overallTimerValue} seconds`;
     overallTimerInterval = setInterval(() => {
         overallTimerValue--;
+
+        if (overallTimerValue <= overallTimer / 3) {
+            quizTimer.classList.add('timer-ran-out');
+        }
+
+        if (overallTimerValue <= overallTimer / 2) {
+            quizTimer.classList.add('timer-half-out');
+        }
+
         if (overallTimerValue <= 0) {
             quizTimer.textContent = 'Time ran out, Sorry!';
             clearInterval(overallTimerInterval);
@@ -1147,7 +1156,6 @@ const divEl = document.createElement('div');
 divEl.id = "form-div";
 const scoreDivEl = document.createElement('div');
 divEl.appendChild(scoreDivEl);
-divEl.appendChild(quizTimer);
 
 const quizFormEl = document.createElement('form');
 quizFormEl.method = 'post';
@@ -1157,6 +1165,7 @@ quizFormEl.action = 'javascript:void(0)';
 const quizHeadingEl = document.createElement('h1');
 quizHeadingEl.textContent = 'Quiz: Test Your Knowledge';
 quizFormEl.appendChild(quizHeadingEl);
+quizFormEl.appendChild(quizTimer);
 
 displayStartButton();
 let currentQuestionIndex = 0;
@@ -1286,7 +1295,7 @@ function calculateQuizScore(e) {
     if (clearInterval) {
         clearInterval(intervalId);
     }
-    if(overallTimerInterval){
+    if (overallTimerInterval) {
         clearInterval(overallTimerInterval);
     }
 
