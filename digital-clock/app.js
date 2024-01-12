@@ -6,12 +6,14 @@ function updateTime() {
     });
 }
 function getTime(timeZone, index) {
-    const date = new Date();
-    const time = date.toLocaleString('en-US', { timeZone: `${timeZone}` });
-    const divBox = document.getElementById(`${index}`);
-    divBox.innerText = `${timeZone}:${time}`;
+    const p = document.createElement('p');
+    setInterval(() => {
+        const date = new Date();
+        const time = date.toLocaleString('en-US', { timeZone: `${timeZone}` });
+        p.innerText = `${timeZone}:${time}`;
+    }, 1000);
+    body.appendChild(p);
 }
-setInterval(() => {
-    updateTime();
-}, 1000);
+updateTime();
+
 
