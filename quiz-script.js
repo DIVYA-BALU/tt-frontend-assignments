@@ -21,25 +21,25 @@ const inputs = [
         options: [
             {
                 value: 1,
+                isAnswer: "false",
                 content: "Jawaharlal Nehru"
             },
             {
                 value: 2,
+                isAnswer: "false",
                 content: "Modi"
             },
             {
                 value: 3,
+                isAnswer: "false",
                 content: "Subhas Chandra Bose"
             },
             {
                 value: 4,
+                isAnswer: "true",
                 content: "Mahatma Gandhi"
             },
-        ],
-        answer: {
-            value: 4,
-            content: "Mahatma Gandhi"
-        }
+        ]
     },
     {
         question_no: 2,
@@ -48,25 +48,25 @@ const inputs = [
         options: [
             {
                 value: 0,
+                isAnswer: "false",
                 content: "Select options"
             },
             {
                 value: 1,
+                isAnswer: "false",
                 content: "Berlin"
             },
             {
                 value: 2,
+                isAnswer: "false",
                 content: "Madrid"
             },
             {
                 value: 3,
+                isAnswer: "true",
                 content: "Paris"
             }
-        ],
-        answer: {
-            value: 3,
-            content: "Paris"
-        }
+        ]
     },
     {
         question_no: 3,
@@ -75,21 +75,20 @@ const inputs = [
         options: [
             {
                 value: 1,
+                isAnswer: "true",
                 content: "1945"
             },
             {
                 value: 2,
+                isAnswer: "false",
                 content: "1939"
             },
             {
                 value: 3,
+                isAnswer: "true",
                 content: "1942"
             }
-        ],
-        answer: {
-            value: [1, 3],
-            content: ["1945", "1942"]
-        }
+        ]
     },
     {
         question_no: 4,
@@ -98,21 +97,20 @@ const inputs = [
         options: [
             {
                 value: 1,
+                isAnswer: "false",
                 content: "F. Scott Fitzgerald"
             },
             {
                 value: 2,
+                isAnswer: "true",
                 content: "Ernest Hemingway"
             },
             {
                 value: 3,
+                isAnswer: "true",
                 content: "Jane Austen"
             }
-        ],
-        answer: {
-            value: [2],
-            content: ["Ernest Hemingway"]
-        }
+        ]
     },
     {
         question_no: 5,
@@ -121,21 +119,20 @@ const inputs = [
         options: [
             {
                 value: 1,
+                isAnswer: "false",
                 content: "Elephant"
             },
             {
                 value: 2,
+                isAnswer: "true",
                 content: "Blue Whale"
             },
             {
                 value: 3,
+                isAnswer: "false",
                 content: "Giraffe"
             }
-        ],
-        answer: {
-            value: 2,
-            content: "Blue Whale"
-        }
+        ]
     },
     {
         question_no: 6,
@@ -144,21 +141,20 @@ const inputs = [
         options: [
             {
                 value: 1,
+                isAnswer: "true",
                 content: "Mars"
             },
             {
                 value: 2,
+                isAnswer: "true",
                 content: "Venus"
             },
             {
                 value: 3,
+                isAnswer: "false",
                 content: "Jupiter"
             }
-        ],
-        answer: {
-            value: [2, 3],
-            content: ["Venus", "Jupiter"]
-        }
+        ]
     },
     {
         question_no: 7,
@@ -167,21 +163,20 @@ const inputs = [
         options: [
             {
                 value: 1,
+                isAnswer: "true",
                 content: "Vincent van Gogh"
             },
             {
                 value: 2,
+                isAnswer: "false",
                 content: "Pablo Picasso"
             },
             {
                 value: 3,
+                isAnswer: "false",
                 content: "Leonardo da Vinci"
             }
-        ],
-        answer: {
-            value: 1,
-            content: "Vincent van Gogh"
-        }
+        ]
     },
     {
         question_no: 8,
@@ -190,21 +185,20 @@ const inputs = [
         options: [
             {
                 value: 1,
+                isAnswer: "true",
                 content: "Yen"
             },
             {
                 value: 2,
+                isAnswer: "false",
                 content: "Won"
             },
             {
                 value: 3,
+                isAnswer: "false",
                 content: "Dollar"
             }
-        ],
-        answer: {
-            value: 1,
-            content: "Yen"
-        }
+        ]
     },
     {
         question_no: 9,
@@ -213,21 +207,20 @@ const inputs = [
         options: [
             {
                 value: 1,
+                isAnswer: "false",
                 content: "Isaac Newton"
             },
             {
                 value: 2,
+                isAnswer: "true",
                 content: "Albert Einstein"
             },
             {
                 value: 3,
+                isAnswer: "false",
                 content: "Stephen Hawking"
             }
-        ],
-        answer: {
-            value: 2,
-            content: "Albert Einstein"
-        }
+        ]
     },
     {
         question_no: 10,
@@ -236,22 +229,22 @@ const inputs = [
         options: [
             {
                 value: 1,
+                isAnswer: "false",
                 content: "Rose"
             },
             {
                 value: 2,
+                isAnswer: "true",
                 content: "Lotus"
             },
             {
                 value: 3,
+                isAnswer: "true",
                 content: "Tulip"
             }
-        ],
-        answer: {
-            value: 2,
-            content: "Lotus"
-        }
+        ]
     },
+
     // {
     //     question_no: 11,
     //     type: "text",
@@ -652,6 +645,7 @@ while (map.size < totalQuestions) {
     if (input.type === "radio" || input.type === "checkbox") {
 
         let index = 0;
+        let answer = [];
         while (index < input.options.length) {
             const innerOptionDivEle = document.createElement("div");
             innerOptionDivEle.setAttribute("question-no", `${questionNumber}`);
@@ -662,7 +656,7 @@ while (map.size < totalQuestions) {
                 inputEle.type = "radio";
             }
             else {
-                inputEle.type = "checkbox"
+                inputEle.type = "checkbox";
             }
 
             inputEle.id = `${idValue}`;
@@ -679,9 +673,15 @@ while (map.size < totalQuestions) {
             index++;
 
             answerDivEle.setAttribute("name", input.question_no);
-            // if()
-            answerDivEle.textContent = `Correct answer : ${input.answer.content}`;
+
         }
+        input.options.forEach(option => {
+            if (option.isAnswer === 'true') {
+                answer.push(option.content);
+            }
+        });
+        // console.log(answer);
+        answerDivEle.textContent = `Correct answer : ${answer}`;
     }
     else if (input.type === "select") {
         const selectOptionEle = document.createElement("select");
@@ -716,9 +716,10 @@ bodyEle.appendChild(divEle);
 const score = document.createElement("div");
 score.className = "score-div";
 
+
 formEle.addEventListener("submit", function (event) {
-    event.preventDefault();
-    
+    event.preventDefault(); 
+
     const totalInputs = document.querySelectorAll("input");
 
     totalInputs.forEach(element => {
@@ -741,34 +742,40 @@ formEle.addEventListener("submit", function (event) {
     });
 
     let questionNumber = 1;
+    let correctAnswersCount = 0;
+
     while (questionNumber <= 10) {
         let list1 = document.querySelectorAll(`[question-no="${questionNumber}"]`);
 
-        for (let i = 0; i < list1.length; i++) {
-
-            if (list1[i].querySelector("input:checked")) {
-                console.log(list1[i].querySelector("input:checked"));
-                let checkedValue = Number(list1[i].querySelector("input:checked").getAttribute("value"));
-                console.log(checkedValue);
-                let checkedName = list1[i].querySelector("input:checked").getAttribute("name");
-                console.log(checkedName);
-
-                if (inputs[checkedName - 1].answer.value === checkedValue) {
-                    console.log(inputs[checkedName - 1].answer.value);
-                    console.log(checkedValue);
-                    document.querySelector(list1[i].querySelector("input:checked").parentElement.classList.add("hidden-correct"));
-                }
-                else {
-                    document.querySelector(list1[i].querySelector("input:checked").parentElement.classList.add("hidden-wrong"));
-                    console.log(document.querySelector("answer-div" && `[name="${checkedName}"]`));
-                }
-
+        let answer = [];
+        list1.querySelector("")
+        inputs[Number(list1[0].querySelector("input:checked").getAttribute("name"))-1].options.forEach(option => {
+            if (option.isAnswer === 'true') {
+                answer.push(option.value);
             }
+        });
+        for (let i = 0; i < list1.length; i++) {
+            // console.log(list1[i]);
+            if(list1[i].querySelector("input:checked")){
+                const checkedValue=Number(list1[i].querySelector("input:checked").getAttribute("value"));
+                if(answer.includes(checkedValue)){
+                    list1[i].classList.add("hidden-correct");
+                    correctAnswersCount++;
+                }
+                else{
+                    list1[i].classList.add("hidden-wrong");
+                }
+            }
+            // if(answer.includes(checkedValue)){
+            //     list1[i].parentElement.classList.add("hidden-correct");
+            //     correctAnswersCount++;
+            // }
+            // else{   
+            //     list1[i].parentElement.classList.add("hidden");
+            // }
         }
-        
         questionNumber++;
     }
-
 
 
 
