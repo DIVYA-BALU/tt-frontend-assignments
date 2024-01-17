@@ -3,13 +3,36 @@ const body = document.body;
 const quizBody = document.createElement("form");
 quizBody.id = "quizBody";
 
+let timeInterval;
+const timeAlloted = 10;
+let timeLeft = timeAlloted;
+
+function displayTimer() {
+    const timeElement = document.createElement("div");
+    timeElement.className = "time";
+    quizBody.appendChild(timeElement);
+    timeInterval = setInterval(() => {
+        timeLeft--;
+        timeElement.textContent = `Time left: ${timeLeft} seconds`;
+
+        if (timeLeft === 0) {
+            clearInterval(timeInterval);
+            handleSubmit(new Event("submit"));
+        }
+        
+    }, 1000);
+}
+
+displayTimer();
+
 const quizQuestions = [
     {
         question: "Who is making the web standards?",
         options: ["Mozilla", "Microsoft", "The World Wide Web Consortium"],
         answer: "The World Wide Web Consortium",
         type: "radio",
-        name: "question1"
+        name: "question1",
+        hint: "this is a hint"
 
     },
     {
@@ -17,7 +40,8 @@ const quizQuestions = [
         options: ["_blank", "target", "same"],
         answer: "_blank",
         type: "radio",
-        name: "question2"
+        name: "question2",
+        hint: "this is a hint"
 
     },
     {
@@ -25,7 +49,8 @@ const quizQuestions = [
         options: ["Hyperlinks and Text Markup Language", "Hyper Text Markup Language", "Home Tool Markup Language"],
         answer: "Hyper Text Markup Language",
         type: "radio",
-        name: "question3"
+        name: "question3",
+        hint: "this is a hint"
 
     },
     {
@@ -33,7 +58,8 @@ const quizQuestions = [
         options: ["a {underline:none}", "a {text-decoration:no underline}", "a {text-decoration:none}"],
         answer: "a {text-decoration:none}",
         type: "radio",
-        name: "question4"
+        name: "question4",
+        hint: "this is a hint"
 
     },
     {
@@ -41,7 +67,8 @@ const quizQuestions = [
         options: ["<tr>", "<caption>", "<title>"],
         answer: "<caption>",
         type: "radio",
-        name: "question5"
+        name: "question5",
+        hint: "this is a hint"
 
     },
     {
@@ -49,7 +76,8 @@ const quizQuestions = [
         options: ["<!-->", "<comment>", "<title>"],
         answer: "<!-->",
         type: "radio",
-        name: "question6"
+        name: "question6",
+        hint: "this is a hint"
 
     },
     {
@@ -57,7 +85,8 @@ const quizQuestions = [
         options: ["CSS code in a style attribute", "CSS code in a style tag", "CSS code in an external css file"],
         answer: "CSS code in a style attribute",
         type: "radio",
-        name: "question7"
+        name: "question7",
+        hint: "this is a hint"
 
     },
     {
@@ -65,7 +94,8 @@ const quizQuestions = [
         options: ["<a>", "<tr>", "<img>"],
         answer: "<a>",
         type: "radio",
-        name: "question8"
+        name: "question8",
+        hint: "this is a hint"
 
     },
     {
@@ -73,7 +103,8 @@ const quizQuestions = [
         options: ["<a>", "<br>", "<img>"],
         answer: "<br>",
         type: "radio",
-        name: "question9"
+        name: "question9",
+        hint: "this is a hint"
 
     },
     {
@@ -81,7 +112,8 @@ const quizQuestions = [
         options: ["Mozilla", "Microsoft", "The World Wide Web Consortium"],
         answer: "The World Wide Web Consortium",
         type: "radio",
-        name: "question10"
+        name: "question10",
+        hint: "this is a hint"
 
     },
     {
@@ -89,14 +121,16 @@ const quizQuestions = [
         options: ["<body>", "<header>", "<section>"],
         answer: "<body>",
         type: "radio",
-        name: "question11"
+        name: "question11",
+        hint: "this is a hint"
     },
     {
         question: "Which CSS property is used to control the space between elements inside the content box?",
         options: ["margin", "padding", "border"],
         answer: "padding",
         type: "radio",
-        name: "question12"
+        name: "question12",
+        hint: "this is a hint"
 
     },
     {
@@ -104,7 +138,8 @@ const quizQuestions = [
         options: ["<ul>", "<ol>", "<li>"],
         answer: "<ul>",
         type: "radio",
-        name: "question13"
+        name: "question13",
+        hint: "this is a hint"
 
     },
     {
@@ -112,7 +147,8 @@ const quizQuestions = [
         options: ["font-size", "text-size", "size"],
         answer: "font-size",
         type: "radio",
-        name: "question14"
+        name: "question14",
+        hint: "this is a hint"
 
     },
     {
@@ -120,7 +156,8 @@ const quizQuestions = [
         options: ["Display a message in the console", "Create a new variable", "Define a function"],
         answer: "Display a message in the console",
         type: "radio",
-        name: "question15"
+        name: "question15",
+        hint: "this is a hint"
 
     },
     {
@@ -128,7 +165,8 @@ const quizQuestions = [
         options: ["data-info", "extra", "class"],
         answer: "class",
         type: "radio",
-        name: "question16"
+        name: "question16",
+        hint: "this is a hint"
 
     },
     {
@@ -136,7 +174,8 @@ const quizQuestions = [
         options: ["text-align", "alignment", "align"],
         answer: "text-align",
         type: "radio",
-        name: "question17"
+        name: "question17",
+        hint: "this is a hint"
 
     },
     {
@@ -144,7 +183,8 @@ const quizQuestions = [
         options: ["To create a conditional statement", "To iterate over a sequence of values", "To select elements with CSS selectors"],
         answer: "To iterate over a sequence of values",
         type: "radio",
-        name: "question18"
+        name: "question18",
+        hint: "this is a hint"
 
     },
     {
@@ -152,7 +192,8 @@ const quizQuestions = [
         options: ["<link>", "<a>", "<url>"],
         answer: "<a>",
         type: "radio",
-        name: "question19"
+        name: "question19",
+        hint: "this is a hint"
 
     },
     {
@@ -160,7 +201,8 @@ const quizQuestions = [
         options: [".content p", "div.content p", "#content p"],
         answer: "div.content p",
         type: "radio",
-        name: "question20"
+        name: "question20",
+        hint: "this is a hint"
 
     },
     {
@@ -168,7 +210,8 @@ const quizQuestions = [
         options: ["To parse JSON data", "To convert a JavaScript object to a JSON string", "To fetch data from an API"],
         answer: "To convert a JavaScript object to a JSON string",
         type: "radio",
-        name: "question21"
+        name: "question21",
+        hint: "this is a hint"
 
     },
     {
@@ -176,7 +219,8 @@ const quizQuestions = [
         options: ["alt", "description", "text"],
         answer: "alt",
         type: "radio",
-        name: "question22"
+        name: "question22",
+        hint: "this is a hint"
 
     },
     {
@@ -184,14 +228,16 @@ const quizQuestions = [
         options: ["<HTML>", "<p>", "<body>"],
         answer: "<body>",
         type: "radio",
-        name: "question23"
+        name: "question23",
+        hint: "this is a hint"
     },
     {
         question: "In CSS, what property is used to set the font weight of text?",
         options: ["font-weight", "text-weight", "weight"],
         answer: "font-weight",
         type: "radio",
-        name: "question24"
+        name: "question24",
+        hint: "this is a hint"
 
     },
     {
@@ -199,148 +245,169 @@ const quizQuestions = [
         options: ["<table>", "<tr>", "<td>"],
         answer: "<table>",
         type: "radio",
-        name: "question25"
+        name: "question25",
+        hint: "this is a hint"
 
     },
     {
         question: "Select the programming languages:",
         options: ["JavaScript", "Python", "Java", "C++", "Ruby"],
-        answer: ["JavaScript", "Python", "Java","C++", "Ruby"],
+        answer: ["JavaScript", "Python", "Java", "C++", "Ruby"],
         type: "checkbox",
-        name: "question26"
+        name: "question26",
+        hint: "this is a hint"
     },
     {
         question: "Select the capital of France:",
         options: ["Berlin", "Paris", "London", "Madrid"],
         answer: ["Paris"],
         type: "dropdown",
-        name: "question27"
+        name: "question27",
+        hint: "this is a hint"
     },
     {
         question: "Select the capital of France:",
         options: ["Berlin", "Paris", "London", "Madrid"],
         answer: ["Paris"],
         type: "dropdown",
-        name: "question27"
+        name: "question27",
+        hint: "this is a hint"
     },
     {
         question: "Select the capital of France:",
         options: ["Berlin", "Paris", "London", "Madrid"],
         answer: ["Paris"],
         type: "dropdown",
-        name: "question27"
+        name: "question27",
+        hint: "this is a hint"
     },
     {
         question: "Select the web development frameworks:",
         options: ["React", "Angular", "Vue", "Django", "Spring"],
         answer: ["React", "Angular", "Vue", "Django"],
         type: "checkbox",
-        name: "question28"
+        name: "question28",
+        hint: "this is a hint"
     },
     {
         question: "Select the web development frameworks:",
         options: ["React", "Angular", "Vue", "Django", "Spring"],
         answer: ["React", "Angular", "Vue", "Django"],
         type: "checkbox",
-        name: "question29"
+        name: "question29",
+        hint: "this is a hint"
     },
     {
         question: "Choose the front-end languages:",
         options: ["HTML", "CSS", "JavaScript", "Java", "Python"],
         answer: ["HTML", "CSS", "JavaScript"],
         type: "checkbox",
-        name: "question30"
+        name: "question30",
+        hint: "this is a hint"
     },
     {
         question: "Select the databases:",
         options: ["MySQL", "MongoDB", "Oracle", "SQLite", "PostgreSQL"],
         answer: ["MySQL", "MongoDB", "Oracle", "PostgreSQL"],
         type: "checkbox",
-        name: "question31"
+        name: "question31",
+        hint: "this is a hint"
     },
     {
         question: "Choose the programming paradigms:",
         options: ["Object-Oriented", "Functional", "Imperative", "Declarative", "Procedural"],
         answer: ["Object-Oriented", "Functional", "Imperative", "Procedural"],
         type: "checkbox",
-        name: "question32"
+        name: "question32",
+        hint: "this is a hint"
     },
     {
         question: "Select the cloud computing platforms:",
         options: ["AWS", "Azure", "Google Cloud", "IBM Cloud", "Heroku"],
         answer: ["AWS", "Azure", "Google Cloud", "Heroku"],
         type: "checkbox",
-        name: "question33"
+        name: "question33",
+        hint: "this is a hint"
     },
     {
         question: "Choose the colors of the rainbow:",
         options: ["Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"],
         answer: ["Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"],
         type: "multiple-dropdown",
-        name: "question34"
+        name: "question34",
+        hint: "this is a hint"
     },
     {
         question: "Select the continents:",
         options: ["Africa", "Asia", "Europe", "North America", "South America", "Australia", "Antarctica"],
         answer: ["Africa", "Asia", "Europe", "North America", "South America", "Australia", "Antarctica"],
         type: "multiple-dropdown",
-        name: "question35"
+        name: "question35",
+        hint: "this is a hint"
     },
     {
         question: "Choose the planets in our solar system:",
         options: ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"],
         answer: ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"],
         type: "multiple-dropdown",
-        name: "question36"
+        name: "question36",
+        hint: "this is a hint"
     },
     {
         question: "Select programming languages with 'Script' in their name:",
         options: ["JavaScript", "Python", "Java", "C++", "TypeScript"],
         answer: ["JavaScript", "TypeScript"],
         type: "multiple-dropdown",
-        name: "question37"
+        name: "question37",
+        hint: "this is a hint"
     },
     {
         question: "Choose the largest planet in our solar system:",
         options: ["Mercury", "Venus", "Earth", "Jupiter", "Saturn"],
         answer: ["Jupiter"],
         type: "dropdown",
-        name: "question38"
+        name: "question38",
+        hint: "this is a hint"
     },
     {
         question: "Select the primary colors:",
         options: ["Red", "Blue", "Yellow", "Green"],
         answer: ["Red"],
         type: "dropdown",
-        name: "question39"
+        name: "question39",
+        hint: "this is a hint"
     },
     {
         question: "Choose the main programming language for web development:",
         options: ["Python", "Java", "JavaScript", "C++"],
         answer: ["JavaScript"],
         type: "dropdown",
-        name: "question40"
+        name: "question40",
+        hint: "this is a hint"
     },
     {
         question: "Select the capital of Japan:",
         options: ["Beijing", "Seoul", "Tokyo", "Bangkok"],
         answer: ["Tokyo"],
         type: "dropdown",
-        name: "question41"
+        name: "question41",
+        hint: "this is a hint"
     },
     {
         question: "capital of Japan:",
         options: ["Tokyo"],
         answer: "Tokyo",
         type: "text",
-        name: "question42"
+        name: "question42",
+        hint: "this is a hint"
     },
     {
         question: "capital of Japan:",
         options: ["Tokyo"],
         answer: "Tokyo",
         type: "text",
-        name: "question42"
+        name: "question42",
+        hint: "this is a hint"
     },
     {
         question: "capital of Japan:",
@@ -397,8 +464,6 @@ while (questionCount) {
                 const inputEl = document.createElement("input");
                 inputEl.type = question.type === "checkbox" ? "checkbox" : "radio";
                 inputEl.name = question.type === "checkbox" ? `${question.name}-${index}` : question.name;
-                // if (question.type === "radio")
-                // inputEl.required = "required";
 
                 const labelEl = document.createElement("label");
                 inputEl.value = option;
@@ -406,6 +471,7 @@ while (questionCount) {
                 innerDiv.appendChild(inputEl);
                 innerDiv.appendChild(labelEl);
             } else if (question.type === "dropdown" || question.type === "multiple-dropdown") {
+
                 if (!iterated) {
 
                     iterated = true;
@@ -431,28 +497,30 @@ while (questionCount) {
                 }
 
             } else if (question.type === "text") {
+
                 if (!inputIterated) {
                     inputIterated = true;
                     const inputEl = document.createElement("input");
                     inputEl.classList.add("input");
                     inputEl.type = question.type;
                     inputEl.name = question.name;
-                    inputEl.required = true;
                     inputEl.placeholder = "your answers here";
                     innerDiv.appendChild(inputEl);
                 }
             }
-            if (!(question.type === "dropdown" || question.type === "multiple-dropdown"))
+
+            if (!(question.type === "dropdown" || question.type === "multiple-dropdown")) {
                 div.appendChild(innerDiv);
+            }
+
             quizBody.appendChild(div);
         });
 
     };
 }
 
-
 let mark = 0;
-function dispalyAnswers() {
+function displayAnswers() {
     for (let i = 0; i < indexOfQuestionsSelected.length; i++) {
         let index = 0;
         const questionIndex = indexOfQuestionsSelected[i];
@@ -465,7 +533,6 @@ function dispalyAnswers() {
                 const ansDiv = selectedOption.closest('.inner-div');
                 const labelEl = ansDiv.querySelector('label');
 
-
                 if (labelEl.textContent === question.answer) {
                     mark++;
                 }
@@ -475,9 +542,11 @@ function dispalyAnswers() {
             const checkboxes = [];
             for (let index = 0; index < question.options.length; index++) {
                 const el = (document.querySelector(`input[name="${question.name}-${index}"]`));
+
                 if (el.checked)
                     checkboxes.push(el);
             }
+
             let inc = 0;
             checkboxes.forEach(() => {
                 selectedOptions.push(checkboxes[inc].value)
@@ -492,23 +561,23 @@ function dispalyAnswers() {
             if (isAllCorrect) {
                 mark++;
             }
-        }else if(question.type === "text"){
+
+        } else if (question.type === "text") {
             const userInput = document.querySelector(`input[name="${question.name}"]`).value.trim();
-            const correctAnswer = question.answer.toLowerCase().trim(); 
+            const correctAnswer = question.answer.toLowerCase().trim();
 
             if (userInput === correctAnswer) {
                 mark++;
             }
-        }else if(question.type === "dropdown" || question.type === "multiple-dropdown"){
+
+        } else if (question.type === "dropdown" || question.type === "multiple-dropdown") {
             const selectedOptions = Array.from(document.querySelectorAll(`select[name="${question.name}"] option:checked`))
                 .map(option => option.value);
-            console.log(selectedOptions);
             const correctOptions = question.answer;
-            console.log(correctOptions);
             const isAllCorrect = selectedOptions.length === correctOptions.length &&
                 selectedOptions.every((option) => correctOptions.includes(option));
 
-            if (isAllCorrect) 
+            if (isAllCorrect)
                 mark++;
         }
     }
@@ -518,14 +587,41 @@ buttonEl.type = "submit";
 buttonEl.value = "submit";
 
 let displayCount = 0;
-quizBody.addEventListener("submit", (e) => {
-    e.preventDefault();
-    dispalyAnswers();
-    displayCount++;
-    if (displayCount === 1)
-        quizMarks();
 
-});
+function handleSubmit(e) {
+    e.preventDefault();
+    clearInterval(timeInterval);
+    displayAnswers();
+    displayCount++;
+
+    if (displayCount === 1) {
+        quizMarks();
+        displayHint();
+    }
+}
+
+quizBody.addEventListener("submit", handleSubmit);
+
+function displayHint() {
+    for (let i = 0; i < indexOfQuestionsSelected.length; i++) {
+        const questionIndex = indexOfQuestionsSelected[i];
+        const question = quizQuestions[questionIndex];
+
+        const hintDiv = document.createElement("div");
+        hintDiv.classList.add("hint-div");
+
+        const hintPara = document.createElement("p");
+        hintPara.textContent = `Explanation: ${question.hint}`;
+        hintDiv.appendChild(hintPara);
+
+        const answerPara = document.createElement("p");
+        answerPara.textContent = `Correct Answer: ${question.answer}`;
+        hintDiv.appendChild(answerPara);
+
+        const questionDiv = quizBody.children[i + 1];
+        questionDiv.appendChild(hintDiv);
+    }
+}
 
 function quizMarks() {
     const resultDiv = document.createElement("div");
@@ -537,6 +633,7 @@ function quizMarks() {
 }
 
 quizBody.appendChild(buttonEl);
+
 
 body.appendChild(quizBody);
 
