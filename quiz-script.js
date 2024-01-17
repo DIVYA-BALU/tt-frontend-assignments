@@ -43,7 +43,8 @@ const inputs = [
     },
     {
         question_no: 2,
-        type: "radio",
+        type: "select",
+        isMultiple:true,
         label_content: "What is the capital city of France?",
         options: [
             {
@@ -53,7 +54,7 @@ const inputs = [
             },
             {
                 value: 1,
-                isAnswer: "false",
+                isAnswer: "true",
                 content: "Berlin"
             },
             {
@@ -239,7 +240,7 @@ const inputs = [
             },
             {
                 value: 3,
-                isAnswer: "true",
+                isAnswer: "false",
                 content: "Tulip"
             }
         ]
@@ -628,11 +629,12 @@ while (map.size < totalQuestions) {
         continue;
     }
     map.set(traverse, 1);
+    const input = inputs[traverse];
     const innerDivEle = document.createElement("div");
     innerDivEle.className = "section-div";
     const questionsDivEle = document.createElement("div");
     questionsDivEle.className = "question-div";
-    const input = inputs[traverse];
+    questionsDivEle.setAttribute("input-question-no",`${input.question_no}`);
     questionsDivEle.textContent = `${questionNumber}) ${input.label_content}`;
 
     const optionsDivEle = document.createElement("div");
@@ -642,10 +644,10 @@ while (map.size < totalQuestions) {
     answerDivEle.className = "answer-div hidden";
     const brEle = document.createElement("br");
     innerDivEle.appendChild(brEle);
+    let answer = [];
     if (input.type === "radio" || input.type === "checkbox") {
 
         let index = 0;
-        let answer = [];
         while (index < input.options.length) {
             const innerOptionDivEle = document.createElement("div");
             innerOptionDivEle.setAttribute("question-no", `${questionNumber}`);
@@ -656,7 +658,7 @@ while (map.size < totalQuestions) {
                 inputEle.type = "radio";
             }
             else {
-                inputEle.type = "checkbox";
+                inputEle.type = "checkbox"
             }
 
             inputEle.id = `${idValue}`;
@@ -675,17 +677,16 @@ while (map.size < totalQuestions) {
             answerDivEle.setAttribute("name", input.question_no);
 
         }
-        input.options.forEach(option => {
-            if (option.isAnswer === 'true') {
-                answer.push(option.content);
-            }
-        });
-        // console.log(answer);
-        answerDivEle.textContent = `Correct answer : ${answer}`;
+        
     }
     else if (input.type === "select") {
+        optionsDivEle.classList.add("select-div-option");
         const selectOptionEle = document.createElement("select");
         selectOptionEle.setAttribute("question-no", `${questionNumber}`);
+
+        if(input.isMultiple===true){
+            selectOptionEle.multiple="multiple";
+        }
 
         let index = 0;
         while (index < input.options.length) {
@@ -703,6 +704,16 @@ while (map.size < totalQuestions) {
         inputEle.type = "text";
         optionsDivEle.appendChild(inputEle);
     }
+
+    input.options.forEach(option => {
+        if (option.isAnswer === 'true') {
+            answer.push(option.content);
+        }
+    });
+    // console.log(answer);
+    answerDivEle.textContent = `Correct answer : ${answer}`;
+
+    
     innerDivEle.appendChild(optionsDivEle);
     questionNumber++;
     innerDivEle.appendChild(answerDivEle);
@@ -719,9 +730,8 @@ score.className = "score-div";
 
 formEle.addEventListener("submit", function (event) {
     event.preventDefault(); 
-
     const totalInputs = document.querySelectorAll("input");
-
+    
     totalInputs.forEach(element => {
         if (element.parentElement.classList.contains("hidden-wrong")) {
             element.parentElement.classList.remove("hidden-wrong");
@@ -731,48 +741,93 @@ formEle.addEventListener("submit", function (event) {
         }
     })
 
+    const totalOptions = document.querySelectorAll("option");
+    totalOptions.forEach(element => {
+        if (element.classList.contains("hidden-wrong")) {
+            element.classList.remove("hidden-wrong");
+        }
+        else if (element.classList.contains("hidden-correct")) {
+            element.classList.remove("hidden-correct");
+        }
+    })
+
     let list = document.querySelectorAll(".answer-div");
 
     list.forEach(element => {
-
+        
         if (!element.classList.contains("hidden")) {
             element.classList.add("hidden");
         }
-
+        
     });
-
+    
     let questionNumber = 1;
     let correctAnswersCount = 0;
-
+    
     while (questionNumber <= 10) {
         let list1 = document.querySelectorAll(`[question-no="${questionNumber}"]`);
-
         let answer = [];
-        list1.querySelector("")
-        inputs[Number(list1[0].querySelector("input:checked").getAttribute("name"))-1].options.forEach(option => {
+        const question=inputs[list1[0].parentElement.parentElement.querySelector(".question-div").getAttribute("input-question-no")-1];
+        // console.log(question);
+        const type=question.type;
+        console.log(type);
+        question.options.forEach(option => {
             if (option.isAnswer === 'true') {
                 answer.push(option.value);
             }
         });
+        
+        let checkedInputs=[];
+        let flag=0;
+        // console.log(list1);
         for (let i = 0; i < list1.length; i++) {
-            // console.log(list1[i]);
-            if(list1[i].querySelector("input:checked")){
+            console.log(list1[i]);
+            if((type==="radio" || type==="checkbox") && list1[i].querySelector("input:checked")){
                 const checkedValue=Number(list1[i].querySelector("input:checked").getAttribute("value"));
+                // console.log(checkedValue);
+                checkedInputs.push(checkedValue);
                 if(answer.includes(checkedValue)){
                     list1[i].classList.add("hidden-correct");
-                    correctAnswersCount++;
+                    flag++;
                 }
                 else{
                     list1[i].classList.add("hidden-wrong");
+                    flag--;
                 }
             }
-            // if(answer.includes(checkedValue)){
-            //     list1[i].parentElement.classList.add("hidden-correct");
-            //     correctAnswersCount++;
-            // }
-            // else{   
-            //     list1[i].parentElement.classList.add("hidden");
-            // }
+            else if(type==="select"){
+                // console.log(list1[i].querySelector("option:checked"));
+                // console.log(list1[i]);
+                const checkedInputs1=list1[i].querySelectorAll("option:checked");
+                // checkedInputs1.forEach(element => {
+                //     checkedInputs.push(Number(element.getAttribute("value")));
+                // })
+                console.log(checkedInputs1);
+                // const checkedValue=Number(list1[i].querySelector("option:checked").getAttribute("value"));
+                // console.log(checkedValue);
+                // checkedInputs.push(checkedValue);
+
+                checkedInputs1.forEach(element =>{
+                    console.log(element);
+                    if(answer.includes(Number(element.getAttribute("value")))){
+                        console.log("correct");
+                        element.classList.add("hidden-correct");
+                        flag++;
+                    }
+                    else{
+                        element.classList.add("hidden-wrong");
+                        flag--;
+                    }
+                })
+            }
+        }
+        console.log(flag+" "+answer);
+        if(flag===answer.length){
+            correctAnswersCount++;
+        }
+        else{
+            document.querySelector(`[question-no="${questionNumber}"]`).parentElement.parentElement.querySelector(".answer-div").classList.remove("hidden");
+            // console.log("wrong answer");
         }
         questionNumber++;
     }

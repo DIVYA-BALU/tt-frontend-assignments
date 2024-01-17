@@ -33,6 +33,11 @@
     margin-bottom: 10px;
 }
 
+.select-div-option{
+    padding-left: 10%;
+    padding-right: 20%;
+}
+
 .options-div div{
     display: grid;
     grid-template-columns: 0.25fr 1fr;
