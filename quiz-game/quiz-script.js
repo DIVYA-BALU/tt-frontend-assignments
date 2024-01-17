@@ -19,11 +19,20 @@ function displayTimer() {
             clearInterval(timeInterval);
             handleSubmit(new Event("submit"));
         }
-        
+
     }, 1000);
 }
 
-displayTimer();
+//displayTimer();
+
+function disableAnswers(inputEl) {
+    const radioButton = document.getElementsByName(inputEl.name);
+    for (let ind = 0; ind < radioButton.length; ind++) {
+        radioButton[ind].setAttribute("disabled", "true");
+    }
+}
+
+
 
 const quizQuestions = [
     {
@@ -452,10 +461,15 @@ while (questionCount) {
         h4El.textContent = `${++count}.  ${question.question}`;
         div.appendChild(h4El);
 
+        const showTimeDiv = document.createElement("div");
+        showTimeDiv.className = "hide";
+        div.appendChild(showTimeDiv);
+
         const options = question.options;
 
         let iterated = false;
         let inputIterated = false;
+        let showCount = true;
         options.map((option, index) => {
             const innerDiv = document.createElement("div");
             innerDiv.classList.add("inner-div");
@@ -470,6 +484,34 @@ while (questionCount) {
                 labelEl.textContent = option;
                 innerDiv.appendChild(inputEl);
                 innerDiv.appendChild(labelEl);
+                let time = 10;
+                innerDiv.addEventListener("click", () => {
+
+                    if (inputEl.disabled === true) {
+                        return;
+                    }
+                    inputEl.checked = true;
+
+                    if (showCount === true) {
+                        showCount = false
+                    }
+                    else {
+                        return;
+                    }
+
+                    showTimeDiv.className = "show-time";
+                    showTimeDiv.innerText = `You Have ${time} sec`
+                    const myInterval = setInterval(() => {
+                        time--;
+                        showTimeDiv.innerText = `You Have ${time} sec`
+
+                        if (time === 0) {
+                            clearInterval(myInterval);
+                            disableAnswers(inputEl);
+                            showTimeDiv.remove();
+                        }
+                    }, 1000)
+                });
             } else if (question.type === "dropdown" || question.type === "multiple-dropdown") {
 
                 if (!iterated) {
@@ -518,6 +560,8 @@ while (questionCount) {
 
     };
 }
+
+
 
 let mark = 0;
 function displayAnswers() {
@@ -590,6 +634,10 @@ let displayCount = 0;
 
 function handleSubmit(e) {
     e.preventDefault();
+    const timers = document.querySelectorAll(".show-time");
+    timers.forEach(function (timer) {
+        timer.remove();
+    });
     clearInterval(timeInterval);
     displayAnswers();
     displayCount++;
@@ -610,13 +658,13 @@ function displayHint() {
         const hintDiv = document.createElement("div");
         hintDiv.classList.add("hint-div");
 
-        const hintPara = document.createElement("p");
-        hintPara.textContent = `Explanation: ${question.hint}`;
-        hintDiv.appendChild(hintPara);
-
         const answerPara = document.createElement("p");
         answerPara.textContent = `Correct Answer: ${question.answer}`;
         hintDiv.appendChild(answerPara);
+
+        const hintPara = document.createElement("p");
+        hintPara.textContent = `Explanation: ${question.hint}`;
+        hintDiv.appendChild(hintPara);
 
         const questionDiv = quizBody.children[i + 1];
         questionDiv.appendChild(hintDiv);
