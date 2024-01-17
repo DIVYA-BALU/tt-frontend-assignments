@@ -1,7 +1,8 @@
 .form-div{
-  background-color: rgb(242, 230, 230);
+  background-color: rgb(236, 236, 236);
   display: flex;
   justify-content: center;
+  font-family: 'Salsa', cursive;
 }
 .quiz-start-button{
   color: white;
@@ -14,10 +15,12 @@
   padding-left: 10px;
   padding-right: 10px;
   text-align: center;
+  font-family: 'Salsa', cursive;
+
 }
 .quiz-form{
   align-items: center;
-  background-color: rgb(255, 208, 208);
+  background-color: rgb(240, 237, 237);
   border: 3px solid;
   border-color: black;
   width: 800px;
@@ -45,4 +48,7 @@
 }
 .qlabel{
   font-weight: bold;
+}
+.disabled-select{
+  display: none;
 }

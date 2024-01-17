@@ -1,219 +1,451 @@
 const questions = [
   {
     question: "Which of the following is an example of a sustainable practice?",
+    type: 'dropdown',
     choices: [
-      { option: "Implementing renewable energy sources in manufacturing processes", "is_true": true },
-      { option: "Increasing single-use plastic production", "is_true": false },
-      { option: "Expanding deforestation for agricultural purposes", "is_true": false },
-      { option: "Maximizing fossil fuel consumption in transportation", "is_true": false }
+      {
+         option: "Implementing renewable energy sources in manufacturing processes",
+         is_answer: true 
+      },
+      { 
+        option: "Increasing single-use plastic production",
+        is_answer: false 
+      },
+      { 
+        option: "Expanding deforestation for agricultural purposes", 
+        is_answer: false 
+      },
+      { 
+        option: "Maximizing fossil fuel consumption in transportation",
+        is_answer: false
+      }
     ]
   },
   {
-    question: "Which action contributes positively to environmental sustainability?",
+    question: "Which energy practice is sustainable?",
+    type: 'dropdown',
     choices: [
-      { option: "Promoting recycling initiatives within a community", "is_true": true },
-      { option: "Dumping hazardous waste in water bodies", "is_true": false },
-      { option: "Using non-renewable resources excessively", "is_true": false },
-      { option: "Burning forests for land clearance", "is_true": false }
+      {
+        option: "Solar power",
+        is_answer: true 
+      },
+      { 
+        option: "Plastic production",
+        is_answer: false 
+      },
+      { 
+        option: "Deforestation",
+        is_answer: false 
+      },
+      { 
+        option: "Fuel consumption",
+        is_answer: false
+      }
     ]
   },
   {
-    question: "What aligns with sustainable resource management?",
+    question: "What reduces waste?",
+    type: 'dropdown',
     choices: [
-      { option: "Careful monitoring and preservation of freshwater sources", "is_true": true },
-      { option: "Dumping industrial waste in rivers", "is_true": false },
-      { option: "Overfishing without limits", "is_true": false },
-      { option: "Clear-cutting forests without reforestation plans", "is_true": false }
+      {
+        option: "Recycling",
+        is_answer: true 
+      },
+      { 
+        option: "Paper",
+        is_answer: false 
+      },
+      { 
+        option: "Mining",
+        is_answer: false 
+      },
+      { 
+        option: "Digging",
+        is_answer: false
+      }
     ]
   },
   {
-    question: "Which practice is conducive to sustainable agriculture?",
+    question: "Which aids in water conservation?",
+    type: 'dropdown',
     choices: [
-      { option: "Crop rotation and soil enrichment techniques", "is_true": true },
-      { option: "Massive pesticide and herbicide use", "is_true": false },
-      { option: "Monoculture farming with no crop diversity", "is_true": false },
-      { option: "Using genetically modified organisms extensively", "is_true": false }
+      {
+        option: "Drip irrigation",
+        is_answer: true 
+      },
+      { 
+        option: "Concrete production",
+        is_answer: false 
+      },
+      { 
+        option: "Wasteful usage",
+        is_answer: false 
+      },
+      { 
+        option: "Pipeline leaks",
+        is_answer: false
+      }
     ]
   },
   {
-    question: "What supports sustainable waste management?",
+    question: "What promotes biodiversity?",
+    type: 'dropdown',
     choices: [
-      { option: "Implementing comprehensive recycling programs", "is_true": true },
-      { option: "Incinerating all waste without sorting", "is_true": false },
-      { option: "Dumping garbage in open spaces", "is_true": false },
-      { option: "Landfilling hazardous materials without containment measures", "is_true": false }
+      {
+        option: "Reforestation",
+        is_answer: true 
+      },
+      { 
+        option: "Urbanization",
+        is_answer: false 
+      },
+      { 
+        option: "Monoculture",
+        is_answer: false 
+      },
+      { 
+        option: "Pesticides",
+        is_answer: false
+      }
     ]
   },
   {
-    question: "Which approach promotes sustainable transportation?",
+    question: "Which limits air pollution?",
+    type: 'dropdown',
     choices: [
-      { option: "Developing efficient public transport systems", "is_true": true },
-      { option: "Relying solely on personal vehicles for commuting", "is_true": false },
-      { option: "Constructing highways through natural habitats", "is_true": false },
-      { option: "Using outdated, fuel-inefficient vehicles", "is_true": false }
+      {
+        option: "Public transit",
+        is_answer: true 
+      },
+      { 
+        option: "Traffic congestion",
+        is_answer: false 
+      },
+      { 
+        option: "Industrial emissions",
+        is_answer: false 
+      },
+      { 
+        option: "Fuel combustion",
+        is_answer: false
+      }
     ]
   },
   {
-    question: "What supports sustainable consumption?",
+    question: "What conserves natural resources?",
+    type: 'radio',
     choices: [
-      { option: "Opting for products with minimal packaging", "is_true": true },
-      { option: "Purchasing single-use plastic items in bulk", "is_true": false },
-      { option: "Preferring products with excessive plastic packaging", "is_true": false },
-      { option: "Buying disposable items without considering alternatives", "is_true": false }
+      {
+        option: "Efficient appliances",
+        is_answer: true
+      },
+      {
+        option: "Landfill dumping",
+        is_answer: false
+      },
+      {
+        option: "Overconsumption",
+        is_answer: false
+      },
+      {
+        option: "Excessive packaging",
+        is_answer: false
+      }
     ]
   },
   {
-    question: "Which action contributes to sustainable energy use?",
+    question: "Which supports sustainable agriculture?",
+    type: 'radio',
     choices: [
-      { option: "Investing in solar panel installations", "is_true": true },
-      { option: "Relying solely on fossil fuels", "is_true": false },
-      { option: "Building more coal-powered plants", "is_true": false },
-      { option: "Disregarding energy conservation practices", "is_true": false }
+      {
+        option: "Crop rotation",
+        is_answer: true
+      },
+      {
+        option: "Soil degradation",
+        is_answer: false
+      },
+      {
+        option: "Chemical fertilizers",
+        is_answer: false
+      },
+      {
+        option: "Monsoon farming",
+        is_answer: false
+      }
     ]
   },
   {
-    question: "What supports sustainable urban development?",
+    question: "What encourages energy efficiency?",
+    type: 'radio',
     choices: [
-      { option: "Creating green spaces and parks within cities", "is_true": true },
-      { option: "Expanding urbanization without regard for ecosystems", "is_true": false },
-      { option: "Constructing buildings without energy-efficient designs", "is_true": false },
-      { option: "Promoting heavy industrialization within city limits", "is_true": false }
+      {
+        option: "LED lighting",
+        is_answer: true
+      },
+      {
+        option: "Incandescent bulbs",
+        is_answer: false
+      },
+      {
+        option: "Power wastage",
+        is_answer: false
+      },
+      {
+        option: "Energy-intensive devices",
+        is_answer: false
+      }
     ]
   },
   {
-    question: "Which practice promotes sustainable forest management?",
+    question: "Which minimizes waste?",
+    type: 'radio',
     choices: [
-      { option: "Implementing selective logging techniques with reforestation plans", "is_true": true },
-      { option: "Clear-cutting forests without reforestation efforts", "is_true": false },
-      { option: "Ignoring the impact of logging on biodiversity", "is_true": false },
-      { option: "Expanding logging operations without regulations", "is_true": false }
+      {
+        option: "Composting",
+        is_answer: true
+      },
+      {
+        option: "Landfill expansion",
+        is_answer: false
+      },
+      {
+        option: "Dumping refuse",
+        is_answer: false
+      },
+      {
+        option: "Burning trash",
+        is_answer: false
+      }
     ]
   },
   {
-    question: "What aligns with sustainable fishing practices?",
+    question: "What reduces carbon footprint?",
+    type: 'radio',
     choices: [
-      { option: "Adhering to fishing quotas and seasonal bans", "is_true": true },
-      { option: "Overfishing without limitations", "is_true": false },
-      { option: "Using destructive fishing methods", "is_true": false },
-      { option: "Ignoring the impact on endangered species", "is_true": false }
+      {
+        option: "Public transport",
+        is_answer: true
+      },
+      {
+        option: "Individual car usage",
+        is_answer: false
+      },
+      {
+        option: "Road construction",
+        is_answer: false
+      },
+      {
+        option: "Traffic jams",
+        is_answer: false
+      }
     ]
   },
   {
-    question: "Which action supports sustainable water conservation?",
+    question: "Which practices contribute to waste reduction?",
+    type: 'checkbox',
     choices: [
-      { option: "Implementing water-saving measures in agriculture", "is_true": true },
-      { option: "Wastefully using water resources without consideration", "is_true": false },
-      { option: "Discharging untreated sewage into water bodies", "is_true": false },
-      { option: "Diverting water from natural habitats excessively", "is_true": false }
+      {
+        option: "Recycling",
+        is_answer: true
+      },
+      {
+        option: "Composting",
+        is_answer: true
+      },
+      {
+        option: "Landfill dumping",
+        is_answer: false
+      },
+      {
+        option: "Incinerating trash",
+        is_answer: false
+      }
     ]
   },
   {
-    question: "What contributes to sustainable wildlife preservation?",
+    question: "What helps in energy conservation?",
+    type: 'checkbox',
     choices: [
-      { option: "Protecting natural habitats from encroachment", "is_true": true },
-      { option: "Hunting endangered species for commercial purposes", "is_true": false },
-      { option: "Allowing invasive species to dominate ecosystems", "is_true": false },
-      { option: "Neglecting conservation efforts in wildlife reserves", "is_true": false }
+      {
+        option: "Using LED bulbs",
+        is_answer: true
+      },
+      {
+        option: "Leaving lights on",
+        is_answer: false
+      },
+      {
+        option: "Turning off electronics",
+        is_answer: true
+      },
+      {
+        option: "Running appliances 24/7",
+        is_answer: false
+      }
     ]
   },
   {
-    question: "Which practice supports sustainable construction?",
+    question: "Which actions support sustainable transportation?",
+    type: 'checkbox',
     choices: [
-      { option: "Utilizing eco-friendly building materials", "is_true": true },
-      { option: "Constructing buildings without energy efficiency considerations", "is_true": false },
-      { option: "Ignoring the impact on local ecosystems", "is_true": false },
-      { option: "Opting for high-resource consumption in construction", "is_true": false }
+      {
+        option: "Carpooling",
+        is_answer: true
+      },
+      {
+        option: "Driving alone daily",
+        is_answer: false
+      },
+      {
+        option: "Using public transit",
+        is_answer: true
+      },
+      {
+        option: "Buying multiple cars",
+        is_answer: false
+      }
     ]
   },
   {
-    question: "Which action supports sustainable tourism?",
+    question: "What contributes to water conservation?",
+    type: 'checkbox',
     choices: [
-      { option: "Promoting responsible travel and minimizing environmental impact", "is_true": true },
-      { option: "Encouraging excessive waste generation in tourist areas", "is_true": false },
-      { option: "Allowing unrestricted development in ecologically sensitive areas", "is_true": false },
-      { option: "Neglecting cultural and environmental preservation in tourist destinations", "is_true": false }
+      {
+        option: "Fixing leaky faucets",
+        is_answer: true
+      },
+      {
+        option: "Leaving taps running",
+        is_answer: false
+      },
+      {
+        option: "Taking long showers",
+        is_answer: false
+      },
+      {
+        option: "Watering lawns excessively",
+        is_answer: false
+      }
     ]
   },
   {
-    question: "What contributes to sustainable food production?",
+    question: "Which practices help reduce air pollution?",
+    type: 'checkbox',
     choices: [
-      { option: "Implementing organic farming methods", "is_true": true },
-      { option: "Relying solely on intensive chemical-based agriculture", "is_true": false },
-      { option: "Using excessive amounts of pesticides and fertilizers", "is_true": false },
-      { option: "Neglecting soil health and biodiversity in farming practices", "is_true": false }
+      {
+        option: "Using public transport",
+        is_answer: true
+      },
+      {
+        option: "Burning fossil fuels",
+        is_answer: false
+      },
+      {
+        option: "Limiting vehicle emissions",
+        is_answer: true
+      },
+      {
+        option: "Industrial emissions",
+        is_answer: false
+      }
     ]
   },
   {
-    question: "Which practice aligns with sustainable ecosystem management?",
+    question: "What contributes to sustainable agriculture?",
+    type: 'checkbox',
     choices: [
-      { option: "Preserving biodiversity and protecting keystone species", "is_true": true },
-      { option: "Ignoring the impact of invasive species on ecosystems", "is_true": false },
-      { option: "Disrupting natural ecological balances", "is_true": false },
-      { option: "Neglecting the conservation of endangered species", "is_true": false }
+      {
+        option: "Crop rotation",
+        is_answer: true
+      },
+      {
+        option: "Monoculture",
+        is_answer: false
+      },
+      {
+        option: "Excessive pesticide use",
+        is_answer: false
+      },
+      {
+        option: "Soil degradation",
+        is_answer: false
+      }
     ]
   },
   {
-    question: "What supports sustainable supply chain management?",
+    question: "Which actions support biodiversity?",
+    type: 'checkbox',
     choices: [
-      { option: "Implementing ethical sourcing practices", "is_true": true },
-      { option: "Exploiting labor and resources in the supply chain", "is_true": false },
-      { option: "Disregarding the environmental impact of production processes", "is_true": false },
-      { option: "Neglecting transparency and accountability in the supply chain", "is_true": false }
+      {
+        option: "Protecting natural habitats",
+        is_answer: true
+      },
+      {
+        option: "Deforestation",
+        is_answer: false
+      },
+      {
+        option: "Encouraging monoculture",
+        is_answer: false
+      },
+      {
+        option: "Introducing invasive species",
+        is_answer: false
+      }
     ]
   },
   {
-    question: "What aligns with sustainable ocean conservation?",
+    question: "What helps in reducing carbon emissions?",
+    type: 'checkbox',
     choices: [
-      { option: "Establishing marine protected areas and preserving coral reefs", "is_true": true },
-      { option: "Encouraging unregulated fishing in sensitive marine ecosystems", "is_true": false },
-      { option: "Allowing excessive pollution in coastal areas", "is_true": false },
-      { option: "Neglecting the impact of industrial runoff on marine life", "is_true": false }
+      {
+        option: "Using renewable energy",
+        is_answer: true
+      },
+      {
+        option: "Increasing fossil fuel usage",
+        is_answer: false
+      },
+      {
+        option: "Promoting carpooling",
+        is_answer: true
+      },
+      {
+        option: "Neglecting energy-efficient practices",
+        is_answer: false
+      }
     ]
   },
   {
-    question: "Which practice supports sustainable energy-efficient housing?",
-    choices: [
-      { option: "Installing energy-saving appliances and insulation", "is_true": true },
-      { option: "Building houses without regard for energy consumption", "is_true": false },
-      { option: "Ignoring the impact of construction materials on energy usage", "is_true": false },
-      { option: "Opting for energy-intensive heating and cooling systems", "is_true": false }
-    ]
+    question: "What is the capital of France?",
+    type: 'text',
+    answer: "Paris"
   },
   {
-    question: "What contributes to sustainable community development?",
-    choices: [
-      { option: "Involving local residents in decision-making processes", "is_true": true },
-      { option: "Imposing top-down development plans without community input", "is_true": false },
-      { option: "Neglecting social and cultural aspects in development projects", "is_true": false },
-      { option: "Allowing unchecked gentrification without affordable housing options", "is_true": false }
-    ]
+    question: "Which planet is known as the Red Planet?",
+    type: 'text',
+    answer: "Mars"
   },
   {
-    question: "Which practice aligns with sustainable wildlife corridors?",
-    choices: [
-      { option: "Preserving and connecting habitats to facilitate species movement", "is_true": true },
-      { option: "Fragmenting habitats through extensive construction projects", "is_true": false },
-      { option: "Allowing urban sprawl to disrupt natural wildlife routes", "is_true": false },
-      { option: "Neglecting the impact of human activities on wildlife migration paths", "is_true": false }
-    ]
+    question: "What is the largest mammal in the world?",
+    type: 'text',
+    answer: "Blue whale"
   },
   {
-    question: "What supports sustainable environmental education?",
-    choices: [
-      { option: "Promoting hands-on learning about ecosystems and conservation", "is_true": true },
-      { option: "Teaching without emphasizing the importance of environmental stewardship", "is_true": false },
-      { option: "Neglecting to include environmental topics in educational curricula", "is_true": false },
-      { option: "Allowing misinformation about environmental issues to spread unchecked", "is_true": false }
-    ]
+    question: "How many continents are there?",
+    type: 'text',
+    answer: "7"
   },
   {
-    question: "Which action supports sustainable carbon footprint reduction?",
-    choices: [
-      { option: "Implementing energy-saving practices in households and industries", "is_true": true },
-      { option: "Encouraging excessive use of carbon-emitting transportation", "is_true": false },
-      { option: "Ignoring the impact of carbon emissions on climate change", "is_true": false },
-      { option: "Opting for energy sources with high carbon footprints", "is_true": false }
-    ]
+    question: "What is the boiling point of water in Celsius?",
+    type: 'text',
+    answer: "100"
+  },
+  {
+    question: "What is the largest ocean on Earth?",
+    type: 'text',
+    answer: "Pacific Ocean"
   }
 ]
 
@@ -238,7 +470,6 @@ function generateRandomString(lenString) {
 const div1 = document.querySelector('body');
 div1.className = "form-div";
 
-//starting point
 const startButton = document.createElement('button');
 startButton.className = 'quiz-start-button';
 startButton.textContent = "Start Quiz";
@@ -253,15 +484,14 @@ function questionsPage() {
   quizForm.className = "quiz-form";
   quizForm.method = 'post';
   quizForm.action = 'javascript:void(0)';
-
   const heading = document.createElement('h1');
   heading.textContent = 'Quiz';
   div1.appendChild(quizForm);
   quizForm.appendChild(heading);
 
-  let n = 3;
+  let n = 10;
   let i = 0;
-  
+
   while (i < n) {
     let random = Math.floor(Math.random() * questions.length);
 
@@ -274,36 +504,72 @@ function questionsPage() {
 
     const qlabel = document.createElement('label');
     qlabel.className = "qlabel";
-    qlabel.textContent = questions[random].question;
+    qlabel.textContent = `${i + 1}. ${questions[random].question}`;
 
     questionDiv.appendChild(qlabel);
 
     const choiceDiv = document.createElement('div');
 
-    questions[random].choices.forEach(choice => {
+    if (questions[random].type === 'text') {
       const input = document.createElement('input');
-      const randomName = generateRandomString(10);
+      input.type = 'text';
+      input.id = `q${random + 1}`;
+      input.className = 'text-box';
+      questionDiv.appendChild(input);
+    }
+    else if (questions[random].type === 'dropdown') {
+      const input = document.createElement('select');
+      input.id = `q${random + 1}`;
+      input.className = 'dropdown-box';
 
-      input.type = 'radio';
-      input.value = choice.option;
-      input.id = randomName;
-      input.className = 'quiz-choice';
-      input.required = true;
-      input.name = `q${random + 1}`;
+      
+      questions[random].choices.forEach(choice =>{
+        const option = document.createElement('option');
+        option.textContent = choice.option;
+        input.appendChild(option);
+      })
 
-      const choiceLabel = document.createElement('label');
-      choiceLabel.className = 'choice-label'; 
-      choiceLabel.textContent = choice.option;
-      choiceLabel.setAttribute('for', randomName);
+      const option = document.createElement('option');
+      option.textContent = 'Select';
+      option.disabled = true;
+      option.selected = true;
+      option.className = 'disabled-select';
+      
+      input.appendChild(option);
+      questionDiv.appendChild(input);
 
-      if(choice.is_true)
-      answerLabelsRandomName.push(randomName);
-      console.log();
+    }
+    else {
+      questions[random].choices.forEach(choice => {
+        const input = document.createElement('input');
+        const randomName = generateRandomString(10);
 
-      choiceDiv.appendChild(input);
-      choiceDiv.appendChild(choiceLabel);
-      choiceDiv.appendChild(document.createElement('br'));
-    })
+        if (questions[random].type === 'radio')
+          input.type = 'radio';
+        else if (questions[random].type === 'checkbox')
+          input.type = 'checkbox';
+
+        input.value = choice.option;
+        input.id = randomName;
+        input.className = 'quiz-choice';
+        input.name = `q${random + 1}`;
+
+        if (input.type === 'radio')
+          input.required = true;
+
+        const choiceLabel = document.createElement('label');
+        choiceLabel.className = 'choice-label';
+        choiceLabel.textContent = choice.option;
+        choiceLabel.setAttribute('for', randomName);
+
+        if (choice.is_answer)
+          answerLabelsRandomName.push(randomName);
+
+        choiceDiv.appendChild(input);
+        choiceDiv.appendChild(choiceLabel);
+        choiceDiv.appendChild(document.createElement('br'));
+      })
+    }
 
 
     questionDiv.appendChild(choiceDiv);
@@ -325,43 +591,66 @@ function questionsPage() {
 function doValidation(event) {
   event.preventDefault();
 
-  for (let i = 0; i < openedQuestions.length; i++) {
-    let answer = "";
-
-    for (let n = 0; n < questions[openedQuestions[i]].choices.length; n++) {
-
-      if (questions[openedQuestions[i]].choices[n].is_true) {
-        answer = questions[openedQuestions[i]].choices[n].option;
-        break;
-      }
-
-    }
-
-    const userSelectedAnswer = document.querySelector(`input[name="q${openedQuestions[i] + 1}"]:checked`);
-
-    if (userSelectedAnswer !== null && answer === userSelectedAnswer.value)
-    {
-      score++;
-      // console.log(userSelectedAnswer);
-      // const choiceLabel = document.querySelector(`label[for="${userSelectedAnswer.id}"]`);
-      // if (choiceLabel !== null) {
-      //   choiceLabel.classList.add('correct-answer');
-      // }
-    }
-    else if(userSelectedAnswer !== null)
-    {
-      const choiceLabel = document.querySelector(`label[for="${userSelectedAnswer.id}"]`);
-      if (choiceLabel !== null) {
-        choiceLabel.classList.add('wrong-answer');
-      }
-    }
-    
-  }
-  
-  for(let m = 0; m < answerLabelsRandomName.length; m++)
-  {
+  for (let m = 0; m < answerLabelsRandomName.length; m++) {
     const choiceLabel = document.querySelector(`label[for="${answerLabelsRandomName[m]}"]`);
     choiceLabel.classList.add('correct-answer');
+  }
+
+  for (let i = 0; i < openedQuestions.length; i++) {
+
+    if (questions[openedQuestions[i]].type === 'text') {
+      const input = document.querySelector(`#q${openedQuestions[i] + 1}`);
+      console.log(questions[openedQuestions[i]].answer);
+
+      if (input.value === questions[openedQuestions[i]].answer) {
+        score++;
+        input.classList.add('correct-answer');
+      }
+      else{
+        input.classList.add('wrong-answer');
+      }
+
+    }
+    else if (questions[openedQuestions[i]].type === 'dropdown') {
+      const input = document.querySelectorAll(`#q${openedQuestions[i] + 1}`);
+      console.log(input);
+    }
+    else {
+      const answer = [];
+
+      for (let n = 0; n < questions[openedQuestions[i]].choices.length; n++) {
+
+        if (questions[openedQuestions[i]].choices[n].is_answer) {
+          answer.push(questions[openedQuestions[i]].choices[n].option);
+        }
+
+      }
+
+      const userSelectedAnswer = document.querySelectorAll(`input[name="q${openedQuestions[i] + 1}"]:checked`);
+
+      if (userSelectedAnswer !== null) {
+        const selectedValues = Array.from(userSelectedAnswer).map(checkbox => checkbox.value);
+        const allElementsInArray1ExistInArray2 = selectedValues.every(item => answer.includes(item));
+        const allElementsInArray2ExistInArray1 = answer.every(item => selectedValues.includes(item));
+
+        if (allElementsInArray1ExistInArray2 && allElementsInArray2ExistInArray1) {
+          score++;
+        }
+        else {
+          console.log("here");
+          Array.from(userSelectedAnswer).forEach(checkbox => {
+            const labelId = checkbox.getAttribute('id');
+            const associatedLabel = document.querySelector(`label[for="${labelId}"]`);
+            if (!associatedLabel.classList.contains('correct-answer'))
+              associatedLabel.classList.add('wrong-answer');
+          }
+          );
+        }
+
+      }
+
+    }
+
   }
 
   const quizForm = document.querySelector('.quiz-form');
