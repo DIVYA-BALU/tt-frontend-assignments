@@ -12,19 +12,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
             for (let i = 0; i < inputEls.length; i++) {
                 const input = inputEls[i];
-                const id = input.getAttribute("id");
-                const labelEl = document.querySelector(`label[for="${id}"]`);
 
-                if (selected.type === "text") {
-                    setTimeout(() => {
-                        input.disabled = "disabled";
-                        labelEl.id = "disable";
-                    }, 10000);
-                } else {
-                    setTimeout(() => {
-                        input.disabled = "disabled";
-                        labelEl.id = "disable";
-                    }, 5000);
+                if (input.checked === false) {
+                    const id = input.getAttribute("id");
+                    const labelEl = document.querySelector(`label[for="${id}"]`);
+
+                    if (selected.type === "text") {
+                        setTimeout(() => {
+                            input.disabled = "disabled";
+                            labelEl.id = "disable";
+                        }, 10000);
+                    } else {
+                        setTimeout(() => {
+                            input.disabled = "disabled";
+                            labelEl.id = "disable";
+                        }, 10000);
+                    }
                 }
             }
         } else if (event.target.getElementsByTagName("select")) {
@@ -39,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-let timeLeft = 20;
+let timeLeft = 60;
 
 const containerEl = document.getElementById("container");
 const spanElement = document.createElement("span");
@@ -64,17 +67,21 @@ const countdown = setInterval(() => {
 function getAllInputs() {
     const radioInputs = document.querySelectorAll(`input[type="radio"]`);
     for (let i = 0; i < radioInputs.length; i++) {
-        const id = radioInputs[i].getAttribute("id");
-        const labelEl = document.querySelector(`label[for="${id}"]`);
-        radioInputs[i].disabled = "disabled";
-        labelEl.id = "disable";
+        if (radioInputs[i].checked === false) {
+            const id = radioInputs[i].getAttribute("id");
+            const labelEl = document.querySelector(`label[for="${id}"]`);
+            radioInputs[i].disabled = "disabled";
+            labelEl.id = "disable";
+        }
     }
     const checkboxInputs = document.querySelectorAll(`input[type="checkbox"]`);
     for (let i = 0; i < checkboxInputs.length; i++) {
+        if (checkboxInputs[i].checked === false) {
         const id = checkboxInputs[i].getAttribute("id");
         const labelEl = document.querySelector(`label[for="${id}"]`);
         checkboxInputs[i].disabled = "disabled";
         labelEl.id = "disable";
+        }
     }
     const textInputs = document.querySelectorAll(`input[type="text"]`);
     for (let i = 0; i < textInputs.length; i++) {
@@ -688,7 +695,7 @@ const divEl = document.getElementById("container");
 const formEl = document.createElement("form");
 formEl.setAttribute("id", "quiz_form");
 const headingEl = document.createElement("h1");
-headingEl.textContent = "HTML Quiz";
+headingEl.textContent = "HTML QUIZ";
 formEl.appendChild(headingEl);
 
 start();
