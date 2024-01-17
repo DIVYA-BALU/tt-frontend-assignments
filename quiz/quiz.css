@@ -6,7 +6,7 @@ body {
     margin-left: 300px;
     margin-top: 50px;
     padding: 50px;
-    width: 50%;
+    width: 55%;
     /* background-color: rgb(238, 251, 255); */
     font-size: 20px;
     font-family: "Trirong";
@@ -45,8 +45,8 @@ h4 {
 }
 
 #container .question input {
-    width: 15px;
-    height: 15px;
+    width: 40px;
+    height: 16px;
 }
 
 #container .question input[type="radio"]:hover,
@@ -142,12 +142,12 @@ select[disabled] {
     display: inline-block;
     text-align: center;
     padding-left: 25px;
-    color: green;
+    color: rgb(1, 168, 1);
     font-family: "Trirong";
 }
 
 #container .question .correct-text {
-    color: green;
+    color: rgb(1, 168, 1);
 }
 
 #container .question .wrong-text {
