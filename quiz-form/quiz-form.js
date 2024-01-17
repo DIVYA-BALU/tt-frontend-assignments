@@ -508,14 +508,15 @@ function questionsPage() {
 
     questionDiv.appendChild(qlabel);
 
-    const choiceDiv = document.createElement('div');
+    const choicesDiv = document.createElement('div');
+    choicesDiv.className = 'choices-div';
 
     if (questions[random].type === 'text') {
       const input = document.createElement('input');
       input.type = 'text';
       input.id = `q${random + 1}`;
       input.className = 'text-box';
-      questionDiv.appendChild(input);
+      choicesDiv .appendChild(input);
     }
     else if (questions[random].type === 'dropdown') {
       const input = document.createElement('select');
@@ -536,7 +537,7 @@ function questionsPage() {
       option.className = 'disabled-select';
       
       input.appendChild(option);
-      questionDiv.appendChild(input);
+       choicesDiv.appendChild(input);
 
     }
     else {
@@ -551,7 +552,7 @@ function questionsPage() {
 
         input.value = choice.option;
         input.id = randomName;
-        input.className = 'quiz-choice';
+        input.className = 'input-buttons';
         input.name = `q${random + 1}`;
 
         if (input.type === 'radio')
@@ -565,14 +566,16 @@ function questionsPage() {
         if (choice.is_answer)
           answerLabelsRandomName.push(randomName);
 
-        choiceDiv.appendChild(input);
-        choiceDiv.appendChild(choiceLabel);
-        choiceDiv.appendChild(document.createElement('br'));
+          const choiceDiv =document.createElement('div');
+          choiceDiv.appendChild(input);
+          choiceDiv.appendChild(choiceLabel);
+          choiceDiv.className = 'choice-div';
+          choicesDiv.appendChild(choiceDiv);
       })
     }
 
 
-    questionDiv.appendChild(choiceDiv);
+    questionDiv.appendChild(choicesDiv);
     quizForm.appendChild(questionDiv);
     div1.appendChild(quizForm);
 
@@ -594,7 +597,7 @@ function doValidation(event) {
   for (let m = 0; m < answerLabelsRandomName.length; m++) {
     const choiceLabel = document.querySelector(`label[for="${answerLabelsRandomName[m]}"]`);
     choiceLabel.classList.add('correct-answer');
-  }
+  } 
 
   for (let i = 0; i < openedQuestions.length; i++) {
 
@@ -605,6 +608,7 @@ function doValidation(event) {
       if (input.value === questions[openedQuestions[i]].answer) {
         score++;
         input.classList.add('correct-answer');
+        console.log(input);
       }
       else{
         input.classList.add('wrong-answer');
@@ -637,7 +641,6 @@ function doValidation(event) {
           score++;
         }
         else {
-          console.log("here");
           Array.from(userSelectedAnswer).forEach(checkbox => {
             const labelId = checkbox.getAttribute('id');
             const associatedLabel = document.querySelector(`label[for="${labelId}"]`);
