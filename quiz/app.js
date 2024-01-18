@@ -642,10 +642,10 @@ const questions = [
     }
 ];
 
-function randomIndex(arrLength,limit) {
+function randomIndex(arrLength,questionLimit) {
     let indexarr = [];
     
-    for (var i = 0; indexarr.length < limit; i++) {
+    for (var i = 0; indexarr.length < questionLimit; i++) {
         let rnum = Math.floor(Math.random() * arrLength);
     
         if (indexarr.includes(rnum)){
@@ -670,7 +670,6 @@ function startQuiz() {
     formElement.className = "quiz";
     divElement.appendChild(formElement);
 
-    const limit = 10;
     const randomIndices = randomIndex(questions.length,limit);
     const questionToDisplay = [];
     const answersForQuestions = [];
@@ -964,6 +963,7 @@ function startQuiz() {
 }
 
 let seconds = 0;
+const limit = 10;
 const secondsPerQuestion = 10;
 const timeLimitForChange = 5;
 let divNumber = 1;
@@ -1025,7 +1025,7 @@ function timekeeper () {
 
     })
 
-    document.querySelector(".timer").textContent = `Time in Seconds: ${seconds}`;
+    document.querySelector(".timer").textContent = `Total time: ${secondsPerQuestion * limit} \nTime in Seconds: ${seconds}`;
 }
 
 const divElement = document.querySelector(".container");
