@@ -1,17 +1,33 @@
+
 const bodyEle = document.querySelector(".body-tag");
+const startOuterDivEle = document.createElement("div");
+startOuterDivEle.className="front-page";
+const startQuizEle = document.createElement("button");
+startQuizEle.textContent="StartQuiz";
 const divEle = document.createElement("div");
 divEle.className = "outer-div";
+const headingEle = document.createElement("div");
+headingEle.className = "heading-div";
+headingEle.textContent = "Tech Quiz";
 const formEle = document.createElement("form");
 formEle.className = "quiz-form";
+formEle.classList.add("hidden");
+const timingEle = document.createElement("div");
+timingEle.className="timing-div";
+timingEle.classList.add("hidden");
 const submitEle = document.createElement("button");
 
 submitEle.type = "submit"
 submitEle.textContent = "Submit";
 
+divEle.appendChild(headingEle);
+startOuterDivEle.appendChild(startQuizEle);
+divEle.appendChild(startOuterDivEle);
 
 function randomNumber(inputsLength) {
     return Math.floor(Math.random() * 10);
 }
+
 
 const inputs = [
     {
@@ -44,7 +60,7 @@ const inputs = [
     {
         question_no: 2,
         type: "select",
-        isMultiple:true,
+        isMultiple: true,
         label_content: "What is the capital city of France?",
         options: [
             {
@@ -246,29 +262,12 @@ const inputs = [
         ]
     },
 
-    // {
-    //     question_no: 11,
-    //     type: "text",
-    //     label_content: "What is the national flower of India?",
-    //     options: [
-    //         {
-    //             value: 1,
-    //             content: "Rose"
-    //         },
-    //         {
-    //             value: 2,
-    //             content: "Lotus"
-    //         },
-    //         {
-    //             value: 3,
-    //             content: "Tulip"
-    //         }
-    //     ],
-    //     answer: {
-    //         value: 2,
-    //         content: "Lotus"
-    //     }
-    // },
+    {
+        question_no: 11,
+        type: "text",
+        label_content: "What is the national flower of India?",
+        answer: "hello"
+    },
 
     // {
     //     question_no: 11,
@@ -619,22 +618,33 @@ const inputs = [
 
 
 
+startQuizEle.addEventListener("click",function(event){
+    startOuterDivEle.classList.add("hidden");
+    formEle.classList.remove("hidden");
+    timingEle.classList.remove("hidden");
+    updateTimer();
+})
+
+
 const totalQuestions = 10;
 let idValue = 1;
 let questionNumber = 1;
 const map = new Map();
+
 while (map.size < totalQuestions) {
     const traverse = randomNumber(inputs.length);
+
     if (map.has(traverse)) {
         continue;
     }
+
     map.set(traverse, 1);
     const input = inputs[traverse];
     const innerDivEle = document.createElement("div");
     innerDivEle.className = "section-div";
     const questionsDivEle = document.createElement("div");
     questionsDivEle.className = "question-div";
-    questionsDivEle.setAttribute("input-question-no",`${input.question_no}`);
+    questionsDivEle.setAttribute("input-question-no", `${input.question_no}`);
     questionsDivEle.textContent = `${questionNumber}) ${input.label_content}`;
 
     const optionsDivEle = document.createElement("div");
@@ -645,9 +655,11 @@ while (map.size < totalQuestions) {
     const brEle = document.createElement("br");
     innerDivEle.appendChild(brEle);
     let answer = [];
+
     if (input.type === "radio" || input.type === "checkbox") {
 
         let index = 0;
+
         while (index < input.options.length) {
             const innerOptionDivEle = document.createElement("div");
             innerOptionDivEle.setAttribute("question-no", `${questionNumber}`);
@@ -675,20 +687,21 @@ while (map.size < totalQuestions) {
             index++;
 
             answerDivEle.setAttribute("name", input.question_no);
-
         }
-        
+
     }
+
     else if (input.type === "select") {
         optionsDivEle.classList.add("select-div-option");
         const selectOptionEle = document.createElement("select");
         selectOptionEle.setAttribute("question-no", `${questionNumber}`);
 
-        if(input.isMultiple===true){
-            selectOptionEle.multiple="multiple";
+        if (input.isMultiple === true) {
+            selectOptionEle.multiple = "multiple";
         }
 
         let index = 0;
+
         while (index < input.options.length) {
             const optionsEle = document.createElement("option");
             optionsEle.textContent = `${input.options[index].content}`;
@@ -697,8 +710,10 @@ while (map.size < totalQuestions) {
             selectOptionEle.appendChild(optionsEle);
             index++;
         }
+
         optionsDivEle.appendChild(selectOptionEle);
     }
+
     else {
         const inputEle = document.createElement("input");
         inputEle.type = "text";
@@ -706,137 +721,178 @@ while (map.size < totalQuestions) {
     }
 
     input.options.forEach(option => {
+
         if (option.isAnswer === 'true') {
             answer.push(option.content);
         }
+
     });
-    // console.log(answer);
     answerDivEle.textContent = `Correct answer : ${answer}`;
 
-    
+
     innerDivEle.appendChild(optionsDivEle);
     questionNumber++;
     innerDivEle.appendChild(answerDivEle);
     formEle.appendChild(innerDivEle);
 }
+
 formEle.appendChild(submitEle);
 divEle.appendChild(formEle);
+divEle.appendChild(timingEle);
 bodyEle.appendChild(divEle);
 
+// setTimeout(formPrevent(),2000);
 
 const score = document.createElement("div");
 score.className = "score-div";
 
 
-formEle.addEventListener("submit", function (event) {
-    event.preventDefault(); 
+
+
+
+function validateForm(){
     const totalInputs = document.querySelectorAll("input");
-    
+
     totalInputs.forEach(element => {
+
         if (element.parentElement.classList.contains("hidden-wrong")) {
             element.parentElement.classList.remove("hidden-wrong");
         }
+
         else if (element.parentElement.classList.contains("hidden-correct")) {
             element.parentElement.classList.remove("hidden-correct");
         }
+
     })
 
     const totalOptions = document.querySelectorAll("option");
     totalOptions.forEach(element => {
+        
         if (element.classList.contains("hidden-wrong")) {
             element.classList.remove("hidden-wrong");
         }
+
         else if (element.classList.contains("hidden-correct")) {
             element.classList.remove("hidden-correct");
         }
+
     })
 
     let list = document.querySelectorAll(".answer-div");
 
     list.forEach(element => {
-        
+
         if (!element.classList.contains("hidden")) {
             element.classList.add("hidden");
         }
-        
+
     });
-    
+
     let questionNumber = 1;
     let correctAnswersCount = 0;
-    
+
     while (questionNumber <= 10) {
         let list1 = document.querySelectorAll(`[question-no="${questionNumber}"]`);
         let answer = [];
-        const question=inputs[list1[0].parentElement.parentElement.querySelector(".question-div").getAttribute("input-question-no")-1];
-        // console.log(question);
-        const type=question.type;
+        const question = inputs[list1[0].parentElement.parentElement.querySelector(".question-div").getAttribute("input-question-no") - 1];
+        const type = question.type;
         console.log(type);
+
         question.options.forEach(option => {
             if (option.isAnswer === 'true') {
                 answer.push(option.value);
             }
         });
-        
-        let checkedInputs=[];
-        let flag=0;
-        // console.log(list1);
+
+        let checkedInputs = [];
+        let flag = 0;
+
         for (let i = 0; i < list1.length; i++) {
             console.log(list1[i]);
-            if((type==="radio" || type==="checkbox") && list1[i].querySelector("input:checked")){
-                const checkedValue=Number(list1[i].querySelector("input:checked").getAttribute("value"));
-                // console.log(checkedValue);
+
+            if ((type === "radio" || type === "checkbox") && list1[i].querySelector("input:checked")) {
+                const checkedValue = Number(list1[i].querySelector("input:checked").getAttribute("value"));
                 checkedInputs.push(checkedValue);
-                if(answer.includes(checkedValue)){
+
+                if (answer.includes(checkedValue)) {
                     list1[i].classList.add("hidden-correct");
                     flag++;
                 }
-                else{
+
+                else {
                     list1[i].classList.add("hidden-wrong");
                     flag--;
                 }
-            }
-            else if(type==="select"){
-                // console.log(list1[i].querySelector("option:checked"));
-                // console.log(list1[i]);
-                const checkedInputs1=list1[i].querySelectorAll("option:checked");
-                // checkedInputs1.forEach(element => {
-                //     checkedInputs.push(Number(element.getAttribute("value")));
-                // })
-                console.log(checkedInputs1);
-                // const checkedValue=Number(list1[i].querySelector("option:checked").getAttribute("value"));
-                // console.log(checkedValue);
-                // checkedInputs.push(checkedValue);
 
-                checkedInputs1.forEach(element =>{
-                    console.log(element);
-                    if(answer.includes(Number(element.getAttribute("value")))){
-                        console.log("correct");
+            }
+
+            else if (type === "select") {
+                const checkedInputs1 = list1[i].querySelectorAll("option:checked");
+
+                checkedInputs1.forEach(element => {
+
+                    if (answer.includes(Number(element.getAttribute("value")))) {
                         element.classList.add("hidden-correct");
                         flag++;
                     }
-                    else{
+
+                    else {
                         element.classList.add("hidden-wrong");
                         flag--;
                     }
+
                 })
+
             }
         }
-        console.log(flag+" "+answer);
-        if(flag===answer.length){
+
+
+        if (flag === answer.length) {
             correctAnswersCount++;
         }
-        else{
+
+        else {
             document.querySelector(`[question-no="${questionNumber}"]`).parentElement.parentElement.querySelector(".answer-div").classList.remove("hidden");
-            // console.log("wrong answer");
         }
+        
         questionNumber++;
     }
-
-
 
     score.textContent = `Total Score ${correctAnswersCount} / ${totalQuestions}`;
     formEle.appendChild(score);
     divEle.appendChild(formEle);
+    divEle.appendChild(timingEle);
     bodyEle.appendChild(divEle);
+}
+
+
+let remainingTime=10;
+function updateTimer() {
+    timingEle.textContent=`Remaining ${remainingTime} seconds left`;  
+    if (remainingTime >  0){
+        remainingTime--;
+        setTimeout(() => {
+            updateTimer();
+        }, 1000);
+    }
+    else{
+        timingEle.textContent="Time is up !";
+        validateForm();
+    }
+}
+
+
+formEle.addEventListener("submit", function (event) {
+    event.preventDefault();
+    validateForm();
 });
 
+
+// setInterval(() => {
+//     updateTimer();
+// }, 1000);
+
+
+// setTimeout(() => {
+//     validateForm();
+// }, 10000);
