@@ -1025,12 +1025,12 @@ function timekeeper () {
 
     })
 
-    document.querySelector(".timer").textContent = `Total time: ${secondsPerQuestion * limit} \nTime in Seconds: ${seconds}`;
+    document.querySelector(".timer").textContent = `Total time: ${secondsPerQuestion * limit} \n Time in Seconds: ${seconds}`;
 }
 
 const divElement = document.querySelector(".container");
 
-const timer = document.createElement("div");
+const timer = document.createElement("p");
 timer.className = "timer";
 timer.hidden = true;
 divElement.appendChild(timer);
@@ -1048,6 +1048,7 @@ start.addEventListener("click",() => {
     timer.hidden = false;
     start.remove();
     startQuiz();
+    timekeeper();
 })
 
 divElement.appendChild(start);
