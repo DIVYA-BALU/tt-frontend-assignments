@@ -4,10 +4,14 @@ const quizBody = document.createElement("form");
 quizBody.id = "quizBody";
 
 let timeInterval;
-const timeAlloted = 10;
+const timeAlloted = 60;
 let timeLeft = timeAlloted;
 
+
+
+
 function displayTimer() {
+
     const timeElement = document.createElement("div");
     timeElement.className = "time";
     quizBody.appendChild(timeElement);
@@ -23,16 +27,52 @@ function displayTimer() {
     }, 1000);
 }
 
-//displayTimer();
+displayTimer();
 
 function disableAnswers(inputEl) {
-    const radioButton = document.getElementsByName(inputEl.name);
-    for (let ind = 0; ind < radioButton.length; ind++) {
-        radioButton[ind].setAttribute("disabled", "true");
+    const ansElement = document.getElementsByName(inputEl.name);
+    for (let ind = 0; ind < ansElement.length; ind++) {
+        ansElement[ind].setAttribute("disabled", "true");
     }
 }
 
+function disableAllOptions() {
+    const options = document.querySelectorAll("input, select");
+    options.forEach(function (option) {
+        option.setAttribute("disabled", "true");
+    });
+}
 
+
+function callTimer(showTimeDiv, inputEl, time) {
+    const myInterval = setInterval(() => {
+        time--;
+        showTimeDiv.innerText = `You Have ${time} sec`;
+
+        if (time === 0) {
+            clearInterval(myInterval);
+            disableAnswers(inputEl);
+            showTimeDiv.remove();
+        }
+    }, 1000)
+}
+
+
+function disablefunction(element, showCount, showTimeDiv, time) {
+    if (element.disabled === true) {
+        return;
+    }
+    element.checked = true;
+
+    if (showCount === false) {
+        return;
+    }
+
+    showTimeDiv.className = "show-time";
+    showTimeDiv.innerText = `You Have ${time} sec`;
+
+    callTimer(showTimeDiv, element, time);
+}
 
 const quizQuestions = [
     {
@@ -443,7 +483,6 @@ const quizQuestions = [
 
 ];
 
-
 const indexOfQuestionsSelected = [];
 let questionCount = 10;
 let count = 0;
@@ -487,30 +526,9 @@ while (questionCount) {
                 let time = 10;
                 innerDiv.addEventListener("click", () => {
 
-                    if (inputEl.disabled === true) {
-                        return;
-                    }
-                    inputEl.checked = true;
+                    disablefunction(inputEl, showCount, showTimeDiv, time);
+                    showCount = false;
 
-                    if (showCount === true) {
-                        showCount = false
-                    }
-                    else {
-                        return;
-                    }
-
-                    showTimeDiv.className = "show-time";
-                    showTimeDiv.innerText = `You Have ${time} sec`
-                    const myInterval = setInterval(() => {
-                        time--;
-                        showTimeDiv.innerText = `You Have ${time} sec`
-
-                        if (time === 0) {
-                            clearInterval(myInterval);
-                            disableAnswers(inputEl);
-                            showTimeDiv.remove();
-                        }
-                    }, 1000)
                 });
             } else if (question.type === "dropdown" || question.type === "multiple-dropdown") {
 
@@ -532,8 +550,17 @@ while (questionCount) {
                         optionEl.textContent = opt;
                         selectEl.appendChild(optionEl);
                     });
+
+                    let time = 10;
+                    innerDiv.addEventListener("click", () => {
+                        disablefunction(selectEl, showCount, showTimeDiv, time);
+                        showCount = false;
+
+                    });
+
                     innerDiv.appendChild(selectEl);
                     div.appendChild(innerDiv);
+
                 } else {
                     innerDiv.remove();
                 }
@@ -548,6 +575,13 @@ while (questionCount) {
                     inputEl.name = question.name;
                     inputEl.placeholder = "your answers here";
                     innerDiv.appendChild(inputEl);
+
+                    let time = 10;
+                    innerDiv.addEventListener("focusout", () => {
+
+                        disablefunction(inputEl, showCount, showTimeDiv, time);
+                        showCount = false;
+                    });
                 }
             }
 
@@ -626,6 +660,7 @@ function displayAnswers() {
         }
     }
 }
+
 const buttonEl = document.createElement("input");
 buttonEl.type = "submit";
 buttonEl.value = "submit";
@@ -634,10 +669,13 @@ let displayCount = 0;
 
 function handleSubmit(e) {
     e.preventDefault();
+    disableAllOptions();
+
     const timers = document.querySelectorAll(".show-time");
     timers.forEach(function (timer) {
         timer.remove();
     });
+
     clearInterval(timeInterval);
     displayAnswers();
     displayCount++;

@@ -39,6 +39,7 @@ h4 {
 
 .inner-div:hover {
     background-color: #a5a7a5;
+    cursor: pointer;
 }
 
 .inner-div label {
