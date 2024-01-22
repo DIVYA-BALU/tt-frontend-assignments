@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/push-popstate/" class="routing">Home</a>
+    <a href="/page1" class="routing">Page 1</a>
+    <a href="/page2" class="routing">Page 2</a>
+    <div class="container"></div>
+</body>
+<script>
+
+function navigate(url, popping) {
+  if (!popping) {
+    window.history.pushState({path: url}, document.title, url);
+  }
+}
+
+function stateChange(){
+    let child = document.querySelector(".container");
+    if(window.location.href == "http://127.0.0.1:5500/page1"){
+        child.innerHTML = "page 1";
+    }
+    else if(window.location.href == "http://127.0.0.1:5500/page2"){
+        child.innerHTML = "page 2";
+    }
+    else{
+        child.innerHTML = "";
+    }
+}
+
+const routes = document.querySelectorAll(".routing");
+
+for(let i = 0; i < routes.length; i++){
+
+    routes[i].addEventListener("click", function(event){
+        event.preventDefault();
+        navigate(event.target.href)
+        stateChange()
+    });
+
+}
+
+addEventListener('popstate', function (e) {
+  navigate(event.target.href, true);
+  stateChange()
+});
+</script>
+</html>
