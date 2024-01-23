@@ -658,8 +658,128 @@ function randomIndex(arrLength,questionLimit) {
     return indexarr;
 }
 
+let currentQuestion;
+
 function startQuiz() {
 
+    let localTimerSeconds = 6;
+    // let localDivNumber = 1;
+
+
+    // function fiveSecondRule(currentQuestion){
+
+    //     let timeNow = document.querySelector(".timer-element").textContent.split(" ",6);
+
+    //     if(parseInt(timeNow[timeNow.length - 1]) < 0){
+    //         currentQuestion.childNodes.forEach((node) => {
+    //             node.disabled = true;
+    //         })
+    //     }
+
+    //     currentQuestion.childNodes.forEach((childNode) => {
+
+    //         childNode.onclick = function(){
+    //             // five second rule 
+
+    //             if(parseInt(timeNow[timeNow.length - 1]) % 10 > timeLimitForChange){
+    //                 return;
+    //             }
+    //             else{
+    
+    //                 if (childNode.tagName.toLowerCase() === "select"){
+                        
+    //                     if (childNode.multiple){
+    //                         return;
+    //                     }
+    
+    //                     childNode.disabled = true;
+    //                 }
+    
+    //                 let elementFromLabel = document.getElementById(childNode.getAttribute("for"));
+                    
+    //                 if (elementFromLabel !== undefined || elementFromLabel !== null){
+    //                     childNode = elementFromLabel;
+    //                 }
+    
+    //                 if (childNode.type === "checkbox" || childNode.type === "radio"){
+    //                     childNode.checked = true;
+    //                 }
+    
+    //                 childNode.parentNode.childNodes.forEach((node) =>{
+    //                     node.disabled = true;
+    //                 });
+    //             }
+    
+    //         }
+    
+    //     })
+    // }
+
+    function localTimer(currentQuestion){
+        localTimerSeconds--;
+
+        // let currentQuestion = document.querySelector(`.options-div${localDivNumber}`);
+
+        if(localTimerSeconds == 5){
+            this.currentQuestion = currentQuestion;
+        }
+
+        if(localTimerSeconds < 0){
+
+            this.currentQuestion.childNodes.forEach((node) => {
+                node.disabled = true;
+            })
+
+            clearInterval(localInterval);
+            document.querySelector(".timer-element").remove();
+
+            // console.log(this.currentQuestion.getElementByTagName("p"));
+            // this.currentQuestion.getElementByTagName("p").remove();
+            localTimerSeconds = 6;
+            // localDivNumber += 1;
+        }
+        else{
+            document.querySelector(".timer-element").textContent = `Time left to choose option ${localTimerSeconds}`
+        }
+
+        // this.currentQuestion.childNodes.forEach((childNode) => {
+
+        //     childNode.onclick = function(){
+        //         // five second rule 
+
+        //         if(localTimerSeconds % 10 > timeLimitForChange){
+        //             return;
+        //         }
+        //         else{
+    
+        //             if (childNode.tagName.toLowerCase() === "select"){
+                        
+        //                 if (childNode.multiple){
+        //                     return;
+        //                 }
+    
+        //                 childNode.disabled = true;
+        //             }
+    
+        //             let elementFromLabel = document.getElementById(childNode.getAttribute("for"));
+                    
+        //             if (elementFromLabel !== undefined || elementFromLabel !== null){
+        //                 childNode = elementFromLabel;
+        //             }
+    
+        //             if (childNode.type === "checkbox" || childNode.type === "radio"){
+        //                 childNode.checked = true;
+        //             }
+    
+        //             childNode.parentNode.childNodes.forEach((node) =>{
+        //                 node.disabled = true;
+        //             });
+        //         }
+    
+        //     }
+    
+        // })
+    }
 
     function linebreaker() {
         const linebreak = document.createElement("br");
@@ -731,9 +851,9 @@ function startQuiz() {
                 optionsElement.name = `options-for-${(i + 1)}`;
                 optionsElement.id = j;
                 
-                if (qna.options_type === "radio") {
-                    optionsElement.required = true;
-                }
+                // if (qna.options_type === "radio") {
+                //     optionsElement.required = true;
+                // }
 
                 optionsDiv.appendChild(optionsElement);
     
@@ -759,7 +879,7 @@ function startQuiz() {
         else if (qna.options_type === "dropdown"){
             let optionsSelect= document.createElement("select");
             optionsSelect.className = `options-for-${(i + 1)}`;
-            optionsSelect.required = true;
+            // optionsSelect.required = true;
 
             if(qna.multiple){
                 optionsSelect.multiple = true;
@@ -786,6 +906,30 @@ function startQuiz() {
             optionsDiv.appendChild(optionsSelect);
         }
 
+        let divElementFlag = document.createElement("p");
+        divElementFlag.className = `flag-${i}`;
+        divElementFlag.textContent = "0";
+        divElementFlag.hidden = true;
+        optionsDiv.appendChild(divElementFlag);
+
+        optionsDiv.addEventListener("click", () => {
+
+            if(document.querySelector(`.flag-${i}`).textContent === "0"){
+                localInterval = setInterval(localTimer,1000);
+                let timerElement = document.createElement("p");
+                timerElement.className = "timer-element";
+                optionsDiv.appendChild(timerElement);
+                divElementFlag.textContent = "1";
+                localTimer(optionsDiv);
+                // fiveSecondRule(optionsDiv);
+            }
+            else{
+                // fiveSecondRule(optionsDiv);
+                return;
+            }
+            currentQuestion = optionsDiv;
+        })
+
         formElement.appendChild(optionsDiv);
         linebreaker();
     }
@@ -799,23 +943,37 @@ function startQuiz() {
         e.preventDefault();
         let userSelection = [];
         let userSelectionText = [];
+        let timerElement = document.querySelectorAll(".timer-element");
+        clearInterval(this.localInterval);
+
+        timerElement.forEach((element) => {
+            element.remove();
+        })
         
         for(let j = 0; j < questionToDisplay.length; j++){
             let flag = 0;
             let selectedOption = document.getElementsByName(`options-for-${(j + 1)}`);
             let boxSelections = [];
             let boxSelectionsText = []
-            if(selectedOption.length === 0) {
-                let upperDiv = document.querySelector(`.options-div${(j + 1)}`)
-                
-                upperDiv.childNodes.forEach((node) => {
-                    flag = 1;
-                    
-                    Array.from(node.selectedOptions).map((option) => { 
-                        boxSelections.push(option.index.toString());
-                        boxSelectionsText.push(option.textContent);
-                    })
 
+            if(selectedOption.length === 0) {
+                let upperDiv = document.querySelector(`.options-div${(j + 1)}`);
+
+                upperDiv.childNodes.forEach((node) => {
+
+                    console.log(node.selectedOptions, node.tagName)
+                    if(node.tagName === "P"){
+                        return;
+                    }
+                    else{
+                        flag = 1;
+                        Array.from(node.selectedOptions).map((option) => { 
+                            boxSelections.push(option.index.toString());
+                            boxSelectionsText.push(option.textContent);
+                        })
+                    }
+
+                    node.disabled = true;
                     // node.selectedIndex = 0; // do we uncheck after submitted or not
                 })
 
@@ -853,7 +1011,7 @@ function startQuiz() {
                         }
 
                     }
-
+                    selected.disabled = true;
                 })
 
             }
@@ -909,7 +1067,7 @@ function startQuiz() {
             window.location.reload();
         })
 
-        // display q and a?
+        // display q and a
         const analytics = document.createElement("button");
         analytics.className = "analytics";
         analytics.textContent = "Analytics";
@@ -966,66 +1124,64 @@ let seconds = 0;
 const limit = 10;
 const secondsPerQuestion = 10;
 const timeLimitForChange = 5;
-let divNumber = 1;
+// let divNumber = 1;
+
 function timekeeper () {
     seconds++;
-    let currentQuestion = document.querySelector(`.options-div${divNumber}`);
-    
-    if(seconds % secondsPerQuestion == 0){
+    // let currentQuestion = document.querySelector(`.options-div${divNumber}`);
+    document.querySelector(".timer").textContent = `Total time: ${secondsPerQuestion * limit} \n Time in Seconds: ${seconds}`;
 
-        if (currentQuestion === null){
+    if(seconds % (secondsPerQuestion * limit) === 0){
+
+        // if (currentQuestion === null){
             alert("Time's Up!!!");
             clearInterval(interval);
             document.querySelector(".timer").remove();
             document.querySelector(".submit").click(); 
             return;
-        }
+        // }
 
-        currentQuestion.childNodes.forEach((node) => {
-            node.disabled = true;
-        })
 
-        divNumber += 1;
+        // divNumber += 1;
     }
 
-    currentQuestion.childNodes.forEach((childNode) => {
+    // currentQuestion.childNodes.forEach((childNode) => {
 
-        childNode.onclick = function(){
-            // five second rule 
-            if(seconds % 10 <= timeLimitForChange){
-                return;
-            }
-            else{
+    //     childNode.onclick = function(){
+    //         // five second rule 
+    //         if(seconds % 10 <= timeLimitForChange){
+    //             return;
+    //         }
+    //         else{
 
-                if (childNode.tagName.toLowerCase() === "select"){
+    //             if (childNode.tagName.toLowerCase() === "select"){
                     
-                    if (childNode.multiple){
-                        return;
-                    }
+    //                 if (childNode.multiple){
+    //                     return;
+    //                 }
 
-                    childNode.disabled = true;
-                }
+    //                 childNode.disabled = true;
+    //             }
 
-                let elementFromLabel = document.getElementById(childNode.getAttribute("for"));
+    //             let elementFromLabel = document.getElementById(childNode.getAttribute("for"));
                 
-                if (elementFromLabel !== undefined || elementFromLabel !== null){
-                    childNode = elementFromLabel;
-                }
+    //             if (elementFromLabel !== undefined || elementFromLabel !== null){
+    //                 childNode = elementFromLabel;
+    //             }
 
-                if (childNode.type === "checkbox" || childNode.type === "radio"){
-                    childNode.checked = true;
-                }
+    //             if (childNode.type === "checkbox" || childNode.type === "radio"){
+    //                 childNode.checked = true;
+    //             }
 
-                childNode.parentNode.childNodes.forEach((node) =>{
-                    node.disabled = true;
-                });
-            }
+    //             childNode.parentNode.childNodes.forEach((node) =>{
+    //                 node.disabled = true;
+    //             });
+    //         }
 
-        }
+    //     }
 
-    })
+    // })
 
-    document.querySelector(".timer").textContent = `Total time: ${secondsPerQuestion * limit} \n Time in Seconds: ${seconds}`;
 }
 
 const divElement = document.querySelector(".container");
