@@ -1,20 +1,19 @@
 const body = document.body;
 
-const quizBody = document.createElement("form");
-quizBody.id = "quizBody";
+const mainBody = document.createElement("div");
 
 let timeInterval;
 const timeAlloted = 60;
 let timeLeft = timeAlloted;
 
+const timeElement = document.createElement("div");
+timeElement.className = "time";
+timeElement.textContent = `Time left: ${timeLeft} seconds`;
+mainBody.appendChild(timeElement);
 
 
 
 function displayTimer() {
-
-    const timeElement = document.createElement("div");
-    timeElement.className = "time";
-    quizBody.appendChild(timeElement);
     timeInterval = setInterval(() => {
         timeLeft--;
         timeElement.textContent = `Time left: ${timeLeft} seconds`;
@@ -22,12 +21,22 @@ function displayTimer() {
         if (timeLeft === 0) {
             clearInterval(timeInterval);
             handleSubmit(new Event("submit"));
+            
         }
 
     }, 1000);
 }
 
+mainBody.appendChild(timeElement);
+
 displayTimer();
+
+body.appendChild(mainBody);
+
+
+
+const quizBody = document.createElement("form");
+quizBody.id = "quizBody";
 
 function disableAnswers(inputEl) {
     const ansElement = document.getElementsByName(inputEl.name);
@@ -62,11 +71,19 @@ function disablefunction(element, showCount, showTimeDiv, time) {
     if (element.disabled === true) {
         return;
     }
-    element.checked = true;
-
+    
+    
+    if(element.checked === true)
+    {
+        element.checked = false;
+    }
+    else{
+        element.checked = true;
+    }
     if (showCount === false) {
         return;
     }
+    
 
     showTimeDiv.className = "show-time";
     showTimeDiv.innerText = `You Have ${time} sec`;
@@ -516,7 +533,8 @@ while (questionCount) {
             if (question.type === "checkbox" || question.type === "radio") {
                 const inputEl = document.createElement("input");
                 inputEl.type = question.type === "checkbox" ? "checkbox" : "radio";
-                inputEl.name = question.type === "checkbox" ? `${question.name}-${index}` : question.name;
+                inputEl.name = question.name;
+                //question.type === "checkbox" ? `${question.name}-${index}` : 
 
                 const labelEl = document.createElement("label");
                 inputEl.value = option;
