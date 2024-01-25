@@ -1,6 +1,19 @@
 
+const questSize = 6;
 function genrateNumber(num) {
     return Math.floor(Math.random() * num);
+}
+function disableButton(inputEl) {
+    const parent = inputEl.parentElement.parentElement.childNodes;
+    parent.forEach(element => {
+        element.querySelector('input').disabled = true;
+    })
+}
+function disableSelect(inputEl) {
+    const parent = inputEl.parentElement.childNodes;
+    parent.forEach(element => {
+        element.disabled = true;
+    })
 }
 
 function randomString(lenString) {
@@ -13,13 +26,19 @@ function randomString(lenString) {
     }
     return res;
 }
+const title = document.createElement('div');
+title.innerText = "Tech quiz";
+title.setAttribute('class', 'title');
 const button = document.querySelector('.start-button');
 const bodyEl = document.getElementById('body');
+
 button.addEventListener('click', () => {
     start();
     button.setAttribute('class', 'hidden-block');
 })
+
 function start() {
+    bodyEl.appendChild(title);
     const divEl = document.createElement('div');
     const formEl = document.createElement('form');
     const buttonEl = document.createElement('button');
@@ -27,6 +46,28 @@ function start() {
     buttonEl.innerText = 'Submit';
     buttonEl.setAttribute('class', 'button')
     divEl.setAttribute('class', 'divEL');
+
+    let totaltime = setTimeout(() => {
+        clearInterval(time);
+        formSubmit();
+        timer.innerText = `Times Up!`;
+    }, questSize * 5000);
+
+    let sec = questSize * 5;
+    let secs = `${sec}s`;
+
+    let time = setInterval(() => {
+        sec--;
+
+        if (sec < 10) {
+            secs = `0${sec}`;
+        }
+        else {
+            secs = `${sec}`;
+        }
+
+        timer.innerText = `Time Left :${secs}s`;
+    }, 1000);
 
     const inputs = [
         // {
@@ -303,9 +344,10 @@ function start() {
         {
             "question": "Which country has 2nd largest population?",
             "type": "select",
+            "multiple": false,
             "options": [
                 {
-                    value: "",
+                    value: "0",
                     label: "Select Country"
                 },
                 {
@@ -325,7 +367,31 @@ function start() {
                     label: "Pakistan"
                 }
             ],
-            "correctans": 1
+            "correctans": ['1']
+        },
+        {
+            "question": "Select nearest countries to india ?",
+            "type": "select",
+            "multiple": true,
+            "options": [
+                {
+                    value: 1,
+                    label: "Africa"
+                },
+                {
+                    value: 2,
+                    label: "USA"
+                },
+                {
+                    value: 3,
+                    label: "China"
+                },
+                {
+                    value: 4,
+                    label: "Pakistan"
+                }
+            ],
+            "correctans": ['3', '4']
         },
         {
             "question": "Select similar methods among given?",
@@ -348,13 +414,13 @@ function start() {
                     label: "concat()"
                 }
             ],
-            "correctans": [123]
+            "correctans": ['1', '2', '3']
         }
     ]
 
     const numbers = [];
-    const questCount = 4;
-    for (let i = 0; i < questCount; i++) {
+    for (let i = 0; i < questSize; i++) {
+
         let value = genrateNumber(inputs.length);
         while (numbers.includes(value)) {
             value = genrateNumber(inputs.length);
@@ -362,17 +428,28 @@ function start() {
         numbers.push(value);
     }
 
-    for (let i = 0; i < numbers.length; i++) {
+    for (let i = 0; i < questSize; i++) {
+
         const p = document.createElement('p');
         const currEl = inputs[numbers[i]];
         const no = i + 1;
         p.innerText = `Q${no}:${currEl.question}`;
+        p.setAttribute('class', `Q${no}`);
+        p.setAttribute('type', currEl.type);
+
+        const timeBox = document.createElement('div');
+        timeBox.setAttribute('id', `timerQ${no}`);
+        timeBox.setAttribute('class', 'timeBox');
+        p.append(timeBox);
         formEl.appendChild(p);
+
         const optionHolder = document.createElement('div');
         optionHolder.setAttribute('id', `Q${no}holder`);
-        const selector = document.createElement('select');
-        selector.name = `Q${no}`;
 
+        const selector = document.createElement('select');
+        if (currEl.multiple === true)
+            selector.multiple = "multiple";
+        let flag = 0;
         for (let j = 0; j < currEl.options.length; j++) {
 
             const optionBox = document.createElement('div');
@@ -395,45 +472,85 @@ function start() {
                 optionBox.appendChild(inputEl);
                 optionBox.appendChild(labelEl);
                 const breakEl = document.createElement('br');
-                optionBox.setAttribute('ans', currEl.correctans);
                 optionBox.appendChild(breakEl);
                 optionHolder.appendChild(optionBox);
                 optionBox.addEventListener('click', () => {
-                    inputEl.checked = true;
+                    if (!inputEl.disabled) {
+                        inputEl.checked = true;
+                        if (flag === 0) {
+                            flag = 1;
+                            let sec = 5;
+                            let remTime = setInterval(() => {
+                                const time = document.querySelector(`#timerQ${no}`);
+                                if (time != null)
+                                    time.innerText = `Time left: ${sec}`;
+                                sec--;
+                                if (sec < 0) {
+                                    inputEl.disabled = true;
+                                    if (time != null)
+                                        time.innerText = `Times Up!`;
+                                    disableButton(inputEl);
+                                    clearInterval(remTime);
+                                }
+                            }, 1000);
+                        }
+                    }
+
                 })
             }
 
             else if (currEl.type === 'input') {
-
                 const inputEl = document.createElement('input');
                 inputEl.id = string;
                 inputEl.name = `Q${no}`;
                 inputEl.type = 'text';
                 inputEl.className = 'option-box';
-                inputEl.placeholder = currEl.options[j].label;
+                inputEl.placeholder = "type here";
                 optionBox.appendChild(inputEl);
                 optionBox.setAttribute('id', `Q${no}`);
                 const breakEl = document.createElement('br');
-                optionBox.setAttribute('ans', currEl.correctans);
                 optionBox.appendChild(breakEl);
                 optionHolder.appendChild(optionBox);
             }
-
             else if (currEl.type === 'select') {
-
                 const optionEl = document.createElement("option");
                 optionEl.value = currEl.options[j].value;
+                optionEl.setAttribute("name", `Q${no}`);
+                optionEl.setAttribute('class', 'option-box');
                 optionEl.textContent = currEl.options[j].label;
                 optionEl.setAttribute('id', `Q${no}${currEl.options[j].value}`);
-                optionEl.setAttribute('ans', `${currEl.correctans}`);
                 selector.appendChild(optionEl);
+                selector.addEventListener('change', () => {
+                    console.log("clicked");
+                    if (!optionEl.disabled) {
+                        optionEl.checked = true;
+                        if (flag === 0) {
+                            flag = 1;
+                            let sec = 5;
+                            const time = document.querySelector(`#timerQ${no}`);
+                            let remTime = setInterval(() => {
+                                if (time != null)
+                                    time.innerText = `Time left: ${sec}`;
+                                sec--;
+                                if (sec < 0) {
+                                    optionEl.disabled = true;
+                                    if (time != null)
+                                        time.innerText = `Times Up!`;
+                                    disableSelect(optionEl);
+                                    clearInterval(remTime);
+                                }
+                            }, 1000);
+                        }
+                    }
+
+                })
             }
+
         }
 
         if (currEl.type === 'select') {
-
-            optionHolder.appendChild(selector);
             selector.setAttribute('class', `selector`);
+            optionHolder.appendChild(selector);
         }
 
         if (currEl.type === 'radio' || currEl.type === 'checkbox')
@@ -441,86 +558,104 @@ function start() {
         formEl.appendChild(optionHolder);
     }
 
-    let correctAnscount;
-    formEl.addEventListener("submit", function (e) {
-        correctAnscount = 0;
-        e.preventDefault();
-        const formData = new FormData(formEl);
-        formData.forEach(function (value, key) {
-            console.log(value + ' ' + key);
-
-            if (value.length === 1) {
-
-                const optionEl = document.getElementById(`${key}${value}`) || document.getElementById(key);
-                const correctAnswer = optionEl.getAttribute("ans");
-
-                if (correctAnswer.includes(value)) {
-                    correctAnscount++;
-                    optionEl.className = "show-block-correct";
-
-                }
-                else {
-                    optionEl.className = "show-block-wrong";
-                    if (correctAnswer.length === 1) {
-                        const correctEl = document.getElementById(key + correctAnswer);
-                        correctEl.className = "show-block-correct";
-                    }
-                    else {
-                        console.log(correctAnswer);
-                        for (ele of correctAnswer) {
-                            console.log(`${key}${ele}`);
-                            const correctEl = document.getElementById(`${key}${ele}`);
-                            correctEl.className = "show-block-correct";
-                        }
-                    }
-                }
-            }
-            else {
-                const optionEl = document.getElementById(key);
-                const correctAnswer = optionEl.getAttribute("ans");
-
-                if (correctAnswer === value) {
-
-                    correctAnscount++;
-                    optionEl.className = "show-block-correct";
-                    optionEl.innerHTML = `${correctAnswer}`;
-                }
-                else {
-                    optionEl.className = "show-block-wrong";
-                    optionEl.innerHTML = `${value}`;
-                }
-            }
-
-        });
-        console.log("corCount:" + correctAnscount);
-        result.innerHTML = "Total no of Wrong Answers: " + (10 - correctAnscount) + "<br>" + " Total no of Correct Answers: " + correctAnscount + " <br>Total Score: " + Math.round((correctAnscount / 10) * 100) + "%";
-        result.className = "result";
-    })
     const breakEl = document.createElement('br');
     const result = document.createElement('div');
     const divEl2 = document.createElement('div');
-
+    const timer = document.createElement('div');
+    timer.innerText = `Time Left :${secs}`;
     divEl2.setAttribute('class', 'form2');
-    divEl2.innerHTML = "Welcome to Genral Knowledge Quiz<br><br>Instructions:<br> Total 10 question will be given.<br> User must attempt all 10 questions. <br> Score will be displayed below.";
+    timer.setAttribute('class', 'timer');
+    divEl2.innerHTML = `Welcome to Genral Knowledge Quiz<br>Instructions:<br> Total ${questSize} question will be given.<br> User must attempt all ${questSize} questions. <br> Score will be displayed below.`;
     result.setAttribute('class', 'hidden-block');
     formEl.appendChild(breakEl);
     formEl.appendChild(buttonEl);
     divEl2.appendChild(result);
+    divEl2.appendChild(timer);
     divEl.appendChild(formEl);
     divEl.appendChild(divEl2);
     bodyEl.appendChild(divEl);
 
+    let correctAnscount;
+    formEl.addEventListener("submit", function (e) {
+        e.preventDefault();
+        formSubmit();
+    })
+
+    function formSubmit(params) {
+        clearInterval(time);
+        clearInterval(totaltime);
+        correctAnscount = 0;
+        for (let i = 1; i <= questSize; i++) {
+            const curr = inputs[numbers[i - 1]];
+            const questType = curr.type;
+
+            if (questType === "radio") {
+                const selectedElement = document.querySelector(`input[name="Q${i}"]:checked`);
+                if (selectedElement != null) {
+                    if (curr.correctans === selectedElement.value)
+                        correctAnscount++;
+                    else
+                        selectedElement.parentNode.className = "show-block-wrong";
+                }
+            }
+            else if (questType === "checkbox" || questType === "select") {
+
+                const selectedElement = (questType === "checkbox") ? document.querySelectorAll(`input[name="Q${i}"]:checked`) : document.querySelectorAll(`[name="Q${i}"]:checked`);
+                if (selectedElement.length !== 0) {
+                    let ans = 0;
+                    for (j of selectedElement) {
+                        if (curr.correctans.includes(j.value))
+                            ans++;
+                        else
+                            questType === "checkbox" ? j.parentNode.className = "show-block-wrong" : j.className = "show-block-wrong";
+                    }
+                    if (ans === selectedElement.length)
+                        correctAnscount++;
+                }
+            }
+            else if (questType === "input") {
+                const selectedElement = document.querySelector(`input[name="Q${i}"]`);
+                if (selectedElement !== null) {
+                    if (curr.correctans === selectedElement.value) {
+                        selectedElement.className = "show-block-correct"
+                        correctAnscount++;
+                    }
+                    else
+                        selectedElement.className = "show-block-wrong";
+                }
+            }
+
+            //show correct option
+            const timeBox = document.querySelector(`#timerQ${i}`);
+            timeBox.remove();
+            const ans = curr.correctans;
+            const type = curr.type;
+            if (type !== 'input') {
+                for (let j = 0; j < ans.length; j++) {
+                    const ele = document.querySelector(`[id=Q${i}${ans[j]}]`);
+                    ele.className = 'show-block-correct';
+                    if (type != "radio" && type != "checkbox")
+                        disableSelect(ele);
+                    else {
+                        const parent = ele.parentElement.childNodes;
+                        parent.forEach(element => {
+                            element.disabled = true;
+                        });
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        // console.log("corCount:" + correctAnscount);
+        result.innerHTML = "Total no of Wrong Answers: " + (questSize - correctAnscount) + "<br>" + " Total no of Correct Answers: " + correctAnscount + " <br>Total Score: " + Math.round((correctAnscount / questSize) * 100) + "%";
+        result.className = "result";
+    }
 }
 
 
-// optionHolder.addEventListener('click', function (e) { });
 
-// optionHolder.addEventListener('click', function (e) {
 
-//     console.log(e.target.value);
-// const selectedEl = document.getElementById(`Q${no}val`);
-// setTimeout(() => {
-//     selectedEl.disabled = true;
-//     console.log("Selected option locked!");
-// }, 3000);
-// })

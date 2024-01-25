@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>state</title>
+</head>
+
+<body>
+    <b id="p1">Home</b>
+    <b id="p2">AboutUs</b>
+    <b id="p3">Contact</b>
+    <p id="p">Home Content</p>
+    <script>
+        const content = { "/example/Home.html": "Home Content", "/example/AboutUs.html": "About Content", "/example/Contact.html": "Contact Content" }
+        const p = document.querySelector("#p");
+        const p1 = document.querySelector('#p1');
+        p1.addEventListener("click", () => {
+            window.history.pushState("", "", "/example/Home.html");
+            p.innerHTML = "Home Content";
+        })
+        const p2 = document.querySelector('#p2');
+        p2.addEventListener("click", () => {
+            window.history.pushState("", "", "/example/AboutUs.html");
+            p.innerHTML = "About Content";
+        })
+        const p3 = document.querySelector('#p3');
+        p3.addEventListener("click", () => {
+            window.history.pushState("", "", "/example/Contact.html");
+            p.innerHTML = "Contact Content";
+        })
+        addEventListener("popstate", (e) => {
+            e.preventDefault()
+            const curr = window.location.pathname;
+            p.innerHTML = content[curr];
+        })
+    </script>
+</body>
+
+</html>
