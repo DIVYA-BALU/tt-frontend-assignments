@@ -1,12 +1,18 @@
-.form-div{
-  background-color: rgb(255, 255, 255);
+.start-form-div{
+  background-color: rgb(236, 245, 246);
+  display: flex;
+  justify-content: center;
+  font-family: 'Salsa', cursive;
+}
+.open-form-div{
+  background-color: rgb(21, 21, 48);
   display: flex;
   justify-content: center;
   font-family: 'Salsa', cursive;
 }
 .quiz-start-button{
   color: white;
-  border-radius: 20px;
+  border-radius: 12px;
   border: 2px solid;
   border-color: black;
   background-color: rgb(21, 21, 48);
@@ -16,28 +22,28 @@
   padding-right: 10px;
   text-align: center;
   font-family: 'Salsa', cursive;
+  justify-content: center;
   
+}
+.quiz-start-button:hover{
+  cursor: pointer;
 }
 .quiz-form{
   align-items: center;
-  background-color: rgb(240, 237, 237);
+  background-color: rgb(236, 245, 246);
   border: 3px solid;
   border-color: black;
   border-radius: 10px;
   width: 800px;
   padding-left: 40px;
+  padding-right: 40px;
   padding-bottom: 40px;
+  padding-top: 40px;
 }
 .correct-answer{
   border: 2px black solid;
   border-radius: 2px;
-  background-color: rgb(72, 255, 182);
-  border: 2px solid rgb(0, 164, 58);
-}
-.right-answer{
-  border: 2px solid rgb(0, 164, 58);
-  color: rgb(72, 255, 182);
-  background-color: rgb(72, 255, 182);
+  background-color: rgb(72, 255, 182) ;
 }
 .question-container{
   margin-top: 20px;
@@ -63,4 +69,24 @@
 }
 .choice-div{
   margin-top: 4px;
+}
+.buttons-div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.submit-button{
+  color: white;
+  border-radius: 10 px;
+  background-color: rgb(21, 21, 48);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  font-family: 'Salsa', cursive;
+  justify-content: center;
+}
+.over-all-timer-div{
+  text-align: right ;
 }

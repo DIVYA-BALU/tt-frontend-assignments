@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+    
+    <a href="" id="home">hi click here to go to home page</a>
+    <a href="" id="about">hi click here to go about page</a>
+    <a href="" id="picture">hi click here to go to picture page</a>
+    <div id="div1">
+        
+    </div>
+
+	<script>
+        const divEl = document.getElementById("div1");
+        const contentArray = ["Page","Home","About","Picture"];
+        const url = ["/quiz/history.html/home","/quiz/history.html/about","/quiz/history.html/picture"];
+        const idList = ["home","about","picture"];
+
+        function content(index){
+                divEl.innerText = contentArray[index];
+        }
+
+        function addHistory(index){
+            window.history.pushState("","", url[index]);
+        }
+
+        function navigator(id,index){
+            document.getElementById(id).addEventListener("click", function(event){
+            event.preventDefault()
+            content(index+1);
+            addHistory(index)
+            });
+
+        }
+
+        for(let index = 0; index < idList.length; index++){
+            navigator(idList[index],index);
+        }
+
+        addEventListener("popstate", function (e) {
+            e.preventDefault();
+            const arr = e.currentTarget.location.href.split("/")
+            const page = arr[arr.length - 1];
+            console.log(page);
+            if(page === "home"){
+                content(1);
+            }
+            else if(page === "about"){
+                content(2);
+            }
+            else if(page === "picture"){
+                content(3);
+            }
+            else if(page === "history.html"){
+                content(0);
+            }
+
+        });
+
+        content(0);
+
+	</script>
+</body>
+
+</html>

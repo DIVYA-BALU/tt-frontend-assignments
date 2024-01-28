@@ -449,6 +449,11 @@ const questions = [
   }
 ]
 
+const overAllTimeInSeconds = 100;
+const inputDisableTimeInSeconds = 5;
+const timeForDisableInput = 5*1000;
+const timerObject = {};
+const n = 7;
 const openedQuestions = [];
 let score = 0;
 const answerLabelsRandomName = [];
@@ -456,9 +461,9 @@ const answerLabelsRandomName = [];
 function generateRandomString(lenString) {
   lenString = lenString === undefined ? 7 : lenString;
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
-
+  
   let resultRandomString = '';
-
+  
   for (var i = 0; i < lenString; i++) {
     let randomNumber = Math.floor(Math.random() * characters.length);
     resultRandomString += characters.substring(randomNumber, randomNumber + 1);
@@ -468,7 +473,7 @@ function generateRandomString(lenString) {
 }
 
 const div1 = document.querySelector('body');
-div1.className = "form-div";
+div1.className = "start-form-div";
 
 const startButton = document.createElement('button');
 startButton.className = 'quiz-start-button';
@@ -477,199 +482,308 @@ startButton.addEventListener('click', questionsPage);
 
 div1.appendChild(startButton);
 
+function timerspan(timerDiv){
+  timeInSeconds = timerObject[timerDiv.id].remainingTime;
+  const hours = Math.floor(timeInSeconds / 3600);
+  const minutes = Math.floor((timeInSeconds % 3600) / 60);
+  const seconds = timeInSeconds % 60;
+  
+  let result = '';
+  
+  if (hours > 0) {
+    result += hours + 'h ';
+  }
+  
+  if (minutes > 0 || hours > 0) {
+    result += minutes + 'm ';
+  }
+  
+  result += seconds + 's';
+  timerDiv.querySelector('#timer-span').textContent = result;
+  timerObject[timerDiv.id].remainingTime--;
+
+  if(timeInSeconds === 0)
+  {
+    console.log('in if t===0');
+    clearInterval(timerObject[timerDiv.id].intervalId);
+    timerDiv.remove();
+    console.log(timerDiv.id);
+    if(timerDiv.id === 'over-all-timer-div')
+    {
+      doValidation();
+    }
+  }
+
+}
+
 function questionsPage() {
   startButton.remove();
-
+  
+  const formDiv =document.querySelector('body');
+  formDiv.classList.add('open-form-div');
+  
   const quizForm = document.createElement('form');
   quizForm.className = "quiz-form";
   quizForm.method = 'post';
   quizForm.action = 'javascript:void(0)';
+  
   const heading = document.createElement('h1');
   heading.textContent = 'Quiz';
+
   div1.appendChild(quizForm);
   quizForm.appendChild(heading);
 
-  let n = 10;
-  let i = 0;
+  const overAllTimerDiv =createTimerDiv('over-all-timer','Time left');
+  quizForm.appendChild(overAllTimerDiv);
+  
+  overAllTimerIntervalId = setInterval(() => timerspan(overAllTimerDiv),1000);
 
+  addTimerInfo(overAllTimerDiv.id,overAllTimerIntervalId,overAllTimeInSeconds);
+  timerspan(overAllTimerDiv);
+  
+  let i = 0;
+  
   while (i < n) {
     let random = Math.floor(Math.random() * questions.length);
-
+    
     if (openedQuestions.includes(random))
-      continue;
-
-    openedQuestions.push(random);
-    const questionDiv = document.createElement('div');
-    questionDiv.className = "question-container";
-
-    const qlabel = document.createElement('label');
-    qlabel.className = "qlabel";
-    qlabel.textContent = `${i + 1}. ${questions[random].question}`;
-
-    questionDiv.appendChild(qlabel);
-
-    const choicesDiv = document.createElement('div');
-    choicesDiv.className = 'choices-div';
-
-    if (questions[random].type === 'text') {
-      const input = document.createElement('input');
-      input.type = 'text';
-      input.id = `q${random + 1}`;
-      input.className = 'text-box';
-      choicesDiv .appendChild(input);
-    }
-    else if (questions[random].type === 'dropdown') {
-      const input = document.createElement('select');
-      input.id = `q${random + 1}`;
-      input.className = 'dropdown-box';
-
-      
-      questions[random].choices.forEach(choice =>{
-        const option = document.createElement('option');
-        option.textContent = choice.option;
-        input.appendChild(option);
-      })
-
-      const option = document.createElement('option');
-      option.textContent = 'Select';
-      option.disabled = true;
-      option.selected = true;
-      option.className = 'disabled-select';
-      
-      input.appendChild(option);
-       choicesDiv.appendChild(input);
-
-    }
-    else {
-      questions[random].choices.forEach(choice => {
-        const input = document.createElement('input');
-        const randomName = generateRandomString(10);
-
-        if (questions[random].type === 'radio')
-          input.type = 'radio';
-        else if (questions[random].type === 'checkbox')
-          input.type = 'checkbox';
-
-        input.value = choice.option;
-        input.id = randomName;
-        input.className = 'input-buttons';
-        input.name = `q${random + 1}`;
-
-        if (input.type === 'radio')
-          input.required = true;
-
-        const choiceLabel = document.createElement('label');
-        choiceLabel.className = 'choice-label';
-        choiceLabel.textContent = choice.option;
-        choiceLabel.setAttribute('for', randomName);
-
-        if (choice.is_answer)
-          answerLabelsRandomName.push(randomName);
-
-          const choiceDiv =document.createElement('div');
-          choiceDiv.appendChild(input);
-          choiceDiv.appendChild(choiceLabel);
-          choiceDiv.className = 'choice-div';
-          choicesDiv.appendChild(choiceDiv);
-      })
-    }
-
-
-    questionDiv.appendChild(choicesDiv);
-    quizForm.appendChild(questionDiv);
-    div1.appendChild(quizForm);
-
-    i++;
+    continue;
+  
+  openedQuestions.push(random);
+  const questionDiv = document.createElement('div');
+  questionDiv.className = "question-container";
+  
+  const qlabel = document.createElement('label');
+  qlabel.className = "qlabel";
+  qlabel.textContent = `${i + 1}. ${questions[random].question}`;
+  
+  questionDiv.appendChild(qlabel);
+  
+  const choicesDiv = document.createElement('div');
+  choicesDiv.className = 'choices-div';
+  choicesDiv.id = `${i+1}-choices-div-id`;
+  
+  if (questions[random].type === 'text') {
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.id = `q${random + 1}`;
+    input.className = 'text-box';
+    input.addEventListener('click',() => disable(choicesDiv));
+    choicesDiv .appendChild(input);
   }
+  else if (questions[random].type === 'dropdown') {
+    const input = document.createElement('select');
+    input.id = `q${random + 1}`;
+    input.className = 'dropdown-box';
+    
+    
+    questions[random].choices.forEach(choice =>{
+      const option = document.createElement('option');
+      option.textContent = choice.option;
+      option.addEventListener('click',() => disable(choicesDiv));
+      input.appendChild(option);
+    })
+    
+    const option = document.createElement('option');
+    option.textContent = 'Select';
+    option.disabled = true;
+    option.selected = true;
+    option.className = 'disabled-select';
+    
+    input.appendChild(option);
+    choicesDiv.appendChild(input);
+    
+  }
+  else {
+    questions[random].choices.forEach(choice => {
+      const input = document.createElement('input');
+      const randomName = generateRandomString(10);
+      
+      if (questions[random].type === 'radio')
+      input.type = 'radio';
+    else if (questions[random].type === 'checkbox')
+      input.type = 'checkbox';
+    input.addEventListener('click',() => disable(choicesDiv));
+      
+    input.value = choice.option;
+    input.id = randomName;
+    input.className = 'input-buttons';
+    input.name = `q${random + 1}`;
+    
+    if (input.type === 'radio')
+    input.required = true;
+  
+  const choiceLabel = document.createElement('label');
+  choiceLabel.className = 'choice-label';
+  choiceLabel.textContent = choice.option;
+  choiceLabel.setAttribute('for', randomName);
+  
+  if (choice.is_answer)
+  answerLabelsRandomName.push(randomName);
 
-  const submitButton = document.createElement('button');
-  submitButton.id = 'submit-button';
-  submitButton.type = 'submit';
-  submitButton.textContent = 'Submit';
-  quizForm.appendChild(submitButton);
-  quizForm.addEventListener('submit', doValidation);
-
+const choiceDiv =document.createElement('div');
+choiceDiv.appendChild(input);
+choiceDiv.appendChild(choiceLabel);
+choiceDiv.className = 'choice-div';
+choicesDiv.appendChild(choiceDiv);
+})
 }
 
-function doValidation(event) {
-  event.preventDefault();
+questionDiv.appendChild(choicesDiv);
+quizForm.appendChild(questionDiv);
+div1.appendChild(quizForm);
 
+i++;
+}
+const submitButton = document.createElement('button');
+submitButton.id = 'submit-button';
+submitButton.className = 'submit-button';
+  submitButton.type = 'submit';
+  submitButton.textContent = 'Submit';
+  
+  const buttonsDiv = document.createElement('div');
+  buttonsDiv.className = 'buttons-div';
+  buttonsDiv.appendChild(submitButton);
+  quizForm.appendChild(buttonsDiv);
+  quizForm.addEventListener('submit', doValidation);
+  
+}
+
+function doValidation() {
+  
+  clearInterval(overAllTimerIntervalId);
+  
   for (let m = 0; m < answerLabelsRandomName.length; m++) {
     const choiceLabel = document.querySelector(`label[for="${answerLabelsRandomName[m]}"]`);
     choiceLabel.classList.add('correct-answer');
-  } 
-
+  }
+  
   for (let i = 0; i < openedQuestions.length; i++) {
-
+    
     if (questions[openedQuestions[i]].type === 'text') {
       const input = document.querySelector(`#q${openedQuestions[i] + 1}`);
-      console.log(questions[openedQuestions[i]].answer);
-
+      
       if (input.value === questions[openedQuestions[i]].answer) {
         score++;
         input.classList.add('correct-answer');
-        console.log(input);
       }
       else{
         input.classList.add('wrong-answer');
       }
-
-    }
-    else if (questions[openedQuestions[i]].type === 'dropdown') {
-      const input = document.querySelectorAll(`#q${openedQuestions[i] + 1}`);
-      console.log(input);
     }
     else {
       const answer = [];
-
+      
       for (let n = 0; n < questions[openedQuestions[i]].choices.length; n++) {
-
+        
         if (questions[openedQuestions[i]].choices[n].is_answer) {
           answer.push(questions[openedQuestions[i]].choices[n].option);
         }
-
+        
       }
-
-      const userSelectedAnswer = document.querySelectorAll(`input[name="q${openedQuestions[i] + 1}"]:checked`);
-
-      if (userSelectedAnswer !== null) {
-        const selectedValues = Array.from(userSelectedAnswer).map(checkbox => checkbox.value);
-        const allElementsInArray1ExistInArray2 = selectedValues.every(item => answer.includes(item));
-        const allElementsInArray2ExistInArray1 = answer.every(item => selectedValues.includes(item));
-
-        if (allElementsInArray1ExistInArray2 && allElementsInArray2ExistInArray1) {
-          score++;
-        }
-        else {
-          Array.from(userSelectedAnswer).forEach(checkbox => {
-            const labelId = checkbox.getAttribute('id');
-            const associatedLabel = document.querySelector(`label[for="${labelId}"]`);
-            if (!associatedLabel.classList.contains('correct-answer'))
+      
+      if (questions[openedQuestions[i]].type === 'dropdown')
+      {
+        userSelectedAnswer = document.getElementById(`q${openedQuestions[i]+1}`);
+        if(answer.includes(userSelectedAnswer.value))
+        score++;
+        else
+        userSelectedAnswer.classList.add('wrong-answer');
+      } 
+      else {
+        
+        const userSelectedAnswer = document.querySelectorAll(`input[name="q${openedQuestions[i] + 1}"]:checked`);
+      
+       if (userSelectedAnswer !== null) {
+         const selectedValues = Array.from(userSelectedAnswer).map(checkbox => checkbox.value);
+         const allElementsInArray1ExistInArray2 = selectedValues.every(item => answer.includes(item));
+         const allElementsInArray2ExistInArray1 = answer.every(item => selectedValues.includes(item));
+ 
+         if (allElementsInArray1ExistInArray2 && allElementsInArray2ExistInArray1) {
+           score++;
+          }
+          else {
+            Array.from(userSelectedAnswer).forEach(checkbox => {
+              const labelId = checkbox.getAttribute('id');
+              const associatedLabel = document.querySelector(`label[for="${labelId}"]`);
+              if (!associatedLabel.classList.contains('correct-answer'))
               associatedLabel.classList.add('wrong-answer');
           }
           );
+         }
+         
         }
-
       }
 
     }
-
+    
   }
-
+  
+  const formDiv =document.querySelector('body');
+  formDiv.classList.add('submit-form-div');
+  
   const quizForm = document.querySelector('.quiz-form');
-
+  
   const scoreCard = document.createElement('p');
   scoreCard.textContent = `You got ${score} / ${openedQuestions.length}`;
-
+  
   quizForm.appendChild(scoreCard);
-
+  
   const submitButton = document.querySelector('#submit-button');
   submitButton.remove();
 
   const reloadButton = document.createElement('button');
+  reloadButton.className = 'reload-button';
   reloadButton.type = 'reset';
   reloadButton.textContent = 'Restart';
-
+  
   quizForm.appendChild(reloadButton);
   quizForm.addEventListener('reset', () => { window.location.reload() })
 }
+
+function createTimerDiv(name,text){
+  const timerDiv = document.createElement('div');
+  timerDiv.className = `${name}-div`;
+  timerDiv.id = `${name}-div`;  
+  const timerText = document.createElement('p');
+  timerText.id = `timer-sext`;
+  timerText.textContent = `${text}  :  `;
+  const timerSpan = document.createElement('span')
+  timerSpan.id = `timer-span`;
+  timerText.appendChild(timerSpan);
+  timerDiv.appendChild(timerText);
+  return timerDiv;
+}
+
+function disable(choicesDiv){
+  console.log(timerObject[choicesDiv.id]);
+  if(timerObject[choicesDiv.id])
+  return;
+  else
+  {
+    console.log('in disable() else');
+    setTimeout(() => disableInputs(choicesDiv),timeForDisableInput);
+    choicesDiv.appendChild(createTimerDiv('input-disable-timer','Time left to make changes'));
+
+    inputDisableTimerIntervalId = setInterval(() => timerspan(choicesDiv),1000);
+    addTimerInfo(choicesDiv.id,inputDisableTimerIntervalId);
+    console.log(timerObject[choicesDiv.id]);
+    timerspan(choicesDiv);
+    
+  }
+}
+ 
+function disableInputs(choicesDiv){
+  const inputs = choicesDiv.querySelectorAll('input');
+  inputs.forEach(input => input.disabled = true);
+
+}
+
+function addTimerInfo(timerDivId,inputDisableTimerIntervalId,remainingTimeInSeconds = inputDisableTimeInSeconds){
+  timerObject[timerDivId] = {
+    remainingTime : remainingTimeInSeconds,
+    intervalId : inputDisableTimerIntervalId
+  }
+}
+
+//div is removed but we need to remove the timerDiv alone 
