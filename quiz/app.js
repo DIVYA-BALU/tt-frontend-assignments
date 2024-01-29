@@ -659,6 +659,7 @@ function randomIndex(arrLength,questionLimit) {
 }
 
 let currentQuestion;
+let iValue;
 
 function startQuiz() {
 
@@ -715,71 +716,73 @@ function startQuiz() {
     //     })
     // }
 
-    function localTimer(currentQuestion){
-        localTimerSeconds--;
+    // function localTimer(currentQuestion,iValue,localTimerSeconds){
+    //     console.log(localTimerSeconds)
+    //     localTimerSeconds--;
 
-        // let currentQuestion = document.querySelector(`.options-div${localDivNumber}`);
+    //     // let currentQuestion = document.querySelector(`.options-div${localDivNumber}`);
 
-        if(localTimerSeconds == 5){
-            this.currentQuestion = currentQuestion;
-        }
+    //     // if(localTimerSeconds == 5){
+    //     //     this.currentQuestion = currentQuestion;
+    //     //     this.iValue = iValue;
+    //     // }
 
-        if(localTimerSeconds < 0){
+    //     if(localTimerSeconds < 0){
 
-            this.currentQuestion.childNodes.forEach((node) => {
-                node.disabled = true;
-            })
+    //         currentQuestion.childNodes.forEach((node) => {
+    //             node.disabled = true;
+    //         })
 
-            clearInterval(localInterval);
-            document.querySelector(".timer-element").remove();
+    //         clearInterval(localInterval);
+    //         document.querySelector(`.timer-element-${iValue}`).remove();
 
-            // console.log(this.currentQuestion.getElementByTagName("p"));
-            // this.currentQuestion.getElementByTagName("p").remove();
-            localTimerSeconds = 6;
-            // localDivNumber += 1;
-        }
-        else{
-            document.querySelector(".timer-element").textContent = `Time left to choose option ${localTimerSeconds}`
-        }
+    //         // console.log(this.currentQuestion.getElementByTagName("p"));
+    //         // this.currentQuestion.getElementByTagName("p").remove();
+    //         localTimerSeconds = 6;
+    //         // localDivNumber += 1;
+    //     }
+    //     else{
+    //         document.querySelector(`.timer-element-${iValue}`).textContent = `Time left to choose option ${localTimerSeconds}`
+    //     }
 
-        // this.currentQuestion.childNodes.forEach((childNode) => {
+    //     // this.currentQuestion.childNodes.forEach((childNode) => {
 
-        //     childNode.onclick = function(){
-        //         // five second rule 
+    //     //     childNode.onclick = function(){
+    //     //         // five second rule 
 
-        //         if(localTimerSeconds % 10 > timeLimitForChange){
-        //             return;
-        //         }
-        //         else{
+    //     //         if(localTimerSeconds % 10 > timeLimitForChange){
+    //     //             return;
+    //     //         }
+    //     //         else{
     
-        //             if (childNode.tagName.toLowerCase() === "select"){
+    //     //             if (childNode.tagName.toLowerCase() === "select"){
                         
-        //                 if (childNode.multiple){
-        //                     return;
-        //                 }
+    //     //                 if (childNode.multiple){
+    //     //                     return;
+    //     //                 }
     
-        //                 childNode.disabled = true;
-        //             }
+    //     //                 childNode.disabled = true;
+    //     //             }
     
-        //             let elementFromLabel = document.getElementById(childNode.getAttribute("for"));
+    //     //             let elementFromLabel = document.getElementById(childNode.getAttribute("for"));
                     
-        //             if (elementFromLabel !== undefined || elementFromLabel !== null){
-        //                 childNode = elementFromLabel;
-        //             }
+    //     //             if (elementFromLabel !== undefined || elementFromLabel !== null){
+    //     //                 childNode = elementFromLabel;
+    //     //             }
     
-        //             if (childNode.type === "checkbox" || childNode.type === "radio"){
-        //                 childNode.checked = true;
-        //             }
+    //     //             if (childNode.type === "checkbox" || childNode.type === "radio"){
+    //     //                 childNode.checked = true;
+    //     //             }
     
-        //             childNode.parentNode.childNodes.forEach((node) =>{
-        //                 node.disabled = true;
-        //             });
-        //         }
+    //     //             childNode.parentNode.childNodes.forEach((node) =>{
+    //     //                 node.disabled = true;
+    //     //             });
+    //     //         }
     
-        //     }
+    //     //     }
     
-        // })
-    }
+    //     // })
+    // }
 
     function linebreaker() {
         const linebreak = document.createElement("br");
@@ -873,6 +876,7 @@ function startQuiz() {
             optionsElement.type = qna.options_type;
             optionsElement.name = `options-for-${(i + 1)}`;
             optionsElement.id = j;
+            optionsElement.maxLength = 50
             j += 1;
             optionsDiv.appendChild(optionsElement);
         }
@@ -912,19 +916,48 @@ function startQuiz() {
         divElementFlag.hidden = true;
         optionsDiv.appendChild(divElementFlag);
 
+        
         optionsDiv.addEventListener("click", () => {
+            console.log(optionsDiv.firstChild.type);
+            if(document.querySelector(".submit") === undefined || document.querySelector(".submit") === null){
+                return;
+            }
+            if(optionsDiv.firstChild.type === "text"){
+                return;
+            }
 
             if(document.querySelector(`.flag-${i}`).textContent === "0"){
-                localInterval = setInterval(localTimer,1000);
+                let localTimerSeconds = 6;
                 let timerElement = document.createElement("p");
-                timerElement.className = "timer-element";
+                timerElement.className = `timer-element-${i}`;
                 optionsDiv.appendChild(timerElement);
+
+                const localInterval = setInterval(() => {
+                    localTimerSeconds--;
+
+                    if(localTimerSeconds < 0){
+            
+                        optionsDiv.childNodes.forEach((node) => {
+                            node.disabled = true;
+                        })
+            
+                        clearInterval(localInterval);
+                        document.querySelector(`.timer-element-${i}`).remove();
+
+                    }
+                    else{
+                        document.querySelector(`.timer-element-${i}`).textContent = `Time left to choose option ${localTimerSeconds}`
+                    }
+
+                },1000);
+
                 divElementFlag.textContent = "1";
-                localTimer(optionsDiv);
+                // localTimer(optionsDiv,i,localTimerSeconds);
                 // fiveSecondRule(optionsDiv);
             }
             else{
                 // fiveSecondRule(optionsDiv);
+                this.localTimerSeconds--;
                 return;
             }
             currentQuestion = optionsDiv;
@@ -952,9 +985,10 @@ function startQuiz() {
         
         for(let j = 0; j < questionToDisplay.length; j++){
             let flag = 0;
+            let boxFlag = 0;
             let selectedOption = document.getElementsByName(`options-for-${(j + 1)}`);
             let boxSelections = [];
-            let boxSelectionsText = []
+            let boxSelectionsText = [];
 
             if(selectedOption.length === 0) {
                 let upperDiv = document.querySelector(`.options-div${(j + 1)}`);
@@ -962,16 +996,17 @@ function startQuiz() {
                 upperDiv.childNodes.forEach((node) => {
 
                     console.log(node.selectedOptions, node.tagName)
-                    if(node.tagName === "P"){
-                        return;
-                    }
-                    else{
+                    if(node.tagName !== "P"){
                         flag = 1;
+                        boxFlag = 1;
                         Array.from(node.selectedOptions).map((option) => { 
                             boxSelections.push(option.index.toString());
                             boxSelectionsText.push(option.textContent);
                         })
                     }
+                    // else{
+
+                    // }
 
                     node.disabled = true;
                     // node.selectedIndex = 0; // do we uncheck after submitted or not
@@ -986,6 +1021,7 @@ function startQuiz() {
                         
                         if(selected.checked){
                             flag = 1;
+                            boxFlag = 1;
                             boxSelections.push(selected.value);
                             boxSelectionsText.push(document.querySelector("label[for='" + selected.id + "']").innerText);
                             // selected.checked = false; // do we uncheck after submitted or not
@@ -1021,7 +1057,7 @@ function startQuiz() {
                 userSelectionText.push(boxSelectionsText);
             }
 
-            if(boxSelections.length > 0){
+            if(boxFlag === 1){
                 userSelection.push(boxSelections);
                 userSelectionText.push(boxSelectionsText);
             }
@@ -1034,11 +1070,14 @@ function startQuiz() {
         
         let score = 0;
         
-        for(let k = 0; k < valueOfAnswer.length;k++){
+        for(let k = 0; k < valueOfAnswer.length; k++){
             
             if(Array.isArray(valueOfAnswer[k])){
-                let answerEquals = valueOfAnswer[k].every((value,index) => { 
-                    return value === userSelection[k][index];
+                let answerEquals = valueOfAnswer[k].every((value,index) => {
+                    if(userSelection[k].length !== 0){
+                        return value === userSelection[k][index];
+                    }
+                    return false;
                 });
 
                 if(answerEquals){
