@@ -1,34 +1,17 @@
-
 const bodyEle = document.querySelector(".body-tag");
-const startOuterDivEle = document.createElement("div");
-startOuterDivEle.className = "front-page";
-const startQuizEle = document.createElement("button");
-startQuizEle.textContent = "StartQuiz";
-startQuizEle.className = "start-button";
+
 const divEle = document.createElement("div");
 divEle.className = "outer-div";
+
 const headingEle = document.createElement("div");
 headingEle.className = "heading-div";
 headingEle.textContent = "Tech Quiz";
-const timingFormEle = document.createElement("div");
-timingFormEle.className = "timing-form-div";
-const timingOuterEle = document.createElement("div");
-timingOuterEle.className = "timing-outer-div";
-const timingEle = document.createElement("div");
-timingEle.className = "timing-div";
-timingEle.classList.add("hidden");
+
 const formEle = document.createElement("form");
 formEle.className = "quiz-form";
-formEle.classList.add("hidden");
-const submitEle = document.createElement("button");
 
-submitEle.type = "submit"
-submitEle.textContent = "Submit";
-submitEle.className = "submit-button";
-
-divEle.appendChild(headingEle);
-startOuterDivEle.appendChild(startQuizEle);
-divEle.appendChild(startOuterDivEle);
+const startQuizEle = document.createElement("button");
+startQuizEle.textContent = "Start Quiz";
 
 
 
@@ -594,90 +577,6 @@ const inputs = [
 
 
 
-// to view quiz form after clicking start quiz button
-
-let interval;
-startQuizEle.addEventListener("click", function (event) {
-    startOuterDivEle.classList.add("hidden");
-    formEle.classList.remove("hidden");
-    timer();
-})
-
-const totalTime = 30;
-let remainingTime = totalTime;
-let updateTimer;
-function timer(){
-    updateTimer = setInterval(() => {
-        timingEle.classList.remove("hidden");
-        timingEle.textContent = `Remaining ${remainingTime} seconds left`;
-        if(remainingTime > 0){
-            remainingTime--;
-        }
-        else{
-            timingEle.textContent = "Time is up !";
-            validateForm();
-            disableInputIndividual();
-            clearInterval(updateTimer);
-        }
-    }, 1000);
-}
-
-
-
-
-
-
-// individual question timer
-
-function startQuestionTimer(inputEle, questionTime) {
-    console.log(inputEle.tagName);
-    const timer = inputEle.tagName === 'SELECT' ? inputEle.parentElement.parentElement.querySelector(".question-timer-div") : inputEle.parentElement.parentElement.parentElement.querySelector(".question-timer-div");
-    const interval = setInterval(() => {
-        console.log(questionTime);
-        timer.classList.remove("hidden");
-        timer.textContent = `${questionTime}`;
-        questionTime--;
-        if (questionTime < 0) {
-            timer.textContent = `Time's up!`;
-            disableInputSelection(inputEle);
-            clearInterval(interval);
-        }
-    }, 1000);
-}
-
-
-
-
-
-// disable input individually
-
-function disableInputIndividual(){
-    const inputElements = document.querySelectorAll(':is(input, option)');
-    console.log(inputElements);
-    inputElements.forEach(element => {
-        element.disabled=true;
-    })
-}
-
-
-
-
-
-// disable input with respect to parentelement
-
-function disableInputSelection(inputEle) {
-    const optionsDiv = inputEle.tagName === 'SELECT' ? inputEle.parentElement : inputEle.parentElement.parentElement;
-    optionsDiv.childNodes.forEach(element => {
-        if(inputEle.tagName === 'SELECT'){
-            element.disabled = true;
-        }
-        else{
-            element.querySelector("input").disabled = true;
-        }
-    })
-}
-
-
 
 
 // elements creation
@@ -687,319 +586,150 @@ let idValue = 1;
 let questionNumber = 1;
 const map = new Map();
 
-(
-    function quizCreation() {
-        while (map.size < totalQuestions) {
-            const traverse = randomNumber(inputs.length);
-            if (map.has(traverse)) {
-                continue;
+let innerDivEle;
+function quizCreation(traverse) {
+    map.set(traverse, 1);
+    const input = inputs[traverse];
+    innerDivEle = document.createElement("div");
+    innerDivEle.className = "section-div";
+    innerDivEle.setAttribute("question-div",questionNumber);
+    const questionsDivEle = document.createElement("div");
+    questionsDivEle.className = "question-div";
+    questionsDivEle.setAttribute("input-question-no", `${input.question_no}`);
+    questionsDivEle.textContent = `${questionNumber}) ${input.label_content}`;
+    innerDivEle.appendChild(questionsDivEle);
+    const brEle = document.createElement("br");
+    innerDivEle.appendChild(brEle);
+
+    const optionsDivEle = document.createElement("div");
+    optionsDivEle.className = "options-div";
+    const answerDivEle = document.createElement("div");
+    answerDivEle.className = "answer-div hidden";
+    let answer = [];
+
+    if (input.type === "radio" || input.type === "checkbox") {
+
+        let index = 0;
+
+        while (index < input.options.length) {
+            const innerOptionDivEle = document.createElement("div");
+            innerOptionDivEle.setAttribute("question-no", `${questionNumber}`);
+            innerOptionDivEle.setAttribute("value-no", `${input.options[index].value}`);
+            const inputEle = document.createElement("input");
+
+            if (input.type === "radio") {
+                inputEle.type = "radio";
             }
-
-            map.set(traverse, 1);
-            const input = inputs[traverse];
-            const innerDivEle = document.createElement("div");
-            innerDivEle.className = "section-div";
-            const questionsDivEle = document.createElement("div");
-            questionsDivEle.className = "question-div";
-            questionsDivEle.setAttribute("input-question-no", `${input.question_no}`);
-            questionsDivEle.textContent = `${questionNumber}) ${input.label_content}`;
-            innerDivEle.appendChild(questionsDivEle);
-            const brEle = document.createElement("br");
-            innerDivEle.appendChild(brEle);
-
-            const questionTimerEle = document.createElement("div");
-            questionTimerEle.className = "question-timer-div";
-            questionTimerEle.classList.add("hidden");
-            questionTimerEle.textContent = `5`;
-            innerDivEle.appendChild(questionTimerEle);
-
-
-            const optionsDivEle = document.createElement("div");
-            optionsDivEle.className = "options-div";
-            const answerDivEle = document.createElement("div");
-            answerDivEle.className = "answer-div hidden";
-            let answer = [];
-
-            if (input.type === "radio" || input.type === "checkbox") {
-
-                let index = 0;
-
-                let flag = 0;
-                while (index < input.options.length) {
-                    const innerOptionDivEle = document.createElement("div");
-                    innerOptionDivEle.className="individual-option";
-                    innerOptionDivEle.setAttribute("question-no", `${questionNumber}`);
-                    innerOptionDivEle.setAttribute("value-no", `${input.options[index].value}`);
-                    const inputEle = document.createElement("input");
-
-                    if (input.type === "radio") {
-                        inputEle.type = "radio";
-                    }
-                    else {
-                        inputEle.type = "checkbox"
-                    }
-
-                    inputEle.id = `${idValue}`;
-                    inputEle.value = input.options[index].value;
-                    inputEle.setAttribute("name", input.question_no);
-                    const labelEle = document.createElement("label");
-                    labelEle.textContent = input.options[index].content;
-                    labelEle.setAttribute("for", `${idValue}`);
-                    idValue++;
-
-                    innerOptionDivEle.appendChild(inputEle);
-                    innerOptionDivEle.appendChild(labelEle);
-                    optionsDivEle.appendChild(innerOptionDivEle);
-                    index++;
-
-                    answerDivEle.setAttribute("name", input.question_no);
-
-                    inputEle.addEventListener('click', function () {
-                        if (flag == 0 && !inputEle.disabled) {
-                            flag = 1;
-                            let questionTime = 5;
-                            startQuestionTimer(inputEle, questionTime);
-                        }
-                    })
-
-                }
-
-            }
-
-            else if (input.type === "select") {
-                optionsDivEle.classList.add("select-div-option");
-                const selectOptionEle = document.createElement("select");
-                selectOptionEle.setAttribute("question-no", `${questionNumber}`);
-
-                if (input.isMultiple === true) {
-                    selectOptionEle.multiple = "multiple";
-                }
-
-                let index = 0;
-                
-                while (index < input.options.length) {
-                    const optionsEle = document.createElement("option");
-                    optionsEle.textContent = `${input.options[index].content}`;
-                    optionsEle.setAttribute("id",`${idValue}`);
-                    optionsEle.setAttribute("name", `${input.question_no}`);
-                    optionsEle.value = `${input.options[index].value}`;
-                    selectOptionEle.appendChild(optionsEle);
-                    index++;
-                    idValue++;
-                }
-
-                let flag=0;
-                selectOptionEle.addEventListener('change',function(){
-                    if(flag==0 && !selectOptionEle.childNodes.disabled){
-                        console.log("fnsdn");
-                        let questionTime = 5;
-                        startQuestionTimer(selectOptionEle, questionTime);
-                        flag=1;
-                    }
-                })
-
-                optionsDivEle.appendChild(selectOptionEle);
-            }
-
             else {
-                const inputEle = document.createElement("input");
-                // inputEle.className=`text-div`
-                inputEle.setAttribute('question-no',`${questionNumber}`);
-                inputEle.setAttribute("name",input.question_no);
-                inputEle.setAttribute("id",`${idValue}`);
-                inputEle.type = "text";
-                optionsDivEle.appendChild(inputEle);
+                inputEle.type = "checkbox"
             }
 
-            if(input.type === "text"){
-                answer.push(input.answer);
-            }
-            else{
-                input.options.forEach(option => {
+            inputEle.id = `${idValue}`;
+            inputEle.value = input.options[index].value;
+            inputEle.setAttribute("name", input.question_no);
+            const labelEle = document.createElement("label");
+            labelEle.textContent = input.options[index].content;
+            labelEle.setAttribute("for", `${idValue}`);
+            idValue++;
 
-                    if (option.isAnswer === true) {
-                        answer.push(option.content);
-                    }
+            innerOptionDivEle.appendChild(inputEle);
+            innerOptionDivEle.appendChild(labelEle);
+            optionsDivEle.appendChild(innerOptionDivEle);
+            index++;
 
-                });
-            }
-            answerDivEle.textContent = `Correct answer : ${answer}`;
-
-
-            innerDivEle.appendChild(optionsDivEle);
-            questionNumber++;
-            innerDivEle.appendChild(answerDivEle);
-            formEle.appendChild(innerDivEle);
+            answerDivEle.setAttribute("name", input.question_no);
         }
-    }
-)();
-
-formEle.appendChild(submitEle);
-timingOuterEle.appendChild(timingEle);
-timingFormEle.appendChild(timingOuterEle);
-timingFormEle.appendChild(formEle);
-divEle.appendChild(timingFormEle);
-bodyEle.appendChild(divEle);
-
-
-
-
-
-const score = document.createElement("div");
-score.className = "score-div";
-
-
-
-
-// form validation
-
-function validateForm() {
-    const totalInputs = document.querySelectorAll("input");
-
-    totalInputs.forEach(element => {
-
-        if (element.parentElement.classList.contains("hidden-wrong")) {
-            element.parentElement.classList.remove("hidden-wrong");
-        }
-
-        else if (element.parentElement.classList.contains("hidden-correct")) {
-            element.parentElement.classList.remove("hidden-correct");
-        }
-
-    })
-
-    const totalOptions = document.querySelectorAll("option");
-    totalOptions.forEach(element => {
-
-        if (element.classList.contains("hidden-wrong")) {
-            element.classList.remove("hidden-wrong");
-        }
-
-        else if (element.classList.contains("hidden-correct")) {
-            element.classList.remove("hidden-correct");
-        }
-
-    })
-
-    let list = document.querySelectorAll(".answer-div");
-
-    list.forEach(element => {
-
-        if (!element.classList.contains("hidden")) {
-            element.classList.add("hidden");
-        }
-
-    });
-
-
-    let questionNumber = 1;
-    let correctAnswersCount = 0;
-
-    while (questionNumber <= 10) {
-        let list1 = document.querySelectorAll(`[question-no="${questionNumber}"]`);
-
-        let answer = [];
-        const sectionsDiv = document.querySelectorAll(".section-div");
-        const question = inputs[sectionsDiv[`${questionNumber-1}`].querySelector(".question-div").getAttribute(`input-question-no`)-1];
-        const type = question.type;
-
-        if(type !== "text"){
-            question.options.forEach(option => {
-                if (option.isAnswer === true) {
-                    answer.push(option.value);
-                }
-            });
-        }
-        else{
-            answer.push(question.answer);
-        }
-
-        let checkedInputs = [];
-        let flag = 0;
-
-        for (let i = 0; i < list1.length; i++) {
-            if ((type === "radio" || type === "checkbox") && list1[i].querySelector("input:checked")) {
-                const checkedValue = Number(list1[i].querySelector("input:checked").getAttribute("value"));
-                checkedInputs.push(checkedValue);
-
-                if (answer.includes(checkedValue)) {
-                    list1[i].classList.add("hidden-correct");
-                    flag++;
-                }
-
-                else {
-                    list1[i].classList.add("hidden-wrong");
-                    flag--;
-                }
-
-            }
-
-            else if (type === "select") {
-                const checkedInputs1 = list1[i].querySelectorAll("option:checked");
-
-                checkedInputs1.forEach(element => {
-
-                    if (answer.includes(Number(element.getAttribute("value")))) {
-                        element.classList.add("hidden-correct");
-                        flag++;
-                    }
-
-                    else {
-                        element.classList.add("hidden-wrong");
-                        flag--;
-                    }
-
-                })
-
-            }
-
-            else if(type === "text"){
-                const typedInput = list1[i];
-                if(typedInput.value == answer[0]){
-                    typedInput.classList.add("hidden-correct");
-                    correctAnswersCount++;
-                }
-                else{
-                    typedInput.classList.add("hidden-wrong");
-                    document.querySelector(`[question-no="${questionNumber}"]`).parentElement.parentElement.querySelector(".answer-div").classList.remove("hidden");                
-                }
-            }
-            
-        }
-     
-        if(type!== "text"){
-            if (flag === answer.length) {
-                correctAnswersCount++;
-            }
-            
-            else {
-                document.querySelector(`[question-no="${questionNumber}"]`).parentElement.parentElement.querySelector(".answer-div").classList.remove("hidden");
-            }
-        }
-        questionNumber++;
 
     }
 
-    score.textContent = `Total Score ${correctAnswersCount} / ${totalQuestions}`;
-    formEle.appendChild(score);
-    timingOuterEle.appendChild(timingEle);
-    timingFormEle.appendChild(timingOuterEle);
-    timingFormEle.appendChild(formEle);
-    divEle.appendChild(timingFormEle);
+    else if (input.type === "select") {
+        optionsDivEle.classList.add("select-div-option");
+        const selectOptionEle = document.createElement("select");
+        selectOptionEle.setAttribute("question-no", `${questionNumber}`);
+
+        if (input.isMultiple === true) {
+            selectOptionEle.multiple = "multiple";
+        }
+
+        let index = 0;
+        
+        while (index < input.options.length) {
+            const optionsEle = document.createElement("option");
+            optionsEle.textContent = `${input.options[index].content}`;
+            optionsEle.setAttribute("id",`${idValue}`);
+            optionsEle.setAttribute("name", `${input.question_no}`);
+            optionsEle.value = `${input.options[index].value}`;
+            selectOptionEle.appendChild(optionsEle);
+            index++;
+            idValue++;
+        }
+
+        optionsDivEle.appendChild(selectOptionEle);
+    }
+
+    else {
+        const inputEle = document.createElement("input");
+        inputEle.setAttribute('question-no',`${questionNumber}`);
+        inputEle.setAttribute("name",input.question_no);
+        inputEle.setAttribute("id",`${idValue}`);
+        inputEle.type = "text";
+        optionsDivEle.appendChild(inputEle);
+    }
+
+    if(input.type === "text"){
+        answer.push(input.answer);
+    }
+    else{
+        input.options.forEach(option => {
+
+            if (option.isAnswer === true) {
+                answer.push(option.content);
+            }
+
+        });
+    }
+    answerDivEle.textContent = `Correct answer : ${answer}`;
+
+
+
+    questionNumber++;
+    innerDivEle.appendChild(questionsDivEle);
+    innerDivEle.appendChild(optionsDivEle);
+    innerDivEle.appendChild(answerDivEle);
+    formEle.appendChild(innerDivEle);
+    divEle.appendChild(headingEle);
+    divEle.appendChild(formEle);
     bodyEle.appendChild(divEle);
 }
 
 
+formEle.appendChild(startQuizEle);
+divEle.appendChild(headingEle);
+divEle.appendChild(formEle);
+bodyEle.appendChild(divEle);
 
 
-// calling form validation function after submit the quiz
 
-formEle.addEventListener("submit", function (event) {
+let traverse;
+startQuizEle.addEventListener('click',function(event){
     event.preventDefault();
-    clearInterval(updateTimer);
-    timingEle.textContent = `Completed Quiz in ${totalTime - remainingTime} seconds`;
-    validateForm(); 
-    disableInputIndividual();   
-});
+    do{
+        traverse = randomNumber(25);
+    }
+    while(map.has(traverse));
+    
+    if(map.size<10){
+        map.set(traverse,1);
+        if(questionNumber!=1){
+            formEle.removeChild(innerDivEle);
+        }   
+        quizCreation(traverse);
+    }
+})
+
+
+
+
+
 
 

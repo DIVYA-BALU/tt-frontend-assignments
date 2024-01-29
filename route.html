@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button{
+            padding: 10px 20px 10px 20px;
+        }
+    </style>
+</head>
+<body>
+	<!-- <a hreid="history1">home</a> -->
+    <button class="next-button1">Next1</button>
+    <button class="next-button2">Next2</button>
+    <button class="next-button3">Next3</button>
+
+    <div class="text-div1" style="padding-top: 10%;padding-left: 10%;font-size: 30px;">home</div>
+	<script>
+        function fun1(){
+            document.querySelector(".text-div1").textContent="page1";
+        }
+        function fun2(){
+            document.querySelector(".text-div1").textContent="page2";
+        }
+        function fun3(){
+            document.querySelector(".text-div1").textContent="page3";
+        }
+        
+        document.querySelector(".next-button1").addEventListener("click", function(event){
+            event.preventDefault();
+            fun1();
+            window.history.pushState(""," ", "/page1");
+        });
+        
+        document.querySelector(".next-button2").addEventListener("click", function(event){
+            event.preventDefault();
+            fun2();
+            window.history.pushState(""," ", "/page2");
+        });	
+        document.querySelector(".next-button3").addEventListener("click", function(event){
+            event.preventDefault();
+            fun3();
+            window.history.pushState(""," ", "/page3");
+        });	
+
+        window.addEventListener("popstate", function (e) {
+            const arr = e.currentTarget.location.href.split("/")
+            const page = arr[arr.length - 1];
+            console.log(page);
+            if(page === "page1"){
+                fun1();
+            }
+            if(page === "page2"){
+                fun2();
+            }
+            if(page === "page3"){
+                fun3();
+            }
+            e.preventDefault();
+        });
+
+    </script>
+</body>
+</html>

@@ -1,20 +1,126 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Form</title>
+    <style>
+        #quiz-container {
+            width: 60%;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .question-container {
+            display: none;
+        }
+        .next-btn {
+            margin-top: 10px;
+            cursor: pointer;
+            padding: 8px 12px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
 <body>
-<h1>The Element Object</h1>
-<h2>The childNodes Property</h2>
 
-<div id="myDIV" style="background:coral;">
-  <p>First p element (index 1)</p>
-  <p>Second p element (index 3)</p>
+<div id="quiz-container">
+    <!-- Questions will be dynamically added here -->
+    <button class="next-btn" onclick="nextQuestion()">Next Question</button>
 </div>
 
 <script>
-	const element = document.getElementById("myDIV");
-	let numb = elementchildNode;
-	numb.forEach(element =>{
-        console.log(element);
-    });
+    // Sample quiz data
+    const quizData = [
+        {
+            question_no: 1,
+            type: "radio",
+            label_content: "Which scientist formulated the theory of relativity?",
+            options: [
+                { value: 1, content: "Isaac Newton" },
+                { value: 2, content: "Albert Einstein" },
+                { value: 3, content: "Stephen Hawking" }
+            ]
+        },
+        {
+            question_no: 2,
+            type: "radio",
+            label_content: "What is the capital of France?",
+            options: [
+                { value: 1, content: "London" },
+                { value: 2, content: "Berlin" },
+                { value: 3, content: "Paris" }
+            ]
+        },
+        // Add more questions here...
+    ];
+
+    let currentQuestionIndex = 0;
+
+    // Function to generate HTML for a question
+    function createQuestionElement(question) {
+        const questionContainer = document.createElement("div");
+        questionContainer.classList.add("question-container");
+
+        const questionLabel = document.createElement("p");
+        questionLabel.textContent = `${question.question_no}. ${question.label_content}`;
+        questionContainer.appendChild(questionLabel);
+
+        question.options.forEach(option => {
+            const input = document.createElement(question.type === "checkbox" ? "input" : "input");
+            input.type = question.type;
+            input.name = `question_${question.question_no}`;
+            input.value = option.value;
+            input.textContent = option.content;
+            input.id = `q${question.question_no}_option${option.value}`;
+
+            const label = document.createElement("label");
+            label.textContent = option.content;
+            label.setAttribute("for", `q${question.question_no}_option${option.value}`);
+
+            questionContainer.appendChild(input);
+            questionContainer.appendChild(label);
+        });
+
+        return questionContainer;
+    }
+
+    // Function to display the current question
+    function displayCurrentQuestion() {
+        const quizContainer = document.getElementById("quiz-container");
+        const questionElement = createQuestionElement(quizData[currentQuestionIndex]);
+        quizContainer.innerHTML = "";
+        quizContainer.appendChild(questionElement);
+    }
+
+    // Function to show the next question
+    function nextQuestion() {
+        const selectedOptions = document.querySelectorAll(`input[name="question_${quizData[currentQuestionIndex].question_no}"]:checked`);
+
+        // Check if the user has selected an option
+        if (selectedOptions.length === 0) {
+            alert("Please select an option before moving to the next question.");
+            return;
+        }
+
+        currentQuestionIndex++;
+
+        // Check if there are more questions
+        if (currentQuestionIndex < quizData.length) {
+            displayCurrentQuestion();
+        } else {
+            // Display quiz completion message or redirect to results page
+            alert("Quiz completed! You can show the results or perform another action.");
+        }
+    }
+
+    // Initialize the quiz
+    displayCurrentQuestion();
 </script>
 
 </body>

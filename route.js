@@ -1,0 +1,3 @@
+home.addEventListener("click",function(){
+    
+})
