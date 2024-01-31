@@ -375,6 +375,11 @@ const inputs = [
         label_content: "Who is known as the 'Iron Lady'?",
         options: [
             {
+                value: 0,
+                isAnswer: false,
+                content: "Select options"
+            },
+            {
                 value: 1,
                 isAnswer: false,
                 content: "Margaret Thatcher"
@@ -485,6 +490,11 @@ const inputs = [
         isMultiple : true,
         label_content: "Which planet is known as the 'Blue Planet'?",
         options: [
+            {
+                value: 0,
+                isAnswer: false,
+                content: "Select options"
+            },
             {
                 value: 1,
                 isAnswer: false,
@@ -597,7 +607,8 @@ const inputs = [
 // to view quiz form after clicking start quiz button
 
 let interval;
-startQuizEle.addEventListener("click", function (event) {
+startQuizEle.addEventListener("click", function () {
+    bodyEle.classList.add("background-hidden");
     startOuterDivEle.classList.add("hidden");
     formEle.classList.remove("hidden");
     timer();
@@ -630,12 +641,10 @@ function timer(){
 // individual question timer
 
 function startQuestionTimer(inputEle, questionTime) {
-    console.log(inputEle.tagName);
     const timer = inputEle.tagName === 'SELECT' ? inputEle.parentElement.parentElement.querySelector(".question-timer-div") : inputEle.parentElement.parentElement.parentElement.querySelector(".question-timer-div");
     const interval = setInterval(() => {
-        console.log(questionTime);
         timer.classList.remove("hidden");
-        timer.textContent = `${questionTime}`;
+        timer.textContent = `${questionTime} seconds left`;
         questionTime--;
         if (questionTime < 0) {
             timer.textContent = `Time's up!`;
@@ -653,7 +662,6 @@ function startQuestionTimer(inputEle, questionTime) {
 
 function disableInputIndividual(){
     const inputElements = document.querySelectorAll(':is(input, option)');
-    console.log(inputElements);
     inputElements.forEach(element => {
         element.disabled=true;
     })
@@ -791,8 +799,7 @@ const map = new Map();
                 let flag=0;
                 selectOptionEle.addEventListener('change',function(){
                     if(flag==0 && !selectOptionEle.childNodes.disabled){
-                        console.log("fnsdn");
-                        let questionTime = 5;
+                            let questionTime = 5;
                         startQuestionTimer(selectOptionEle, questionTime);
                         flag=1;
                     }
@@ -808,6 +815,7 @@ const map = new Map();
                 inputEle.setAttribute("name",input.question_no);
                 inputEle.setAttribute("id",`${idValue}`);
                 inputEle.type = "text";
+                inputEle.placeholder = "Type your answer";  
                 optionsDivEle.appendChild(inputEle);
             }
 
@@ -996,10 +1004,12 @@ function validateForm() {
 
 formEle.addEventListener("submit", function (event) {
     event.preventDefault();
-    clearInterval(updateTimer);
-    timingEle.textContent = `Completed Quiz in ${totalTime - remainingTime} seconds`;
-    validateForm(); 
-    disableInputIndividual();   
+    if(totalTime!=0){
+        clearInterval(updateTimer);
+        timingEle.textContent = `Completed Quiz in ${totalTime - remainingTime} seconds`;
+        validateForm(); 
+        disableInputIndividual();   
+    }
 });
 
 

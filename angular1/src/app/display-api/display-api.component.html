@@ -1,1 +1,115 @@
-<p>display-api works!</p>
+<style>
+    .div-style{
+        background-color: brown;
+    }
+</style>
+
+
+<app-child-component [item]="currentItem"></app-child-component>
+
+<app-child-component (newItemEvent) = "getFunction($event)"></app-child-component>
+
+<p>{{childValue}}</p>
+
+
+<!-- default directories -->
+
+<!-- if -->
+<!-- Example 1 -->
+<p *ngIf="true">3</p>
+
+<!-- Example 2 -->
+<app-child-component *ngIf="true" [childVar1]="variable1"> </app-child-component>
+
+<!-- for -->
+<!-- Example 1 -->
+<p *ngFor="let item of variable2">{{item}}</p>
+
+<!-- Example 2 -->
+<app-child-component *ngFor="let item of variable2" [childVar2]="item"> </app-child-component>
+
+
+
+<!-- switch -->
+<!-- Example 1 -->
+<div [ngSwitch]="variable3">
+    <div *ngSwitchCase="3">Variable 3 contains value = {{variable3}}</div>
+    <div *ngSwitchCase="5">Variable 3 contains value = {{variable3}}</div>
+    <div *ngSwitchCase="10">Variable 3 contains value = {{variable3}}</div>
+</div>
+
+<!-- Example 2 -->
+<div [ngSwitch]="variable4">
+    <app-child-component *ngSwitchCase="'Ram'" [childVar3]="variable4"> </app-child-component>
+    <app-child-component *ngSwitchCase="'Candru'" [childVar3]="variable4"> </app-child-component>
+    <app-child-component *ngSwitchCase="'Ravi'" [childVar3]="variable4"> </app-child-component>
+    <app-child-component *ngSwitchCase="'Nathis'" [childVar3]="variable4"> </app-child-component>
+    <app-child-component *ngSwitchDefault [childVar3]="'name doesn`t match'"> </app-child-component>
+</div>
+
+
+
+<!-- ngClass -->
+<div [ngClass]="true ? 'div-style' : ''">Check ng Class</div>
+
+
+<!-- ngStyle -->
+<div [ngStyle]="styles">Check ng Style</div>
+
+
+<!-- ngModel -->
+<!-- Example 1 -->
+<label for="ngModel-eg">{{name}}</label>
+<br>
+<input [(ngModel)]="name" id="ngModel-eg">
+<br>
+<br>
+
+<!-- Example 2 -->
+<form>
+    <input type="text" name="inputField" [(ngModel)]="currentItem2.name" >
+    <p>{{currentItem2.name}}</p>
+
+    <input [ngModel]="currentItem2.name" (ngModelChange)="setUppercaseName($event)" id="example-uppercase" name="example-uppercase">
+    <p>{{currentItem2.name}}</p>
+</form>
+
+
+
+
+<!-- filters -->
+<!-- currency -->
+<div>{{currencyVar | currency}}</div>
+
+<!-- date -->
+<div> {{dateVar | date }} </div>
+<div> {{dateVar | date:'medium' }} </div>
+<div> {{dateVar | date:'yyyy' }} </div>
+<div> {{dateVar | date:'fullDate' }} </div>
+
+<!-- filter -->
+<!-- <div *ngFor = "let element of filterArr1 | filter:'t'"> {{element}}</div> -->
+
+<!-- json -->
+<div>{{jsonArr1 | json}}</div>
+
+<!-- limit -->
+<!-- <li *ngFor="let x of limitArr1 | limitTo:3">{{x}}</li> -->
+
+<!-- uppercase -->
+<div>{{upperCaseVar | uppercase}}</div>
+
+<!-- fraction size -->
+<div>{{fractionVar | number}}</div>
+
+<!-- order by -->
+<ul>
+    <li *ngFor="let element of orderByVar">{{element.name}}</li>
+</ul>
+
+
+
+
+
+
+

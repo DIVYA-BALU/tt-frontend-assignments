@@ -1,4 +1,5 @@
-import { Component, NgModule, OnInit, inject } from '@angular/core';
+import { Component, NgModule, OnInit, inject } from '@angular/core';  
+
 // import { DisplayApiComponent } from './display-api/display-api.component';
 // import { HttpClient, HttpClientModule } from '@angular/common/http';
 
@@ -11,7 +12,7 @@ import { Component, NgModule, OnInit, inject } from '@angular/core';
   // imports: [HttpClientModule]
 })
 export class AppComponent implements OnInit{
-  title = 'angular1';
+    title = 'angular1';
 
   // constructor(){
   //   const personName : symbol = Symbol("test person name");
@@ -19,7 +20,7 @@ export class AppComponent implements OnInit{
   //   const person = {
   //     personName : "Nathis",
   //     fullName : "Nathis S",
-  //     [employeeName] : "David"
+  //     [employee  Name] : "David"
   //   };
     
   //   console.log(person);
@@ -30,6 +31,9 @@ export class AppComponent implements OnInit{
   // }
   // httpClient = inject(HttpClient);
   // data : any[] = [];
+
+
+
 
   ngOnInit(): void {
 
@@ -86,13 +90,4 @@ export class AppComponent implements OnInit{
 }
 
 
-
-// @NgModule({
-//   imports: [
-//     HttpClientModule
-//   ]
-// })
-// export class MyComponent implements OnInit{
- 
-// }
 

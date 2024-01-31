@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input type="text" class="input">
+        <p class="tag1"></p>
+        <input type="text" class="inputUpperCase">
+        <p class="tag2"></p>
+    </div>
+</body>
+<script>
+    const firstInput = document.querySelector(".input");
+    const secondInput = document.querySelector(".inputUpperCase");
+    const textTag1 = document.querySelector(".tag1");
+    const textTag2 = document.querySelector(".tag2");
+
+    let onChange = (value) => {
+        firstInput.value = value;
+        secondInput.value = value;
+        textTag1.textContent = value;
+        textTag2.textContent = value;
+    }
+
+    let value = "";
+    firstInput.addEventListener("input", (event) => {
+        onChange(event.target.value);
+    });
+    
+    secondInput.addEventListener("input", (event) => {
+        onChange(event.target.value.toUpperCase());
+    });
+    
+    onChange(value);
+</script>
+</html>

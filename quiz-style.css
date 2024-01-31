@@ -32,6 +32,12 @@
     background-attachment: fixed;
 }
 
+/* 
+.background-hidden{
+    background-image: none;
+    background-color: #FFEAA7;
+} */
+
 .heading-div{
     font-size: 50px;
     color: #FDFFAB;
@@ -116,11 +122,13 @@
 
 .question-timer-div{
     font-family: kanit;
-    font-size: 16px;
+    font-size: 15.7px;
+    color: red;
     margin-top: 0px;
     margin-bottom: 20px;
     text-align: center;
-    width: 40px;
+    width: 30%;
+    text-align: left;
 }
 
 select{
@@ -152,10 +160,6 @@ label{
     background-color:  #7077A1;
 }
 
-/* .individual-option input:disabled + .individual-option:hover{
-    background-color: #A9A9A9;
-} */
-
 option:hover{
     background-color: #7077A1;
 }
@@ -164,11 +168,13 @@ option:hover:disabled{
     background-color: #A9A9A9;
 }
 
-input:hover {
-    cursor: pointer;
+
+input[type="text"]{
+    height: 35px;
+    width: 100%;
 }
 
-label:hover {
+.options-div div:hover {
     cursor: pointer;
 }
 
