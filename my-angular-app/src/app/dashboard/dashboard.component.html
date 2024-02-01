@@ -1,0 +1,93 @@
+<style>
+    .special {
+        color: red;
+        font-size: 30px;
+
+    }
+
+    .notspecial {
+        color: green;
+        font-size: 30px;
+    }
+</style>
+
+<h1>Attribute directives</h1>
+
+<app-child [item]="currentItem" (childClickEvent)="getFunction($event)"
+    (childClickEvent1)="getFunction1($event)"></app-child>
+<p>{{valueFromChild}}</p>
+
+<input type="text" [(ngModel)]="ngname" name="inpel">
+<p>{{ngname}}</p>
+
+<p [ngStyle]="ngstyle">ngStyle example</p>
+
+<p ngbind="ngname"></p>
+
+<h1>Structural directives</h1>
+
+<ul>
+    <li *ngFor="let item of items">{{item}}</li>
+</ul>
+
+<p>item1 value:{{item1}}</p>
+
+<div [ngSwitch]="item1">
+    <div *ngSwitchCase="'a'">currentItem A</div>
+    <div *ngSwitchCase="'b'">currentItem B</div>
+    <div *ngSwitchCase="'c'">currentItem C</div>
+    <div *ngSwitchCase="'d'">currentItem D</div>
+    <div *ngSwitchDefault>currentItem !</div>
+</div>
+
+<div [ngClass]="isSpecial ? 'special' : 'notspecial'">This div is special</div>
+
+<p *ngIf="courses.length>0;then ifResult else elResult"></p>
+
+<ng-template #ifResult>list of course</ng-template>
+<ng-template #elResult>no courses</ng-template>
+
+<div [hidden]="courses.length == 0">list of courses</div>
+<div [hidden]="courses.length > 0">no courses</div>
+
+<h1>Filters</h1>
+<!-- currency -->
+<div>{{currencyVar | currency}}</div>
+
+<!-- date -->
+<div> {{dateVar | date }} </div>
+<div> {{dateVar | date:'medium' }} </div>
+<div> {{dateVar | date:'yyyy' }} </div>
+<div> {{dateVar | date:'fullDate' }} </div>
+
+<!-- json -->
+<div>{{filterArr1 | json}}</div>
+
+<!-- limit -->
+<!-- <li *ngFor="let x of limitArr1 | limitTo:3">{{x}}</li> -->
+
+<!-- uppercase -->
+<div>{{upperCaseVar | uppercase}}</div>
+
+<!-- fraction size -->
+<div>{{fractionVar | number}}</div>
+
+<!-- order by -->
+<ul>
+    <li *ngFor="let element of orderByVar">{{element.name}}</li>
+</ul>
+
+<h1>Custom service</h1>
+<input [(ngModel)]="val" type="text">
+<button (click)="addItem()">insert</button>
+
+<!-- <div *ngIf="resultArr.length>0">{{resultArr}}</div> -->
+<div *ngFor="let x of resultArr">
+    <div>{{x}}</div>
+</div>
+<h1>Router module</h1>
+<div>
+    <li><a routerLink="lodash">lodash example</a></li>
+    <li><a routerLink="custom">custom example</a></li>
+    <router-outlet></router-outlet>
+</div>

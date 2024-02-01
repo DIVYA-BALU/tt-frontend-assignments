@@ -1,0 +1,10 @@
+<p>custom filter and directive!</p>
+
+<!-- custom filter -->
+<input type="text" [(ngModel)]="inpVal" placeholder="search">
+<div *ngFor="let x of filterArr1">
+    <li *ngIf="(x | filter1: inpVal)!==''">{{x | filter1: inpVal}}</li>
+</div>
+<br>
+<!-- custom attribute -->
+<div appHighlight>custom attribute directive</div>

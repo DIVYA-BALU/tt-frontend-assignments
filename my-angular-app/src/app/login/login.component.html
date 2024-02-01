@@ -1,0 +1,11 @@
+<div class="loginBox">
+    <label>Enter Email :</label><input [(ngModel)]="email" type="text">
+    <br>
+    <label>Enter Password: </label><input [(ngModel)]="password" type="password">
+    <br>
+    <br>
+    <button (click)="login()">submit</button>
+    <div>Token:
+        {{token.token}}
+    </div>
+</div>

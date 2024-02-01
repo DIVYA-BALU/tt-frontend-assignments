@@ -1,0 +1,24 @@
+<p>Lodash Example!</p>
+<!-- lodash  _.clone-->
+<h1>lodash_.clone</h1>
+<div>name:{{clonedItem.name}}<br>age:{{clonedItem.age}}</div>
+
+<!-- lodash  _.chunk-->
+<h1>_.chunk</h1>
+<div>[{{filterArr}}]</div>
+<div *ngFor="let x of splitArr">
+    [{{x}}]
+</div>
+
+<!-- lodash _.compact() -->
+<h1>_.compact</h1>
+<div>[{{compact}}]</div>
+<div>[{{newCompact}}]</div>
+
+<!-- lodash _.concat() -->
+<h1>_.concat</h1>
+<div>[{{concat}}]</div>
+<div>[{{newConcat}}]</div>
+
+<a routerLink="different">different</a>
+<router-outlet></router-outlet>

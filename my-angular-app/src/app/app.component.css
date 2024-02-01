@@ -1,0 +1,9 @@
+#box {
+    margin: 5px;
+    padding: 2px;
+    border: 2px solid black;
+    font-family: 'Times New Roman', Times, serif;
+    color: blue;
+    font-size: larger;
+    background-color: chartreuse;
+}
