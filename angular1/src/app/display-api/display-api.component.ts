@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-display-api',
@@ -94,4 +95,54 @@ export class DisplayApiComponent {
     {name: 'Adam',   phone: '555-5678',  age: 35},
     {name: 'Julie',  phone: '555-8765',  age: 29}
   ];
+
+
+  // custom filter
+
+  inpVal : any = null;
+  
+  filterArr2 : string[] = [
+    "sachin",
+    "dhoni",
+    "virat",
+    "pradeep",
+    "brawo",
+    "kholi",
+    "ashwin",
+    "yuvaraj",
+    "jadeja"
+  ];
+
+
+
+
+  // lodash
+
+  myItem = { "name": "nathis", "age": 20 };
+  clonedItem = _.clone(this.myItem);
+ 
+  filterArr3 : string[] = [
+    "sachin",
+    "dhoni",
+    "virat",
+    "pradeep",
+    "brawo",
+    "kholi",
+    "ashwin",
+    "yuvaraj",
+    "jadeja"
+  ];  
+  splitArr = _.chunk(this.filterArr3, 3);
+ 
+  compact : any[]= [0, 1, false, 2, '', 3,null,undefined];
+  newCompact = _.compact(this.compact);
+ 
+  concat = [1];
+  newConcat: any = _.concat(this.concat, 2, [3], [4, 5]);
+ 
+  sub = [2, 3, 5, 6, 7];
+  diff = _.difference(this.newConcat, this.sub);
+
+  index : number[]= [34,78,65,23,56,78,20,10];
+  lastIndex = _.lastIndexOf(this.index,78,2);
 }

@@ -5,16 +5,18 @@ import { AppComponent } from './app.component';
 import { DisplayApiComponent } from './display-api/display-api.component';
 import { ChildComponentComponent } from './child-component/child-component.component';
 import { FormsModule } from '@angular/forms';
+import { filterClass1 } from './custom-filter';
 
 @NgModule({
   declarations: [
     AppComponent,
     DisplayApiComponent,
-    ChildComponentComponent
+    ChildComponentComponent,
+    filterClass1,
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
