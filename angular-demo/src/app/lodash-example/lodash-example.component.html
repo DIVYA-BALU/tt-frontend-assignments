@@ -1,0 +1,32 @@
+<p>lodash-example works!</p>
+<h1>Lodash Example</h1>
+<!-- lodash  _.clone-->
+<h1>lodash_.clone</h1>
+<div>name:{{clonedItem.name}}<br>age:{{clonedItem.age}}</div>
+ 
+<!-- lodash  _.chunk-->
+<h1>_.chunk</h1>
+<div>Creates an array of elements split into groups the length of size. If array can't be split evenly, the final chunk will be the remaining elements.</div>
+<div>original array : [{{filterArr1}}]<br>_.chunk(this.filterArr1, 3);
+</div>
+<div *ngFor="let x of splitArr">
+    
+    <div>[{{x}}]</div>
+</div>
+ 
+<!-- lodash _.compact() -->
+<h1>_.compact</h1>
+Creates an array with all falsey values removed. The values false, null, 0, "", undefined, and NaN are falsey.
+<div>original array: [{{compact}}]</div>
+<div>[{{newCompact}}]</div>
+ 
+<!-- lodash _.concat() -->
+<h1>_.concat</h1>
+<div>[{{concat}}]</div>
+<div>[{{newConcat}}]</div>
+ 
+<!-- lodash _.difference() -->
+<nav>
+<a routerLink="different" >different</a>
+</nav>
+<router-outlet></router-outlet>

@@ -1,0 +1,87 @@
+<!-- {{message}}
+<app-child [childMessage]="name" ></app-child> -->
+<div>
+    <form>
+        <input type="text" name="inputField" [(ngModel)]="currentItem.name" >
+        <p>{{currentItem.name}}</p>
+    
+        <input [ngModel]="currentItem.name" (ngModelChange)="setUppercaseName($event)" id="example-uppercase" name="example-uppercase">
+        <p>{{currentItem.name}}</p>
+      </form>
+    <p>Input something in the input box:</p>
+    <!-- <p>Name: <input type="text" [ngModel]="firstName" ></p> -->
+    <p *ngIf="true">You wrote: {{ firstName }}</p>
+   
+    <ul>
+        <li *ngFor="let item of items" >
+            {{item.name}} is
+            <ng-container *ngIf="item.age >= 18; else result">
+                 eligible 
+                </ng-container>
+                for vote</li>
+            </ul>
+</div>
+<ul>
+    <li *ngFor="let item of items" >
+        {{item.name}} is voted for
+        <span [ngSwitch]="item.voted"> 
+            <span *ngSwitchCase="'flower'" (load) = "onloadcount()"> flower {{count}}</span>
+            <span *ngSwitchCase="'sun'">  sun </span>
+            <span *ngSwitchCase="'leaf'"> leaf </span>
+            <span *ngSwitchDefault>  hand </span>
+        </span>
+        
+    </li>
+</ul>
+<ng-template #result> not eligible </ng-template>
+
+<!-- filters -->
+<!-- currency -->
+<div>{{currencyVar | currency}}</div>
+
+<!-- date -->
+<div> {{dateVar | date }} </div>
+<div> {{dateVar | date:'medium' }} </div>
+<div> {{dateVar | date:'yyyy' }} </div>
+<div> {{dateVar | date:'fullDate' }} </div>
+
+<!-- filter -->
+<!-- <div *ngFor = "let element of filterArr1 | filter:'t'"> {{element}}</div> -->
+
+<!-- json -->
+<div>{{jsonArr1 | json}}</div>
+
+<!-- uppercase -->
+<div>{{upperCaseVar | uppercase}}</div>
+
+<!-- fraction size -->
+<div>{{fractionVar | number}}</div>
+
+
+<!-- custom filter -->
+<label for="">Type here and the matched conntent display down </label>
+<input type="text" name="inputField" [(ngModel)]="name" >
+<ul>
+    <div *ngFor="let element of limitArr1"><li *ngIf="(element | filter :name) !== '' ">{{element}}</li></div>
+</ul>
+
+<div appCustomDirective>
+    This element has the custom directive applied.
+  </div>
+
+
+<!-- <app-sample-list></app-sample-list> -->
+<h1>Angular Router App</h1>
+<!-- This nav gives you links to click, which tells the router which route to use (defined in the routes constant in  AppRoutingModule) -->
+<nav>
+  <ul>
+    <li><a routerLink="/first-component" >api call</a></li>
+    <li><a routerLink="/lodash" >lodash</a></li>
+    <!-- { path: 'first-component', component: SampleListComponent }, -->
+  </ul>
+</nav>
+<!-- The routed views render in the <router-outlet> -->
+
+    <router-outlet></router-outlet>
+
+    <footer>this is footer</footer>

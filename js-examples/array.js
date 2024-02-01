@@ -48,6 +48,9 @@ const fruits = ['apple','orange','goa','kiwi','banana'];
 console.log(fruits);
 fruits.copyWithin(2,3,4);
 console.log(fruits);
+const num = [1,2,3,4,5,6,7,8,9,10]
+console.log(num.find(elementLessThan5));
+console.log(num.filter(elementLessThan5));
 
 
 
@@ -60,8 +63,11 @@ console.log(fruits);
 
 
 
-
-
+function elementLessThan5(num){
+    if(num<5){
+        return num;
+    }
+}
 
 function printAllElement(element,index,arr){
     console.log(element+"  "+index+"  "+arr);

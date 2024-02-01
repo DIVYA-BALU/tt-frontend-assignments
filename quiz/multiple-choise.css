@@ -1,6 +1,7 @@
 
 body{
     background-color: #348660e3;
+    font-family: 'Josefin Sans', sans-serif;
 }
 .form-design {
   background-color: #ecf5fd;
@@ -89,8 +90,9 @@ label{
     display: flex;
     background-color: rgb(243, 43, 43);
     color: white;
+    height: 20px;
+    width: 250px;
     align-items: center;
-    justify-content: space-between;
 }
 .answer-block-show{
     margin-top: 10px;
@@ -142,7 +144,30 @@ img{
 .edit-button:hover{
     cursor: pointer;
 }
-h4{
-    font-size: 25;
+h5{
+    font-size: 10;
     margin-left: 20px;
+}
+
+.input-field{
+    width: 700px;
+    padding: 15px;
+    border: none;
+    font-size: 20px;
+}
+
+select{
+    width: 700px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: none;
+    font-size: 20px;
+}
+
+select:focus{
+    outline: none;
+}
+
+.input-field:focus{
+    outline: none;
 }

@@ -21,9 +21,7 @@ function createRadioButtonOrCheckBox(type, name, value, id) {
   inputEl.name = name;
   inputEl.value = value;
   inputEl.id = id;
-  if (type === "radio") {
-    inputEl.setAttribute("required", "");
-  }
+
   return inputEl;
 }
 
@@ -38,7 +36,7 @@ function disableRadioButton(inputEl) {
   const radioButtons = document.getElementsByName(inputEl.name);
   for (let index = 0; index < radioButtons.length; index++) {
     radioButtons[index].disabled = true;
-    console.log(radioButtons[index]);
+    // console.log(radioButtons[index]);
   }
 }
 
@@ -91,10 +89,14 @@ function createInformationElement() {
     "quiz-information",
     "In this quiz there is 10 general knowledge question. You have to answer each question without completing every question you can not submit the test"
   );
+  const quizTimeEl = document.createElement("div");
+  quizTimeEl.className = "quiz-time";
+  quizTimeEl.innerText = "time left 02:00:00 "
   const imgEl = createImage("welcome.gif", "Image not loaded");
 
   divInfo.appendChild(welcomeEl);
   divInfo.appendChild(informationEl);
+  divInfo.appendChild(quizTimeEl)
   divInfo.appendChild(imgEl);
 
   return divInfo;
@@ -104,13 +106,10 @@ function timerDiv(time, id){
   const timeEl = document.createElement("div");
   timeEl.id = id;
   timeEl.className = "hide";
-  const contextEl = document.createElement("h4");
+  const contextEl = document.createElement("h5");
   contextEl.innerText = `time left to change answer ${time} sec`;
-  const buttonEl = document.createElement("div");
-  buttonEl.innerText = "Edit"
-  buttonEl.className = "edit-button";
   timeEl.appendChild(contextEl);
-  timeEl.appendChild(buttonEl);
+  // timeEl.appendChild(buttonEl);
   return timeEl;
 }
 
@@ -121,55 +120,58 @@ const contents = [
     type: "text",
     correct_option: "Paris",
   },
-  {
-    question: "Which planet is known as the 'Red Planet'?",
-    type: "text",
-    correct_option: "Mars",
-  },
+  // {
+  //   question: "Which planet is known as the 'Red Planet'?",
+  //   type: "text",
+  //   correct_option: "Mars",
+  // },
   {
     question: "Who painted the Mona Lisa?",
     options: [
-      { value: 1, label: "Vincent van Gogh" },
-      { value: 2, label: "Leonardo da Vinci" },
-      { value: 3, label: "Pablo Picasso" },
-      { value: 4, label: "Michelangelo" },
+      
+      { value: 0, label: "Vincent van Gogh" },
+      { value: 1, label: "Leonardo da Vinci" },
+      { value: 2, label: "Pablo Picasso" },
+      { value: 3, label: "Michelangelo" },
     ],
-    type: "radio",
-    correct_option: 2,
+    type: "select",
+    is_multiple: true,
+    correct_option: [1,3],
   },
   {
     question: "Which is the longest river in the world?",
     options: [
+      { value: 0, label: "select any below option"},
       { value: 1, label: "Nile" },
       { value: 2, label: "Amazon" },
       { value: 3, label: "Yangtze" },
       { value: 4, label: "Mississippi" },
     ],
-    type: "radio",
-    correct_option: 1,
-  },
-  {
-    question: "In which year did World War I begin?",
-    options: [
-      { value: 1, label: "1914" },
-      { value: 2, label: "1918" },
-      { value: 3, label: "1939" },
-      { value: 4, label: "1945" },
-    ],
-    type: "checkbox",
-    correct_option: [1,2],
-  },
-  {
-    question: "Who wrote the play 'Romeo and Juliet'?",
-    options: [
-      { value: 1, label: "William Shakespeare" },
-      { value: 2, label: "Jane Austen" },
-      { value: 3, label: "Charles Dickens" },
-      { value: 4, label: "Mark Twain" },
-    ],
-    type: "checkbox",
+    type: "select",
     correct_option: [1],
   },
+  // {
+  //   question: "In which year did World War I begin?",
+  //   options: [
+  //     { value: 1, label: "1914" },
+  //     { value: 2, label: "1918" },
+  //     { value: 3, label: "1939" },
+  //     { value: 4, label: "1945" },
+  //   ],
+  //   type: "checkbox",
+  //   correct_option: [1,2],
+  // },
+  // {
+  //   question: "Who wrote the play 'Romeo and Juliet'?",
+  //   options: [
+  //     { value: 1, label: "William Shakespeare" },
+  //     { value: 2, label: "Jane Austen" },
+  //     { value: 3, label: "Charles Dickens" },
+  //     { value: 4, label: "Mark Twain" },
+  //   ],
+  //   type: "checkbox",
+  //   correct_option: [1],
+  // },
   // {
   //   question: "What is the chemical symbol for gold?",
   //   options: [
@@ -183,14 +185,8 @@ const contents = [
   // },
   // {
   //   question: "Which famous scientist developed the theory of relativity?",
-  //   options: [
-  //     { value: 1, label: "Isaac Newton" },
-  //     { value: 2, label: "Albert Einstein" },
-  //     { value: 3, label: "Stephen Hawking" },
-  //     { value: 4, label: "Galileo Galilei" },
-  //   ],
-  //   type: "radio",
-  //   correct_option: 2,
+  //   type: "text",
+  //   correct_option: "Albert Einstein",
   // },
   // {
   //   question: "What is the largest mammal in the world?",
@@ -200,8 +196,8 @@ const contents = [
   //     { value: 3, label: "Giraffe" },
   //     { value: 4, label: "Hippopotamus" },
   //   ],
-  //   type: "radio",
-  //   correct_option: 2,
+  //   type: "checkbox",
+  //   correct_option: [2],
   // },
   // {
   //   question: "Who is known as the 'Father of the Computer'?",
@@ -211,8 +207,8 @@ const contents = [
   //     { value: 3, label: "Bill Gates" },
   //     { value: 4, label: "Steve Jobs" },
   //   ],
-  //   type: "radio",
-  //   correct_option: 1,
+  //   type: "checkbox",
+  //   correct_option: [1],
   // },
   // {
   //   question: "Which country is famous for producing maple syrup?",
@@ -247,17 +243,17 @@ const contents = [
   //   type: "radio",
   //   correct_option: 2,
   // },
-  // {
-  //   question: "Which country is the largest by land area?",
-  //   options: [
-  //     { value: 1, label: "Russia" },
-  //     { value: 2, label: "Canada" },
-  //     { value: 3, label: "China" },
-  //     { value: 4, label: "United States" },
-  //   ],
-  //   type: "radio",
-  //   correct_option: 1,
-  // },
+  {
+    question: "Which country is the largest by land area?",
+    options: [
+      { value: 1, label: "Russia" },
+      { value: 2, label: "Canada" },
+      { value: 3, label: "China" },
+      { value: 4, label: "United States" },
+    ],
+    type: "radio",
+    correct_option: 1,
+  },
   // {
   //   question: "What is the largest organ in the human body?",
   //   options: [
@@ -393,6 +389,7 @@ const contents = [
 ];
 
 const generatedNumbers = [];
+const correctAnswers = [];
 const divContent = document.getElementById("content");
 const divInfo = createInformationElement();
 divContent.appendChild(divInfo);
@@ -408,9 +405,10 @@ divForm.appendChild(formEl);
 const headEl = document.createElement("h1");
 headEl.innerText = "Here You Go, All The Best!";
 formEl.appendChild(headEl);
-const noOfQusetion = 2;
+const noOfQuestion = 3;
 
-for (let i = 1; i <= noOfQusetion; i++) {
+
+for (let i = 1; i <= noOfQuestion; i++) {
   let generatedNum = generateRandomNumber(contents.length);
 
   while (generatedNumbers.includes(generatedNum)) {
@@ -431,8 +429,10 @@ for (let i = 1; i <= noOfQusetion; i++) {
   optionBlock.className = "option-block";
 
   if (contents[generatedNum].type === "radio" || contents[generatedNum].type === "checkbox") {
-    const items = contents[generatedNum].options;
 
+    const items = contents[generatedNum].options;
+    let flag = 0;
+    const checkboxAnswers = [];
     items.map((item, index) => {
       let time = editableTime-1;
       const randomName = randomString(30);
@@ -442,6 +442,12 @@ for (let i = 1; i <= noOfQusetion; i++) {
       optionBox.className = "option-box";
       optionBox.setAttribute("data-unique-id", randomName);
 
+      if(contents[generatedNum].type === "radio" && item.value === contents[generatedNum].correct_option){
+        correctAnswers.push(item.label)
+      }
+      else if(contents[generatedNum].type === "checkbox" && contents[generatedNum].correct_option.includes(item.value)){
+        checkboxAnswers.push(item.label)
+      }
       const inputEl = createRadioButtonOrCheckBox(
         contents[generatedNum].type,
         `Q${i}`,
@@ -460,11 +466,16 @@ for (let i = 1; i <= noOfQusetion; i++) {
         if (inputEl.disabled === false) 
         {
           inputEl.checked = true;
-          disableRadioButton(inputEl);
-          const buttonEl = timeEl.children[1];
+          if(flag === 0){
+            flag = 1;
+          }
+          else{
+            return;
+          }
+
           const contextEl = timeEl.children[0];
           
-          myInterval = setInterval(() => {
+          const myInterval = setInterval(() => {
             contextEl.innerText = `time left to change answer ${time} sec`;
             time--;
 
@@ -475,23 +486,92 @@ for (let i = 1; i <= noOfQusetion; i++) {
             }
 
           }, 1000);
-
-          buttonEl.addEventListener("click",() => {
-            enableRadioButton(inputEl)
-            clearInterval(myInterval)
-            timeEl.className = "hide";
-            time = 10;
-            contextEl.innerText = `time left to change answer ${time} sec`;
-          })
           timeEl.className = "show-time";
         }
       });
 
       optionBlock.appendChild(optionBox);
     });
-  } else {
-    const inputEl = createTextFeild("Enter your answer", `Q${i}`);
+    if(checkboxAnswers.length !== 0){
+      correctAnswers.push(checkboxAnswers);
+    }
+  } 
+  else if (contents[generatedNum].type === "select")
+   {
+    inputEl = document.createElement("select");
+    inputEl.name = `Q${i}`;
+
+    if (contents[generatedNum].is_multiple) {
+        inputEl.multiple = "multiple"
+    }
+
+   
+    const items = contents[generatedNum].options;
+    const selectAnswers = []
+    items.map((item, index) => {
+        const optionEl = document.createElement("option");
+        optionEl.value = item.value;
+        optionEl.textContent = item.label;
+        inputEl.appendChild(optionEl);
+
+        if(contents[generatedNum].correct_option.includes(item.value)){
+          console.log(contents[generatedNum].correct_option);
+          selectAnswers.push(item.label)
+        }
+        // else if(contents[generatedNum].type === "checkbox" && contents[generatedNum].correct_option.includes(item.value)){
+        //   checkboxAnswers.push(item.label)
+        // }
+    });
+    correctAnswers.push(selectAnswers);
     optionBlock.appendChild(inputEl);
+
+    let time = editableTime-1;
+    let flag = 0;
+    inputEl.addEventListener("change", () => { 
+      if(flag === 0){
+        flag = 1;
+      }
+      else{
+        return
+      }
+      const contextEl = timeEl.children[0];
+      const myInterval = setInterval(() => {
+        contextEl.innerText = `time left to change answer ${time} sec`;
+        time--;
+        if (time < 0) {
+          clearInterval(myInterval);
+          document.getElementById(`T${i}`).className = "hide";
+          document.querySelector(`select[name="Q${i}"]`).disabled = true ;
+        }
+      }, 1000);
+      
+      timeEl.className = "show-time";
+});
+
+}  else {
+    let time = editableTime-1;
+    const inputEl = createTextFeild("Enter your answer", `Q${i}`);
+    // inputEl.setAttribute("minlength",8)
+    inputEl.className = "input-field" ;
+    correctAnswers.push(contents[generatedNum].correct_option)
+    optionBlock.appendChild(inputEl);
+
+    const contextEl = timeEl.children[0];
+    inputEl.addEventListener("focusout", () => { 
+
+          const myInterval = setInterval(() => {
+           
+            contextEl.innerText = `time left to change answer ${time} sec`;
+            time--;
+            if (time < 0) {
+              clearInterval(myInterval);
+              document.getElementById(`T${i}`).className = "hide";
+              disableRadioButton(inputEl);
+            }
+          }, 1000);
+          
+          timeEl.className = "show-time";
+    });
   }
 
   quizBlock.appendChild(optionBlock);
@@ -511,7 +591,9 @@ formEl.addEventListener("submit", function (e) {
   e.preventDefault();
   let noOfCorrectAnswer = 0;
 
-  for (let i = 1; i <= noOfQusetion; i++) {
+  console.log(correctAnswers);
+
+  for (let i = 1; i <= noOfQuestion; i++) {
     const quizObject = contents[generatedNumbers[i - 1]];
     const divEl = document.getElementById(`Q${i}`);
     divEl.className = "answer-block-show";
@@ -524,21 +606,45 @@ formEl.addEventListener("submit", function (e) {
 
     if (quizObject.type === "radio") {
       userSelectedAnswer = document.querySelector(`input[name="Q${i}"]:checked`);
+     // console.log(userSelectedAnswer);
+      if(userSelectedAnswer == null){
+        value = "did not choose";
+      }
+      else{
       value = userSelectedAnswer.value.toLowerCase();
-      divEl.innerText = `Correct Option : ${answer}`;
+      }
+      divEl.innerText = `Correct Answer : ${correctAnswers[i-1]}`;
     } 
     else if (quizObject.type === "text") {
       userSelectedAnswer = document.querySelector(`input[name="Q${i}"]`);
       value = userSelectedAnswer.value.toLowerCase();
-      divEl.innerText = `Correct Answer : ${answer}`;
+      divEl.innerText = `Correct Answer : ${correctAnswers[i-1]}`;
     }
     else if (quizObject.type === "checkbox") {
       userSelectedAnswer = document.querySelectorAll(`input[name="Q${i}"]:checked`);
-      divEl.innerText = `Correct Answer : ${answer}`;
+      divEl.innerText = `Correct Answer : ${correctAnswers[i-1]}`;
       value = [];
       for(let j = 0; j < userSelectedAnswer.length; j++){
         value.push(parseInt(userSelectedAnswer[j].value))
       }
+      value = value.toString().toLowerCase();
+    }
+    else if (quizObject.type === "select") {
+      userSelectedAnswer = document.querySelector(`[name="Q${i}"]`);
+      console.log(quizObject.type);
+      console.log(userSelectedAnswer.selectedOptions);
+      divEl.innerText = `Correct Answer : ${correctAnswers[i-1]}`;
+      value = [];
+
+      Array.from(userSelectedAnswer.selectedOptions).map((option) => { 
+        value.push(option.index);
+        console.log(option.textContent);
+    })
+console.log(value,"     sns     ",answer);
+      // for(let j = 0; j < userSelectedAnswer.length; j++){
+      //   console.log(userSelectedAnswer.selectedOptions,"   out   ",userSelectedAnswer[j].value);
+      //   value.push(parseInt(userSelectedAnswer[j].value))
+      // }
       value = value.toString().toLowerCase();
     }
     
@@ -553,21 +659,13 @@ formEl.addEventListener("submit", function (e) {
 
   }
 
-  // let formData = new FormData(formEl);
-  // let index = 0;
-
-  // formData.forEach(function (value, key) {
-  //   console.log(key, value);
-  //   index++;
-  // });
-
   headEl.innerText = "Well Done, Here You Can Check Your Answer";
   divInfo.innerHTML = "";
 
   const textEl = createParagraph("grettings", "Congrulation");
   const resultEl = createParagraph(
     "result",
-    `Your score is ${noOfCorrectAnswer}/${noOfQusetion}`
+    `Your score is ${noOfCorrectAnswer}/${noOfQuestion}`
   );
   const gifEl = createImage("celb.gif", "");
 
@@ -576,3 +674,27 @@ formEl.addEventListener("submit", function (e) {
   divInfo.appendChild(gifEl);
   window.scroll(0, 0);
 });
+
+let seconds = 59
+let minutes = 59
+let hours = 2
+
+const quizTimeEl = document.querySelector(`div[class="quiz-time"]`);
+const wholeInterval = setInterval(() => {
+  quizTimeEl.innerText = `time left ${hours}:${minutes}:${seconds} sec`;
+  if (seconds <= 0 && minutes <= 0 && hours <= 0) {
+    clearInterval(wholeInterval);
+    buttonEl.click();
+  }
+  if (seconds <= 0 && minutes <= 0) {
+    hours--;
+    seconds = 60;
+    minutes = 59;
+  }
+  if (seconds <= 0) {
+    minutes--;
+    seconds = 60;
+  }
+  seconds--;
+}, 1000);
+

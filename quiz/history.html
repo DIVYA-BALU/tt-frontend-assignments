@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+    
+    <a href="" id="insert">hi click here to go to insert page</a>
+    <a href="" id="update">hi click here to go update page</a>
+    <a href="" id="delete">hi click here to go to delete page</a>
+    <div id="div1">
+        
+    </div>
+
+	<script>
+        const divEl = document.getElementById("div1");
+        const contentArray = ["hi this is home","this is insert","this is update","this is delete"];
+        const url = ["/quiz/history.html/insert","/quiz/history.html/update","/quiz/history.html/delete"];
+        const idList = ["insert","update","delete"];
+
+        function content(index){
+                divEl.innerText = contentArray[index];
+        }
+
+        function addHistory(index){
+            window.history.pushState("","", url[index]);
+        }
+
+        function navigator(id,index){
+            document.getElementById(id).addEventListener("click", function(event){
+            event.preventDefault()
+            content(index+1);
+            addHistory(index)
+            });
+
+        }
+
+        for(let index = 0; index < idList.length; index++){
+            navigator(idList[index],index);
+        }
+
+        addEventListener("popstate", function (e) {
+            e.preventDefault();
+            const arr = e.currentTarget.location.href.split("/")
+            const page = arr[arr.length - 1];
+            console.log(page);
+            if(page === "insert"){
+                content(1);
+            }
+            else if(page === "update"){
+                content(2);
+            }
+            else if(page === "delete"){
+                content(3);
+            }
+            else if(page === "history.html"){
+                content(0);
+            }
+
+        });
+
+        content(0);
+
+	</script>
+</body>
+
+</html>
