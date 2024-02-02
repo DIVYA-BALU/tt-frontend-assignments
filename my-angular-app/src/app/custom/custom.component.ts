@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { filterClass } from '../custom/custom.filter';
+import { filterClass } from '../custom-folder/custom.filter';
 
 @Component({
   selector: 'app-second',
-  templateUrl: './second.component.html',
-  styleUrls: ['./second.component.sass']
+  templateUrl: './custom.component.html',
+  styleUrls: ['./custom.component.sass']
 })
-export class SecondComponent {
+export class CustomComponent {
   inpVal = '';
   filterArr1: string[] = [
     "sachin",

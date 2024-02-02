@@ -13,12 +13,12 @@
 
 <h1>Attribute directives</h1>
 
-<app-child [item]="currentItem" (childClickEvent)="getFunction($event)"
+<!-- <app-child [item]="currentItem" (childClickEvent)="getFunction($event)"
     (childClickEvent1)="getFunction1($event)"></app-child>
-<p>{{valueFromChild}}</p>
+<p>{{valueFromChild}}</p>   
 
 <input type="text" [(ngModel)]="ngname" name="inpel">
-<p>{{ngname}}</p>
+<p>{{ngname}}</p> -->
 
 <p [ngStyle]="ngstyle">ngStyle example</p>
 
@@ -77,9 +77,9 @@
     <li *ngFor="let element of orderByVar">{{element.name}}</li>
 </ul>
 
-<h1>Custom service</h1>
+<!-- <h1>Custom service</h1>
 <input [(ngModel)]="val" type="text">
-<button (click)="addItem()">insert</button>
+<button (click)="addItem()">insert</button> -->
 
 <!-- <div *ngIf="resultArr.length>0">{{resultArr}}</div> -->
 <div *ngFor="let x of resultArr">

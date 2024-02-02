@@ -3,10 +3,10 @@ import * as _ from 'lodash';
 
 @Component({
   selector: 'app-first',
-  templateUrl: './first.component.html',
-  styleUrls: ['./first.component.css']
+  templateUrl: './lodash.component.html',
+  styleUrls: ['./lodash.component.css']
 })
-export class FirstComponent {
+export class LodashComponent {
   filterArr: string[] = [
     "sachin",
     "dhoni",

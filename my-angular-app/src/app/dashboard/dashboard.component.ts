@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { MyService } from '../service/my-service.service';
-
+import { ChildComponent } from '../child/child.component';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.sass']
 })
 export class DashboardComponent {
-  val: string = '';
+  val: any = '';
   resultArr: string[] = [];
   constructor(public myService: MyService) {
   }

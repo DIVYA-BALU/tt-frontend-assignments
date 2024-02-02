@@ -1,32 +1,46 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FirstComponent } from './first/first.component';
-import { SecondComponent } from './second/second.component';
-import { ThirdComponent } from './third/third.component';
 import { LoginComponent } from './login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthGuard } from './authguard';
 const appRoute: Routes = [
-  // { path: '', redirectTo: 'first', pathMatch: 'full' },
+
+  // { path: '', redirectTo: 'login', pathMatch: 'full' },
   // { path: '', component: AppComponent },
+
   {
-    path: 'lodash', component: FirstComponent, children: [
-      { path: 'different', component: ThirdComponent }
-    ]
+    path: 'lodash', loadChildren: () =>
+      import('./lodash/lodash.module').then((d) => d.LodashModule)
+  },
+
+  {
+    path: 'admin', loadChildren: () =>
+      import('./admin/admin.module').then((d) => d.AdminModule), canActivate: [AuthGuard]
+  },
+
+  {
+    path: 'dashboard', loadChildren: () =>
+      import('./dashboard/dashboard.module').then((d) => d.DashModule)
   },
   {
-    path: 'dashboard', component: DashboardComponent,
-    children: [
-      {
-        path: 'lodash', component: FirstComponent,
-        children: [
-          { path: 'different', component: ThirdComponent }
-        ]
-      },
-      { path: 'custom', component: SecondComponent },
-    ]
+    path: 'custom', loadChildren: () =>
+      import('./custom/custom.module').then((d) => d.CustomModule)
   },
-  { path: 'custom', component: SecondComponent },
+
+  // {
+  //   path: 'dashboard', component: DashboardComponent,
+  //   children: [
+  //     {
+  //       path: 'lodash', component: LodashComponent,
+  //       children: [
+  //         { path: 'different', component: ThirdComponent }
+  //       ]
+  //     },
+  //     { path: 'custom', component: SecondComponent },
+  //   ]
+  // },
+
   { path: 'login', component: LoginComponent },
+
 ]
 
 @NgModule({
