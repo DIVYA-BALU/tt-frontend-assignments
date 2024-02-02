@@ -1,0 +1,50 @@
+<button (click)="disp()">click Here</button>
+
+<br>
+
+<p *ngIf="str">{{str}}</p>
+
+<br>
+
+<label>Enter a number:</label>
+<input type="text" [(ngModel)]=value>
+
+<br>
+
+<div [ngSwitch]="value">
+    <p *ngSwitchCase="1">one</p>
+    <p *ngSwitchCase="2">two</p>
+    <p *ngSwitchCase="3">three</p>
+    <p *ngSwitchCase="4">four</p>
+    <p *ngSwitchDefault>default</p>
+</div>
+
+<br>
+
+
+<div [ngClass]="'color'">ngClass</div>
+
+<br>
+
+<div [ngStyle]="{'color': 'green','font-size': '20px'}">This is ngStyle</div>
+
+
+<br>
+
+<app-movie-table (movieSelectedEventEmitter)="selectedMovieToWatch($event)" [movieList]="myFavoriteMovies">
+</app-movie-table>
+
+<br>
+
+<p appHighlight>Highlight me!</p>
+
+
+<p>{{'hello' | uppercase}}</p>
+<p>{{'hello' | lowercase}}</p>
+<p>{{20 | currency: "USD"}}</p>
+<p>{{20-12-2024 | date: "dd/mm/yyyy"}}</p>
+<p>{{"20" | number}}</p>
+<p>{{"20" | percent}}</p>
+<p>{{"hello" | slice: 0:3}}</p>
+<p>{{"hello" | slice: 0:3 | uppercase}}</p>
+<p>{{"hello" | customFilter: "world": "!"}}</p>
