@@ -1,0 +1,60 @@
+// <div class="container">
+//   <form (ngSubmit)="onSubmit()">
+//       <div class="form-group">
+//           <label for="email">Email:</label>
+//           <input type="text" id="email" [(ngModel)]="email" name="email" required>
+//       </div>
+
+//       <div class="form-group">
+//           <label for="password">Password:</label>
+//           <input type="password" id="password" [(ngModel)]="password" name="password" required>
+//       </div>
+
+//       <button type="submit">Login</button>
+//   </form>
+// </div>
+
+
+//style the above html with form at center along with border and padding and margin box shadow and background color and text color and padding and block size for input elements 
+
+.container {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px #ccc;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    display: block;
+    margin-top: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    display: block;
+    margin-top: 5px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #444;
+}
+
+
+
+
