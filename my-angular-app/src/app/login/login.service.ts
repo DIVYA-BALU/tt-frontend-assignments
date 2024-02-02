@@ -7,7 +7,9 @@ import { environment } from 'src/environments/environment.development';
 })
 export class LoginService {
   loggedStatus: boolean = localStorage.getItem('isLogged') == 'true';
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+
+  }
 
   authenticate(email: string, password: string): Observable<any> {
     const body = { email, password }
