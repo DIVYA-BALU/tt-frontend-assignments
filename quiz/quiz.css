@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(221, 243, 250)
+    background-color: rgb(221, 243, 250);
 }
 
 #container {
@@ -9,9 +9,10 @@ body {
     width: 55%;
     /* background-color: rgb(238, 251, 255); */
     font-size: 20px;
-    font-family: "Trirong";
-    border: 3px solid rgb(32, 136, 171);
-    border-radius: 10px;
+    font-family: "Playfair Display";
+    /* border: 3px solid rgb(32, 136, 171); */
+    /* border-radius: 10px; */
+    box-shadow: 3px 3px 6px 6px rgb(165, 176, 179);
 }
 
 @media only screen and (max-width: 412px) {
@@ -30,7 +31,7 @@ h4 {
     /* background-color: rgb(255, 255, 255); */
     /* height: 250px; */
     /* border: 1px solid blue; */
-    margin-bottom: 1px;
+    /* margin-bottom: 0px; */
     padding: 15px;
     cursor: pointer;
 }
@@ -67,10 +68,11 @@ select[disabled] {
     border-left: none;
     border-right: none;
     border-bottom: 2px solid;
-    width: 60%;
+    width: 50%;
     height: 30px;
     padding-left: 10px;
-    font-family: "Trirong";
+    font-family: "Playfair Display";
+    font-size: 17px;
 }
 
 #container .question input[type="text"]:focus {
@@ -88,54 +90,61 @@ select[disabled] {
 }
 
 #container .question select {
-    width: 100px;
+    width: 200px;
     height: 30px;
     font-size: 15px;
     border: none;
     outline: none;
+    font-family: "Playfair Display";
 }
 
-#container .countdown {
+.countdown {
     display: block;
     background-color: rgb(32, 136, 171);
+    width: 15%;
     text-align: center;
     height: 45px;
-    padding-top: 11px;
-    margin-left: 650px;
+    font-size: 25px;
+    padding-top: 20px;
     color: white;
+    top: 50px;
+    left: 50px;
+    position: fixed;
 }
 
 #container .button input {
     display: block;
     height: 50px;
     width: 100px;
-    margin-left: 300px;
+    margin-left: 350px;
     border: none;
     background-color: rgb(32, 136, 171);
     color: white;
+    font-family: "Playfair Display";
     font-size: 20px;
 }
 
-#container .button input:focus {
+/* #container .button input:focus {
     display: block;
     height: 100px;
     width: 80px;
     margin-left: 300px;
     border: none;
     background-color: rgb(103, 103, 176);
-}
+} */
 
 #container .button input:hover {
     display: block;
     height: 50px;
     width: 100px;
-    margin-left: 300px;
+    margin-left: 350px;
     border: none;
     background-color: rgb(10, 91, 118);
-    border: 2px solid rgb(9, 9, 110);
     border-radius: 5px;
+    box-shadow: 1px 1px 4px 4px rgb(128, 186, 206);
     cursor: pointer;
-    transform: scale(1.1);
+    transform: scale(1);
+    font-family: "Playfair Display";
 }
 
 #container .question .correct {
@@ -143,7 +152,6 @@ select[disabled] {
     text-align: center;
     padding-left: 25px;
     color: rgb(1, 168, 1);
-    font-family: "Trirong";
 }
 
 #container .question .correct-text {
@@ -159,7 +167,6 @@ select[disabled] {
     text-align: center;
     padding-left: 25px;
     color: red;
-    font-family: "Trirong";
 }
 
 #container .button-disable input {
@@ -167,6 +174,7 @@ select[disabled] {
 }
 
 #container .button-disable p {
+    font-size: 40px;
     text-align: center;
 }
 
@@ -174,7 +182,7 @@ a {
     text-align: center;
     color: rgb(213, 213, 219);
     margin-left: 320px;
-    padding-top: 10px;
+    padding-top: 20px;
     background-color: rgb(32, 136, 171);
     display: block;
     height: 45px;
@@ -186,14 +194,16 @@ a:hover {
     text-align: center;
     color: rgb(82, 198, 237);
     margin-left: 320px;
-    padding-top: 10px;
+    padding-top: 20px;
     background-color: rgb(10, 91, 118);
     display: block;
-    height: 47px;
-    width: 130px;
+    height: 45px;
+    width: 120px;
     text-decoration: none;
-    border: 2px solid rgb(193, 224, 234);
-    border-radius: 5px;
+    /* border: 2px solid rgb(193, 224, 234); */
+    border-radius: 5px; 
+    box-shadow: 1px 1px 4px 4px rgb(128, 186, 206);
+    transform: scale(1);
 }
 
 #container-index {
@@ -201,12 +211,14 @@ a:hover {
     /* margin-top: 1px; */
     padding: 30px;
     width: 50%;
-    height: 770px;
+    height: 620px;
     /* background-color: rgb(238, 251, 255); */
     font-size: 20px;
-    font-family: "Trirong";
+    font-family: "Playfair Display";
     border-radius: 10px;
-    border: 3px solid rgb(32, 136, 171);
+    box-shadow: 4px 4px 6px 6px rgb(165, 176, 179);
+    /* border: 3px solid rgb(32, 136, 171); */
+    /* box-shadow: 60px; */
 }
 
 #container-index h1,
@@ -223,17 +235,15 @@ h4 {
     border: 1px solid;
     padding: 10px;
     color: red;
-    font-family: "Trirong";
+    font-family: "Playfair Display";
 }
 
 .pass {
     font-size: 30px;
     color: green;
-    font-family: "Trirong";
 }
 
 .fail {
     font-size: 30px;
     color: red;
-    font-family: "Trirong";
 }

@@ -1,35 +1,22 @@
 
 document.addEventListener("DOMContentLoaded", () => {
+    overallCountDown();
     countdown;
     document.addEventListener("click", (event) => {
 
-        if (event.target.getAttribute("for")) { // check for both input and label     
-            event.stopPropagation();            //prevent that event from further progation
+        if (event.target.getAttribute("for")) {
+            event.stopPropagation();
         } else if (event.target.getAttribute("type")) {
             const selected = event.target;
             const name = selected.name;
             const inputEls = document.getElementsByName(name);
 
-            for (let i = 0; i < inputEls.length; i++) {
-                const input = inputEls[i];
+            const div = inputEls[0].parentNode;
+            timer(div, 5);
 
-                if (input.checked === false) {
-                    const id = input.getAttribute("id");
-                    const labelEl = document.querySelector(`label[for="${id}"]`);
-
-                    if (selected.type === "text") {
-                        setTimeout(() => {
-                            input.disabled = "disabled";
-                            labelEl.id = "disable";
-                        }, 10000);
-                    } else {
-                        setTimeout(() => {
-                            input.disabled = "disabled";
-                            labelEl.id = "disable";
-                        }, 10000);
-                    }
-                }
-            }
+            setTimeout(() => {
+                disabled(inputEls);
+            }, 5000);
         } else if (event.target.getElementsByTagName("select")) {
             const selected = event.target;
             const id = selected.getAttribute("id");
@@ -42,26 +29,59 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+function timer(div, time) {
+    if (div.querySelector('spanEl')) {
+        const spanEl = document.createElement("span");
+        spanEl.textContent = `${time} sec left to change the option`;
+        div.appendChild(spanEl);
+        setInterval(() => {
+            if (time > 1) {
+                spanEl.textContent = `${--time} sec left to change the option`;
+            } else {
+                spanEl.remove();
+            }
+        }, 1000);
+    }
+}
+
+function disabled(inputEls) {
+    for (let i = 0; i < inputEls.length; i++) {
+
+        const input = inputEls[i];
+        const id = input.getAttribute("id");
+        const labelEl = document.querySelector(`label[for="${id}"]`);
+
+        if ((input.checked === false && input.type === "radio") || (input.type === "text")) {
+            input.disabled = "disabled";
+            labelEl.id = "disable";
+        } else if (input.checked === false && input.type === "checkbox") {
+            input.disabled = "disabled";
+            labelEl.id = "disable";
+        } else if (input.checked === true && input.type === "checkbox") {
+            input.setAttribute("onclick", "return false");
+        }
+    }
+}
+
 let timeLeft = 60;
 
-const containerEl = document.getElementById("container");
+const bodyEl = document.querySelector("body");
 const spanElement = document.createElement("span");
 spanElement.className = "countdown";
-containerEl.appendChild(spanElement);
+bodyEl.appendChild(spanElement);
 
-function countDown() {
+function overallCountDown() {
 
     if (timeLeft > -1) {
-        spanElement.textContent = timeLeft--;
+        spanElement.textContent = `Time Left : ${timeLeft--} sec`;
     } else {
         spanElement.textContent = "Time out";
         getAllInputs();
         document.querySelector(`input[type='submit']`).click();
     }
 }
-
 const countdown = setInterval(() => {
-    countDown();
+    overallCountDown();
 }, 1000);
 
 function getAllInputs() {
@@ -77,10 +97,10 @@ function getAllInputs() {
     const checkboxInputs = document.querySelectorAll(`input[type="checkbox"]`);
     for (let i = 0; i < checkboxInputs.length; i++) {
         if (checkboxInputs[i].checked === false) {
-        const id = checkboxInputs[i].getAttribute("id");
-        const labelEl = document.querySelector(`label[for="${id}"]`);
-        checkboxInputs[i].disabled = "disabled";
-        labelEl.id = "disable";
+            const id = checkboxInputs[i].getAttribute("id");
+            const labelEl = document.querySelector(`label[for="${id}"]`);
+            checkboxInputs[i].disabled = "disabled";
+            labelEl.id = "disable";
         }
     }
     const textInputs = document.querySelectorAll(`input[type="text"]`);
@@ -694,9 +714,6 @@ const questions = [{
 const divEl = document.getElementById("container");
 const formEl = document.createElement("form");
 formEl.setAttribute("id", "quiz_form");
-const headingEl = document.createElement("h1");
-headingEl.textContent = "HTML QUIZ";
-formEl.appendChild(headingEl);
 
 start();
 
@@ -748,19 +765,19 @@ function start() {
             divEl.appendChild(labelEl);
 
 
-            const inputEl = document.createElement("select");
-            inputEl.id = randomIdName;
-            inputEl.name = questions[randomIndex].name;
+            const selectEl = document.createElement("select");
+            selectEl.id = randomIdName;
+            selectEl.name = questions[randomIndex].name;
 
             for (let k = 0; k < questions[randomIndex].options.length; k++) {
 
                 const optionEl = document.createElement("option");
                 optionEl.textContent = questions[randomIndex].options[k].option;
                 optionEl.value = k;
-                inputEl.appendChild(optionEl);
+                selectEl.appendChild(optionEl);
 
             }
-            divEl.appendChild(inputEl);
+            divEl.appendChild(selectEl);
         } else if (questions[randomIndex].type === "text") {
 
             const randomIdName = randomString(5);

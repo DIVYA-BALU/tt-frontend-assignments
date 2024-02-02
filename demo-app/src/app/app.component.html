@@ -1,0 +1,76 @@
+<!-- <h1>parent-component works!</h1>
+
+<p [ngStyle]="{'color': 'red', 'font-size': '50px'}">Learning Angular</p>
+
+<ul>
+    <li *ngFor="let operation of operations">{{operation}} </li>
+</ul> -->
+
+<!-- <app-child-component [fruits]="fruits" [name]="parent" (eventItem)="parentFunction($event)"></app-child-component>
+<p>{{child}}</p>
+
+<input type="checkbox" [(ngModel)]="isChecked">checkbox
+<p>{{isChecked}}</p> -->
+
+<!-- <input type="checkbox" [(ngModel)]="isChecked">ADDITION
+<p *ngIf="isChecked" [ngClass]="'checked'">CHOOSED ADDITION</p>
+
+<div [ngClass]="{'checked': isChecked}">Element is checked</div>
+
+<br><br>
+
+<label>ENTER A NUMBER 1</label>
+<input type="text" [(ngModel)]="number1">
+
+<br><br>
+
+
+<label>ENTER A NUMBER 2</label>
+<input type="text" [(ngModel)]="number2">
+
+<p>ANSWER = {{+number1 + +number2}}</p>
+
+<p>TYPE A NUMBER BETWEEN 1to3</p>
+<input type="text" [(ngModel)]="num">
+
+<div [ngSwitch]="num">
+    <div *ngSwitchCase="1">ONE</div>
+    <div *ngSwitchCase="2">TWO</div>
+    <div *ngSwitchCase="3">THREE</div>
+    <div *ngSwitchDefault="">NONE</div>
+</div>
+
+<br><br>
+
+<p appHighlight>This a example for custom directive</p>
+
+{{ "hello" | uppercase }} <br>
+{{"hello" | lowercase }} <br>
+{{ 20 | currency:'USD' }} <br>
+{{ 01-01-2002 | date:'dd/mm/yyyy' }} <br>
+{{ 12 | number }} <br>
+
+<p>Custom Filter: {{ ' Hello ' | customfilter: 'argument1' : 'argument2' }}</p>
+
+<p>Chaining Filters: {{ 'world' | uppercase | customfilter: 'Hello ' : '!'}}</p> -->
+
+<nav>
+    <a routerLink="/" >Home</a>
+    <a routerLink="/login" >Login</a>
+    <a routerLink="/about">About Us</a>
+    <a routerLink="/contact">Contact Us</a>
+    <!-- <button type="button" (click)="logout()">LOGOUT</button> -->
+</nav>
+
+<router-outlet></router-outlet>
+
+<!-- <table>
+    <tr *ngFor="let post of allPost">
+        <td>{{post.userId}}</td>
+        <td>{{post.id}}</td>
+        <td>{{post.title}}</td>
+        <td>{{post.body}}</td>
+    </tr>
+</table>
+
+<app-lodash-example></app-lodash-example> -->
