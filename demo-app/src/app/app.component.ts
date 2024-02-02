@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService } from './service/data.service';
+import { LoginService } from './login/login.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ export class AppComponent {
 
   allPost: any = [];
 
-  constructor(private post: DataService){
+  constructor(private post: DataService, private loginService: LoginService){
     this.post.getPost().subscribe((data) => {
       this.allPost = data;
     });
@@ -34,4 +35,7 @@ export class AppComponent {
 
   num: string = "";
 
+  logout(){
+    this.loginService.logout();
+  }
 }

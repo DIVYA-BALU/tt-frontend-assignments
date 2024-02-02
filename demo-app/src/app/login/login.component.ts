@@ -16,7 +16,7 @@ export class LoginComponent {
   postData(){
     this.loginService.login(this.email, this.password).subscribe(
       data =>{
-        this.loginService.loggedIn(true);
+        this.loginService.loggedIn(true, data.accessToken);
         console.log(data.accessToken);
       } ,
       error => console.log(error)    

@@ -19,10 +19,11 @@ export class LoginService {
     return this.http.post<loginResponse>(this.url, body);
   }
 
-  loggedIn(status: boolean): void {
+  loggedIn(status: boolean, token:string): void {
     if (status) {
       this.isLoggedIn = true;
       localStorage.setItem('isLoggedIn', 'valid');
+      localStorage.setItem('accessToken', token);
       this.cookieService.set('isLoggedIn', 'valid');
 
     } else {
@@ -37,6 +38,13 @@ export class LoginService {
     // return this.isLoggedIn;
     // return localStorage.getItem('isLoggedIn') === 'valid';
     return this.cookieService.get('isLoggedIn') === 'valid';
+  }
+
+  logout(){
+    this.isLoggedIn = false;
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('accessToken');
+    this.cookieService.deleteAll('isLoggedIn');
   }
 
 }
