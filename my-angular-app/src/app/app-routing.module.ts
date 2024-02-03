@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { AuthGuard } from './authguard';
+import { AuthGuard } from './auth.guard';
 const appRoute: Routes = [
 
   // { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -13,8 +13,13 @@ const appRoute: Routes = [
   },
 
   {
-    path: 'admin', loadChildren: () =>
-      import('./admin/admin.module').then((d) => d.AdminModule), canActivate: [AuthGuard]
+    path: 'admin', canActivate: [AuthGuard], loadChildren: () =>
+      import('./admin/admin.module').then((d) => d.AdminModule)
+  },
+
+  {
+    path: 'logout', canActivate: [AuthGuard], loadChildren: () =>
+      import('./logout/logout.module').then((d) => d.LogOutModule),
   },
 
   {

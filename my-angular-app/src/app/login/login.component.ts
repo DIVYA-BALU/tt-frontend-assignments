@@ -14,7 +14,6 @@ export class LoginComponent {
     token: any = '';
     constructor(private loginService: LoginService, private cookieService: CookieService, private router: Router) { }
     login() {
-
         this.loginService.authenticate(this.email, this.password).subscribe({
             next: (token) => {
                 this.token = token.body.token;
@@ -22,12 +21,11 @@ export class LoginComponent {
                 if (token.status == 200) {
                     localStorage.setItem('isLogged', 'true');
                     this.cookieService.set('isLogged', 'true');
+                    // this.router.navigate(['dashboard']);
                 }
             },
             error: (error) => {
                 console.log("error:", error);
-                localStorage.setItem('isLogged', 'false');
-                this.cookieService.set('isLogged', 'false');
             },
             complete: () => {
                 if (this.loginService.isAuthencticate()) {
