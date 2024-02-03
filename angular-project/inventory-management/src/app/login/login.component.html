@@ -1,0 +1,27 @@
+<div class="split left">
+  <img src="../assets/images/in.jpg" alt="login image">
+
+</div>
+<div class="split right">
+  <div class="form">
+    <form #loginForm="ngForm" (ngSubmit)="loginForm.valid && onSubmit()">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="text" id="email" [(ngModel)]="email" name="email" required #emailField="ngModel">
+        <div *ngIf="emailField.invalid && loginForm.submitted" class="error">
+          Email is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" [(ngModel)]="password" name="password" required #passwordField="ngModel">
+        <div *ngIf="passwordField.invalid && loginForm.submitted" class="error">
+          Password is required.
+        </div>
+      </div>
+
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</div>

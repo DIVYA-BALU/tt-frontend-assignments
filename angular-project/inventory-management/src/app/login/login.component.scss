@@ -1,0 +1,85 @@
+// <div class="split left">
+//   <img src="../assets/images/in.jpg" alt="login image">
+
+// </div>
+// <div class="split right">
+//   <div class="form">
+//     <form #loginForm="ngForm" (ngSubmit)="loginForm.valid && onSubmit()">
+//       <div class="form-group">
+//         <label for="email">Email:</label>
+//         <input type="text" id="email" [(ngModel)]="email" name="email" required #emailField="ngModel">
+//         <div *ngIf="emailField.invalid && loginForm.submitted" class="error">
+//           Email is required.
+//         </div>
+//       </div>
+
+//       <div class="form-group">
+//         <label for="password">Password:</label>
+//         <input type="password" id="password" [(ngModel)]="password" name="password" required #passwordField="ngModel">
+//         <div *ngIf="passwordField.invalid && loginForm.submitted" class="error">
+//           Password is required.
+//         </div>
+//       </div>
+
+//       <button type="submit">Login</button>
+//     </form>
+//   </div>
+// </div>
+
+ 
+
+
+
+// css for class="container" to be displayed as flex container and flex wrap as row
+
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+}
+
+.left {
+  left: 0;
+  
+}
+
+.right {
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f1f1f1;
+}
+
+.split::-webkit-scrollbar {
+  display: none;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #d8d7d7;
+  background-color: #f1f1f1;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+}
