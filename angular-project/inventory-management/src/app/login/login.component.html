@@ -1,8 +1,12 @@
+
 <div class="split left">
   <img src="../assets/images/in.jpg" alt="login image">
 
 </div>
+
 <div class="split right">
+  <div class="content">
+  <h1>Inventory Management System</h1>
   <div class="form">
     <form #loginForm="ngForm" (ngSubmit)="loginForm.valid && onSubmit()">
       <div class="form-group">
@@ -22,6 +26,12 @@
       </div>
 
       <button type="submit">Login</button>
+      <div *ngIf="invalidLogin" class="error">
+        <br>
+        Invalid User Credentials
+      </div>
+      <p class="register-link">Not a user? <a routerLink="/register">Register</a></p>
     </form>
+  </div>
   </div>
 </div>

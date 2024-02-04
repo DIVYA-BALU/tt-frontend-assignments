@@ -1,0 +1,82 @@
+<div class="split left">
+  <img src="../assets/images/cart.avif" alt="register image">
+</div>
+
+<div class="split right">
+  <div class="content">
+    <h1>Inventory Management System</h1>
+    <div class="form-container">
+      <form #registerForm="ngForm" (ngSubmit)="registerForm.valid && onSubmit()" class="form-group">
+        <!-- First Name -->
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input id="firstName" type="text" name="firstName" [(ngModel)]="user.firstname" required class="form-control">
+          <div *ngIf="registerForm.controls['firstName']?.invalid && registerForm.submitted" class="error">
+            First Name is required.
+          </div>
+        </div>
+      
+        <!-- Last Name -->
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input id="lastName" type="text" name="lastName" [(ngModel)]="user.lastname" required class="form-control">
+          <div *ngIf="registerForm.controls['lastName']?.invalid && registerForm.submitted" class="error">
+            Last Name is required.
+          </div>
+        </div>
+      
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" type="email" name="email" [(ngModel)]="user.email" required email class="form-control">
+          <div *ngIf="registerForm.controls['email']?.invalid && registerForm.submitted" class="error">
+            A valid Email is required.
+          </div>
+          <div *ngIf="emailError" class="error">{{ emailError }}</div>
+        </div>
+      
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input id="password" type="password" name="password" [(ngModel)]="user.password" required #password="ngModel" class="form-control">
+          <div *ngIf="registerForm.controls['password']?.invalid && registerForm.submitted" class="error">
+            Password is required.
+          </div>
+        </div>
+      
+        <!-- Confirm Password -->
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input id="confirmPassword" type="password" name="confirmPassword" required [pattern]="user.password" class="form-control">
+          <div *ngIf="registerForm.controls['confirmPassword']?.invalid && registerForm.submitted" class="error">
+            Confirm Password is required and should match the Password.
+          </div>
+          <div *ngIf="!passwordsMatch" class="error">
+            Passwords do not match.
+          </div>
+        </div>
+      
+        <!-- Role -->
+        <div class="form-group">
+          <label for="role">Role</label>
+          <select id="role" name="role" [(ngModel)]="user.role" required class="form-control">
+            <option value="">Select a role</option>
+            <option value="admin">ADMIN</option>
+            <option value="user">MANAGER</option>
+            <option value="manager">WAREHOUSE_STAFF</option>
+          </select>
+          <div *ngIf="registerForm.controls['role']?.invalid && registerForm.submitted" class="error">
+            Role is required.
+          </div>
+        </div>
+      
+        <!-- Submit -->
+        <div class="form-group">
+          <button type="submit"  class="btn btn-primary">Submit</button>
+          <button type="reset" class="btn btn-secondary">Reset</button>
+          <button type="button" (click)="onCancel()" class="btn btn-danger">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

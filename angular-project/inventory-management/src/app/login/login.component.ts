@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../service/login.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,8 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private loginService: LoginService) {}
+  invalidLogin: boolean = false;
+  constructor(private loginService: LoginService, private router: Router) {}
 
 
   onSubmit(): void{
@@ -19,6 +22,14 @@ export class LoginComponent {
       response => {
         this.loginService.loggedin(true,response.token);
         console.log(response.token);
+        this.router.navigate(['/home']);
+      },
+      (error: HttpErrorResponse) => {
+        if (error.status === 403) {
+          this.invalidLogin = true;
+        } else {
+          console.log(error);
+        }
       }
     );
   }

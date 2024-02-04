@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
-import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,37 +13,44 @@ export class LoginService {
 
   isLoggedin : boolean = false;
 
-
-  constructor(private http: HttpClient, private cookieService: CookieService) {}
+  role : string = '';
+  
+  constructor(private http: HttpClient) {}
 
   login(email: string, password: string): Observable<loginResponse>{
     
-    return this.http.post<loginResponse>(this.authUrl, {email, password});
+    return this.http.post<loginResponse>(this.authUrl, {email, password}).pipe(
+      tap(response => {
+        const tokenParts = response.token.split('.');
+        const payload = JSON.parse(atob(tokenParts[1]));
+        this.isLoggedin  = true;
+        this.role = payload.roles[0];
+      })
+    );
+
   }
 
 
   loggedin(status: boolean, token : string): void {
     if (status) {
       this.isLoggedin = true;
-      // localStorage.setItem('isLoggedin', 'true');
-      // localStorage.setItem('accessToken', token);
-       this.cookieService.set('isLoggedIn', 'true');
+      localStorage.setItem('isLoggedin', 'true');
+      localStorage.setItem('accessToken', token);
+      localStorage.setItem('role', this.role);
     } else {
       this.isLoggedin = false;
-      // localStorage.setItem('isLoggedin', 'false');
-       this.cookieService.set('isLoggedIn', 'false');
+      localStorage.setItem('isLoggedin', 'false');
+
     }
   }
   isAuthenticated(): boolean {
-    // return localStorage.getItem('isLoggedin') === 'true';
-    return this.cookieService.get('isLoggedIn') === 'true';
+    return localStorage.getItem('isLoggedin') === 'true';
   }
 
   logout(){
     this.isLoggedin = false;
-    // localStorage.removeItem('isLoggedIn');
-    // localStorage.removeItem('accessToken');
-     this.cookieService.deleteAll('isLoggedIn');
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('accessToken');
   }
 
 }
@@ -52,3 +58,5 @@ export class LoginService {
 interface loginResponse {
   token: string;
 }
+
+

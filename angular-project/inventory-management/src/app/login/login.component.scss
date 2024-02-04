@@ -1,37 +1,6 @@
-// <div class="split left">
-//   <img src="../assets/images/in.jpg" alt="login image">
-
-// </div>
-// <div class="split right">
-//   <div class="form">
-//     <form #loginForm="ngForm" (ngSubmit)="loginForm.valid && onSubmit()">
-//       <div class="form-group">
-//         <label for="email">Email:</label>
-//         <input type="text" id="email" [(ngModel)]="email" name="email" required #emailField="ngModel">
-//         <div *ngIf="emailField.invalid && loginForm.submitted" class="error">
-//           Email is required.
-//         </div>
-//       </div>
-
-//       <div class="form-group">
-//         <label for="password">Password:</label>
-//         <input type="password" id="password" [(ngModel)]="password" name="password" required #passwordField="ngModel">
-//         <div *ngIf="passwordField.invalid && loginForm.submitted" class="error">
-//           Password is required.
-//         </div>
-//       </div>
-
-//       <button type="submit">Login</button>
-//     </form>
-//   </div>
-// </div>
-
- 
-
-
-
 // css for class="container" to be displayed as flex container and flex wrap as row
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 .split {
   height: 100%;
   width: 50%;
@@ -39,6 +8,7 @@
   z-index: 1;
   top: 0;
   overflow-x: hidden;
+  font-family: 'Roboto', sans-serif;
 }
 
 .left {
@@ -78,8 +48,30 @@ button {
   background-color: #007bff;
   color: #ffffff;
   cursor: pointer;
+  font-family: 'Roboto', sans-serif;
 }
 
 .error {
   color: red;
+}
+
+.split.right .content {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+}
+
+.register-link {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.register-link a {
+  color: #007bff;
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
 }
