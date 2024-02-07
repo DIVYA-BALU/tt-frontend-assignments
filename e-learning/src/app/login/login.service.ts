@@ -1,23 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-
-  url = "http://localhost:8080/login";
+  url = environment.loginUrl;
 
   isLoggedIn: boolean = false;
 
   constructor(private http: HttpClient, private cookieService: CookieService, private route: Router) { }
 
-  login(email: string, password: string): Observable<loginResponse> {
-    const body = { email, password };
-    return this.http.post<loginResponse>(this.url, body);
+  login(loginUser: user): Observable<loginResponse> {
+    return this.http.post<loginResponse>(this.url, loginUser);
   }
 
   loggedIn(status: boolean, token:string): void {
@@ -52,4 +51,9 @@ export class LoginService {
 }
 interface loginResponse {
   accessToken: string;
+}
+
+interface user{
+  email: string;
+  password: string;
 }

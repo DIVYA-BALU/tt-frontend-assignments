@@ -12,6 +12,8 @@ import { ContactComponent } from './contact/contact.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LodashExampleComponent } from './lodash-example/lodash-example.component'; 
 import { DataService } from './service/data.service';
+import { HomeComponent } from './home/home.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { DataService } from './service/data.service';
     CustomfilterPipe,
     AboutComponent,
     ContactComponent,
-    LodashExampleComponent
+    LodashExampleComponent,
+    HomeComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

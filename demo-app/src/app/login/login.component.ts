@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginService } from './login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,15 +12,16 @@ export class LoginComponent {
   email = "";
   password = "";
 
-  constructor(private loginService: LoginService){}
+  constructor(private loginService: LoginService, private route: Router) { }
 
-  postData(){
+  postData() {
     this.loginService.login(this.email, this.password).subscribe(
-      data =>{
+      data => {
         this.loginService.loggedIn(true, data.accessToken);
+        this.route.navigate(['/home']);
         console.log(data.accessToken);
-      } ,
-      error => console.log(error)    
-    );    
+      },
+      error => console.log(error)
+    );
   }
 }

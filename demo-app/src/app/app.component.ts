@@ -35,6 +35,8 @@ export class AppComponent {
 
   num: string = "";
 
+  isLogged: boolean = this.loginService.isAuthenticated();
+
   logout(){
     this.loginService.logout();
   }

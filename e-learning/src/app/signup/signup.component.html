@@ -1,0 +1,47 @@
+<div class="form-container">
+    <h2>Welcome!</h2>
+    <h3>Create your account!</h3>
+    <form #signupForm="ngForm" (ngSubmit)="onSignup(signupForm)">
+
+        <div>
+            <label for="userId">User id:</label>
+            <input type="text" #userId="ngModel" id="userId" placeholder="Enter userId" ngModel name="userId" required>
+            <span *ngIf="!userId.valid && (userId.touched || userId.dirty)">
+                <span *ngIf="userId.errors?.['minlength']">
+                    Minimum length is 6 characters
+                </span>
+                <span *ngIf="userId.errors?.['required']">
+                    Please enter valid userId
+                </span>
+            </span>
+        </div>
+
+        <div>
+            <label for="email">Email:</label>
+            <input type="text" #email="ngModel" id="email" placeholder="Enter email" ngModel name="email" required>
+            <span *ngIf="!email.valid && (email.touched || email.dirty)">
+                Please enter valid email
+            </span>
+        </div>
+
+        <div>
+            <label for="pword">Password:</label>
+            <input type="text" #pword="ngModel" id="pword" placeholder="Enter password" ngModel name="password" required minlength="6">
+            <span *ngIf="!pword.valid && (pword.touched || pword.dirty)">
+                <span *ngIf="pword.errors?.['minlength']">
+                    Minimum length is 6 characters
+                </span>
+                <span *ngIf="pword.errors?.['required']">
+                    Please enter valid password
+                </span>
+            </span>
+        </div>
+
+        <div class="button-div">
+            <button type="submit" [disabled]="!signupForm.valid">SIGNUP</button>
+        </div>
+    </form>
+    <div *ngIf="errorStatus" class="error-msg">
+        <p><i class="fa fa-exclamation-triangle"></i>{{errorStatus}}</p>
+    </div>
+</div>

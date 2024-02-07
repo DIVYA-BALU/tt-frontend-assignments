@@ -7,6 +7,8 @@ import { ContactComponent } from './contact/contact.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [ 
+  { path: '', redirectTo: '/home', pathMatch: 'full'},
+  { path: 'home', loadChildren: () => import('./home/home.module').then(module => module.HomeModule)},
   { path: 'about', component: AboutComponent, canActivate: [AuthGuard]}, 
   { path: 'contact', component: ContactComponent, canActivate: [AuthGuard]}, 
   { path: 'login', loadChildren: () => import('./login/login.module').then( module => module.LoginModule)}

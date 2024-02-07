@@ -1,0 +1,20 @@
+<div class="header">
+  <div class="logo">E-LEARNING</div>
+
+  <div class="search">
+    <i class="fa fa-search"></i>
+    <input type="text" name="search" id="search-box" placeholder="Seach for anything">
+  </div>
+
+  <div class="nav-container">
+    <nav>
+      <a routerLink="/home">Home</a>
+      <a routerLink="/teach">Wish to Teach</a>
+      <a routerLink="/login" *ngIf="!logged">Login</a>
+      <a routerLink="/signup" *ngIf="!logged">Sign up</a>
+      <a routerLink="/myLearning" *ngIf="logged">My Learning</a>
+      <a routerLink="/profile" *ngIf="logged">Profile</a>
+    </nav>
+  </div>
+</div>
+<router-outlet></router-outlet>
