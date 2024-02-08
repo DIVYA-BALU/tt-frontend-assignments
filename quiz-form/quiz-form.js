@@ -449,9 +449,9 @@ const questions = [
   }
 ]
 
-const overAllTimeInSeconds = 100;
+const overAllTimeInSeconds = 10;
 const inputDisableTimeInSeconds = 5;
-const timeForDisableInput = 5*1000;
+const timeForDisableInput = inputDisableTimeInSeconds*1000;
 const timerObject = {};
 const n = 7;
 const openedQuestions = [];
@@ -483,6 +483,8 @@ startButton.addEventListener('click', questionsPage);
 div1.appendChild(startButton);
 
 function timerspan(timerDiv){
+
+  console.log(timerDiv);
   timeInSeconds = timerObject[timerDiv.id].remainingTime;
   const hours = Math.floor(timeInSeconds / 3600);
   const minutes = Math.floor((timeInSeconds % 3600) / 60);
@@ -507,11 +509,10 @@ function timerspan(timerDiv){
     console.log('in if t===0');
     clearInterval(timerObject[timerDiv.id].intervalId);
     timerDiv.remove();
-    console.log(timerDiv.id);
+
     if(timerDiv.id === 'over-all-timer-div')
-    {
-      doValidation();
-    }
+    doValidation();
+
   }
 
 }
@@ -533,7 +534,7 @@ function questionsPage() {
   div1.appendChild(quizForm);
   quizForm.appendChild(heading);
 
-  const overAllTimerDiv =createTimerDiv('over-all-timer','Time left');
+  const overAllTimerDiv =createTimerDiv('over-all','Time left');
   quizForm.appendChild(overAllTimerDiv);
   
   overAllTimerIntervalId = setInterval(() => timerspan(overAllTimerDiv),1000);
@@ -651,7 +652,8 @@ submitButton.className = 'submit-button';
 
 function doValidation() {
   
-  clearInterval(overAllTimerIntervalId);
+ 
+  disableAllInputsAndRemoveTimerDiv();
   
   for (let m = 0; m < answerLabelsRandomName.length; m++) {
     const choiceLabel = document.querySelector(`label[for="${answerLabelsRandomName[m]}"]`);
@@ -695,6 +697,7 @@ function doValidation() {
         const userSelectedAnswer = document.querySelectorAll(`input[name="q${openedQuestions[i] + 1}"]:checked`);
       
        if (userSelectedAnswer !== null) {
+
          const selectedValues = Array.from(userSelectedAnswer).map(checkbox => checkbox.value);
          const allElementsInArray1ExistInArray2 = selectedValues.every(item => answer.includes(item));
          const allElementsInArray2ExistInArray1 = answer.every(item => selectedValues.includes(item));
@@ -743,10 +746,10 @@ function doValidation() {
 
 function createTimerDiv(name,text){
   const timerDiv = document.createElement('div');
-  timerDiv.className = `${name}-div`;
-  timerDiv.id = `${name}-div`;  
+  timerDiv.className = `${name}-timer-div`;
+  timerDiv.id = `${name}-timer-div`;
   const timerText = document.createElement('p');
-  timerText.id = `timer-sext`;
+  timerText.id = `timer-text`;
   timerText.textContent = `${text}  :  `;
   const timerSpan = document.createElement('span')
   timerSpan.id = `timer-span`;
@@ -756,19 +759,18 @@ function createTimerDiv(name,text){
 }
 
 function disable(choicesDiv){
-  console.log(timerObject[choicesDiv.id]);
-  if(timerObject[choicesDiv.id])
+
+  if(timerObject[`${choicesDiv.id}-timer-div`])
   return;
   else
   {
     console.log('in disable() else');
     setTimeout(() => disableInputs(choicesDiv),timeForDisableInput);
-    choicesDiv.appendChild(createTimerDiv('input-disable-timer','Time left to make changes'));
-
-    inputDisableTimerIntervalId = setInterval(() => timerspan(choicesDiv),1000);
-    addTimerInfo(choicesDiv.id,inputDisableTimerIntervalId);
-    console.log(timerObject[choicesDiv.id]);
-    timerspan(choicesDiv);
+    const timerDiv = createTimerDiv(choicesDiv.id,'Time left to make changes');
+    choicesDiv.appendChild(timerDiv);
+    inputDisableTimerIntervalId = setInterval(() => timerspan(timerDiv),1000);
+    addTimerInfo(timerDiv.id,inputDisableTimerIntervalId);
+    timerspan(timerDiv);
     
   }
 }
@@ -786,4 +788,16 @@ function addTimerInfo(timerDivId,inputDisableTimerIntervalId,remainingTimeInSeco
   }
 }
 
-//div is removed but we need to remove the timerDiv alone 
+function disableAllInputsAndRemoveTimerDiv(){
+  const inputs = document.querySelectorAll('input');
+  inputs.forEach(input => {
+      input.disabled = true;
+  });
+  
+  for (const timerDivId in timerObject) {
+    if (timerObject.hasOwnProperty(timerDivId)) {
+        const intervalId = timerObject[timerDivId].intervalId;
+        clearInterval(intervalId);
+    }
+}
+}
