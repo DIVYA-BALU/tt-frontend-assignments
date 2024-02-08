@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,7 @@ import { LoginService } from '../login.service';
 })
 export class LoginComponent {
   token: any = '';
-  constructor(private login: LoginService) {}
+  constructor(private loginService: LoginService, private router:Router) {}
   loginRequest = {
     username: '',
     password: '',
@@ -17,14 +18,22 @@ export class LoginComponent {
   loginUser() {
     console.log(this.loginRequest);
 
-    this.login
+    this.loginService
       .loginUser(this.loginRequest.username, this.loginRequest.password)
-      .subscribe((token) => {
-        this.token = token;
-        console.log(token);
-      },(error) => {
-        console.log("error",error,error.error.text);
-      });
+      .subscribe({next: (httpResult) => {
+        
+        if(httpResult.status === 200){
+        this.token = httpResult.body.token;
+        this.loginService.login(this.token);
+        this.router.navigate(['app-dashbord']);
+        console.log(this.token);
+        }
+      },error:(error) => {
+        console.log("error");
+      },
+    complete:()=>{
+        
+    }});
   }
 
   ngOnInit(): void {}

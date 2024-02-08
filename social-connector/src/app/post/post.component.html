@@ -1,0 +1,20 @@
+<mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{post?.pageId?.name}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image [src]="post?.mediaUrl" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+      <p>{{post?.caption}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-icon-button [color]="likeColor" (click)="addLike()">
+            <mat-icon>favorite</mat-icon>
+          </button>{{post?.likeCount}}
+          <button mat-icon-button color="primary" (click)="openDialog('30ms', '30ms')">
+            <mat-icon>comment</mat-icon>
+          </button>{{post?.commentCount}}
+      <button mat-button>Comment</button>
+    </mat-card-actions>
+  </mat-card>
+  

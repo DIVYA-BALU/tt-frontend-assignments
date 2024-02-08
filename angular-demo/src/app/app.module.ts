@@ -15,6 +15,7 @@ import { CustomDirective } from './custom.directive';
 import { LodashDifferentExampleComponent } from './lodash-different-example/lodash-different-example.component';
 import { LoginComponent } from './login/login.component';
 import { DashbordComponent } from './dashbord/dashbord.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
