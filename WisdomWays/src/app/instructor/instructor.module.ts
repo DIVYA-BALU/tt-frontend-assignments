@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { InstructorRoutingModule } from './instructor-routing.module';
 import { InstructorComponent } from './instructor.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 
@@ -16,6 +16,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     InstructorRoutingModule,
     FormsModule,
     MatTooltipModule,
+    ReactiveFormsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

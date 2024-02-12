@@ -6,16 +6,15 @@
 </div>
 
 <div class="form-container" *ngIf="showDiv()">
-  <form #courseForm="ngForm" (ngSubmit)="onCreate(courseForm)">
+
+  <form [formGroup]="courseForm">
     <div>
       <label for="cid">Course code:</label>
       <input
         type="text"
-        #cid="ngModel"
         id="cid"
         name="courseId"
-        [(ngModel)]="courseId"
-        required
+        formControlName="courseId"
       />
       <!-- <br> <span *ngIf="!cid.valid && (cid.touched || cid.dirty)">
                 Please enter course id
@@ -24,11 +23,9 @@
       <label for="cname">Course name:</label>
       <input
         type="text"
-        #cname="ngModel"
         id="cname"
         name="courseName"
-        [(ngModel)]="courseName"
-        required
+        formControlName="courseName"
       />
       <!-- <span *ngIf="!cname.valid && (cname.touched || cname.dirty)">
                 Please enter course name
@@ -39,11 +36,9 @@
       <label for="amt">Amount:</label>
       <input
         type="text"
-        #amt="ngModel"
         id="amt"
         name="amount"
-        [(ngModel)]="amount"
-        required
+        formControlName="amount"
       />
       <!-- <span *ngIf="!amt.valid && (amt.touched || amt.dirty)">
                 Please enter amount
@@ -52,11 +47,9 @@
       <label for="img">Image:</label>
       <input
         type="file"
-        #img="ngModel"
         id="img"
         name="image"
-        [(ngModel)]="image"
-        required
+        formControlName="image"
       />
     </div>
 
@@ -66,11 +59,9 @@
         <textarea
           matInput
           placeholder="Ex. It makes me feel..."
-          #bdesc="ngModel"
           id="b-desc"
           name="breifDescription"
-          [(ngModel)]="breifDescription"
-          required
+          formControlName="breifDescription"
         ></textarea>
       </mat-form-field>
 
@@ -85,11 +76,10 @@
         <textarea
           matInput
           placeholder="Ex. It makes me feel..."
-          #desc="ngModel"
           id="desc"
           name="description"
-          [(ngModel)]="description"
-          required
+          formControlName="description"
+
         ></textarea>
       </mat-form-field>
       <!-- <span *ngIf="!desc.valid && (desc.touched || desc.dirty)">
@@ -97,24 +87,24 @@
             </span> -->
     </div>
 
-    <div class="module">
+    <!-- <div class="module">
       <p>Modules</p>
       <button
-        (click)="addModule($event)"
+        (click)="addModule()"
         matTooltip="Add more modules"
         matTooltipPosition="above"
       >
         <i class="fa-solid fa-plus"></i>
       </button>
-    </div>
+    </div> -->
 
-    <div *ngFor="let module of modules; let i = index">
+    <!-- <div *ngFor="let module of modules; let i = index">
       <label for="title{{ i + 1 }}">Title {{ i + 1 }}:</label>
       <input
         type="text"
         id="title{{ i + 1 }}"
         name="title"
-        [(ngModel)]="module.title"
+        formControlName="module.title"
       />
 
       <label for="duration{{ i + 1 }}">Duration {{ i + 1 }}:</label>
@@ -122,7 +112,7 @@
         type="text"
         id="duration{{ i + 1 }}"
         name="duration"
-        [(ngModel)]="module.duration"
+        formControlName="module.duration"
       />
 
       <label for="level{{ i + 1 }}">Level {{ i + 1 }}:</label>
@@ -130,9 +120,9 @@
         type="text"
         id="level{{ i + 1 }}"
         name="level"
-        [(ngModel)]="module.level"
-      />
-    </div>
+        formControlName="module.level"
+      /> 
+    </div> -->
 
     <!-- <button
         (click)="addSubModule($event)"
@@ -146,7 +136,7 @@
     input -->
 
     <div class="button-div">
-      <button>CREATE</button>
+      <button type="submit" (click)="onCreate()">CREATE</button>
     </div>
   </form>
 </div>

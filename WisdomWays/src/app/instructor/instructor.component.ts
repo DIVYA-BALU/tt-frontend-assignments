@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-instructor',
@@ -10,24 +10,34 @@ export class InstructorComponent {
   create: boolean = false;
   buttonClick: boolean = false;
 
-  courseId: string = '';
-  courseName: string = '';
-  amount: number = 0.0;
-  breifDescription: string = '';
-  description: string = '';
-  image: string = '';
-  modules = [
-    {
-      title: '',
-      duration: 0,
-      level: '',
-      submodule: {
-        title: "",
-        videoUrl: '',
-        duration: 0
-      }
-    },
-  ];
+  courseForm: FormGroup = new FormGroup ({
+    courseId: new FormControl(''),
+    courseName: new FormControl(''),
+    amount:  new FormControl(0.0),
+    breifDescription: new FormControl(''),
+    description: new FormControl(''),
+    image: new FormControl(''),
+    // modules: new FormControl('')
+  });
+
+  // courseId: string = '';
+  // courseName: string = '';
+  // amount: number = 0.0;
+  // breifDescription: string = '';
+  // description: string = '';
+  // image: string = '';
+  // modules = [
+  //   {
+  //     title: '',
+  //     duration: 0,
+  //     level: '',
+  //     submodule: {
+  //       title: '',
+  //       videoUrl: '',
+  //       duration: 0,
+  //     },
+  //   },
+  // ];
 
   createCourse() {
     localStorage.setItem('createCourse', 'true');
@@ -37,23 +47,24 @@ export class InstructorComponent {
     return localStorage.getItem('createCourse') === 'true';
   }
 
-  onCreate(courseForm: NgForm) {
-    console.log(courseForm);
+  onCreate() {
     this.buttonClick = true;
     localStorage.removeItem('createCourse');
+    console.log(this.courseForm.value);
+    
   }
 
-  addModule(e: Event) {
-    e.preventDefault();
-    this.modules.push({
-      title: '',
-      duration: 0,
-      level: '',
-      submodule: {
-        title: "",
-        videoUrl: '',
-        duration: 0
-      }
-    });
-  }
+  addModule() {
+  //   e.preventDefault();
+  //   this.modules.push({
+  //     title: '',
+  //     duration: 0,
+  //     level: '',
+  //     submodule: {
+  //       title: '',
+  //       videoUrl: '',
+  //       duration: 0,
+  //     },
+  //   });
+   }
 }
