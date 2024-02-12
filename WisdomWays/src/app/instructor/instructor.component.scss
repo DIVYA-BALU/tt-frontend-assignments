@@ -1,6 +1,6 @@
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
-.form-container {
+.container {
     height: 70px;
     width: 50%;
     align-items: center;
@@ -12,12 +12,12 @@
     box-shadow: 3px 3px 5px 5px rgb(193, 199, 201);
 }
 
-.form-container {
+.container {
     text-align: center;
     padding-left: 60px;
 }
 
-.form-container div button {
+.container div button {
     background-color: #9fd3c7;
     height: 50px;
     width: 40%;
@@ -25,4 +25,89 @@
     cursor: pointer;
     border: none;
     text-align: center;
+}
+
+.form-container {
+    width: 60%;
+    align-items: center;
+    margin-top: 50px;
+    margin-left: 300px;
+    padding: 30px;
+    box-shadow: 3px 3px 5px 5px rgb(193, 199, 201);
+}
+
+.form-container div {
+    font-family: "Playfair Display";
+    font-size: 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+label {
+    white-space: nowrap;
+}
+
+input[type="text"],
+input[type="file"] {
+    margin-right: 10px;
+    margin-left: 5px;
+    // width: 100%;
+    height: 30px;
+    outline: none;
+    box-sizing: border-box;
+    padding-left: 20px;
+    font-size: 15px;
+}
+
+textarea {
+    margin-top: 10px;
+    width: 90%;
+    height: 30px;
+    padding-left: 20px;
+    font-size: 15px;
+}
+
+input:focus {
+    padding-left: 20px;
+}
+
+.form-container span {
+    font-size: 15px;
+    color: red;
+    display: block;
+}
+
+
+.form-container .button-div {
+    margin-bottom: 0px;
+}
+
+button {
+    background-color: #9fd3c7;
+    height: 50px;
+    width: 20%;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+    margin-right: 10px;
+}
+
+button[disabled] {
+    cursor: not-allowed;
+}
+
+.form-container .module button {
+    background-color: white;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
 }

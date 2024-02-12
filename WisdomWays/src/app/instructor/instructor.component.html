@@ -1,9 +1,152 @@
-<div class="form-container">
-
-    <h2>Go into course creation</h2>
-
-    <div>
-        <button type="submit">Create Course</button>
-    </div>
+<div class="container" *ngIf="!showDiv()">
+  <h2>Go into course creation</h2>
+  <div>
+    <button type="submit" (click)="createCourse()">Create Course</button>
+  </div>
 </div>
 
+<div class="form-container" *ngIf="showDiv()">
+  <form #courseForm="ngForm" (ngSubmit)="onCreate(courseForm)">
+    <div>
+      <label for="cid">Course code:</label>
+      <input
+        type="text"
+        #cid="ngModel"
+        id="cid"
+        name="courseId"
+        [(ngModel)]="courseId"
+        required
+      />
+      <!-- <br> <span *ngIf="!cid.valid && (cid.touched || cid.dirty)">
+                Please enter course id
+            </span> -->
+
+      <label for="cname">Course name:</label>
+      <input
+        type="text"
+        #cname="ngModel"
+        id="cname"
+        name="courseName"
+        [(ngModel)]="courseName"
+        required
+      />
+      <!-- <span *ngIf="!cname.valid && (cname.touched || cname.dirty)">
+                Please enter course name
+            </span> -->
+    </div>
+
+    <div>
+      <label for="amt">Amount:</label>
+      <input
+        type="text"
+        #amt="ngModel"
+        id="amt"
+        name="amount"
+        [(ngModel)]="amount"
+        required
+      />
+      <!-- <span *ngIf="!amt.valid && (amt.touched || amt.dirty)">
+                Please enter amount
+            </span> -->
+
+      <label for="img">Image:</label>
+      <input
+        type="file"
+        #img="ngModel"
+        id="img"
+        name="image"
+        [(ngModel)]="image"
+        required
+      />
+    </div>
+
+    <div>
+      <mat-form-field class="example-full-width">
+        <mat-label>Brief Description:</mat-label>
+        <textarea
+          matInput
+          placeholder="Ex. It makes me feel..."
+          #bdesc="ngModel"
+          id="b-desc"
+          name="breifDescription"
+          [(ngModel)]="breifDescription"
+          required
+        ></textarea>
+      </mat-form-field>
+
+      <!-- <span *ngIf="!bdesc.valid && (bdesc.touched || bdesc.dirty)">
+                Please enter brief description
+            </span> -->
+    </div>
+
+    <div>
+      <mat-form-field class="example-full-width">
+        <mat-label>Description:</mat-label>
+        <textarea
+          matInput
+          placeholder="Ex. It makes me feel..."
+          #desc="ngModel"
+          id="desc"
+          name="description"
+          [(ngModel)]="description"
+          required
+        ></textarea>
+      </mat-form-field>
+      <!-- <span *ngIf="!desc.valid && (desc.touched || desc.dirty)">
+                Please enter description
+            </span> -->
+    </div>
+
+    <div class="module">
+      <p>Modules</p>
+      <button
+        (click)="addModule($event)"
+        matTooltip="Add more modules"
+        matTooltipPosition="above"
+      >
+        <i class="fa-solid fa-plus"></i>
+      </button>
+    </div>
+
+    <div *ngFor="let module of modules; let i = index">
+      <label for="title{{ i + 1 }}">Title {{ i + 1 }}:</label>
+      <input
+        type="text"
+        id="title{{ i + 1 }}"
+        name="title"
+        [(ngModel)]="module.title"
+      />
+
+      <label for="duration{{ i + 1 }}">Duration {{ i + 1 }}:</label>
+      <input
+        type="text"
+        id="duration{{ i + 1 }}"
+        name="duration"
+        [(ngModel)]="module.duration"
+      />
+
+      <label for="level{{ i + 1 }}">Level {{ i + 1 }}:</label>
+      <input
+        type="text"
+        id="level{{ i + 1 }}"
+        name="level"
+        [(ngModel)]="module.level"
+      />
+    </div>
+
+    <!-- <button
+        (click)="addSubModule($event)"
+        matTooltip="Add more modules"
+        matTooltipPosition="above"
+      >
+        <i class="fa-solid fa-plus"></i>
+      </button>
+
+    <label for="subModule{{ i + 1}}">sub module:</label>
+    input -->
+
+    <div class="button-div">
+      <button>CREATE</button>
+    </div>
+  </form>
+</div>

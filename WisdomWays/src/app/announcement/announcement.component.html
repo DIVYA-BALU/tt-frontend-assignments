@@ -2,8 +2,10 @@
     <form #announce="ngForm" (ngSubmit)="onAnnounce(announce)">
   
       <div>
-        <label for="anounce">Create announcement:</label><br>
-        <textarea name="anounce" id="anounce" cols="30" rows="10" [(ngModel)]="anounce"></textarea>
+        <mat-form-field class="example-full-width">
+          <mat-label>Leave a announcement :</mat-label>
+          <textarea matInput placeholder="Ex. It makes me feel..." [(ngModel)]="anounce" name="announce"></textarea>
+        </mat-form-field>
       </div>
 
       <div>{{anounce}}</div>
