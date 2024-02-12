@@ -1,0 +1,18 @@
+<div class="signInPage">
+    <div class="leftSection">
+        <div class="brandDetails">    
+            <img src="https://img.freepik.com/free-vector/gradient-accounting-logo-template_23-2148863566.jpg?size=338&ext=jpg&ga=GA1.1.1803636316.1701475200&semt=ais" alt="logo">
+            <div>Expensify</div>
+        </div>
+        <div>Welcome Back</div>
+        <div>To keep connected with us plase login with your personal info</div>
+    </div>
+    <div class="rightSection">
+        <form>
+            <div>Login Account</div>
+            <input type="text" placeholder="Name" [(ngModel)]="userName" name="userName">
+            <input type="password" placeholder="Password" [(ngModel)]="password" name="password">
+            <button (click)="signIn()">SIGN IN</button>
+        </form>
+    </div>
+</div>

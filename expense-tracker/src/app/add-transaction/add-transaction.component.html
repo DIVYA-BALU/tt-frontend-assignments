@@ -1,0 +1,24 @@
+<p>add-transaction works!</p>
+
+<div>
+    <div>Enter Transaction</div>
+    <form action="">
+        <label for="transactionName">Transaction Name</label>
+        <input id="transactionName" type="text" [(ngModel)]="transactionName">
+        <label for="category">Category</label>
+        <select #category id="category" (change)="categoryUpdate(category.value)">
+            <option value="" default>Select Category</option>
+            <option value="{{item}}" *ngFor="let item of categories" >{{item}}</option>
+        </select>
+        <label for="date">Date</label>
+        <input type="date" id="date" [(ngModel)]="date">
+        <label for="transactionType">Transaction Type</label>
+        <select #type id="transactionType"(change)="transactionTypeUpdate(type.value)">
+            <option value="" default>Select type</option>
+            <option value="{{item}}" *ngFor="let item of transactionTypes" >{{item}}</option>
+        </select>    
+        <label for="amount">Amount</label>
+        <input type="text" id="amount" [(ngModel)]="amount">
+        <button (click)="addTransaction()">Add Transaction</button>
+    </form>
+</div>  

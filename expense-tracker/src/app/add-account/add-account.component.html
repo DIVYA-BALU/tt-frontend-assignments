@@ -1,0 +1,24 @@
+<p>add-account works!</p>
+
+<div>
+    <h1>User Info</h1>
+    <div>
+        <div>User Since     --- </div>
+        <div>Expenses & Incomes logged     --- </div>
+        <div>Last Login   --- </div>
+    </div>
+    <div>
+        <form [formGroup]="addAccount" (ngSubmit)="onSubmit()">
+            <h2>Account Details</h2>
+            <label>Account Number</label>
+            <input type="text" formControlName="accountNumber">
+            <label>Bank Name</label>
+            <input type="text" formControlName="bankName">
+            <label>Account Type</label>
+            <input type="text" formControlName="accountType">
+            <label>Balance</label>
+            <input type="number" formControlName="totalBalance">
+            <button type="submit">Add Account</button>  
+        </form>
+    </div>
+</div>   

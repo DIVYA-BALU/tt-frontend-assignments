@@ -1,0 +1,49 @@
+<p>view-statement works!</p>
+
+<div>
+    <div class="transaction-info">
+        <div>
+            <input type="date" name="" id="" [(ngModel)]="startDate" (change)="dateChange()">
+            <div>Start Date</div>
+        </div>
+        <div>    
+            <input type="date" name="" id="" [(ngModel)]="endDate" (change)="dateChange()">
+            <div>End Date</div>
+        </div>
+        <div>
+            <div>{{totalTransaction}} No of Transactions</div>
+        </div>
+        <div>
+            <div>{{totalAmount.value}} Total Amount</div>
+        </div>
+    </div>
+    <div>
+        <div>View Analytics</div>
+        <div>
+            <select name="" id="">
+                <option value="" default>Sort By</option>
+                <option value="Date">Date</option>
+                <option value="Category">Category</option>
+            </select>
+        </div>
+    </div>
+    <div class="transaction-details">
+        <div class="row-heading">
+            <div>Category</div>
+            <div>Description</div>
+            <div>Date</div>
+            <div>Amount</div>
+            <div>Opening Balance</div>
+            <div>Closing Balance</div>
+        </div>
+        <div class="statement-item" *ngFor="let item of data1">
+            <div>{{item.category}}</div>
+            <div>{{item.description}}</div>
+            <div>{{item.date}}</div>
+            <div>{{item.amount.value}}</div>
+            <div>{{item.openingBalance.value}}</div>
+            <div>{{item.closingBalance.value}}</div>
+            <div [hidden]="true">hidden</div>
+        </div>
+    </div>
+</div>
