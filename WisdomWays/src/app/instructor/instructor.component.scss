@@ -1,0 +1,28 @@
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+.form-container {
+    height: 70px;
+    width: 50%;
+    align-items: center;
+    margin-top: 50px;
+    margin-left: 340px;
+    padding: 30px;
+    position: fixed;
+    display: flex;
+    box-shadow: 3px 3px 5px 5px rgb(193, 199, 201);
+}
+
+.form-container {
+    text-align: center;
+    padding-left: 60px;
+}
+
+.form-container div button {
+    background-color: #9fd3c7;
+    height: 50px;
+    width: 40%;
+    margin-left: 220px;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+}

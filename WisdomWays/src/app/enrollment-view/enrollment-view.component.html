@@ -1,0 +1,61 @@
+<div class="form-container">
+  <form #enrollView="ngForm" (ngSubmit)="onView(enrollView)">
+
+    <div>
+      <label for="course-uid">Course Uid:</label>
+      <input type="text" #courseUid="ngModel" id="course-uid" placeholder="Enter Course id" ngModel name="courseUid">
+    </div>
+
+    <div class="button-div">
+      <button type="submit">ENTER</button>
+    </div>
+
+  </form>
+</div>
+
+<!-- <div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">User name</th>
+        <th scope="col">Enrolled Date</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let enrollUser of listOfUsers">
+        <td>{{enrollUser.username}}</td>
+        <td>{{enrollUser.enrollDate | date:'dd/mm/yyyy' }}</td>
+        <td>{{enrollUser.status}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div> -->
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+  
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef> User name </th>
+        <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="enrollDate">
+        <th mat-header-cell *matHeaderCellDef> Enrolled Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.enrollDate | date}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                   showFirstLastButtons
+                   aria-label="Select page of periodic elements">
+    </mat-paginator>
+  </div>

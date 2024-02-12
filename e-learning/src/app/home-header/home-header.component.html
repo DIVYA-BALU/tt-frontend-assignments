@@ -1,0 +1,24 @@
+<div class="header">
+    <div class="logo">WisdomWays</div>
+  
+    <div class="search">
+      <i class="fa fa-search"></i>
+      <input type="text" name="search" id="search-box" placeholder="Seach for anything">
+    </div>
+  
+    <div class="nav-container">
+      <nav>
+        <a routerLink="/home">Home</a>
+        <a routerLink="/teach" *ngIf="instructor===false || logged===false ">Wish to Teach</a>
+  
+        <a routerLink="/instructor" *ngIf="instructor===true && logged===true">Instructor</a>
+  
+        <a routerLink="/login" *ngIf="logged===false">Login</a>
+        <a routerLink="/signup" *ngIf="logged===false">Sign up</a>
+  
+        <a routerLink="/myLearning" *ngIf="logged===true">My Learning</a>
+        <a routerLink="/profile" *ngIf="logged===true">Profile</a>
+      </nav>
+    </div> 
+  </div>
+  <router-outlet></router-outlet>

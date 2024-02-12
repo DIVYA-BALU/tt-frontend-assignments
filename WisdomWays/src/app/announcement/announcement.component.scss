@@ -1,0 +1,48 @@
+@import '~@fortawesome/fontawesome-free/css/all.css';
+// @import "~bootstrap/dist/css/bootstrap.min.css";
+
+.form-container {
+    height: 500px;
+    width: 40%;
+    align-items: center;
+    margin-top: 50px;
+    margin-left: 420px;
+    padding: 25px;
+    // box-shadow: 3px 3px 5px 5px rgb(193, 199, 201);
+}
+
+.form-container div {
+    font-family: "Playfair Display";
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+.form-container div textarea {
+    margin-top: 20px;
+    width: 100%;
+    // border-radius: 20px;
+    border: 1px solid grey;
+    outline: none;
+    box-sizing: border-box;
+    // padding-left: 20px;
+    font-size: 15px;
+}
+
+.form-container div button {
+    background-color: #9fd3c7;
+    height: 50px;
+    width: 30%;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+}
+
+.form-container .msg {
+    display: flex;
+    font-size: 18px;
+    font-family: Georgia;
+
+    i {
+        font-size: large;
+    }
+}

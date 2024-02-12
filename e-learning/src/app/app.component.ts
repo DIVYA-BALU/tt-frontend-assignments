@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginService } from './login/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +8,13 @@ import { LoginService } from './login/login.service';
 })
 export class AppComponent {
   title = 'e-learning';
+  constructor(private router: Router) {}
 
-  logged: boolean = false;
+  isCommonHeaderVisible(): boolean {
+    return !this.router.url.includes('/instructor');
+  }
 
-  constructor(private loginService: LoginService){
-
-    if (loginService.isAuthenticated()) {
-      this.logged = true;
-    }
+  isInstructorHeaderVisible(): boolean {
+    return this.router.url.includes('/instructor');
   }
 }

@@ -1,0 +1,55 @@
+<div class="form-container">
+    <form #profileForm="ngForm" (ngSubmit)="onProfile(profileForm)">
+
+        <table>
+            <tr>
+                <td>
+                    <label for="uid">User Id:</label>
+                    <input type="text" id="uid" name="userId" [(ngModel)]="profile.userId" readonly>
+                </td>
+                <td>
+                    <label for="fname">First Name:</label>
+                    <input type="text" id="fname" name="firstName" [(ngModel)]="profile.firstName">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="lname">Last Name:</label>
+                    <input type="text" id="lname" name="lastName" [(ngModel)]="profile.lastName">
+                </td>
+                <td>
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" name="email" [(ngModel)]="profile.email">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="bio">Bio:</label>
+                    <input type="text" id="bio" name="bio" [(ngModel)]="profile.bio">
+                </td>
+                <td>
+                    <label for="profession">Profession:</label>
+                    <input type="text" id="profession" name="profession" [(ngModel)]="profile.profession">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="organisation">Organisation:</label>
+                    <input type="text" id="organisation" name="organisation" [(ngModel)]="profile.organisation">
+                </td>
+            </tr>
+
+            <tr class="button-div">
+                <td>
+                    <button type="submit">SAVE</button>
+                    <button type="submit" class="delete" (click)="deleteUser()">DELETE ACCOUNT</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div class="msg" *ngIf="buttonClick">
+        <p><i class="fa fa-thumbs-up"></i> {{ updateStatus }}!</p>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+@import '~@fortawesome/fontawesome-free/css/all.css';
+// @import "~bootstrap/dist/css/bootstrap.min.css";
+
+.form-container {
+    height: 35px;
+    width: 30%;
+    align-items: center;
+    margin-top: 50px;
+    margin-left: 420px;
+    padding: 25px;
+    box-shadow: 3px 3px 5px 5px rgb(193, 199, 201);
+}
+
+.form-container form{
+    padding-left: 30px;
+    display: flex;
+}
+
+.form-container div {
+    font-family: "Playfair Display";
+    font-size: 18px;
+}
+
+.form-container div input {
+    margin-left: 10px;
+    width: 50%;
+    height: 30px;
+    border-radius: 20px;
+    border: 1px solid grey;
+    outline: none;
+    box-sizing: border-box;
+    padding-left: 20px;
+    font-size: 15px;
+}
+
+.form-container div input:focus {
+    padding-left: 20px;
+}
+
+.form-container div button {
+    background-color: #9fd3c7;
+    height: 30px;
+    width: 150%;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+}
+
+div table{
+    font-family: "Playfair Display";
+    margin-top: 50px;
+    // margin-left: 10px;
+    border-collapse: collapse;
+    // width: 40%;
+    // text-align: center;
+    border: grey;
+}
+
+// table {
+//     width: 50%;
+//   }
+
+//   mat-elevation-z8{
+//     margin-top: 200px;
+//     width: 50%;
+//   }
+  

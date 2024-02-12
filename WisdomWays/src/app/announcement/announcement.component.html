@@ -1,0 +1,19 @@
+<div class="form-container">
+    <form #announce="ngForm" (ngSubmit)="onAnnounce(announce)">
+  
+      <div>
+        <label for="anounce">Create announcement:</label><br>
+        <textarea name="anounce" id="anounce" cols="30" rows="10" [(ngModel)]="anounce"></textarea>
+      </div>
+
+      <div>{{anounce}}</div>
+  
+      <div class="button-div">
+        <button type="submit">Publish</button>
+      </div>
+    </form>
+
+    <div class="msg" *ngIf="buttonClick">
+        <p><i class="fa fa-thumbs-up"></i> {{ status }}!</p>
+    </div>
+  </div>
