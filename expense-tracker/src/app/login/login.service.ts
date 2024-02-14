@@ -19,7 +19,6 @@ export class LoginService {
   authenticate(userName: string, password: string){
     const body = { userName, password }
     this.token = this.http.post<any>(this.loginUrl, body, {observe : 'response'});
-    localStorage.setItem('isLogin','true');
     return this.token;
   }   
 
@@ -36,17 +35,8 @@ export class LoginService {
     }
   }
 
-
-  
-
   getAccountDetails(userName : string) : any{
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      })
-    };
     this.getAccountDetailsUrl = `${environment.getAccountDetailsUrl}/${userName}`;
-    return this.http.get<any>(this.getAccountDetailsUrl, httpOptions);
+    return this.http.get<any>(this.getAccountDetailsUrl, { observe : 'response' });
   }
 }

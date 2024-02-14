@@ -18,8 +18,12 @@ export class SignupService {
     const body = {
       userName,
       email,
-      password
+      password,
+      role
     }
-    return this.token = this.http.post<any>(this.registerUrl, body);
+    this.token = this.http.post<any>(this.registerUrl, body, { observe : 'response'});
+    console.log(this.token);
+    return this.token;
+    
   }
 }

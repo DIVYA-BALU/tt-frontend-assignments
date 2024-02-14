@@ -15,12 +15,6 @@ export class HomeService {
   constructor(private http: HttpClient) { }
 
   getDetails() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      })
-    };
 
     this.userName = localStorage.getItem('userName');
     this.accountNumber = localStorage.getItem('accountNumber');
@@ -31,7 +25,7 @@ export class HomeService {
     
     const baseUrl = `${environment.getAccountDetailsUrl}/${this.accountNumber}/${this.userName}`;
 
-    return this.http.get<any>(baseUrl, httpOptions);
+    return this.http.get<any>(baseUrl);
   }
 
 }

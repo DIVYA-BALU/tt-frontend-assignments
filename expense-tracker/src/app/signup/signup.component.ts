@@ -34,8 +34,10 @@ export class SignupComponent {
     
     
     this.signupService.registerUser(this.userName,this.email,this.password,this.role).subscribe({
-      next : (token : any) => {
-        console.log(token);
+      next : (response : any) => {
+        if(response.status === 200){
+          this.router.navigate(['login']);
+        }
       },
       error: (error : any) => {
 

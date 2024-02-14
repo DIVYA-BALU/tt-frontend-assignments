@@ -10,15 +10,16 @@ import bigDecimal from 'js-big-decimal';
 })
 export class ViewStatementComponent {
 
-  startDate: any = '';
-  endDate: any = formatDate(new Date(), 'MMM dd yyyy', 'en');
-  totalTransaction: any = '';
-  totalAmount: any = new bigDecimal(0);
+  startDate: any = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+  endDate: any = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+  totalTransaction: any = 0;
+  totalAmount: bigDecimal = new bigDecimal(0);
 
   constructor(private viewStatementService: ViewStatementService) {
     this.getDetails();
-    this.getTotalIncome();
-    this.getTotalExpense();
+    this.getTotalTransactions();
+    console.log(this.totalTransaction);
+    
   }
 
   dateChange() {
@@ -30,8 +31,12 @@ export class ViewStatementComponent {
   getDetails() {
     this.viewStatementService.getDetails().subscribe({
       next: (details) => {
-        this.startDate = formatDate(details.dateAndTime, 'MMM dd yyyy', 'en');
-        this.totalTransaction = details.transaction.length;
+        this.startDate = formatDate(details.dateAndTime, 'yyyy-MM-dd', 'en');
+        console.log(this.startDate);
+        
+        if(details.transaction !==null){
+          this.totalTransaction = details.transaction.length;
+        }
       },
       error: (error) => {
 
@@ -42,62 +47,60 @@ export class ViewStatementComponent {
     });
   }
 
-  getTotalIncome() {
-    this.viewStatementService.getTotalIncome().subscribe({
+  // getTotalIncome() {
+  //   this.viewStatementService.getTotalIncome().subscribe({
+  //     next: (details) => {
+  //       this.totalAmount = this.totalAmount.add(new bigDecimal(details.totalIncome));
+  //     },
+  //     error: (error) => {
+  //     },
+  //     complete: () => {
+
+  //     }
+  //   });
+  // }
+
+  // getTotalExpense() {
+  //   this.viewStatementService.getTotalExpense().subscribe({
+  //     next: (details) => {
+  //       this.totalAmount = this.totalAmount.subtract(new bigDecimal(details.totalExpense));
+  //     },
+  //     error: (error) => {
+  //     },
+  //     complete: () => {
+
+  //     }
+  //   });
+  // }
+
+  getTotalTransactions() {
+    this.viewStatementService.getTotalTransaction().subscribe({
       next: (details) => {
-        this.totalAmount = this.totalAmount.add(new bigDecimal(details.totalIncome));
+        console.log(details);
+        details.forEach(element => {
+          this.data1.push(element);
+        });
       },
-      error: (error) => {
-      },
-      complete: () => {
+      error : (error) => {
 
+      },
+      complete : () => {
+        console.log(this.data1);
+        
       }
-    });
-  }
-
-  getTotalExpense() {
-    this.viewStatementService.getTotalExpense().subscribe({
-      next: (details) => {
-        this.totalAmount = this.totalAmount.subtract(new bigDecimal(details.totalExpense));
-      },
-      error: (error) => {
-      },
-      complete: () => {
-
-      }
-    });
+    })
   }
   
-  data1 : statementData1[] = [{
-    "userName" : "nathis2",
-    "email" : "nathis468@gmail.com",
-    "category" : "sfjndsf",
-    "description" : "sngdnjdsfng",
-    "date" : "sngdfnkfd",
-    "amount" : new bigDecimal(45),
-    "openingBalance" : new bigDecimal(45),
-    "closingBalance" : new bigDecimal(45)
-  },
-  {
-    "userName" : "nathis2",
-    "email" : "nathis468@gmail.com",
-    "category" : "poiuytf",
-    "description" : "sngdnjdsfng",
-    "date" : "sngdfnkfd",
-    "amount" : new bigDecimal(45),
-    "openingBalance" : new bigDecimal(45),
-    "closingBalance" : new bigDecimal(45)
-  },
-]
+  data1 : statementData1[] = []
 
 }
 
 interface statementData1 {
   "userName" : string,
-  "email" : string,
   "category" : string,
   "description" : string,
-  "date" : string,
+  "dateAndTime" : string,
+  "transactionType" : string,
   "amount" : any,
   "openingBalance" : any,
   "closingBalance" : any

@@ -13,77 +13,46 @@ export class ViewStatementService {
   constructor(private http: HttpClient) { }
 
   getDetails() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      })
-    };
 
     this.userName = localStorage.getItem('userName');
     this.accountNumber = localStorage.getItem('accountNumber');
 
     const baseUrl = `${environment.getAccountDetailsUrl}/${this.accountNumber}/${this.userName}`;
 
-     console.log(this.http.get<any>(baseUrl, httpOptions));
+     console.log(this.http.get<any>(baseUrl));
 
-    return this.http.get<any>(baseUrl, httpOptions);
+    return this.http.get<any>(baseUrl);
   }
 
-  getTotalIncome() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      })
-    };
+  // getTotalIncome() {
 
-    this.userName = localStorage.getItem('userName');
+  //   this.userName = localStorage.getItem('userName');
 
-    console.log(this.userName);
+  //   console.log(this.userName);
     
-    const baseUrl = `http://localhost:8080/income/listtotalincome/${this.userName}`;
+  //   const baseUrl = `http://localhost:8080/income/listtotalincome/${this.userName}`;
 
-     console.log(this.http.get<any>(baseUrl, httpOptions));
+  //    console.log(this.http.get<any>(baseUrl));
     
-     return this.http.get<any>(baseUrl, httpOptions);
-  }
+  //    return this.http.get<any>(baseUrl);
+  // }
 
-  getTotalExpense() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      })
-    };
+  // getTotalExpense() {
 
-    this.userName = localStorage.getItem('userName');
+  //   this.userName = localStorage.getItem('userName');
 
-    console.log(this.userName);
+  //   console.log(this.userName);
     
-    const baseUrl = `http://localhost:8080/expense/listtotalexpense/${this.userName}`;
+  //   const baseUrl = `http://localhost:8080/expense/listtotalexpense/${this.userName}`;
 
-     console.log(this.http.get<any>(baseUrl, httpOptions));
+  //    console.log(this.http.get<any>(baseUrl));
     
-     return this.http.get<any>(baseUrl, httpOptions);
-  }
+  //    return this.http.get<any>(baseUrl);
+  // }
 
   getTotalTransaction() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      })
-    };
-
     this.userName = localStorage.getItem('userName');
-
-    console.log(this.userName);
-    
-    const baseUrl = `/${this.userName}`;
-
-     console.log(this.http.get<any>(baseUrl, httpOptions));
-    
-     return this.http.get<any>(baseUrl, httpOptions);
+    const baseUrl = `${environment.getTransactionStatementUrl}/${this.userName}`;
+    return this.http.get<any>(baseUrl);
   }
 }

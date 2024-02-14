@@ -1,20 +1,25 @@
 <p>view-statement works!</p>
 
 <div>
+    <button routerLink="/home">Home</button>
+    <button>Logout</button>
+</div>
+
+<div *ngIf="totalTransaction !== 0;else template1">
     <div class="transaction-info">
         <div>
-            <input type="date" name="" id="" [(ngModel)]="startDate" (change)="dateChange()">
+            <input type="date" name="startDate" [(ngModel)]="startDate" (change)="dateChange()">
             <div>Start Date</div>
         </div>
         <div>    
-            <input type="date" name="" id="" [(ngModel)]="endDate" (change)="dateChange()">
+            <input type="date" name="endDate" [(ngModel)]="endDate" (change)="dateChange()">
             <div>End Date</div>
         </div>
         <div>
             <div>{{totalTransaction}} No of Transactions</div>
         </div>
         <div>
-            <div>{{totalAmount.value}} Total Amount</div>
+            <div>{{totalAmount.getValue()}} Total Amount</div>
         </div>
     </div>
     <div>
@@ -39,11 +44,14 @@
         <div class="statement-item" *ngFor="let item of data1">
             <div>{{item.category}}</div>
             <div>{{item.description}}</div>
-            <div>{{item.date}}</div>
-            <div>{{item.amount.value}}</div>
-            <div>{{item.openingBalance.value}}</div>
-            <div>{{item.closingBalance.value}}</div>
-            <div [hidden]="true">hidden</div>
+            <div>{{item.dateAndTime}}</div>
+            <div [ngStyle]="{color: item.transactionType === 'INCOME' ? 'green' : 'red'}">{{item.amount}}</div>
+            <div>{{item.openingBalance}}</div>
+            <div>{{item.closingBalance}}</div>
+            <!-- <div [hidden]="true">hidden</div> -->
         </div>
     </div>
 </div>
+<ng-template #template1>
+    <div>No record Found</div>
+</ng-template>
