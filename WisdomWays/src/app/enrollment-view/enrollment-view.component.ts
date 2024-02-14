@@ -21,10 +21,11 @@ export class EnrollmentViewComponent implements AfterViewInit{
   constructor(private enrollmentViewService: EnrollmentViewService){}
 
   onView(enrollView: NgForm){
-    console.log(enrollView.value);
-    this.listOfUsers = this.enrollmentViewService.getAllEnrollments();
-    console.log(this.listOfUsers);
-    this.dataSource.data = this.listOfUsers;
+    // console.log(enrollView.value);
+    this.enrollmentViewService.getAllEnrollments(enrollView.value.courseUid).subscribe(data => {
+      this.listOfUsers = data;
+      this.dataSource.data = this.listOfUsers;
+    })
   }
 
   ngAfterViewInit() {

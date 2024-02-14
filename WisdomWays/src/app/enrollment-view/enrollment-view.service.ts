@@ -1,24 +1,22 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EnrollmentViewService {
 
+  url: string = environment.getEnrollmentsUrl;
+
   listOfUsers: EnrollmentsDTO[] = [];
 
-  user: EnrollmentsDTO = {
-    username: "grace",
-    enrollDate: new Date("12-01-2024"),
-    status: "ongoing"
-  }
+  constructor(private httpClient: HttpClient) { }
 
-  constructor() { }
-
-  getAllEnrollments() {
-    this.listOfUsers = [];
-    this.listOfUsers.push(this.user);
-    return this.listOfUsers;
+  getAllEnrollments(body: string){
+    // console.log( body);
+    return this.httpClient.get<EnrollmentsDTO[]>(`${this.url}/${body}`);
   }
 }
 

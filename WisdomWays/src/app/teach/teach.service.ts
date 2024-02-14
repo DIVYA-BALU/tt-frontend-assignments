@@ -11,7 +11,7 @@ export class TeachService {
 
   addInstructor(){
     localStorage.setItem('instructor', 'true');
-    console.log(this.setInstructor); 
+    // console.log(this.setInstructor); 
     return "added";
   }
 
@@ -19,7 +19,7 @@ export class TeachService {
     if(localStorage.getItem('instructor') == 'true'){
       this.setInstructor = true;
     }
-    console.log(this.setInstructor);  
+    // console.log(this.setInstructor);  
     return this.setInstructor;
   }
 }

@@ -3,5 +3,7 @@ export const environment = {
   signupUrl:  'http://localhost:8080/signup',
   getUserUrl:  'http://localhost:8080/user/user',
   updateUserUrl:  'http://localhost:8080/user/update',
-  deleteUserUrl: 'http://localhost:8080/user/delete'
+  deleteUserUrl: 'http://localhost:8080/user/delete',
+  getEnrollmentsUrl: 'http://localhost:8080/enrollment/getallenroll',
+  addAnnouncementUrl: 'http://localhost:8080/add-announcement'
 };

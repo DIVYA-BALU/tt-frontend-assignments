@@ -43,8 +43,9 @@
 
             <tr class="button-div">
                 <td>
-                    <button type="submit">SAVE</button>
-                    <button type="submit" class="delete" (click)="deleteUser()">DELETE ACCOUNT</button>
+                    <button type="submit">UPDATE</button>
+                    <button type="submit" (click)="logoutUser($event)">LOGOUT</button>
+                    <button type="submit" (click)="deleteUser()">DELETE ACCOUNT</button>
                 </td>
             </tr>
         </table>

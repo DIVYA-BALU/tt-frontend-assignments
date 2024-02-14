@@ -17,7 +17,7 @@ export class TeachComponent {
   instructorStatus: string = "";
 
   onTeach(teachForm: NgForm) {
-    console.log(teachForm);
+    // console.log(teachForm);
      this.instructorStatus = this.teachService.addInstructor();
      this.route.navigate(['/instructor']);
   }

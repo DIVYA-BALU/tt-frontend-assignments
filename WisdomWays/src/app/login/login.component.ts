@@ -26,13 +26,13 @@ export class LoginComponent {
 
     this.loginService.login(this.loginUser).subscribe(
       data => {
-        this.loginService.loggedIn(true, data.accessToken);
         this.route.navigate(['/home']).then(() => this.reloadPage());
-        console.log(data.accessToken);
+        this.loginService.loggedIn(true, data.accessToken);
+        // console.log(data.accessToken);
       },
       error => {
         this.errorStatus = error.error;
-        console.log(error.ok)
+        // console.log(error.ok)
       }
     );
   }

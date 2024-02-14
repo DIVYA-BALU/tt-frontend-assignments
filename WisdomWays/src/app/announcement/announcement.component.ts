@@ -9,7 +9,7 @@ import { AnnouncementService } from './announcement.service';
 })
 export class AnnouncementComponent {
 
-  anounce: string = "";
+  announcement: string = "";
   status: string = "";
   buttonClick: boolean = false;
 
@@ -17,12 +17,8 @@ export class AnnouncementComponent {
 
   onAnnounce(announce: NgForm) {
     this.buttonClick = true;
-    // this.anounce = announce.value;
-    console.log(announce);
-    console.log(this.anounce);
-    this.status = this.announcementService.addAnnounce(this.anounce);
-    console.log(this.status);
-    
+    // console.log(announce.value);
+    this.announcementService.addAnnounce(announce.value).subscribe(data => this.status = data); 
   }
 
 }

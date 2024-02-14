@@ -32,9 +32,9 @@ export class ProfileComponent {
 
   getProfile() {
     this.profileService.getUser().subscribe(data => {
-      console.log(data);
+      // console.log(data);
       this.profile = data;
-      console.log(this.profile);
+      // console.log(this.profile);
     })
   }
 
@@ -50,6 +50,12 @@ export class ProfileComponent {
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('accessToken');
     this.cookieService.deleteAll('isLoggedIn');
+    this.route.navigate(['/home']).then(() => this.reloadPage());
+  }
+
+  logoutUser(e: Event){
+    e.preventDefault();
+    this.loginService.logout();
     this.route.navigate(['/home']).then(() => this.reloadPage());
   }
   

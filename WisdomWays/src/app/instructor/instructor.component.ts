@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, NgForm } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-instructor',
@@ -10,34 +10,32 @@ export class InstructorComponent {
   create: boolean = false;
   buttonClick: boolean = false;
 
-  courseForm: FormGroup = new FormGroup ({
-    courseId: new FormControl(''),
-    courseName: new FormControl(''),
-    amount:  new FormControl(0.0),
-    breifDescription: new FormControl(''),
-    description: new FormControl(''),
-    image: new FormControl(''),
-    // modules: new FormControl('')
-  });
+  courseForm!: FormGroup;
 
-  // courseId: string = '';
-  // courseName: string = '';
-  // amount: number = 0.0;
-  // breifDescription: string = '';
-  // description: string = '';
-  // image: string = '';
-  // modules = [
-  //   {
-  //     title: '',
-  //     duration: 0,
-  //     level: '',
-  //     submodule: {
-  //       title: '',
-  //       videoUrl: '',
-  //       duration: 0,
-  //     },
-  //   },
-  // ];
+  ngOnInit() {
+    this.courseForm = new FormGroup({
+      courseId: new FormControl(''),
+      courseName: new FormControl(''),
+      amount: new FormControl(0.0),
+      breifDescription: new FormControl(''),
+      description: new FormControl(''),
+      image: new FormControl(''),
+      modules: new FormArray([
+        new FormGroup({
+          title: new FormControl(''),
+          duration: new FormControl(0),
+          level: new FormControl(''),
+          subModules: new FormArray([
+            new FormGroup({
+              subTitle: new FormControl(''),
+              video: new FormControl(''),
+              subDuration: new FormControl('')
+            })
+          ])
+        }),
+      ]),
+    });
+  }
 
   createCourse() {
     localStorage.setItem('createCourse', 'true');
@@ -50,21 +48,57 @@ export class InstructorComponent {
   onCreate() {
     this.buttonClick = true;
     localStorage.removeItem('createCourse');
-    console.log(this.courseForm.value);
-    
+    console.log(this.courseForm.controls);
+    this.courseForm.reset();
+
+    while (this.getModules().length > 1) {
+      this.getModules().removeAt(this.getModules().length - 1);
+    }
+  }
+
+  removeModule(index: number) {
+    this.getModules().removeAt(index);
+  }
+
+  removeSubModule(index: number, j:number){
+    this.subModules(index).removeAt(j);
+  }
+
+  getModules(): FormArray {
+    return <FormArray>this.courseForm.get('modules');
+  }
+
+  subModules(index: number): FormArray {
+    return <FormArray>this.getModules().at(index).get('subModules');
   }
 
   addModule() {
-  //   e.preventDefault();
-  //   this.modules.push({
-  //     title: '',
-  //     duration: 0,
-  //     level: '',
-  //     submodule: {
-  //       title: '',
-  //       videoUrl: '',
-  //       duration: 0,
-  //     },
-  //   });
-   }
+    this.getModules().push(
+      new FormGroup({
+        title: new FormControl(''),
+        duration: new FormControl(0),
+        level: new FormControl(''),
+        subModules: new FormArray([
+          new FormGroup({
+            subTitle: new FormControl(''),
+            video: new FormControl(''),
+            subDuration: new FormControl('')
+          })
+        ])
+      })
+    );
+    // console.log(this.getModules());
+  }
+
+  addSubModule(index: number) {
+    this.subModules(index).push(
+      new FormGroup({
+        subTitle: new FormControl(''),
+        video: new FormControl(''),
+        subDuration: new FormControl(''),
+      })
+    );
+    // console.log(this.subModules(index));
+    
+  }
 }

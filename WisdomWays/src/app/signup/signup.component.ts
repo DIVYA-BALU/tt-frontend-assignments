@@ -30,11 +30,11 @@ export class SignupComponent {
         this.loginService.loggedIn(true, data.accessToken);
         this.route.navigate(['/home']).then(() => this.reloadPage());
         // localStorage.setItem("userId", this.signupUser.userId);
-        console.log(data.accessToken);
+        // console.log(data.accessToken);
       },
       error => {
           this.errorStatus = error.error;
-        console.log(error.error)
+        // console.log(error.error)
       }
     )
   }

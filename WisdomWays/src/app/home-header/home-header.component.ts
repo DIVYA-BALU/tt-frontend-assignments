@@ -20,7 +20,7 @@ export class HomeHeaderComponent {
     }
 
     if (teachService.isInstructor()) {
-      console.log(this.instructor);
+      // console.log(this.instructor);
       this.instructor = true;
     }
   }
