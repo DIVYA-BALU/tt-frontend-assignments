@@ -14,13 +14,7 @@ export class SignupService {
     this.registerUrl = `${environment.registerUrl}`
   }
 
-  registerUser(userName: string, email : string, password: string, role: any){
-    const body = {
-      userName,
-      email,
-      password,
-      role
-    }
+  registerUser(body : object){
     this.token = this.http.post<any>(this.registerUrl, body, { observe : 'response'});
     console.log(this.token);
     return this.token;

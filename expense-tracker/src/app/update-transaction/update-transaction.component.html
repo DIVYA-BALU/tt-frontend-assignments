@@ -1,41 +1,19 @@
 <div>
-    <button routerLink="/home">Home</button>
-</div>
-
-<br>
-<br>
-<hr>
-<br>
-<div>
-    <div>Enter Transaction</div>
-    <br>
-    <form [formGroup]="addTransaction" (ngSubmit)="onSubmit()">
+    <form [formGroup]="updateTransaction" (ngSubmit)="onSubmit()">
         <label for="category">Category</label>
         <select #category id="category" (change)="categoryUpdate(category.value)" formControlName="category"> 
             <option  default>Select Category</option>
             <option *ngFor="let item of categories" >{{item}}</option>
         </select>
-        <br>
-        <br>
         <label for="transactionType">Transaction Type</label>
         <select #type id="transactionType" (change)="transactionTypeUpdate(type.value)" formControlName="transactionType">
             <option default>Select type</option>
             <option *ngFor="let item of transactionTypes" >{{item}}</option>
         </select> 
-        <br>
-        <br>    
         <label for="description">Description</label>
         <input type="text" formControlName="description" id="description">
-        <br>
-        <br>
         <label for="date">Date</label>
         <input type="date" id="date" formControlName="date" name="date"> 
-        <br>
-        <br>
-        <label for="amount">Amount</label>
-        <input type="number" id="amount" formControlName="amount" name="amount">
-        <br>
-        <br>
-        <button [disabled]="!addTransaction.valid">Add Transaction</button>
+        <button [disabled]="!updateTransaction.valid">Add Transaction</button>
     </form>
-</div>  
+</div>

@@ -13,12 +13,7 @@ export class AddTransactionService {
   private userName = localStorage.getItem('userName');
 
   addTransaction(body : any){
-
-
-    console.log(body);
-    
     this.addTransactionUrl = `${environment.addTransactionUrl}`;
-    
     return this.http.post<any>(`${this.addTransactionUrl}/${this.userName}`,body, { observe : 'response'});
   }
 

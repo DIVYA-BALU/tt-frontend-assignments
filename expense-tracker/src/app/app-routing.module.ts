@@ -9,7 +9,9 @@ const routes: Routes = [
   { path: "home", loadChildren: () => import('./home/home.module').then(m => m.HomeModule), canActivate: [AuthGuard]},
   { path: "addAccount", loadChildren: () => import('./add-account/add-account.module').then(m => m.AddAccountModule), canActivate: [AuthGuard]},
   { path: "addTransaction", loadChildren: () => import('./add-transaction/add-transaction.module').then(m => m.AddTransactionModule),  canActivate: [AuthGuard]},
-  { path: "viewStatement", loadChildren: () => import('./view-statement/view-statement.module').then(m => m.ViewStatementModule),  canActivate: [AuthGuard]}
+  { path: "viewStatement", loadChildren: () => import('./view-statement/view-statement.module').then(m => m.ViewStatementModule),  canActivate: [AuthGuard]},
+  { path: "list-users", loadChildren: () => import('./list-users/list-users.module').then(m => m.ListUsersModule),  canActivate: [AuthGuard]},
+  { path: "update-transaction", loadChildren: () => import('./update-transaction/update-transaction.module').then(m => m.UpdateTransactionModule),  canActivate: [AuthGuard]},
 ];
 
 @NgModule({

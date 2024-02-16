@@ -11,19 +11,12 @@ export class AddAccountService {
 
   addAccountUrl : any = '';
 
-  addAccount(accountNumber : string, accountHolderName: string, bankName : string, accountType : string) {
+  addAccount(addAccount : object) {
 
-    const body = {
-      accountNumber,
-      accountHolderName,
-      bankName,
-      accountType
-    }
-
-    console.log(body);
+    console.log(addAccount);
     
     this.addAccountUrl = `${environment.addAccountUrl}`;
     
-    return this.http.post<any>(this.addAccountUrl, body, {observe : 'response'});
+    return this.http.post<any>(this.addAccountUrl, addAccount, {observe : 'response'});
   }
 }

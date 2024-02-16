@@ -1,5 +1,3 @@
-<p>add-account works!</p>
-
 <div>
     <h1>User Info</h1>
     <div>
@@ -15,9 +13,15 @@
             <label>Bank Name</label>
             <input type="text" formControlName="bankName">
             <label>Account Type</label>
-            <input type="text" formControlName="accountType">
+            <select #type id="transactionType" (change)="accountTypeChange(type.value)" formControlName="accountType">
+                <option default>Select Account Type</option>
+                <option *ngFor="let item of accountTypes" >{{item}}</option>
+            </select> 
+
+            <label>Financial Advisor Name</label>
+            <input type="text" formControlName="financialAdvisorName">
             <label>Balance</label>
-            <input type="number" formControlName="totalBalance">
+            <input type="number" formControlName="balance">
             <button type="submit">Add Account</button>  
         </form>
     </div>

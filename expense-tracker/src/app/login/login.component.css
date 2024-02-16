@@ -1,0 +1,74 @@
+.logo{
+    height: 120px;
+    width: 120px;
+}
+
+.brandDetails{
+    display: flex;
+}
+
+.signInPage{
+    height: 100%;
+    display: grid;
+    grid-template-columns: 0.6fr 1fr;
+}
+
+.left-section{
+    background-color: #0288d1;
+}
+
+.right-section{
+    margin-top: 18%;
+    margin-left: 30%;
+    margin-right: 30%;
+    /* margin-bottom: 40%; */
+}
+
+.welcome{
+    /* font-size: 500%; */
+}
+
+.example-button-row {
+    display: table-cell;
+    max-width: 600px;
+  }
+  
+.example-button-row .mat-mdc-button-base {
+    margin: 8px 8px 8px 0;
+}
+
+.example-container{
+    display: grid;
+    grid-template-columns: auto;
+    row-gap: 50px;
+}
+
+
+mat-form-field{
+    width: 400px;
+}
+
+
+.heading-create{
+    font-size: 38px;
+    color: #0288d1;
+}
+
+svg{
+    margin-right: 20px;
+}
+
+._ngcontent-cnc-c17{
+    position: relative;
+}
+
+.signin-button{
+    width: 200px;
+    height: 50px;
+    border-radius: 25px;
+}
+
+.signin-button-div{
+    position: absolute;
+    transform: translateX(70%);
+}

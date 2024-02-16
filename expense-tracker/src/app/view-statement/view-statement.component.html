@@ -1,8 +1,5 @@
-<p>view-statement works!</p>
-
 <div>
     <button routerLink="/home">Home</button>
-    <button>Logout</button>
 </div>
 
 <div *ngIf="totalTransaction !== 0;else template1">
@@ -23,7 +20,7 @@
         </div>
     </div>
     <div>
-        <div>View Analytics</div>
+        <button>View Analytics</button>
         <div>
             <select name="" id="">
                 <option value="" default>Sort By</option>
@@ -40,15 +37,19 @@
             <div>Amount</div>
             <div>Opening Balance</div>
             <div>Closing Balance</div>
+            <div *ngIf="role != 'FINANCIAL_ADVISOR'">hidden</div>
         </div>
         <div class="statement-item" *ngFor="let item of data1">
             <div>{{item.category}}</div>
             <div>{{item.description}}</div>
-            <div>{{item.dateAndTime}}</div>
+            <div>{{item.date}}</div>
             <div [ngStyle]="{color: item.transactionType === 'INCOME' ? 'green' : 'red'}">{{item.amount}}</div>
             <div>{{item.openingBalance}}</div>
             <div>{{item.closingBalance}}</div>
-            <!-- <div [hidden]="true">hidden</div> -->
+            <div>
+                <button (click)="editData(item)">Edit</button>
+                <button>Delete</button>
+            </div>
         </div>
     </div>
 </div>

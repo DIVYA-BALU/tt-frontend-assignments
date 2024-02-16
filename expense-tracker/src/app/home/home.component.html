@@ -1,9 +1,11 @@
-<p>home works!</p>
 <div>
     <button routerLink="/addTransaction">Add Transaction</button>
     <button routerLink="/viewStatement">View Transaction</button>
-    <button>Logout</button>
+    <button (click)="logout()">Logout</button>
 </div>
+<br>
+<br>
+<hr>
 <div>
     <h1>User Info</h1>
     <div>
@@ -11,7 +13,10 @@
         <div>Expenses & Incomes logged {{transactions}}</div>
         <div>Last Login {{currentDate}}</div>
     </div>
-    <div>
+    <br>
+    <br>
+    <br>
+    <div class="division">
         <h2>Account Details</h2>
         <div>Account Number {{accountNumber}}</div>
         <div>Bank Name {{bankName}}</div>

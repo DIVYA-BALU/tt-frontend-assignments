@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HomeService } from './home.service';
 import { formatDate } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,7 @@ export class HomeComponent {
   currentDate : any = formatDate(new Date(), 'MMM dd yyyy', 'en');
   transactions : string = '';
 
-  constructor(private homeService : HomeService){
+  constructor(private homeService : HomeService, private router: Router){
     this.getAccountDetails();
   }
   getAccountDetails(){
@@ -43,5 +44,10 @@ export class HomeComponent {
       complete : () =>{
       }
     });  
+  }
+
+  logout(){
+    localStorage.clear();
+    this.router.navigate(['']);
   }
 }

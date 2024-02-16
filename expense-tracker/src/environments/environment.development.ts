@@ -4,5 +4,7 @@ export const environment = {
     getAccountDetailsUrl : "http://localhost:8080/account/listaccount",
     getTransactionStatementUrl : "http://localhost:8080/transactions/listall",
     addAccountUrl : "http://localhost:8080/account/addaccount",
-    addTransactionUrl : "http://localhost:8080/transactions/inserttransactions"
+    addTransactionUrl : "http://localhost:8080/transactions/inserttransactions",
+    updateTransactionUrl : "http://localhost:8080/transactions/updatetransactions",
+    getUserDetailsUrl : "http://localhost:8080/account/listusers"
 };
