@@ -3,6 +3,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { NgForm } from '@angular/forms';
 import { EnrollmentViewService } from './enrollment-view.service';
+import { EnrollmentsDTO } from '../models/enrollmentDTO';
 
 @Component({
   selector: 'app-enrollment-view',
@@ -22,7 +23,7 @@ export class EnrollmentViewComponent implements AfterViewInit{
 
   onView(enrollView: NgForm){
     // console.log(enrollView.value);
-    this.enrollmentViewService.getAllEnrollments(enrollView.value.courseUid).subscribe(data => {
+    this.enrollmentViewService.getAllEnrollments(enrollView.value.courseUid, this.paginator.pageSize, this.paginator.pageIndex).subscribe(data => {
       this.listOfUsers = data;
       this.dataSource.data = this.listOfUsers;
     })
@@ -30,13 +31,9 @@ export class EnrollmentViewComponent implements AfterViewInit{
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    // console.log(this.dataSource.paginator);
+    
   }
 
 
-}
-
-interface EnrollmentsDTO {
-  username: string;
-  enrollDate: Date;
-  status: string;
 }

@@ -1,7 +1,31 @@
 <div class="home-container">
-    <img src="/assets/img1.jpg" alt="" srcset="">
-    <div class="text-container">
-        <h3>Unlock the doors to knowledge with <br>E-Learning.</h3>
-         <p>Elevate your learning experience, anytime, anywhere.</p>
-    </div>
+  <img src="/assets/img1.jpg" alt="" srcset="" />
+  <div class="text-container">
+    <h3>Unlock the doors to knowledge with <br />E-Learning.</h3>
+    <p>Elevate your learning experience, anytime, anywhere.</p>
+  </div>
+</div>
+
+<div class="header">
+  <h2>What to learn next :</h2>
+</div>
+
+<div class="course-div">
+  <div *ngFor="let course of courses">
+    <mat-card class="example-card">
+      <img mat-card-image src="/assets/preview.png" alt="image" />
+      <mat-card-content class="card">
+        <mat-card-header>
+          <!-- <mat-card-title>{{ course.courseUid }}</mat-card-title> -->
+          <mat-card-title>
+            <a [routerLink]="['/course',course.courseUid]">
+              {{ course.courseName }}</a>
+          </mat-card-title>
+          <mat-card-subtitle>{{ course.instructorName }}</mat-card-subtitle>
+          <mat-card-subtitle>{{ course.amount | currency : "INR" }}</mat-card-subtitle>
+          <mat-card-subtitle>{{ course.reviews }} reviews</mat-card-subtitle>
+        </mat-card-header>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

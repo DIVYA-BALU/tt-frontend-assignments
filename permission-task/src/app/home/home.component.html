@@ -1,0 +1,10 @@
+<mat-card  *appIsLogout="login">
+  <mat-card-content>
+    <a routerLink="/product">product</a>
+    <div *appIsManageUser="manageUser">
+        <a routerLink="/users">users</a>
+    </div>
+    <button type="button" (click)="logout()">LOGOUT</button>
+  </mat-card-content>
+</mat-card>
+<router-outlet></router-outlet>

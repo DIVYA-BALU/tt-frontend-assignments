@@ -8,18 +8,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from './auth.interceptor';
 import { HomeHeaderComponent } from './home-header/home-header.component';
 import { InstructorHeaderComponent } from './instructor-header/instructor-header.component';
+import { FormsModule } from '@angular/forms';
+import { SearchPageComponent } from './search-page/search-page.component';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeHeaderComponent,
-    InstructorHeaderComponent
+    InstructorHeaderComponent,
+    SearchPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    MatCardModule
   ],
   providers: [
     {

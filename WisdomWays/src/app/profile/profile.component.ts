@@ -4,72 +4,67 @@ import { NgForm } from '@angular/forms';
 import { LoginService } from '../login/login.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { User } from '../models/users';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent {
-
   buttonClick: boolean = false;
-  updateStatus: string = "";
-  deleteStatus: string = "";
+  updateStatus: string = '';
+  deleteStatus: string = '';
 
   profile: User = {
-    userId: "",
-    firstName: "",
-    lastName: "",
-    bio: "",
-    profession: "",
-    organisation: "",
-    email: ""
-  }
+    userId: '',
+    firstName: '',
+    lastName: '',
+    bio: '',
+    profession: '',
+    organisation: '',
+    email: '',
+  };
 
-  constructor(private profileService: ProfileService, private loginService: LoginService, private cookieService: CookieService, private route: Router) {
+  constructor(
+    private profileService: ProfileService,
+    private loginService: LoginService,
+    private cookieService: CookieService,
+    private route: Router
+  ) {
     this.getProfile();
   }
 
   getProfile() {
-    this.profileService.getUser().subscribe(data => {
+    this.profileService.getUser().subscribe((data) => {
       // console.log(data);
       this.profile = data;
       // console.log(this.profile);
-    })
+    });
   }
 
   onProfile(profileForm: NgForm) {
     this.buttonClick = true;
     this.profile = profileForm.value;
-    this.profileService.updateUser(this.profile).subscribe(data => this.updateStatus = data);
+    this.profileService
+      .updateUser(this.profile)
+      .subscribe((data) => (this.updateStatus = data));
   }
 
   deleteUser() {
-    this.profileService.deleteUser().subscribe(data => this.deleteStatus = data);
-    this.loginService.isLoggedIn = false;
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('accessToken');
-    this.cookieService.deleteAll('isLoggedIn');
-    this.route.navigate(['/home']).then(() => this.reloadPage());
-  }
-
-  logoutUser(e: Event){
-    e.preventDefault();
+    this.profileService
+      .deleteUser()
+      .subscribe((data) => (this.deleteStatus = data));
     this.loginService.logout();
-    this.route.navigate(['/home']).then(() => this.reloadPage());
+    this.route.navigate(['/home']);
   }
-  
-  reloadPage(){
-    window.location.reload()
-  }
-}
 
-interface User {
-  userId: string;
-  firstName: string,
-  lastName: string,
-  bio: string,
-  profession: string;
-  organisation: string;
-  email: string;
+  logoutUser() {
+    this.loginService.logout();
+    this.route.navigate(['/home']);
+  }
+
+  reloadPage() {
+    window.location.reload();
+  }
 }

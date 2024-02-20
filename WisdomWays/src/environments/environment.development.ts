@@ -5,5 +5,8 @@ export const environment = {
   updateUserUrl:  'http://localhost:8080/user/update',
   deleteUserUrl: 'http://localhost:8080/user/delete',
   getEnrollmentsUrl: 'http://localhost:8080/enrollment/getallenroll',
-  addAnnouncementUrl: 'http://localhost:8080/add-announcement'
+  addAnnouncementUrl: 'http://localhost:8080/add-announcement',
+  searchUrl: 'http://localhost:8080/course/search-course',
+  getAllCourseUrl: 'http://localhost:8080/course/all-course',
+  getCourseByIdUrl: 'http://localhost:8080/course/id'
 };

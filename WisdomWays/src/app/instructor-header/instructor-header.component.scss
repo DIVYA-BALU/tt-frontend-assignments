@@ -18,40 +18,12 @@
     width: 15%;
 }
 
-.header .search {
-    background-color: white;
-    height: 30px;
-    width: 40%;
-    margin-top: 23px;
-    margin-left: 5px;
-    border-radius: 20px;
-    padding-left: 15px;
-    padding-top: 7px;
-}
-
-.header .search input {
-    border: none;
-    outline: none;
-    padding-left: 10px;
-    font-size: 15px;
-    width: 90%;
-}
-
-.header .search input:focus {
-    font-size: 15px;
-}
-
-.header .search i {
-    color: grey;
-    cursor: pointer;
-}
-
 .header .nav-container {
-    width: 45%;
+    width: 85%;
 }
 
 .header .nav-container nav {
-    padding-left: 50px;
+    padding-left: 650px;
     padding-top: 26px;
     font-size: 20px;
 

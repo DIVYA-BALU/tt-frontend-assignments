@@ -1,27 +1,69 @@
 import { Component } from '@angular/core';
-import { LoginService } from '../login/login.service';
-import { TeachService } from '../teach/teach.service';
+import { SearchPageService } from '../search-page/search-page.service';
+import { Router } from '@angular/router';
+import { CourseDTO } from '../models/course-dto';
 
 @Component({
   selector: 'app-home-header',
   templateUrl: './home-header.component.html',
-  styleUrls: ['./home-header.component.scss']
+  styleUrls: ['./home-header.component.scss'],
 })
 export class HomeHeaderComponent {
+  search: string = '';
 
   logged: boolean = false;
   instructor: boolean = false;
-  isInstructorPage: boolean = false;
 
-  constructor(private loginService: LoginService, private teachService: TeachService) { 
+  constructor(
+    private searchPageService: SearchPageService,
+    private route: Router
+  ) {}
 
-    if (loginService.isAuthenticated()) {
+  ngDoCheck() {
+    if (localStorage.getItem('isLoggedIn') === 'valid') {
       this.logged = true;
     }
 
-    if (teachService.isInstructor()) {
-      // console.log(this.instructor);
+    if (localStorage.getItem('isLoggedIn') === 'inValid') {
+      this.logged = false;
+    }
+
+    if (localStorage.getItem('instructor') === 'true') {
       this.instructor = true;
     }
+
+    if (localStorage.getItem('instructor') === 'false') {
+      this.instructor = false;
+    }
+  }
+
+  // courses: CourseDTO[] = [];
+  // timer: any;
+
+  // searchedCourses() {
+  //   this.route.navigate(['/search']);
+
+  //   clearTimeout(this.timer);
+  //   this.timer = setTimeout(() => {
+
+  //     this.searchPageService.search(this.search).subscribe((data: CourseDTO[]) => {
+  //       if (data.length > 0) {
+  //         this.courses = data;
+  //       } else {
+  //         this.courses = [];
+  //       }
+  //     });
+  //   }, 1000);
+  // }
+
+  timer: any;
+
+  entered() {
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
+      this.searchPageService.setValue(this.search);
+    }, 1000);
+    
+    this.route.navigate(['/search']);
   }
 }

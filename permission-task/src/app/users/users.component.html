@@ -1,0 +1,20 @@
+<table border="1">
+  <th>ID</th>
+  <th>NAME</th>
+  <th>EMAIL</th>
+  <!-- <th>ROLES</th>
+  <th>ROLE PERMISSION</th> -->
+  <!-- <th>ACTIVATE PERMISSION</th> -->
+    <tr *ngFor="let user of users">
+      <td>{{ user.id }}</td>
+      <td>{{ user.name }}</td>
+      <td>{{ user.email }}</td>
+      <!-- <td>{{ user.role }}</td>
+      <td>{{ user.rolePermissions }}</td> -->
+      <!-- <td>
+        <button type="button" (click)="write($event)" id={{user.id}}>WRITE</button>
+        <button type="button" (click)="edit($event)" id={{user.id}}>EDIT</button>
+        <button type="button" (click)="delete($event)" id={{user.id}}>DELETE</button>
+      </td> -->
+    </tr>
+</table>

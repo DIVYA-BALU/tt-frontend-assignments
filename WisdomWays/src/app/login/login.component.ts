@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
+import { user } from '../models/user';
 
 @Component({
   selector: 'app-login',
@@ -26,9 +27,8 @@ export class LoginComponent {
 
     this.loginService.login(this.loginUser).subscribe(
       data => {
-        this.route.navigate(['/home']).then(() => this.reloadPage());
         this.loginService.loggedIn(true, data.accessToken);
-        // console.log(data.accessToken);
+        this.route.navigate(['/home']);
       },
       error => {
         this.errorStatus = error.error;
@@ -40,9 +40,4 @@ export class LoginComponent {
   reloadPage(){
     window.location.reload()
   }
-}
-
-interface user{
-  email: string;
-  password: string;
 }

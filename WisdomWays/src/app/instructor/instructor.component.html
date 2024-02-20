@@ -10,35 +10,77 @@
 <div class="form-container" *ngIf="showDiv()">
   <form [formGroup]="courseForm" (ngSubmit)="onCreate()">
     <div class="group">
-      <label for="cid">Course code:</label>
-      <input type="text" id="cid" name="courseId" formControlName="courseId" />
-      <!-- <br> <span *ngIf="!cid.valid && (cid.touched || cid.dirty)">
+      <table>
+        <tr>
+          <td>
+            <label for="cid">Course code:</label>
+          </td>
+          <td>
+            <input
+              type="text"
+              id="cid"
+              name="courseId"
+              formControlName="courseId"
+            />
+          </td>
+          <!-- <br> <span *ngIf="!cid.valid && (cid.touched || cid.dirty)">
                 Please enter course id
             </span> -->
-
-      <label for="cname">Course name:</label>
-      <input type="text" id="cname" name="courseName" formControlName="courseName" />
-      <!-- <span *ngIf="!cname.valid && (cname.touched || cname.dirty)">
+          <td>
+            <label for="cname">Course name:</label>
+          </td>
+          <td>
+            <input
+              type="text"
+              id="cname"
+              name="courseName"
+              formControlName="courseName"
+            />
+            <!-- <span *ngIf="!cname.valid && (cname.touched || cname.dirty)">
                 Please enter course name
             </span> -->
-    </div>
-
-    <div class="group">
-      <label for="amt">Amount:</label>
-      <input type="text" id="amt" name="amount" formControlName="amount" />
-      <!-- <span *ngIf="!amt.valid && (amt.touched || amt.dirty)">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="amt">Amount:</label>
+          </td>
+          <td>
+            <input
+              type="text"
+              id="amt"
+              name="amount"
+              formControlName="amount"
+            />
+          </td>
+          <!-- <span *ngIf="!amt.valid && (amt.touched || amt.dirty)">
                 Please enter amount
             </span> -->
 
-      <label for="img">Image:</label>
-      <input type="file" id="img" name="image" formControlName="image" />
+          <td>
+            <label for="img">Image:</label>
+          </td>
+          <td>
+            <input type="file" accept="image/*" id="img" name="image" formControlName="image" />
+          </td>
+        </tr>
+      </table>
     </div>
+
+    <!-- <span *ngIf="!amt.valid && (amt.touched || amt.dirty)">
+                Please enter amount
+            </span>-->
 
     <div class="group">
       <mat-form-field class="example-full-width">
         <mat-label>Brief Description:</mat-label>
-        <textarea matInput placeholder="Ex. It makes me feel..." id="b-desc" name="breifDescription"
-          formControlName="breifDescription"></textarea>
+        <textarea
+          matInput
+          placeholder="Ex. It makes me feel..."
+          id="b-desc"
+          name="breifDescription"
+          formControlName="breifDescription"
+        ></textarea>
       </mat-form-field>
 
       <!-- <span *ngIf="!bdesc.valid && (bdesc.touched || bdesc.dirty)">
@@ -49,8 +91,13 @@
     <div>
       <mat-form-field class="example-full-width">
         <mat-label>Description:</mat-label>
-        <textarea matInput placeholder="Ex. It makes me feel..." id="desc" name="description"
-          formControlName="description"></textarea>
+        <textarea
+          matInput
+          placeholder="Ex. It makes me feel..."
+          id="desc"
+          name="description"
+          formControlName="description"
+        ></textarea>
       </mat-form-field>
       <!-- <span *ngIf="!desc.valid && (desc.touched || desc.dirty)">
                 Please enter description
@@ -59,27 +106,56 @@
 
     <div class="module">
       <p>Modules :</p>
-      <button type="button" class="plus-icon" (click)="addModule()" matTooltip="Add more modules"
-        matTooltipPosition="above">
+      <button
+        type="button"
+        class="plus-icon"
+        (click)="addModule()"
+        matTooltip="Add more modules"
+        matTooltipPosition="above"
+      >
         <i class="fa-solid fa-square-plus"></i>
       </button>
     </div>
 
-    <div formArrayName="modules" *ngFor="let module of getModules().controls; let i = index" class="arrayDiv">
+    <div
+      formArrayName="modules"
+      *ngFor="let module of getModules().controls; let i = index"
+      class="arrayDiv"
+    >
       <div [formGroupName]="i">
         <div class="module">
           <label for="title{{ i + 1 }}">Title {{ i + 1 }}:</label>
-          <input type="text" id="title{{ i + 1 }}" name="title" formControlName="title" />
+          <input
+            type="text"
+            id="title{{ i + 1 }}"
+            name="title"
+            formControlName="title"
+          />
 
           <label for="duration{{ i + 1 }}">Duration {{ i + 1 }}:</label>
-          <input type="text" id="duration{{ i + 1 }}" name="duration" formControlName="duration" />
+          <input
+            type="text"
+            id="duration{{ i + 1 }}"
+            name="duration"
+            formControlName="duration"
+          />
 
           <label for="level{{ i + 1 }}">Level {{ i + 1 }}:</label>
-          <input type="text" id="level{{ i + 1 }}" name="level" formControlName="level" />
+          <input
+            type="text"
+            id="level{{ i + 1 }}"
+            name="level"
+            formControlName="level"
+          />
 
           <div>
-            <button type="button" class="icon" (click)="removeModule(i)" matTooltip="remove modules"
-              matTooltipPosition="above">
+            <button
+              type="button"
+              class="icon"
+              (click)="removeModule(i)"
+              matTooltip="remove modules"
+              matTooltipPosition="above"
+            >
               <i class="fa-solid fa-square-minus"></i>
             </button>
           </div>
@@ -87,8 +163,13 @@
 
         <div class="module">
           <p>Sub Modules :</p>
-          <button type="button" class="plus-icon" (click)="addSubModule(i)" matTooltip="Add sub modules"
-            matTooltipPosition="above">
+          <button
+            type="button"
+            class="plus-icon"
+            (click)="addSubModule(i)"
+            matTooltip="Add sub modules"
+            matTooltipPosition="above"
+          >
             <i class="fa-solid fa-square-plus"></i>
           </button>
         </div>
@@ -104,11 +185,20 @@
                 <input type="file" name="video" formControlName="video" />
 
                 <label>Sub Duration {{ j + 1 }}:</label>
-                <input type="text" name="subDuration" formControlName="subDuration" />
+                <input
+                  type="text"
+                  name="subDuration"
+                  formControlName="subDuration"
+                />
 
                 <div>
-                  <button type="button" class="icon" (click)="removeSubModule(i,j)" matTooltip="remove sub modules"
-                    matTooltipPosition="above">
+                  <button
+                    type="button"
+                    class="icon"
+                    (click)="removeSubModule(i, j)"
+                    matTooltip="remove sub modules"
+                    matTooltipPosition="above"
+                  >
                     <i class="fa-solid fa-square-minus"></i>
                   </button>
                 </div>

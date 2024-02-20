@@ -3,7 +3,7 @@
   
     <div class="search">
       <i class="fa fa-search"></i>
-      <input type="text" name="search" id="search-box" placeholder="Seach for anything">
+      <input type="text" name="search" id="search-box" placeholder="Seach for anything" [(ngModel)]="search" (keyup)="entered()">
     </div>
   
     <div class="nav-container">

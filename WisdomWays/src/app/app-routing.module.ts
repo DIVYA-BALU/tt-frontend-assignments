@@ -45,6 +45,14 @@ const routes: Routes = [
   {
     path: 'anounce',
     loadChildren: () => import('./announcement/announcement.module').then(module => module.AnnouncementModule)
+  },
+  {
+    path: 'search',
+    loadChildren: () => import('./search-page/search-page.module').then(module => module.SearchPageModule)
+  },
+  {
+    path: 'course/:courseUid',
+    loadChildren: () => import('./course-display/course-display.module').then(module => module.CourseDisplayModule)
   }
 ];
 

@@ -29,9 +29,9 @@ export class InstructorComponent {
             new FormGroup({
               subTitle: new FormControl(''),
               video: new FormControl(''),
-              subDuration: new FormControl('')
-            })
-          ])
+              subDuration: new FormControl(''),
+            }),
+          ]),
         }),
       ]),
     });
@@ -48,11 +48,15 @@ export class InstructorComponent {
   onCreate() {
     this.buttonClick = true;
     localStorage.removeItem('createCourse');
-    console.log(this.courseForm.controls);
+    // console.log(this.courseForm.controls);
     this.courseForm.reset();
 
     while (this.getModules().length > 1) {
       this.getModules().removeAt(this.getModules().length - 1);
+    }
+
+    while (this.subModules(0).length > 1) {
+      this.subModules(0).removeAt(this.subModules(0).length - 1);
     }
   }
 
@@ -60,7 +64,7 @@ export class InstructorComponent {
     this.getModules().removeAt(index);
   }
 
-  removeSubModule(index: number, j:number){
+  removeSubModule(index: number, j: number) {
     this.subModules(index).removeAt(j);
   }
 
@@ -82,9 +86,9 @@ export class InstructorComponent {
           new FormGroup({
             subTitle: new FormControl(''),
             video: new FormControl(''),
-            subDuration: new FormControl('')
-          })
-        ])
+            subDuration: new FormControl(''),
+          }),
+        ]),
       })
     );
     // console.log(this.getModules());
@@ -99,6 +103,5 @@ export class InstructorComponent {
       })
     );
     // console.log(this.subModules(index));
-    
   }
 }

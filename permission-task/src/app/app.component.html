@@ -1,0 +1,9 @@
+<mat-card *ngIf="!login">
+  <mat-card-content>
+    <nav>
+      <a routerLink="/login" >Login</a>
+      <a routerLink="/signup" >Signup</a>
+    </nav>
+  </mat-card-content>
+</mat-card>
+<router-outlet></router-outlet>

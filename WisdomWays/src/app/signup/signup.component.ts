@@ -3,6 +3,7 @@ import { SignupService } from './signup.service';
 import { LoginService } from '../login/login.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { signupDTO } from '../models/signUpDTO';
 
 @Component({
   selector: 'app-signup',
@@ -28,7 +29,7 @@ export class SignupComponent {
     this.signupService.signup(this.signupUser).subscribe(
       data => {
         this.loginService.loggedIn(true, data.accessToken);
-        this.route.navigate(['/home']).then(() => this.reloadPage());
+        this.route.navigate(['/home']);
         // localStorage.setItem("userId", this.signupUser.userId);
         // console.log(data.accessToken);
       },
@@ -42,10 +43,4 @@ export class SignupComponent {
   reloadPage(){
     window.location.reload()
   }
-}
-
-interface signupDTO {
-  userId: string;
-  email: string;
-  password: string;
 }

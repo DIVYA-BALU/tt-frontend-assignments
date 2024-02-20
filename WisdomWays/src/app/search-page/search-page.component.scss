@@ -1,0 +1,26 @@
+.course-div {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 25px;
+}
+
+.example-card {
+  flex: 0 0 auto; /* Set the card to a fixed width and allow it to shrink or grow */
+  width: 260px;
+  height: 280px;
+  margin-top: 10px;
+  margin-right: 30px;
+  box-sizing: border-box;
+  img {
+    height: 120px;
+  }
+
+  a {
+    color: black;
+    text-decoration: none;
+  }
+}
+
+.card {
+  padding: 0px;
+}

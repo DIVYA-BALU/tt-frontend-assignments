@@ -1,0 +1,19 @@
+<button type="button" *appIsButton="isShowAdd">ADD PRODUCT</button>
+<br>
+<br>
+<table border="1">
+    <th>ID</th>
+    <th>NAME</th>
+    <th>QUANTITY</th>
+    <th>PERMISSION</th>
+      <tr *ngFor="let product of products">
+        <td>{{ product.id }}</td>
+        <td>{{ product.productName }}</td>
+        <td>{{ product.quantity }}</td>
+         <td> 
+          <button type="button"  id={{product.id}}>EDIT</button>
+          <button type="button"  id={{product.id}}>DELETE</button>
+        </td> 
+      </tr>
+  </table>
+  

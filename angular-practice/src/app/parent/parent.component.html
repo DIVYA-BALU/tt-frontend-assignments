@@ -1,0 +1,9 @@
+<p #para>parent works!</p>
+
+<input type="text" [(ngModel)]="val">
+
+<button type="button" (click)="toggled()" id="button" #button>toggle</button>
+
+<app-child [value]="val" *ngIf="display">
+    <p #progection>content progection</p>
+</app-child>

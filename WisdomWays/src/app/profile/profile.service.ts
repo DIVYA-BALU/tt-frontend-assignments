@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
+import { User } from '../models/users';
 
 @Injectable({
   providedIn: 'root'
@@ -26,14 +27,4 @@ export class ProfileService {
     return this.http.delete(this.deleteUserUrl, { responseType : 'text' });
   }
 
-}
-
-interface User {
-  userId: string;
-  firstName: string,
-  lastName: string,
-  bio: string,
-  profession: string;
-  organisation: string;
-  email: string;
 }

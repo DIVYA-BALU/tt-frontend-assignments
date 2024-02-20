@@ -1,0 +1,14 @@
+
+<form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)">
+<mat-form-field appearance="fill">
+    <mat-label>email</mat-label>
+    <input matInput ngModel name="email">
+</mat-form-field>
+<br>
+<mat-form-field appearance="fill">
+    <mat-label>password</mat-label>
+    <input matInput ngModel name="password">
+</mat-form-field>
+<br>
+<button type="submit">LOGIN</button><br>
+</form>
