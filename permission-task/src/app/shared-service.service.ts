@@ -8,7 +8,13 @@ import { LoginService } from './login/login.service';
 })
 export class SharedServiceService {
   write: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  value$ = this.write.asObservable();
+  writeValue$ = this.write.asObservable();
+
+  edit: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  editValue$ = this.edit.asObservable();
+
+  delete: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  deleteValue$ = this.delete.asObservable();
 
   authorities: authority[] = [];
 
@@ -29,5 +35,17 @@ export class SharedServiceService {
         this.write.next(true);
       }
     });
+
+    this.authorities.some((data) => {
+      if(data.authority === 'EDIT'){
+        this.edit.next(true);
+      }
+    });
+
+    this.authorities.some((data) => {
+      if(data.authority === 'DELETE'){
+
+      }
+    })
   }
 }
