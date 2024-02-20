@@ -1,0 +1,34 @@
+@import url('https://pro.fontawesome.com/releases/v5.10.0/css/all.css');
+
+.nav-container {
+  height: 100%;
+  margin-left: 0%;
+}
+
+.mat-drawer {
+  background-color: #01044A;
+  font-size: 18px;
+  position: fixed;
+}
+
+.mat-drawer a:hover {
+  background-color: #aaacdc;
+}
+
+.mat-drawer a {
+  color: #aaacdc;
+}
+
+.icon {
+  font-size: 20px;
+  padding: 10px;
+}
+
+.custom-drawer {
+
+  color: white;
+}
+
+.custom-drawer :hover {
+  color: black;
+}

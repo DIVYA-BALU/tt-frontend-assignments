@@ -1,0 +1,38 @@
+<form [formGroup]="productForm" (ngSubmit)="updateProduct()">
+    <table>
+      <tr>
+        <td>
+          <label for="name">Product Name:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            formControlName="name"
+          />
+        </td>
+      </tr>
+      <!--  -->
+      <tr>
+        <td>
+          <label for="price">Product Price:</label>
+          <input
+            type="text"
+            id="price"
+            name="price"
+            formControlName="price"
+          />
+        </td>
+      </tr>
+     
+  
+      <tr class="button-div">
+        <td>
+          <button type="submit">UPDATE</button>
+          <button type="submit" class="cancel" (click)="onNoClick()">
+            CANCEL
+          </button>
+        </td>
+      </tr>
+    </table>
+  </form>
+  

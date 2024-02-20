@@ -1,0 +1,85 @@
+// css for class="container" to be displayed as flex container and flex wrap as row
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  font-family: 'Roboto', sans-serif;
+}
+
+.left {
+  left: 0;
+
+}
+
+.right {
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f1f1f1;
+}
+
+.split::-webkit-scrollbar {
+  display: none;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #d8d7d7;
+  background-color: #f1f1f1;
+  font-family: 'Roboto', sans-serif;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+}
+
+.error {
+  color: red;
+}
+
+.split.right .content {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+}
+
+.register-link {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.register-link a {
+  color: #007bff;
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  padding-bottom: 50px;
+  font-family: 'Roboto', sans-serif;
+  color: #0a0063;
+}

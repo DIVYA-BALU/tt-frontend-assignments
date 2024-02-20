@@ -1,0 +1,57 @@
+<form [formGroup]="addProductForm" (ngSubmit)="onAddProduct()">
+    <table>
+      <tr>
+        <td>
+          <label for="name">Product Name:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            formControlName="name"
+          />
+          <div
+            *ngIf="
+              addProductForm.controls['name'].invalid &&
+              (addProductForm.controls['name'].dirty ||
+                addProductForm.controls['name'].touched)
+            "
+            class="error"
+          >
+            Product Name is required
+          </div>
+        </td>
+      </tr>
+      <!--  -->
+      <tr>
+        <td>
+          <label for="price">Product Price:</label>
+          <input
+            type="number"
+            id="price"
+            name="Price"
+            formControlName="price"
+          />
+          <div
+            *ngIf="
+              addProductForm.controls['price'].invalid &&
+              (addProductForm.controls['price'].dirty ||
+                addProductForm.controls['price'].touched)
+            "
+            class="error"
+          >
+            Product Price is required
+          </div>
+        </td>
+      </tr>
+  
+      <tr class="button-div">
+        <td>
+          <button type="submit">ADD</button>
+          <button type="submit" class="cancel" (click)="onNoClick()">
+            CANCEL
+          </button>
+        </td>
+      </tr>
+    </table>
+  </form>
+  

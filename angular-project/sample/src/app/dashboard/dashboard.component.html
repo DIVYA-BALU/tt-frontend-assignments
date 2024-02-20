@@ -1,0 +1,30 @@
+<mat-drawer-container class="nav-container">
+    <mat-drawer class="custom-drawer" mode="side" opened>
+      <mat-nav-list>
+        <a mat-list-item routerLink="profile">
+          <span class="custom-drawer"
+            ><i class="icon fas fa-user-circle"></i> Profile</span
+          >
+        </a>
+        <a mat-list-item routerLink="products" routerLinkActive="active-link">
+          <span class="custom-drawer"
+            ><i class="icon fas fa-box-open"></i> Products</span
+          >
+        </a>
+        <a mat-list-item routerLink="users">
+          <span class="custom-drawer"
+            ><i class="icon fas fa-users-cog"></i> Users</span
+          >
+        </a>
+        <a mat-list-item (click)="logout()">
+          <span class="custom-drawer"
+            ><i class="icon fas fa-sign-out"></i> Logout</span
+          >
+        </a>
+      </mat-nav-list>
+    </mat-drawer>
+    <mat-drawer-content>
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+  
