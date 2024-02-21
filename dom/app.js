@@ -129,7 +129,8 @@ function createEditableCell(value, index, key, selectedData) {
     input.addEventListener("blur", function () {
       const newValue = this.value;
       td.innerHTML = newValue;
-      selectedData[index][key] = newValue;
+      const actualIndex = (currentPage - 1) * itemsPerPage + index;
+      selectedData[actualIndex][key] = newValue;
     });
   });
   return td;
