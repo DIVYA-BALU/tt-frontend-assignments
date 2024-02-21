@@ -1,20 +1,25 @@
-<p>profile works!</p>
-<!DOCTYPE html>
-<html>
-<body>
-
-<h2>HTML Forms</h2>
-
-<form action="/action_page.php">
-  <label for="fname">First name:</label><br>
-  <input type="text" id="fname" name="fname" value="John"><br>
-  <label for="lname">Last name:</label><br>
-  <input type="text" id="lname" name="lname" value="Doe"><br><br>
-  <input type="submit" value="Submit">
-</form> 
-
-<p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
-
-</body>
-</html>
-
+<div class="profile">
+  <img [src]="profile?.dp" alt="" srcset="" class="dp" />
+  <div class="profile-content">
+    <div class="profile-name">
+      <span>{{ profile?.name }}</span>
+      <button mat-icon-button [matMenuTriggerFor]="menu" class="logout-menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()">Logout</button>
+      </mat-menu>
+    </div>
+    <div class="follow">
+      <div class="follow-details">
+        <span>{{ profile?.follower_count }}</span>
+        <span>Follower</span>
+      </div>
+      <div class="follow-details">
+        <span>{{ profile?.following_count }}</span>
+        <span>Follower</span>
+      </div>
+    </div>
+  </div>
+</div>
+<span>{{ profile?.bio }}</span>

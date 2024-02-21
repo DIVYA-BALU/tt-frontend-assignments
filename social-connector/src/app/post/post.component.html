@@ -1,20 +1,34 @@
 <mat-card class="example-card">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>{{post?.pageId?.name}}</mat-card-title>
-    </mat-card-header>
-    <img mat-card-image [src]="post?.mediaUrl" alt="Photo of a Shiba Inu">
-    <mat-card-content>
-      <p>{{post?.caption}}</p>
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-icon-button [color]="likeColor" (click)="addLike()">
-            <mat-icon>favorite</mat-icon>
-          </button>{{post?.likeCount}}
-          <button mat-icon-button color="primary" (click)="openDialog('30ms', '30ms')">
-            <mat-icon>comment</mat-icon>
-          </button>{{post?.commentCount}}
-      <button mat-button>Comment</button>
-    </mat-card-actions>
-  </mat-card>
-  
+  <mat-card-header>
+    <img [src]="post.pageId.dp" mat-card-avatar class="example-header-image" />
+    <mat-card-title>{{ post.pageId.name }}</mat-card-title>
+    <span class="flex-spacer"></span>
+    <button
+      class="report"
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      class="logout-menu"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="report()">Report</button>
+    </mat-menu>
+  </mat-card-header>
+  <img mat-card-image [src]="post.mediaUrl" alt="Photo of a Shiba Inu" />
+  <mat-card-content>
+    <p>{{ post.caption }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-icon-button [color]="likeColor" (click)="addLike()">
+      <mat-icon>favorite</mat-icon></button
+    >{{ post.likeCount }}
+    <button
+      mat-icon-button
+      color="primary"
+      (click)="openDialog('30ms', '30ms')"
+    >
+      <mat-icon>comment</mat-icon></button
+    >{{ post.commentCount }}
+  </mat-card-actions>
+</mat-card>

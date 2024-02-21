@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="left">
+    <img [src]="data.url" />
+    <div>
+      <form action="">
+        <mat-form-field>
+          <mat-label>Comment</mat-label>
+          <textarea
+            matInput
+            [(ngModel)]="comment.comment"
+            name="newComment"
+          ></textarea>
+        </mat-form-field>
+
+        <button mat-icon-button color="primary" (click)="addComment()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="right">
+    <div *ngFor="let comm of comments">
+      <div class="user-detail">
+        <img [src]="comm.pageId.dp" class="dp" />
+        <span>{{ comm.pageId.name }}</span>
+      </div>
+      <span class="comment">{{ comm.comment }}</span>
+    </div>
+  </div>
+</div>
+<!-- <mat-dialog-content></mat-dialog-content> -->

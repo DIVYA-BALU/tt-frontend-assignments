@@ -1,0 +1,15 @@
+<p>addpost works!</p>
+<input
+  #postUpload
+  *ngIf="!isImageUploaded"
+  type="file"
+  (change)="addFile($event)"
+/>
+<img *ngIf="isImageUploaded" [src]="imgUrl" alt="" srcset="" />
+<mat-form-field *ngIf="isImageUploaded">
+  <mat-label>caption</mat-label>
+  <textarea matInput [(ngModel)]="newPost.caption" name="caption"></textarea>
+</mat-form-field>
+<button *ngIf="isImageUploaded" mat-button color="primary" (click)="addPost()">
+  post
+</button>

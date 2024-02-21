@@ -1,0 +1,15 @@
+
+.example-card {
+    max-width: 400px;
+    margin: 10px;
+  }
+
+.example-header-image {
+  background-size: cover;
+}
+ .report{
+  float:right ;
+ }
+ .flex-spacer {
+  flex: 1;
+}//So, flex: 1; is a concise way of saying that the flex item should grow, shrink, and have an initial basis of 0%, allowing it to take up any available space along the main axis of the flex container.

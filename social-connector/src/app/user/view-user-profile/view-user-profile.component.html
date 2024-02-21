@@ -1,0 +1,26 @@
+<div class="profile">
+    <img [src]="profile.dp" alt="" srcset="" class="dp" />
+    <div class="profile-content">
+      <div class="profile-name">
+        <span>{{ profile.name }}</span>
+        <button mat-icon-button [matMenuTriggerFor]="menu" class="logout-menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item >Logout</button>
+        </mat-menu>
+      </div>
+      <div class="follow">
+        <div class="follow-details">
+          <span>{{ profile.follower_count }}</span>
+          <span>Follower</span>
+        </div>
+        <div class="follow-details">
+          <span>{{ profile.following_count }}</span>
+          <span>Follower</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span>{{ profile.bio }}</span>
+  

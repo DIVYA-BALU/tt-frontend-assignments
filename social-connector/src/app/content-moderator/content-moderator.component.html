@@ -1,1 +1,48 @@
-<p>content-moderator works!</p>
+<div class="side-nav">
+  <h1>Social Connector</h1>
+  <div class="menu">
+    <svg
+      width="45"
+      height="45"
+      viewBox="0 0 91 66"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M89.1166 32.4593L47.7704 0.722798C47.4727 0.493672 47.1191 0.311894 46.7299 0.187867C46.3406 0.0638404 45.9233 0 45.5019 0C45.0805 0 44.6632 0.0638404 44.2739 0.187867C43.8846 0.311894 43.531 0.493672 43.2333 0.722798L1.88713 32.4593C0.682578 33.3845 0 34.6413 0 35.9521C0 38.6739 2.88088 40.8869 6.42427 40.8869H10.7807V63.5326C10.7807 64.8974 12.2161 66 13.9929 66H39.0776V48.7285H50.3201V66H77.0109C78.7876 66 80.223 64.8974 80.223 63.5326V40.8869H84.5795C86.2859 40.8869 87.9221 40.3703 89.1267 39.4373C91.6261 37.5097 91.6261 34.3869 89.1166 32.4593Z"
+        fill="white"
+      />
+    </svg>
+    <a routerLink="/user">Home</a><br />
+  </div>
+  <div class="menu">
+    <svg
+      width="45"
+      height="45"
+      viewBox="0 0 90 90"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
+      <rect width="90" height="90" fill="url(#pattern0)" />
+      <defs>
+        <pattern
+          id="pattern0"
+          patternContentUnits="objectBoundingBox"
+          width="1"
+          height="1"
+        >
+          <use xlink:href="#image0_7_61" transform="scale(0.0111111)" />
+        </pattern>
+        <image
+          id="image0_7_61"
+          width="90"
+          height="90"
+          xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAACJklEQVR4nO3dvW4TQRTF8ROKABIvQHjD8FGSNwCJhoKKinegQDxBIAWEl0BCogIHRVR/tNJECijYa2dnfXxyf/2O5x6tZm3P1axUSimllFJKKQmA28AT4CNwxu44a3N+BOzLGfAA+MLuOx1qkfGdnBDyhc+Wd3ZbLtI8lBvghDwf5AZYkGchN4SSG0LJDaHkhlByQyi5IZTcEEpuCCU3hJIbQskNoeSGUHJDKLkhlNwQSm4IpXG13wVetw3e78CLYWuvgp4+6CHkf73rEjahtLruvSW7S9OHTSiNq/3nkiGmDZtQGlf7yxXDTBc2oTS+p2UIs3/YhNL4+veBtyuGew/cqaCvsObN1j9sQmn9HPqGTShtlkW/sAmlDXULm1C6hi5hM6/fwFPg4DpBGNU1/qsf8zrqHfAW6nruNqHB/e4Jz1/XN7cJMceSsYW6vrpNKHXpeOY2oYuH4VE9DIPohn+9m41VyBX03+on+Aa0pvpTaUNWIbcPiSSnkG960NRW1mxBv1oxTG3OrjIi5FvAryVDVLvBhEGf/+fyaqCZeOl4c8Wl1RLWIeh7Lezz1h42NNRUk+PUQV8KfE+9EUpuCCU3hJIbQskNoeSGUHJDKLkhlNwQSm4IJTeEkhtCyQ2h5IZQchN6COwPuWnHtqc5lhvgMXkO5ab1Ngxn46f4ZHn0/KWXKZyGhHwgZ601anjFxvGOPSAXbc6HtndyKaWUUkoppWhL/gA8W92XIF47ywAAAABJRU5ErkJggg=="
+        />
+      </defs>
+    </svg>
+    <a (click)="logout()">Logout</a><br />
+  </div>
+</div>
+<div class="component"><router-outlet></router-outlet></div>

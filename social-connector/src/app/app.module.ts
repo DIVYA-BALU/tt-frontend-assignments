@@ -13,9 +13,11 @@ import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { UserComponent } from './user/user.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { PostComponent } from './post/post.component';
-import { CommentComponent } from './post/comment/comment.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { ContentModeratorComponent } from './content-moderator/content-moderator.component';
+import { ParentComponent } from './parent/parent.component';
+import { ChildComponent } from './child/child.component';
+import { ReadPostReportDirective } from './read-post-report.directive';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,11 @@ import {MatDialogModule} from '@angular/material/dialog';
     SignupComponent,
     LoginComponent,
     UserComponent,
+    ContentModeratorComponent,
+    ParentComponent,
+    ChildComponent,
+    ReadPostReportDirective,
+    
   ],
   imports: [
     BrowserModule,

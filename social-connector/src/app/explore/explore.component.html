@@ -1,1 +1,23 @@
-<p>explore works!</p>
+<div class="parent-div">
+  
+  <div class="post">
+    <div *ngFor="let post of posts" width="60%" (scroll)="onScroll()">
+      <app-post [post]="post"></app-post>
+    </div>
+    <div *ngIf="isLoading">Loading...</div>
+  </div>
+  <div class="search">
+    <form action="">
+      <mat-form-field class="form-field">
+        <mat-label>Search</mat-label>
+        <input matInput [(ngModel)]="searchName" (keyup)="search()" name="username" width="40%" />
+      </mat-form-field>
+    </form>
+    <div class="search-result">
+      <div *ngFor="let page of pages" class="result" (click)="saveUser(page)" routerLink="/user/view-user-profile">
+        <img [src]="page.dp" alt="" srcset="" class="dp">
+        <span>{{page.name}}</span>
+      </div>
+    </div>
+  </div>
+</div>

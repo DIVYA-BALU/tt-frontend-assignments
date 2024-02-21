@@ -1,0 +1,41 @@
+.parent-div{
+    display: flex;
+    justify-content: space-between;
+    /* flex-direction: column; */
+}
+
+.search{
+    margin-right: 0px;
+    /* position: fixed; */
+    width: 40%;
+}
+
+.search-result{
+   
+    height: 70vh;
+    width: 100%;
+    background-color: darkgray;
+    overflow-y:scroll;
+}
+
+.result{
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.post{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field {
+    width: 100%;
+  }
+
+.dp{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 10px;
+}

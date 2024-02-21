@@ -19,6 +19,13 @@
             
         <a routerLink="/user/explore">Explore</a><br>
     </div>
-    <div><a routerLink="/user/profile">Profile</a></div>
+    <div class="menu">
+        <img src="assets\Add New.png" class="dp">
+            
+            
+        <a routerLink="/user/add-post">Add Post</a><br>
+    </div>
+    <div class="menu" ><img [src]="profile?.dp" class="dp"><a routerLink="/user/profile">Profile</a></div>
+    <div appReadPostReport access="READ_POST_REPORT" class="menu" ><img src="assets/reported.png" class="dp"><a routerLink="/user/profile">Reported Post</a></div>
 </div>
 <div class="component"><router-outlet></router-outlet></div>

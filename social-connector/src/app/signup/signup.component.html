@@ -1,68 +1,65 @@
 <style>
-    
-    .container{
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        flex-direction:column;
-        height:100vh;
-        width: 100%;
-        border: 2px solid black;
-        border-radius: 10px;
-    }
-    form{
-        padding: 20px;
-        display:flex;
-        align-items:center;
-        justify-content:space-around;
-        flex-direction:column;
-        border: 2px solid black;
-        border-radius: 10px;
-        height:50vh;
-    }
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    border: 2px solid black;
+    border-radius: 10px;
+  }
+  form {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    border: 2px solid black;
+    border-radius: 10px;
+    height: 50vh;
+  }
 
-    .page-title{
-        font-size: 40px;
-        font-style: italic;
-        font-weight: 900;
-    }
+  .page-title {
+    font-size: 40px;
+    font-style: italic;
+    font-weight: 900;
+  }
 
-    h4 { 
-            display: flex; 
-            flex-direction: row; 
-        } 
-          
-        h4:before, 
-        h4:after { 
-            content: ""; 
-            flex: 1 1; 
-            border-bottom: 2px solid #000; 
-            margin: auto; 
-        } 
+  h4 {
+    display: flex;
+    flex-direction: row;
+  }
+
+  h4:before,
+  h4:after {
+    content: "";
+    flex: 1 1;
+    border-bottom: 2px solid #000;
+    margin: auto;
+  }
 </style>
 
-<div class = "container">
-    
-    <form action="">
-        <div class="page-title">Social Connector</div>
-        <mat-form-field >
-            <mat-label >Email</mat-label>
-            <input matInput [(ngModel)]="loginRequest.email" name="email">
-          </mat-form-field>
-    <mat-form-field >
-        <mat-label >Username</mat-label>
-        <input matInput [(ngModel)]="loginRequest.username" name = "username">
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Password</mat-label>
-        <input matInput [(ngModel)]="loginRequest.password" name = "password">
-      </mat-form-field>
-      <button mat-raised-button color="primary" (click)="signUpUser()">SignUp</button>
-      <hr width="100%">
-      <div>New here? <a routerLink="/login">LogIn</a></div>
-      
-    </form>
-
-    
+<div class="container">
+  <form action="">
+    <div class="page-title">Social Connector</div>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput [(ngModel)]="loginRequest.email" name="email" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput [(ngModel)]="loginRequest.username" name="username" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput [(ngModel)]="loginRequest.password" name="password" />
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="signUpUser()">
+      SignUp
+    </button>
+    <hr width="100%" />
+    <div>New here? <a routerLink="/login">LogIn</a></div>
+  </form>
 </div>
 <router-outlet></router-outlet>

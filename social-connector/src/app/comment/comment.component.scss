@@ -1,0 +1,48 @@
+.container{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.left{
+    float:left;
+    width:45%;
+    height: 100%;
+    background-color: burlywood;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.right{
+    float:right;
+    width:55%;
+    height: 100%;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+img{
+    height: 80%;
+    width: 100%;
+}
+
+.dp{
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    margin-right: 20px;
+}
+
+.user-detail{
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.comment{
+    margin-left: 50px;
+}

@@ -1,0 +1,31 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <img
+      [src]="postreport.postId.pageId.dp"
+      mat-card-avatar
+      class="example-header-image"
+    />
+    <mat-card-title>{{ postreport.postId.pageId.name }}</mat-card-title>
+    <span class="flex-spacer"></span>
+    <button
+      class="report"
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      class="logout-menu"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="removeReport()">Remove</button>
+      <button mat-menu-item (click)="removePost()">Retrieve</button>
+    </mat-menu>
+  </mat-card-header>
+  <img
+    mat-card-image
+    [src]="postreport.postId.mediaUrl"
+    alt="Photo of a Shiba Inu"
+  />
+  <mat-card-content>
+    <p>{{ postreport.postId.caption }}</p>
+  </mat-card-content>
+</mat-card>
