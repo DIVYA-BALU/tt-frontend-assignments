@@ -46,9 +46,11 @@ let totalDataLength;
 function fetchAllData() {
   fetch(`https://api.escuelajs.co/api/v1/products`)
     .then(response => {
+      
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
+
       return response.json();
     })
     .then(data => {
@@ -83,6 +85,7 @@ filterInput.addEventListener('input', function () {
       filteredData.push(totalData[i]);
     }
   }
+
   console.log(filteredData);
   offset = 0;
   renderTable(filteredData.slice(offset, limit + offset));
@@ -93,8 +96,11 @@ filterInput.addEventListener('input', function () {
 
 function sortData(key) {
   totalData = totalData.sort((a, b) => {
+
     if (a[key] < b[key]) return -1;
+
     if (a[key] > b[key]) return 1;
+
     return 0;
   });
   fetchData();
@@ -161,7 +167,6 @@ function renderTable(data) {
     tdata4.textContent = `${JSON.stringify(data[i].description)}`;
     tdata4.contentEditable = true;
 
-
     trow.appendChild(tdata1);
     trow.appendChild(tdata2);
     trow.appendChild(tdata3);
@@ -169,6 +174,7 @@ function renderTable(data) {
 
     table.appendChild(trow);
   }
+
 }
 
 
@@ -225,7 +231,6 @@ paginationDiv.appendChild(previousBtn);
 paginationDiv.appendChild(pageNoDiv);
 paginationDiv.appendChild(nextBtn);
 
-// Append elements to the body
 bodyEle.appendChild(h2Ele);
 bodyEle.appendChild(filterDiv);
 bodyEle.appendChild(table);
@@ -247,10 +252,13 @@ function pageNo(totalData) {
 document.querySelector('.previous-btn').addEventListener('click', function () {
   document.querySelector('.next-btn').disabled = false;
   offset = offset - limit;
+
   if (offset === 0) {
     document.querySelector('.previous-btn').disabled = true;
   }
+
   currentPage--;
+
   if (filterInput.value == '') {
     fetchData();
     pageNo(totalData);
@@ -258,17 +266,21 @@ document.querySelector('.previous-btn').addEventListener('click', function () {
   else {
     pageNo(filteredData);
   }
+
 })
 
 document.querySelector('.next-btn').addEventListener('click', function () {
   document.querySelector('.previous-btn').disabled = false;
   offset = limit + offset;
   console.log(offset, limit);
+
   if (offset + limit >= totalDataLength) {
     document.querySelector('.next-btn').disabled = true;
   }
+
   currentPage++;
   console.log(filterInput.value);
+
   if (filterInput.value == '') {
     fetchData();
     pageNo(totalData);
@@ -276,6 +288,7 @@ document.querySelector('.next-btn').addEventListener('click', function () {
   else {
     pageNo(filteredData);
   }
+  
 })
 
 
