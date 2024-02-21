@@ -73,20 +73,15 @@ function fetchData() {
 
 let filteredData = totalData;
 filterInput.addEventListener('input', function () {
-  console.log(filterInput.value);
   let filteredData = [];
   const selectedOption = filterColumn.options[filterColumn.selectedIndex].value;
-  console.log(selectedOption);
 
   for (let i = 0; i < totalData.length; i++) {
     if (filterInput.value == "" || totalData[i][selectedOption].toString().includes(filterInput.value)) {
-      console.log("dbf");
-      console.log(totalData);
       filteredData.push(totalData[i]);
     }
   }
 
-  console.log(filteredData);
   offset = 0;
   renderTable(filteredData.slice(offset, limit + offset));
   pageNo(filteredData);
@@ -272,14 +267,12 @@ document.querySelector('.previous-btn').addEventListener('click', function () {
 document.querySelector('.next-btn').addEventListener('click', function () {
   document.querySelector('.previous-btn').disabled = false;
   offset = limit + offset;
-  console.log(offset, limit);
 
   if (offset + limit >= totalDataLength) {
     document.querySelector('.next-btn').disabled = true;
   }
 
   currentPage++;
-  console.log(filterInput.value);
 
   if (filterInput.value == '') {
     fetchData();
@@ -288,7 +281,7 @@ document.querySelector('.next-btn').addEventListener('click', function () {
   else {
     pageNo(filteredData);
   }
-  
+
 })
 
 
