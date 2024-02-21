@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" class="in">
+    <p class="de-bounce"></p>
+</body>
+
+<script>
+    const inputBox = document.querySelector(".in");
+    const pTag = document.querySelector(".de-bounce");
+
+    let trigger = debounce(val => {
+        pTag.textContent = val;
+    },1000)
+
+    
+    let triggerSpaceOrLength = debounce(val => {
+        pTag.textContent = val;
+    },0)
+
+
+    inputBox.addEventListener("input",(e)=>{
+        if( (e.target.value[e.target.value.length - 2] !== " " && e.target.value[e.target.value.length - 1] === " ") ){
+            console.log("triggered");
+            triggerSpaceOrLength(e.target.value);
+            return;
+        }
+        else if( e.target.value.length % 5 === 0){
+            triggerSpaceOrLength(e.target.value);
+            return;
+        }
+        trigger(e.target.value);
+    })
+
+    function debounce(cb,delay) {
+        let interval;
+        return (...args) =>{
+            clearTimeout(interval);
+            interval = setTimeout(() => {
+                cb(...args)
+            },delay)
+        }
+    }
+</script>
+</html>

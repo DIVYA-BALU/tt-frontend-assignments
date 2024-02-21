@@ -1,0 +1,9 @@
+<p>login-test works!</p>
+<form action="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="username" [(ngModel)] = "formResponse.username">
+    <label for="pass">Password:</label>
+    <input type="text" id="pass" name="password" [(ngModel)] = "formResponse.password">
+    <button type="button" (click)= "loginResponseFunction()" >Submit</button>
+</form>
+

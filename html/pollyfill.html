@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" class="inp">
+</body>
+<script>
+    const content = document.createElement("p");
+    const inputTag = document.querySelector(".inp");
+    String.prototype.Sai = function () {
+        return `${this} Sai`;
+    };
+
+    inputTag.addEventListener("input",(e) => {
+        if(e.target.value === ""){
+            content.style.display = "none";
+            return;
+        }
+        content.style.display = "block";
+
+        content.innerText = e.target.value.Sai();
+        document.body.appendChild(content)
+    })
+</script>
+</html>

@@ -977,7 +977,16 @@ function startQuiz() {
         let userSelection = [];
         let userSelectionText = [];
         let timerElement = document.querySelectorAll(".timer-element");
-        clearInterval(this.localInterval);
+
+        document.querySelectorAll('[class ^= "timer-element-"]').forEach((element) => {
+            element.remove();
+            const interval_id = window.setInterval(function(){}, Number.MAX_SAFE_INTEGER);
+
+            for (let i = 1; i < interval_id; i++) {
+                window.clearInterval(i);
+            }
+
+        })
 
         timerElement.forEach((element) => {
             element.remove();

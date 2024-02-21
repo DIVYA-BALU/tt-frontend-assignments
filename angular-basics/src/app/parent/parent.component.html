@@ -1,0 +1,70 @@
+<!-- <p>parent works!</p>-->
+
+<p>{{parent}}</p>
+
+<app-child [productsToLoad] = "products" (childClickEvent) = "getFunction($event)"></app-child>
+
+<p *ngIf= "childVal; else instruct">{{childVal}}</p>
+
+<ng-template #instruct>Click on buttont to tigger child component</ng-template>
+
+<div [ngSwitch]= "switchCaseVal" >
+    <p *ngSwitchCase="'Red'"> Red </p>
+    <p *ngSwitchCase="'Blue'"> Blue </p>
+    <p *ngSwitchCase="'Green'"> Green </p>
+    <p *ngSwitchDefault> Black </p>
+</div>
+
+<span (click) = "count = count +1" *ngIf= "count>-1">{{count}}</span>
+
+<p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    <ng-container *ngIf="false">Eum sit fugiat, molestiae, quia illum cumque cum nihil repudiandae quo accusantium, qui nemo ex quisquam accusamus ullam facere reprehenderit.</ng-container>  
+    Sit, velit.
+</p>
+
+
+<!-- filters -->
+<!-- currency -->
+<div>{{currencyVar | currency}}</div>
+
+<!-- date -->
+<div> {{dateVar | date }} </div>
+<div> {{dateVar | date:'medium' }} </div>
+<div> {{dateVar | date:'yyyy' }} </div>
+<div> {{dateVar | date:'fullDate' }} </div>
+
+
+<!-- json -->
+<p>json</p>
+<div>{{jsonArr1 | json}}</div>
+
+<!-- limit -->
+<p>slice</p>
+<li *ngFor= "let x of limitArr1 | slice:0:2">{{x}}</li>
+
+<!-- uppercase -->
+<div>{{upperCaseVar | uppercase}}</div>
+
+<!-- fraction size -->
+<div>{{fractionVar | number}}</div>
+
+<h3>Custom directiives</h3>
+<p appHighlight>Highlight me!</p>
+
+<h1 *appNot="true">True</h1><h1 *appNot="false">False</h1>
+
+<h3>Custom filter pipe</h3>
+<p>Super power boost: {{2 | multipleOfNumber: 10}}</p>
+
+
+<h3>lodash</h3>
+<p>{{ld}}</p>
+
+<h3>underscorejs</h3>
+<p>{{evens}}</p>
+
+<h3>Moment</h3>
+<p (click) = "clearTime()">{{now}}</p>
+
+<!-- <p>{{now}}</p> -->
