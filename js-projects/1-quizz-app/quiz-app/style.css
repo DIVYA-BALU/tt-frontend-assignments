@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Nunito', sans-serif;
     box-sizing: border-box;
 }
 
@@ -18,12 +18,56 @@ body {
     padding: 30px;
 }
 
-.app h1 {
+.app header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #333;
+}
+
+.app header h1 {
     font-size: 25px;
     color: #001e4d;
     font-weight: 600;
-    border-bottom: 1px solid #333;
     padding-bottom: 30px;
+}
+
+.app header .timer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #043585;
+    color: #fff;
+    width: 145px;
+    height: 45px;
+    border: 1px solid #001e4d;
+    border-radius: 5px;
+    padding: 0 8px;
+}
+
+.app header .timer .time_text {
+    font-weight: 400;
+    font-size: 17px;
+    user-select: none;
+}
+
+.app header .timer .time_secs {
+    font-size: 18px;
+    font-weight: 500;
+    background: #fff;
+    height: 35px;
+    width: 45px;
+    line-height: 30px;
+    text-align: center;
+    color: black;
+    border-radius: 5px;
+}
+
+.app header .time_line {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 15px;
+    background: #fff;
 }
 
 .quiz {

@@ -1,0 +1,15 @@
+.clock-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+  
+.clock {
+    margin-bottom: 50px;
+    padding: 30px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+}
+

@@ -1,0 +1,15 @@
+<nav>
+    <ul>
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/notes">Notes</a></li>
+        <li><a [routerLink]="['/notes', '123']">Note 123</a></li>
+        <li><a [routerLink]="['/notes', '456']">Note 456</a></li>
+        <li><a [routerLink]="['/notes', '789']">Note 789</a></li>
+        
+        <button (click)="navigateToNotes()"> Go to Notes</button>
+        <button (click)="navigateToNote(117)"> Go to Note</button>
+
+        <li><a routerLink="/about">About</a></li>
+    </ul>
+</nav>
+<router-outlet></router-outlet>

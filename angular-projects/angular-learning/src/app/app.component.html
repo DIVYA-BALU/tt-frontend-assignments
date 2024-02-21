@@ -1,0 +1,66 @@
+<!-- <table>
+  <tr>
+      <th>user_id</th>
+      <th>id</th>
+      <th>title</th>
+      <th>body</th>
+  </tr>
+
+  <tr *ngFor="let user of userList; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ user.user_id }}</td>
+      <td>{{ user.id }} </td>
+      <td>{{ user.title }} </td>
+      <td>{{ user.body }} </td>
+  </tr>
+</table> -->
+
+<!-- STRUCTURAL DIRECTIVES -->
+<h2>*ngFor</h2>
+<h3> {{moviesList}} </h3>
+<ul>
+    <li *ngFor="let movie of movies">
+        {{movie.title}} - {{movie.director}}
+    </li>
+</ul>
+
+<hr>
+
+<h2>*ngSwitch</h2>
+<input type="text" [(ngModel)]="num">     <!-- TWO WAY BINDING -->
+<div [ngSwitch]="num">
+    <div *ngSwitchCase="0">Zero</div>
+    <div *ngSwitchCase="1">One</div>
+    <div *ngSwitchCase="2">Two</div>
+</div>
+
+<hr>
+<!-- eg1 -->
+<h2>*ngIf</h2>
+<p *ngIf="true">True</p>
+
+<!-- eg2 -->
+<div>
+    <label for="">Checkbox
+        <input type="checkbox" [(ngModel)]="showTick">
+    </label>
+</div>
+<p *ngIf="showTick; else elseBlock1">Checkbox is <span>ticked</span></p>
+<ng-template #elseBlock1>
+    <p>Checkbox is <span>unticked</span></p>
+</ng-template>
+
+<!-- eg3 -->
+<div *ngIf="block; then thenBlock; else elseBlock2">
+    <p>Div Block</p>
+</div>
+
+<ng-template #thenBlock>
+    <p>Then Condition</p>
+</ng-template>
+
+<ng-template #elseBlock2>
+    <p>Else condition</p>
+</ng-template>
+
+<hr>

@@ -23,15 +23,16 @@
 
             /* ID SELECTOR */
             #blue {
-                background: blue;
-            }
-
-            /* NESTED TEXT */
-            div b {
                 background: yellow;
             }
 
-            ul > li {
+            /* NESTED TEXT - all b tag inside the div tag is elected */
+            div b {
+                background: blueviolet;
+            }
+
+            /* DIRECT CHILD SELECTOR */
+            span > b {
                 font-style: italic;
             }
 

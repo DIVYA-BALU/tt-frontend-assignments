@@ -4,12 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="app">
-        <h1>Quiz Test</h1>
+        <header>
+            <h1>Quiz Test</h1> 
+            <div class="timer">
+                <div class="time_text">Time Left</div>
+                <div class="time_secs">10</div>
+            </div>
+            <div class="time_line"></div>
+        </header>
         <div class="quiz">
             <h2 id="questions">Questions</h2>
             <div id="answer-buttons">
