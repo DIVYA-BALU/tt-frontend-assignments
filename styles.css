@@ -1,0 +1,52 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-content: end;
+}
+
+.container {
+    padding: 4rem;
+}
+
+table,
+tr,
+td,
+th {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 1rem 2rem;
+    text-align: center;
+}
+
+tr:nth-child(odd) {
+    background-color: blue;
+    color: wheat;
+}
+
+tr:nth-child(even) {
+    background-color: #6a49bf;
+    color: wheat;
+}
+
+.paginationDiv {
+    display: flex;
+    width: 50%;
+    margin: 1rem;
+    float: left;
+}
+
+.inputStyle {
+    background-color: inherit;
+    border: none;
+    padding: 0.2rem;
+}
+
+.inputStyle:focus {
+    border: none !important;
+    background-color: wheat;
+}
+
+.headingbtn{
+    background-color: inherit;
+    border: none;
+}
