@@ -90,7 +90,6 @@ let currentPage = 1;
 const itemsPerPage = 5;
 
 function createTableBody(selectedData) {
-
   const existingTbody = document.querySelector("table tbody");
   if (existingTbody) existingTbody.remove();
 
@@ -100,11 +99,11 @@ function createTableBody(selectedData) {
   const end = start + itemsPerPage;
   const pageItems = selectedData.slice(start, end);
 
-  pageItems.forEach((item,index) => {
+  pageItems.forEach((item, index) => {
     const tr = document.createElement("tr");
-    const td1 = createEditableCell(item.name, index, 'name',selectedData);
-    const td2 = createEditableCell(item.age, index, 'age',selectedData);
-    const td3 = createEditableCell(item.email, index, 'email',selectedData);
+    const td1 = createEditableCell(item.name, index, "name", selectedData);
+    const td2 = createEditableCell(item.age, index, "age", selectedData);
+    const td3 = createEditableCell(item.email, index, "email", selectedData);
     td1.innerHTML = item.name;
     td2.innerHTML = item.age;
     td3.innerHTML = item.email;
@@ -118,24 +117,23 @@ function createTableBody(selectedData) {
   createPagination(selectedData);
 }
 
-
 function createEditableCell(value, index, key, selectedData) {
-    const td = document.createElement("td");
-    td.innerHTML = value;
-    td.addEventListener('click', function() {
-      const input = document.createElement('input');
-      input.value = value;
-      this.innerHTML = '';
-      this.appendChild(input);
-      input.focus();
-      input.addEventListener('blur', function() {
-        const newValue = this.value;
-        td.innerHTML = newValue;
-        selectedData[index][key] = newValue;
-      });
+  const td = document.createElement("td");
+  td.innerHTML = value;
+  td.addEventListener("click", function () {
+    const input = document.createElement("input");
+    input.value = value;
+    this.innerHTML = "";
+    this.appendChild(input);
+    input.focus();
+    input.addEventListener("blur", function () {
+      const newValue = this.value;
+      td.innerHTML = newValue;
+      selectedData[index][key] = newValue;
     });
-    return td;
-  }
+  });
+  return td;
+}
 
 function tableCreation() {
   const table = document.createElement("table");
@@ -183,7 +181,9 @@ function createPagination(selectedData) {
 
   const nextButton = document.createElement("button");
   nextButton.innerHTML = "Next";
+
   if (currentPage === totalPages) nextButton.disabled = true;
+
   nextButton.addEventListener("click", () => {
     currentPage++;
     createTableBody(data);
@@ -216,8 +216,11 @@ function createDropdown() {
   dropdown.addEventListener("change", (e) => {
     const sortKey = e.target.value;
     data.sort((a, b) => {
+        
       if (a[sortKey] < b[sortKey]) return -1;
+
       if (a[sortKey] > b[sortKey]) return 1;
+
       return 0;
     });
     createTableBody(data);
@@ -234,7 +237,7 @@ function createAgeFilter() {
     const age = e.target.value;
     const filteredData = data.filter((item) => item.age == age);
     createTableBody(filteredData);
-    if(!age) createTableBody(data);
+    if (!age) createTableBody(data);
   });
 }
 
