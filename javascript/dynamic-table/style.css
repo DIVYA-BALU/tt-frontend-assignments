@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,300;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
+
+/* Universal CSS */
+/* :root {
+    --main-color: #fca311;
+    --main-white: #e0e0e0;
+    --main-black: #0a0a0a;
+    --secondary-black: #787878;
+    --text-black: #0a0a0a;
+    --light-blue: #daf0ff;
+    --white: #fff;
+} */
+
+:root {
+    --primary-color: #fca311;
+    /* Primary color for your brand */
+    --secondary-color: #004b91a9;
+    /* Secondary color for your brand */
+    --background-color: #e0e0e0;
+    /* Background color */
+    --text-color: #0a0a0a;
+    /* Main color for text */
+    --secondary-text-color: #787878;
+    /* Secondary color for text */
+    --accent-color: #daf0ff;
+    /* Accent color for highlights and special sections */
+    --error-color: #d00000;
+    /* Error color for error messages and icons */
+    --success-color: #52b788;
+    /* Success color for success messages and icons */
+    --warning-color: #ffba08;
+    /* Warning color for warning messages and icons */
+    --info-color: #0077b6;
+    /* Info color for informational messages and icons */
+    --white: #fff;
+    /* White color */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    user-select: none;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+img {
+    max-width: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+    font-family: "Rubik", sans-serif;
+}
+
+.bold {
+    font-weight: 900;
+}
+
+/* Styling for table heading */
+.table-heading {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Styling for table */
+  .product-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  /* Styling for table header */
+  .table-header th {
+    background-color: #f2f2f2;
+    text-align: left;
+    padding: 10px;
+  }
+  
+  /* Styling for table body */
+  .table-body td {
+    padding: 10px;
+  }
+  
+  /* Styling for odd rows in the table body */
+  .table-body tr:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+  
+  /* Styling for pagination */
+  .pagination {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  /* Styling for pagination buttons */
+  .pagination button {
+    padding: 8px 16px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 0 5px;
+  }
+  
+  /* Styling for pagination buttons hover */
+  .pagination button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Styling for page number */
+  .page-number {
+    font-size: 18px;
+    margin: 0 10px;
+  }
+  
+  /* Styling for sort dropdown container */
+.sort-dropdowns {
+    margin-bottom: 10px;
+}
+
+/* Styling for sort dropdowns */
+.sort-dropdown {
+    padding: 8px;
+    font-size: 14px;
+}
+
+/* Styling for sort dropdown labels */
+.sort-dropdowns label {
+    margin-right: 10px;
+}
+
+/* Styling for filter dropdown container */
+.filter-dropdowns {
+    margin-bottom: 10px;
+}
+
+/* Styling for filter dropdowns */
+.filter-dropdown {
+    padding: 8px;
+    font-size: 14px;
+}
+
+/* Styling for filter dropdown labels */
+.filter-dropdowns label {
+    margin-right: 10px;
+}
