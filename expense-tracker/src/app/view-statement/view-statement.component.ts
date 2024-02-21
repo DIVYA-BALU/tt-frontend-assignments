@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class ViewStatementComponent {
 
-  role : string = `${localStorage.getItem('role')}`;
+  role: string = `${localStorage.getItem('role')}`;
 
   startDate: string = formatDate(new Date(), 'yyyy-MM-dd', 'en');
   endDate: string = formatDate(new Date(), 'yyyy-MM-dd', 'en');
@@ -20,8 +20,8 @@ export class ViewStatementComponent {
   totalTransaction: number = 0;
   totalAmount: bigDecimal = new bigDecimal(0);
 
-  constructor(private viewStatementService: ViewStatementService, private commonService : CommonService, private router : Router) {
-    this.getDetails();
+  constructor(private viewStatementService: ViewStatementService, private commonService: CommonService, private router: Router) {
+    this.getDetails();  
     this.getTotalTransactions();
   }
 
@@ -34,8 +34,8 @@ export class ViewStatementComponent {
     this.viewStatementService.getDetails().subscribe({
       next: (details) => {
         this.startDate = formatDate(details.dateAndTime, 'yyyy-MM-dd', 'en');
-        
-        if(details.transaction !==null){
+
+        if (details.transaction !== null) {
           this.totalTransaction = details.transaction.length;
         }
       },
@@ -55,30 +55,35 @@ export class ViewStatementComponent {
           this.data1.push(element);
         });
       },
-      error : (error) => {
+      error: (error) => {
 
       },
-      complete : () => {
-        
+      complete: () => {
+
       }
     })
   }
-  
-  data1 : statementData1[] = [];
 
-  editData(item : any){
+  data1: statementData1[] = [];
+
+  editData(item: statementData1) {
     this.commonService.setData(item);
     this.router.navigate(['update-transaction']);
   }
+
+  deleteData(item: object) {
+    this.viewStatementService.deleteData(item);
+  }
 }
 
-interface statementData1 {
-  "userName" : string,
-  "category" : string,
-  "description" : string,
-  "date" : string,
-  "transactionType" : string,
-  "amount" : any,
-  "openingBalance" : any,
-  "closingBalance" : any
+export interface statementData1 {
+  "id": string,
+  "userName": string,
+  "category": string,
+  "description": string,
+  "date": string,
+  "transactionType": string,
+  "amount": any,
+  "openingBalance": any,
+  "closingBalance": any
 }

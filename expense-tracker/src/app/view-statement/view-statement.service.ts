@@ -7,8 +7,8 @@ import { environment } from 'src/environments/environment.development';
 })
 export class ViewStatementService {
 
-  userName: any = '';
-  accountNumber: any = '';
+  userName: string = '';
+  accountNumber: string = '';
 
   constructor(private http: HttpClient) { }
 
@@ -23,5 +23,15 @@ export class ViewStatementService {
     this.userName = localStorage.getItem('userName');
     const baseUrl = `${environment.getTransactionStatementUrl}/${this.userName}`;
     return this.http.get<any>(baseUrl);
+  }
+
+  deleteData(item : any) {
+    this.userName = localStorage.getItem('userName');
+    console.log(item.id);
+    
+    console.log(typeof(item));
+    
+    const baseUrl = `${environment.deleteTransactionUrl}/${this.userName}`;
+    return this.http.delete<any>(baseUrl);
   }
 }

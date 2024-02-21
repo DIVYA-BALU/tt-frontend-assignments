@@ -69,7 +69,6 @@
 <form>
     <input type="text" name="inputField" [(ngModel)]="currentItem2.name" >
     <p>{{currentItem2.name}}</p>
-
     <input [ngModel]="currentItem2.name" (ngModelChange)="setUppercaseName($event)" id="example-uppercase" name="example-uppercase">
     <p>{{currentItem2.name}}</p>
 </form>
@@ -168,10 +167,5 @@
 
 
 
-
-<!-- routing -->
-<h1>Routing</h1>
-<div>
-    <li><a routerLink="/first-component" routerLinkActive="active" ariaCurrentWhenActive="page">First Component</a></li>
-    <li><a routerLink="/second-component" routerLinkActive="active" ariaCurrentWhenActive="page">Second Component</a></li>
-</div>
+<!-- custom directive -->
+<div turnGreen>Custom directive</div>

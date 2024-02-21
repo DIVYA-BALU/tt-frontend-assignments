@@ -12,13 +12,19 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpdateTransactionComponent } from './update-transaction/update-transaction.component';
 import { ListUsersComponent } from './list-users/list-users.component';
+import { DebounceComponent } from './debounce/debounce.component';
+import { CommonService } from './service/common.service';
+import { CommonServiceService } from './permissions/common-service.service';
+// import { SearchBarComponent } from './search-bar/search-bar.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     UpdateTransactionComponent,
-    ListUsersComponent
+    ListUsersComponent,
+    DebounceComponent,
+    // SearchBarComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +40,8 @@ import { ListUsersComponent } from './list-users/list-users.component';
       provide: HTTP_INTERCEPTORS, 
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    CommonServiceService
   ],
   bootstrap: [AppComponent]
 })

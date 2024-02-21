@@ -6,6 +6,7 @@ import { DisplayApiComponent } from './display-api/display-api.component';
 import { ChildComponentComponent } from './child-component/child-component.component';
 import { FormsModule } from '@angular/forms';
 import { filterClass1 } from './custom-filter';
+import { LifecycleHooksComponent } from './lifecycle-hooks/lifecycle-hooks.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { filterClass1 } from './custom-filter';
     DisplayApiComponent,
     ChildComponentComponent,
     filterClass1,
+    LifecycleHooksComponent
   ],
   imports: [
     BrowserModule,
@@ -21,4 +23,7 @@ import { filterClass1 } from './custom-filter';
   providers: [],
   bootstrap: [AppComponent]
 })
+
+
+
 export class AppModule { }

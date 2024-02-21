@@ -32,20 +32,20 @@ export class SignupComponent {
 
   onSubmit(){
     if(this.signUp.valid === true){
-      const atIndex = this.signUp.value.email.indexOf('@');
-      if(this.signUp.value.email.substring(0,atIndex) === 'admin1'){
-        this.signUp.value.role = "ADMIN";
-      }
-      else if(this.signUp.value.email.substring(0,atIndex) === 'financialadvisor1'){
-        this.signUp.value.role = "FINANCIAL_ADVISOR";
-      }
-      else if(this.signUp.value.email.substring(0,atIndex) === 'financialadvisor2'){
-        this.signUp.value.role = "FINANCIAL_ADVISOR";
-      }
-      else{
-        this.signUp.value.role = "USER";
-      }
-      console.log(this.signUp.value.role);
+      // const atIndex = this.signUp.value.email.indexOf('@');
+      // if(this.signUp.value.email.substring(0,atIndex) === 'admin1'){
+      //   this.signUp.value.role = "ADMIN";
+      // }
+      // else if(this.signUp.value.email.substring(0,atIndex) === 'financialadvisor1'){
+      //   this.signUp.value.role = "FINANCIAL_ADVISOR";
+      // }
+      // else if(this.signUp.value.email.substring(0,atIndex) === 'financialadvisor2'){
+      //   this.signUp.value.role = "FINANCIAL_ADVISOR";
+      // }
+      // else{
+      //   this.signUp.value.role = "USER";
+      // }
+      // console.log(this.signUp.value.role);
       
       
       this.signupService.registerUser(this.signUp.value).subscribe({

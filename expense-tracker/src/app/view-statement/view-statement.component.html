@@ -6,11 +6,11 @@
     <div class="transaction-info">
         <div>
             <input type="date" name="startDate" [(ngModel)]="startDate" (change)="dateChange()">
-            <div>Start Date</div>
+            <div style="margin-top: 10px;">Start Date</div>
         </div>
         <div>    
             <input type="date" name="endDate" [(ngModel)]="endDate" (change)="dateChange()">
-            <div>End Date</div>
+            <div style="margin-top: 10px;">End Date</div>
         </div>
         <div>
             <div>{{totalTransaction}} No of Transactions</div>
@@ -29,7 +29,11 @@
             </select>
         </div>
     </div>
+    
+    <!-- <app-search-bar></app-search-bar> -->
+
     <div class="transaction-details">
+        <hr>
         <div class="row-heading">
             <div>Category</div>
             <div>Description</div>
@@ -37,8 +41,9 @@
             <div>Amount</div>
             <div>Opening Balance</div>
             <div>Closing Balance</div>
-            <div *ngIf="role != 'FINANCIAL_ADVISOR'">hidden</div>
+            <div appEditDirective>Changes</div>
         </div>
+        <hr>
         <div class="statement-item" *ngFor="let item of data1">
             <div>{{item.category}}</div>
             <div>{{item.description}}</div>
@@ -47,12 +52,16 @@
             <div>{{item.openingBalance}}</div>
             <div>{{item.closingBalance}}</div>
             <div>
-                <button (click)="editData(item)">Edit</button>
-                <button>Delete</button>
+                <button (click)="editData(item)" appEditDirective>Edit</button>
+                <button (click)="deleteData(item)" appDeleteDirective>Delete</button>
             </div>
+            <br>
         </div>
     </div>
 </div>
+
 <ng-template #template1>
     <div>No record Found</div>
 </ng-template>
+
+  

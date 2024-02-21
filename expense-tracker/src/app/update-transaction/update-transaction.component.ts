@@ -3,6 +3,8 @@ import { UpdateTransactionService } from './update-transaction.service';
 import { CommonService } from '../service/common.service';
 import { FormGroup, FormBuilder, Validators, FormControlName } from '@angular/forms';
 import { Router } from '@angular/router';
+import { editTransaction } from '../interface/editTransaction';
+import { statementData1 } from '../view-statement/view-statement.component';
 
 @Component({
   selector: 'app-update-transaction',
@@ -18,7 +20,7 @@ export class UpdateTransactionComponent {
   ngOnInit() {
     this.updateTransaction = this.formBuilder.group({
       id: [],
-      userName : [`${localStorage.getItem('userName')}`],
+      userName : [`${localStorage.getItem ('userName')}`],
       category : ['',Validators.required],
       transactionType : ['',Validators.required],
       description : [''],
@@ -49,16 +51,23 @@ export class UpdateTransactionComponent {
     this.updateTransaction.value.transactionType = value;
   }
 
-  data:{};
+  data : any;
 
   editTransaction(){
-    this.data = this.commonService.getData().category;
+    this.commonService.getData().subscribe((val) =>{
+      console.log(val);
+      this.data = val;
+      console.log(this.data);
+    });
+
+    
+    // this.data = this.commonService.getData().category;
     this.updateTransaction.patchValue({
-      id: this.commonService.getData().id || '',
-      category: this.commonService.getData().category || '',
-      transactionType: this.commonService.getData().transactionType || '',
-      description: this.commonService.getData().description || '', 
-      date: this.commonService.getData().date || new Date(),
+      id: this.data.id || '',
+      category: this.data.category || '',
+      // transactionType: this.data.transactionType || '',
+      description: this.data.description || '', 
+      date: this.data.date || new Date(),
     });
     console.log(this.updateTransaction);
   }

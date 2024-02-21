@@ -17,22 +17,22 @@ export class ListUsersComponent {
   }
 
   ngOnInit() { 
-    if(`${localStorage.getItem('role')}` === 'ROLE_FINANCIAL_ADVISOR'){
-      this.listUsersService.getUsers(`${localStorage.getItem('userName')}`).subscribe({
-        next : (users) => {
-          users.body.forEach(element => {
-            this.userArray.push(this.userVar.userName = element.accountHolderName);
-          });       
-        },
-        error : (error) => {
+    // if(`${localStorage.getItem('role')}` === 'ROLE_FINANCIAL_ADVISOR'){
+    //   this.listUsersService.getUsers(`${localStorage.getItem('userName')}`).subscribe({
+    //     next : (users) => {
+    //       users.body.forEach(element => {
+    //         this.userArray.push(this.userVar.userName = element.accountHolderName);
+    //       });       
+    //     },
+    //     error : (error) => {
 
-        },
-        complete : () => {
+    //     },
+    //     complete : () => {
 
-        }
-      })
-    }
-    else{
+    //     }
+    //   })
+    // }
+    // else{
       this.listUsersService.getAllUsers().subscribe({
         next : (users) => {
           users.body.forEach(element => {
@@ -47,6 +47,6 @@ export class ListUsersComponent {
 
         }
       })
-    }     
+    // }     
   }
 }   

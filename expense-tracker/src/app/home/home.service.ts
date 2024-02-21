@@ -18,13 +18,7 @@ export class HomeService {
 
     this.userName = localStorage.getItem('userName');
     this.accountNumber = localStorage.getItem('accountNumber');
-    console.log(localStorage.getItem('accountNumber'));
-    
-    
-    console.log(this.accountNumber);
-    
     const baseUrl = `${environment.getAccountDetailsUrl}/${this.accountNumber}/${this.userName}`;
-
     return this.http.get<any>(baseUrl);
   }
 }

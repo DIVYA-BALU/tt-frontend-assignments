@@ -1,0 +1,13 @@
+.profile-info{
+    display: flex;
+    /* grid-template-columns: 200px 200px; */
+    /* flex-wrap: wrap;
+    flex-direction: column; */
+    flex: 2;    
+  
+}
+
+.profile-details{
+    display: grid;
+    grid-template-columns: 200px 200px;
+}

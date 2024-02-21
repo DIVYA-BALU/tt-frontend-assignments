@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import * as _ from 'lodash';
 
 @Component({
@@ -42,7 +43,7 @@ export class DisplayApiComponent {
   };
   setUppercaseName(value: string) {
     this.currentItem2.name = value.toUpperCase();
-  }
+}
 
 
 
@@ -145,4 +146,29 @@ export class DisplayApiComponent {
 
   index : number[]= [34,78,65,23,56,78,20,10];
   lastIndex = _.lastIndexOf(this.index,78,2);
+
+
+
+
+  // structural typing
+
+  
 }
+
+type Person = {
+  name: string;
+  DOB: Date;
+};
+
+type Employee = {
+  name: string;
+  DOB: Date;
+};
+
+const person: Person ={
+  name: 'Buzz Lightyear' ,
+  DOB: new Date(1953, 5, 13)
+}
+const employee: Employee = person;
+console.log(employee);
+

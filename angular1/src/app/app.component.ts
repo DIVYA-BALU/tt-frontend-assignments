@@ -1,7 +1,9 @@
 import { Component, NgModule, OnInit, inject } from '@angular/core';  
 
+
 // import { DisplayApiComponent } from './display-api/display-api.component';   
 // import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-root',
@@ -11,6 +13,7 @@ import { Component, NgModule, OnInit, inject } from '@angular/core';
   // standalone : true,
   // imports: [HttpClientModule]
 })
+
 export class AppComponent implements OnInit{
     title = 'angular1';
 
@@ -89,5 +92,4 @@ export class AppComponent implements OnInit{
   }
 }
 
-
-
+    

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -21,13 +22,21 @@ export class LoginComponent {
     })
   }
 
+  permissions = new BehaviorSubject<Array<any>>([]);  
 
   onSubmit() {
     if(this.signIn.valid){
       this.loginService.authenticate(this.signIn.value).subscribe({
-        next: (response: any) => {
-          
+        next: (response: any) => {            
           if (response.status == 200) {
+            console.log(response);
+            this.permissions.next(response.body.permission);
+
+            this.permissions.subscribe({next : (val) => {
+              console.log(val);
+              localStorage.setItem('permissions',JSON.stringify(val));
+            }})
+            
             localStorage.setItem('isLogin','true');
             localStorage.setItem('token', response.body.token);
             localStorage.setItem('role', this.loginService.DecodeToken(response.body.token).role[0].authority);
@@ -42,7 +51,7 @@ export class LoginComponent {
                 error: (error: any) => {
                   console.log("error : ", error);
                   if(error.status === 404){
-                    this.router.navigate(['addAccount']);
+                    this.router.navigate(['add-account']);
                   }
                 },
                 complete: () => {
@@ -59,7 +68,7 @@ export class LoginComponent {
           if(error.status === 401){
             this.loginService.openSnackBar('Invalid Credentials');
           }
-          // alert("Invalid credentials");
+          console.log(error);
         },
         complete: () => {
 

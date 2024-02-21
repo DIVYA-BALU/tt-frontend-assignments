@@ -1,0 +1,13 @@
+<div class="loginBox">
+    <form>
+        <label>Enter Name :</label><input [(ngModel)]="userName" type="text" name="form">
+        <br>
+        <label>Enter Password: </label><input [(ngModel)]="password" type="text" name="form">
+        <br>
+        <br>
+        <button (click)="login()">submit</button>
+        <div>Token:
+            {{token}}
+        </div>
+    </form>
+</div>

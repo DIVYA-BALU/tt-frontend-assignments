@@ -25,7 +25,6 @@ export class HomeComponent {
   getAccountDetails(){
     this.homeService.getDetails().subscribe({
       next: (details) => {
-        console.log("no error : ",details);        
         this.accountNumber = details.accountNumber;
         this.bankName = details.bankName;
         this.accountType = details.accountType;
@@ -39,7 +38,6 @@ export class HomeComponent {
         }
       },
       error:(error) => {
-        console.log(error);
       },
       complete : () =>{
       }

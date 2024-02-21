@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 import { jwtDecode } from 'jwt-decode';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +13,15 @@ export class LoginService {
   private loginUrl : string = '';
   private getAccountDetailsUrl : string = '';
   private getUserDetailsUrl:  string = '';
-  token : any = '';
+  response : any = '';
  
   constructor(private http: HttpClient, private snackBar: MatSnackBar) {
-    this.loginUrl = `${environment.loginUrl}`
+    this.loginUrl = `${environment.loginUrl}`;
   }
  
   authenticate(body : object){
-    this.token = this.http.post<any>(this.loginUrl, body, {observe : 'response'});
-    return this.token;
+    this.response = this.http.post<any>(this.loginUrl, body, {observe : 'response'});
+    return this.response;
   }   
 
   DecodeToken(token: any): any {
@@ -51,4 +52,9 @@ export class LoginService {
       duration: 3000,
     });
   }
+
+
+
+
+
 }

@@ -6,5 +6,7 @@ export const environment = {
     addAccountUrl : "http://localhost:8080/account/addaccount",
     addTransactionUrl : "http://localhost:8080/transactions/inserttransactions",
     updateTransactionUrl : "http://localhost:8080/transactions/updatetransactions",
-    getUserDetailsUrl : "http://localhost:8080/account/listusers"
+    deleteTransactionUrl : "http://localhost:8080/transactions/deletetransactions",
+    getUserDetailsUrl : "http://localhost:8080/account/listusers",
+    permissionUrl : "http://localhost:8080/account/permission"
 };

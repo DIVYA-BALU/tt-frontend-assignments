@@ -1,6 +1,6 @@
 <div>
-    <button routerLink="/addTransaction">Add Transaction</button>
-    <button routerLink="/viewStatement">View Transaction</button>
+    <button routerLink="/add-transaction">Add Transaction</button>
+    <button routerLink="/view-statement">View Transaction</button>
     <button (click)="logout()">Logout</button>
 </div>
 <br>
@@ -8,19 +8,27 @@
 <hr>
 <div>
     <h1>User Info</h1>
-    <div>
-        <div>User Since {{accountCreationDate}}</div>
-        <div>Expenses & Incomes logged {{transactions}}</div>
-        <div>Last Login {{currentDate}}</div>
+    <div class="profile-info">
+        <div>User Since </div>
+        <div>{{accountCreationDate}}</div>
+        <div>Expenses & Incomes logged</div>
+        <div>{{transactions}}</div>
+        <div>Last Login</div>
+        <div>{{currentDate}}</div>
     </div>
     <br>
     <br>
     <br>
-    <div class="division">
-        <h2>Account Details</h2>
-        <div>Account Number {{accountNumber}}</div>
-        <div>Bank Name {{bankName}}</div>
-        <div>Account Type {{accountType}}</div>
-        <div>Balance {{balance}}</div>
+    <h2>Account Details</h2>
+    <div class="profile-details">
+        <div>Account Number</div>
+        <div>{{accountNumber}}</div>
+        <div>Bank Name</div>
+        <div>{{bankName}}</div>
+        <div>Account Type</div>
+        <div>{{accountType}}</div>
+        <div>Balance</div>
+        <div>{{balance}}</div>
     </div>
 </div>   
+    
