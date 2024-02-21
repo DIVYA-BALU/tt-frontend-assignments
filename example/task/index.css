@@ -1,0 +1,29 @@
+div {
+  margin-top: 20px;
+}
+
+.page {
+  display: flex;
+  list-style: none;
+}
+.page li {
+  margin: 0 5px;
+  cursor: pointer;
+  border: 1px solid black;
+  text-align: center;
+  width: 2%;
+}
+
+.page .active {
+    font-weight: bolder;
+}
+
+.disable {
+  display: none;
+}
+
+.input{
+    border: none;
+    outline: none;
+    background-color: transparent;
+}

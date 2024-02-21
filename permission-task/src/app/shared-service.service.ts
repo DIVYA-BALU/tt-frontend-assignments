@@ -44,7 +44,7 @@ export class SharedServiceService {
 
     this.authorities.some((data) => {
       if(data.authority === 'DELETE'){
-
+        this.delete.next(true);
       }
     })
   }

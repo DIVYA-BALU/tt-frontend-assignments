@@ -45,7 +45,9 @@ export class ProductComponent {
     })
   }
 
-  ngDestroy(){
+  ngOnDestroy(){
+    console.log(true);
+    
     this.sub1$.unsubscribe();
     this.sub2$.unsubscribe();
     this.sub3$.unsubscribe();

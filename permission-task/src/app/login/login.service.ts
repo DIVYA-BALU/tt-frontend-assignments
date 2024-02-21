@@ -44,5 +44,6 @@ export class LoginService {
     // localStorage.removeItem('authorities')
     // localStorage.removeItem('admin');
     localStorage.clear();
+    this.route.navigate(['/'])
   }
 }

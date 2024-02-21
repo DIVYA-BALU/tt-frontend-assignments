@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { CourseDTO } from '../models/course-dto';
 
@@ -14,6 +14,8 @@ export class SearchPageService {
 
   value: BehaviorSubject<string> = new BehaviorSubject<string>('');
   value$ = this.value.asObservable();
+
+  data: ReplaySubject<string> = new ReplaySubject<string>();
 
   setValue(val: string){
     this.value.next(val);

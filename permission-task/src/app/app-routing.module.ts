@@ -7,11 +7,11 @@ import { UsersComponent } from './users/users.component';
 import { ProductComponent } from './product/product.component';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   redirectTo:"/login",
-  //   pathMatch: 'full'
-  // },
+  {
+    path: '',
+    redirectTo:"/",
+    pathMatch: 'full'
+  },
   {
     path: 'login',
     component: LoginComponent,
