@@ -1,0 +1,52 @@
+ 
+        <div class="registerBox">
+                <h2>Add User</h2>
+        <form class="form" [formGroup]="addUserForm" (ngSubmit)="onSubmit()">
+                <label class="labels">Enter First Name :</label><input 
+                class="inputs" placeholder="Enter First Name" formControlName="firstname">
+               <mat-error *ngIf="addUserForm.get('firstname')?.invalid &&
+               (addUserForm.get('firstname')?.dirty ||
+               addUserForm.get('firstname')?.touched)">
+               First Name is Required!</mat-error>
+               <br>
+           
+               <label class="labels">Enter Last Name :</label><input matInput  
+               class="inputs"  placeholder="Enter Last Name" formControlName="lastname">
+               <mat-error *ngIf="addUserForm.get('lastname')?.invalid &&
+               (addUserForm.get('lastname')?.dirty ||
+                addUserForm.get('lastname')?.touched)">
+                Last Name is Required!</mat-error>
+                <br>
+           
+               <label class="labels">Enter Email :</label><input 
+                class="inputs" placeholder="Enter Email" formControlName="email">
+               <mat-error *ngIf="addUserForm.get('email')?.invalid &&
+               (addUserForm.get('email')?.dirty ||
+                addUserForm.get('email')?.touched)">
+                Email is Required!</mat-error>
+                <br>
+           
+               <label class="labels">Enter Password: </label><input type="password" 
+               class="inputs" placeholder="Enter Password" formControlName="password">
+               <mat-error *ngIf="addUserForm.get('password')?.invalid &&
+               (addUserForm.get('password')?.dirty ||
+                addUserForm.get('password')?.touched)">
+                Password is Required!
+                </mat-error>
+
+                <label class="labels">Enter Role: </label><input  
+               class="inputs" placeholder="Enter Role" formControlName="role">
+               <mat-error *ngIf="addUserForm.get('role')?.invalid &&
+               (addUserForm.get('role')?.dirty ||
+                addUserForm.get('role')?.touched)">
+                Role is Required!
+                </mat-error>
+        </form>
+        <br>
+        <br>
+        <div class="footer">
+        <button mat-raised-button color="primary" (click)="register()" class="buttons">Add User</button>
+        <button mat-raised-button color="primary" (click)="close()" class="buttons">Cancel</button>
+</div>
+        </div>
+        

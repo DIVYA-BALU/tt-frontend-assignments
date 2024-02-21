@@ -1,0 +1,55 @@
+<div class="box">
+  <div class="header">
+    <h2>Edit Profile</h2>
+    <button mat-raised-button color="primary" *ngIf="!parentData.flag" class="navbuttons" (click)="logout()">Logout <i class="pi pi-sign-out"></i></button>
+  </div>
+  <br />
+  <div class="container">
+    <div>
+      <mat-form-field>
+      <mat-label>Frist name</mat-label>  
+      <input matInput #input  [(ngModel)]="parentData.firstname" placeholder="Enter FirstName"/>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>Last name</mat-label>  
+      <input matInput #input    [(ngModel)]="parentData.lastname" placeholder="Enter LastName"/>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>Email</mat-label>  
+        <input matInput #input    [(ngModel)]="parentData.email" placeholder="Enter Email"/>
+      </mat-form-field>
+    </div>
+    <div *ngIf="parentData.doctor">
+      <mat-form-field>
+        <mat-label>Specialization</mat-label>  
+        <input matInput #input    [(ngModel)]="parentData.specialization" placeholder="Enter Specialization"/>
+      </mat-form-field>
+    </div>
+    <div *ngIf="parentData.doctor">
+      <mat-form-field>
+        <mat-label>In time</mat-label> 
+        <input matInput #input    [(ngModel)]="parentData.inTime" placeholder="Enter InTime"/>
+      </mat-form-field>
+    </div>
+    <div *ngIf="parentData.doctor">
+      <mat-form-field>
+        <mat-label>Out time</mat-label>
+        <input matInput #input    [(ngModel)]="parentData.outTime" placeholder="Enter OutTime"/>
+      </mat-form-field>
+    </div>
+    <div *ngIf="!parentData.doctor && !receptionist">
+      <mat-form-field>
+        <mat-label>Phone no</mat-label>
+        <input matInput #input  maxlength="10" [(ngModel)]="parentData.phoneno" placeholder="Enter Phoneno">
+      </mat-form-field>
+    </div>
+  </div>
+  <div>
+  <button mat-raised-button color="primary" class="buttons" (click)="updateUser()">Update</button>
+  <button mat-raised-button color="primary" class="buttons" (click)="close()">Cancel</button>
+</div>
+</div>

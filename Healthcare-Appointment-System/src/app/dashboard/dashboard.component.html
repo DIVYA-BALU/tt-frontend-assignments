@@ -1,0 +1,22 @@
+
+<mat-card-header class="dashboard">
+  <img mat-card-avatar src="../../assets/image/logo.jpg" class="image" />
+  <mat-card-title class="spans">Dashboard</mat-card-title>
+</mat-card-header>
+<div class="body">
+  
+  <div class="left-cont">
+    <button mat-raised-button color="primary" class="buttons"  routerLink="doctor"><i class="pi pi-shield" style="font-size: 1.5rem"></i>Doctors</button>
+    <button mat-raised-button color="primary" class="buttons" routerLink="appointment"><i class="pi pi-check-square" style="font-size: 1.5rem"></i>Appointments</button>
+    <!-- <button mat-raised-button color="primary" class="buttons" routerLink="search"><i class="pi pi-search" style="font-size: 1.5rem"></i>Search</button> -->
+    <button mat-raised-button color="primary" class="buttons" *ngIf="isDoctor()||isAdmin()" routerLink="patient"><i class="pi pi-users" style="font-size: 1.5rem"></i>Patients</button>
+    <button mat-raised-button color="primary" class="buttons" (click)="openProfileDialog()"><i class="pi pi-user-edit" style="font-size: 1.5rem"></i>Profile</button>
+    <button  mat-raised-button color="primary" class="buttons" *ngIf="isAdmin()" (click)="openUserDialog()"><i class="pi pi-user-plus" style="font-size: 1.5rem"></i>Add Users</button>
+    <button  mat-raised-button color="primary" class="buttons" *ngIf="isAdmin()" routerLink="viewUser"><i class="pi pi-th-large" style="font-size: 1.5rem"></i>View Users</button>
+    <button mat-raised-button color="primary" class="buttons" routerLink="about"><i class="pi pi-info-circle" style="font-size: 1.5rem"></i>About</button>
+   
+  </div>
+  <div class="right-cont">
+    <router-outlet></router-outlet>
+  </div>
+</div>

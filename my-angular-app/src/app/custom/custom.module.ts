@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { CustomComponent } from './custom.component';
-import { filterClass } from "../custom-folder/custom.filter";
+import { filterClass } from "../custom-directive/custom.filter";
 
 const appRoute: Routes = [
     {

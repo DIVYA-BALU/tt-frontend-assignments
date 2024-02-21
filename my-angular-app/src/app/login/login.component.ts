@@ -9,8 +9,11 @@ import { Router } from '@angular/router';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+    firstname: string = '';
+    lastname: string = '';
     email: string = '';
     password: string = '';
+    role: string = '';
     token: any = '';
     constructor(private loginService: LoginService, private cookieService: CookieService, private router: Router) { }
     login() {
@@ -26,6 +29,7 @@ export class LoginComponent {
             },
             error: (error) => {
                 console.log("error:", error);
+                window.alert('Enter valid User Details!');
             },
             complete: () => {
                 if (this.loginService.isAuthencticate()) {
@@ -34,5 +38,9 @@ export class LoginComponent {
             }
         });
     }
+    register() {
+        this.router.navigate(['register']);
+    }
+
 }
 

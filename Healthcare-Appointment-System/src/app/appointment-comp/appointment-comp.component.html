@@ -1,0 +1,42 @@
+<div class="box">
+  <div class="head">
+    <h2 *ngIf="flag">Book Appointment</h2>
+    <h2 *ngIf="!flag">Update Appointment</h2>
+  </div>
+  <br />
+  <div class="container">
+    <div>
+      <mat-form-field>
+      <mat-label>Doctor Id</mat-label>  
+      <input matInput #input  [(ngModel)]="doctorId" placeholder="Enter Doctor Id"/>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>Doctor Name</mat-label>  
+      <input matInput #input  [(ngModel)]="doctorName" placeholder="Enter Doctor Name"/>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>Patient Id</mat-label>  
+        <input matInput #input [(ngModel)]="patientId" placeholder="Enter Patient Id"/>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>Patient Name</mat-label>  
+        <input matInput #input [(ngModel)]="patientName" placeholder="Enter Patient Name"/>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="date">
+    <mat-label>Date & Time</mat-label><br>
+      <p-calendar matInput #input [(ngModel)]="dateTime" [showTime]="true" [showIcon]="true" [showSeconds]="true" ><i class="pi-calendar"></i></p-calendar>
+  </div>
+  <div class="header">
+  <button mat-raised-button color="primary" *ngIf="flag" class="buttons" (click)="book()">Book</button>
+  <button mat-raised-button color="primary" *ngIf="!flag" class="buttons" (click)="update()">Update</button>
+  <button mat-raised-button color="primary" (click)="close()"  class="buttons">cancel</button>
+</div>
+</div>

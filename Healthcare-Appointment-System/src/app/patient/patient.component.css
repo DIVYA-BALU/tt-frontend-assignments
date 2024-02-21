@@ -1,0 +1,47 @@
+.box {
+    max-width: 240px;
+    min-width: min-content;
+    height: fit-content;
+    padding: 25px;
+    border-radius: 15px;
+    background-color: white;
+    border: 0px;
+}
+
+.name {
+    font-size: 15px;
+      
+}
+
+.buttons {
+    font: 15px bold;
+    border: 0px;
+    padding: 10px;
+    width: fit-content;
+    margin-left: 30%;
+}
+
+.head{
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr 0.3fr;
+}
+
+.buttons:hover {
+    color: black;
+    background-color: aliceblue;
+    cursor: pointer;
+}
+
+.body {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 30px;
+    column-gap: 15px;
+}
+
+.footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}

@@ -4,8 +4,13 @@
     <label>Enter Password: </label><input [(ngModel)]="password" type="password">
     <br>
     <br>
-    <button (click)="login()">submit</button>
-    <div>Token:
+    <button (click)="login()">Login</button>
+    <br>
+    <div>Are you new user ?
+        <button (click)="register()">Register</button>
+    </div>
+    <div class="token">Token:
         {{token}}
     </div>
+
 </div>

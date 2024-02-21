@@ -14,7 +14,7 @@ export class LoginService {
   authenticate(email: string, password: string): Observable<any> {
     const body = { email, password }
     console.log(body);
-    const tk: any = this.http.post<any>(environment.baseUrl, body, { observe: 'response' });
+    const tk: any = this.http.post<any>(environment.baseUrl + "/authenticate", body, { observe: 'response' });
     return tk;
   }
 

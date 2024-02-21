@@ -1,0 +1,32 @@
+
+<div class="head">
+  <h2 >Doctors List</h2>
+</div>
+<div class="body">
+  <app-search></app-search>
+  <div *ngFor="let x of doctors" class="box">
+    <label class="name">Dr.{{ x.doctorFristName }}{{ x.doctorLastName }}</label>
+    <br />
+    <label class="name">{{ x.specialization }}</label>
+    <br />
+    <label class="name">{{ x.doctorEmail }}</label>
+    <br />
+    <label class="name">inTime: {{ (x.inTime| toDate | date: 'medium') }}</label>
+    <br />
+    <label class="name">outTime: {{ (x.outTime| toDate | date: 'medium') }}</label>
+    <br />
+    <br />
+    <!-- <button mat-raised-button color="primary" class="buttons"
+      routerLink="/dashboard/appointmentComp" (click)="sendDetails({from:'book',doctorId:x.doctorId,doctorName:x.doctorFristName + ' ' + x.doctorLastName})"
+      *ngIf="!isDoctor()">Book</button> -->
+      
+    <button mat-raised-button color="primary" appCanBook (click)="openDialog({from:'book',doctorId:x.doctorId,doctorName:x.doctorFristName + ' ' + x.doctorLastName})" class="buttons" *ngIf="!isDoctor()">Book <i class="pi pi-book"></i></button>
+  </div>
+
+
+
+  <div class="footer">
+    <button mat-raised-button color="primary" (click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
+    <button mat-raised-button color="primary" (click)="nextPage()" [disabled]=lastpage>Next</button>
+  </div>
+</div>

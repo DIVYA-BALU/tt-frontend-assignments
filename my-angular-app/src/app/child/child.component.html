@@ -1,4 +1,13 @@
-<p>
+<!-- <p>
     child item value:{{item}}
 </p>
-<button (click)="buttonClick()">button</button>
+<button (click)="buttonClick()">button</button> -->
+<div [ngClass]="{red:true}" [ngStyle]="{
+    color:'green',
+    'background-color':'black'
+}">child component</div>
+<ng-content></ng-content>
+<div>
+    <p #child></p>
+    <input (input)="emitter($event)">
+</div>

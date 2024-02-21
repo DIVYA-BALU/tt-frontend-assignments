@@ -1,0 +1,43 @@
+<mat-card class="nav">
+  <button mat-raised-button color="primary" (click)="homePage()" class="navbuttons">Home<i class="pi pi-home"></i></button>
+  <button mat-raised-button color="primary" (click)="loginPage()" class="navbuttons">Login<i class="pi pi-sign-in"></i></button>
+  <button mat-raised-button color="primary" (click)="registerPage()" class="navbuttons">Register<i class="pi pi-check-square"></i></button>
+</mat-card>
+<div class="registerBox">
+  <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <label class="labels">Enter First Name :</label><input 
+     class="inputs" placeholder="Enter First Name" formControlName="firstname">
+    <mat-error *ngIf="registerForm.get('firstname')?.invalid &&
+    (registerForm.get('firstname')?.dirty ||
+    registerForm.get('firstname')?.touched)">
+    First Name is Required!</mat-error>
+    <br>
+
+    <label class="labels">Enter Last Name :</label><input matInput  
+    class="inputs"  placeholder="Enter Last Name" formControlName="lastname">
+    <mat-error *ngIf="registerForm.get('lastname')?.invalid &&
+    (registerForm.get('lastname')?.dirty ||
+     registerForm.get('lastname')?.touched)">
+     Last Name is Required!</mat-error>
+     <br>
+
+    <label class="labels">Enter Email :</label><input 
+     class="inputs" placeholder="Enter Email" formControlName="email">
+    <mat-error *ngIf="registerForm.get('email')?.invalid &&
+    (registerForm.get('email')?.dirty ||
+     registerForm.get('email')?.touched)">
+     Email is Required!</mat-error>
+     <br>
+
+    <label class="labels">Enter Password: </label><input type="password" 
+    class="inputs" placeholder="Enter Password" formControlName="password">
+    <mat-error *ngIf="registerForm.get('password')?.invalid &&
+    (registerForm.get('password')?.dirty ||
+     registerForm.get('password')?.touched)">
+     Password is Required!
+     </mat-error>
+    <br>
+    <br>
+    <button mat-raised-button color="primary" (click)="register()" class="buttons">submit<i class="pi pi-check-circle"></i></button>
+  </form>
+</div>

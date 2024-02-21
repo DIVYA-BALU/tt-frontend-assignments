@@ -1,0 +1,55 @@
+<div class="head">
+  <div>
+    <h2 *ngIf="isdoctor; then doctor; else patinet"></h2>
+  <ng-template #patinet><h2>Hi Mr.{{ username }}</h2></ng-template>
+  <ng-template #doctor><h2>Hi Dr.{{ username }}</h2></ng-template>
+  <br />
+  <span *ngIf="!admin && !flag && isdoctor">Your Appointments</span>
+  <span *ngIf="admin && !flag">Appointments List</span>
+  <h3 *ngIf="flag" class="title">No Appointments Found</h3>
+  </div>
+</div>
+<div class="body">
+  <div *ngFor="let x of appointments" class="box">
+    <label class="name">Patient Name: {{ x.patientName }}</label>
+    <br />
+    <label class="name">Doctor Name: {{ x.doctorName }}</label>
+    <br />
+    <label class="name">Date: {{ (x.time | toDate | date: 'medium')}}</label>
+    <br />
+    <label class="name">Status: <span [ngClass]="x.appointmentStatus ==='Not Visited'? 'wrong': 'correct'">{{ x.appointmentStatus }}</span></label>
+    <br />
+    <br>
+    <!-- <button mat-raised-button color="primary"
+      class="buttons"
+      routerLink='/dashboard/appointmentComp' (click)="sendDetails({
+          appointmentId: x.appointmentId,
+          from: 'update',
+          doctorId: x.doctorId,
+          patientId: x.patientId,
+          doctorName: x.doctorName,
+          patientName: x.patientName
+        })"
+    >
+      Edit
+    </button> -->
+    <button mat-raised-button color="primary" appCanEdit
+      class="buttons"
+      (click)="openDialog({
+          appointmentId: x.appointmentId,
+          from: 'update',
+          doctorId: x.doctor.doctorId,
+          patientId: x.patient.patientId,
+          doctorName: x.doctorName,
+          patientName: x.patientName,
+          time:x.time
+        })"
+    >
+      Edit
+    </button>
+  </div>
+  <div class="footer">
+    <button mat-raised-button color="primary"(click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
+    <button mat-raised-button color="primary" (click)="nextPage()" [disabled]=lastpage>Next</button>
+  </div>
+</div>

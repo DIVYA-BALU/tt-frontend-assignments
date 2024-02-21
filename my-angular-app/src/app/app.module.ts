@@ -4,18 +4,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { ChildComponent } from './child/child.component';
-import { filterClass } from './custom-folder/custom.filter';
-import { HighlightDirective } from './custom-folder/custom-attribute.directive';
+import { filterClass } from './custom-directive/custom.filter';
+import { HighlightDirective } from './custom-directive/custom-attribute.directive';
 import { ThirdComponent } from './third/third.component';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminComponent } from './admin/admin.component';
+import { MouseDirective } from './custom-directive/mouse.directive';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent,AdminComponent,
     ChildComponent,
     ThirdComponent,
     LoginComponent,
+    MouseDirective,
   ],
   imports: [
     BrowserModule,

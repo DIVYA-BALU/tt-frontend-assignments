@@ -13,8 +13,8 @@ const appRoute: Routes = [
   },
 
   {
-    path: 'admin', canActivate: [AuthGuard], loadChildren: () =>
-      import('./admin/admin.module').then((d) => d.AdminModule)
+    path: 'register', loadChildren: () =>
+      import('./register/register.module').then((d) => d.RegisterModule)
   },
 
   {

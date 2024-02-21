@@ -1,0 +1,27 @@
+<div class="head">
+  <h2 >Patients List</h2>
+</div>
+    
+
+<div class="body">
+    <div *ngFor="let x of patients" class="box">
+      <label class="name">Id:{{ x.patientId }}</label>
+      <br />
+      <label class="name">Mr.{{ x.patientFirstName }}{{ x.patientLastName }}</label>
+      <br />
+      <label class="name">{{ x.patientEmail }}</label>
+      <br />
+      <label class="name">{{ x.patientContact }}</label>
+      <br />
+      <br />
+      <button mat-raised-button color="primary" class="buttons"
+        routerLink="/dashboard/appointment" (click)="sendDetails({patient:true,patientId:x.patientId})">
+        View
+      </button>
+    </div>
+    <div class="footer">
+      <button mat-raised-button color="primary"(click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
+      <button mat-raised-button color="primary" (click)="nextPage()" [disabled]=lastpage>Next</button>
+    </div>
+  </div>
+  

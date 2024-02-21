@@ -1,1 +1,27 @@
-<p>login successfull</p>
+<div>Parent component</div>
+<button (click)="getChild()">toggle</button>
+<input [(ngModel)]="parentValue">
+
+<!-- <app-child *ngIf="isChild" [item]="parentValue" >
+    <h2 #head>parent message tag</h2>
+</app-child> -->
+
+<!-- <app-child *ngIf="isChild" (childClickEvent)="getMessage($event)">
+    <h2 #head>parent message tag</h2>
+</app-child> -->
+
+<br>
+<button (click)="toggle()">Toggle Component</button>
+<br>
+<ng-container *ngComponentOutlet="component">
+</ng-container>
+
+<button [disabled]="isDisabled"> attribute binding</button>
+
+<div [class.active]="isActive">Content</div>
+<div [class.error]="hasError">Error Message</div>
+<button [ngClass]="{'btn-primary': isPrimary, 'btn-secondary': !isPrimary}">Submit</button>
+
+<p appMouse>this is a custom directive with Host Listener</p>
+
+<div *ngFor="let x of values">{{x}}</div>

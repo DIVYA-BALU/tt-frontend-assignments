@@ -1,0 +1,35 @@
+<mat-card class="nav">
+    <button mat-raised-button color="primary" (click)="homePage()" class="navbuttons">Home<i class="pi pi-home"></i></button>
+    <button mat-raised-button color="primary" (click)="loginPage()" class="navbuttons">Login<i class="pi pi-sign-in"></i></button>
+    <button mat-raised-button color="primary" (click)="registerPage()" class="navbuttons">Register<i class="pi pi-check-square"></i></button>
+  </mat-card>
+<div class="loginBox">
+  <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+  <label class="labels">Enter Email :</label>
+  <input  type="text" class="inputs" formControlName="email">
+  <mat-error *ngIf="loginForm.get('email')?.invalid &&
+  (loginForm.get('email')?.dirty ||
+   loginForm.get('email')?.touched)">
+   Email is Required!
+   </mat-error>
+  <br />
+
+  <label class="labels">Enter Password: </label>
+  <input type="password" class="inputs" formControlName="password"/>
+  <mat-error *ngIf="loginForm.get('password')?.invalid &&
+  (loginForm.get('password')?.dirty ||
+   loginForm.get('password')?.touched)">
+   Password is Required!
+   </mat-error>
+  <br />
+  <button mat-raised-button color="primary" (click)="login()" class="buttons">Login<i class="pi pi-sign-in"></i></button>
+  <!-- <button mat-raised-button color="primary" class="buttons">Login</button> -->
+</form>
+
+  <br />
+  <div>
+    Are you new user ?
+    <button mat-raised-button color="primary" (click)="registerPage()"  class="buttons">Register<i class="pi pi-check-square"></i></button>
+  </div>
+</div>

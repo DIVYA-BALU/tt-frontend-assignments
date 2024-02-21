@@ -9,7 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class LogoutComponent {
   constructor(private route: Router, private cookieService: CookieService) { }
-  logOut() {
+  logout() {
     localStorage.setItem('isLogged', 'false');
     this.cookieService.delete('isLogged');
     this.route.navigate(['login']);
