@@ -10,5 +10,5 @@ import com.project.storeadministration.model.Role;
 @Repository
 public interface RoleRepository extends MongoRepository<Role, String> {
 
-  Optional<Role> findByName(String emailId);
+  Optional<Role> findByName(String name);
 }

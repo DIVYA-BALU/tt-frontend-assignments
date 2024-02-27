@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,10 +31,18 @@ public class User implements UserDetails {
   private Long mobileNumber;
   private List<String> branchesId;
   private String sectionId;
+  @DocumentReference(collection = "roles")
   private Role role;
+  @DocumentReference(collection = "permissions")
   private List<Permission> permissions;
   private LocalDate joiningDate;
-  private EmploymentStatus employmentHistory;
+  private List<EmploymentDetail> employmentHistory;
+
+  @Data
+  public static class EmploymentDetail {
+    private LocalDate joiningDate;
+    private LocalDate relievingDate;
+  }
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -48,7 +57,7 @@ public class User implements UserDetails {
     return authorities;
   }
 
-  public String getId(){
+  public String getId() {
     return this._id;
   }
 

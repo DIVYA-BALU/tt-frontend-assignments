@@ -16,8 +16,8 @@ import com.project.storeadministration.repository.SectionRepository;
 import com.project.storeadministration.service.BranchService;
 
 @Service
-public class BranchServiceImplementation implements BranchService{
-  
+public class BranchServiceImplementation implements BranchService {
+
   @Autowired
   private BranchRepository branchRepository;
 
@@ -34,13 +34,19 @@ public class BranchServiceImplementation implements BranchService{
   public Branch addSectionDetails(String branchId, String sectionId) throws CustomException {
     Optional<Branch> optionalBranch = branchRepository.findBy_id(sectionId);
 
-    if(!optionalBranch.isPresent())
-    throw new CustomException("Branch Not Exists");
-    
-    Branch branch = optionalBranch.get();
-    Section section = sectionRepository.findBy_id();
+    if (!optionalBranch.isPresent())
+      throw new CustomException("Branch Not Exists");
 
-    SectionDetail sectionDetail = new SectionDetail(section,LocalDate.now());
+    Branch branch = optionalBranch.get();
+
+    Optional<Section> optionalSection = sectionRepository.findBy_id(sectionId);
+
+    if (!optionalSection.isPresent())
+      throw new CustomException("Section Not Exists");
+
+    Section section = optionalSection.get();
+
+    SectionDetail sectionDetail = new SectionDetail(section, LocalDate.now());
     branch.getSectionDetails().add(sectionDetail);
     return branchRepository.save(branch);
   }

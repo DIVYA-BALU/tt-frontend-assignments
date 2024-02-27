@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 import com.project.storeadministration.model.LeaveDetail;
 
 @Repository
-public interface LeaveDetailRepository extends MongoRepository<LeaveDetail, String>{
+public interface LeaveDetailRepository extends MongoRepository<LeaveDetail, String> {
 
   Optional<LeaveDetail> findByDate(LocalDate date);
-  
+
 }

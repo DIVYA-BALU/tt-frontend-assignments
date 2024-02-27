@@ -20,21 +20,25 @@ import com.project.storeadministration.model.User;
 import com.project.storeadministration.service.LeaveDetailService;
 
 @RestController
-@RequestMapping("leave-details") 
+@RequestMapping("leave-details")
 public class LeaveDetailController {
-  
+
   @Autowired
   private LeaveDetailService leaveDetailService;
 
   @PostMapping
-  public ResponseEntity<LeaveDetail> saveLeaveDetail(@RequestBody LeaveDetailRequest leaveDetail) throws CustomException{
+  public ResponseEntity<LeaveDetail> saveLeaveDetail(@RequestBody LeaveDetailRequest leaveDetail)
+      throws CustomException {
     return new ResponseEntity<LeaveDetail>(leaveDetailService.saveLeaveDetail(leaveDetail), HttpStatus.OK);
   }
 
   @GetMapping
-  public ResponseEntity<Page<User>> getLeaveAppliedUsers(@RequestParam(defaultValue = "0") int pageNo,
-  @RequestParam(defaultValue = "10") int pageSize, @RequestParam String branchId, @RequestParam(required = false) String sectionId, @RequestParam(required = false) LocalDate date) throws CustomException{
-    return new ResponseEntity<Page<User>>(leaveDetailService.getLeaveAppliedUsers(pageNo, pageSize, branchId, sectionId, date), HttpStatus.OK);
+  public ResponseEntity<Page<LeaveDetail>> getLeaveAppliedUsers(@RequestParam(defaultValue = "0") int pageNo,
+      @RequestParam(defaultValue = "10") int pageSize, @RequestParam String branchId,
+      @RequestParam(required = false) String sectionId, @RequestParam(required = false) LocalDate date)
+      throws CustomException {
+    return new ResponseEntity<Page<LeaveDetail>>(
+        leaveDetailService.getLeaveDetails(pageNo, pageSize, branchId, sectionId, date), HttpStatus.OK);
   }
 
 }

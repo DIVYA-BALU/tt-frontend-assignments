@@ -7,8 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.storeadministration.model.Branch;
 
-
 @Repository
-public interface BranchRepository extends MongoRepository<Branch, String>{
+public interface BranchRepository extends MongoRepository<Branch, String> {
   Optional<Branch> findBy_id(String _id);
 }

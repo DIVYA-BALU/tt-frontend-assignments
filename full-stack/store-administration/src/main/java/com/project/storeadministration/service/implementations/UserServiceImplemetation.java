@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,6 +24,7 @@ import com.project.storeadministration.filter.service.JwtService;
 import com.project.storeadministration.model.Permission;
 import com.project.storeadministration.model.Role;
 import com.project.storeadministration.model.User;
+import com.project.storeadministration.repository.CustomUserRepository;
 import com.project.storeadministration.repository.RoleRepository;
 import com.project.storeadministration.repository.UserRepository;
 import com.project.storeadministration.service.UserService;
@@ -41,6 +45,9 @@ public class UserServiceImplemetation implements UserService {
 
   @Autowired
   private RoleRepository roleRepository;
+
+  @Autowired
+  private CustomUserRepository customUserRepository;
 
   public ResponseEntity<?> enrollUser(EnrollUserRequest request, boolean signUp) throws CustomException {
 
@@ -72,53 +79,48 @@ public class UserServiceImplemetation implements UserService {
     user = userRepository.save(user);
 
     if (signUp) {
-      List<String> permissions = new ArrayList<String>();
-
-      for (Permission permission : userRole.getPermissions()) {
-        permissions.add(permission.getName());
-      }
-
+      
       LoginResponse response = LoginResponse.builder()
           .jwt(jwtService.generateToken(user))
           .userEmail(user.getEmailId())
           .branchesId(user.getBranchesId())
           .sectionId(user.getSectionId())
-          .role(userRole.getName())
-          .permissions(permissions)
+          .role(userRole)
           .build();
 
       return new ResponseEntity<LoginResponse>(response, HttpStatus.OK);
     }
 
     else
-      return new ResponseEntity<User>(user,HttpStatus.OK);
+      return new ResponseEntity<User>(user, HttpStatus.OK);
   }
 
-  public LoginResponse validateUser(LoginRequest loginRequest){
+  public LoginResponse validateUser(LoginRequest loginRequest) {
     authenticationManager
         .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmailId(), loginRequest.getPassword()));
     User user = userRepository.findByEmailId(loginRequest.getEmailId()).orElseThrow();
 
-    List<String> permissions = new ArrayList<String>();
-
-    for(Permission permission : user.getRole().getPermissions()) {
-      permissions.add(permission.getName());
-    }
-
-    for(Permission permission : user.getPermissions()){
-      permissions.add(permission.getName());
-    }
-
     LoginResponse response = LoginResponse.builder()
-          .jwt(jwtService.generateToken(user))
-          .userEmail(user.getEmailId())
-          .branchesId(user.getBranchesId())
-          .sectionId(user.getSectionId())
-          .role(user.getRole().getName())
-          .permissions(permissions)
-          .build();
+        .jwt(jwtService.generateToken(user))
+        .userEmail(user.getEmailId())
+        .branchesId(user.getBranchesId())
+        .sectionId(user.getSectionId())
+        .role(user.getRole())
+        .permissions(user.getPermissions())
+        .build();
 
     return response;
+  }
+
+  @Override
+  public User updateSection(String userId, String sectionId) {
+    return customUserRepository.updateSection(userId, sectionId);
+  }
+
+  @Override
+  public Page<User> getUsers(int pageNo, int pageSize, String branchId, String sectionId) {
+    PageRequest pageable = PageRequest.of(pageNo, pageSize);
+    return customUserRepository.getUsers(branchId, sectionId, pageable);
   }
 
 }

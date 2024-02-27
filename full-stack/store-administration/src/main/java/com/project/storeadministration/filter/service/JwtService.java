@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import io.jsonwebtoken.Claims;
 
 public interface JwtService {
-  
+
   public String extractUserName(String jwt);
 
   public <T> T extractClaim(String token, Function<Claims, T> claimsResolver);

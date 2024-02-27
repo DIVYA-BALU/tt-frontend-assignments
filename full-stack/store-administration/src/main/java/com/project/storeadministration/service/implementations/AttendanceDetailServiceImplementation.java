@@ -1,16 +1,18 @@
 package com.project.storeadministration.service.implementations;
 
-import java.util.Optional;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.project.storeadministration.dto.AttendanceRequest;
 import com.project.storeadministration.exception.CustomException;
 import com.project.storeadministration.model.AttendanceDetail;
-import com.project.storeadministration.model.LeaveDetail;
 import com.project.storeadministration.repository.AttendanceDetailRepository;
+import com.project.storeadministration.repository.CustomAttendanceDetailRepository;
 import com.project.storeadministration.repository.UserRepository;
 import com.project.storeadministration.service.AttendanceDetailService;
 
@@ -21,29 +23,34 @@ public class AttendanceDetailServiceImplementation implements AttendanceDetailSe
   private AttendanceDetailRepository attendanceDetailRepository;
 
   @Autowired
+  private CustomAttendanceDetailRepository customAttendanceDetailRepository;
+
+  @Autowired
   private UserRepository userRepository;
 
   @Override
-  public Page<AttendanceDetail> saveAttendanceDetail(AttendanceRequest attendanceRequest) {
-    if(!userRepository.existsById(attendanceRequest.getEmployeeId()))
-    throw new CustomException("User Not Exists");
+  public AttendanceDetail saveAttendanceDetail(AttendanceRequest attendanceRequest) throws CustomException {
+    if (!userRepository.existsById(attendanceRequest.getUserId()))
+      throw new CustomException("User Not Exists");
 
-    // check whether the data is available with date and user id if not add the enry otherwise add the checkout
-    
-    // Optional<AttendanceDetail> optionalLeaveDetail = leaveDetailRepository.findByDate(leaveDetailRequest.getDate());
-    // LeaveDetail leaveDetail = new LeaveDetail();
-    // if(optionalLeaveDetail.isPresent())
-    // {
-    //   leaveDetail = optionalLeaveDetail.get();
-    //   leaveDetail.getEmployees().add(userRepository.findById(leaveDetailRequest.getEmployeeId()).get());
-    // }
-    // else{
-    //   leaveDetail.setDate(leaveDetailRequest.getDate());
-    //   leaveDetail.getEmployees().add(userRepository.findById(leaveDetailRequest.getEmployeeId()).get());
-    // }
-    // return leaveDetailRepository.save(leaveDetail);
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'saveAttendanceDetail'");
+    AttendanceDetail attendanceDetail = customAttendanceDetailRepository.findByUserIdAndDate(
+        attendanceRequest.getUserId(),
+        LocalDate.now());
+    if (attendanceDetail != null) {
+      attendanceDetail.setCheckOutTime(attendanceRequest.getCheckOutTime());
+    } else {
+      attendanceDetail = new AttendanceDetail();
+      attendanceDetail.setDate(LocalDate.now());
+      attendanceDetail.setEmployee(userRepository.findById(attendanceRequest.getUserId()).get());
+    }
+    return attendanceDetailRepository.save(attendanceDetail);
   }
-  
+
+  @Override
+  public Page<AttendanceDetail> getAttendanceDetails(int pageNo, int pageSize, String branchId, String sectionId,
+      LocalDate date) {
+    Pageable pageable = PageRequest.of(pageNo, pageSize);
+    return customAttendanceDetailRepository.getAttendanceDetails(branchId, sectionId, date, pageable);
+  }
+
 }

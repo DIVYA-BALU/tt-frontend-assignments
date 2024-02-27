@@ -15,11 +15,4 @@ public class Permission {
   @Id
   private String _id;
   private String name;
-  // FinancialManagement,
-  // AddInvestment,
-  // StoreDetailsManagement,
-  // Biller,
-  // EmployeeManagement,
-  // EmployeeSectionAllocation,
-  // Employee
 }

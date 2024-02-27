@@ -10,7 +10,7 @@ import com.project.storeadministration.repository.SectionRepository;
 import com.project.storeadministration.service.SectionService;
 
 @Service
-public class SectionServiceImplementation implements SectionService{
+public class SectionServiceImplementation implements SectionService {
 
   @Autowired
   private SectionRepository sectionRepository;

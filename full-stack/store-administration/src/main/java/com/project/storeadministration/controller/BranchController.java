@@ -30,7 +30,7 @@ public class BranchController {
 
   @PostMapping("/addSection/{branchId}/")
   public ResponseEntity<Branch> saveSection(@PathVariable("branchId") String branchId,
-            @RequestParam("sectionId") String sectionId) throws CustomException {
+      @RequestParam("sectionId") String sectionId) throws CustomException {
     return new ResponseEntity<Branch>(branchService.addSectionDetails(branchId, sectionId), HttpStatus.OK);
   }
 

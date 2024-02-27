@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AttendanceRequest {
-  private String employeeId;
+  private String userId;
   private LocalDateTime checkInTime;
   private LocalDateTime checkOutTime;
 }

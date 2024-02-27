@@ -14,19 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.storeadministration.model.Section;
 import com.project.storeadministration.service.SectionService;
 
-
 @RestController
 @RequestMapping("sections")
 public class SectionController {
-  
+
   @Autowired
   private SectionService sectionService;
-  
+
   @GetMapping
   public ResponseEntity<List<Section>> getAllSections() {
-      return new ResponseEntity<List<Section>>(sectionService.getAllSections(), HttpStatus.OK);
+    return new ResponseEntity<List<Section>>(sectionService.getAllSections(), HttpStatus.OK);
   }
-  
+
   @PostMapping
   public ResponseEntity<Section> saveSection(@RequestBody Section section) {
     return new ResponseEntity<Section>(sectionService.saveSection(section), HttpStatus.OK);
