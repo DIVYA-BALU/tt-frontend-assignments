@@ -29,9 +29,9 @@ public class SecurityConfig {
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(requests -> requests
-            .requestMatchers("/user/**", "/ticketRegistration/ticketValidation")
+            .requestMatchers("/user/login")
             .permitAll()
-            .requestMatchers("/event/**").permitAll()
+            .requestMatchers("/user/*").hasAuthority("EmployeeManagement")
             .requestMatchers("eventInfo/**").hasAnyRole("USER", "ORGANIZER", "ADMIN")
             .requestMatchers("/ticketRegistration/saveRegistration").hasAnyRole("USER", "ORGANIZER")
             .requestMatchers("/**").hasRole("ADMIN")

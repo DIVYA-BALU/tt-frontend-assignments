@@ -24,7 +24,7 @@ import com.project.storeadministration.model.User;
 import com.project.storeadministration.service.UserService;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("users")
 public class UserController {
 
   @Autowired
@@ -46,7 +46,7 @@ public class UserController {
     return userService.enrollUser(request, signUp);
   }
 
-  @PatchMapping("/updateSection/{userId}/{sectionId}")
+  @PatchMapping("/{userId}/updateSection/{sectionId}")
   public ResponseEntity<User> updateSection(@PathVariable String userId, @PathVariable String sectionId) {
     return new ResponseEntity<User>(userService.updateSection(userId, sectionId), HttpStatus.OK);
   }

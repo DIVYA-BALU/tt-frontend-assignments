@@ -5,10 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { PermissionDirective } from './directives/permission.directive';
+import { PermissionsDirective } from './directives/permissions.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PermissionDirective,
+    PermissionsDirective
   ],
   imports: [
     BrowserModule,
