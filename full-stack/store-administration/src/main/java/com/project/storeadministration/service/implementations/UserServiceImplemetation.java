@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
@@ -74,7 +75,7 @@ public class UserServiceImplemetation implements UserService {
         .mobileNumber(request.getMobileNumber())
         .branchesId(new ArrayList<>(Arrays.asList(request.getBranchId())))
         .sectionId(request.getSectionId())
-        .joiningDate(request.getJoiningDate())
+        .joiningDate(LocalDate.now())
         .build();
     user = userRepository.save(user);
 

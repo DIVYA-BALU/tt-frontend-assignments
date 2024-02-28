@@ -17,5 +17,4 @@ public class EnrollUserRequest {
   private Long mobileNumber;
   private String branchId;
   private String sectionId;
-  private LocalDate joiningDate;
 }

@@ -1,20 +1,10 @@
-import { Directive, Injectable, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
-import { UserDetailsService } from '../core/services/user-details.service';
+import { Directive } from '@angular/core';
 
 @Directive({
   selector: '[appPermission]'
 })
-export class PermissionDirective implements OnInit{
+export class PermissionDirective {
 
-  constructor(
-    private templateRef: TemplateRef<any>,
-    private viewContainer: ViewContainerRef,
-    private userDetailsService: UserDetailsService
-  ) {}
+  constructor() { }
 
-  ngOnInit(){
-    this.userDetailsService.getLoginResponseSubject().subscribe(loginResponse => {
-      console.log(loginResponse.role.permissions);
-    })
-  }
 }
