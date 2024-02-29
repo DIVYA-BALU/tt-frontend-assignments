@@ -1,3 +1,5 @@
+@import '../style/variables.scss';
+
 a {
     display: block;
     color: white;
@@ -15,7 +17,7 @@ a.active {
 }
 
 .nav-bar{
-    background-color: rgba(223, 177, 79, 0.952);
+    background-color: $primary-color;   
     display: flex;
     justify-content: end;
     column-gap: 30px;

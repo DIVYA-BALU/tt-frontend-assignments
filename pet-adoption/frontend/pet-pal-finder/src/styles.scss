@@ -1,4 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import '/src/app/style/variables.scss';
 html, body { height: 100%; }
 body { margin: 0; font-family:'Josefin Sans', sans-serif; }
+.mdc-tab__ripple::before{
+    background-color: $primary-color;
+}
+.mat-mdc-tab:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label{
+    color:$primary-color;
+}
+.mat-mdc-tab:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline{
+    border-color: $primary-color;
+}

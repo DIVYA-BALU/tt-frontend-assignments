@@ -45,3 +45,26 @@ export interface AdopterDto {
     contactNumber: number;
     dob: Date;
 }
+
+export interface VeterinaryDoctor {
+    _id: string;
+    name: string;
+    profilePhoto: string;
+    email: string;
+    location: Location;
+    degree: string;
+    degreeCertificate: string;
+    contactNumber: number;
+    status: string;
+    isSubscribed: boolean;
+}
+
+export interface Organization {
+    _id: string;
+    name: string;
+    email: string;
+    organizationPhoto: string;
+    location: Location;
+    contactNumber: number;
+    status: string;
+}

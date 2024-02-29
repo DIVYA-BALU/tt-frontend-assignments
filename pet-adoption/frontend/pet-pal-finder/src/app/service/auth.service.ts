@@ -1,41 +1,69 @@
 import { Injectable } from '@angular/core';
-import { EmailVerificationRequest, LoginDetails, Otp, StatusMessage, Token, User } from '../models/models';
+import {
+  EmailVerificationRequest,
+  LoginDetails,
+  Otp,
+  StatusMessage,
+  Token,
+  User,
+} from '../models/models';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  
   private baseUrl: string = environment.baseUrl;
 
-  constructor(private http: HttpClient) {}
+  isLoggedIn: boolean = false;
 
-  login(loginDetails:LoginDetails) {}
-
-  registerUser(user:User):Observable<Token> {
-    return this.http.post<any>(
-      `${this.baseUrl}auth/register`,user
-    );
+  constructor(private http: HttpClient) {
+    this.isLoggedIn =
+      localStorage.getItem('loggedIn') === 'true' ? true : false;
   }
 
-  verifyEmail(email:string):Observable<StatusMessage>{
-    console.log("email",email);
-    
+  login(loginDetails: LoginDetails) {
+    return this.http.post<Token>(`${this.baseUrl}auth`, loginDetails);
+  }
+
+  registerUser(user: User): Observable<Token> {
+    return this.http.post<any>(`${this.baseUrl}auth/register`, user);
+  }
+
+  verifyEmail(email: string): Observable<StatusMessage> {
     const status: Observable<StatusMessage> = this.http.post<any>(
-      `${this.baseUrl}email-verification`,{email}
+      `${this.baseUrl}email-verification`,
+      { email }
     );
-    return status
+    return status;
   }
 
-  verifyOtp(otp:Otp):Observable<StatusMessage>{
-    console.log("otp",otp);
-    
+  verifyOtp(otp: Otp): Observable<StatusMessage> {
     const status: Observable<StatusMessage> = this.http.post<any>(
-      `${this.baseUrl}email-verification/verify`,otp
+      `${this.baseUrl}email-verification/verify`,
+      otp
     );
-    return status
+    return status;
   }
+
+  registerOrganization(formData: FormData): Observable<StatusMessage> {
+    return this.http.post<any>(`${this.baseUrl}organization`, formData);
+  }
+
+  registerVeterinaryDoctor(formData: FormData) {
+    return this.http.post<any>(`${this.baseUrl}veterinary-doctor`, formData);
+  }
+
+  setLogin() {
+    this.isLoggedIn = true;
+    localStorage.setItem("loggedIn","true")
+  }
+
+  isAuthenticated(): boolean {
+    return this.isLoggedIn;
+  }
+  
 }

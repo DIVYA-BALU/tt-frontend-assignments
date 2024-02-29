@@ -18,8 +18,8 @@ public class Organization {
     private String _id;
     private String name;
     private String email;
-    private String profilePhoto;
-    private String occupation;
+    private String organizationPhoto;
     private Location location;
     private Long contactNumber;
+    private String status;
 }

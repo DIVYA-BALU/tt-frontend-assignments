@@ -2,6 +2,7 @@ package com.petAdoption.petPalFinder.models;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +22,8 @@ public class VeterinaryDoctor {
     private String email;
     private Location location;
     private String degree;
+    private String degreeCertificate;
     private long contactNumber;
-    private boolean isSubscribed = false;
+    private String status;
+    private Boolean isSubscribed;
 }

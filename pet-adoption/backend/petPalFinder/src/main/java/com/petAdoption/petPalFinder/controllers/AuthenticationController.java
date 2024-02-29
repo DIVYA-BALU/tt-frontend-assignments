@@ -30,6 +30,11 @@ public class AuthenticationController {
     public ResponseEntity<Token> register(@RequestBody Registration request) {
           return ResponseEntity.ok(authenticationService.register(request));
     }
+    // @PostMapping("/register/admin")
+    // public ResponseEntity<Token> admin(@RequestBody Registration request) {
+    //     System.out.println(request);
+    //       return ResponseEntity.ok(authenticationService.admin(request));
+    // }
  
     @PostMapping
     public ResponseEntity<Token> postLogin(@RequestBody LoginRequest request) {

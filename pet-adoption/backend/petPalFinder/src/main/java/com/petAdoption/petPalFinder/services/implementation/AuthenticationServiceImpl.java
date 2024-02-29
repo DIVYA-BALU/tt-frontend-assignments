@@ -99,6 +99,22 @@ public class AuthenticationServiceImpl implements AuthenticationService{
     }
 
 
+    // @Override
+    // public Token admin(Registration request) {
+    //     User user = new User();
+    //     user.setPassword(passwordEncoder.encode(request.getPassword()));
+    //     user.setEmail(request.getEmail());
+    //     Roles role = new Roles();
+    //     role.setRole(request.getRole());
+    //     user.setRole(roleRepo.findByRole(request.getRole()).get());
+    //     user = userRepo.save(user);
+    //     Token jwtToken = new Token();
+    //     jwtToken.setToken(jwtService.generateToken(user,user.getId()));
+    //     jwtToken.setRefreshToken(jwtService.generateToken(user,user.getId()));
+    //     return jwtToken;
+    // }
+
+
     // public Roles saveRole(Roles request) {
     //     return roleRepo.save(request);
     // }

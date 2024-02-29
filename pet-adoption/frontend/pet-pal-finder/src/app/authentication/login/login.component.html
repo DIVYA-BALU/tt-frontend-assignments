@@ -1,51 +1,10 @@
-<style>
-  .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    height: 100vh;
-    width: 100%;
-    border: 2px solid black;
-    border-radius: 10px;
-  }
-  form {
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-direction: column;
-    border: 2px solid black;
-    border-radius: 10px;
-    height: 50vh;
-  }
-
-  .page-title {
-    font-size: 40px;
-    font-style: italic;
-    font-weight: 900;
-  }
-
-  h4 {
-    display: flex;
-    flex-direction: row;
-  }
-
-  h4:before,
-  h4:after {
-    content: "";
-    flex: 1 1;
-    border-bottom: 2px solid #000;
-    margin: auto;
-  }
-</style>
 
 <div class="container">
   <form action="" [formGroup]="formResponse" (ngSubmit)="login()">
     <div class="page-title">Pet Pal Finder</div>
     <mat-form-field>
       <mat-label>Username</mat-label>
-      <input type="text" matInput formControlName="username" />
+      <input type="text" matInput formControlName="email" />
     </mat-form-field>
     <mat-form-field>
       <mat-label>Password</mat-label>

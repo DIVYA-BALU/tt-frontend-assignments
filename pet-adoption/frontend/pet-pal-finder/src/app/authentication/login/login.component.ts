@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
+import { AuthService } from 'src/app/service/auth.service';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-login',
@@ -8,10 +13,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent {
 
-  constructor(private formBuilder:FormBuilder){}
+  constructor(private formBuilder:FormBuilder, private authService:AuthService, private route:Router){}
 
   formResponse:FormGroup = this.formBuilder.group({
-    username:["",[Validators.required, Validators.minLength(1)]],
+    email:["",[Validators.required, Validators.minLength(1)]],
     password:["",[Validators.required, Validators.minLength(1)]]
   })
 
@@ -22,5 +27,17 @@ export class LoginComponent {
     }
     console.log(this.formResponse.value);
     
+    this.authService.login(this.formResponse.value).subscribe({next:(token) =>{
+      console.log(token);
+      localStorage.setItem("token",token.token)
+      const tokenInfo: any = jwtDecode(token.token);
+      const role: String = tokenInfo.role[0].authority;
+     if(role === environment.admin){
+      this.route.navigate(['admin']);
+     }
+      
+    }})
+    
   }
 }
+

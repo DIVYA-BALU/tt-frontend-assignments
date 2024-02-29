@@ -2,6 +2,9 @@ package com.petAdoption.petPalFinder.services.implementation;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,10 +18,14 @@ public class FileServiceImpl implements FileService{
     public String saveFile(MultipartFile file, String folder) {
         String url = "";
         String a=file.getContentType();
+        String date = LocalDateTime.now().toString();
+        date = date.replaceAll("\\s", "-");
+        date = date.replaceAll(":", "-");
+        System.out.println(date + "  --  " + folder);
         if(a!=null && a.startsWith("image")){
-            url = "http://localhost:8080/static/images/" + folder + "/" + file.getOriginalFilename();
+            url = "http://localhost:8080/static/images/" + folder + "/" + date;
             try {
-                file.transferTo(new File("E:/front_end_examples/pet-adoption/backend/petPalFinder/src/main/resources/static/images/adopter_profile/"+file.getOriginalFilename()));
+                file.transferTo(new File("E:/front_end_examples/pet-adoption/backend/petPalFinder/src/main/resources/static/images/" + folder + "/" +date));
             } catch (IllegalStateException | IOException e) {
                 e.printStackTrace();
             }

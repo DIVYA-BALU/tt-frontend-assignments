@@ -25,13 +25,13 @@ public class AdopterController {
     
     @PreAuthorize("hasRole('ADOPTER')")
     @PutMapping
-    public ResponseEntity<Adopter> postMethodName(@ModelAttribute AdopterDto adopterDto) {  
+    public ResponseEntity<Adopter> updateAdopter(@ModelAttribute AdopterDto adopterDto) {  
         System.out.println(adopterDto);    
         return ResponseEntity.ok(adopterService.updateAdopter(adopterDto));
     }
     
     @GetMapping
-    public ResponseEntity<Adopter> getMethodName(@RequestParam String id) {
+    public ResponseEntity<Adopter> getAdopter(@RequestParam String id) {
         return ResponseEntity.ok(adopterService.getAdopter(id));
     }
     
