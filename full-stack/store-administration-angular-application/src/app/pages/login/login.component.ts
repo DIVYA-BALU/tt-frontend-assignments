@@ -30,8 +30,6 @@ export class LoginComponent {
           this.isLoading = false;
           this.userDetailsService.setLoginResponseSubject(loginResponse);
 
-          console.log(loginResponse.role.name);
-
           if (loginResponse.role.name === 'ADMIN') {
             this.router.navigate(['/admin']);
           }
@@ -44,9 +42,12 @@ export class LoginComponent {
         },
         error: (error: HttpErrorResponse) => {
           this.isLoading = false;
-
+          
           if (error.status === 404) {
             alert('invalid username or password');
+          }
+          else if (error.status === 0){
+            alert('Unable to connect to the server')
           }
           else {
             alert(`${error.status} found`);

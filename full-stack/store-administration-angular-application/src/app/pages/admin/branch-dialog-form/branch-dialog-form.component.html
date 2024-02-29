@@ -1,0 +1,20 @@
+<h1>FILL BRANCH DETAILS</h1>
+<form [formGroup]="branchCreationForm" (ngSubmit)="submit()">
+  <div>
+    <label for="branchName">Branch Name:</label>
+    <input type="text" id="branchName" formControlName="branchName">
+    <div *ngIf="branchCreationForm.get('branchName')?.invalid && branchCreationForm.get('branchName')?.touched">
+      <span *ngIf="branchCreationForm.get('branchName')?.hasError('required')">Branch Name is required</span>
+    </div>
+  </div>
+  <div>
+    <label for="Location">Location:</label>
+    <input type="text" id="location" formControlName="location">
+    <div *ngIf="branchCreationForm.get('location')?.invalid && branchCreationForm.get('location')?.touched">
+      <span *ngIf="branchCreationForm.get('location')?.hasError('required')">Location is required.</span>
+    </div>
+  </div>
+  <mat-spinner diameter="32" *ngIf="isLoading"></mat-spinner>
+  <button type="submit" [disabled]="branchCreationForm.invalid || isLoading">Save</button>
+  <button mat-button (click)="closeBranchDialogForm()">Close</button>
+</form>

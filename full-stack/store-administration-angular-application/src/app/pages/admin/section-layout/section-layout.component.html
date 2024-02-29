@@ -1,0 +1,5 @@
+<button mat-button (click)="enableSectionInput()">Create Section</button>
+<label for="sectionName" *ngIf=sectionInput>Section Name:</label>
+<input type="text" id="sectionName" required="true" *ngIf=sectionInput>
+<button mat-button (click)="disableSectionInput()" *ngIf=sectionInput>Close</button>
+<button mat-button (click)="saveSection()" *ngIf=sectionInput >Save</button>

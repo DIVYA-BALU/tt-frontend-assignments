@@ -1,0 +1,19 @@
+<h1>Layout</h1>
+<div class="container">
+  <div class="sidenav-div">
+    <mat-list role="list">
+      <mat-list-item routerLink ="store-management">
+        Store Management 
+      </mat-list-item>
+      <mat-list-item routerLink ="financial-management">
+        Financial Management
+      </mat-list-item>
+      <mat-list-item routerLink ="employee-management">
+        Employee Management
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -1,46 +1,71 @@
-export interface LoginResponse {
+export class LoginResponse {
   userEmail: string;
   branchesId: string[];
   sectionId: string;
   jwt: string;
   role: Role;
   permissions: Permission[];
+
+  constructor(userEmail: string, branchesId: string[], sectionId: string, jwt: string, role: Role, permissions: Permission[]) {
+    this.userEmail = userEmail;
+    this.branchesId = branchesId;
+    this.sectionId = sectionId;
+    this.jwt = jwt;
+    this.role = role;
+    this.permissions = permissions;
+  }
 }
 
 export class Role {
-  constructor(
-    public _id: string,
-    public name: string,
-    public permissions: Permission[]
-  ) {}
-}
+  _id: string;
+  name: string;
+  permissions: Permission[];
 
+  constructor(_id: string, name: string, permissions: Permission[]) {
+    this._id = _id;
+    this.name = name;
+    this.permissions = permissions;
+  }
+}
 export class Permission {
-  constructor(
-    public _id: string,
-    public name: string
-  ) {}
+  _id: string;
+  name: string;
+
+  constructor(_id: string, name: string) {
+    this._id = _id;
+    this.name = name;
+  }
 }
 
-export class LoginRequest{
+export class LoginRequest {
   emailId: string;
-  password:string;
-  constructor(emailId: string,password: string){
+  password: string;
+  constructor(emailId: string, password: string) {
     this.emailId = emailId,
-    this.password = password
+      this.password = password
   }
 }
 
 export class EnrollUserRequest {
+  emailId: string;
+  name: string;
+  password: string;
+  role: string;
+  mobileNumber: number;
+  branchId: string;
+  sectionId: string;
+
   constructor(
-    public emailId: string,
-    public name: string,
-    public password: string,
-    public role: string,
-    public mobileNumber: number,
-    public branchId: string,
-    public sectionId: string
-  ) {}
+    emailId: string, name: string, password: string, role: string, mobileNumber: number, branchId: string, sectionId: string
+  ) {
+    this.emailId = emailId;
+    this.name = name;
+    this.password = password;
+    this.role = role;
+    this.mobileNumber = mobileNumber;
+    this.branchId = branchId;
+    this.sectionId = sectionId;
+  }
 }
 
 export interface User {
