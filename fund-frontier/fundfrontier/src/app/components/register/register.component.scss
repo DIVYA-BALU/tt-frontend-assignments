@@ -1,0 +1,57 @@
+// @import '../../styles/variables.scss';
+
+.register {
+    display: flex;
+    justify-content: center;
+    width: 500px;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    margin-top: 50px;
+    margin-left: 450px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    // background-color: $primary-color;
+    
+}
+
+.form-group {
+    padding-bottom: 20px;
+}
+
+
+form {
+    width: 70%;
+}
+input {
+  width: 98%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #d8d7d7;
+  background-color: #f1f1f1;
+  font-family: 'Roboto', sans-serif;
+}
+
+select {
+
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #d8d7d7;
+  background-color: #f1f1f1;
+  font-family: 'Roboto', sans-serif;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+}
+
+.error {
+    color: red;
+}
