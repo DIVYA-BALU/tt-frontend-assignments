@@ -1,0 +1,22 @@
+a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+a:hover{
+    cursor: pointer;
+}
+
+a.active {
+    color: black;
+}
+
+.nav-bar{
+    background-color: rgba(223, 177, 79, 0.952);
+    display: flex;
+    justify-content: end;
+    column-gap: 30px;
+}

@@ -1,0 +1,20 @@
+
+  
+  <div class="container">
+    <form action="" [formGroup]="formResponse" (ngSubmit)="login()">
+      <div class="page-title">Pet Pal Finder</div>
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input type="text" matInput formControlName="username" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password" />
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Login</button>
+      <hr width="100%" />
+      <div>New here? <a routerLink="/auth/register">SignUp</a></div>
+    </form>
+  </div>
+  <router-outlet></router-outlet>
+  

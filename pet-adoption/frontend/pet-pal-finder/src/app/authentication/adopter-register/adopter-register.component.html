@@ -1,0 +1,31 @@
+<div class="container">
+  <form
+    action=""
+    [formGroup]="formResponse"
+    (ngSubmit)="isOtpSend ? verifyOtp() : verifyEmail()"
+  >
+    <div class="page-title">Pet Pal Finder</div>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input type="text" matInput formControlName="email" />
+    </mat-form-field>
+    <mat-form-field *ngIf="!isOtpSend">
+      <mat-label >Password</mat-label>
+      <input matInput formControlName="password" type="password" />
+    </mat-form-field>
+    <mat-form-field *ngIf="!isOtpSend">
+      <mat-label>Confirm Password</mat-label>
+      <input matInput formControlName="confirmPassword" type="password" />
+    </mat-form-field >
+    <mat-form-field *ngIf="isOtpSend">
+      <mat-label>OTP</mat-label>
+      <input matInput formControlName="otp" type="password" />
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">
+      {{ isOtpSend ? "Verify Otp" : "Login" }}
+    </button>
+    <hr width="100%" />
+    <div>New here? <a routerLink="/auth/register">SignUp</a></div>
+  </form>
+</div>
+<router-outlet></router-outlet>

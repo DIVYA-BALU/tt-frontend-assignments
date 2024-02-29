@@ -1,0 +1,24 @@
+
+  
+  <div class="container">
+    <form action="" [formGroup]="formResponse" (ngSubmit)="verifyEmail()">
+      <div class="page-title">Verify Your Email</div>
+      <mat-form-field>
+        <mat-label>Email Id</mat-label>
+        <input
+          matInput
+          [(ngModel)]="emailVerificationRequest.email"
+          formControlName="email"
+          name="username"
+          required
+        />
+      </mat-form-field>
+      <p><mat-checkbox formControlName="role">You want register as Veterinary-doctor</mat-checkbox></p>
+      <button mat-raised-button color="primary">
+        verify Email
+      </button>
+      <hr width="100%" />
+      <div>already have a account? <a routerLink="/login">Login</a></div>
+    </form>
+  </div>
+  <router-outlet></router-outlet>

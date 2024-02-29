@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="registerBox">
+        <h1 class="head"> Enter Profile Details</h1>
+        <form class="form" [formGroup]="registerForm">
+            <label class="labels">Full Name</label><input class="inputs" placeholder="Enter company name"
+                formControlName="companyName">
+                <mat-label >Choose a date</mat-label>
+                <input  matInput [matDatepicker]="datepicker">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                <mat-datepicker #datepicker>
+                  <mat-datepicker-actions>
+                    <button mat-button matDatepickerCancel>Cancel</button>
+                    <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                  </mat-datepicker-actions>
+                </mat-datepicker>
+            <label class="labels">Profile Photo</label><input  type="file" formControlName="image"
+                id="upload">
+            <br>
+            <br>
+            <label class="labels">Occupation</label><input matInput class="inputs"
+                placeholder="Enter employee count" formControlName="empCount">
+            <mat-error *ngIf="registerForm.get('empCount')?.invalid &&
+    (registerForm.get('empCount')?.dirty ||
+     registerForm.get('empCount')?.touched)">
+                Employee count is required!</mat-error>
+
+
+            <label class="labels">Contact Number</label><input class="inputs" placeholder="Enter name"
+                formControlName="name">
+            <mat-error *ngIf="registerForm.get('name')?.invalid &&
+    (registerForm.get('name')?.dirty ||
+     registerForm.get('name')?.touched)">
+                Name is required!</mat-error>
+
+
+            <label class="labels">Your phone number</label><input class="inputs" placeholder="Enter phone number"
+                formControlName="phoneno">
+            <mat-error *ngIf="registerForm.get('phoneno')?.invalid &&
+    (registerForm.get('phoneno')?.dirty ||
+     registerForm.get('phoneno')?.touched)">
+                Phoneno is Required!</mat-error>
+
+
+            <label class="labels">Your email id</label><input matInput class="inputs" placeholder="Enter email id"
+                formControlName="email">
+            <mat-error *ngIf="registerForm.get('email')?.invalid &&
+    (registerForm.get('email')?.dirty ||
+     registerForm.get('email')?.touched)">
+                email id is required!</mat-error>
+
+            <label class="labels">Your password</label><input matInput type="password" class="inputs"
+                placeholder="Enter password" formControlName="password">
+            <mat-error *ngIf="registerForm.get('password')?.invalid &&
+    (registerForm.get('password')?.dirty ||
+     registerForm.get('password')?.touched)">
+                password is required!</mat-error>
+
+            <label class="labels">Your company type</label><input matInput class="inputs"
+                placeholder="Enter company type" formControlName="companyType">
+            <mat-error *ngIf="registerForm.get('companyType')?.invalid &&
+    (registerForm.get('companyType')?.dirty ||
+     registerForm.get('companyType')?.touched)">
+                Company type is required!</mat-error>
+
+
+            <label class="labels">Enter location: </label><input type="text" class="inputs" placeholder="Enter location"
+                formControlName="location">
+
+            <button mat-raised-button color="primary" (click)="register()" class="buttons">submit<i
+                    class="pi pi-check-circle"></i></button>
+        </form>
+    </div>
+
+</div>
