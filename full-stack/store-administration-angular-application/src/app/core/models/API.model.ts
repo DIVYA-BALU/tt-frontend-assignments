@@ -81,7 +81,53 @@ export interface User {
   joiningDate: Date;
   employmentHistory: EmploymentDetail[];
 }
+
 export interface EmploymentDetail {
   joiningDate: Date;
   relievingDate: Date;
+}
+
+export interface NewBranch {
+  branchName: string;
+  location: string;
+}
+
+export interface Section {
+  _id: string;
+  name: string;
+}
+
+export interface Branch {
+  _id: string;
+  name: string;
+  sectionDetails: SectionDetail[];
+  createdDate: string;
+  location: string;
+}
+
+
+export interface SectionDetail {
+  section: Section;
+  createdDate: string;
+}
+
+export interface PaginatedResponse<T> {
+  content: T[]; 
+  pageable: {
+    pageNumber: number;
+    pageSize: number;
+  };
+  totalPages: number;
+  totalElements: number;
+}
+
+export interface Product {
+  _id: string;
+  productName: string;
+  branch: Branch;
+  section: Section;
+  totalQuantity: number;
+  price: number;
+  cogs: number;
+  quantityAvailable: number;
 }

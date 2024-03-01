@@ -1,4 +1,10 @@
 import { Component } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { Section } from 'src/app/core/models/API.model';
+import { SectionService } from 'src/app/core/services/section.service';
+import { SectionDialogFormComponent } from '../section-dialog-form/section-dialog-form.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-section-layout',
@@ -7,17 +13,15 @@ import { Component } from '@angular/core';
 })
 export class SectionLayoutComponent {
 
-  sectionInput: boolean = false;
-  
-  enableSectionInput() {
-    this.sectionInput = true;
+  displayedColumns: string[] = ['Serial Number', 'Section Name'];
+  dataSource: MatTableDataSource<Section>;
+  isLoading: boolean = false;
+
+  constructor(private sectionService: SectionService, private dialog: MatDialog) {
+    this.dataSource = new MatTableDataSource<Section>;
   }
 
-  disableSectionInput() {
-    this.sectionInput = false;
-  }
-
-  saveSection() {
-    this.sectionInput = false;
+  openSectionDialogForm() {  
+    const dialogRef = this.dialog.open(SectionDialogFormComponent, { disableClose: true });
   }
 }

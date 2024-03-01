@@ -14,6 +14,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BranchDialogFormComponent } from './branch-dialog-form/branch-dialog-form.component';
+import { SectionDialogFormComponent } from './section-dialog-form/section-dialog-form.component';
+import { ProductLayoutComponent } from './product-layout/product-layout.component';
+import { ProductDialogFormComponent } from './product-dialog-form/product-dialog-form.component';
 
 
 @NgModule({
@@ -23,7 +26,10 @@ import { BranchDialogFormComponent } from './branch-dialog-form/branch-dialog-fo
     EmployeeManagentComponent,
     BranchLayoutComponent,
     SectionLayoutComponent,
-    BranchDialogFormComponent
+    BranchDialogFormComponent,
+    SectionDialogFormComponent,
+    ProductLayoutComponent,
+    ProductDialogFormComponent
   ],
   imports: [
     CommonModule,

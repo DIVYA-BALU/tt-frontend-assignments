@@ -2,7 +2,7 @@
 <form [formGroup]="loginForm" (ngSubmit)="login()">
   <div>
     <label for="emailId">Email Id:</label>
-    <input type="text" id="emailId" formControlName="emailId">
+    <input type="text" id="emailId" formControlName="emailId" autocomplete ="off">
     <div *ngIf="loginForm.get('emailId')?.invalid && loginForm.get('emailId')?.touched">
       <span *ngIf="loginForm.get('emailId')?.hasError('required')">EmailId is required</span>
       <span *ngIf="loginForm.get('emailId')?.hasError('email')">Please enter a valid emailId.</span>
@@ -10,7 +10,7 @@
   </div>
   <div>
     <label for="password">Password:</label>
-    <input type="password" id="password" formControlName="password">
+    <input type="password" id="password" formControlName="password" autocomplete ="off">
     <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
       <span *ngIf="loginForm.get('password')?.hasError('required')">Password is required.</span>
     </div>

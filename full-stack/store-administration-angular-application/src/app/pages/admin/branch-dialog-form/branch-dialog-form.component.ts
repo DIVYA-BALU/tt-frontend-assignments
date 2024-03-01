@@ -1,29 +1,54 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { BranchService } from 'src/app/core/services/branch.service';
+import { PopUpComponent } from '../../pop-up/pop-up.component';
 
 @Component({
   selector: 'app-branch-dialog-form',
   templateUrl: './branch-dialog-form.component.html',
   styleUrls: ['./branch-dialog-form.component.scss']
 })
+
 export class BranchDialogFormComponent {
+
+  @Output() branchSaved: EventEmitter<null> = new EventEmitter<null>();
 
   branchCreationForm: FormGroup;
   isLoading: boolean = false;
 
-
   constructor(private fb: FormBuilder, private branchService: BranchService, private dialog: MatDialog) {
     this.branchCreationForm = this.fb.group({
-      branchName: ['', [Validators.required]],
+      name: ['', [Validators.required]],
       location: ['', Validators.required]
     })
   }
-  submit(){
+
+  submit() {
     this.isLoading = true;
+    this.branchService.saveBranch(this.branchCreationForm.value).subscribe({
+      next: () => {
+        this.isLoading = false;
+        this.closeBranchDialogForm();
+        this.branchSaved.emit();
+        this.dialog.open(PopUpComponent, {
+          data: {
+            message: 'Branch Saved Successfully',
+          },
+        });
+      },
+      error: (HttpErrorResponse) => {
+        this.isLoading = false;
+        this.dialog.open(PopUpComponent, {
+          data: {
+            message: 'Error occured',
+          },
+        });
+      }
+    })
   }
-  closeBranchDialogForm(){
+
+  closeBranchDialogForm() {
     this.dialog.closeAll();
   }
 }

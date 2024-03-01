@@ -29,14 +29,15 @@ public class SecurityConfig {
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(requests -> requests
-            .requestMatchers("/user/login")
+            .requestMatchers("/**")
             .permitAll()
-            .requestMatchers("/user/*").hasAuthority("EmployeeManagement")
-            .requestMatchers("eventInfo/**").hasAnyRole("USER", "ORGANIZER", "ADMIN")
-            .requestMatchers("/ticketRegistration/saveRegistration").hasAnyRole("USER", "ORGANIZER")
-            .requestMatchers("/**").hasRole("ADMIN")
-            .anyRequest()
-            .authenticated())
+            // .requestMatchers("/users/*").hasAuthority("EmployeeManagement")
+            // .requestMatchers("eventInfo/**").hasAnyRole("USER", "ORGANIZER", "ADMIN")
+            // .requestMatchers("/ticketRegistration/saveRegistration").hasAnyRole("USER", "ORGANIZER")
+            // .requestMatchers("/**").hasRole("ADMIN")
+            // .anyRequest()
+            // .authenticated())
+        )
         .sessionManagement(management -> management
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authenticationProvider(authenticationProvider)

@@ -12,6 +12,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutComponent } from './pages/admin/layout/layout.component';
 import {MatListModule} from '@angular/material/list';
+import { PopUpComponent } from './pages/pop-up/pop-up.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {MatListModule} from '@angular/material/list';
     AppComponent,
     PermissionDirective,
     LoginComponent,
-    LayoutComponent
+    LayoutComponent,
+    PopUpComponent
   ],
   imports: [
     BrowserModule,

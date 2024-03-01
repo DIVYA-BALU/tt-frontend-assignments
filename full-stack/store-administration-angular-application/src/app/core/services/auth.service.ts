@@ -37,23 +37,6 @@ export class AuthService {
     this.isLoggedIn = false;
   }
 
-  signUp(enrollUserRequest: EnrollUserRequest): Observable<LoginResponse> {
-    const params = new HttpParams().set('signUp', 'true');
-    return this.http.post<LoginResponse>(
-      `${environment.API_URL}${Constants.API_END_POINT.USER_LOGIN}`,
-      enrollUserRequest,
-      { params: params }
-    ).pipe(
-      tap((loginResponse: LoginResponse) => {
-        localStorage.setItem("loginResponse", JSON.stringify(loginResponse));
-        this.isLoggedIn = true;
-      }),
-      catchError((error) => {
-        return throwError(() => error);
-      })
-    );
-  }
-
   enrollUser(enrollUserRequest: EnrollUserRequest): Observable<User> {
     return this.http.post<User>(`${environment.API_URL}${Constants.API_END_POINT.USERS}`, enrollUserRequest);
   }

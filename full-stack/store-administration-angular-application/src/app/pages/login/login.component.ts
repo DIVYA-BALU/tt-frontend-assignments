@@ -24,7 +24,7 @@ export class LoginComponent {
 
   login() {
     this.isLoading = true;
-    this.authService.login(new LoginRequest(this.loginForm.value.emailId, this.loginForm.value.password))
+    this.authService.login(this.loginForm.value)
       .subscribe({
         next: (loginResponse: LoginResponse) => {
           this.isLoading = false;

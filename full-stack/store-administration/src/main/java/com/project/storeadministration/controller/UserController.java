@@ -1,11 +1,10 @@
 package com.project.storeadministration.controller;
 
-import java.time.LocalDate;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,12 +18,12 @@ import com.project.storeadministration.dto.EnrollUserRequest;
 import com.project.storeadministration.dto.LoginRequest;
 import com.project.storeadministration.dto.LoginResponse;
 import com.project.storeadministration.exception.CustomException;
-import com.project.storeadministration.model.AttendanceDetail;
 import com.project.storeadministration.model.User;
 import com.project.storeadministration.service.UserService;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("/users")
+@CrossOrigin("*")
 public class UserController {
 
   @Autowired
@@ -35,7 +34,7 @@ public class UserController {
     return "Hello";
   }
 
-  @GetMapping("login")
+  @PostMapping("/login")
   public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
     return new ResponseEntity<LoginResponse>(userService.validateUser(loginRequest), HttpStatus.OK);
   }
@@ -59,7 +58,4 @@ public class UserController {
     return new ResponseEntity<Page<User>>(
         userService.getUsers(pageNo, pageSize, branchId, sectionId), HttpStatus.OK);
   }
-
-  // @GetMapping
-  // public ResponseEntity<List<EmploymentStatus>>
 }

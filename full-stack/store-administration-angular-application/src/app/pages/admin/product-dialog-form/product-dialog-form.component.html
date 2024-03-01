@@ -1,0 +1,41 @@
+<h1>FILL PRODUCT DETAILS</h1>
+<form [formGroup]="productCreationForm" (ngSubmit)="submit()">
+  <div>
+    <label for="productName">Product Name:</label>
+    <input type="text" id="productName" formControlName="productName">
+    <div *ngIf="productCreationForm.get('productName')?.invalid && productCreationForm.get('productName')?.touched">
+      <span *ngIf="productCreationForm.get('productName')?.hasError('required')">Product Name is required</span>
+    </div>
+  </div>
+  <div>
+    <label for="section">Section</label>
+    <select formControlName="section" id="section">
+      <option *ngFor="let section of sections" [value]="section">{{ section.name }}</option>
+    </select>
+  </div>
+  <div>
+    <label for="branch">Branch</label>
+    <select formControlName="branch" id="branch">
+      <option *ngFor="let branch of branches" [value]="branch">{{ branch.name }}</option>
+    </select>
+  </div>
+  <div>
+    <label for="quantity">Quantity:</label>
+    <input type="text" id="quantity" formControlName="quantity">
+    <div *ngIf="productCreationForm.get('quantity')?.invalid && productCreationForm.get('quantity')?.touched">
+      <span *ngIf="productCreationForm.get('quantity')?.hasError('invalidNumber')">Please enter a valid number.</span>
+      <span *ngIf="productCreationForm.get('quantity')?.hasError('required')">Quantity is required.</span>
+    </div>
+  </div>
+  <div>
+    <label for="price">Price:</label>
+    <input type="text" id="price" formControlName="price">
+    <div *ngIf="productCreationForm.get('price')?.invalid && productCreationForm.get('price')?.touched">
+      <span *ngIf="productCreationForm.get('price')?.hasError('invalidNumber')">Please enter a valid number.</span>
+      <span *ngIf="productCreationForm.get('price')?.hasError('required')">Price is required.</span>
+    </div>
+  </div>
+  <mat-spinner diameter="32" *ngIf="isLoading"></mat-spinner>
+  <button type="submit" [disabled]="productCreationForm.invalid || isLoading">Save</button>
+  <button type="button" (click)="closeProductDialogForm()">Close</button>
+</form>

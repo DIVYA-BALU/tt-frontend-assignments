@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.storeadministration.dto.LeaveDetailRequest;
 import com.project.storeadministration.exception.CustomException;
 import com.project.storeadministration.model.LeaveDetail;
-import com.project.storeadministration.model.User;
 import com.project.storeadministration.service.LeaveDetailService;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("leave-details")
 public class LeaveDetailController {
