@@ -37,8 +37,8 @@ public class CustomUserRepository {
 
     long total = mongoTemplate.count(query, AttendanceDetail.class);
     query.with(pageable);
-    List<User> results = mongoTemplate.find(query, User.class);
+    List<User> users = mongoTemplate.find(query, User.class);
 
-    return new PageImpl<>(results, pageable, total);
+    return new PageImpl<>(users, pageable, total);
   }
 }

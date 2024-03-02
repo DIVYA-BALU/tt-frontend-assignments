@@ -12,7 +12,7 @@ public interface BranchService {
 
   Branch addSectionDetails(String branchId, String sectionId) throws CustomException;
 
-  Page<Branch> getPaginationBranches(int pageNo, int pageSize);
+  Page<Branch> getPaginatedBranches(int pageNo, int pageSize);
 
   List<Branch> getAllBranches();
 }

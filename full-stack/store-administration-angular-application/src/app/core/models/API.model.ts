@@ -78,13 +78,13 @@ export interface User {
   sectionId: string;
   role: Role;
   permissions: Permission[];
-  joiningDate: Date;
+  joiningDate: string;
   employmentHistory: EmploymentDetail[];
 }
 
 export interface EmploymentDetail {
-  joiningDate: Date;
-  relievingDate: Date;
+  joiningDate: string;
+  relievingDate: string;
 }
 
 export interface NewBranch {
@@ -104,7 +104,6 @@ export interface Branch {
   createdDate: string;
   location: string;
 }
-
 
 export interface SectionDetail {
   section: Section;
@@ -129,5 +128,15 @@ export interface Product {
   totalQuantity: number;
   price: number;
   cogs: number;
-  quantityAvailable: number;
+  availableQuantity: number;
+}
+
+export interface Bill {
+  billItems: BillItem[];
+  totalPrice: number;
+}
+
+export interface BillItem {
+  product: Product;
+  quantity: number;
 }

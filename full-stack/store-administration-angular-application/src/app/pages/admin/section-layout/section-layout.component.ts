@@ -21,7 +21,18 @@ export class SectionLayoutComponent {
     this.dataSource = new MatTableDataSource<Section>;
   }
 
-  openSectionDialogForm() {  
+  ngOnInit(): void {
+    this.getSectionDetails();
+  }
+  
+  getSectionDetails() {
+    this.sectionService.paginationSections$.subscribe({
+      next: (paginationSection) => {
+        this.dataSource.data = paginationSection.content;
+      }
+    })
+  }
+  openSectionDialogForm() {
     const dialogRef = this.dialog.open(SectionDialogFormComponent, { disableClose: true });
   }
 }

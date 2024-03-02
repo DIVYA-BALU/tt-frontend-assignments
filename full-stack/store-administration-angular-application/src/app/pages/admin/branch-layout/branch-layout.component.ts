@@ -13,7 +13,7 @@ import { Branch, PaginatedResponse } from 'src/app/core/models/API.model';
   styleUrls: ['./branch-layout.component.scss']
 })
 export class BranchLayoutComponent implements OnInit {
-  displayedColumns: string[] = ['Branch Name', 'Location', 'Created Date'];
+  displayedColumns: string[] = ['Serial Number', 'Branch Name', 'Location', 'Created Date'];
   pageNumber: number = 0;
   pageSize: number = 10;
   totalBranches: number = 0;
@@ -27,9 +27,9 @@ export class BranchLayoutComponent implements OnInit {
   }
 
   getBranchDetails(){
-    this.branchService.getPaginationBranches().subscribe({
-      next: (paginationBranches) => {
-        this.dataSource.data = paginationBranches.content;
+    this.branchService.paginatedBranches$.subscribe({
+      next: (paginatedBranches) => {
+        this.dataSource.data = paginatedBranches.content;
       }
     })
   }

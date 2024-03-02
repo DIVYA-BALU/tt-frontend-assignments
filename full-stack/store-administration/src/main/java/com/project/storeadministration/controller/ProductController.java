@@ -22,24 +22,43 @@ import com.project.storeadministration.service.ProductService;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("products")
+@RequestMapping("/products")
 
 public class ProductController {
 
   @Autowired
   private ProductService productService;
-  
+
+  @GetMapping("/hello")
+  public String hello() {
+    return "Hello Products";
+  }
+
   @PostMapping
+  public ResponseEntity<Product> saveProduct(@RequestBody Product product) {
+    return new ResponseEntity<Product>(productService.saveProduct(product), HttpStatus.OK);
+  }
+
+  @PostMapping("/list")
   public ResponseEntity<List<Product>> saveProducts(@RequestBody List<Product> products) {
     return new ResponseEntity<List<Product>>(productService.saveProducts(products), HttpStatus.OK);
   }
 
-  @GetMapping("/page")
-  public ResponseEntity<Page<ProductDetails>> getProductDetails(@RequestParam(defaultValue = "0") int pageNo,
-      @RequestParam(defaultValue = "10") int pageSize)
+  @GetMapping
+  public ResponseEntity<List<Product>> getProductDetails(@RequestParam String branchId,
+      @RequestParam(required = false) String sectionId, @RequestParam(required = false) String search)
       throws CustomException {
-    return new ResponseEntity<Page<ProductDetails>>(
-        productService.getProductDetails(pageNo, pageSize), HttpStatus.OK);
+    return new ResponseEntity<List<Product>>(
+        productService.getProductDetails(branchId, sectionId, search), HttpStatus.OK);
+  }
+
+  @GetMapping("/page")
+  public ResponseEntity<Page<Product>> getProductDetails(@RequestParam(defaultValue = "0") int pageNo,
+      @RequestParam(defaultValue = "10") int pageSize, @RequestParam(required = false) String branchId,
+      @RequestParam(required = false) String sectionId)
+      throws CustomException {
+    return new ResponseEntity<Page<Product>>(
+        productService.getProductDetails(pageNo, pageSize, branchId, sectionId), HttpStatus.OK);
   }
 
   @PostMapping("/{productId}/updateQuantity")

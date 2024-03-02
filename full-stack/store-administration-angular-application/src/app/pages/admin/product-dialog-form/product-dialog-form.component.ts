@@ -6,6 +6,7 @@ import { Branch, Product, Section } from 'src/app/core/models/API.model';
 import { BranchService } from 'src/app/core/services/branch.service';
 import { ProductService } from 'src/app/core/services/product.service';
 import { SectionService } from 'src/app/core/services/section.service';
+import { PopUpComponent } from '../../pop-up/pop-up.component';
 
 @Component({
   selector: 'app-product-dialog-form',
@@ -27,7 +28,7 @@ export class ProductDialogFormComponent implements OnInit{
       branch: [null, Validators.required],
       section: [null, Validators.required],
       cogs:['',[Validators.required,this.validateNumber]],
-      quantity:['',[Validators.required,this.validateNumber]],
+      totalQuantity:['',[Validators.required,this.validateNumber]],
       price:['',[Validators.required,this.validateNumber]],
     })
   }
@@ -59,8 +60,18 @@ export class ProductDialogFormComponent implements OnInit{
 
   submit() {
     this.isLoading = true;
+    console.log(this.productCreationForm);
     this.productService.saveProducts(this.productCreationForm.value).subscribe({
-      next: () => this.isLoading = false,
+      next: () => {
+        this.isLoading = false,
+        this.closeProductDialogForm();
+        this.productService.setPaginatedProductsSubject();
+        this.dialog.open(PopUpComponent, {
+          data: {
+            message: 'Product Saved Successfully',
+          },
+        });
+      },
       error: (HttpErrorResponse) => {
         this.isLoading = false;
         alert('Error Occured Retry Later');

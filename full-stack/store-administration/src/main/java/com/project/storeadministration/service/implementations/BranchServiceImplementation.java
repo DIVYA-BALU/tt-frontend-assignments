@@ -56,7 +56,7 @@ public class BranchServiceImplementation implements BranchService {
   }
 
   @Override
-  public Page<Branch> getPaginationBranches(int pageNo, int pageSize) {
+  public Page<Branch> getPaginatedBranches(int pageNo, int pageSize) {
     PageRequest pageable = PageRequest.of(pageNo, pageSize);
     return branchRepository.findAll(pageable);
   }

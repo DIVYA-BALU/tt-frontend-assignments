@@ -123,5 +123,4 @@ public class UserServiceImplemetation implements UserService {
     PageRequest pageable = PageRequest.of(pageNo, pageSize);
     return customUserRepository.getUsers(branchId, sectionId, pageable);
   }
-
 }

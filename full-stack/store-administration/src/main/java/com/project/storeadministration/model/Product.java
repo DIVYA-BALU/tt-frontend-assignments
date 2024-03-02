@@ -25,5 +25,5 @@ public class Product {
   private int totalQuantity;
   private int price;
   private int cogs;
-  private int quantityAvailable;
+  private int availableQuantity;
 }

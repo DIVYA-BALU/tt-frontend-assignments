@@ -1,5 +1,11 @@
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
+  
+  <ng-container matColumnDef="Serial Number">
+    <th mat-header-cell *matHeaderCellDef> S.No </th>
+    <td mat-cell *matCellDef="let i = index"> {{i+1}} </td>
+  </ng-container>
+  
   <ng-container matColumnDef="Branch Name">
     <th mat-header-cell *matHeaderCellDef> Branch Name </th>
     <td mat-cell *matCellDef="let branch"> {{branch.name}} </td>

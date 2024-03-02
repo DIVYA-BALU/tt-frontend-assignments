@@ -45,6 +45,6 @@ public class BranchController {
   @GetMapping("/page")
   public ResponseEntity<Page<Branch>> getAllBranches(@RequestParam(defaultValue = "0") int pageNo,
       @RequestParam(defaultValue = "10") int pageSize) {
-    return new ResponseEntity<Page<Branch>>(branchService.getPaginationBranches(pageNo, pageSize), HttpStatus.OK);
+    return new ResponseEntity<Page<Branch>>(branchService.getPaginatedBranches(pageNo, pageSize), HttpStatus.OK);
   }
 }

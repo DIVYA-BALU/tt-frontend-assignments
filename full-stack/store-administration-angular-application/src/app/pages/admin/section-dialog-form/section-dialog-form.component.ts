@@ -24,6 +24,7 @@ export class SectionDialogFormComponent {
     this.sectionService.saveSection(this.sectionCreationForm.value).subscribe({
       next: () => {
         this.isLoading = false,
+        this.sectionService.setPaginationSectionsSubject();
         this.closeSectionDialogForm();
         this.dialog.open(PopUpComponent, {
           data: {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { BranchService } from 'src/app/core/services/branch.service';
@@ -11,8 +11,6 @@ import { PopUpComponent } from '../../pop-up/pop-up.component';
 })
 
 export class BranchDialogFormComponent {
-
-  @Output() branchSaved: EventEmitter<null> = new EventEmitter<null>();
 
   branchCreationForm: FormGroup;
   isLoading: boolean = false;
@@ -30,7 +28,7 @@ export class BranchDialogFormComponent {
       next: () => {
         this.isLoading = false;
         this.closeBranchDialogForm();
-        this.branchSaved.emit();
+        this.branchService.setPaginatedBranchesSubject();
         this.dialog.open(PopUpComponent, {
           data: {
             message: 'Branch Saved Successfully',

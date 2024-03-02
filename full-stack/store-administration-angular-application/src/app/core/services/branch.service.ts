@@ -1,16 +1,30 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Branch, NewBranch, PaginatedResponse } from '../models/API.model';
+import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { Constants } from '../constants/Constants';
-import { Observable, catchError, tap, throwError } from 'rxjs';
+import { Branch, NewBranch, PaginatedResponse } from '../models/API.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BranchService {
 
-  constructor(private http: HttpClient) { }
+  private paginatedBranches: BehaviorSubject<PaginatedResponse<Branch>> = new BehaviorSubject<PaginatedResponse<Branch>>({
+    content: [],
+    pageable: {
+      pageNumber: 0,
+      pageSize: 10
+    },
+    totalPages: 0,
+    totalElements: 0
+  });
+
+  public paginatedBranches$: Observable<PaginatedResponse<Branch>> = this.paginatedBranches.asObservable();
+
+  constructor(private http: HttpClient) {
+    this.setPaginatedBranchesSubject();
+  }
 
   saveBranch(newbranch: NewBranch): Observable<Branch> {
     return this.http.post<Branch>(
@@ -22,17 +36,29 @@ export class BranchService {
     );
   }
 
-  getPaginationBranches(): Observable<PaginatedResponse<Branch>> {
-    return this.http.get<PaginatedResponse<Branch>>(`${environment.API_URL}${Constants.API_END_POINT.BRANCHES}/page`).
-      pipe(catchError((error) => {
-        return throwError(() => error);
-      })
-      );
+  getPaginatedBranches(): Observable<PaginatedResponse<Branch>> {
+    return this.http.get<PaginatedResponse<Branch>>(`${environment.API_URL}${Constants.API_END_POINT.BRANCHES}/page`);
   }
 
-  getAllBranches(){
+  setPaginatedBranchesSubject() {
+    this.getPaginatedBranches().
+      subscribe({
+        next: (paginatedBranches) => {
+          this.paginatedBranches.next(paginatedBranches);
+        },
+        error: (error: HttpErrorResponse) => {
+          if (error.status === 404)
+            alert('Unable to connect to the server');
+          else
+            alert(`${error.status} found`);
+        }
+      });
+    ;
+  }
+
+  getAllBranches(): Observable<Branch[]>  {
     return this.http.get<Branch[]>(`${environment.API_URL}${Constants.API_END_POINT.BRANCHES}`)
-  }  
+  }
 
   addSection(branchId: string, sectionId: string): Observable<Branch> {
     const params = new HttpParams().set('sectionId', sectionId);
