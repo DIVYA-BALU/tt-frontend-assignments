@@ -7,11 +7,14 @@ import { FundersComponent } from './components/funders/funders.component';
 import { LoginComponent } from './components/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RegisterComponent } from './components/register/register.component';
+import { StudentprofileComponent } from './components/studentprofile/studentprofile.component';
+import { FunderprofileComponent } from './components/funderprofile/funderprofile.component';
+import { FindstudentsComponent } from './components/findstudents/findstudents.component';
 
 const routes: Routes = [
   {
     path:"",
-    redirectTo: "header/home",
+    redirectTo: "header/home", //"header/home"
     pathMatch: 'full'
 
   },
@@ -41,10 +44,23 @@ const routes: Routes = [
       {
         path: "register",
         component: RegisterComponent
+      },
+      {
+        path: "studentprofile",
+        component: StudentprofileComponent
+      },
+      {
+        path: "funderprofile",
+        component: FunderprofileComponent
+      },
+      {
+        path: "findstudents",
+        component: FindstudentsComponent
       }
+      
     ]
   },
-  
+
 ];
 
 @NgModule({

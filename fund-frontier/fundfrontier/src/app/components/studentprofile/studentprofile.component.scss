@@ -1,0 +1,48 @@
+.first-page {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.inner-form-group {
+    display: flex;
+    flex-direction: row;
+}
+
+.example-container {
+    margin-right: 100px;
+
+}
+
+.form-input {
+    width: 400px;
+}
+
+// .native-input {
+// height: 30px;
+   
+// }
+
+.form-color {
+    background-color: rgb(220, 220, 221);
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #ffffff;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+  }
+
+.final-page {
+    display: flex;
+    padding: 50px;
+}

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StudentService } from 'src/app/services/student.service';
+import { DatePipe, formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-studentprofile',
@@ -9,25 +10,38 @@ import { StudentService } from 'src/app/services/student.service';
   styleUrls: ['./studentprofile.component.scss'],
 })
 export class StudentprofileComponent {
+
   applicationForm!: FormGroup;
+
+  profile!:File;
+  aadhar!:File;
+  income!:File;
+  fee!:File;
+  idcard!:File;
+
 
   constructor(
     private studentService: StudentService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private pipe: DatePipe
   ) {}
+
+
+  
+
 
   ngOnInit() {
     this.applicationForm = this.formBuilder.group({
       profilePhoto: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required,Validators.email]],
       phoneNumber: ['', Validators.required],
       gender: ['', Validators.required],
       countryOfBirth: ['', Validators.required],
       countryOfResidence: ['', Validators.required],
-      dateOfBirth: ['', Validators.required],
+      dateOfBirth: [new Date().toISOString(), Validators.required],
       address: ['', Validators.required],
       city: ['', Validators.required],
       state: ['', Validators.required],
@@ -42,12 +56,78 @@ export class StudentprofileComponent {
       studentId: ['', Validators.required],
       fundRequired: ['', Validators.required],
       feeDetails: ['', Validators.required],
-      endDate: ['', Validators.required],
+      endDate: [new Date().toISOString(), Validators.required],
       shortStory: ['', Validators.required],
     });
   }
 
+  setProfile(event: any) {
+    this.profile = event.target.files[0];
+  }
+
+  setAadhar(event:any) {
+    this.aadhar = event.target.files[0];
+  }
+
+  setIncome(event:any) {
+    this.income = event.target.files[0];
+  }
+
+  setIdcard(event:any) {
+    this.idcard = event.target.files[0];
+  }
+
+  setFee(event:any) {
+    this.fee = event.target.files[0];
+  }
+
+
+
+  formdata: FormData = new FormData();
+
   onSubmit() {
+
+    // const dob: Date = this.pipe.transform(this.applicationForm.value.dateOfBirth, 'yyyy-MM-ddTHH:mm:ss.SSSZ')
+    // c  onst dobDate = new Date(dob);
+    console.log(this.applicationForm.value.dateOfBirth);
     
+    this.formdata.append('profilePhoto',this.profile),
+    this.formdata.append('firstName',this.applicationForm.value.firstName),
+    this.formdata.append('lastName',this.applicationForm.controls['lastName'].value),
+    this.formdata.append('email',this.applicationForm.controls['email'].value),
+    this.formdata.append('phoneNumber',this.applicationForm.controls['phoneNumber'].value),
+    this.formdata.append('gender',this.applicationForm.controls['gender'].value),
+    this.formdata.append('countryOfBirth',this.applicationForm.value.countryOfBirth),
+    this.formdata.append('countryOfResidence',this.applicationForm.controls['countryOfResidence'].value),
+    this.formdata.append('dateOfBirth',this.applicationForm.controls['dateOfBirth'].value),
+    this.formdata.append('address',this.applicationForm.controls['address'].value),
+    this.formdata.append('city',this.applicationForm.controls['city'].value),
+    this.formdata.append('state',this.applicationForm.controls['state'].value),
+    this.formdata.append('zipCode',this.applicationForm.controls['zipCode'].value),
+    this.formdata.append('school',this.applicationForm.controls['school'].value),
+    this.formdata.append('aadharCardProof',this.aadhar),
+    this.formdata.append('incomeProof',this.income),
+    this.formdata.append('collegeName',this.applicationForm.controls['collegeName'].value),
+    this.formdata.append('course',this.applicationForm.controls['course'].value),
+    this.formdata.append('studentIdentityProof',this.idcard),
+    this.formdata.append('studentId',this.applicationForm.controls['studentId'].value),
+    this.formdata.append('fundRequired',this.applicationForm.controls['fundRequired'].value),
+    this.formdata.append('feeDetails',this.fee),
+    this.formdata.append('endDate',this.applicationForm.controls['endDate'].value),
+    this.formdata.append('shortStory',this.applicationForm.controls['shortStory'].value),
+    
+    
+    this.studentService.saveApplication(this.formdata).subscribe(
+      (response) => {
+        this.router.navigate(['/home'])
+      }
+    )
+  }
+
+
+ 
+
+  getErrorMessage() {
+
   }
 }

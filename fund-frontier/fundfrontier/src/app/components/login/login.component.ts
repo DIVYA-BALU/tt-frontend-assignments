@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -12,13 +13,14 @@ export class LoginComponent {
 
   invalidLogin: boolean = false; 
 
-  constructor(private loginService : LoginService) {}
+  constructor(private loginService : LoginService, private router: Router) {}
 
   onSubmit(): void {
     this.loginService.login(this.email,this.password).subscribe(
       (response) => {
         console.log(response);        
         this.loginService.loggedin(true, response.token);
+        this.router.navigate(['header/home'])
       }
     )
   }

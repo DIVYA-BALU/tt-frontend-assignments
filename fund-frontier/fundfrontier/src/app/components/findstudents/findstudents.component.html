@@ -1,1 +1,22 @@
-<p>findstudents works!</p>
+<mat-card class="example-card" *ngFor="let student of students">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image">
+      </div>
+      <mat-card-title>Student</mat-card-title>
+      <mat-card-subtitle>{{student.firstName}}  {{student.lastName}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src={{student.profilePhoto}} alt="Photo of a Shiba Inu">
+    <mat-card-content>
+      <p>
+        <strong>College : </strong>{{student.collegeName}}
+       <br>
+       <strong>Year Of Study : </strong>{{student.yearOfStudy}}
+        <br>
+       <strong>Fund to be Raised : </strong>{{student.fundRequired}}
+        
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button> Pay {{student.fundRequired}}</button>
+    </mat-card-actions>
+  </mat-card>

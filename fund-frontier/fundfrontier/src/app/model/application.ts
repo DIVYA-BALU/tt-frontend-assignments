@@ -4,7 +4,7 @@ export interface Application {
   firstName:string;
   lastName:string;
   email:string;
-  phoneNumber:string;
+  phoneNumber:number;
   gender:string;
   countryOfBirth:string;
   countryOfResidence:string;
@@ -12,7 +12,7 @@ export interface Application {
   address:string;
   city:string;
   state:string;
-  zipCode:string;
+  zipCode:number;
   school:string;
   aadharCardProof:File;
   incomeProof:File;

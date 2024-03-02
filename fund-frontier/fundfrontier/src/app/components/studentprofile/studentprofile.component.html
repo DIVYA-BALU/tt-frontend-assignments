@@ -1,5 +1,340 @@
-<div>
-    <form>
-        
-    </form>
+<!-- <mat-tab-group>
+  <mat-tab label="First">
+    <div class="first-page">
+      <form [formGroup]="applicationForm">
+        <div class="form-group">
+          <div class="inner-form-group">
+            <div class="example-container">
+              <mat-form-field class="form-input">
+                <mat-label> First Name</mat-label>
+                <input matInput formControlName="firstName" required />
+                <mat-error
+                  *ngIf="applicationForm.get('firstName')?.hasError('required')"
+                >
+                  First Name is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="example-container">
+              <mat-form-field class="form-input">
+                <mat-label> Last Name</mat-label>
+                <input matInput formControlName="lastName" required />
+                <mat-error
+                  *ngIf="applicationForm.get('lastName')?.hasError('required')"
+                >
+                  Last Name is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="inner-form-group">
+            <div class="example-container">
+              <mat-form-field class="form-input">
+                <mat-label> Email</mat-label>
+                <input matInput formControlName="email" required />
+              </mat-form-field>
+            </div>
+            <div class="example-container">
+              <mat-form-field class="form-input">
+                <mat-label> Mobile Number</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  formControlName="phoneNumber"
+                  maxlength="10"
+                  required
+                />
+                <mat-error
+                  *ngIf="
+                    applicationForm.get('phoneNumber')?.hasError('required')
+                  "
+                >
+                  Mobile number is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="inner-form-group">
+            <div class="example-container">
+              <mat-form-field class="form-input">
+                <mat-label for="gender">Select</mat-label>
+                <mat-select id="gender" formControlName="gender"  required>
+                  <mat-option value="Male">Male</mat-option>
+                  <mat-option value="Female">Female</mat-option>
+                  <mat-option value="Transgender">Trangender</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="example-container">
+              <mat-form-field class="form-input">
+                <mat-label> Country of Residence</mat-label>
+                <input
+                  matInput
+                  formControlName="countryOfResidence"
+                  maxlength="10"
+                  required
+                />
+                <mat-error
+                  *ngIf="
+                    applicationForm
+                      .get('countryOfResidence')
+                      ?.hasError('required')
+                  "
+                >
+                  Residence is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="inner-form-group">
+            <div class="example-container">
+              <mat-form-field class="form-input">
+                <mat-label> Country of Residence</mat-label>
+                <input
+                  matInput
+                  formControlName="countryOfResidence"
+                  maxlength="10"
+                  required
+                />
+                <mat-error
+                  *ngIf="
+                    applicationForm
+                      .get('countryOfResidence')
+                      ?.hasError('required')
+                  "
+                >
+                  Residence is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="example-container">
+              <mat-form-field class="form-input">
+                <mat-label>Date of birth</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="picker"
+                  formControlName="dateOfBirth"
+                />
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="inner-form-group">
+            <div class="example-container">
+              <mat-form-field class="form-input">
+                <mat-label> Address door no</mat-label>
+                <input matInput formControlName="address" required />
+              </mat-form-field>
+            </div>
+            <div class="example-container">
+              <mat-form-field class="form-input">
+                <mat-label> City</mat-label>
+                <input matInput formControlName="city" required />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="inner-form-group">
+            <div class="example-container">
+              <mat-form-field class="form-input">
+                <mat-label> State</mat-label>
+                <input matInput formControlName="state" required />
+              </mat-form-field>
+            </div>
+            <div class="example-container">
+              <mat-form-field class="form-input">
+                <mat-label> Zip code</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  formControlName="zipCode"
+                  required
+                />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </mat-tab>
+  <mat-tab label="Second">
+    <div class="first-page">
+      <form [formGroup]="applicationForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <div class="inner-form-group">
+            <div class="example-container">
+              <mat-form-field class="form-input">
+                <mat-label> Scool studied</mat-label>
+                <input matInput formControlName="school" required />
+                <mat-error
+                  *ngIf="applicationForm.get('school')?.hasError('required')"
+                >
+                  school is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="example-container native-input">
+              <div class="form-input">
+                <span> Aadhar proof</span>
+                <input type="file" formControlName="aadharCardProof" (change)="setAadhar($event)" required />
+              </div>
+              <hr />
+            </div>
+          </div>
+          <div class="inner-form-group native-input">
+            <div class="example-container">
+              <div class="form-input">
+                <span> Income proof</span>
+                <input type="file" formControlName="incomeProof" (change)="setIncome($event)" required />
+              </div>
+              <hr />
+            </div>
+            <div class="example-container">
+              <mat-form-field class="form-input">
+                <mat-label> Name of college</mat-label>
+                <input
+                  matInput
+                  formControlName="collegeName"
+                  maxlength="10"
+                  required
+                />
+                <mat-error
+                  *ngIf="
+                    applicationForm.get('collegeName')?.hasError('required')
+                  "
+                >
+                  College Name is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="inner-form-group">
+            <div class="example-container">
+              <mat-form-field class="form-input">
+                <mat-label for="yearOfStudy">Select</mat-label>
+                <mat-select
+                  id="yearOfStudy"
+                  formControlName="yearOfStudy"
+                  required
+                >
+                  <mat-option value="1">I</mat-option>
+                  <mat-option value="2">II</mat-option>
+                  <mat-option value="3">III</mat-option>
+                  <mat-option value="4">IV</mat-option>
+                  <mat-option value="5">V</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="example-container">
+              <mat-form-field class="form-input">
+                <mat-label> Course</mat-label>
+                <input matInput formControlName="course" required />
+                <mat-error
+                  *ngIf="applicationForm.get('course')?.hasError('required')"
+                >
+                  Course is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="inner-form-group">
+            <div class="example-container native-input">
+              <div class="form-input">
+                <span> Identity card proof</span>
+                <input
+                  type="file"
+                  formControlName="studentIdentityProof"
+                  (change)="setIdcard($event)"
+                  required
+                />
+              </div>
+              <hr />
+            </div>
+            <div class="example-container">
+              <mat-form-field class="form-input">
+                <mat-label> Student Id</mat-label>
+                <input matInput formControlName="studentId" required />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="inner-form-group">
+            <div class="example-container native-input">
+              <mat-form-field class="form-input">
+                <mat-label> Fund Required</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  formControlName="fundRequired"
+                  required
+                />
+              </mat-form-field>
+            </div>
+            <div class="example-container native-input">
+              <div class="form-input">
+                <span> Fee details receipt</span>
+                <input type="file" formControlName="feeDetails" 
+                (change)="setFee($event)"
+                required />
+              </div>
+              <hr />
+            </div>
+          </div>
+          <div class="inner-form-group">
+            <div class="example-container">
+              <mat-form-field class="form-input">
+                <mat-label>End Date to pay fee</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="picker1"
+                  formControlName="endDate"
+                />
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="picker1"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+
+                <input type="date" formControlName="endDate">
+              </mat-form-field>
+            </div>
+            <div class="example-container">
+              <div class="form-input">
+                <mat-label> Profile Photo</mat-label>
+                <input type="file" formControlName="profilePhoto" 
+                (change)="setProfile($event)"
+                required />
+              </div>
+              <hr />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </mat-tab>
+  <mat-tab label="Third">
+    <div class="final-page">
+     <form [formGroup]="applicationForm" (ngSubmit)="onSubmit()">
+        <div class="example-container" >
+            <mat-form-field class="form-input">
+              <mat-label>  Short story about you</mat-label>
+              <textarea matInput
+              formControlName="shortStory"
+              
+            ></textarea>
+            </mat-form-field>
+          </div>
+          <div>
+            <button type="submit">Submit </button>
+          </div>
+    </form> 
+    <div>
+     </div>
 </div>
+  </mat-tab> 
+</mat-tab-group> -->
+
+
+<input type="date" formControlName="">

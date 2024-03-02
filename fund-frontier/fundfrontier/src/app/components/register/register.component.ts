@@ -30,7 +30,11 @@ export class RegisterComponent {
 
   onSubmit() {
     this.registerService.register(this.registerForm.value).subscribe((data) => {
-      console.log(data);
+      if(data.role === 'funder'){
+        this.router.navigate(['header/funderprofile'])
+      }else if(data.role === 'student') {
+        this.router.navigate(['header/studentprofile'])
+      }
       this.router.navigate(['header/login'])
     });
   }

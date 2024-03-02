@@ -10,7 +10,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { AboutusComponent } from './components/aboutus/aboutus.component';
 import { StudentsComponent } from './components/students/students.component';
@@ -19,6 +19,17 @@ import { FindstudentsComponent } from './components/findstudents/findstudents.co
 import { RegisterComponent } from './components/register/register.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { StudentprofileComponent } from './components/studentprofile/studentprofile.component'
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {TextFieldModule} from '@angular/cdk/text-field';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { FunderprofileComponent } from './components/funderprofile/funderprofile.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -31,7 +42,8 @@ import { StudentprofileComponent } from './components/studentprofile/studentprof
     FundersComponent,
     FindstudentsComponent,
     RegisterComponent,
-    StudentprofileComponent
+    StudentprofileComponent,
+    FunderprofileComponent
   ],
   imports: [
     BrowserModule,
@@ -44,9 +56,22 @@ import { StudentprofileComponent } from './components/studentprofile/studentprof
     HttpClientModule,
     MatSidenavModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTabsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    TextFieldModule,
+    MatCardModule,
+    MatButtonModule
+
   ],
-  providers: [],
+  providers: [{
+    provide : HTTP_INTERCEPTORS,useClass:AuthInterceptor, multi:true
+    }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
