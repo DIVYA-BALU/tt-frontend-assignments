@@ -10,3 +10,20 @@
 .content {
   flex: 1;
 }
+
+.sidenav-div mat-list-item {
+  cursor: pointer;
+}
+
+.sidenav-div mat-list-item:hover {
+  background-color: rgba(223, 230, 239, 0.477);
+}
+
+.sidenav-div mat-list-item:active{
+  background-color: #ccccd045;
+}
+
+.content{
+  margin: 30px 20px 20px 20px;
+  
+}

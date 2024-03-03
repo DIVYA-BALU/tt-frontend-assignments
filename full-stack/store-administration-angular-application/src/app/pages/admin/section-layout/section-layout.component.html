@@ -1,3 +1,6 @@
+<div class="button-div">
+  <button mat-button (click)="openSectionDialogForm()">Create Section</button>
+</div>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
   <ng-container matColumnDef="Serial Number">
@@ -14,4 +17,3 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
-<button mat-button (click)="openSectionDialogForm()">Create Section</button>

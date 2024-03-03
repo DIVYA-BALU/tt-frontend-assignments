@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Bill, Product } from 'src/app/core/models/API.model';
 import { ProductService } from 'src/app/core/services/product.service';
 import { ProductDialogFormComponent } from '../product-dialog-form/product-dialog-form.component';
+import { BillService } from 'src/app/core/services/bill.service';
+import { PopUpComponent } from '../../pop-up/pop-up.component';
 
 @Component({
   selector: 'app-product-layout',
@@ -22,8 +24,10 @@ export class ProductLayoutComponent {
     billItems: [],
     totalPrice: 0
   };
+  makeBillButton: Boolean = false;
+  clickedButtons: Set<string> = new Set();
 
-  constructor(private productService: ProductService, private dialog: MatDialog) {
+  constructor(private billService: BillService, private productService: ProductService, private dialog: MatDialog) {
     this.dataSource = new MatTableDataSource<Product>;
     this.getProductDetails();
   }
@@ -53,26 +57,55 @@ export class ProductLayoutComponent {
   }
 
   addToBill(product: Product, selectedQuantity: string): void {
+
+    this.clickedButtons.add(product._id);
+
     const quantity = parseInt(selectedQuantity);
 
-    if (quantity !== 0) {
-      const itemIndex = this.bill.billItems.findIndex(item => item.product === product);
+    const itemIndex = this.bill.billItems.findIndex(item => item.product === product);
 
-      if (itemIndex !== -1) {
-        this.bill.billItems[itemIndex].quantity = quantity;
-      }
-      else {
-        this.bill.billItems.push({ product: product, quantity: quantity });
-      }
-
+    if (itemIndex !== -1) {
+      this.bill.billItems[itemIndex].quantity = quantity;
     }
-    console.log(this.bill);
-    
+
+    else if (quantity !== 0) {
+      this.bill.billItems.push({ product: product, quantity: quantity });
+    }
+
   }
 
   openProductDialogForm() {
     const dialogRef = this.dialog.open(ProductDialogFormComponent, { disableClose: true });
   }
 
+  makeBill() {
 
+    if (this.bill.billItems.length === 0) {
+      this.dialog.open(PopUpComponent, {
+        data: {
+          message: 'No products Selected'
+        }
+      })
+    }
+    else {
+      this.bill.billItems.forEach((item) => {
+        this.bill.totalPrice += item.product.price * item.quantity;
+      })
+      this.billService.saveBill(this.bill).subscribe({
+        next: () => {
+          this.dialog.open(PopUpComponent, {
+            data: {
+              message: `Bill Saved Successfully.Please Collect Total Bill Amount: ${this.bill.totalPrice} `,
+            },
+          });
+          this.bill.billItems = [];
+          this.bill.totalPrice = 0;
+        },
+        error: () => {
+          alert('Error Occured Retry Later');
+        }
+      })
+
+    }
+  }
 }

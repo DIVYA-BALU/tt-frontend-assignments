@@ -64,7 +64,7 @@ public class RoleSeeder implements CommandLineRunner {
     }
 
     role.setPermissions(permissions);
-    
+
     return role;
   }
 }

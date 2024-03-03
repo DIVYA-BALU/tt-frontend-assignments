@@ -60,7 +60,6 @@ export class ProductDialogFormComponent implements OnInit{
 
   submit() {
     this.isLoading = true;
-    console.log(this.productCreationForm);
     this.productService.saveProducts(this.productCreationForm.value).subscribe({
       next: () => {
         this.isLoading = false,

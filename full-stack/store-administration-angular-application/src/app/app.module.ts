@@ -6,6 +6,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PermissionDirective } from './directives/permission.directive';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { HeaderComponent } from './pages/shared/header/header.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
 import { LoginComponent } from './pages/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -14,10 +18,10 @@ import { LayoutComponent } from './pages/admin/layout/layout.component';
 import {MatListModule} from '@angular/material/list';
 import { PopUpComponent } from './pages/pop-up/pop-up.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
     PermissionDirective,
     LoginComponent,
     LayoutComponent,
@@ -28,6 +32,9 @@ import { PopUpComponent } from './pages/pop-up/pop-up.component';
     MatListModule,
     AppRoutingModule,
     FormsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatMenuModule,
     MatProgressSpinnerModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,

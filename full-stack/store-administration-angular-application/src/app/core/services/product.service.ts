@@ -28,7 +28,6 @@ export class ProductService {
 
   saveProducts(products: Product[]): Observable<Product[]> {
     return this.http.post<Product[]>(`${environment.API_URL}${Constants.API_END_POINT.PRODUCTS}`, products)
-
   }
 
   setPaginatedProductsSubject() {

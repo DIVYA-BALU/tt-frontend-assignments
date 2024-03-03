@@ -13,11 +13,22 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   isLoggedIn: boolean;
+
   constructor(private http: HttpClient, private userDetailsService: UserDetailsService, private router: Router) {
+    
     this.isLoggedIn = false;
+    const loginResponseString= localStorage.getItem('loginResponse');
+
+    if(loginResponseString !== null)
+    {
+      this.isLoggedIn = true;
+      userDetailsService.setLoginResponseSubject(JSON.parse(loginResponseString));
+    }
+
   }
 
   login(loginRequest: LoginRequest): Observable<LoginResponse> {
+
     return this.http.post<LoginResponse>(
       `${environment.API_URL}${Constants.API_END_POINT.USER_LOGIN}`,
       loginRequest
@@ -30,11 +41,14 @@ export class AuthService {
         return throwError(() => error);
       })
     );
+
   }
 
   logout() {
+
     localStorage.removeItem("loginResponse");
     this.isLoggedIn = false;
+
   }
 
   enrollUser(enrollUserRequest: EnrollUserRequest): Observable<User> {

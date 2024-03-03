@@ -140,3 +140,13 @@ export interface BillItem {
   product: Product;
   quantity: number;
 }
+
+export interface Revenue {
+  totalRevenue: number;
+}
+
+export interface Investment {
+  _id: string;
+  amount: number;
+  description: string;
+}
