@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Application } from '../model/application';
 import { Observable } from 'rxjs';
+import { Successstory } from '../model/successstory';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,8 @@ import { Observable } from 'rxjs';
 export class StudentService {
 
   studentUrl = environment.studentUrl;
+  storyUrl = environment.storyUrl;
+
   constructor(private http: HttpClient) { }
 
   saveApplication(application:FormData): Observable<Application>{
@@ -34,5 +37,9 @@ export class StudentService {
 
   viewStudent(email:string): Observable<Application> {
     return this.http.get<Application>(`${this.studentUrl}/get/${email}`)
+  }
+
+  getstories(): Observable<Successstory[]>{
+    return this.http.get<Successstory[]>(`${this.storyUrl}/getall`)
   }
 }

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Successstory } from 'src/app/model/successstory';
+import { StudentService } from 'src/app/services/student.service';
 
 @Component({
   selector: 'app-home',
@@ -7,4 +10,19 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
+  constructor(private studentService: StudentService,private router:Router) {
+    this.getStory()
+  }
+
+  story!:Successstory ;
+  getStory() {
+    this.studentService.getstories().subscribe((response) => {
+      console.log(response);      
+      this.story = response[0];
+    })
+  }
+
+  getTestimonials() {
+   this.router.navigate(['header/testimonial']);  
+}
 }

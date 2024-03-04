@@ -1,1 +1,8 @@
-<img src="../../../assets/images/home.png">
+<img src="../../../assets/images/home.png" />
+<div class="story">
+  <div class="inner-story">
+    <h2>Story Time</h2>
+    <p *ngIf="story">{{ story.story }}</p>
+    <button mat-button class="button" (click)="getTestimonials()">Read More</button>
+  </div>
+</div>

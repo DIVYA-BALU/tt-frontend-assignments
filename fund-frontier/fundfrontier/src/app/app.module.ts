@@ -33,6 +33,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ViewstudentComponent } from './components/viewstudent/viewstudent.component';
+import { TestimonialComponent } from './components/testimonial/testimonial.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { ViewstudentComponent } from './components/viewstudent/viewstudent.compo
     RegisterComponent,
     StudentprofileComponent,
     FunderprofileComponent,
-    ViewstudentComponent
+    ViewstudentComponent,
+    TestimonialComponent
   ],
   imports: [
     BrowserModule,

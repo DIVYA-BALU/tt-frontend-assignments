@@ -10,6 +10,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { StudentprofileComponent } from './components/studentprofile/studentprofile.component';
 import { FunderprofileComponent } from './components/funderprofile/funderprofile.component';
 import { FindstudentsComponent } from './components/findstudents/findstudents.component';
+import { TestimonialComponent } from './components/testimonial/testimonial.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,11 @@ const routes: Routes = [
       {
         path: "findstudents",
         component: FindstudentsComponent
+      },
+      {
+        path:"testimonial",
+        component: TestimonialComponent
+      
       }
       
     ]
