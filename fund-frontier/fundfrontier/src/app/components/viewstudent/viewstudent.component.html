@@ -1,0 +1,20 @@
+<body >
+<div class="ind-student">
+    <div>
+        <img src={{student.profilePhoto}} alt="student">
+    </div>
+    
+    <div class="info">
+        <h3>{{student.firstName}} {{student.lastName}}</h3>
+        <h3>{{student.school}}</h3>
+        <h3>{{student.collegeName}}</h3>
+        <h3>{{student.course}} {{student.yearOfStudy}}</h3>
+        <h3>Total funding needed : {{student.fundRequired}}</h3>
+    </div>
+</div>
+<div>
+    <h2>My story</h2>
+    <h3 class="story">{{student.shortStory}}</h3>
+    <button class="fund"> Fund </button>
+</div>
+</body>

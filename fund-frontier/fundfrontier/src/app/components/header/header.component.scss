@@ -3,17 +3,46 @@
   }
 
 span {
-    margin-left: 30px;
+    color:  rgb(228, 224, 224);
 }
 
 a {
     text-decoration: none;
     padding: 30px;
     padding-bottom: 20px;
+    color: rgb(228, 224, 224);
   }
 
+.header {
+  background-color: rgb(21, 60, 134);
+}
 
+mat-icon {
+  color: white;
+}
 
+.menu-bar {
+  text-align: center;
+}
+
+footer {
+  // position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #483ac2;
+}
+
+.column {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.column a {
+  color: black;
+}
 
 
 

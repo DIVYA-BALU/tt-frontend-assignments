@@ -14,7 +14,7 @@ import { FindstudentsComponent } from './components/findstudents/findstudents.co
 const routes: Routes = [
   {
     path:"",
-    redirectTo: "header/home", //"header/home"
+    redirectTo: "header/home",
     pathMatch: 'full'
 
   },

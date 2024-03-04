@@ -30,6 +30,9 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { FunderprofileComponent } from './components/funderprofile/funderprofile.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ViewstudentComponent } from './components/viewstudent/viewstudent.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,8 @@ import {MatButtonModule} from '@angular/material/button';
     FindstudentsComponent,
     RegisterComponent,
     StudentprofileComponent,
-    FunderprofileComponent
+    FunderprofileComponent,
+    ViewstudentComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +69,9 @@ import {MatButtonModule} from '@angular/material/button';
     MatNativeDateModule,
     TextFieldModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    FlexLayoutModule,
+    MatDialogModule
 
   ],
   providers: [{

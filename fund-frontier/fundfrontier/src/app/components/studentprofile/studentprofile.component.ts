@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StudentService } from 'src/app/services/student.service';
-import { DatePipe, formatDate } from '@angular/common';
+
 
 @Component({
   selector: 'app-studentprofile',
@@ -23,8 +23,7 @@ export class StudentprofileComponent {
   constructor(
     private studentService: StudentService,
     private router: Router,
-    private formBuilder: FormBuilder,
-    private pipe: DatePipe
+    private formBuilder: FormBuilder
   ) {}
 
 

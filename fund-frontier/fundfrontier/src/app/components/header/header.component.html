@@ -1,9 +1,9 @@
-  <mat-toolbar>
+  <mat-toolbar class="header">
     <button mat-button [matMenuTriggerFor]="menu">
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menu="matMenu" class="menu-bar">
-      <button mat-menu-item routerLink="login">Login</button>
+      <button mat-menu-item routerLink="login" >Login</button>
       <button mat-menu-item routerLink="register">Register</button>
       <button mat-menu-item routerLink="findstudents">Find Students</button>
       <button mat-menu-item routerLink="home">Home</button>
@@ -18,7 +18,34 @@
       <a routerLink="home">Home</a>
       <a routerLink="aboutus">About us</a>
       <a routerLink="students">Students</a>
-      <a routerLink="funders">Funders</a>
+      <a routerLink="funders">Funders</a>      
+      <!-- <a *ngIf="loggedin" routerLink="">Profile</a> -->
+      <div *ngIf="loggedin;then content"></div>
+<ng-template #content>
+  <a *ngIf="role === 'funder'"routerLink="funderprofile">Profile</a>
+  <a *ngIf="role === 'student'" routerLink="studentprofile" >Profile</a>
+</ng-template>
     </div>
   </mat-toolbar>
 <router-outlet></router-outlet>
+<!-- <footer>
+  <div class="column">
+    <h3>ABOUT</h3>
+    <h4>The FundFrontier Trust: IT1831.2017</h4>
+    <a routerLink="aboutus">About Us</a>
+    <br>
+    <a routerLink="">Terms and Conditions</a>
+    <br>
+    <a routerLink="">Privacy Policy</a>
+  </div>
+
+  <div class="column">
+    <h3>QUICK LINKS</h3>
+   
+  </div>
+
+  <div class="column">
+    <h3>CONTACT</h3>
+   
+  </div>
+</footer> -->

@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+  role:string = 'student';
+  loggedin:boolean = true;
+  constructor() {
+
+  }
+
+
 }

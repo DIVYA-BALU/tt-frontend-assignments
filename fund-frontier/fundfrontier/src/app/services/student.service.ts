@@ -20,4 +20,19 @@ export class StudentService {
     return this.http.get<Application[]>(`${this.studentUrl}/getallapproved`)
   }
 
+  getStudentsByYear(year: string): Observable<Application[]> {
+    return this.http.get<Application[]>(`${this.studentUrl}/searchbyyear/${year}`)
+  }
+
+  getStudentsByCourse(course:string):Observable<Application[]> {
+    return this.http.get<Application[]>(`${this.studentUrl}/searchbygroup/${course}`)
+  }
+
+  getStudentsByCollege(college:string):Observable<Application[]> {
+    return this.http.get<Application[]>(`${this.studentUrl}/searchbycollege/${college}`)
+  }
+
+  viewStudent(email:string): Observable<Application> {
+    return this.http.get<Application>(`${this.studentUrl}/get/${email}`)
+  }
 }

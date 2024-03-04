@@ -1,7 +1,41 @@
 .example-card {
-    max-width: 300px;
+    width: 30%;
+    margin-left: 20px;
+    margin-bottom: 20px;
   }
   
-  .example-header-image {
+  .example-form-field {
+    width: 200px;
+  }
+
+  .search {
+    margin-top: 20px;
+    margin-left: 10px;
+  }
+
+  .search-input {
+    width: 300px;
+    margin-right: 20px;
+  }
+
+  .students-list{
+    display: flex;
+    margin: 10px;
+    flex-wrap:wrap;
+  }
+
+  img {
     background-size: cover;
   }
+
+  button {
+    margin-left: 10px;
+    background-color:rgb(226, 220, 247);
+ }
+
+ mat-card-actions {
+    margin-left: 160px;
+ }
+ .students-list {
+  background-color:rgb(209, 230, 243) ;
+ }

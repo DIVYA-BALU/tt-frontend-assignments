@@ -1,0 +1,29 @@
+.ind-student {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+}
+
+.info {
+    padding: 10px;
+}
+
+img {
+    background-size: cover;
+    height: 220px;
+    width: 250px;
+}
+
+body {
+    background-image: url("../../../assets/images/indstudent.jpeg")
+}
+
+.story {
+    margin-bottom: 0;
+}
+
+.fund {
+    padding: 10px 20px;
+    color: rgb(101, 166, 209);
+    margin-left: 200px;
+}
