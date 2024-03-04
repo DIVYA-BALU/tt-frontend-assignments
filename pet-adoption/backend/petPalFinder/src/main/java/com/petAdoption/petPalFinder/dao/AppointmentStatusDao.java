@@ -3,6 +3,7 @@ package com.petAdoption.petPalFinder.dao;
 import java.util.Date;
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -20,8 +21,8 @@ public class AppointmentStatusDao {
     @Autowired
     MongoTemplate template;
 
-    public List<AppointmentStatus> getInitiatedRequest(String id){
-        Criteria criteria = Criteria.where("requesterId").is(id).andOperator(Criteria.where("status").is("initiated"));
+    public List<AppointmentStatus> getInitiatedRequest(String id,String status){
+        Criteria criteria = Criteria.where("doctorId").is(new ObjectId(id)).andOperator(Criteria.where("status").is(status));
 		Query query = new Query(criteria);
         return template.find(query, AppointmentStatus.class);
     }

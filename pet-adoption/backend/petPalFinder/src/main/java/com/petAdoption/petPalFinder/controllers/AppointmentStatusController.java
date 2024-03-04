@@ -45,14 +45,8 @@ public class AppointmentStatusController {
 
     @PreAuthorize("hasRole('VETERINARY_DOCTOR')")
     @GetMapping("doctor")
-    public ResponseEntity<List<AppointmentStatusDto>> viewRequestedAppointment(@RequestParam String id) {
-        return ResponseEntity.ok(appointmentStatusService.getRequestedAppoinments(id));
-    }
-
-    @PreAuthorize("hasRole('VETERINARY_DOCTOR')")
-    @GetMapping("accepted")
-    public ResponseEntity<List<AppointmentStatusDto>> viewAcceptedAppointment(@RequestParam String id) {
-        return ResponseEntity.ok(appointmentStatusService.getRequestedAppoinments(id));
+    public ResponseEntity<List<AppointmentStatusDto>> viewRequestedAppointment(@RequestParam String id,@RequestParam String status) {
+        return ResponseEntity.ok(appointmentStatusService.getRequestedAppoinments(id,status));
     }
 
     @PutMapping

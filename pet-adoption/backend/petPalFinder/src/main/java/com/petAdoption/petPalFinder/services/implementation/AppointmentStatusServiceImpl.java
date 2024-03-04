@@ -52,9 +52,9 @@ public class AppointmentStatusServiceImpl implements AppointmentStatusService{
     }
 
     @Override
-    public List<AppointmentStatusDto> getRequestedAppoinments(String id) {
+    public List<AppointmentStatusDto> getRequestedAppoinments(String id,String status) {
         List<AppointmentStatusDto> list = new ArrayList<>();
-        List<AppointmentStatus> appointment = appointmentStatusDao.getInitiatedRequest(id);
+        List<AppointmentStatus> appointment = appointmentStatusDao.getInitiatedRequest(id,status);
         for(int  i =0;i<appointment.size();i++){
             AppointmentStatusDto appointmentStatusDto = new AppointmentStatusDto();
             if(appointment.get(i).getRequesterType().equals("ADOPTER")){

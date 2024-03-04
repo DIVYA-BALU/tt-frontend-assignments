@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Document(value = "adoption_details")
 public class AdoptionDetail {
     @Id
@@ -25,5 +24,5 @@ public class AdoptionDetail {
     private Boolean allergyToAnimal;
     private String homeType;
     private Boolean familyAcceptance;
-    private String status;
+    private String status = "initiated";
 }

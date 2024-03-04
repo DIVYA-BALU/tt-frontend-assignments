@@ -1,0 +1,25 @@
+@import '../style/variables.scss';
+.container{
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 10px;
+}
+.details{
+    display: flex;
+    margin-bottom: 20px;
+}
+.profile{
+    width: 30%;
+    height: 30%;
+    margin-right: 20px;
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin-left: 20px;
+}
+span{
+    margin-top: 10px;
+    margin-left: 15px;
+}

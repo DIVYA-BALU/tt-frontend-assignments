@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AppointmentStatus, StatusMessage, VeterinaryDoctor } from '../models/models';
+import { AppointmentStatus, AppointmentStatusDto, AppointmentUpdate, StatusMessage, VeterinaryDoctor } from '../models/models';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
@@ -30,9 +30,23 @@ export class VeterinaryDoctorService {
     );
   }
 
-  getReceivedRequest(id:string){
-    return this.http.get<AppointmentStatus[]>(
-      `${this.baseUrl}appointment/doctor?id=${id}`
+  getReceivedRequest(id:string,status:string){
+    console.log(status);
+    
+    return this.http.get<AppointmentStatusDto[]>(
+      `${this.baseUrl}appointment/doctor?id=${id}&status=${status}`
+    );
+  }
+
+  getAcceptedRequest(id:string){
+    return this.http.get<AppointmentStatusDto[]>(
+      `${this.baseUrl}appointment/accepted?id=${id}`
+    );
+  }
+
+  updateAppointment(appoinment:AppointmentUpdate){
+    return this.http.put<StatusMessage>(
+      `${this.baseUrl}appointment`,appoinment
     );
   }
 }

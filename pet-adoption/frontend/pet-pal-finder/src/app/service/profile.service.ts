@@ -54,7 +54,7 @@ export class ProfileService {
   constructor(private authService: AuthService, private http: HttpClient) {}
 
   getAdopterProfile(id: string) {
-    return this.http.get<Adopter>(`${this.baseUrl}adopter?id=${this.id}`);
+    return this.http.get<Adopter>(`${this.baseUrl}adopter?id=${id}`);
   }
 
   getVeterinaryDoctorProfile(id: string) {
@@ -66,7 +66,7 @@ export class ProfileService {
   }
 
   getOrganizationProfile(id: string) {
-    return this.http.get<any>(`${this.baseUrl}adopter?id=${this.id}`);
+    return this.http.get<any>(`${this.baseUrl}adopter?id=${id}`);
   }
   
   setUser(user:Adopter | VeterinaryDoctor | Organization){

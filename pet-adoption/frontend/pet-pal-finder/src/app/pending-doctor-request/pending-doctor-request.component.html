@@ -1,3 +1,32 @@
-<div *ngIf="appointmentStatuses.length === 0">
+<div *ngIf="appointmentStatuses.length === 0;else pending">
 You Have No Pending Request
 </div>
+<ng-template #pending>
+    <div class="container">
+        <div class="details" *ngFor="let appointmentStatus of appointmentStatuses">
+          <img [src]="appointmentStatus.profileUrl" alt="" class="profile"/>
+          <div class="card">
+            Requester Details: <br>
+            <span>Name : {{ appointmentStatus.name }}</span>
+            <span>Contact Number : {{ appointmentStatus.contactNumber }}</span>
+            <span>Email Id : {{ appointmentStatus.email }}</span>
+            
+          </div>
+          <div class="card">
+              Location Details: <br>
+              <span>Street : {{ appointmentStatus.location.street }}</span>
+              <span>City : {{ appointmentStatus.location.city }}</span>
+              <span>District : {{ appointmentStatus.location.district }}</span>
+              <span>State : {{ appointmentStatus.location.state }}</span>
+              <span>Country : {{ appointmentStatus.location.country  }}</span>
+            </div>
+            <div class="card">
+                <input type="date" [(ngModel)]="date" name=`date${appointmentStatus._id}`/>
+                <input type="time" [(ngModel)]="time" name=`time${appointmentStatus._id}`/>
+                <button   type="button" (click)="acceptAppointment(appointmentStatus.appointmentStatus._id||'','accepted')" class="accept">Accept</button>
+                <button  type="button" (click)="acceptAppointment(appointmentStatus.appointmentStatus._id||'','rejected')" class="reject">Reject</button>
+            </div>
+        </div>
+      </div>
+      
+</ng-template>

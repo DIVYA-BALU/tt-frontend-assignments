@@ -1,32 +1,66 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Time } from '@angular/common';
 import { AuthService } from '../service/auth.service';
 import { VeterinaryDoctorService } from '../service/veterinary-doctor.service';
-import { AppointmentStatus } from '../models/models';
+import {
+  AppointmentStatus,
+  AppointmentStatusDto,
+  AppointmentUpdate,
+} from '../models/models';
+import Swal from 'sweetalert2';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-pending-doctor-request',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './pending-doctor-request.component.html',
-  styleUrls: ['./pending-doctor-request.component.scss']
+  styleUrls: ['./pending-doctor-request.component.scss'],
 })
 export class PendingDoctorRequestComponent {
+  constructor(
+    private veterinaryDoctorService: VeterinaryDoctorService,
+    private authService: AuthService
+  ) {}
 
-  constructor(private veterinaryDoctorService:VeterinaryDoctorService, private authService:AuthService){}
+  appointmentStatuses: AppointmentStatusDto[] = [];
 
-  appointmentStatuses:AppointmentStatus [] = []
+  appointmentUpdate: AppointmentUpdate = {
+    id: '',
+    status: '',
+    date: new Date(),
+  };
 
-  ngOnInit(){
+  time = '';
+  date = '';
+
+  ngOnInit() {
     this.authService.sharedId$.subscribe({
       next: (id) => {
-        this.veterinaryDoctorService.getReceivedRequest(id).subscribe({
-          next: (val) => {
-           this.appointmentStatuses = val;
-          }
-        })
-      }
-    })
-    
+        this.veterinaryDoctorService
+          .getReceivedRequest(id, 'initiated')
+          .subscribe({
+            next: (val) => {
+              console.log(val);
+
+              this.appointmentStatuses = val;
+            },
+          });
+      },
+    });
+  }
+
+  acceptAppointment(id: string, status: string) {
+    this.appointmentUpdate.id = id;
+    this.appointmentUpdate.status = status;
+    this.appointmentUpdate.date = new Date(this.date + 'T' + this.time);
+    console.log(this.time, this.appointmentUpdate);
+    this.veterinaryDoctorService
+      .updateAppointment(this.appointmentUpdate)
+      .subscribe({
+        next: (val) => {
+          console.log(val);
+        },
+      });
   }
 }

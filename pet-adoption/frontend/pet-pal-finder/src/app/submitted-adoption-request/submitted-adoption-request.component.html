@@ -1,8 +1,12 @@
+<div *ngIf="adoptionStatuses.length === 0;else pending">
+  You Have Not Requested For Adoption
+  </div>
+  <ng-template #pending>
 <div class="container">
     <div class="details" *ngFor="let adoptionStatus of adoptionStatuses">
       <img [src]="adoptionStatus.petPostId.images" alt="" class="profile"/>
       <div class="card">
-          Doctor Details: <br>
+          Pet Details: <br>
         <span>Name : {{ adoptionStatus.petPostId.category }}</span>
         <span>Degree : {{ adoptionStatus.petPostId.breed }}</span>
         <span>Contact Number : {{ adoptionStatus.petPostId.gender }}</span>
@@ -13,4 +17,4 @@
       </div>
     </div>
   </div>
-  
+  </ng-template>
