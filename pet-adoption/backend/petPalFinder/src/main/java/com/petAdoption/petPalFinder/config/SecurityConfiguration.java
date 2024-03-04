@@ -26,7 +26,7 @@ public class SecurityConfiguration {
 
     private final AuthenticationProvider authenticationProvider;
 
-    private String[] permitAllEndpointList = {"/auth/**","/static/**","/email-verification/**"};
+    private String[] permitAllEndpointList = {"/auth/**","/static/**","/email-verification/**","/pet-post/near-by-post","/pet-post/latest","/transaction/**"};
     
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
@@ -36,6 +36,8 @@ public class SecurityConfiguration {
                         .requestMatchers(permitAllEndpointList)
                         .permitAll()
                         .requestMatchers(HttpMethod.POST,"/organization","/veterinary-doctor")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.GET,"/pet-post","/veterinary-doctor")
                         .permitAll()
                         .anyRequest()
                         .authenticated())

@@ -2,7 +2,7 @@
   <mat-tab label="Organization Request">
     <div *ngFor="let organization of organizations">
       <app-request-registration-list
-        [request]="organization"
+        [requestOrganization]="organization"
         type="organization"
       ></app-request-registration-list>
     </div>
@@ -10,14 +10,9 @@
   <mat-tab label="Veterinary Doctor Request"> 
     <div *ngFor="let veterinaryDoctor of veterinaryDoctors">
         <app-request-registration-list
-          [request]="veterinaryDoctor"
+          [requestVeterinaryDoctor]="veterinaryDoctor"
           type="veterinaryDoctor"
         ></app-request-registration-list>
       </div>
   </mat-tab>
 </mat-tab-group>
-<div>
-  gyjhkl
-  <div class="list">dfghjk</div>
-  fghj
-</div>

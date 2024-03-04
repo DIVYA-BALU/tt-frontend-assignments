@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.petAdoption.petPalFinder.dto.AdopterDto;
 import com.petAdoption.petPalFinder.models.Adopter;
 import com.petAdoption.petPalFinder.services.AdopterService;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
+@CrossOrigin
 @RequestMapping(path = "adopter")
 public class AdopterController {
 
@@ -32,6 +35,7 @@ public class AdopterController {
     
     @GetMapping
     public ResponseEntity<Adopter> getAdopter(@RequestParam String id) {
+
         return ResponseEntity.ok(adopterService.getAdopter(id));
     }
     

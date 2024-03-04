@@ -31,10 +31,18 @@ export class LoginComponent {
       console.log(token);
       localStorage.setItem("token",token.token)
       const tokenInfo: any = jwtDecode(token.token);
-      const role: String = tokenInfo.role[0].authority;
+      const role: string = tokenInfo.role[0].authority;
+      this.authService.setLogin(tokenInfo.id);
+      this.authService.setRole(role)
      if(role === environment.admin){
       this.route.navigate(['admin']);
      }
+     else if(role === environment.organization){
+      this.route.navigate(['organization']);
+     }else if(role === environment.adopter || role === environment.veterinaryDoctor){
+      this.route.navigate(['pet']);
+     }
+     console.log(role);
       
     }})
     

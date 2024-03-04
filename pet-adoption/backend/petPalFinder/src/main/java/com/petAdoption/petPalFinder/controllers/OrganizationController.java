@@ -13,8 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.petAdoption.petPalFinder.dto.OrganizationRegistrationDto;
 import com.petAdoption.petPalFinder.dto.StatusMessage;
+import com.petAdoption.petPalFinder.dto.StatusUpdateDto;
 import com.petAdoption.petPalFinder.models.Organization;
 import com.petAdoption.petPalFinder.services.OrganizationService;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 @CrossOrigin
 @Controller
@@ -33,5 +38,10 @@ public class OrganizationController {
     @GetMapping
     public ResponseEntity<List<Organization>> getOrganizationInitiated() {
         return ResponseEntity.ok(organizationService.getInitiatedOrganization());
+    }
+
+    @PutMapping
+    public ResponseEntity<StatusMessage> changeStatus(@RequestBody StatusUpdateDto statusUpdateDto) {
+        return ResponseEntity.ok(organizationService.updateStatus(statusUpdateDto));
     }
 }

@@ -1,10 +1,7 @@
 package com.petAdoption.petPalFinder.dto;
 
-import java.sql.Date;
 
-import org.springframework.web.multipart.MultipartFile;
 
-import com.petAdoption.petPalFinder.models.Location;
 
 import lombok.Data;
 

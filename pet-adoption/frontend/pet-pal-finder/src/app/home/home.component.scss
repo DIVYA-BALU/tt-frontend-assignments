@@ -1,15 +1,69 @@
-.header{
-    background-image: url('/assets/bg-header.jpg') ;
-    background-repeat:no-repeat ;
-    background-size: 100% 100%;
-    width: 100%;
-    height: 70vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
+@import "/src/app/style/variables.scss";
+.header {
+  background-image: url("/assets/bg-header.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
-h1{
-    font-size: 60px;
+h1 {
+  font-size: 60px;
+}
+
+.card-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  column-gap: 20px;
+  row-gap: 20px;
+  width: 100%;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  width: 100%;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  background: #f1f1f1;
+}
+.card:hover {
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+img {
+  width: 100%;
+  height: 50%;
+}
+span {
+  margin-top: 10px;
+  margin-left: 15px;
+}
+.search {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.button {
+  height: 30px;
+  width: 50px;
+  background-color: $primary_color;
+  border-radius: 10px;
+  margin-left: 3%;
+  font-size: medium;
+  color: white;
+  cursor: pointer;
+}
+.input {
+  height: 100%;
+  width: 300px;
+  margin-right: 10px;
+  font-size: medium;
+  color: rgb(9, 9, 9);
+  opacity: 0.5;
 }

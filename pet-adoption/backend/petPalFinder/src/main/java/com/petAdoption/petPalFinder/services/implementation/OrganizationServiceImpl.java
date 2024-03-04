@@ -5,10 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.petAdoption.petPalFinder.dao.OrganizationDao;
 import com.petAdoption.petPalFinder.dto.OrganizationRegistrationDto;
 import com.petAdoption.petPalFinder.dto.StatusMessage;
+import com.petAdoption.petPalFinder.dto.StatusUpdateDto;
 import com.petAdoption.petPalFinder.models.Organization;
 import com.petAdoption.petPalFinder.repositorys.OrganizationRepository;
+import com.petAdoption.petPalFinder.services.EmailVerificationService;
 import com.petAdoption.petPalFinder.services.FileService;
 import com.petAdoption.petPalFinder.services.OrganizationService;
 
@@ -20,6 +23,12 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Autowired
     FileService fileService;
+
+    @Autowired
+    OrganizationDao organizationDao;
+
+    @Autowired
+    EmailVerificationService emailVerificationService;
 
     @Override
     public StatusMessage save(OrganizationRegistrationDto organizationRegistrationDto) {
@@ -46,6 +55,16 @@ public class OrganizationServiceImpl implements OrganizationService {
     public Organization getApprovedOrganization() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getApprovedOrganization'");
+    }
+
+    @Override
+    public StatusMessage updateStatus(StatusUpdateDto statusUpdateDto) {
+        organizationDao.updateStatus(statusUpdateDto);
+        String email = organizationRepository.findById(statusUpdateDto.getId()).get().getEmail();
+        emailVerificationService.sendStatusMail(email,statusUpdateDto,"ORGANIZATION");
+        StatusMessage statusMessage = new StatusMessage();
+        statusMessage.setMessage("status updated");
+        return statusMessage;
     }
 
 }

@@ -1,1 +1,22 @@
-<p>veterinary-doctor works!</p>
+<div class="container">
+    <div class="details" *ngFor="let veterinaryDoctor of veterinaryDoctors">
+      <img [src]="veterinaryDoctor.profilePhoto" alt="" class="profile"/>
+      <div class="card">
+          Doctor Details: <br>
+        <span>Name : {{ veterinaryDoctor.name }}</span>
+        <span>Degree : {{ veterinaryDoctor.degree }}</span>
+        <span>Contact Number : {{ veterinaryDoctor.contactNumber }}</span>
+        <span>Email Id : {{ veterinaryDoctor.email }}</span>
+        <button  type="button" (click)="sendRequest(veterinaryDoctor._id)">Request Appointment</button>
+      </div>
+      <div class="card">
+          Location Details: <br>
+          <span>Street : {{ veterinaryDoctor.location.street }}</span>
+          <span>City : {{ veterinaryDoctor.location.city }}</span>
+          <span>District : {{ veterinaryDoctor.location.district }}</span>
+          <span>State : {{ veterinaryDoctor.location.state }}</span>
+          <span>Country : {{ veterinaryDoctor.location.country  }}</span>
+        </div>
+    </div>
+  </div>
+  

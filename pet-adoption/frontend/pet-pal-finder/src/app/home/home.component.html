@@ -1,4 +1,18 @@
 <div class="header">
-    <div><input type="text"></div>
-    <h1>Find your Pal</h1>
+  <div class="search" id="search">
+    <input type="text" placeholder="Location" class="input" />
+    <button mat-fab aria-label="Example icon button with a heart icon">
+        <mat-icon>search</mat-icon>
+      </button>
+  </div>
+  <h1>Find your Pal</h1>
+</div>
+<div *ngIf="petPosts.length === 0"> no animal is near to your location</div>
+<div class="card-list">
+  <div *ngFor="let petPost of petPosts" class="card" (click)="navigate(petPost._id)">
+    <img [src]="petPost.images" alt="" />
+    <span>Breed : {{ petPost.breed }}</span>
+    <span>Category : {{ petPost.category }}</span>
+    <span>Gender : {{ petPost.gender }}</span>
+  </div>
 </div>

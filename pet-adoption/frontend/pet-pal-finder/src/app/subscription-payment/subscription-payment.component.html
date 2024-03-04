@@ -1,0 +1,7 @@
+<div>
+    <div *ngFor="let subscriptionPlan of subscriptionPlans">
+        <span>Amount {{subscriptionPlan.amount}}</span>
+        <span>Duration of Subscription {{subscriptionPlan.months}} Months</span>
+        <button type="button" (click)="pay(subscriptionPlan)">Pay</button>
+    </div>
+</div>

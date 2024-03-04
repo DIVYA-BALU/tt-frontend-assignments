@@ -20,5 +20,16 @@ a.active {
     background-color: $primary-color;   
     display: flex;
     justify-content: end;
+    align-items: center;
     column-gap: 30px;
 }
+.dp {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  .profile {
+    display: flex;
+    align-items: center;
+  }

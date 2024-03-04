@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="details" *ngFor="let adoptionStatus of adoptionStatuses">
+      <img [src]="adoptionStatus.petPostId.images" alt="" class="profile"/>
+      <div class="card">
+          Doctor Details: <br>
+        <span>Name : {{ adoptionStatus.petPostId.category }}</span>
+        <span>Degree : {{ adoptionStatus.petPostId.breed }}</span>
+        <span>Contact Number : {{ adoptionStatus.petPostId.gender }}</span>
+      </div>
+      <div class="card">
+        <span> Status :  {{adoptionStatus.status}}</span>
+       
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="details">
+    <img [src]="petPost.images" alt="" class="profile"/>
+    <div class="card">
+        Pet Details: <br>
+      <span>Breed : {{ petPost.breed }}</span>
+      <span>Category : {{ petPost.category }}</span>
+      <span>Gender : {{ petPost.gender }}</span>
+      <span>Adopted : {{ petPost.isAdopted ? "Yes" : "No" }}</span>
+      <span>Infected : {{ petPost.isInfected ? "Yes" : "No" }}</span>
+      <span>Quantity : {{ petPost.quantity }}</span>
+      <span>Weight : {{ petPost.weight }} Kg</span>
+      <button *ngIf="!petPost.isAdopted" type="button" (click)="adopt()">Adopt IT</button>
+    </div>
+    <div class="card">
+        Location Details: <br>
+        <span>Street : {{ petPost.posterId.location.street }}</span>
+        <span>City : {{ petPost.posterId.location.city }}</span>
+        <span>District : {{ petPost.posterId.location.district }}</span>
+        <span>State : {{ petPost.posterId.location.state }}</span>
+        <span>Country : {{ petPost.posterId.location.country  }}</span>
+      </div>
+  </div>
+  <div class="discription">
+    Description : <br> <span>{{ petPost.description }}</span>
+  </div>
+  Poster Details
+  <div class="poster-details">
+        <img [src]="petPost.posterId.organizationPhoto" alt="" />
+        <span>Email Id : {{ petPost.posterId.email }}</span>
+        <span>Name : {{ petPost.posterId.name }}</span>
+        <span>Contact Number: {{ petPost.posterId.contactNumber }}</span>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Organization, VeterinaryDoctor } from '../models/models';
+import { Organization, StatusUpdate, VeterinaryDoctor } from '../models/models';
+import { RegistrationRequestService } from '../service/registration-request.service';
 
 @Component({
   selector: 'app-request-registration-list',
@@ -10,11 +11,35 @@ import { Organization, VeterinaryDoctor } from '../models/models';
   styleUrls: ['./request-registration-list.component.scss']
 })
 export class RequestRegistrationListComponent {
-  @Input() request?:Organization | VeterinaryDoctor;
-  @Input() type?:string;
+
+  constructor(private registrationRequestService:RegistrationRequestService){}
+
+  
+  @Input() requestVeterinaryDoctor?:VeterinaryDoctor;
+  @Input() requestOrganization?:Organization;
+  @Input() type:string='';
+  status:StatusUpdate = {
+    id: '',
+    status: ''
+  }
 
   ngOnInit(){
-    console.log(this.request,this.type);
+    console.log(this.requestVeterinaryDoctor,this.type);
     
   }
+
+    updateStatus(id: string|undefined,status: string) {
+      this.status.id = id || '';
+      this.status.status = status;
+      if( this.type === "organization"){
+        this.registrationRequestService.updateStatusForOrganization(this.status).subscribe({next: (message) =>{
+          console.log(message);
+        }})
+      }
+      else{
+        this.registrationRequestService.updateStatusForVeterinaryDoctor(this.status).subscribe({next: (message) =>{
+          console.log(message); 
+        }})
+      }
+      }
 }

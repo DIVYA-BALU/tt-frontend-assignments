@@ -1,0 +1,13 @@
+<mat-tab-group>
+  <mat-tab label="Adoption request">
+    <app-submitted-adoption-request></app-submitted-adoption-request>
+  </mat-tab>
+  <mat-tab label="Veterinary Doctor request">
+    <app-submitted-doctor-request
+      appAdopterAccess
+    ></app-submitted-doctor-request>
+    <app-recived-doctor-request
+      appVeterinaryDoctorAccess
+    ></app-recived-doctor-request
+  ></mat-tab>
+</mat-tab-group>

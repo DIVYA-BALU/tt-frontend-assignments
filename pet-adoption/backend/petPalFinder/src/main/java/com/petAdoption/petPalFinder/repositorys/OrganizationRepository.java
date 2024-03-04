@@ -11,5 +11,6 @@ import com.petAdoption.petPalFinder.models.Organization;
 public interface OrganizationRepository extends MongoRepository<Organization,String>{
 
     List<Organization> findByStatus(String string);
+    
         
 }

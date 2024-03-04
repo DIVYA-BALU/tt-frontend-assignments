@@ -8,16 +8,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.petAdoption.petPalFinder.dto.OrganizationRegistrationDto;
 import com.petAdoption.petPalFinder.dto.StatusMessage;
+import com.petAdoption.petPalFinder.dto.StatusUpdateDto;
 import com.petAdoption.petPalFinder.dto.VeterinaryDoctorDto;
-import com.petAdoption.petPalFinder.models.Organization;
 import com.petAdoption.petPalFinder.models.VeterinaryDoctor;
-import com.petAdoption.petPalFinder.services.OrganizationService;
 import com.petAdoption.petPalFinder.services.VeterinaryDoctorService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 @CrossOrigin
@@ -33,7 +36,23 @@ public class VeterinaryDoctorController {
     }
 
     @GetMapping
-    public ResponseEntity<List<VeterinaryDoctor>> getOrganizationInitiated() {
-        return ResponseEntity.ok(veterinaryDoctorService.getInitiatedVeterinaryDoctorDto());
+    public ResponseEntity<List<VeterinaryDoctor>> getInitiatedVeterinaryDoctor() {
+        return ResponseEntity.ok(veterinaryDoctorService.getInitiatedVeterinaryDoctor());
     }
+
+    @PutMapping
+    public ResponseEntity<StatusMessage> changeStatus(@RequestBody StatusUpdateDto statusUpdateDto) {
+        return ResponseEntity.ok(veterinaryDoctorService.updateStatus(statusUpdateDto));
+    }
+
+    @GetMapping("near-by")
+    public ResponseEntity<List<VeterinaryDoctor>> getApprovedVeterinaryDoctor() {
+        return ResponseEntity.ok(veterinaryDoctorService.getNearByVeterinaryDoctor());
+    }
+
+    @GetMapping("profile/{id}")
+    public ResponseEntity<VeterinaryDoctor> getMethodName(@PathVariable String id) {
+        return ResponseEntity.ok(veterinaryDoctorService.getVeterinaryDoctor(id));
+    }
+    
 }

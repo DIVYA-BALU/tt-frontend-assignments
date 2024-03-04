@@ -79,6 +79,7 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 
 
     public Token authenticate(LoginRequest request) {
+        String id;
         User user = userRepo.findByEmail(request.getEmail()).orElseThrow(()-> new UsernameNotFoundException("User not Found"));
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
@@ -86,9 +87,14 @@ public class AuthenticationServiceImpl implements AuthenticationService{
         // if(user.getRole().getRole().equals("USER")){
         //    id = pageRepo.findByName(user.getName()).get().get_id();
         // }
+        if(user.getRole().getRole().equals("ADMIN")){
+            id = user.getId();
+        }else{
+            id = user.getProfileId();
+        }
         Token jwtToken = new Token();
-        jwtToken.setToken(jwtService.generateToken(user,user.getId()));
-        jwtToken.setRefreshToken(jwtService.generateToken(user,user.getId()));
+        jwtToken.setToken(jwtService.generateToken(user,id));
+        jwtToken.setRefreshToken(jwtService.generateToken(user,id));
         return jwtToken;
 
     }

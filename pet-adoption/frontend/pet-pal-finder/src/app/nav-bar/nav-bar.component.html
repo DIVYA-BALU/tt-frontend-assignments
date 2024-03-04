@@ -2,19 +2,19 @@
     <a routerLink="/pet" (click)="setActiveLink('home')" [class.active]="activeLink === 'home'">
         Home
     </a>
-    <a routerLink="/pet/doctor" (click)="setActiveLink('doctors')" [class.active]="activeLink === 'doctors'">
+    <a *ngIf="isAdopter" routerLink="/pet/doctor" (click)="setActiveLink('doctors')" [class.active]="activeLink === 'doctors'">
         Veterinary Doctors
     </a>
-    <a routerLink="" (click)="setActiveLink('status')" [class.active]="activeLink === 'status'">
+    <a routerLink="/pet/requests" (click)="setActiveLink('status')" [class.active]="activeLink === 'status'">
         Request Status
     </a>
     <a routerLink="" (click)="setActiveLink('favorites')" [class.active]="activeLink === 'favorites'">
         Favorites
     </a>
-    <a routerLink="/auth" (click)="setActiveLink('login')" [class.active]="activeLink === 'login'">
+    <a *ngIf="!loggedIn" routerLink="/auth" (click)="setActiveLink('login')" [class.active]="activeLink === 'login'">
         Login
     </a>
-    <a routerLink="" (click)="setActiveLink('profile')" [class.active]="activeLink === 'profile'">
-        <img src="" alt=""> Name
+    <a *ngIf="loggedIn" routerLink="" (click)="setActiveLink('profile')" [class.active]="activeLink === 'profile'" class="profile">
+        <img class="dp" [src]="profileUrl" alt=""> {{profileName}}
     </a>
 </div>

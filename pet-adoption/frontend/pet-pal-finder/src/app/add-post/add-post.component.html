@@ -1,0 +1,34 @@
+<div class="container">
+  <label>Username</label>
+  <input type="file" (change)="getImage($event)" />
+  <form action="" [formGroup]="formResponse" (ngSubmit)="request()">
+    <div class="page-title">Pet Pal Finder</div>
+    <mat-form-field class="feild">
+      <mat-label>Category</mat-label>
+      <input type="text" matInput formControlName="category" />
+    </mat-form-field>
+    <mat-form-field class="feild">
+      <mat-label>breed</mat-label>
+      <input type="text" matInput formControlName="breed" />
+    </mat-form-field>
+    <mat-form-field class="feild">
+      <mat-label>Quantity</mat-label>
+      <input type="text" matInput formControlName="quantity" />
+    </mat-form-field>
+    
+    <mat-form-field class="feild">
+      <mat-label>Gender</mat-label>
+      <input type="text" matInput formControlName="gender" />
+    </mat-form-field>
+    <mat-form-field class="feild">
+      <mat-label>Weight</mat-label>
+      <input type="text" matInput formControlName="weight" />
+    </mat-form-field>
+    <div class="checkbox"><mat-checkbox formControlName="isInfected">Select if pet is infected</mat-checkbox></div>
+    <mat-form-field class="feild">
+      <mat-label>Description</mat-label>
+      <input type="text" matInput formControlName="description" />
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+</div>

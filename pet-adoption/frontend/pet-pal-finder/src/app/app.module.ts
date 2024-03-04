@@ -7,6 +7,8 @@ import { AuthenticationComponent } from './authentication/authentication.compone
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { AdoptionFormComponent } from './adoption-form/adoption-form.component';
+import { DateConverterPipe } from './pipes/date-converter.pipe';
 
 @NgModule({
   declarations: [

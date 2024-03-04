@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import {
-  EmailVerificationRequest,
   LoginDetails,
   Otp,
   StatusMessage,
   Token,
   User,
 } from '../models/models';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { FormGroup } from '@angular/forms';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -20,9 +19,20 @@ export class AuthService {
 
   isLoggedIn: boolean = false;
 
+  private idSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  sharedId$: Observable<string> = this.idSubject.asObservable();
+
+  private role: string = 'ANONYMOUS';
+
   constructor(private http: HttpClient) {
     this.isLoggedIn =
       localStorage.getItem('loggedIn') === 'true' ? true : false;
+
+    if (this.isLoggedIn === true) {
+      const token: any = jwtDecode(localStorage.getItem('token') || '');
+      this.idSubject.next(token.id);
+      this.role = token.role[0].authority;
+    }
   }
 
   login(loginDetails: LoginDetails) {
@@ -57,13 +67,26 @@ export class AuthService {
     return this.http.post<any>(`${this.baseUrl}veterinary-doctor`, formData);
   }
 
-  setLogin() {
+  setLogin(id: string) {
     this.isLoggedIn = true;
-    localStorage.setItem("loggedIn","true")
+    localStorage.setItem('loggedIn', 'true');
+    this.idSubject.next(id);
+  }
+
+  setRole(role: string) {
+    this.role = role;
   }
 
   isAuthenticated(): boolean {
     return this.isLoggedIn;
   }
-  
+
+  hasAccess(role: string) {
+    console.log(role,this.role);
+    
+    if (this.role === role) {
+      return true;
+    }
+    return false;
+  }
 }

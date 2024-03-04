@@ -2,9 +2,7 @@ package com.petAdoption.petPalFinder.services.implementation;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

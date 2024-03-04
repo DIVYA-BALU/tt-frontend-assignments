@@ -11,15 +11,23 @@ import org.springframework.stereotype.Service;
 
 import com.petAdoption.petPalFinder.dto.OtpVerificaion;
 import com.petAdoption.petPalFinder.dto.StatusMessage;
+import com.petAdoption.petPalFinder.dto.StatusUpdateDto;
 import com.petAdoption.petPalFinder.models.EmailVerification;
 import com.petAdoption.petPalFinder.repositorys.EmailVerificationRepository;
 import com.petAdoption.petPalFinder.services.EmailVerificationService;
+import com.petAdoption.petPalFinder.services.UserService;
 
 @Service
 public class EmailVerificationServiceImpl implements EmailVerificationService{
     @Autowired
     EmailVerificationRepository emailVerificationRepository;
-    @Autowired private JavaMailSender javaMailSender;
+
+    @Autowired 
+    private JavaMailSender javaMailSender;
+
+
+    @Autowired
+    UserService userService;
  
     @Value("${spring.mail.username}") private String sender;
  
@@ -29,8 +37,7 @@ public class EmailVerificationServiceImpl implements EmailVerificationService{
     {
         StatusMessage statusMessage = new StatusMessage();
  
-        // Try block to check for exceptions
-        try {
+        
 
             emailVerificationRepository.deleteByEmail(email.getEmail());
             Random rnd = new Random();
@@ -50,14 +57,10 @@ public class EmailVerificationServiceImpl implements EmailVerificationService{
             javaMailSender.send(mailMessage);
             emailVerificationRepository.save(email);
             statusMessage.setMessage("Mail Sent Successfully");
-            
-        }
-         catch (Exception e) {
-            e.printStackTrace();
-            statusMessage.setMessage("Error while Sending Mail");
-        }
+          
         return statusMessage;
     }
+
     public StatusMessage verifyOtp(OtpVerificaion otpVerificaion){
         StatusMessage statusMessage = new StatusMessage();
         EmailVerification emailVerification = emailVerificationRepository.findByEmail(otpVerificaion.getEmail()).get();
@@ -75,5 +78,35 @@ public class EmailVerificationServiceImpl implements EmailVerificationService{
             statusMessage.setMessage("invalid otp");
         }
         return statusMessage;
+    }
+
+    public void sendStatusMail(String email, StatusUpdateDto status, String role){
+        SimpleMailMessage mail = new SimpleMailMessage();
+        mail.setFrom(sender);
+        mail.setTo(email);
+        mail.setSubject("Registration Status");
+        String body;
+        if(status.getStatus().equals("accepted") ){
+            String password = generatePassword();
+            userService.saveUser(email, password, role, status.getId());
+            body = "Your Registration has done successfully\n password: " + password + " \n you can login using given password";
+        }
+        else{
+            body = "Your registration has cancelled because of some data you provided look like not proper \n sorry for the inconvenience";
+        }
+        mail.setText(body);
+        javaMailSender.send(mail);
+    }
+
+    public String generatePassword() {
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder stringBuilder = new StringBuilder();
+        Random rnd = new Random();
+        while (stringBuilder.length() < 10) { 
+            int index = (int) (rnd.nextFloat() * chars.length());
+            stringBuilder.append(chars.charAt(index));
+        }
+        String password = stringBuilder.toString();
+        return password;
     }
 }

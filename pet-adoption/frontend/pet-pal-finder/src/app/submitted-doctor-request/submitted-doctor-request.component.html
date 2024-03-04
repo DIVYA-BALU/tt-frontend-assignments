@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="details" *ngFor="let appointmentStatus of appointmentStatuses">
+      <img [src]="appointmentStatus.doctorId.profilePhoto" alt="" class="profile"/>
+      <div class="card">
+          Doctor Details: <br>
+        <span>Name : {{ appointmentStatus.doctorId.name }}</span>
+        <span>Degree : {{ appointmentStatus.doctorId.degree }}</span>
+        <span>Contact Number : {{ appointmentStatus.doctorId.contactNumber }}</span>
+        <span>Email Id : {{ appointmentStatus.doctorId.email }}</span>
+      </div>
+      <div class="card">
+        <span>Requested Time : {{ appointmentStatus.requestedDate || date | dateConverter | date:'medium'}}</span>
+        <span> Status :  {{appointmentStatus.status}}</span>
+        <span *ngIf="appointmentStatus.status === 'accepted'"> Appointment Date :  {{appointmentStatus.appointmentDate || date | dateConverter | date:'medium'}}</span>
+       
+      </div>
+    </div>
+  </div>
+  

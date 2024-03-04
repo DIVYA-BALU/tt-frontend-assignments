@@ -7,6 +7,8 @@ export const ADMIN_ROUTES: Route[] = [
   children: [
     { path: '', component: HomeComponent },
     { path: 'doctor', component: VeterinaryDoctorComponent },
+    { path:"pet-profile/:id", loadComponent:() => import("src/app/pet-profile/pet-profile.component").then(d => d.PetProfileComponent)},
+    { path:"requests", loadComponent:() => import("src/app/view-request-status/view-request-status.component").then(d => d.ViewRequestStatusComponent)}
   ]}
    
   ];
