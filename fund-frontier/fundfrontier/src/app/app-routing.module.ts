@@ -11,6 +11,8 @@ import { StudentprofileComponent } from './components/studentprofile/studentprof
 import { FunderprofileComponent } from './components/funderprofile/funderprofile.component';
 import { FindstudentsComponent } from './components/findstudents/findstudents.component';
 import { TestimonialComponent } from './components/testimonial/testimonial.component';
+import { TermsComponent } from './components/terms/terms.component';
+import { PrivacypolicyComponent } from './components/privacypolicy/privacypolicy.component';
 
 const routes: Routes = [
   {
@@ -62,6 +64,14 @@ const routes: Routes = [
         path:"testimonial",
         component: TestimonialComponent
       
+      },
+      {
+        path: "terms",
+        component: TermsComponent
+      },
+      {
+        path: "privacy",
+        component: PrivacypolicyComponent
       }
       
     ]

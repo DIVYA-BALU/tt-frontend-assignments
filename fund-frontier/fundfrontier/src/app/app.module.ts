@@ -34,6 +34,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ViewstudentComponent } from './components/viewstudent/viewstudent.component';
 import { TestimonialComponent } from './components/testimonial/testimonial.component';
+import { TermsComponent } from './components/terms/terms.component';
+import { PrivacypolicyComponent } from './components/privacypolicy/privacypolicy.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { TestimonialComponent } from './components/testimonial/testimonial.compo
     StudentprofileComponent,
     FunderprofileComponent,
     ViewstudentComponent,
-    TestimonialComponent
+    TestimonialComponent,
+    TermsComponent,
+    PrivacypolicyComponent
   ],
   imports: [
     BrowserModule,
