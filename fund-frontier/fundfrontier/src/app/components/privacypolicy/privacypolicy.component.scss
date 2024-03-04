@@ -1,0 +1,22 @@
+.container { 
+    border: 10px solid transparent;
+    padding: 15px;
+    border-image: url('/assets/images/privacybg.jpg') 30 round;
+    margin: 300px;
+    margin-top: 0px;
+  }
+
+  h2 {
+    text-align: center;
+    color: rgb(89, 49, 235);
+  }
+
+  li {
+    padding: 10px;
+    color: rgb(1, 10, 53);
+  }
+
+  .privacybg {
+    background-image: url('/assets/images/termsbc.jpg');
+    background-size: cover;
+  }
