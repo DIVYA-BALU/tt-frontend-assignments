@@ -1,0 +1,58 @@
+.main-banner {
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: #ffc709;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    border-image: url('/assets/images/studentpattern.jpeg');
+}
+
+.button {
+  
+    background-color: rgb(67, 67, 160);
+    text-align: center;
+    color:white;
+    height: 40px;
+    width: 100px;
+    margin-left: 600px;
+
+}
+
+.text-bold{
+    font-size: 40px;
+    padding: 10px;
+    color: #483ac2;
+   }
+
+.text-thin {
+    font-size: 30px;
+    padding: 20px;
+ }
+
+.need {
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    justify-content: center;
+}
+
+.card {
+    padding: 10px;
+    width: 350px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.info-content {
+    background-color: #8292ec;
+    text-align: center;
+    padding: 10px;
+}
+
+.pattern {
+    background-image: url('/assets/images/studentpattern.jpeg');
+    height: 40px;
+}

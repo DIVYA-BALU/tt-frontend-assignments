@@ -1,0 +1,51 @@
+.main-banner.about-banner {
+    height: 450px;
+    background: #092644  center no-repeat;
+}
+.main-banner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.text-bold {
+    font-size:xx-large;
+
+}
+
+.vision-mission {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    //margin: 20px;
+    height: 200px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(250, 246, 10, 0.863);
+}
+
+.card {
+    //height: 200px;
+    width: 400px;
+    padding: 20px;
+    margin-right: 40px;
+}
+
+.card-header {
+    text-align: center;
+    font-size: 40px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+.video {
+    padding: 20px;
+    background-color: #092644;
+}
+iframe {
+    width: 70%;
+    height: 400px;
+    margin-left: 200px;
+}
