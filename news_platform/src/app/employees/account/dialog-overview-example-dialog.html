@@ -1,0 +1,41 @@
+<div mat-dialog-content>
+  <p>Create Account for employees</p>
+
+  <div class="form-container">
+    <form>
+      <div>
+        <label for="fname">First Name:</label>
+        <input type="text" name="firstName" id="fname" [(ngModel)]="data.firstName"/>
+      </div>
+
+      <div>
+        <label for="email">Email:</label>
+        <input type="text" name="email" id="email" [(ngModel)]="data.email" />
+      </div>
+
+      <div>
+        <label for="pno">Phone No:</label>
+        <input type="text" name="phoneNo" id="pno" [(ngModel)]="data.phoneNo"/>
+      </div>
+
+      <div>
+        <label for="pword">Password:</label>
+        <input type="password" name="password" id="pword" [(ngModel)]="data.password"/>
+      </div>
+
+      <div>
+        <label for="role">Role:</label>
+        <select name="role" id="role" [(ngModel)]="data.role">
+          <option value="">Select one</option>
+          <option value="content_writer">CONTENT_WRITER</option>
+          <option value="news_writer">NEWS_WRITER</option>
+          <option value="editor">EDITOR</option>
+        </select>
+      </div>
+    </form>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Submit</button>
+</div>

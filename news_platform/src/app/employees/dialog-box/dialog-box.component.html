@@ -1,0 +1,31 @@
+<div mat-dialog-content>
+  <p>Reason for Rejection</p>
+
+  <div class="form-container">
+    <form>
+      <div>
+        <label for="id">Id:</label>
+        <input
+          type="text"
+          name="id"
+          id="id"
+          [(ngModel)]="data.id"
+          readonly
+        />
+      </div>
+      <div>
+        <label for="reason">Reason:</label>
+        <input
+          type="text"
+          name="reason"
+          id="reason"
+          [(ngModel)]="data.reason"
+        />
+      </div>
+    </form>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Submit</button>
+</div>

@@ -1,0 +1,26 @@
+@import "~@fortawesome/fontawesome-free/css/all.css";
+@import "/src/styles/variables";
+
+.container{
+  padding-left: 30px;
+  padding-top: 40px;
+}
+
+table {
+  width: 100%;
+}
+
+td {
+  text-align: left;
+  font-family: $font-family;
+  height: 10px;
+}
+
+th {
+  font-family: $font-family;
+  font-weight: bold;
+}
+
+ul {
+  padding-left: 0px;
+}

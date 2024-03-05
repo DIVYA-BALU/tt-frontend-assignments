@@ -1,0 +1,51 @@
+<div class="form-container">
+  <p class="register">Already a user? <a routerLink="/login">Login</a></p>
+  <h2>Create Account!</h2>
+  <form [formGroup]="signupForm" (ngSubmit)="onsignup()">
+    <div>
+      <label for="fname">First name:</label>
+      <input
+        type="text"
+        name="firstName"
+        id="fname"
+        formControlName="firstName"
+      />
+    </div>
+    <span
+      *ngIf="signupForm.controls['firstName']?.touched && signupForm.controls['firstName'].errors?.['required']"
+    >
+      First name is required
+    </span>
+    <div>
+      <label for="email">Email:</label>
+      <input type="text" name="email" id="email" formControlName="email" />
+    </div>
+    <span
+      *ngIf="signupForm.controls['email']?.touched && signupForm.controls['email'].errors?.['required']"
+    >
+      Email is required
+    </span>
+    <div>
+      <label for="pword">Password:</label>
+      <input
+        type="password"
+        name="password"
+        id="pword"
+        formControlName="password"
+      />
+    </div>
+    <span
+      *ngIf="(signupForm.controls['password']?.touched || signupForm.controls['password']?.dirty) && signupForm.controls['password'].errors?.['required']"
+    >
+      Password is required
+    </span>
+    <span *ngIf="signupForm.controls['password'].errors?.['pattern']">
+      Password should have 1 uppercase, 1 lowercase, 1 number and minimum 8
+      characters
+    </span>
+    <div>
+      <button type="submit" [disabled]="!signupForm.valid">Signup</button>
+    </div>
+  </form>
+  <div *ngIf="status">{{ status }}</div>
+</div>

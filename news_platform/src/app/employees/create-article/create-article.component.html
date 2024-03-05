@@ -1,0 +1,103 @@
+<div class="form-container">
+  <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
+    <div class="container">
+      <label for="id">Article Unique Id:</label>
+      <input
+        type="text"
+        name="articleUid"
+        id="id"
+        placeholder="Ex: 20A101"
+        formControlName="articleUid"
+      />
+      <span
+        *ngIf="(articleForm.controls['articleUid'].touched || articleForm.controls['articleUid'].dirty) && (articleForm.controls['articleUid'].errors?.['required'])"
+      >
+        article unique id is required
+      </span>
+    </div>
+
+    <div class="container">
+      <label for="category">Category:</label>
+      <select name="category" id="category" formControlName="category">
+        <option value="">Select category</option>
+        <option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </option>
+      </select>
+      <span
+        *ngIf="(articleForm.controls['category'].touched || articleForm.controls['category'].dirty) && (articleForm.controls['category'].errors?.['required'])"
+      >
+        select category
+      </span>
+    </div>
+
+    <div class="container">
+      <label for="title">Title:</label>
+      <input
+        type="text"
+        name="title"
+        id="title"
+        placeholder="Ex: The Beauty of Earth"
+        formControlName="title"
+      />
+    </div>
+
+    <div class="container img">
+      <div class="img-div">
+        <p>
+          Upload images: (name should be same as unique id, if multiple
+          20A101-1, 20A101-2)
+        </p>
+        <label for="img"><i class="fa-solid fa-cloud-arrow-up"></i></label>
+        <input
+          type="file"
+          name="images"
+          id="img"
+          accept=".jpg, .jpeg, .png, .mp4"
+          (change)="uploadImages($event)"
+          formControlName="images"
+        />
+      </div>
+      <span *ngFor="let file of files; let i = index" class="span-img">
+        <p>
+          {{ file.name }}
+          <button type="button" (click)="remove(i)">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </p>
+      </span>
+      <span
+        *ngIf="((articleForm.controls['images'].touched || articleForm.controls['images'].dirty) && articleForm.controls['images'].errors?.['required'])"
+      >
+        upload image
+      </span>
+      <span *ngIf="imgError">
+        invalid image name format!
+      </span>
+    </div>
+
+    <div class="content container">
+      <label>Article contents:</label>
+      <span
+        *ngIf="((articleForm.controls['content'].touched || articleForm.controls['content'].dirty) && articleForm.controls['content'].errors?.['required'])"
+      >
+        content is required
+      </span>
+      <editor
+        [init]="editorConfig"
+        name="content"
+        formControlName="content"
+      ></editor>
+    </div>
+
+    <div>
+      <button type="submit" [disabled]="articleForm.invalid" class="submit">
+        Upload
+      </button>
+    </div>
+
+    <div *ngIf="status">
+      {{ status }}
+    </div>
+  </form>
+</div>

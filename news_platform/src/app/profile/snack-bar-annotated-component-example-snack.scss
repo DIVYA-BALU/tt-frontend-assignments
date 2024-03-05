@@ -1,0 +1,10 @@
+@import '/src/styles/variables';
+
+.example-pizza-party{
+   width: 90%;
+}
+
+:host{
+    display: flex;
+    flex-direction: row;
+}

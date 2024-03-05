@@ -1,0 +1,22 @@
+<ng-container>
+    <mat-toolbar class="example-header">
+      <div class="heading">
+        InsightNow
+      </div>
+      <div class="example-spacer"></div>
+      <div class="icon">
+        <!-- <h4>Hi, {{ name }}</h4> -->
+        <a routerLink="profile" *appRoutehide="logged">
+          <i class="fa fa-user" aria-hidden="true"></i>
+        </a>
+        <button type="button" (click)="logout()" *appRoutehide="logged">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
+      </div>
+    </mat-toolbar>
+    <mat-sidenav-container class="example-container">
+      <mat-sidenav-content class="content">
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </ng-container>

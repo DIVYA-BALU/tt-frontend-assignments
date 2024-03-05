@@ -1,0 +1,36 @@
+<div class="form-container">
+  <p class="register">Not a user? <a routerLink="/signup">Register Now</a></p>
+  <h2>Welcome back!</h2>
+  <p>Login to continue</p>
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <div>
+      <label for="email">Email:</label>
+      <input type="text" name="email" id="email" formControlName="email" />
+    </div>
+    <span *ngIf="(loginForm.controls['email']?.touched || loginForm.controls['email']?.dirty )&& loginForm.controls['email'].errors?.['required']">
+      Email is required
+    </span>
+    <div>
+      <label for="pword">Password:</label>
+      <input
+        type="password"
+        name="password"
+        id="pword"
+        formControlName="password"
+      />
+    </div>
+    <span *ngIf="(loginForm.controls['password']?.touched || loginForm.controls['password']?.dirty) && loginForm.controls['password'].errors?.['required']">
+      Password is required
+    </span>
+    <span *ngIf="loginForm.controls['password'].errors?.['pattern']">
+      Password should have 1 uppercase, 1 lowercase, 1 number and minimum 8 characters
+    </span>
+    <div>
+      <button type="submit" [disabled]="!loginForm.valid">LOGIN</button>
+    </div>
+    <div>
+      <a routerLink="/user" class="guest">Login as guest</a>
+    </div>
+  </form>
+  <div *ngIf="status">{{ status }}</div>
+</div>

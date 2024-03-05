@@ -1,0 +1,77 @@
+@import "~@fortawesome/fontawesome-free/css/all.css";
+@import "/src/styles/variables";
+
+.form-container {
+  display: flex;
+  font-family: $font-family;
+  padding-left: 70px;
+  padding-top: 40px;
+}
+
+.container {
+  margin-bottom: 20px;
+}
+
+label {
+  margin-right: 10px;
+}
+
+input[type="text"],
+select {
+  margin-right: 20px;
+  font-family: $font-family;
+  height: 30px;
+  border: 1px solid grey;
+  outline: none;
+  box-sizing: border-box;
+  padding-left: 20px;
+  width: 100%;
+}
+
+span {
+  color: $error-color;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.img-div {
+  display: flex;
+}
+
+.img {
+  p {
+    margin-right: 10px;
+  }
+  label {
+    font-size: 20px;
+  }
+  .span-img {
+    color: black;
+  }
+  button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+.submit {
+  font-family: $font-family;
+  background-color: $secondary-color;
+  height: 50px;
+  width: 20%;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+  color: white;
+}
+
+.content {
+  width: 150%;
+}
+
+button[disabled] {
+  cursor: not-allowed;
+}

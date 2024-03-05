@@ -1,0 +1,66 @@
+<div class="form-container">
+  <form [formGroup]="profileForm" (ngSubmit)="onSave()">
+    <table>
+      <tr>
+        <td>
+          <label for="fname">First name:</label>
+          <input
+            type="text"
+            name="firstName"
+            id="fname"
+            formControlName="firstName"
+          />
+        </td>
+        <td>
+          <label for="lname">Last name:</label>
+          <input
+            type="text"
+            name="lastName"
+            id="lname"
+            formControlName="lastName"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="email">Email:</label>
+          <input type="text" name="email" id="email" formControlName="email" />
+        </td>
+        <td>
+          <label for="pno">Phone no:</label>
+          <input
+            type="text"
+            name="phoneNo"
+            id="pno"
+            formControlName="phoneNo"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="occupation">Occupation:</label>
+          <input
+            type="text"
+            name="occupation"
+            id="occupation"
+            formControlName="occupation"
+          />
+        </td>
+        <td>
+          <label for="location">Location:</label>
+          <input
+            type="text"
+            name="location"
+            id="location"
+            formControlName="location"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="submit" (click)="openSnackBar()">SAVE</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
