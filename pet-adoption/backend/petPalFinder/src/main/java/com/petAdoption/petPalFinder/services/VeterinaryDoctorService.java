@@ -11,7 +11,8 @@ public interface VeterinaryDoctorService {
     public StatusMessage save(VeterinaryDoctorDto veterinaryDoctorDto);
     public List<VeterinaryDoctor> getInitiatedVeterinaryDoctor();
     public List<VeterinaryDoctor> getNearByVeterinaryDoctor();
-    public VeterinaryDoctor getApprovedVeterinaryDoctor();
+    public List<VeterinaryDoctor> getApprovedVeterinaryDoctor();
     public StatusMessage updateStatus(StatusUpdateDto statusUpdateDto);
     public VeterinaryDoctor getVeterinaryDoctor(String id);
+    public StatusMessage update(VeterinaryDoctorDto veterinaryDoctorDto);
 }

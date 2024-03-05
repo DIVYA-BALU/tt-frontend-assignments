@@ -1,25 +1,30 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 import { Adopter } from '../models/models';
 import { ProfileService } from '../service/profile.service';
 import { environment } from 'src/environments/environment';
+import Swal from 'sweetalert2';
+import { LoginAlertService } from '../service/login-alert.service';
+import { ImagePathConverterPipe } from "../pipes/image-path-converter.pipe";
 
 @Component({
-  selector: 'app-nav-bar',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
-  templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.scss'],
+    selector: 'app-nav-bar',
+    standalone: true,
+    templateUrl: './nav-bar.component.html',
+    styleUrls: ['./nav-bar.component.scss'],
+    imports: [CommonModule, RouterModule, ImagePathConverterPipe]
 })
 export class NavBarComponent {
   constructor(
     private authService: AuthService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private loginAlertService:LoginAlertService,
+    private router:Router
   ) {}
   loggedIn: boolean = false;
-  isAdopter: boolean = false;
+  isVeterinaryDoctor: boolean = false;
   activeLink: string | null = null;
 
   profileName: string = '';
@@ -44,11 +49,20 @@ export class NavBarComponent {
   };
 
   setActiveLink(link: string): void {
+    if(link === 'status' && !this.authService.isAuthenticated()){
+      this.loginAlertService.requestLogin();
+    }else if(link === 'status'){
+      this.router.navigate(['pet/requests']);
+    }
     this.activeLink = link;
   }
 
   ngOnInit() {
-    this.loggedIn = this.authService.isAuthenticated();
+    this.authService.sharedIsLoggedIn$.subscribe({
+      next: (val) => {
+        this.loggedIn = val
+      }
+    });
     if (this.loggedIn) {
       this.authService.sharedId$.subscribe({
         next: (id) => {
@@ -82,7 +96,7 @@ export class NavBarComponent {
           console.log(val);
         },
       });
-      this.isAdopter = this.authService.hasAccess('ROLE_ADOPTER');
+      this.isVeterinaryDoctor = this.authService.hasAccess(environment.veterinaryDoctor);
     }
   }
 }

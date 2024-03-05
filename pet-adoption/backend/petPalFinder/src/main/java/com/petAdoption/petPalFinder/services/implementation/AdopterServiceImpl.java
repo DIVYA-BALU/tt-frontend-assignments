@@ -1,5 +1,9 @@
 package com.petAdoption.petPalFinder.services.implementation;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +25,15 @@ public class AdopterServiceImpl implements AdopterService {
     @Override
     public Adopter updateAdopter(AdopterDto adopterDto) {
         String url = fileService.saveFile(adopterDto.getProfilePhoto(), "adopter_profile");
+        Date date = new Date();
+        try {
+            date = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss 'GMT'Z (z)").parse(adopterDto.getDob());
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }  
         Adopter adopter = Adopter.builder()._id(adopterDto.getId()).location(adopterDto.getLocation())
-                .contactNumber(adopterDto.getContactNumber()).dob(adopterDto.getDob()).name(adopterDto.getName())
+                .contactNumber(adopterDto.getContactNumber()).dob(date).name(adopterDto.getName())
                 .occupation(adopterDto.getOccupation()).profilePhoto(url).build();
             System.out.println(adopter + " " +adopterDto.getId());
         return adopterRepository.save(adopter);

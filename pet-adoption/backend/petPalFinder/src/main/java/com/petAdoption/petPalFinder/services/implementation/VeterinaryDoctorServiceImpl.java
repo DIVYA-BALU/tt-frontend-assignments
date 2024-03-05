@@ -35,16 +35,24 @@ public class VeterinaryDoctorServiceImpl implements VeterinaryDoctorService{
         StatusMessage statusMessage = new StatusMessage();
         String profileUrl = fileService.saveFile(veterinaryDoctorDto.getProfilePhoto(), "doctor-profile");
         String certificateUrl = fileService.saveFile(veterinaryDoctorDto.getDegreeCertificate(), "doctor-certificate");
-        VeterinaryDoctor veterinaryDoctor = VeterinaryDoctor.builder().name(veterinaryDoctorDto.getName())
-                .contactNumber(veterinaryDoctorDto.getContactNumber())
-                .location(veterinaryDoctorDto.getLocation())
-                .email(veterinaryDoctorDto.getEmail())
-                .status(veterinaryDoctorDto.getStatus())
-                .degree(veterinaryDoctorDto.getDegree())
-                .degreeCertificate(certificateUrl)
-                .isSubscribed(veterinaryDoctorDto.getIsSubscribed())
-                .profilePhoto(profileUrl)
-                .build();
+        VeterinaryDoctor veterinaryDoctor = VeterinaryDoctorDtoToVeterinaryDoctor(veterinaryDoctorDto, certificateUrl, profileUrl);
+        veterinaryDoctorRepository.save(veterinaryDoctor);
+        statusMessage.setMessage("data saved");
+        return statusMessage;
+    }
+
+    public StatusMessage update(VeterinaryDoctorDto veterinaryDoctorDto) {
+        VeterinaryDoctor veterinaryDoctor = veterinaryDoctorRepository.findById(veterinaryDoctorDto.getId()).get();
+        StatusMessage statusMessage = new StatusMessage();
+        String profileUrl;
+        if(veterinaryDoctorDto.getProfilePhoto().isEmpty()){
+            profileUrl = veterinaryDoctor.getProfilePhoto();
+        }else{
+            profileUrl = fileService.saveFile(veterinaryDoctorDto.getProfilePhoto(), "doctor-profile");
+        }
+        String certificateUrl = veterinaryDoctor.getDegreeCertificate();
+        veterinaryDoctor = VeterinaryDoctorDtoToVeterinaryDoctor(veterinaryDoctorDto, certificateUrl, profileUrl);
+        veterinaryDoctor.set_id(veterinaryDoctorDto.getId());
         veterinaryDoctorRepository.save(veterinaryDoctor);
         statusMessage.setMessage("data saved");
         return statusMessage;
@@ -56,9 +64,8 @@ public class VeterinaryDoctorServiceImpl implements VeterinaryDoctorService{
     }
 
     @Override
-    public VeterinaryDoctor getApprovedVeterinaryDoctor() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getApprovedVeterinaryDoctorDto'");
+    public List<VeterinaryDoctor> getApprovedVeterinaryDoctor() {
+        return veterinaryDoctorRepository.findByStatus("accepted");
     }
 
     @Override
@@ -79,6 +86,19 @@ public class VeterinaryDoctorServiceImpl implements VeterinaryDoctorService{
     @Override
     public VeterinaryDoctor getVeterinaryDoctor(String id) {
         return veterinaryDoctorRepository.findById(id).get();
+    }
+
+    public VeterinaryDoctor VeterinaryDoctorDtoToVeterinaryDoctor(VeterinaryDoctorDto veterinaryDoctorDto, String certificateUrl,String profileUrl ){
+        return VeterinaryDoctor.builder().name(veterinaryDoctorDto.getName())
+        .contactNumber(veterinaryDoctorDto.getContactNumber())
+        .location(veterinaryDoctorDto.getLocation())
+        .email(veterinaryDoctorDto.getEmail())
+        .status(veterinaryDoctorDto.getStatus())
+        .degree(veterinaryDoctorDto.getDegree())
+        .degreeCertificate(certificateUrl)
+        .isSubscribed(veterinaryDoctorDto.getIsSubscribed().equals("true"))
+        .profilePhoto(profileUrl)
+        .build();
     }
     
 }

@@ -30,7 +30,7 @@ public class VeterinaryDoctorController {
     VeterinaryDoctorService veterinaryDoctorService;
     
     @PostMapping
-     public ResponseEntity<StatusMessage> saveOrganization(@ModelAttribute VeterinaryDoctorDto veterinaryDoctorDto) {  
+     public ResponseEntity<StatusMessage> saveDoctor(@ModelAttribute VeterinaryDoctorDto veterinaryDoctorDto) {  
         System.out.println(veterinaryDoctorDto);    
         return ResponseEntity.ok(veterinaryDoctorService.save(veterinaryDoctorDto));
     }
@@ -38,6 +38,11 @@ public class VeterinaryDoctorController {
     @GetMapping
     public ResponseEntity<List<VeterinaryDoctor>> getInitiatedVeterinaryDoctor() {
         return ResponseEntity.ok(veterinaryDoctorService.getInitiatedVeterinaryDoctor());
+    }
+
+    @GetMapping("all")
+    public ResponseEntity<List<VeterinaryDoctor>> getAllDoctor() {
+        return ResponseEntity.ok(veterinaryDoctorService.getApprovedVeterinaryDoctor());
     }
 
     @PutMapping
@@ -51,8 +56,13 @@ public class VeterinaryDoctorController {
     }
 
     @GetMapping("profile/{id}")
-    public ResponseEntity<VeterinaryDoctor> getMethodName(@PathVariable String id) {
+    public ResponseEntity<VeterinaryDoctor> getDoctor(@PathVariable String id) {
         return ResponseEntity.ok(veterinaryDoctorService.getVeterinaryDoctor(id));
     }
     
+    @PutMapping("update")
+     public ResponseEntity<StatusMessage> update(@ModelAttribute VeterinaryDoctorDto veterinaryDoctorDto) {  
+        System.out.println(veterinaryDoctorDto);    
+        return ResponseEntity.ok(veterinaryDoctorService.update(veterinaryDoctorDto));
+    }
 }

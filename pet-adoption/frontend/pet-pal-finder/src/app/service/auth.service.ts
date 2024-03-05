@@ -15,12 +15,16 @@ import { jwtDecode } from 'jwt-decode';
   providedIn: 'root',
 })
 export class AuthService {
+  
   private baseUrl: string = environment.baseUrl;
 
   isLoggedIn: boolean = false;
 
   private idSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
   sharedId$: Observable<string> = this.idSubject.asObservable();
+
+  private loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  sharedIsLoggedIn$: Observable<boolean> = this.loggedInSubject.asObservable();
 
   private role: string = 'ANONYMOUS';
 
@@ -32,6 +36,7 @@ export class AuthService {
       const token: any = jwtDecode(localStorage.getItem('token') || '');
       this.idSubject.next(token.id);
       this.role = token.role[0].authority;
+      this.loggedInSubject.next(true)
     }
   }
 
@@ -71,6 +76,7 @@ export class AuthService {
     this.isLoggedIn = true;
     localStorage.setItem('loggedIn', 'true');
     this.idSubject.next(id);
+    this.loggedInSubject.next(true)
   }
 
   setRole(role: string) {
@@ -88,5 +94,11 @@ export class AuthService {
       return true;
     }
     return false;
+  }
+  logout() {
+    this.isLoggedIn = false;
+    this.idSubject.next('');
+    this.loggedInSubject.next(false)
+    this.role = 'ANONYMOUS'
   }
 }

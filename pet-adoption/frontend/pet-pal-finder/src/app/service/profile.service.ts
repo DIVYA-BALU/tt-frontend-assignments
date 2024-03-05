@@ -72,4 +72,12 @@ export class ProfileService {
   setUser(user:Adopter | VeterinaryDoctor | Organization){
     this.userSubject.next(user);
   }
+
+  updateAdopterProfile(formData:FormData){
+    return this.http.put<any>(`${this.baseUrl}adopter`,formData);
+  }
+
+  updateVeterinaryDoctorProfile(formData:FormData){
+    return this.http.put<any>(`${this.baseUrl}veterinary-doctor/update`, formData);
+  }
 }

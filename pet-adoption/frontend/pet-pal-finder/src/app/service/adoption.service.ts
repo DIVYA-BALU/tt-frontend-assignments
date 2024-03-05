@@ -23,4 +23,16 @@ export class AdoptionService {
       `${this.baseUrl}adoption-details?id=${id}`
     );
   }
+
+  getAdoptionStatusOfPoster(id:string,status:string,page:number){
+    return this.http.get<AdoptionDetail[]>(
+      `${this.baseUrl}adoption-details/poster?id=${id}&status=${status}&page=${page}`
+    );
+  }
+
+  updateAdoptionStatus(id:string,status:String){
+    return this.http.put<AdoptionDetail[]>(
+      `${this.baseUrl}adoption-details`,{id,status}
+    );
+  }
 }

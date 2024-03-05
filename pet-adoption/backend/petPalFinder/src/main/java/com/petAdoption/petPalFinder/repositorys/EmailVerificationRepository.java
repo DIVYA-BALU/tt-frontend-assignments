@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface EmailVerificationRepository extends MongoRepository<EmailVerification,String>{
-    Optional<EmailVerification> findByEmail(String receiverEmail);
+    EmailVerification findByEmail(String receiverEmail);
     boolean existsByEmail(String receiverEmail);
     void deleteByEmail(String receiverEmail);
 }

@@ -1,5 +1,6 @@
 .container{
     display: flex;
+
     align-items: center;
     justify-content: center;
 }
@@ -17,7 +18,8 @@
 }
 
 .registerBox {
-
+    display: flex;
+    flex-direction: column;
     width: 50%;
     height: fit-content;
     padding: 20px;
@@ -65,4 +67,26 @@ width: fit-content;
 display: grid;
 grid-template-columns: 1fr 2fr;
 align-items: center;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+}
+.location{
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    column-gap: 20px;
+    row-gap: 20px;
+    width: 100%;
+}
+
+.profile{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+img{
+    width:50%;
+    height: 200px;
 }

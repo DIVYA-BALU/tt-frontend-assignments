@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 import { Subscription } from 'rxjs';
 import { Otp, StatusMessage, Token, User } from 'src/app/models/models';
 import { AuthService } from 'src/app/service/auth.service';
@@ -79,8 +80,12 @@ export class AdopterRegisterComponent {
               
               localStorage.setItem("token",token.token);
               localStorage.setItem("refresh-token",token.refreshToken);
+              const tokenInfo: any = jwtDecode(token.token);
+              const role: string = tokenInfo.role[0].authority;
+              this.authService.setLogin(tokenInfo.id);
+              this.authService.setRole(role)
             } });
-          this.router.navigate(['/auth/profile-details']);
+          this.router.navigate(['/pet/profile']);
         } else {
           alert('server down');
         }

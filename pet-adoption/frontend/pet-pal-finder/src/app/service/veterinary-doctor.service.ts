@@ -14,7 +14,7 @@ export class VeterinaryDoctorService {
 
   getNearByDoctors(){
     return this.http.get<VeterinaryDoctor[]>(
-      `${this.baseUrl}veterinary-doctor/near-by`
+      `${this.baseUrl}veterinary-doctor/all`
     );
   }
 

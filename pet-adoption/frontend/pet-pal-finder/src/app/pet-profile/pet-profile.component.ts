@@ -63,7 +63,7 @@ export class PetProfileComponent {
       height: '90vh',
       enterAnimationDuration,
       exitAnimationDuration,
-      data: {petPostId:this.petPost._id},
+      data: {petPostId:this.petPost._id,posterId:this.petPost.posterId._id},
     });
   }
 

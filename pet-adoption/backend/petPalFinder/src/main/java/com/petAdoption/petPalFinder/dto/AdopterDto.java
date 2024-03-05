@@ -15,5 +15,5 @@ public class AdopterDto {
     private String occupation;
     private Location location;
     private Long contactNumber;
-    private Date dob;
+    private String dob;
 }

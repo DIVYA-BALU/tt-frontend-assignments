@@ -151,7 +151,9 @@ export interface AdoptionDetail {
     allergyToAnimal: boolean;
     homeType: string;
     familyAcceptance: boolean;
+    posterId:string;
     status:string;
+    requestDate :Date;
 }
 
 export interface AdoptionDetailDto {
@@ -164,4 +166,5 @@ export interface AdoptionDetailDto {
     allergyToAnimal: boolean;
     homeType: string;
     familyAcceptance: boolean;
+    posterId:string
 }

@@ -42,7 +42,8 @@ export class AdoptionFormComponent {
       noOfChildren: 0,
       allergyToAnimal: false,
       homeType: '',
-      familyAcceptance: false
+      familyAcceptance: false,
+      posterId: ''
     }
 
     
@@ -51,7 +52,7 @@ export class AdoptionFormComponent {
       this.adoptionService.requestAdoption(this.adoptionDetail).subscribe({
         next : (val) => {
           console.log(val);
-          
+        this.dialogRef.close();  
         }
       })
       
@@ -59,6 +60,7 @@ export class AdoptionFormComponent {
 
       ngOnInit(){
         this.adoptionDetail.petPostId._id = this.petPostId.petPostId;
+        this.adoptionDetail.posterId = this.petPostId.posterId;
         this.authService.sharedId$.subscribe({
           next : (id) => {
             this.adoptionDetail.profileId = id;

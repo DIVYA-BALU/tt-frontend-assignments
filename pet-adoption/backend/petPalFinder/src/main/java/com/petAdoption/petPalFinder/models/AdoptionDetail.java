@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,4 +26,6 @@ public class AdoptionDetail {
     private String homeType;
     private Boolean familyAcceptance;
     private String status = "initiated";
+    private String posterId;
+    private Date requestDate = new Date();
 }

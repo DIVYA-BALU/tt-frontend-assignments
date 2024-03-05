@@ -27,7 +27,6 @@ import { MatNativeDateModule } from '@angular/material/core';
     OtpVerificationComponent,
     LoginComponent,
     CreatePasswordComponent,
-    ProfileDetailsComponent,
     RegisterComponent,
     AdopterRegisterComponent,
     OrganizationRegisterComponent,

@@ -63,7 +63,7 @@ public class EmailVerificationServiceImpl implements EmailVerificationService{
 
     public StatusMessage verifyOtp(OtpVerificaion otpVerificaion){
         StatusMessage statusMessage = new StatusMessage();
-        EmailVerification emailVerification = emailVerificationRepository.findByEmail(otpVerificaion.getEmail()).get();
+        EmailVerification emailVerification = emailVerificationRepository.findByEmail(otpVerificaion.getEmail());
         System.out.println(emailVerification.getOtp().getClass().getName() + " " + otpVerificaion.getOtp().getClass().getName());
         System.out.println(emailVerification.getOtp() + " " + otpVerificaion.getOtp());
         if(emailVerification.getOtp().equals(otpVerificaion.getOtp())){

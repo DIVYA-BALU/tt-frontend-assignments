@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class VeterinaryDoctorDto {
 
+    private String id;
     private String name;
     private String email;
     private MultipartFile profilePhoto;
@@ -15,5 +16,5 @@ public class VeterinaryDoctorDto {
     private MultipartFile degreeCertificate;
     private long contactNumber;
     private String status = "initiated";
-    private Boolean isSubscribed = false;
+    private String isSubscribed = "false";
 }
