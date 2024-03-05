@@ -20,7 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
   declarations: [
     AppComponent,
     PagenotfoundComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

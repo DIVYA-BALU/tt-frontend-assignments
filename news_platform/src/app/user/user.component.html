@@ -1,22 +1,51 @@
 <ng-container>
-    <mat-toolbar class="example-header">
-      <div class="heading">
-        InsightNow
+  <mat-toolbar class="example-header">
+    <div class="heading">
+      <!-- <button mat-button (click)="sidenav.toggle()"> -->
+        <i class="fa-solid fa-bars"></i>
+      <!-- </button> -->
+      InsightNow
+    </div>
+    <div class="example-spacer"></div>
+    <div class="icon" *appRoutehide="logged">
+      <h4>Hi, name</h4>
+      <a routerLink="profile">
+        <i class="fa fa-user" aria-hidden="true"></i>
+      </a>
+      <button type="button" (click)="logout()">
+        <i class="fa-solid fa-right-from-bracket"></i>
+      </button>
+    </div>
+    <div class="side-div" *appRoutehide="!logged">
+      <button type="button" (click)="subscribe()">Subscribe</button>
+      <button type="button" (click)="login()">Login</button>
+      <button type="button" (click)="signup()">Signup</button>
+    </div>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="example-container">
+    <mat-sidenav-content class="content">
+      <div class="header">
+        <div class="space"></div>
+        <div class="topics">
+          <a routerLink="">Research topics</a>
+          <a routerLink="">Daily news</a>
+          <a routerLink="">Sensational</a>
+          <a routerLink="">Short reads</a>
+          <a routerLink="">Articles</a>
+          <a routerLink="">Stock prices</a>
+          <a routerLink="">Breaking news</a>
+        </div>
+        <div class="search">
+          <input type="text" name="" id="" placeholder="Search anything" />
+          <button type="button">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
       </div>
-      <div class="example-spacer"></div>
-      <div class="icon">
-        <!-- <h4>Hi, {{ name }}</h4> -->
-        <a routerLink="profile" *appRoutehide="logged">
-          <i class="fa fa-user" aria-hidden="true"></i>
-        </a>
-        <button type="button" (click)="logout()" *appRoutehide="logged">
-          <i class="fa-solid fa-right-from-bracket"></i>
-        </button>
-      </div>
-    </mat-toolbar>
-    <mat-sidenav-container class="example-container">
-      <mat-sidenav-content class="content">
+      <div class="main-content">
         <router-outlet></router-outlet>
-      </mat-sidenav-content>
-    </mat-sidenav-container>
-  </ng-container>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</ng-container>

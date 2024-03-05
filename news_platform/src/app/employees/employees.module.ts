@@ -23,10 +23,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule} from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
-import { RoutehideDirective } from '../custom_directive/routehide.directive';
 import { DialogBoxComponent } from './dialog-box/dialog-box.component';
 import { ShortReadsComponent } from './short-reads/short-reads.component';
 import { ArticleComponent } from './article/article.component';
+import { UserNewsComponent } from './user-news/user-news.component';
+import { RoutehideDirective } from '../custom_directive/routehide.directive';
 
 
 @NgModule({
@@ -42,10 +43,11 @@ import { ArticleComponent } from './article/article.component';
     RejectNewsComponent,
     AccountComponent,
     DialogOverviewExampleDialog,
-    RoutehideDirective,
     DialogBoxComponent,
     ShortReadsComponent,
-    ArticleComponent
+    ArticleComponent,
+    UserNewsComponent,
+    RoutehideDirective
   ],
   imports: [
     CommonModule,

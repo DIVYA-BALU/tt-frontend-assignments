@@ -13,19 +13,19 @@
     margin-left: 400px;
 }
 
-.form-container h2,p {
+h2,p {
     text-align: center;
     p{
         color: rgb(225, 222, 222);
     }
 }
 
-.form-container div {
+div {
     font-family: $font-family;
     margin-top: 25px;
 }
 
-.form-container div input {
+input {
     margin-top: 15px;
     width: 100%;
     height: 30px;
@@ -35,20 +35,20 @@
     padding-left: 20px;
 }
 
-.form-container div input:focus {
+input:focus {
     padding-left: 20px;
 }
 
-.form-container div span{
+span{
     font-size: 15px;
     color: $error-color;
 }
 
-.form-container .button-div{
+.button-div{
     margin-bottom: 0px;
 }
 
-.form-container div button {
+.form-container button {
     background-color: $secondary-color;
     height: 50px;
     width: 30%;
@@ -59,7 +59,7 @@
     color: white;
 }
 
-.form-container div button[disabled]{
+button[disabled]{
     cursor: not-allowed;
 }
 

@@ -23,5 +23,6 @@ export const environment = {
   articleRejectUrl: "http://localhost:8080/article/rejectArticle",
   getPendingShortReadsUrl: "http://localhost:8080/short-reads/get-Pending-ShortReads",
   shortReadsAcceptUrl: "http://localhost:8080/short-reads/acceptShortReads",
-  shortReadsRejectUrl: "http://localhost:8080/short-reads/rejectShortReads"
+  shortReadsRejectUrl: "http://localhost:8080/short-reads/rejectShortReads",
+  getUserNewsAcceptedUrl: "http://localhost:8080/usernews/getUserNews"
 };

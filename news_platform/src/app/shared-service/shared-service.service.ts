@@ -17,7 +17,7 @@ export class SharedServiceService {
   constructor() {
     this.setLogin();
     this.setLogout();
-    this.setPermission();
+    this.setPermission();    
   }
 
   setLogin() {

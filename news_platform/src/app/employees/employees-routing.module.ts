@@ -13,6 +13,7 @@ import { RejectNewsComponent } from './reject-news/reject-news.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { ShortReadsComponent } from './short-reads/short-reads.component';
 import { ArticleComponent } from './article/article.component';
+import { UserNewsComponent } from './user-news/user-news.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
       {
         path: 'user-request',
         component: UserRequestComponent
+      },
+      {
+        path: 'user-news',
+        component: UserNewsComponent
       },
       {
         path: 'display-news',

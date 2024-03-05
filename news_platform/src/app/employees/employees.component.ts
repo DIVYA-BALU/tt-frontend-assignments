@@ -19,8 +19,8 @@ export class EmployeesComponent {
   name: string | null = localStorage.getItem('Role');
 
   logout() {
-    this.sharedService.setLogout();
     localStorage.clear();
+    this.sharedService.setLogout();
     this.route.navigate(['/login']);
   }
 
@@ -44,28 +44,30 @@ export class EmployeesComponent {
   manageShortReads!: boolean;
   editShortReads!: boolean;
   seeRejectedShortReads!: boolean;
+  userNewsApproved!: boolean;
 
   ngOnInit() {
     this.sharedService.permissionsData.subscribe((data) => {
       this.authorities = data;
-      
+
       if (this.authorities) {
-      this.writeArticle = this.hasPermission('WRITE_ARTICLE');
-      this.manageArticle = this.hasPermission('MANAGE_ARTICLE');
-      this.editArticle = this.hasPermission('EDIT_ARTICLE');
-      this.seeRejectedArticle = this.hasPermission('SEE_REJECTED_ARTICLE');
-      this.writeNews = this.hasPermission('WRITE_NEWS');
-      this.manageNews = this.hasPermission('MANAGE_NEWS');
-      this.editNews = this.hasPermission('EDIT_NEWS');
-      this.seeRejectedNews = this.hasPermission('SEE_REJECTED_NEWS');
-      this.writeShortReads = this.hasPermission('WRITE_SHORT_READS');
-      this.manageShortReads = this.hasPermission('MANAGE_SHORT_READS');
-      this.editShortReads = this.hasPermission('EDIT_SHORT_READS');
-      this.seeRejectedShortReads = this.hasPermission(
-        'SEE_REJECTED_SHORTREADS'
-      );
-      this.createAccount = this.hasPermission('CREATE_ACCOUNT');
-      this.userNews = this.hasPermission('USER_NEWS');
+        this.writeArticle = this.hasPermission('WRITE_ARTICLE');
+        this.manageArticle = this.hasPermission('MANAGE_ARTICLE');
+        this.editArticle = this.hasPermission('EDIT_ARTICLE');
+        this.seeRejectedArticle = this.hasPermission('SEE_REJECTED_ARTICLE');
+        this.writeNews = this.hasPermission('WRITE_NEWS');
+        this.manageNews = this.hasPermission('MANAGE_NEWS');
+        this.editNews = this.hasPermission('EDIT_NEWS');
+        this.seeRejectedNews = this.hasPermission('SEE_REJECTED_NEWS');
+        this.writeShortReads = this.hasPermission('WRITE_SHORT_READS');
+        this.manageShortReads = this.hasPermission('MANAGE_SHORT_READS');
+        this.editShortReads = this.hasPermission('EDIT_SHORT_READS');
+        this.seeRejectedShortReads = this.hasPermission(
+          'SEE_REJECTED_SHORTREADS'
+        );
+        this.createAccount = this.hasPermission('CREATE_ACCOUNT');
+        this.userNews = this.hasPermission('USER_NEWS');
+        this.userNewsApproved = this.hasPermission('SEE_USERNEWS');
       }
     });
   }

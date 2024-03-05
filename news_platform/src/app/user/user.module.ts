@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatExpansionModule} from '@angular/material/expansion';
 import { RoutehideDirective } from '../custom_directive/routehide.directive';
 
 
@@ -18,7 +19,6 @@ import { RoutehideDirective } from '../custom_directive/routehide.directive';
   declarations: [
     HomeComponent,
     UserComponent,
-    HomeComponent,
     RoutehideDirective
   ],
   imports: [
@@ -31,7 +31,8 @@ import { RoutehideDirective } from '../custom_directive/routehide.directive';
     EditorModule,
     ReactiveFormsModule,
     MatToolbarModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatExpansionModule
   ]
 })
 export class UserModule { }

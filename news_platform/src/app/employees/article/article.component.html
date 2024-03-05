@@ -21,9 +21,7 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Images</th>
           <td mat-cell *matCellDef="let row">
             <ul *ngFor="let image of row.images">
-              {{
-               image
-              }}
+              <a href="{{image}}">image</a>
             </ul>
           </td>
         </ng-container>
