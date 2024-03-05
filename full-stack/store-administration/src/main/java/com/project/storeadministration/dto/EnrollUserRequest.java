@@ -14,7 +14,5 @@ public class EnrollUserRequest {
   private String name;
   private String password;
   private String role;
-  private Long mobileNumber;
   private String branchId;
-  private String sectionId;
 }

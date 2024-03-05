@@ -1,49 +1,56 @@
-<h1>FILL PRODUCT DETAILS</h1>
-<form [formGroup]="productCreationForm" (ngSubmit)="submit()">
-  <div>
-    <label for="productName">Product Name:</label>
-    <input type="text" id="productName" formControlName="productName">
-    <div *ngIf="productCreationForm.get('productName')?.invalid && productCreationForm.get('productName')?.touched">
-      <span *ngIf="productCreationForm.get('productName')?.hasError('required')">Product Name is required</span>
+<div class="form-div">
+  <h1>FILL PRODUCT DETAILS</h1>
+  <form [formGroup]="productCreationForm" (ngSubmit)="submit()">
+    <div>
+      <label for="productName">Product Name:</label>
+      <input type="text" id="productName" formControlName="productName">
+      <div *ngIf="productCreationForm.get('productName')?.invalid && productCreationForm.get('productName')?.touched">
+        <span *ngIf="productCreationForm.get('productName')?.hasError('required')">Product Name is required</span>
+      </div>
     </div>
-  </div>
-  <div>
-    <label for="section">Section</label>
-    <select formControlName="section" id="section">
-      <option *ngFor="let section of sections" [ngValue]="section">{{ section.name }}</option>
-    </select>
-  </div>
-  <div>
-    <label for="branch">Branch</label>
-    <select formControlName="branch" id="branch">
-      <option *ngFor="let branch of branches" [ngValue]="branch">{{ branch.name }}</option>
-    </select>
-  </div>
-  <div>
-    <label for="cogs">COGS:</label>
-    <input type="text" id="cogs" formControlName="cogs">
-    <div *ngIf="productCreationForm.get('cogs')?.invalid && productCreationForm.get('cogs')?.touched">
-      <span *ngIf="productCreationForm.get('cogs')?.hasError('invalidNumber')">Please enter a valid cogs in number.</span>
-      <span *ngIf="productCreationForm.get('cogs')?.hasError('required')">Cogs is required.</span>
+    <div>
+      <label for="section">Section</label>
+      <select formControlName="section" id="section">
+        <option *ngFor="let section of sections" [ngValue]="section">{{ section.name }}</option>
+      </select>
     </div>
-  </div>
-  <div>
-    <label for="quantity">Quantity:</label>
-    <input type="text" id="quantity" formControlName="totalQuantity">
-    <div *ngIf="productCreationForm.get('quantity')?.invalid && productCreationForm.get('quantity')?.touched">
-      <span *ngIf="productCreationForm.get('quantity')?.hasError('invalidNumber')">Please enter a valid quantity in number.</span>
-      <span *ngIf="productCreationForm.get('quantity')?.hasError('required')">Quantity is required.</span>
+    <div>
+      <label for="branch">Branch</label>
+      <select formControlName="branch" id="branch">
+        <option *ngFor="let branch of branches" [ngValue]="branch">{{ branch.name }}</option>
+      </select>
     </div>
-  </div>
-  <div>
-    <label for="price">Price:</label>
-    <input type="text" id="price" formControlName="price">
-    <div *ngIf="productCreationForm.get('price')?.invalid && productCreationForm.get('price')?.touched">
-      <span *ngIf="productCreationForm.get('price')?.hasError('invalidNumber')">Please enter a valid price in number.</span>
-      <span *ngIf="productCreationForm.get('price')?.hasError('required')">Price is required.</span>
+    <div>
+      <label for="cogs">COGS:</label>
+      <input type="text" id="cogs" formControlName="cogs">
+      <div *ngIf="productCreationForm.get('cogs')?.invalid && productCreationForm.get('cogs')?.touched">
+        <span *ngIf="productCreationForm.get('cogs')?.hasError('invalidNumber')">Please enter a valid cogs in
+          number.</span>
+        <span *ngIf="productCreationForm.get('cogs')?.hasError('required')">Cogs is required.</span>
+      </div>
     </div>
-  </div>
-  <mat-spinner diameter="32" *ngIf="isLoading"></mat-spinner>
-  <button type="submit" [disabled]="productCreationForm.invalid || isLoading">Save</button>
-  <button type="button" (click)="closeProductDialogForm()">Close</button>
-</form>
+    <div>
+      <label for="quantity">Quantity:</label>
+      <input type="text" id="quantity" formControlName="totalQuantity">
+      <div *ngIf="productCreationForm.get('quantity')?.invalid && productCreationForm.get('quantity')?.touched">
+        <span *ngIf="productCreationForm.get('quantity')?.hasError('invalidNumber')">Please enter a valid quantity in
+          number.</span>
+        <span *ngIf="productCreationForm.get('quantity')?.hasError('required')">Quantity is required.</span>
+      </div>
+    </div>
+    <div>
+      <label for="price">Price:</label>
+      <input type="text" id="price" formControlName="price">
+      <div *ngIf="productCreationForm.get('price')?.invalid && productCreationForm.get('price')?.touched">
+        <span *ngIf="productCreationForm.get('price')?.hasError('invalidNumber')">Please enter a valid price in
+          number.</span>
+        <span *ngIf="productCreationForm.get('price')?.hasError('required')">Price is required.</span>
+      </div>
+    </div>
+    <div>
+      <mat-spinner diameter="32" *ngIf="isLoading"></mat-spinner>
+      <button type="submit" [disabled]="productCreationForm.invalid || isLoading">Save</button>
+      <button type="button" (click)="closeProductDialogForm()">Close</button>
+    </div>
+  </form>
+</div>

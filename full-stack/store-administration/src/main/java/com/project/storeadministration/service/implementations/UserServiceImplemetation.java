@@ -51,14 +51,13 @@ public class UserServiceImplemetation implements UserService {
   private CustomUserRepository customUserRepository;
 
   public ResponseEntity<?> enrollUser(EnrollUserRequest request, boolean signUp) throws CustomException {
-
     if (request.getEmailId() == null || request.getEmailId() == "")
       throw new CustomException("Email Id must not be empty");
 
     if (request.getEmailId() != null && userRepository.existsByEmailId(request.getEmailId()))
       throw new CustomException("Email Id already registered");
 
-    Optional<Role> optionalUserRole = roleRepository.findByName(request.getRole());
+    Optional<Role> optionalUserRole = roleRepository.findByName(request.getRole().toUpperCase());
 
     Role userRole = new Role();
     if (optionalUserRole.isPresent()) {
@@ -72,20 +71,18 @@ public class UserServiceImplemetation implements UserService {
         .name(request.getName())
         .password(passwordEncoder.encode(request.getPassword()))
         .role(userRole)
-        .mobileNumber(request.getMobileNumber())
         .branchesId(new ArrayList<>(Arrays.asList(request.getBranchId())))
-        .sectionId(request.getSectionId())
         .joiningDate(LocalDate.now())
+        .permissions(new ArrayList<>())
         .build();
     user = userRepository.save(user);
 
     if (signUp) {
-      
+
       LoginResponse response = LoginResponse.builder()
           .jwt(jwtService.generateToken(user))
           .userEmail(user.getEmailId())
           .branchesId(user.getBranchesId())
-          .sectionId(user.getSectionId())
           .role(userRole)
           .build();
 
@@ -105,7 +102,6 @@ public class UserServiceImplemetation implements UserService {
         .jwt(jwtService.generateToken(user))
         .userEmail(user.getEmailId())
         .branchesId(user.getBranchesId())
-        .sectionId(user.getSectionId())
         .role(user.getRole())
         .permissions(user.getPermissions())
         .build();
@@ -119,8 +115,8 @@ public class UserServiceImplemetation implements UserService {
   }
 
   @Override
-  public Page<User> getUsers(int pageNo, int pageSize, String branchId, String sectionId) {
+  public Page<User> getUsers(int pageNo, int pageSize, String branchId) {
     PageRequest pageable = PageRequest.of(pageNo, pageSize);
-    return customUserRepository.getUsers(branchId, sectionId, pageable);
+    return customUserRepository.getUsers(branchId, pageable);
   }
 }

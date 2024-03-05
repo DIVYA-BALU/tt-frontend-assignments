@@ -1,85 +1,85 @@
-<p>Total investment amount : {{totalInvestment}}</p>
-<p>Total Revenue generated : {{totalRevenue}}</p>
+<div>
+  <div>
+    <p>Total investment amount : {{totalInvestment}}</p>
+    <p>Total Revenue generated : {{totalRevenue}}</p>
+  </div>
+  <div class="button-div">
+    <button mat-button (click)="openProductDialogForm()">Add Investment</button>
+  </div>
+</div>
+
 <div class="table-div">
   <table mat-table [dataSource]="branchWiseAnalysis" class="mat-elevation-z8">
-    
+
     <ng-container matColumnDef="Serial Number">
       <th mat-header-cell *matHeaderCellDef> S.No </th>
-    <td mat-cell *matCellDef="let i = index"> {{i+1}} </td>
-  </ng-container>
-  
-  <ng-container matColumnDef="Branch Name">
-    <th mat-header-cell *matHeaderCellDef> Branch Name </th>
-    <td mat-cell *matCellDef="let branch"> {{branch.name}} </td>
-  </ng-container>
+      <td mat-cell *matCellDef="let i = index"> {{i+1}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="Section Name">
-    <th mat-header-cell *matHeaderCellDef> Section Name </th>
-    <td mat-cell *matCellDef="let branch"> {{branch.location}} </td>
-  </ng-container>
-  
-  <ng-container matColumnDef="Total COGS">
-    <th mat-header-cell *matHeaderCellDef> Total COGS </th>
-    <td mat-cell *matCellDef="let branch"> {{branch.createdDate}} </td>
-  </ng-container>
+    <ng-container matColumnDef="Branch Name">
+      <th mat-header-cell *matHeaderCellDef> Branch Name </th>
+      <td mat-cell *matCellDef="let incomeStatement"> {{incomeStatement.branchName}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="Total Revenue">
-    <th mat-header-cell *matHeaderCellDef> Total Revenue </th>
-    <td mat-cell *matCellDef="let branch"> {{branch.createdDate}} </td>
-  </ng-container>
+    <ng-container matColumnDef="Total COGS">
+      <th mat-header-cell *matHeaderCellDef> Total COGS </th>
+      <td mat-cell *matCellDef="let incomeStatement"> {{incomeStatement.cogs}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="Profit/Loss">
-    <th mat-header-cell *matHeaderCellDef> Profit / Loss </th>
-    <td mat-cell *matCellDef="let branch"> {{branch.createdDate}} </td>
-  </ng-container>
-  
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+    <ng-container matColumnDef="Total Revenue">
+      <th mat-header-cell *matHeaderCellDef> Total Revenue </th>
+      <td mat-cell *matCellDef="let incomeStatement"> {{incomeStatement.revenue}} </td>
+    </ng-container>
 
-<mat-paginator [length]="totalResults" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page"
-  (page)="onBranchWisePageChange($event)">
-</mat-paginator>
+    <ng-container matColumnDef="Profit / Loss">
+      <th mat-header-cell *matHeaderCellDef> Profit / Loss </th>
+      <td mat-cell *matCellDef="let incomeStatement"> {{incomeStatement.revenue-incomeStatement.cogs}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsForBranchWiseAnalysis"></tr>
+    <tr mat-row *matRowDef="let incomeStatement; columns: displayedColumnsForBranchWiseAnalysis"
+      (click)="onRowClicked(incomeStatement.sectionId, incomeStatement.branchId)">
+    </tr>
+  </table>
+
+  <mat-paginator [length]="totalResults" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page"
+    (page)="onBranchWisePageChange($event)">
+  </mat-paginator>
 </div>
 
 <div class="table-div">
   <table mat-table [dataSource]="sectionWiseAnalysis" class="mat-elevation-z8">
-    
+
     <ng-container matColumnDef="Serial Number">
       <th mat-header-cell *matHeaderCellDef> S.No </th>
-    <td mat-cell *matCellDef="let i = index"> {{i+1}} </td>
-  </ng-container>
-  
-  <ng-container matColumnDef="Branch Name">
-    <th mat-header-cell *matHeaderCellDef> Branch Name </th>
-    <td mat-cell *matCellDef="let branch"> {{branch.name}} </td>
-  </ng-container>
+      <td mat-cell *matCellDef="let i = index"> {{i+1}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="Section Name">
-    <th mat-header-cell *matHeaderCellDef> Section Name </th>
-    <td mat-cell *matCellDef="let branch"> {{branch.location}} </td>
-  </ng-container>
-  
-  <ng-container matColumnDef="Total COGS">
-    <th mat-header-cell *matHeaderCellDef> Total COGS </th>
-    <td mat-cell *matCellDef="let branch"> {{branch.createdDate}} </td>
-  </ng-container>
+    <ng-container matColumnDef="Section Name">
+      <th mat-header-cell *matHeaderCellDef> Section Name </th>
+      <td mat-cell *matCellDef="let incomeStatement"> {{incomeStatement.sectionName}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="Total Revenue">
-    <th mat-header-cell *matHeaderCellDef> Total Revenue </th>
-    <td mat-cell *matCellDef="let branch"> {{branch.createdDate}} </td>
-  </ng-container>
+    <ng-container matColumnDef="Total COGS">
+      <th mat-header-cell *matHeaderCellDef> Total COGS </th>
+      <td mat-cell *matCellDef="let incomeStatement"> {{incomeStatement.cogs}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="Profit/Loss">
-    <th mat-header-cell *matHeaderCellDef> Profit / Loss </th>
-    <td mat-cell *matCellDef="let branch"> {{branch.createdDate}} </td>
-  </ng-container>
-  
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+    <ng-container matColumnDef="Total Revenue">
+      <th mat-header-cell *matHeaderCellDef> Total Revenue </th>
+      <td mat-cell *matCellDef="let incomeStatement"> {{incomeStatement.revenue}} </td>
+    </ng-container>
 
-<mat-paginator [length]="totalResults" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page"
-  (page)="onSectionWisePageChange($event)">
-</mat-paginator>
+    <ng-container matColumnDef="Profit / Loss">
+      <th mat-header-cell *matHeaderCellDef> Profit / Loss </th>
+      <td mat-cell *matCellDef="let incomeStatement"> {{incomeStatement.revenue-incomeStatement.cogs}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsForSectionWiseAnalysis"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsForSectionWiseAnalysis;"></tr>
+  </table>
+
+  <mat-paginator [length]="totalResults" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page"
+    (page)="onSectionWisePageChange($event)">
+  </mat-paginator>
 </div>

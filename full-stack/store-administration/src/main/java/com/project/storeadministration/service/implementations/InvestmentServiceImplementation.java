@@ -24,7 +24,6 @@ public class InvestmentServiceImplementation implements InvestmentService{
 
   @Override
   public Investment getTotalInvestment() {
-    System.out.println("here in service");
     saveInvestment(new Investment("",50000,""));
     return new Investment("",customInvestmentRepository.getTotalInvestment(),"");
   }

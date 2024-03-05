@@ -45,8 +45,8 @@ public class ProductServiceImpl implements ProductService {
       throw new RuntimeException("Product not found with id: " + productId);
 
     Product existingProduct = optionalProduct.get();
-    int updatedQuantity = existingProduct.getTotalQuantity() + quantity;
-    existingProduct.setTotalQuantity(updatedQuantity);
+    int updatedQuantity = existingProduct.getAvailableQuantity() + quantity;
+    existingProduct.setAvailableQuantity(updatedQuantity);
     return productRepository.save(existingProduct);
   }
 

@@ -6,7 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.storeadministration.model.Investment;
@@ -22,12 +24,12 @@ public class InvestmentController {
 
   @GetMapping("/total")
   public ResponseEntity<Investment> getTotalInvestment(){
-    System.out.println(investmentService.getTotalInvestment());
     return new ResponseEntity<Investment>(investmentService.getTotalInvestment(),HttpStatus.OK);
   }
 
   @PostMapping
-  public ResponseEntity<Investment> saveInvestment(Investment investment){
+  public ResponseEntity<Investment> saveInvestment(@RequestBody Investment investment){
+    System.out.println(investment);
     return new ResponseEntity<Investment>(investmentService.saveInvestment(investment),HttpStatus.OK);
   }
 }

@@ -7,6 +7,7 @@ import { ProductService } from 'src/app/core/services/product.service';
 import { ProductDialogFormComponent } from '../product-dialog-form/product-dialog-form.component';
 import { BillService } from 'src/app/core/services/bill.service';
 import { PopUpComponent } from '../../pop-up/pop-up.component';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-product-layout',
@@ -26,10 +27,23 @@ export class ProductLayoutComponent {
   };
   makeBillButton: Boolean = false;
   clickedButtons: Set<string> = new Set();
+  tempVariable = false;
 
-  constructor(private billService: BillService, private productService: ProductService, private dialog: MatDialog) {
+  constructor(private billService: BillService, private productService: ProductService, private dialog: MatDialog, private cdr: ChangeDetectorRef) {
     this.dataSource = new MatTableDataSource<Product>;
     this.getProductDetails();
+  }
+
+  private areArraysEqual(array1: any[], array2: any[]): boolean {
+    if (array1.length !== array2.length) {
+      return false;
+    }
+    for (let i = 0; i < array1.length; i++) {
+      if (array1[i] !== array2[i]) {
+        return false;
+      }
+    }
+    return true;
   }
 
   onPageChange(event: PageEvent): void {
@@ -60,6 +74,7 @@ export class ProductLayoutComponent {
 
     this.clickedButtons.add(product._id);
 
+    console.log(this.clickedButtons);
     const quantity = parseInt(selectedQuantity);
 
     const itemIndex = this.bill.billItems.findIndex(item => item.product === product);
@@ -100,12 +115,15 @@ export class ProductLayoutComponent {
           });
           this.bill.billItems = [];
           this.bill.totalPrice = 0;
+          this.clickedButtons.clear();
         },
         error: () => {
           alert('Error Occured Retry Later');
+        },
+        complete: () => {
+          this.productService.setPaginatedProductsSubject();
         }
       })
-
     }
   }
 }

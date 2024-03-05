@@ -27,7 +27,7 @@ public class PermissionSeeder implements CommandLineRunner{
                 "EmployeeManagement",
                 "EmployeeSectionAllocation",
                 "MarkAttendance"
-        );  
+        );
 
         for (String permissionName : permissionNames) {
             Permission permission = new Permission();

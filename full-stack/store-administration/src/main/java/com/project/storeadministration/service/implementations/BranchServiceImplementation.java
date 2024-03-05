@@ -1,12 +1,12 @@
 package com.project.storeadministration.service.implementations;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +14,10 @@ import com.project.storeadministration.exception.CustomException;
 import com.project.storeadministration.model.Branch;
 import com.project.storeadministration.model.Section;
 import com.project.storeadministration.model.SectionDetail;
-import com.project.storeadministration.model.User;
 import com.project.storeadministration.repository.BranchRepository;
 import com.project.storeadministration.repository.SectionRepository;
 import com.project.storeadministration.service.BranchService;
+import com.project.storeadministration.service.SectionService;
 
 @Service
 public class BranchServiceImplementation implements BranchService {
@@ -28,9 +28,17 @@ public class BranchServiceImplementation implements BranchService {
   @Autowired
   private SectionRepository sectionRepository;
 
+  @Autowired
+  private SectionService sectionService;
+
   @Override
   public Branch saveBranch(Branch branch) {
     branch.setCreatedDate(LocalDate.now());
+    List<Section> sections = sectionService.getSections();
+    branch.setSectionDetails(new ArrayList<SectionDetail>());
+    for(Section section : sections){
+      branch.getSectionDetails().add(new SectionDetail(section,LocalDate.now()));
+    }
     return branchRepository.save(branch);
   }
 

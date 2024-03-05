@@ -17,6 +17,8 @@ import { BranchDialogFormComponent } from './branch-dialog-form/branch-dialog-fo
 import { SectionDialogFormComponent } from './section-dialog-form/section-dialog-form.component';
 import { ProductDialogFormComponent } from './product-dialog-form/product-dialog-form.component';
 import { ProductLayoutComponent } from './product-layout/product-layout.component';
+import { UserEnrollmentDialogFormComponent } from './user-enrollment-dialog-form/user-enrollment-dialog-form.component';
+import { InvestmentDialogFormComponent } from './investment-dialog-form/investment-dialog-form.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { ProductLayoutComponent } from './product-layout/product-layout.componen
     BranchDialogFormComponent,
     SectionDialogFormComponent,
     ProductLayoutComponent,
-    ProductDialogFormComponent
+    ProductDialogFormComponent,
+    UserEnrollmentDialogFormComponent,
+    InvestmentDialogFormComponent
   ],
   imports: [
     CommonModule,

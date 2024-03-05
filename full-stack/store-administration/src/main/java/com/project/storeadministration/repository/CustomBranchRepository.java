@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
+import com.project.storeadministration.model.Branch;
 import com.project.storeadministration.model.Section;
 import com.project.storeadministration.model.SectionDetail;
 
@@ -17,6 +18,7 @@ public class CustomBranchRepository {
 
   @Autowired
   private MongoTemplate mongoTemplate;
+
 
   public void addSections(Section section) {
     Query query = new Query();

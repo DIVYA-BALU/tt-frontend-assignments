@@ -30,8 +30,8 @@ public class UserSeeder implements CommandLineRunner {
     User admin = new User();
     admin.setEmailId("thamil@gmail.com");
     admin.setPassword(passwordEncoder.encode("password"));
+    admin.setName("Thamilarasan");
     admin.setRole(roleRepository.findByName("ADMIN").get());
     userRepository.save(admin);
   }
-
 }

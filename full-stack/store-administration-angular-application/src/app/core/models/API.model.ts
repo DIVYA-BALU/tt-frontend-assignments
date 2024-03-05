@@ -27,6 +27,7 @@ export class Role {
     this.permissions = permissions;
   }
 }
+
 export class Permission {
   _id: string;
   name: string;
@@ -69,16 +70,20 @@ export class EnrollUserRequest {
 }
 
 export interface User {
-  _id: string;
   emailId: string;
   name: string;
   password: string;
-  mobileNumber: number;
+  branchId: string;
+  role: string;
+}
+
+export interface UserDetails {
+  _id: string;
+  emailId: string;
+  name: string;
   branchesId: string[];
-  sectionId: string;
   role: Role;
-  permissions: Permission[];
-  joiningDate: string;
+  joiningDate: string; 
   employmentHistory: EmploymentDetail[];
 }
 
@@ -149,4 +154,15 @@ export interface Investment {
   _id: string;
   amount: number;
   description: string;
+}
+
+export interface IncomeStatement {
+  branchId: string;
+  branchName: string;
+  sectionId: string;
+  sectionName: string;
+  revenue: number;
+  cogs: number;
+  date: string;
+  monthAndYear: string;
 }

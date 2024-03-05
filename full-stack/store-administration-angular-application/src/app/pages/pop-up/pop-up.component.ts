@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-pop-up',
@@ -8,7 +8,11 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class PopUpComponent {
   message: string = '';
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {message: ''}) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {message: ''},private dialog: MatDialog) {
     this.message = data.message;
+  }
+
+  close(){
+    this.dialog.closeAll();
   }
 }

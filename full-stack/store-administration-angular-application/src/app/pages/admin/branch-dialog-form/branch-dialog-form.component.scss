@@ -1,0 +1,69 @@
+$primary-color: rgb(61, 61, 138);
+$secondary-color: green;
+$form-color: rgba(90, 184, 255, 0.218);
+$page-color: rgb(255, 255, 255);
+$page-button: rgb(162, 162, 211);
+$save-button-hover: rgb(78, 146, 78);
+$save-button: rgb(38, 205, 127);
+$list-button: rgba(61, 219, 219, 0.579);
+$close-button: rgba(255, 54, 54, 0.726);
+
+.form-div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+div {
+  margin: 40px 40px 40px 40px;
+
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+span {
+  color: red;
+  font-size: 12px;
+}
+
+button[type="submit"]{
+  margin-left: 35px 15px;
+  padding: 10px 30px;
+  background-color:$save-button;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button {
+  background-color: $close-button;
+  margin-left: 35px 15px;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.spinner-button-div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

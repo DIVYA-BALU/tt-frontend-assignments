@@ -1,0 +1,50 @@
+<div class="form-div">
+  <p>ENTER USER DETAILS</p>
+  <form [formGroup]="enrollUserForm" (ngSubmit)="submit()">
+    <div>
+      <label for="name">Username:</label>
+      <input type="text" id="name" formControlName="name">
+      <div *ngIf="enrollUserForm.get('name')?.invalid && enrollUserForm.get('name')?.touched">
+        <span *ngIf="enrollUserForm.get('name')?.hasError('required')">Username is required.</span>
+      </div>
+    </div>
+    <div>
+      <label for="emailId">EmailId:</label>
+      <input type="emailId" id="emailId" formControlName="emailId">
+      <div *ngIf="enrollUserForm.get('emailId')?.invalid && enrollUserForm.get('emailId')?.touched">
+        <span *ngIf="enrollUserForm.get('emailId')?.hasError('required')">EmailId is required.</span>
+        <span *ngIf="enrollUserForm.get('emailId')?.hasError('email')">Please enter a valid emailId.</span>
+      </div>
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" formControlName="password">
+      <div *ngIf="enrollUserForm.get('password')?.invalid && enrollUserForm.get('password')?.touched">
+        <span *ngIf="enrollUserForm.get('password')?.hasError('required')">Password is required.</span>
+      </div>
+    </div>
+    <div>
+      <label for="branch">Branch</label>
+      <select formControlName="branchId" id="branch">
+        <option *ngFor="let branch of branches" [ngValue]="branch._id">{{ branch.name }}</option>
+      </select>
+    </div>
+    <div>
+      <label for="role">Role:</label>
+      <select id="role" formControlName="role">
+        <option value="" disabled>Select a role</option>
+        <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+      </select>
+      <div *ngIf="enrollUserForm.get('role')?.invalid && enrollUserForm.get('role')?.touched">
+        <span *ngIf="enrollUserForm.get('role')?.hasError('required')">Role is required.</span>
+      </div>
+    </div>
+    <div>
+      <mat-spinner diameter="32" *ngIf="isLoading"></mat-spinner>
+    </div>
+    <div>
+      <button type="submit" [disabled]="enrollUserForm.invalid || isLoading">Submit</button>
+      <button type="button" (click)="closeEnrollUserForm()">Close</button>
+    </div>
+  </form>
+</div>

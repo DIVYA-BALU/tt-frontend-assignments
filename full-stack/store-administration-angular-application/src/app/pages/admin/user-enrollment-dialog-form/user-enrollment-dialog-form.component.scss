@@ -8,11 +8,13 @@ $save-button: rgb(38, 205, 127);
 $list-button: rgba(61, 219, 219, 0.579);
 $close-button: rgba(255, 54, 54, 0.726);
 
-.form-div{
+.form-div {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-top: 20px;
+  padding-bottom: 30px;
 }
 
 form {
@@ -21,8 +23,7 @@ form {
 }
 
 div {
-  margin: 40px 40px 40px 40px;
-
+  margin: 10px 40px 10px 40px;
 }
 
 label {
@@ -30,7 +31,7 @@ label {
   margin-bottom: 5px;
 }
 
-input[type="text"] {
+input{
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
@@ -38,15 +39,23 @@ input[type="text"] {
   box-sizing: border-box;
 }
 
-span.error {
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+span {
   color: red;
   font-size: 12px;
 }
 
-button[type="submit"]{
-  margin-left: 35px 15px;
+button[type="submit"] {
+  margin-left: 100px 15px;
   padding: 10px 30px;
-  background-color:$save-button;
+  background-color: $save-button;
   color: white;
   border: none;
   border-radius: 4px;
@@ -62,8 +71,10 @@ button {
   cursor: pointer;
 }
 
-mat-spinner {
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 10px;
+option {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }

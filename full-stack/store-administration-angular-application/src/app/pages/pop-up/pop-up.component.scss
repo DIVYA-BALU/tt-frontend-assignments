@@ -1,9 +1,30 @@
-.div{
+$primary-color: rgb(61, 61, 138);
+$secondary-color: green;
+$form-color: rgba(90, 184, 255, 0.218);
+$page-color: rgb(255, 255, 255);
+$page-button: rgb(162, 162, 211);
+$save-button-hover: rgb(78, 146, 78);
+$save-button: rgb(38, 205, 127);
+$list-button: rgba(61, 219, 219, 0.579);
+$close-button: rgba(255, 54, 54, 0.726);
+
+div{
   display: flex;
   padding: 30px 40px 40px 30px;
+  align-items: center;
+  justify-content: center;
 }
 
 .message{
   display: block;
   padding: 30px 30px 30px 30px;
+}
+
+button {
+  background-color: $close-button;
+  margin-left: 35px 15px;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }

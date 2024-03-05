@@ -22,6 +22,7 @@ export class BranchLayoutComponent implements OnInit {
   constructor(private branchService: BranchService, private dialog: MatDialog) {
     this.dataSource = new MatTableDataSource<Branch>;
   }
+  
   ngOnInit(): void {
     this.getBranchDetails();
   }
