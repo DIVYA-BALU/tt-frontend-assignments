@@ -1,14 +1,13 @@
 package com.project.crowdfund.service.serviceimp;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.project.crowdfund.Repository.FunderRepository;
-import com.project.crowdfund.Repository.UserRepository;
 import com.project.crowdfund.dto.FunderDto;
+import com.project.crowdfund.dto.RequestDto;
 import com.project.crowdfund.model.Funder;
-import com.project.crowdfund.model.Users;
 import com.project.crowdfund.service.FunderService;
 
 import lombok.RequiredArgsConstructor;
@@ -18,16 +17,15 @@ import lombok.RequiredArgsConstructor;
 public class FunderServiceImp implements FunderService{
 
     private final FunderRepository funderRepository;
-    private final UserRepository userRepository;
 
     @Override
     public Funder saveFunder(FunderDto funderDto) {   
 
-        Users user = userRepository.findByEmail(funderDto.getEmail()).get();
         Funder funder = Funder.builder()
+                        ._id(funderDto.get_id())
                         .firstName(funderDto.getFirstName())
                         .lastName(funderDto.getLastName())
-                        .email(user)
+                        .email(funderDto.getEmail())
                         .phoneNumber(funderDto.getPhoneNumber())
                         .countryOfBirth(funderDto.getCountryOfBirth())
                         .countryOfResidence(funderDto.getCountryOfResidence())
@@ -46,8 +44,10 @@ public class FunderServiceImp implements FunderService{
     }
 
     @Override
-    public List<Funder> findAll() {
-        return funderRepository.findAll();
+    public Page<Funder> findAll(Integer pageNo, Integer PageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNo, PageSize);
+        Page<Funder> pageableFunder = funderRepository.findAll(pageRequest);
+        return pageableFunder;
     }
 
     @Override
@@ -55,5 +55,27 @@ public class FunderServiceImp implements FunderService{
         return saveFunder(funderDto);
     }
 
+    public Funder save(RequestDto user) {   
 
+        Funder funder = Funder.builder()
+                        .firstName(user.getFirstName())
+                        .lastName(user.getLastName())
+                        .email(user.getEmail())
+                        .phoneNumber("")
+                        .countryOfBirth("")
+                        .countryOfResidence("")
+                        .address("")
+                        .city("")
+                        .state("")
+                        .zipCode("")
+                        .occupation("")
+                        .build();
+                        System.out.println(funder);
+        return funderRepository.save(funder);
+    }
+
+    @Override
+    public Funder getFunderByEmail(String userEmail) {
+        return funderRepository.findByEmail(userEmail);
+        }
 }

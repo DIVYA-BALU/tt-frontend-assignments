@@ -19,6 +19,6 @@ public class FunderDto {
     private String address;
     private String city;
     private String state;
-    private Integer zipCode;
+    private String zipCode;
     private String occupation;
 }

@@ -17,8 +17,8 @@ import com.project.crowdfund.dto.RequestDto;
 import com.project.crowdfund.dto.LoginRequest;
 import com.project.crowdfund.dto.LoginResponse;
 import com.project.crowdfund.model.Role;
-import com.project.crowdfund.model.Student;
 import com.project.crowdfund.model.Users;
+import com.project.crowdfund.service.FunderService;
 import com.project.crowdfund.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -32,6 +32,7 @@ public class UserServiceImp implements UserService{
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final RoleRepository roleRepository;
+    private final FunderService funderService ;
 
     @Override
     public Users save(RequestDto request) {
@@ -45,10 +46,16 @@ public class UserServiceImp implements UserService{
                     .lastName(request.getLastName())
                     .password(passwordEncoder.encode(request.getPassword()))
                     .role(roleRepository.findByRole(request.getRole().toUpperCase()))
-                    .build();       
+                    .build();    
 
-       
-        userRepository.save(user);
+        userRepository.save(user);   
+         System.out.println(request.getRole());
+
+        if(request.getRole().equals("funder")) {
+            System.out.println(request.getRole());
+            funderService.save(request);
+        }
+        
         return user;
     }
     
@@ -86,4 +93,13 @@ public class UserServiceImp implements UserService{
         Users user = getUserByEmail(email);
         return user.getRole();
     }
+
+    @Override
+    public Users updateUser(Users request) {
+        Users user = userRepository.findBy_id(request.get_id());
+        request.setPassword(user.getPassword());
+        return userRepository.save(request);
+    }
+
+    
 }

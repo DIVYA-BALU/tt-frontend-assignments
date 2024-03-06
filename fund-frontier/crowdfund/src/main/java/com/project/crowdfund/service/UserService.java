@@ -21,4 +21,6 @@ public interface UserService {
     Users getUserByEmail(String userEmail);
     
     Role getUserRole(String email);
+
+    Users updateUser(Users request);
 }

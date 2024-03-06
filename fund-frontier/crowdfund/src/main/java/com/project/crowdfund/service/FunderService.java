@@ -1,8 +1,10 @@
 package com.project.crowdfund.service;
 
-import java.util.List;
+
+import org.springframework.data.domain.Page;
 
 import com.project.crowdfund.dto.FunderDto;
+import com.project.crowdfund.dto.RequestDto;
 import com.project.crowdfund.model.Funder;
 
 public interface FunderService {
@@ -11,9 +13,12 @@ public interface FunderService {
 
     Funder getFunder(String email);
 
-    List<Funder> findAll();
+    Page<Funder> findAll(Integer pageNo, Integer pageSize);
 
     Funder updateFunder(FunderDto funder);
 
+    Funder save(RequestDto user);
+
+    Funder getFunderByEmail(String userEmail);
     
 }

@@ -3,6 +3,7 @@ package com.project.crowdfund.service;
 import java.io.IOException;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.crowdfund.dto.StudentDto;
@@ -16,11 +17,11 @@ public interface StudentService {
 
     Student updateStudent(Student student);
 
-    List<Student> findAll(int pageNo, int pageSize);
+    Page<Student> findAll(int pageNo, int pageSize);
 
     List<Student> getAllApproved(int pageNo, int pageSize);
 
-    String setApproved(String name, String email);
+    Student setApproved(String name, Student request);
 
     String setRejected(StudentDto student);
 
@@ -31,6 +32,8 @@ public interface StudentService {
     List<Student> searchByYear(String year);
 
     List<Student> searchByCollege(String college);
+
+    Page<Student> getAllPending(Integer pageNo, Integer pageSize);
     
 
 }

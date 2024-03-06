@@ -3,6 +3,7 @@ package com.project.crowdfund.controller;
 import java.io.IOException;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,7 +48,7 @@ public class StudentController {
     }
 
     @GetMapping("/findall")
-    public ResponseEntity<List<Student>> findAll(@RequestParam(defaultValue = "0") Integer pageNo,
+    public ResponseEntity<Page<Student>> findAll(@RequestParam(defaultValue = "0") Integer pageNo,
     @RequestParam(defaultValue = "10") Integer pageSize){
         return ResponseEntity.ok(studentService.findAll(pageNo,pageSize));
     }
@@ -58,9 +60,18 @@ public class StudentController {
         return ResponseEntity.ok(studentService.getAllApproved(pageNo, pageSize));
     }
 
-    @PatchMapping("/approved/{name}/{email}")
-    public ResponseEntity<String> setApproved(@PathVariable String name, @PathVariable String email) {
-        return ResponseEntity.ok(studentService.setApproved(name, email));
+    @GetMapping("/getallpending")
+    public ResponseEntity<Page<Student>> getAllPending(@RequestParam(defaultValue = "0") Integer pageNo,
+    @RequestParam(defaultValue = "10") Integer pageSize){
+        System.out.println("called");
+        return ResponseEntity.ok(studentService.getAllPending(pageNo, pageSize));
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PutMapping("/approved/{name}")
+    public ResponseEntity<Student> setApproved(@PathVariable String name, @RequestBody Student request) {
+        System.out.println(request);
+        return ResponseEntity.ok(studentService.setApproved(name, request));
     }
 
     @PatchMapping("/rejected")

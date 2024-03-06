@@ -92,7 +92,7 @@ public class StudentServiceImp implements StudentService {
                 .collegeName(student.getCollegeName())
                 .yearOfStudy(student.getYearOfStudy())
                 .course(student.getCourse())
-                .studentIdentityProof(studentIdPath)
+                .studentIdentityProof(studentidfpath)
                 .studentId(student.getStudentId())
                 .fundRequired(student.getFundRequired())
                 .feeDetails(feesfpath)
@@ -121,10 +121,10 @@ public class StudentServiceImp implements StudentService {
     }
 
     @Override
-    public List<Student> findAll(int pageNo, int pageSize) {
+    public Page<Student> findAll(int pageNo, int pageSize) {
         PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
         Page<Student> pagingStudent = studentRepository.findAll(pageRequest);
-        return pagingStudent.getContent();
+        return pagingStudent;
     }
 
     @Override
@@ -133,6 +133,14 @@ public class StudentServiceImp implements StudentService {
         Page<Student> pagingStudent = studentRepository.findByStatus("Approved",pageRequest);
         System.out.println(studentRepository.findByStatus("Approved"));
         return pagingStudent.getContent();  
+    }
+
+    @Override
+    public Page<Student> getAllPending(Integer pageNo, Integer pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
+        Page<Student> pagingStudent = studentRepository.findByStatus("Pending",pageRequest);
+        //System.out.println(studentRepository.findByStatus("Approved"));
+        return pagingStudent;  
     }
 
     private String sendMail(String email, String name){
@@ -172,9 +180,9 @@ public class StudentServiceImp implements StudentService {
     }
 
     @Override
-    public String setApproved(String name, String email) {
-        Optional<Users> user = userRepository.findByEmail(email);
-        Student  student = studentRepository.findByEmail(user.get());
+    public Student setApproved(String name, Student request) {
+        System.out.println(request);
+        Student  student = studentRepository.findByEmail(request.getEmail());
         student.setStatus("Approved");
         studentRepository.save(student);
         try {
@@ -196,14 +204,14 @@ public class StudentServiceImp implements StudentService {
             "The FundFrontier Team";
 
             mailMessage.setFrom(sender);
-            mailMessage.setTo(email);
+            mailMessage.setTo(request.getEmail().getEmail());
             mailMessage.setText(mailText);
             mailMessage.setSubject("Congratulations! Your Application Has Been Accepted");
  
             javaMailSender.send(mailMessage);
-            return "Mail Sent Successfully...";
+            return student;
         }catch (Exception e) {
-            return "Error while Sending Mail";
+            return student;
         }
     }
 
