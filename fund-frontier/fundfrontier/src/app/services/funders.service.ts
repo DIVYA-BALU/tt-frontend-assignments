@@ -23,5 +23,11 @@ export class FundersService {
     return this.http.get<Page<Funder>>(`${this.funderUrl}/findall`);
   }
 
- 
+  getFunder():Observable<Funder> {
+      return this.http.get<Funder>(`${this.funderUrl}/getfunder`)
+  }
+
+  updateFunder(funder: Funder) :Observable<Funder> {
+    return this.http.patch<Funder>(`${this.funderUrl}/update`,funder)
+  }
 }

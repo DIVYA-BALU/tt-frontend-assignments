@@ -4,7 +4,7 @@ export interface Funder {
     _id: string;
     firstName: string;
     lastName: string;
-    email: User;
+    email: string;
     phoneNumber: string;
     countryOfBirth: string;
     countryOfResidence: string;
