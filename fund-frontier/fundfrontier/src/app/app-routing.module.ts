@@ -15,6 +15,11 @@ import { TermsComponent } from './components/terms/terms.component';
 import { PrivacypolicyComponent } from './components/privacypolicy/privacypolicy.component';
 import { AdminprofileComponent } from './components/adminprofile/adminprofile.component';
 import { UsersComponent } from './components/users/users.component';
+import { FundsComponent } from './components/funds/funds.component';
+import { ApprovalsComponent } from './components/approvals/approvals.component';
+import { AllstudentsComponent } from './components/allstudents/allstudents.component';
+import { AllfundersComponent } from './components/allfunders/allfunders.component';
+import { UpdateadminprofileComponent } from './components/updateadminprofile/updateadminprofile.component';
 
 const routes: Routes = [
   {
@@ -82,6 +87,26 @@ const routes: Routes = [
           {
             path: "users",
             component: UsersComponent
+          },
+          {
+            path: "funds",
+            component: FundsComponent
+          },
+          {
+            path: "approvals",
+            component: ApprovalsComponent
+          },
+          {
+            path: "allstudents",
+            component: AllstudentsComponent
+          },
+          {
+            path: "allfunders",
+            component: AllfundersComponent
+          },
+          {
+            path: "editadminprofile",
+            component: UpdateadminprofileComponent
           }
         ]
 
