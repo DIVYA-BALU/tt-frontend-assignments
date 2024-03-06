@@ -32,6 +32,7 @@ export class RequestRegistrationListComponent {
       this.status.id = id || '';
       this.status.status = status;
       if( this.type === "organization"){
+
         this.registrationRequestService.updateStatusForOrganization(this.status).subscribe({next: (message) =>{
           console.log(message);
         }})

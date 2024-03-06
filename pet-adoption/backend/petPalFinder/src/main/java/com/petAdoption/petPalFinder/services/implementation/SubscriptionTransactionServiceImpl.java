@@ -1,5 +1,6 @@
 package com.petAdoption.petPalFinder.services.implementation;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.petAdoption.petPalFinder.dao.VeterinaryDoctorDao;
 import com.petAdoption.petPalFinder.dto.StatusMessage;
+import com.petAdoption.petPalFinder.models.PreviousSubscripton;
 import com.petAdoption.petPalFinder.models.SubscriptionTransaction;
 import com.petAdoption.petPalFinder.repositorys.SubscriptionTransactionRepository;
 import com.petAdoption.petPalFinder.services.SubscriptionTransactionService;
@@ -41,15 +43,31 @@ public class SubscriptionTransactionServiceImpl implements SubscriptionTransacti
         subscriptionTransaction.setSubscribedOn(date);
         subscriptionTransaction.setValidTill(endDate);
         subscriptionTransactionRepository.save(subscriptionTransaction);
-        veterinaryDoctorDao.updateSubscription(subscriptionTransaction.getSubscriberId());
+        veterinaryDoctorDao.updateSubscription(subscriptionTransaction.getSubscriberId(),true);
         statusMessage.setMessage("success");
         return statusMessage;
     }
 
     @Override
     public void unSubscribeValidityExpiredUser(Date valiDate) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'unSubscribeValidityExpiredUser'");
+        
+        ArrayList<SubscriptionTransaction> subscriptions = new ArrayList<>(subscriptionTransactionRepository.findByValidTillLessThanEqual(valiDate));
+
+        for(SubscriptionTransaction subscription:subscriptions){
+            PreviousSubscripton previousSubscripton = new PreviousSubscripton();
+            previousSubscripton.setPaymentId(subscription.getPaymentId());
+            previousSubscripton.setPlan(subscription.getCurrentPlan());
+            previousSubscripton.setSubscribedOn(subscription.getSubscribedOn());
+            if(subscription.getHistory() == null)
+            subscription.setHistory(new ArrayList<>());
+            subscription.getHistory().add(previousSubscripton);
+            subscription.setCurrentPlan(null);
+            subscription.setPaymentId(null);
+            subscription.setSubscribedOn(null);
+            veterinaryDoctorDao.updateSubscription(subscription.getSubscriberId(),false);
+            subscriptionTransactionRepository.save(subscription);
+
+        }
     }
     
 }

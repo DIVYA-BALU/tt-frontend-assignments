@@ -1,5 +1,7 @@
 package com.petAdoption.petPalFinder.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -21,5 +23,13 @@ public class OrganizationDao {
 		Query query = new Query(criteria);
         Update update = new Update().set("status", statusUpdateDto.getStatus());
         template.updateFirst(query, update, Organization.class);
+    }
+
+
+    public List<String> searchCity(String city){
+        Criteria criteria = Criteria.where("location.city").regex(city,"i");
+		Query query = new Query(criteria);
+        return template.findDistinct(query,"location.city", Organization.class, String.class);
+
     }
 }

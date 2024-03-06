@@ -66,7 +66,7 @@ export class ProfileService {
   }
 
   getOrganizationProfile(id: string) {
-    return this.http.get<any>(`${this.baseUrl}adopter?id=${id}`);
+    return this.http.get<any>(`${this.baseUrl}organization/detail?id=${id}`);
   }
   
   setUser(user:Adopter | VeterinaryDoctor | Organization){
@@ -79,5 +79,8 @@ export class ProfileService {
 
   updateVeterinaryDoctorProfile(formData:FormData){
     return this.http.put<any>(`${this.baseUrl}veterinary-doctor/update`, formData);
+  }
+  updateOrganizationProfile(formData:FormData){
+    return this.http.put<any>(`${this.baseUrl}organization/update`, formData);
   }
 }

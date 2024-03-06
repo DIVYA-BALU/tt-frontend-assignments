@@ -1,0 +1,90 @@
+<div class="container">
+    <div class="filter">
+        <form class="example-form" (ngSubmit)="search()">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Category</mat-label>
+              <input type="text"
+                     placeholder="Pick one"
+                     aria-label="category"
+                     matInput
+                     [matAutocomplete]="autoCategory"
+                     (input)="getCategory()"
+                     [(ngModel)]="category"
+                     name="category">
+              <mat-autocomplete #autoCategory="matAutocomplete">
+                <mat-option *ngFor="let category of categories" [value]="category">
+                  {{category}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Breed</mat-label>
+                <input type="text"
+                       placeholder="Pick one"
+                       aria-label="breed"
+                       matInput
+                       [matAutocomplete]="autoBreed"
+                       (input)="getBreed()"
+                       [(ngModel)]="breed"
+                       name="breed">
+                <mat-autocomplete #autoBreed="matAutocomplete">
+                  <mat-option *ngFor="let breed of breeds" [value]="breed">
+                    {{breed}} breed
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Gender</mat-label>
+                <input type="text"
+                       placeholder="Pick one"
+                       aria-label="gender"
+                       matInput
+                       [matAutocomplete]="autoCity"
+                       (input)="getSearchInput()"
+                       [(ngModel)]="gender"
+                       name="gender">
+                <mat-autocomplete #autoCity="matAutocomplete">
+                  <mat-option *ngFor="let gender of genders" [value]="gender">
+                    {{gender}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>City</mat-label>
+                <input type="text"
+                       placeholder="Pick one"
+                       aria-label="city"
+                       matInput
+                       [matAutocomplete]="auto"
+                       (input)="getCity()"
+                       [(ngModel)]="city"
+                       name="city">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let city of cites" [value]="city">
+                    {{city}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            <button mat-flat-button>Apply Filter</button>
+          </form>
+    </div>
+    <div class="result">
+        <div class="details" *ngFor="let petPost of petPosts" (click)="viewProfile(petPost._id)">
+            <img [src]="petPost.images" alt="" class="profile"/>
+            <div class="card">
+                Pet Details: <br>
+              <span>Category : {{ petPost.category }}</span>
+              <span>Breed : {{ petPost.breed }}</span>
+              <span>Gender {{ petPost.gender }}</span>
+            </div>
+            <div class="card">
+                Location Details: <br>
+                <span>City : {{ petPost.posterId.location.city }}</span>
+                <span>District : {{ petPost.posterId.location.district }}</span>
+                <span>State : {{ petPost.posterId.location.state }}</span>
+                <span>Country : {{ petPost.posterId.location.country  }}</span>
+              </div>
+          </div>
+        </div>
+    </div>
+

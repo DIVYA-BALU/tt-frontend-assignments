@@ -1,0 +1,33 @@
+.container{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+.filter{
+    width: 20%;
+}
+.result{
+    width: 70%;
+}
+.details{
+    display: flex;
+    margin-bottom: 20px;
+}
+.details:hover{
+    cursor: pointer;
+}
+.profile{
+    width: 30%;
+    height: 30%;
+    margin-right: 20px;
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin-left: 20px;
+}
+span{
+    margin-top: 10px;
+    margin-left: 15px;
+}

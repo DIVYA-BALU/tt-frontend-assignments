@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.petAdoption.petPalFinder.dto.OrganizationRegistrationDto;
 import com.petAdoption.petPalFinder.dto.StatusMessage;
@@ -43,5 +44,20 @@ public class OrganizationController {
     @PutMapping
     public ResponseEntity<StatusMessage> changeStatus(@RequestBody StatusUpdateDto statusUpdateDto) {
         return ResponseEntity.ok(organizationService.updateStatus(statusUpdateDto));
+    }
+
+    @GetMapping("search-city")
+    public ResponseEntity<List<String>> searchCity(@RequestParam String city) {
+        return ResponseEntity.ok(organizationService.searchCity(city));
+    }
+
+    @GetMapping("detail")
+    public ResponseEntity<Organization> getOrganization(@RequestParam String id) {
+        return ResponseEntity.ok(organizationService.getOrganizationById(id));
+    }
+
+    @PutMapping("update")
+    public ResponseEntity<StatusMessage> updateOrganization(@ModelAttribute OrganizationRegistrationDto organizationRegistrationDto) {
+        return ResponseEntity.ok(organizationService.updateOrganization(organizationRegistrationDto));
     }
 }

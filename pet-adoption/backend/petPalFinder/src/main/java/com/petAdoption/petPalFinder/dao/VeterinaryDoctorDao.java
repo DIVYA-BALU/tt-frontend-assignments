@@ -22,10 +22,10 @@ public class VeterinaryDoctorDao {
         template.updateFirst(query, update, VeterinaryDoctor.class);
     }
 
-    public void updateSubscription(String id){
+    public void updateSubscription(String id,Boolean value){
         Criteria criteria = Criteria.where("_id").is(id);
 		Query query = new Query(criteria);
-        Update update = new Update().set("isSubscribed", true);
+        Update update = new Update().set("isSubscribed", value);
         template.updateFirst(query, update, VeterinaryDoctor.class);
     }
 }

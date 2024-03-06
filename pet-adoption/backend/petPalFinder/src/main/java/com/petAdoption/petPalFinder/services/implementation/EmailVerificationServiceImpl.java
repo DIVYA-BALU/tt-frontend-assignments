@@ -109,4 +109,9 @@ public class EmailVerificationServiceImpl implements EmailVerificationService{
         String password = stringBuilder.toString();
         return password;
     }
+
+    @Override
+    public void deleteAllOtp() {
+        emailVerificationRepository.deleteAll();
+    }
 }

@@ -1,6 +1,14 @@
 <div class="container">
   <div class="registerBox">
-    <h1 class="head">Profile Details</h1>
+    <div class="logout">
+      <h1 class="head">Profile Details</h1>
+      <button mat-icon-button [matMenuTriggerFor]="menu" class="logout-menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()">Logout</button>
+      </mat-menu>
+    </div>
     <form class="form" [formGroup]="formResponse" (ngSubmit)="register()">
         <label class="labels">Profile Photo</label>
         <div class="profile">

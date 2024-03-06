@@ -24,7 +24,6 @@ export class RecivedDoctorRequestComponent {
   isSubscribed:boolean = false;
 
   currentTab:string = "pending"
-
   tabChange(tab:string){
     
       this.currentTab = tab;

@@ -26,7 +26,7 @@ public class SecurityConfiguration {
 
     private final AuthenticationProvider authenticationProvider;
 
-    private String[] permitAllEndpointList = {"/auth/**","/static/**","/email-verification/**","/pet-post/near-by-post","/pet-post/latest","/transaction/**","veterinary-doctor/all"};
+    private String[] permitAllEndpointList = {"/auth/**","/static/**","/email-verification/**","/pet-post/near-by-post","/pet-post/latest","/transaction/**","veterinary-doctor/all","/pet-post/search-input/**","organization/search-city"};
     
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception

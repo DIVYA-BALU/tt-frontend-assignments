@@ -11,10 +11,15 @@ import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
 import org.springframework.data.mongodb.core.aggregation.ConditionalOperators;
 import org.springframework.data.mongodb.core.aggregation.FacetOperation;
+import org.springframework.data.mongodb.core.aggregation.LimitOperation;
+import org.springframework.data.mongodb.core.aggregation.MatchOperation;
+import org.springframework.data.mongodb.core.aggregation.SkipOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.expression.spel.ast.VariableReference;
 import org.springframework.stereotype.Repository;
 
+import com.petAdoption.petPalFinder.models.AppointmentStatus;
 import com.petAdoption.petPalFinder.models.Location;
 import com.petAdoption.petPalFinder.models.Pet;
 import com.petAdoption.petPalFinder.models.PetPost;
@@ -138,5 +143,51 @@ public class PetPostDao {
     return null;
 
    }
+
+    public List<String> petCategoryInput( String value){
+        Criteria criteria = Criteria.where("category").regex(value,"i");
+		Query query = new Query(criteria);
+                System.out.println(template.findDistinct(query,"category", PetPost.class, String.class));
+        return template.findDistinct(query,"category", PetPost.class, String.class);
+    }
+
+    public List<String> petBreedInput(String category, String breed){
+        Criteria criteria = Criteria.where("category").regex(category,"i").andOperator(Criteria.where("breed").regex(breed,"i"));
+		Query query = new Query(criteria);
+                System.out.println(template.findDistinct(query,"breed", PetPost.class, String.class));
+        return template.findDistinct(query,"breed", PetPost.class, String.class);
+    }
+
+    public List<PetPost> searchedPets(String category, String breed,String gender, String isInfected, String city,Integer page){
+        AggregationOperation lookupOperation = Aggregation.lookup("organizations", "posterId", "_id", "result");
+        Criteria genderCriteria ;
+        if(gender.equals("")){
+                genderCriteria = Criteria.where("gender").regex(gender,"i");
+        }else{
+                genderCriteria = Criteria.where("gender").is(gender);
+        }  
+        MatchOperation match = Aggregation.match(Criteria.where("breed").regex(breed,"i")
+                .and("category").regex(category,"i")
+                .and("result.location.city").regex(city,"i")
+                .andOperator(genderCriteria));
+              
+        MatchOperation match2 = Aggregation.match(Criteria.where("isInfected").is(isInfected.equals("true")?true:false));
+        SkipOperation skip = Aggregation.skip(page*10);
+        LimitOperation limit = Aggregation.limit(10);
+        Aggregation aggregation1 ;
+
+        if(isInfected.equals("")){
+                aggregation1= Aggregation.newAggregation(
+                lookupOperation,
+                match,skip,limit);
+        }else{
+                aggregation1= Aggregation.newAggregation(
+                lookupOperation,
+                match,
+                match2,skip,limit);
+        }
+        
+        return template.aggregate(aggregation1, "pet_posts", PetPost.class).getMappedResults();
+    }
     
 }

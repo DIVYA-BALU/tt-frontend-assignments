@@ -12,4 +12,7 @@ public interface PetPostService {
     public List<PetPost> getNearByPost(Location location);
     public List<PetPost> getLatestPost();
     public PetPost getPetPostById(String id);
+    public List<String> petCategoryInput(String value);
+    public List<String> petBreedInput(String category,String breed);
+    public List<PetPost> searchedPets(String category, String breed,String gender, String isInfected, String city,Integer page);
 }

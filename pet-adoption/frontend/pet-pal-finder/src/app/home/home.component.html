@@ -1,9 +1,27 @@
 <div class="header">
   <div class="search" id="search">
-    <input type="text" placeholder="Location" class="input" />
-    <button mat-fab aria-label="Example icon button with a heart icon">
+    <form class="example-form" (ngSubmit)="search()">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Category</mat-label>
+        <input type="text"
+               placeholder="Pick one"
+               aria-label="category"
+               matInput
+               [matAutocomplete]="auto"
+               (input)="getSearchInput()"
+               [(ngModel)]="inputValue"
+               name="search">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{category}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <button mat-fab aria-label="Example icon button with a heart icon">
         <mat-icon>search</mat-icon>
       </button>
+    </form>
+   
   </div>
   <h1>Find your Pal</h1>
 </div>

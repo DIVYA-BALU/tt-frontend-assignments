@@ -70,4 +70,15 @@ public class PetPostServiceImpl implements PetPostService {
         return petPostRepository.findById(id).get();
     }
 
+    public List<String> petBreedInput(String category,String breed){
+        return petPostDao.petBreedInput(category,breed);
+    }
+
+    public List<String> petCategoryInput(String value){
+        return petPostDao.petCategoryInput(value);
+    }
+
+    public List<PetPost> searchedPets(String category, String breed,String gender, String isInfected, String city,Integer page){
+        return petPostDao.searchedPets(category, breed, gender, isInfected, city, page);
+    }
 }

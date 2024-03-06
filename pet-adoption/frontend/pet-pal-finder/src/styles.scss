@@ -11,3 +11,6 @@ body { margin: 0; font-family:'Josefin Sans', sans-serif; }
 .mat-mdc-tab:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline{
     border-color: $primary-color;
 }
+.mat-mdc-unelevated-button.mat-unthemed {
+    --mdc-filled-button-container-color: #ffd740;
+}

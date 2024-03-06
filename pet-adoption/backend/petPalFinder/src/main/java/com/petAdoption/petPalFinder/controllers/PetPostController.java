@@ -51,4 +51,20 @@ public class PetPostController {
     public ResponseEntity<PetPost> getpetPost(@RequestParam String id) {
         return ResponseEntity.ok(petPostService.getPetPostById(id));
     }
+
+    @GetMapping("search-input/category")
+    public ResponseEntity<List<String>> getPetCategoryInput( @RequestParam String value) {
+        return ResponseEntity.ok(petPostService.petCategoryInput(value));
+    }
+
+    @GetMapping("search-input/breed")
+    public ResponseEntity<List<String>> getPetBreedsInput(@RequestParam String category, @RequestParam String breed) {
+        return ResponseEntity.ok(petPostService.petBreedInput(category, breed));
+    }
+
+    @GetMapping("search-input/search")
+    public ResponseEntity<List<PetPost>> searchedPets(String category, String breed,String gender, String isInfected, String city,Integer page) {
+        return ResponseEntity.ok(petPostService.searchedPets(category, breed, gender, isInfected, city, page));
+    }
+    
 }

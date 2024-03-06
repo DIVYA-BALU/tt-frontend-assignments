@@ -1,5 +1,6 @@
 package com.petAdoption.petPalFinder.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.data.annotation.Id;
@@ -25,4 +26,6 @@ public class SubscriptionTransaction {
     private Date validTill;
     private String paymentId;
     private String subscriberId;
+    private ArrayList<PreviousSubscripton> history;
+
 }

@@ -33,14 +33,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Override
     public StatusMessage save(OrganizationRegistrationDto organizationRegistrationDto) {
         StatusMessage statusMessage = new StatusMessage();
-        String url = fileService.saveFile(organizationRegistrationDto.getOrganizationPhoto(), "organization-profile");
-        Organization organization = Organization.builder().name(organizationRegistrationDto.getName())
-                .contactNumber(organizationRegistrationDto.getContactNumber())
-                .location(organizationRegistrationDto.getLocation())
-                .email(organizationRegistrationDto.getEmail())
-                .status(organizationRegistrationDto.getStatus())
-                .organizationPhoto(url)
-                .build();
+        Organization organization = OrganizationDtoToOrganization(organizationRegistrationDto);
         organizationRepository.save(organization);
         statusMessage.setMessage("data saved");
         return statusMessage;
@@ -51,11 +44,7 @@ public class OrganizationServiceImpl implements OrganizationService {
         return organizationRepository.findByStatus("initiated");
     }
 
-    @Override
-    public Organization getApprovedOrganization() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getApprovedOrganization'");
-    }
+    
 
     @Override
     public StatusMessage updateStatus(StatusUpdateDto statusUpdateDto) {
@@ -65,6 +54,38 @@ public class OrganizationServiceImpl implements OrganizationService {
         StatusMessage statusMessage = new StatusMessage();
         statusMessage.setMessage("status updated");
         return statusMessage;
+    }
+
+    public List<String> searchCity(String value){
+        
+        return organizationDao.searchCity(value);
+    }
+
+    @Override
+    public Organization getOrganizationById(String id) {
+        return organizationRepository.findById(id).get();
+    }
+
+    @Override
+    public StatusMessage updateOrganization(OrganizationRegistrationDto organizationRegistrationDto) {
+        StatusMessage statusMessage = new StatusMessage();
+        Organization organization = OrganizationDtoToOrganization(organizationRegistrationDto);
+        organization.set_id(organizationRegistrationDto.getId());
+        organizationRepository.save(organization);
+        statusMessage.setMessage("updated");
+        return statusMessage;
+    }
+
+    public Organization OrganizationDtoToOrganization(OrganizationRegistrationDto organizationRegistrationDto){
+        String url = fileService.saveFile(organizationRegistrationDto.getOrganizationPhoto(), "organization-profile");
+        Organization organization = Organization.builder().name(organizationRegistrationDto.getName())
+                .contactNumber(organizationRegistrationDto.getContactNumber())
+                .location(organizationRegistrationDto.getLocation())
+                .email(organizationRegistrationDto.getEmail())
+                .status(organizationRegistrationDto.getStatus())
+                .organizationPhoto(url)
+                .build();
+        return organization;
     }
 
 }

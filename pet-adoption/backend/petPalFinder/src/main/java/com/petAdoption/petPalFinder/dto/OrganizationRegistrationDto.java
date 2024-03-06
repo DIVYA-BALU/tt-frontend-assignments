@@ -7,6 +7,7 @@ import lombok.Data;
 
 @Data
 public class OrganizationRegistrationDto {
+    private String id;
     private String name;
     private String email;
     private MultipartFile organizationPhoto;

@@ -9,4 +9,5 @@ public interface EmailVerificationService {
     public StatusMessage sendSimpleMail(EmailVerification email);
     public StatusMessage verifyOtp(OtpVerificaion otpVerificaion);
     public void sendStatusMail(String email, StatusUpdateDto status, String role);
+    public void deleteAllOtp();
 }

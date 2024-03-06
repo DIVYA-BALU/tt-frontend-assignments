@@ -9,24 +9,30 @@ import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { SearchInputService } from '../service/search-input.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatInputModule, MatIconModule],
+  imports: [CommonModule,FormsModule, MatButtonModule, MatInputModule, MatIconModule,MatAutocompleteModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
 
-  search() {
-    throw new Error('Method not implemented.');
-  }
+
+  filteredOptions:string[] = ['aaaaa','sssssssss','ddddddd','ffffff','ggggggggg','ttttt']
+  categories:string[]=[]
+  inputValue:string = '';
+  
 
   constructor(
     private petPostService: PetPostService,
     private profileService: ProfileService,
     private authService: AuthService,
+    private searchInput:SearchInputService,
     private route:Router
   ) {}
 
@@ -70,11 +76,32 @@ export class HomeComponent {
         },
       });
     }
+
+    this.searchInput.categorySearchInput(this.inputValue).subscribe({
+      next: (val) => {
+        this.categories = val
+        console.log(val);
+        
+      }
+    })
   }
+  getSearchInput() {
+    this.searchInput.categorySearchInput(this.inputValue).subscribe({
+      next: (val) => {
+        this.categories= val
+        console.log(val);
+        
+      }
+    })
+    }
 
   navigate(id: string) {
     console.log(id);
     
     this.route.navigate(['pet/pet-profile',id])
+    }
+
+    search() {
+      this.route.navigate(['pet/search',this.inputValue])
     }
 }
