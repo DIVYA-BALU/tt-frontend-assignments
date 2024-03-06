@@ -47,7 +47,7 @@ export class LoginService {
 
   getUser(){
    this.http.get<User>(this.userUrl).subscribe(
-    (response) => {
+    (response) => {  
       this.userRole.next(response.role.role);
     }
    );
@@ -68,6 +68,7 @@ export class LoginService {
   }
 
   logout() {
+    this.loginStatus.next(false);
     this.isLoggedin = false;
     localStorage.clear();
   }

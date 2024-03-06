@@ -6,5 +6,6 @@ export const environment = {
     storyUrl : "http://localhost:8080/successstory",
     userUrl : "http://localhost:8080/api/user/getuser",
     userBaseUrl : "http://localhost:8080/api/user",
-    fundsBaseUrl : "http://localhost:8080/fund"
+    fundsBaseUrl : "http://localhost:8080/fund",
+    funderBaseUrl : "http://localhost:8080/funder"
 };

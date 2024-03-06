@@ -1,12 +1,9 @@
-interface Role {
-    _id: string;
-    role: string;
-  }
+import { Role } from "./role";
 
 export interface User {
     _id:string;
     firstName:string;
-    lastname:string;
+    lastName:string;
     email:string;
-    role: Role;
+    role: Role ;
 }

@@ -1,0 +1,105 @@
+@import url('https://pro.fontawesome.com/releases/v5.10.0/css/all.css');
+
+.card {
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    font-size: 100px;
+}
+
+h2 {
+    padding: 0;
+    margin: 0;
+}
+
+.detail {
+    margin-left: 70px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.card {
+    width: 50%;
+}
+
+.input-field {
+    width: 100%;
+}
+
+
+.form-container {
+    width: 60%;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 200px;
+    padding: 30px;
+    box-shadow: 3px 3px 5px 5px rgb(193, 199, 201);
+}
+
+.form-container h2 {
+    text-align: center;
+}
+
+.form-container table {
+    font-size: 20px;
+    width: 100%;
+}
+
+.form-container table input {
+    margin-top: 7px;
+    margin-bottom: 15px;
+    width: 100%;
+    height: 30px;
+    border: 1px solid grey;
+    outline: none;
+    box-sizing: border-box;
+    padding-left: 20px;
+    font-size: 15px;
+}
+
+.form-container div input:focus {
+    padding-left: 20px;
+}
+
+.form-container div span {
+    font-size: 15px;
+    color: red;
+}
+
+.form-container .button-div {
+    margin-bottom: 0px;
+}
+
+.form-container table button {
+    background-color: #343CF0;
+    height: 50px;
+    width: 30%;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+    margin-right: 10px;
+    border-radius: 10px;
+    color: white;
+    font-size: medium;
+}
+
+.form-container .msg {
+    display: flex;
+    font-size: 18px;
+    font-family: Georgia;
+
+    i {
+        font-size: large;
+    }
+}
+
+.form-container table .cancel {
+    background-color: #FF0000;
+}

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../model/user';
 import { Page } from '../model/page';
+import { Register } from '../model/register';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,8 @@ import { Page } from '../model/page';
 export class UserService {
 
   userUrl = environment.userBaseUrl;
+  userFindUrl = environment.userUrl;
+
   constructor(private http:HttpClient) { }
 
   getAllUsers(pageIndex: number, pageSize: number): Observable<Page<User>> {
@@ -20,4 +23,12 @@ export class UserService {
     return this.http.get<Page<User>>(`${this.userUrl}/all`, { params : param})
   }
 
+  getUser(): Observable<User> {
+    return this.http.get<User>(`${this.userFindUrl}`);
+  }
+
+  updateProfile(profile: User): Observable<User>{
+    return this.http.patch<User>(`${this.userUrl}/update`, profile)
+  }
+  
 }

@@ -1,1 +1,77 @@
-<p>updateadminprofile works!</p>
+<mat-card>
+    <mat-card-content class="card">
+      <i class="icon fas fa-user-edit"></i>
+      <div class="detail">
+        <h2>{{ user.role.role }}</h2>
+        <h3>{{ user.firstName }} {{ user.lastName }}</h3>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <div class="form-container">
+    <form #profileForm="ngForm" (ngSubmit)="onProfile(profileForm)">
+      <table>
+        <tr>
+          <td>
+            <label for="fname">First Name:</label>
+            <input
+              type="text"
+              id="fname"
+              name="firstName"
+              [(ngModel)]="user.firstName"
+            />
+          </td>
+        </tr>
+  
+        <tr>
+          <td>
+            <label for="lname">Last Name:</label>
+            <input
+              type="text"
+              id="lname"
+              name="lastName"
+              [(ngModel)]="user.lastName"
+            />
+          </td>
+        </tr>
+  
+        <tr>
+          <td>
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              [(ngModel)]="user.email"
+              readonly
+            />
+          </td>
+        </tr>
+  
+        <tr>
+          <td>
+            <label for="role">Role:</label>
+            <input
+              type="text"
+              id="role"
+              name="role"
+              [(ngModel)]="user.role.role"
+              readonly
+            />
+          </td>
+        </tr>
+  
+        <tr class="button-div">
+          <td>
+            <button type="submit" (click)="updateUser()">UPDATE</button>
+            <button type="submit" class="cancel" (click)="cancelUpdate()">
+              CANCEL
+            </button>
+          </td>
+        </tr>
+      </table>
+    </form>
+    <div class="msg" *ngIf="buttonClick">
+      <p><i class="fas fa-thumbs-up"></i> {{ updateStatus }}!</p>
+    </div>
+  </div>
+  
