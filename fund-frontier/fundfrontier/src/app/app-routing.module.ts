@@ -13,6 +13,8 @@ import { FindstudentsComponent } from './components/findstudents/findstudents.co
 import { TestimonialComponent } from './components/testimonial/testimonial.component';
 import { TermsComponent } from './components/terms/terms.component';
 import { PrivacypolicyComponent } from './components/privacypolicy/privacypolicy.component';
+import { AdminprofileComponent } from './components/adminprofile/adminprofile.component';
+import { UsersComponent } from './components/users/users.component';
 
 const routes: Routes = [
   {
@@ -72,6 +74,17 @@ const routes: Routes = [
       {
         path: "privacy",
         component: PrivacypolicyComponent
+      },
+      {
+        path: "adminprofile",
+        component: AdminprofileComponent,
+        children: [
+          {
+            path: "users",
+            component: UsersComponent
+          }
+        ]
+
       }
       
     ]

@@ -25,4 +25,4 @@ export class HomeComponent {
   getTestimonials() {
    this.router.navigate(['header/testimonial']);  
 }
-}
+}   

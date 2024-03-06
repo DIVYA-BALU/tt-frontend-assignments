@@ -20,6 +20,7 @@ export class LoginComponent {
       (response) => {
         console.log(response);        
         this.loginService.loggedin(true, response.token);
+        this.loginService.getUser();
         this.router.navigate(['header/home'])
       }
     )

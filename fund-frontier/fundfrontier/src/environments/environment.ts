@@ -3,5 +3,7 @@ export const environment = {
     loginUrl : "http://localhost:8080/api/auth/login",
     registerUrl : "http://localhost:8080/api/auth/register",
     studentUrl : "http://localhost:8080/student",
-    storyUrl : "http://localhost:8080/successstory"
+    storyUrl : "http://localhost:8080/successstory",
+    userUrl : "http://localhost:8080/api/user/getuser",
+    userBaseUrl : "http://localhost:8080/api/user"
 };

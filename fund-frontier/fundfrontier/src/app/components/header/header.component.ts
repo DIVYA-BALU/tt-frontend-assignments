@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-header',
@@ -7,11 +8,23 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
-  role:string = 'student';
-  loggedin:boolean = true;
-  constructor() {
+  role!:string;
+  loggedin:boolean = false;
+  constructor(private loginService: LoginService) {
 
   }
-
+  
+ngOnInit() {
+  this.loginService.getLoginStatus().subscribe(
+    (data) => {
+      this.loggedin = data;
+    }
+  )
+  this.loginService.getRole().subscribe(
+    (data) => {
+      this.role = data;
+    }
+  )
+}
 
 }

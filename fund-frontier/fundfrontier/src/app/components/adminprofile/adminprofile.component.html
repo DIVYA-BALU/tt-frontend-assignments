@@ -1,0 +1,40 @@
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" class="nav" opened>
+    <mat-nav-list>
+      <a mat-list-item routerLink="profile">
+        <span class="custom-drawer"
+          ><mat-icon>account_circle</mat-icon> Profile</span
+        >
+      </a>
+      <a mat-list-item routerLink="supplyrecord">
+        <span class="custom-drawer"
+          ><mat-icon>credit_card</mat-icon> Funders</span
+        >
+      </a>
+      <a mat-list-item routerLink="stock">
+        <span class="custom-drawer"
+          ><mat-icon class="icon"> school</mat-icon>Students</span
+        >
+      </a>
+      <a mat-list-item routerLink="contact">
+        <span class="custom-drawer"
+          ><mat-icon>check_circle</mat-icon> Approvals</span
+        >
+      </a>
+      <a mat-list-item routerLink="orders">
+        <span class="custom-drawer">
+          <mat-icon>monetization_on</mat-icon> Funds
+        </span>
+      </a>
+      <a mat-list-item routerLink="users">
+        <span class="custom-drawer"><mat-icon>group</mat-icon> Users</span>
+      </a>
+      <a mat-list-item (click)="logout()">
+        <span class="custom-drawer"><mat-icon>logout</mat-icon> Logout</span>
+      </a>
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

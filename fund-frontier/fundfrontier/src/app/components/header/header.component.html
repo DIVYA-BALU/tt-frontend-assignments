@@ -19,11 +19,12 @@
         <a routerLink="aboutus">About us</a>
         <a routerLink="students">Students</a>
         <a routerLink="funders">Funders</a>      
-        <!-- <a *ngIf="loggedin" routerLink="">Profile</a> -->
         <div *ngIf="loggedin;then content"></div>
   <ng-template #content>
-    <a *ngIf="role === 'funder'"routerLink="funderprofile">Profile</a>
-    <a *ngIf="role === 'student'" routerLink="studentprofile" >Profile</a>
+    <a *ngIf="role === 'FUNDER'"routerLink="funderprofile">Profile</a>
+    <a *ngIf="role === 'STUDENT'" routerLink="studentprofile" >Profile</a>
+    <a *ngIf="role === 'ADMIN'" routerLink="adminprofile" >Profile</a>
+
   </ng-template>
       </div>
     </mat-toolbar>
