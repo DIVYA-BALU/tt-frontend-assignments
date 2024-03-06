@@ -1,0 +1,36 @@
+package com.project.crowdfund.service;
+
+import java.io.IOException;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import com.project.crowdfund.dto.StudentDto;
+import com.project.crowdfund.model.Student;
+
+public interface StudentService {
+
+    Student saveStudent(StudentDto student) throws IOException;
+
+    Student getStudent(String email);
+
+    Student updateStudent(Student student);
+
+    List<Student> findAll(int pageNo, int pageSize);
+
+    List<Student> getAllApproved(int pageNo, int pageSize);
+
+    String setApproved(String name, String email);
+
+    String setRejected(StudentDto student);
+
+    String updateProfile(MultipartFile file,String email) throws IOException;
+
+    List<Student> searchByGroup(String group);
+
+    List<Student> searchByYear(String year);
+
+    List<Student> searchByCollege(String college);
+    
+
+}
