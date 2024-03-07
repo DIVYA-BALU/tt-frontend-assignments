@@ -11,14 +11,14 @@ import { ViewstudentComponent } from '../viewstudent/viewstudent.component';
 })
 export class FindstudentsComponent {
 
-
   year: string = '';
   course: string = '';
   college: string = '';
   constructor(private studentService: StudentService, private dialog: MatDialog) {
-        this.getAllStudents()
+        this.getAllStudents(0,3)
   }
   students: Application[] = [];
+  pageNo: number = 0;
 
   getStudentsByYear() {
     if(this.year){
@@ -29,7 +29,7 @@ export class FindstudentsComponent {
       )
     }
     else {
-      this.getAllStudents()
+      this.getAllStudents(0,3)
     }
   }
 
@@ -42,7 +42,7 @@ export class FindstudentsComponent {
       )
     }
     else {
-      this.getAllStudents()
+      this.getAllStudents(0,3)
     }
   }
 
@@ -55,13 +55,17 @@ export class FindstudentsComponent {
       )
     }
     else {
-      this.getAllStudents()
+      this.getAllStudents(0,3)
     }
   }
-  getAllStudents() {
-    this.studentService.getStudents().subscribe(
+  getAllStudents(pageNo: number, pageSize: number) {
+    this.studentService.getStudents(pageNo, pageSize).subscribe(
       (response) => {
-         this.students = response;
+        response.content.forEach(
+          data => {
+            this.students.push(data);
+          }
+        )
          
       }
     )
@@ -75,8 +79,12 @@ export class FindstudentsComponent {
 
       dialogRef.afterClosed().subscribe(
         () =>{
-          this.getAllStudents();
+          this.getAllStudents(0,3)
         }
       )
     }
+
+    loadMore() {
+      this.getAllStudents(++this.pageNo,3);
+      }
 }

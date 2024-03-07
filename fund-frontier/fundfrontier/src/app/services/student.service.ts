@@ -20,8 +20,11 @@ export class StudentService {
     return this.http.post<Application>(`${this.studentUrl}/save`, application);
   }
 
-  getStudents(): Observable<Application[]> {
-    return this.http.get<Application[]>(`${this.studentUrl}/getallapproved`);
+  getStudents(pageNo: number, pageSize: number): Observable<Page<Application>> {
+    const param = new HttpParams()
+                  .set('pageNo',pageNo)
+                  .set('pageSize',pageSize);
+    return this.http.get<Page<Application>>(`${this.studentUrl}/getallapproved`,{params: param});
   }
 
   getAllPending(
