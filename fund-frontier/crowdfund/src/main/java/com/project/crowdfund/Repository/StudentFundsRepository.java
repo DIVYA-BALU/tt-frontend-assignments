@@ -7,5 +7,7 @@ import com.project.crowdfund.model.StudentFunds;
 
 @Repository
 public interface StudentFundsRepository extends MongoRepository<StudentFunds, String>{
+
+    StudentFunds findByStudentEmail(String email);
     
 }

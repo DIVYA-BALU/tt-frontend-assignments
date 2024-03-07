@@ -54,7 +54,7 @@ public class StudentController {
     }
 
     @GetMapping("/getallapproved")
-    public ResponseEntity<List<Student>> getAllApproved(@RequestParam(defaultValue = "0") Integer pageNo,
+    public ResponseEntity<Page<Student>> getAllApproved(@RequestParam(defaultValue = "0") Integer pageNo,
     @RequestParam(defaultValue = "10") Integer pageSize){
         System.out.println("called");
         return ResponseEntity.ok(studentService.getAllApproved(pageNo, pageSize));

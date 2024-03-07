@@ -31,5 +31,10 @@ public class StudentFundsServiceImp implements StudentFundsService{
     public StudentFunds updateFund(StudentFunds studentFunds) {
        return studentFundsRepository.save(studentFunds);
     }
+
+    @Override
+    public StudentFunds getStudent(String email) {
+       return studentFundsRepository.findByStudentEmail(email);
+    }
     
 }

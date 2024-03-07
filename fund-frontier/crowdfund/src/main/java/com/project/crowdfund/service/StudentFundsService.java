@@ -8,4 +8,6 @@ public interface StudentFundsService {
     StudentFunds saveAmount(Student student);
 
     StudentFunds updateFund(StudentFunds studentFunds);
+
+    StudentFunds getStudent(String email);
 }
