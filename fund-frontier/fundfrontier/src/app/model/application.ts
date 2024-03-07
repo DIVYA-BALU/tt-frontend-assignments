@@ -8,7 +8,7 @@ export interface Application {
   gender:string;
   countryOfBirth:string;
   countryOfResidence:string;
-  dateOfBirth:string;
+  dateOfBirth:Date;
   address:string;
   city:string;
   state:string;
@@ -23,7 +23,7 @@ export interface Application {
   studentId:string;
   fundRequired:string;
   feeDetails:File;
-  endDate:string;
+  endDate:Date;
   shortStory:string;
   status:string;
   reason:string;

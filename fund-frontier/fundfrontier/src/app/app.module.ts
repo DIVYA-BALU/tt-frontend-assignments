@@ -46,6 +46,7 @@ import { AllfundersComponent } from './components/allfunders/allfunders.componen
 import { UpdateadminprofileComponent } from './components/updateadminprofile/updateadminprofile.component';
 import { MatTableModule } from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { StudentregistrationComponent } from './components/studentregistration/studentregistration.component';
 
 
 @NgModule({
@@ -72,6 +73,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     AllstudentsComponent,
     AllfundersComponent,
     UpdateadminprofileComponent,
+    StudentregistrationComponent,
   ],
   imports: [
     BrowserModule,

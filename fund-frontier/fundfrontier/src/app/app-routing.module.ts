@@ -20,11 +20,12 @@ import { ApprovalsComponent } from './components/approvals/approvals.component';
 import { AllstudentsComponent } from './components/allstudents/allstudents.component';
 import { AllfundersComponent } from './components/allfunders/allfunders.component';
 import { UpdateadminprofileComponent } from './components/updateadminprofile/updateadminprofile.component';
+import { StudentregistrationComponent } from './components/studentregistration/studentregistration.component';
 
 const routes: Routes = [
   {
     path:"",
-    redirectTo: "header/home",
+    redirectTo: "header/studententregistration",
     pathMatch: 'full'
 
   },
@@ -110,6 +111,10 @@ const routes: Routes = [
           }
         ]
 
+      },
+      {
+        path: "studententregistration",
+        component: StudentregistrationComponent
       }
       
     ]

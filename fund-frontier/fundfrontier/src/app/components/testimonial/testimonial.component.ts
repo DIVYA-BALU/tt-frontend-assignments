@@ -18,6 +18,9 @@ export class TestimonialComponent {
       this.stories = response;
     })
   }
-
+  loadMore() {
+    throw new Error('Method not implemented.');
+    }
+    
 
 }
