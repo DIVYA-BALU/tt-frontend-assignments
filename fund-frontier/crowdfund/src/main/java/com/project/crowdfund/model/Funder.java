@@ -1,7 +1,5 @@
 package com.project.crowdfund.model;
 
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
