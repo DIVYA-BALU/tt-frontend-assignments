@@ -21,7 +21,7 @@ export interface Application {
   course:string;
   studentIdentityProof:File;
   studentId:string;
-  fundRequired:string;
+  fundRequired:number;
   feeDetails:File;
   endDate:Date;
   shortStory:string;

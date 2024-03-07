@@ -14,6 +14,8 @@ export class FindstudentsComponent {
   year: string = '';
   course: string = '';
   college: string = '';
+  amountRaised: number = 0;
+
   constructor(private studentService: StudentService, private dialog: MatDialog) {
         this.getAllStudents(0,3)
   }
@@ -86,5 +88,18 @@ export class FindstudentsComponent {
 
     loadMore() {
       this.getAllStudents(++this.pageNo,3);
+      }
+
+      getRaisedAmount(student: Application){
+        this.studentService.getRaisedAmount(student.email).subscribe(
+          (data) =>{
+              this.amountRaised = data.amount;
+          }
+        )
+      }
+
+      calculateProgressValue(student:Application) {
+        this.getRaisedAmount(student);
+        return (this.amountRaised / student.fundRequired) * 100;
       }
 }

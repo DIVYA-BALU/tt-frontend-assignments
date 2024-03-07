@@ -6,13 +6,16 @@ import { Observable } from 'rxjs';
 import { Successstory } from '../model/successstory';
 import { Page } from '../model/page';
 import { Studentdetails } from '../model/studentdetails';
+import { Studentfunds } from '../model/studentfunds';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StudentService {
+ 
   studentUrl = environment.studentUrl;
   storyUrl = environment.storyUrl;
+  studentFundUrl = environment.studentFundsUrl;
 
   constructor(private http: HttpClient) {}
 
@@ -93,5 +96,9 @@ export class StudentService {
     set('paseSize',pageSize);
     
     return this.http.get<Page<Studentdetails>>(`${this.studentUrl}/findall`,{params: param});
+  }
+
+  getRaisedAmount(email: string): Observable<Studentfunds> {
+    return this.http.get<Studentfunds>(`${this.studentFundUrl}/update/${email}`);
   }
 }

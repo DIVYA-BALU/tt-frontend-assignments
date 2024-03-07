@@ -47,13 +47,13 @@
        <strong>Fund to be Raised : </strong>{{student.fundRequired}}
         
       </p>
+      <mat-progress-bar mode="determinate" [value]="calculateProgressValue(student)"></mat-progress-bar>
     </mat-card-content>
     <mat-card-actions>
       <button mat-button> Pay {{student.fundRequired}}</button>
       <button mat-button (click)="viewStudent(student)"> Know More</button>
     </mat-card-actions>
   </mat-card>
-
 </div>
 <button mat-button class="load-more" (click)="loadMore()"> Load More</button>
 </div>

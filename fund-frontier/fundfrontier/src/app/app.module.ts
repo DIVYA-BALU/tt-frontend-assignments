@@ -47,7 +47,7 @@ import { UpdateadminprofileComponent } from './components/updateadminprofile/upd
 import { MatTableModule } from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { StudentregistrationComponent } from './components/studentregistration/studentregistration.component';
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -100,7 +100,8 @@ import { StudentregistrationComponent } from './components/studentregistration/s
     MatDialogModule,
     MatListModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatProgressBarModule
   ],
   providers: [
     {
