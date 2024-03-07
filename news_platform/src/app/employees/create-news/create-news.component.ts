@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NewsDTO } from 'src/app/model/News';
+import { NewsDTO } from 'src/app/model/New';
 import { CreateNewsService } from './create-news.service';
 
 @Component({
@@ -43,6 +43,7 @@ export class CreateNewsComponent {
     this.newsForm = new FormGroup({
       newsUid: new FormControl('', Validators.required),
       title: new FormControl('', Validators.required),
+      synopsis: new FormControl('', Validators.required),
       content: new FormControl('', Validators.required),
       category: new FormControl('', Validators.required),
       images: new FormControl('', Validators.required),

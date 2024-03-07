@@ -1,0 +1,33 @@
+@import "~@fortawesome/fontawesome-free/css/all.css";
+@import "/src/styles/variables";
+
+.header {
+  display: flex;
+  flex-direction: row;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid $tertiary-color;
+
+  h2 {
+    font-family: $font-family;
+    text-decoration: underline;
+  }
+  p {
+    font-family: $font-family;
+    color: grey;
+    font-size: 13px;
+  }
+}
+
+.content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  img {
+    width: 30%;
+    margin-bottom: 30px;
+  }
+}

@@ -14,6 +14,8 @@ import { ProfileComponent } from '../profile/profile.component';
 import { ShortReadsComponent } from './short-reads/short-reads.component';
 import { ArticleComponent } from './article/article.component';
 import { UserNewsComponent } from './user-news/user-news.component';
+import { BreakingNewsComponent } from './breaking-news/breaking-news.component';
+import { SensationalNewsComponent } from './sensational-news/sensational-news.component';
 
 const routes: Routes = [
   {
@@ -63,6 +65,14 @@ const routes: Routes = [
       {
         path: 'create-news',
         component: CreateNewsComponent
+      },
+      {
+        path: 'breaking-news',
+        component: BreakingNewsComponent
+      },
+      {
+        path: 'sensational-news',
+        component: SensationalNewsComponent
       },
       {
         path: 'rejected-news',

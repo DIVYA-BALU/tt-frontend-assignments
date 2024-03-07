@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { NewsDTO } from 'src/app/model/News';
+import { NewsDTO } from 'src/app/model/New';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -18,6 +18,7 @@ export class CreateNewsService {
     const formData: FormData = new FormData();
     formData.append('newsUid', news.newsUid);
     formData.append('title', news.title);
+    formData.append('synopsis', news.synopsis);
     formData.append('content', news.content);
     formData.append('category', news.category);
 

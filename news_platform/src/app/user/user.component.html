@@ -1,9 +1,12 @@
 <ng-container>
   <mat-toolbar class="example-header">
     <div class="heading">
-      <!-- <button mat-button (click)="sidenav.toggle()"> -->
+      <!-- <button mat-button>
         <i class="fa-solid fa-bars"></i>
-      <!-- </button> -->
+      </button> -->
+      <span class="logo">
+        <img src="/favicon.ico" alt="logo">
+      </span>
       InsightNow
     </div>
     <div class="example-spacer"></div>
@@ -29,7 +32,7 @@
         <div class="space"></div>
         <div class="topics">
           <a routerLink="">Research topics</a>
-          <a routerLink="">Daily news</a>
+          <a routerLink="daily-news">Daily news</a>
           <a routerLink="">Sensational</a>
           <a routerLink="">Short reads</a>
           <a routerLink="">Articles</a>
@@ -37,7 +40,7 @@
           <a routerLink="">Breaking news</a>
         </div>
         <div class="search">
-          <input type="text" name="" id="" placeholder="Search anything" />
+          <input type="text" name="search" id="search" placeholder="Search anything" (keyup)="onSearch()" [(ngModel)]="inputText"/>
           <button type="button">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
@@ -48,4 +51,18 @@
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
+
+  <!-- <mat-toolbar class="example-footer">
+    <div class="address">
+    <div class="heading">
+      <span class="logo">
+        <img src="/favicon.ico" alt="logo">
+      </span>
+      InsightNow
+    </div>
+    <div>
+      <p>kamaraj nagar, jedarpalayam , namakkal, 637213</p>
+    </div>
+  </div>
+  </mat-toolbar> -->
 </ng-container>

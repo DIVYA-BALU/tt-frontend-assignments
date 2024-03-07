@@ -14,6 +14,9 @@ export class SharedServiceService {
   );
   permissionsData = this.permissions.asObservable();
 
+  searchValue: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  searchValueData = this.searchValue.asObservable();
+
   constructor() {
     this.setLogin();
     this.setLogout();
@@ -41,5 +44,9 @@ export class SharedServiceService {
 
   hasToken() {
     return localStorage.getItem('accessToken');
+  }
+
+  setSearchValue(value: string){
+    this.searchValue.next(value);
   }
 }

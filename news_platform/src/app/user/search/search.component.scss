@@ -1,0 +1,47 @@
+@import "~@fortawesome/fontawesome-free/css/all.css";
+@import "/src/styles/variables";
+
+.container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 50px;
+}
+
+h2{
+    font-family: $font-family;
+    font-size: 30px;
+    font-weight: bold;
+    border-bottom: 1px solid black;
+}
+
+.card{
+    border: 1px solid black;
+    width: 40%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    margin-right: 50px;
+}
+
+.img-div{
+    width: 40%;
+}
+
+.img-div img{
+    width: 100%;
+    height: fit-content;
+    display: block;
+}
+
+.content-div{
+    width: 60%;
+    font-family: $font-family;
+    padding: 30px;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}  

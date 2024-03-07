@@ -15,12 +15,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 
 @NgModule({
   declarations: [
     AppComponent,
     PagenotfoundComponent,
     ProfileComponent,
+    // RoutehideDirective
   ],
   imports: [
     BrowserModule,
@@ -33,7 +35,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatToolbarModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MatBottomSheetModule
   ],
   providers: [
     {

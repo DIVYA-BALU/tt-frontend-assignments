@@ -24,5 +24,13 @@ export const environment = {
   getPendingShortReadsUrl: "http://localhost:8080/short-reads/get-Pending-ShortReads",
   shortReadsAcceptUrl: "http://localhost:8080/short-reads/acceptShortReads",
   shortReadsRejectUrl: "http://localhost:8080/short-reads/rejectShortReads",
-  getUserNewsAcceptedUrl: "http://localhost:8080/usernews/getUserNews"
+  getUserNewsAcceptedUrl: "http://localhost:8080/usernews/getUserNews",
+  searchUrl: "http://localhost:8080/news/search-news",
+  getShortReadsUrl: "http://localhost:8080/short-reads/get-all-ShortReads",
+  getShortReadsByIdUrl: "http://localhost:8080/short-reads/get-ShortReads",
+  getArticleUrl: "http://localhost:8080/article/get-all-article",
+  getArticle: "http://localhost:8080/article/get-article",
+  increaseArticleViews: "http://localhost:8080/article/increaseViews",
+  increaseShortReadsViews: "http://localhost:8080/short-reads/increaseViews",
+  dailyNewsUrl: "http://localhost:8080/news/get-today-news"
 };

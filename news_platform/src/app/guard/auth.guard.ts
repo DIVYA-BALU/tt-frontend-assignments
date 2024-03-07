@@ -1,25 +1,29 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
 import { SharedServiceService } from '../shared-service/shared-service.service';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { LoginBottomSheetComponent } from '../user/login-bottom-sheet/login-bottom-sheet.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private sharedService: SharedServiceService, private route: Router){}
+  logged!: boolean ;
+
+  constructor(private sharedService: SharedServiceService, private route: Router, private _bottomSheet: MatBottomSheet){}
 
   canActivate(): boolean{
     this.sharedService.loginStatusData.subscribe((data) => {
       if (data) {
-        return true;
+        this.logged = true;
       }else{
-        this.route.navigate(["/login"])
-        return false;
+        // this.route.navigate(["/user/login-botton-sheet"])
+        this.logged = false;
+        this._bottomSheet.open(LoginBottomSheetComponent);
       }
     })
-    return false;
+    return this.logged;
   }
   
 }

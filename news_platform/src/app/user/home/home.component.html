@@ -1,1 +1,78 @@
-<p>home </p>
+<div class="container">
+  <div class="div-section">
+    <div *ngFor="let shortRead of shortReads">
+      <mat-card class="example-card">
+        <mat-card-content>
+          <img src="{{ shortRead.image }}" alt="image" />
+          <mat-card-subtitle class="subtitle"
+            >Report | {{ shortRead.date }}</mat-card-subtitle
+          >
+          <div class="content">
+            <a [routerLink]="['/user/display-short-reads', shortRead.id]">
+              {{ shortRead.title }}
+            </a>
+            <button
+              mat-button
+              matTooltip="Save for later"
+              matTooltipClass="example-tooltip-uppercase"
+              aria-label="Button that shows a red tooltip"
+            >
+              <i class="fa-regular fa-bookmark"></i>
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <span>
+      <a routerLink="/user/short-reads">See all shortReads>></a>
+    </span>
+  </div>
+  <div class="div-section1">
+    <p>section</p>
+    <p>section</p>
+    <p>section</p>
+    <p>section</p>
+    <p>section</p>
+    <p>section</p>
+  </div>
+  <div class="div-section">
+    <div *ngFor="let article of articles">
+      <mat-card class="example-card">
+        <mat-card-content>
+          <img src="{{ article.images[0] }}" alt="image" />
+          <mat-card-subtitle class="subtitle"
+            >Report | {{ article.date }}</mat-card-subtitle
+          >
+          <div class="content">
+            <a [routerLink]="['/user/display-article', article.id]">
+              {{ article.title }}
+            </a>
+            <button
+              mat-button
+              matTooltip="Save for later"
+              matTooltipClass="example-tooltip-uppercase"
+              aria-label="Button that shows a red tooltip"
+            >
+              <i class="fa-regular fa-bookmark"></i>
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <span>
+      <a routerLink="/user/article">See all articles>></a>
+    </span>
+  </div>
+</div>
+
+<div class="user-news">
+  <div class="card">
+    <div class="para">
+      Would you like to share any news or information with us? We'd love to hear
+      your updates and keep our community informed!
+    </div>
+    <div class="button">
+      <button type="button">Click here</button>
+    </div>
+  </div>
+</div>

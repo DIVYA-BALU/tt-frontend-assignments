@@ -27,7 +27,9 @@ import { DialogBoxComponent } from './dialog-box/dialog-box.component';
 import { ShortReadsComponent } from './short-reads/short-reads.component';
 import { ArticleComponent } from './article/article.component';
 import { UserNewsComponent } from './user-news/user-news.component';
-import { RoutehideDirective } from '../custom_directive/routehide.directive';
+import { RoutehideModule } from '../custom_directive/routehide.module';
+import { BreakingNewsComponent } from './breaking-news/breaking-news.component';
+import { SensationalNewsComponent } from './sensational-news/sensational-news.component';
 
 
 @NgModule({
@@ -47,7 +49,8 @@ import { RoutehideDirective } from '../custom_directive/routehide.directive';
     ShortReadsComponent,
     ArticleComponent,
     UserNewsComponent,
-    RoutehideDirective
+    BreakingNewsComponent,
+    SensationalNewsComponent
   ],
   imports: [
     CommonModule,
@@ -63,7 +66,8 @@ import { RoutehideDirective } from '../custom_directive/routehide.directive';
     MatDialogModule,
     FormsModule,
     EditorModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RoutehideModule
   ],
   providers: [
     {

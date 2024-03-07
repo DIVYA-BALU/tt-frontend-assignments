@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { NewsDTO } from 'src/app/model/News';
+import { NewsDTO } from 'src/app/model/New';
 import { NewsService } from './news.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
@@ -18,11 +18,12 @@ export class NewsComponent {
   displayedColumns: string[] = [
     'newsUid',
     'title',
+    'synopsis',
     'images',
     'content',
     'category',
     'date',
-    'approval'
+    'approval',
   ];
 
   dataSource!: MatTableDataSource<NewsDTO>;

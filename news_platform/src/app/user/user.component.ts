@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { SharedServiceService } from '../shared-service/shared-service.service';
 import { Router } from '@angular/router';
 import { UserService } from './user.service';
+import { BehaviorSubject, debounce } from 'rxjs';
 
 @Component({
   selector: 'app-user',
@@ -17,16 +18,22 @@ export class UserComponent {
     private route: Router,
     private userService: UserService
   ) {
-    sharedService.loginStatusData.subscribe((data) => {
-      this.logged = data;
-    });
 
-    this.getStocks();
+    // this.getStocks();
+  }
+
+  inputText: string = '';
+
+  ngOnInit(){
+    this.sharedService.loginStatusData.subscribe((data) => {
+      this.logged = data;
+      console.log(this.logged);
+    });
   }
 
   logout() {
-    this.sharedService.setLogout();
     localStorage.clear();
+    this.sharedService.setLogout();
     this.route.navigate(['/login']);
   }
 
@@ -46,5 +53,17 @@ export class UserComponent {
     this.userService.getStocks().subscribe( (data) => {
       console.log(data);
     })
+  }
+
+  timer: any;
+
+  onSearch(){
+
+   clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
+      this.sharedService.setSearchValue(this.inputText);
+    }, 1000);
+    
+    this.route.navigate(['user/search']);
   }
 }

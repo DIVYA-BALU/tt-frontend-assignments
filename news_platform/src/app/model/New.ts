@@ -1,9 +1,8 @@
-export interface News {
+export interface NewsDTO {
   newsUid: string;
   title: string;
-  images: string[];
+  images: File[];
+  synopsis: string;
   content: string;
   category: string;
-  date: Date;
-  reason: string
 }

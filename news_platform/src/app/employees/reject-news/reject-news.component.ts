@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { RejectNewsService } from './reject-news.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { NewsDTO } from 'src/app/model/News';
+import { NewsDTO } from 'src/app/model/New';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 
