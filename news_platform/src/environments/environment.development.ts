@@ -32,5 +32,8 @@ export const environment = {
   getArticle: "http://localhost:8080/article/get-article",
   increaseArticleViews: "http://localhost:8080/article/increaseViews",
   increaseShortReadsViews: "http://localhost:8080/short-reads/increaseViews",
-  dailyNewsUrl: "http://localhost:8080/news/get-today-news"
+  dailyNewsUrl: "http://localhost:8080/news/get-today-news",
+  userNewsUrl: 'http://localhost:8080/usernews/addMyNews',
+  getNewsByIdUrl: "http://localhost:8080/news/get-News",
+  increaseNewsUrl: "http://localhost:8080/news/increaseViews"
 };

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HomeService } from './home.service';
 import { ShortReads } from 'src/app/model/ShortReads';
 import { Article } from 'src/app/model/Article';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ export class HomeComponent implements OnInit{
   shortReads: ShortReads[] = [];
   articles: Article[] = [];
 
-  constructor(private homeService: HomeService) {}
+  constructor(private homeService: HomeService, private route: Router) {}
 
   ngOnInit(){
     this.getShortReads(0, 2);
@@ -30,5 +31,9 @@ export class HomeComponent implements OnInit{
     this.homeService.getArticle(pageIndex, pageSize).subscribe( (data) => {
       this.articles = data.content;
     })
+  }
+
+  onClick(){
+    this.route.navigate(['/user/form']);
   }
 }

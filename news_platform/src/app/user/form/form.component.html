@@ -1,0 +1,98 @@
+<div class="form-container">
+  <form [formGroup]="newsForm" (ngSubmit)="onSubmit()">
+    <div class="container">
+      <label for="name">Name:</label>
+      <input
+        type="text"
+        name="name"
+        id="name"
+        placeholder="Ex: Max"
+        formControlName="name"
+      />
+      <span
+        *ngIf="(newsForm.controls['name'].touched || newsForm.controls['name'].dirty) && (newsForm.controls['name'].errors?.['required'])"
+      >
+        Name is required
+      </span>
+    </div>
+
+    <div class="container">
+      <label for="email">Email:</label>
+      <input
+        type="text"
+        name="email"
+        id="email"
+        placeholder="Ex: max12@gmail.com"
+        formControlName="email"
+      />
+      <span
+        *ngIf="(newsForm.controls['email'].touched || newsForm.controls['email'].dirty) && (newsForm.controls['email'].errors?.['required'])"
+      >
+        Email is required
+      </span>
+    </div>
+
+    <div class="container">
+      <label for="phoneNo">Phone no:</label>
+      <input
+        type="text"
+        name="phoneNo"
+        id="phoneNo"
+        placeholder="Ex: 9876543211"
+        formControlName="phoneNo"
+      />
+    </div>
+
+    <div class="container img">
+      <div class="img-div">
+        <p>
+          Upload images: (name should be same as unique id, if multiple
+          2024-03-07-(1), 2024-03-07-(2))
+        </p>
+        <label for="img"><i class="fa-solid fa-cloud-arrow-up"></i></label>
+        <input
+          type="file"
+          name="images"
+          id="img"
+          accept=".jpg, .jpeg, .png, .mp4"
+          (change)="uploadImages($event)"
+          formControlName="images"
+        />
+      </div>
+      <span *ngFor="let file of files; let i = index" class="span-img">
+        <p>
+          {{ file.name }}
+          <button type="button" (click)="remove(i)">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </p>
+      </span>
+      <span
+        *ngIf="((newsForm.controls['images'].touched || newsForm.controls['images'].dirty) && newsForm.controls['images'].errors?.['required'])"
+      >
+        upload image
+      </span>
+      <span *ngIf="imgError"> invalid image name format! </span>
+    </div>
+
+    <div class="content container">
+      <label>News contents:</label>
+      <span
+        *ngIf="((newsForm.controls['content'].touched || newsForm.controls['content'].dirty) && newsForm.controls['content'].errors?.['required'])"
+      >
+        content is required
+      </span>
+      <editor
+        [init]="editorConfig"
+        name="content"
+        formControlName="content"
+      ></editor>
+    </div>
+
+    <div>
+      <button type="submit" [disabled]="newsForm.invalid" class="submit">
+        Upload
+      </button>
+    </div>
+  </form>
+</div>

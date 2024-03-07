@@ -11,6 +11,9 @@ import { LoginBottomSheetComponent } from './login-bottom-sheet/login-bottom-she
 import { ArticleComponent } from './article/article.component';
 import { DisplayArticleComponent } from './display-article/display-article.component';
 import { DailyNewsComponent } from './daily-news/daily-news.component';
+import { FormComponent } from './form/form.component';
+import { DisplayNewsComponent } from './display-news/display-news.component';
+import { CategoryComponent } from './category/category.component';
 
 const routes: Routes = [
   {
@@ -57,8 +60,21 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
+        path: 'display-news/:id',
+        component: DisplayNewsComponent,
+        canActivate: [AuthGuard]
+      },
+      {
         path: 'daily-news',
         component: DailyNewsComponent
+      },
+      {
+        path: 'form',
+        component: FormComponent
+      },
+      {
+        path: 'topics',
+        component: CategoryComponent
       }
     ],
   },

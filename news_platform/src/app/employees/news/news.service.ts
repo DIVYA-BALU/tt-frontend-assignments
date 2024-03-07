@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { NewsDTO } from 'src/app/model/New';
+import { NewsDTO } from 'src/app/model/NewDTO';
 import { Page } from 'src/app/model/Page';
 import { environment } from 'src/environments/environment.development';
 

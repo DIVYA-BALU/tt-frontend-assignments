@@ -12,6 +12,9 @@ import {
 import { FormControl } from '@angular/forms';
 import { User } from 'src/app/model/User';
 import { UserDTO } from 'src/app/model/UserDTO';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SuccessSnackBarComponent } from 'src/app/success-snack-bar/success-snack-bar.component';
+import { FailureSnackBarComponent } from 'src/app/failure-snack-bar/failure-snack-bar.component';
 
 @Component({
   selector: 'app-account',
@@ -19,6 +22,7 @@ import { UserDTO } from 'src/app/model/UserDTO';
   styleUrls: ['./account.component.scss'],
 })
 export class AccountComponent {
+  durationInSeconds: number = 5;
   users: User[] = [];
 
   filterControl = new FormControl('');
@@ -42,7 +46,7 @@ export class AccountComponent {
 
   constructor(
     private accountService: CreateAccountService,
-    public dialog: MatDialog, private cdref: ChangeDetectorRef
+    public dialog: MatDialog, private cdref: ChangeDetectorRef, private _snackBar: MatSnackBar
   ) {
     this.dataSource = new MatTableDataSource(this.users);
   }
@@ -79,9 +83,11 @@ export class AccountComponent {
   createUser(user: UserDTO){
     this.accountService.createAccount(user).subscribe( (data) => {
       this.status = data;
+      this.openSuccessSnackBar();
     },
     (error) => {
       this.status = error.error;
+      this.openFailureSnackBar();
     })
   }
 
@@ -106,6 +112,18 @@ export class AccountComponent {
 
   nextPage(e: PageEvent) {
     this.getUsers(e.pageIndex, e.pageSize);
+  }
+
+  openSuccessSnackBar() {
+    this._snackBar.openFromComponent(SuccessSnackBarComponent, {
+      duration: this.durationInSeconds * 1000,
+    });
+  }
+
+  openFailureSnackBar() {
+    this._snackBar.openFromComponent(FailureSnackBarComponent, {
+      duration: this.durationInSeconds * 1000,
+    });
   }
 }
 

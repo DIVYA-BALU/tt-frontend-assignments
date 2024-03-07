@@ -8,7 +8,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { EditorModule } from '@tinymce/tinymce-angular';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -23,6 +22,11 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import { DisplayArticleComponent } from './display-article/display-article.component';
 import { ArticleComponent } from './article/article.component';
 import { DailyNewsComponent } from './daily-news/daily-news.component';
+import { FormComponent } from './form/form.component';
+import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { DisplayNewsComponent } from './display-news/display-news.component';
+import { CategoryComponent } from './category/category.component';
 
 
 @NgModule({
@@ -35,7 +39,10 @@ import { DailyNewsComponent } from './daily-news/daily-news.component';
     LoginBottomSheetComponent,
     DisplayArticleComponent,
     ArticleComponent,
-    DailyNewsComponent
+    DailyNewsComponent,
+    FormComponent,
+    DisplayNewsComponent,
+    CategoryComponent
   ],
   imports: [
     CommonModule,
@@ -52,7 +59,13 @@ import { DailyNewsComponent } from './daily-news/daily-news.component';
     MatCardModule,
     RoutehideModule,
     MatTooltipModule,
-    MatBottomSheetModule
+    MatBottomSheetModule,
+    MatProgressSpinnerModule
+  ],
+  providers: [
+    {
+      provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js'
+    }
   ]
 })
 export class UserModule { }

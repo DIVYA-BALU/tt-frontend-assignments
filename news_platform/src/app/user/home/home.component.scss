@@ -66,6 +66,7 @@
   margin-top: 50px;
   margin-left: 50px;
   width: 90%;
+  border: 1px solid grey;
 }
 
 .card{
@@ -74,6 +75,7 @@
   flex: 1;
   background-color: $tertiary-color;
   height: 100px;
+  // box-shadow: 3px 3px 6px 6px $tertiary-color;
   // width: 90%;
 }
 
@@ -89,5 +91,10 @@
     box-sizing: border-box;
     padding: 20px;
     font-family: $font-family;
+  }
+
+  button:hover{
+    cursor: pointer;
+  box-shadow: 3px 3px 6px 6px $tertiary-color;
   }
 }

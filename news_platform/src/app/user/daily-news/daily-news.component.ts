@@ -14,6 +14,7 @@ export class DailyNewsComponent implements OnInit{
   constructor(private dailynewsService: DailyNewsService){}
 
   ngOnInit(){
+    this.showSpinner();
     this.getDailyNews();
   }
 
@@ -23,5 +24,14 @@ export class DailyNewsComponent implements OnInit{
       console.log(this.newsContents);
       
     })
+  }
+
+  spinner!: boolean;
+
+  showSpinner(){
+    this.spinner = true;
+    setTimeout(() => {
+      this.spinner = false;
+    }, 2000);
   }
 }

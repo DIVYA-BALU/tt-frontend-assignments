@@ -16,12 +16,17 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { SuccessSnackBarComponent } from './success-snack-bar/success-snack-bar.component';
+import { FailureSnackBarComponent } from './failure-snack-bar/failure-snack-bar.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
     AppComponent,
     PagenotfoundComponent,
     ProfileComponent,
+    SuccessSnackBarComponent,
+    FailureSnackBarComponent,
     // RoutehideDirective
   ],
   imports: [
@@ -36,7 +41,8 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
     MatToolbarModule,
     MatDialogModule,
     MatButtonModule,
-    MatBottomSheetModule
+    MatBottomSheetModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {

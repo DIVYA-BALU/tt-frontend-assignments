@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NewsDTO } from 'src/app/model/New';
+import { NewsDTO } from 'src/app/model/NewDTO';
 import { CreateNewsService } from './create-news.service';
 
 @Component({
