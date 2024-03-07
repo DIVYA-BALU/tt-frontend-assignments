@@ -2,6 +2,8 @@ package com.project.crowdfund.service.serviceimp;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.project.crowdfund.Repository.SuccessStoryRepository;
@@ -22,8 +24,10 @@ public class SuccessStoryServiceImp implements SuccessStoryService{
     }
 
     @Override
-    public List<SuccessStory> getAllSuccessStory() {
-        return successStoryRepository.findAll();
+    public Page<SuccessStory> getAllSuccessStory(Integer pageNo, Integer pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
+        Page<SuccessStory> story = successStoryRepository.findAll(pageRequest);
+        return story;
     }
 
     @Override

@@ -1,9 +1,7 @@
 package com.project.crowdfund.model;
 
 import java.math.BigDecimal;
-import java.sql.Date;
-import java.time.LocalDate;
-
+import java.time.LocalDateTime;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
@@ -28,7 +26,7 @@ public class Student {
     private String gender;
     private String countryOfBirth;
     private String countryOfResidence;
-    private LocalDate dateOfBirth;
+    private LocalDateTime dateOfBirth;
     private String address;
     private String city;
     private String state;
@@ -43,7 +41,7 @@ public class Student {
     private String studentId;
     private BigDecimal fundRequired;
     private String feeDetails;
-    private LocalDate endDate;
+    private LocalDateTime endDate;
     private String shortStory;
     private String status;
 }

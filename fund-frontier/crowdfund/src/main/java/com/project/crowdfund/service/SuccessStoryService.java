@@ -1,6 +1,7 @@
 package com.project.crowdfund.service;
 
-import java.util.List;
+
+import org.springframework.data.domain.Page;
 
 import com.project.crowdfund.model.SuccessStory;
 
@@ -8,7 +9,7 @@ public interface SuccessStoryService {
 
     SuccessStory saveSuccessStory(SuccessStory successStory);
 
-    List<SuccessStory> getAllSuccessStory();
+    Page<SuccessStory> getAllSuccessStory(Integer pageNo, Integer pageSize);
 
     SuccessStory updateSuccessStory(SuccessStory successStory);
     

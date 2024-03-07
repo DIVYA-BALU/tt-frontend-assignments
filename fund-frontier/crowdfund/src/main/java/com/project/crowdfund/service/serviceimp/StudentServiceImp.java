@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +22,7 @@ import com.project.crowdfund.Repository.UserRepository;
 import com.project.crowdfund.dto.StudentDto;
 import com.project.crowdfund.model.Student;
 import com.project.crowdfund.model.Users;
+import com.project.crowdfund.service.StudentFundsService;
 import com.project.crowdfund.service.StudentService;
 
 import lombok.RequiredArgsConstructor;
@@ -31,6 +34,7 @@ public class StudentServiceImp implements StudentService {
     private final StudentRepository studentRepository;
     private final JavaMailSender javaMailSender;
     private final UserRepository userRepository;
+    private final StudentFundsService studentFundsService;
 
     @Value("${images.folder.path}")
     private String uploads;
@@ -43,6 +47,10 @@ public class StudentServiceImp implements StudentService {
 
     @Override
     public Student saveStudent(StudentDto student) throws IOException {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        LocalDateTime localDateTime1 = LocalDateTime.parse(student.getDateOfBirth(), formatter);
+        LocalDateTime localDateTime2 = LocalDateTime.parse(student.getEndDate(), formatter);
 
         String profile = student.getProfilePhoto().getOriginalFilename();
         String aadhar = student.getAadharCardProof().getOriginalFilename();
@@ -63,11 +71,7 @@ public class StudentServiceImp implements StudentService {
         String feesPath = uploads + fees;
         
 
-        Files.copy(student.getProfilePhoto().getInputStream(), Paths.get(profilePath));
-        Files.copy(student.getAadharCardProof().getInputStream(), Paths.get(aadharPath));
-        Files.copy(student.getIncomeProof().getInputStream(), Paths.get(incomePath));
-        Files.copy(student.getStudentIdentityProof().getInputStream(), Paths.get(studentIdPath));
-        Files.copy(student.getFeeDetails().getInputStream(), Paths.get(feesPath));
+      
 
         Users user = userRepository.findByEmail(student.getEmail()).get();
         System.out.println(user.getEmail());
@@ -81,7 +85,7 @@ public class StudentServiceImp implements StudentService {
                 .gender(student.getGender())
                 .countryOfBirth(student.getCountryOfBirth())
                 .countryOfResidence(student.getCountryOfResidence())
-                .dateOfBirth(student.getDateOfBirth())
+                .dateOfBirth(localDateTime1)
                 .address(student.getAddress())
                 .city(student.getCity())
                 .state(student.getState())
@@ -96,13 +100,20 @@ public class StudentServiceImp implements StudentService {
                 .studentId(student.getStudentId())
                 .fundRequired(student.getFundRequired())
                 .feeDetails(feesfpath)
-                .endDate(student.getEndDate())
+                .endDate(localDateTime2)
                 .shortStory(student.getShortStory())
                 .status("Pending")
                 .build();        
 
 
         Student savedStudent =  studentRepository.save(std);
+
+        Files.copy(student.getProfilePhoto().getInputStream(), Paths.get(profilePath));
+        Files.copy(student.getAadharCardProof().getInputStream(), Paths.get(aadharPath));
+        Files.copy(student.getIncomeProof().getInputStream(), Paths.get(incomePath));
+        Files.copy(student.getStudentIdentityProof().getInputStream(), Paths.get(studentIdPath));
+        Files.copy(student.getFeeDetails().getInputStream(), Paths.get(feesPath));
+
         sendMail(student.getEmail(), savedStudent.getFirstName()+" "+savedStudent.getLastName());
 
         return savedStudent;
@@ -184,6 +195,7 @@ public class StudentServiceImp implements StudentService {
         System.out.println(request);
         Student  student = studentRepository.findByEmail(request.getEmail());
         student.setStatus("Approved");
+        studentFundsService.saveAmount(student);
         studentRepository.save(student);
         try {
             SimpleMailMessage mailMessage

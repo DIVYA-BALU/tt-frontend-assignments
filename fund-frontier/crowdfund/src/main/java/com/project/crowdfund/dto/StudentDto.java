@@ -1,8 +1,6 @@
 package com.project.crowdfund.dto;
 
 import java.math.BigDecimal;
-import java.sql.Date;
-import java.time.LocalDate;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,7 +24,7 @@ public class StudentDto {
     private String gender;
     private String countryOfBirth;
     private String countryOfResidence;
-    private LocalDate dateOfBirth;
+    private String dateOfBirth;
     private String address;
     private String city;
     private String state;
@@ -41,7 +39,7 @@ public class StudentDto {
     private String studentId;
     private BigDecimal fundRequired;
     private MultipartFile feeDetails;
-    private LocalDate endDate;
+    private String endDate;
     private String shortStory;
     private String status;
     private String reason;

@@ -1,6 +1,8 @@
 package com.project.crowdfund.controller;
 
 
+import java.math.BigDecimal;
+
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,8 +27,8 @@ public class FundsController {
     private final FundsService fundsService;
 
     @PostMapping("/save")
-    public ResponseEntity<Funds> saveFunds(@RequestBody Funds funds){
-        return ResponseEntity.ok(fundsService.saveFunds(funds));
+    public ResponseEntity<Funds> saveFunds(@RequestBody Funds funds, @RequestParam Double amount){
+        return ResponseEntity.ok(fundsService.saveFunds(funds, amount));
     }
 
     @GetMapping("/getall")
