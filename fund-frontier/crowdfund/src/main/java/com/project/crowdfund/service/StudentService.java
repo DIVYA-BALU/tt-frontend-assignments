@@ -19,7 +19,7 @@ public interface StudentService {
 
     Page<Student> findAll(int pageNo, int pageSize);
 
-    List<Student> getAllApproved(int pageNo, int pageSize);
+    Page<Student> getAllApproved(int pageNo, int pageSize);
 
     Student setApproved(String name, Student request);
 

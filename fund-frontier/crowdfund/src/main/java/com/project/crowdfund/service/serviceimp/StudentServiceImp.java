@@ -139,11 +139,10 @@ public class StudentServiceImp implements StudentService {
     }
 
     @Override
-    public List<Student> getAllApproved(int pageNo, int pageSize) {
+    public Page<Student> getAllApproved(int pageNo, int pageSize) {
         PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
         Page<Student> pagingStudent = studentRepository.findByStatus("Approved",pageRequest);
-        System.out.println(studentRepository.findByStatus("Approved"));
-        return pagingStudent.getContent();  
+        return pagingStudent;
     }
 
     @Override
