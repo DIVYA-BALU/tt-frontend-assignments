@@ -61,8 +61,11 @@ export class StudentService {
     return this.http.get<Application>(`${this.studentUrl}/get/${email}`);
   }
 
-  getstories(): Observable<Successstory[]> {
-    return this.http.get<Successstory[]>(`${this.storyUrl}/getall`);
+  getstories(pageNo: number, pageSize: number): Observable<Page<Successstory>> {
+    const param = new HttpParams()
+                  .set('pageNo',pageNo)
+                  .set('pageSize',pageSize);
+    return this.http.get<Page<Successstory>>(`${this.storyUrl}/getall`,{params: param});
   }
 
   setApproved(

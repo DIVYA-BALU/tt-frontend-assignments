@@ -9,17 +9,22 @@ import { StudentService } from 'src/app/services/student.service';
 })
 export class TestimonialComponent {
 
+  pageNo: number = 0;
+
   constructor(private studentService:StudentService) {
-    this.getStories()
+    this.getStories(0,3)
   }
   stories: Successstory[] = [];
-  getStories() {
-    this.studentService.getstories().subscribe((response) => {
-      this.stories = response;
+  getStories(pageNo: number, pageSize: number) {
+    this.studentService.getstories(pageNo,pageSize).subscribe((response) => {
+      response.content.forEach(data => {
+        this.stories.push(data);
+      });
     })
   }
+
   loadMore() {
-    throw new Error('Method not implemented.');
+        this.getStories(++this.pageNo, 3)
     }
     
 
