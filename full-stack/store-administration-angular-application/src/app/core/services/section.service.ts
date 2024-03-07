@@ -1,6 +1,6 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { Constants } from '../constants/Constants';
 import { PaginatedResponse, Section } from '../models/API.model';
@@ -21,21 +21,30 @@ export class SectionService {
   });
 
   public paginationSections$: Observable<PaginatedResponse<Section>> = this.paginationSections.asObservable();
+  
+  private subscription: Subscription = new Subscription;
+  
+  private sections: BehaviorSubject<Section[]> = new BehaviorSubject<Section[]>([]);
 
-  constructor(private http: HttpClient) { 
-    this.setPaginationSectionsSubject();
+  public sections$: Observable<Section[]> = this.sections.asObservable();
+
+  constructor(private http: HttpClient) {
   }
 
-  saveSection(section: Section): Observable<Section>{
+  saveSection(section: Section): Observable<Section> {
     return this.http.post<Section>(`${environment.API_URL}${Constants.API_END_POINT.SECTIONS}`, section)
   }
 
-  getPaginationSections(): Observable<PaginatedResponse<Section>> {
-    return this.http.get<PaginatedResponse<Section>>(`${environment.API_URL}${Constants.API_END_POINT.SECTIONS}/page`)
+  getPaginationSections(page: number, size: number): Observable<PaginatedResponse<Section>> {
+    const params = new HttpParams()
+      .set('pageNo', page.toString())
+      .set('pageSize', size.toString());
+    return this.http.get<PaginatedResponse<Section>>(`${environment.API_URL}${Constants.API_END_POINT.SECTIONS}/page`, { params: params })
   }
-  
-  setPaginationSectionsSubject() {
-    this.getPaginationSections().
+
+  setPaginationSectionsSubject(page: number = 0, size: number = 10) {
+
+    const subscription = this.getPaginationSections(page, size).
       subscribe({
         next: (paginationSections) => {
           this.paginationSections.next(paginationSections);
@@ -50,7 +59,32 @@ export class SectionService {
     ;
   }
 
-  getAllSections(): Observable<Section[]>{
+  getAllSections(): Observable<Section[]> {
     return this.http.get<Section[]>(`${environment.API_URL}${Constants.API_END_POINT.SECTIONS}`)
   }
+
+  setSectionsSubject() {
+    const subscription = this.getAllSections().
+      subscribe({
+        next: (sections) => {
+          this.sections.next(sections);
+        },
+        error: (error: HttpErrorResponse) => {
+          if (error.status === 404)
+            alert('Unable to connect to the server');
+          else
+            alert(`${error.status} found`);
+        }
+      });
+    ;
+  }
+
+  ngOnDestroy() {
+
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+
+  }
+
 }

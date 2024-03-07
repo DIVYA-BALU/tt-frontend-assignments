@@ -12,7 +12,6 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
-import com.project.storeadministration.model.AttendanceDetail;
 import com.project.storeadministration.model.User;
 
 @Repository

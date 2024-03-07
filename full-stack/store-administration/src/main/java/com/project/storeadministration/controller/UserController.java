@@ -52,7 +52,7 @@ public class UserController {
 
   @GetMapping
   public ResponseEntity<Page<User>> getUsers(@RequestParam(defaultValue = "0") int pageNo,
-      @RequestParam(defaultValue = "10") int pageSize, @RequestParam String branchId)
+      @RequestParam(defaultValue = "10") int pageSize, @RequestParam String branchId, @RequestParam String searchByName)
       throws CustomException {
     return new ResponseEntity<Page<User>>(
         userService.getUsers(pageNo, pageSize, branchId), HttpStatus.OK);

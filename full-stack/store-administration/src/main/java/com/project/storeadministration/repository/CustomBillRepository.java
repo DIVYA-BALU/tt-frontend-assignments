@@ -1,5 +1,6 @@
 package com.project.storeadministration.repository;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -13,6 +14,8 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.aggregation.ArithmeticOperators;
+import org.springframework.data.mongodb.core.aggregation.ArithmeticOperators.Multiply;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Repository;
 
 import com.project.storeadministration.dto.IncomeStatement;
@@ -117,13 +120,29 @@ public class CustomBillRepository {
 
     return new PageImpl<>(paginatedList, PageRequest.of(currentPage, pageSize), IncomeStatements.size());
   }
-  // public Page<IncomeStatement> getBranchWiseIncomeStatement(PageRequest
-  // pageable) {
-  // https://chat.openai.com/share/10967b1f-e7c6-4a49-93ce-a898c754e9e0
-  // // TODO Auto-generated method stub
-  // throw new UnsupportedOperationException("Unimplemented method
-  // 'getBranchWiseIncomeStatement'");
-  // }
 
+  public List<IncomeStatement> getSectionWiseIncomeStatementForBranch(String branchId, LocalDate date) {
+    Aggregation aggregation = Aggregation.newAggregation(
+      Aggregation.match(Criteria.where("products.branch").is(branchId)),
+      Aggregation.unwind("billItems"),
+      Aggregation.lookup("products", "billItems.product", "_id", "products"),
+      Aggregation.unwind("products"),
+      Aggregation.group("products.branch", "products.section")
+            .first("products.branch").as("branchId")
+            .first("products.branch.name").as("branchName")
+            .first("products.section").as("sectionId")
+            .sum(Multiply.valueOf("$billItems.quantity").multiplyBy("$products.price")).as("revenue")
+            .sum(Multiply.valueOf("$billItems.quantity").multiplyBy("$products.cogs")).as("cogs"),
+            Aggregation.project()
+            .andExpression("_id.branchId").as("branchId")
+            .andExpression("branchName").as("branchName")
+            .andExpression("_id.sectionId").as("sectionId")
+            .and("revenue").as("revenue")
+            .and("cogs").as("cogs")
+    );
+
+    AggregationResults<IncomeStatement> results = mongoTemplate.aggregate(aggregation, "bills", IncomeStatement.class);
+    return results.getMappedResults();
+}
 
 }

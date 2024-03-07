@@ -1,5 +1,8 @@
 package com.project.storeadministration.service;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 
 import com.project.storeadministration.dto.IncomeStatement;
@@ -16,11 +19,6 @@ public interface BillService {
 
   Page<IncomeStatement> getSectionWiseIncomeStatement(int pageNo, int pageSize);
 
-  Page<IncomeStatement> getSectionWiseStatementByBranch(String branchId, int pageNo, int pageSize);
-
-  Page<IncomeStatement> getDateWiseStatementByBranchAndSection(String branchId, String sectionId, int pageNo,
-      int pageSize);
-
-  Page<IncomeStatement> getMonthWiseStatementByBranchAndSection(String branchId, String sectionId, int pageNo,
-      int pageSize);
+  List<IncomeStatement> getSectionWiseStatementForBranch(String branchId, LocalDate date);
+  
 }

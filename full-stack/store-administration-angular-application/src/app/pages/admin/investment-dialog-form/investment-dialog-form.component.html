@@ -12,7 +12,8 @@
       <label for="amount">Amount:</label>
       <input type="text" id="amount" formControlName="amount">
       <div *ngIf="investmentForm.get('amount')?.invalid && investmentForm.get('amount')?.touched">
-        <span *ngIf="investmentForm.get('amount')?.hasError('invalidNumber')">Please enter a valid amount in number.</span>
+        <span *ngIf="investmentForm.get('amount')?.hasError('invalidNumber')">Please enter a valid amount in
+          number.</span>
         <span *ngIf="investmentForm.get('amount')?.hasError('required')">Amount is required.</span>
       </div>
     </div>

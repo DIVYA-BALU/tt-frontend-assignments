@@ -37,14 +37,11 @@ public class BillServiceImpl implements BillService {
   @Override
   public Bill saveBill(Bill bill) {
     bill.setDate(LocalDate.now());
-
     List<BillItem> billItems = bill.getBillItems();
-
     for(BillItem billItem: billItems)
     {
       productService.updateQuantity(billItem.getProduct().get_id(),-billItem.getQuantity());
     }
-
     return billRepository.save(bill);
   }
 
@@ -52,7 +49,7 @@ public class BillServiceImpl implements BillService {
   public Revenue getRevenue() {
     return new Revenue(customBillRepository.getRevenue());
   }
-
+  
   @Override
   public Page<IncomeStatement> getBranchWiseIncomeStatement(int pageNo, int pageSize) {
     PageRequest pageable = PageRequest.of(pageNo, pageSize);
@@ -66,31 +63,8 @@ public class BillServiceImpl implements BillService {
   }
   
   @Override
-  public Page<IncomeStatement> getSectionWiseStatementByBranch(String branchId, int pageNo, int pageSize) {
-    // update the quantity to the backend when bill is added
-    // create three tables for financial analysis
-    // employee enrollment
-    // correct the paginations of all pages
-    // permission based billing-directives
-    // backend permission/role based
-    // employee page attendance marking and billing (alloted)
-    // manager page employee listing(option by branches)
-    // TODO Auto-generated method stub
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getSectionWiseStatementByBranch'");
+  public List<IncomeStatement> getSectionWiseStatementForBranch(String branchId, LocalDate date) {
+    return customBillRepository.getSectionWiseIncomeStatementForBranch(branchId, date);
   }
 
-  @Override
-  public Page<IncomeStatement> getDateWiseStatementByBranchAndSection(String branchId, String sectionId, int pageNo,
-      int pageSize) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getDateWiseStatementByBranchAndSection'");
-  }
-
-  @Override
-  public Page<IncomeStatement> getMonthWiseStatementByBranchAndSection(String branchId, String sectionId, int pageNo,
-      int pageSize) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getMonthWiseStatementByBranchAndSection'");
-  }
 }

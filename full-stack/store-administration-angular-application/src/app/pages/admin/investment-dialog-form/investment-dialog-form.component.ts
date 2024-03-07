@@ -33,13 +33,12 @@ export class InvestmentDialogFormComponent {
 
   submit() {
     this.isLoading = true;
-    console.log(this.investmentForm.value);
-    
     this.investmentService.saveInvestment(this.investmentForm.value).subscribe({
       next: () => {
         this.isLoading = false,
-          this.closeInvestmentDialogForm();
+        this.closeInvestmentDialogForm();
         this.investmentService.setTotalInvestmentSubject();
+        this.investmentForm.reset();
         this.dialog.open(PopUpComponent, {
           data: {
             message: 'Investment Saved Successfully',
@@ -54,6 +53,8 @@ export class InvestmentDialogFormComponent {
   }
 
   closeInvestmentDialogForm() {
+    console.log('in closeInvestment From');
+    this.investmentForm.reset();
     this.dialog.closeAll();
   }
 }

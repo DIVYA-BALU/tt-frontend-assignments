@@ -13,11 +13,13 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const jwtToken = localStorage.getItem("jwtToken");
-    if (jwtToken) {
+    const loginResponse = localStorage.getItem("loginResponse");
+    
+    if (loginResponse) {
+      
         const cloned = request.clone({
             headers: request.headers.set("Authorization",
-                "Bearer " + jwtToken)
+                "Bearer " + JSON.parse(loginResponse).jwt)
         });
 
         return next.handle(cloned);

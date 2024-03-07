@@ -11,7 +11,7 @@ public interface ProductService {
 
   Product saveProduct(Product product);
   
-  Page<Product> getProductDetails(int pageNo, int pageSize, String branchId, String sectionId);
+  Page<Product> getProductDetails(int pageNo, int pageSize, String branchId, String sectionId, String searchByName);
 
   List<Product> getProductDetails(String branchId, String sectionId, String search);
 

@@ -32,9 +32,9 @@ public class ProductServiceImpl implements ProductService {
   }
 
   @Override
-  public Page<Product> getProductDetails(int pageNo, int pageSize, String branchId, String sectionId) {
+  public Page<Product> getProductDetails(int pageNo, int pageSize, String branchId, String sectionId, String searchByName) {
     PageRequest pageable = PageRequest.of(pageNo, pageSize);
-    return customProductRepository.getProductDetails(branchId, sectionId, pageable);
+    return customProductRepository.getProductDetails(branchId, sectionId, searchByName, pageable);
   }
 
   @Override

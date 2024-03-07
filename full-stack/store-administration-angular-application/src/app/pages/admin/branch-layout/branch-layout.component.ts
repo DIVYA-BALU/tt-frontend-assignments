@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { BranchService } from 'src/app/core/services/branch.service';
 import { BranchDialogFormComponent } from '../branch-dialog-form/branch-dialog-form.component';
 import { Branch, PaginatedResponse } from 'src/app/core/models/API.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-branch-layout',
@@ -18,31 +19,22 @@ export class BranchLayoutComponent implements OnInit {
   pageSize: number = 10;
   totalBranches: number = 0;
   dataSource: MatTableDataSource<Branch>;
-  
+  private branchSubscription: Subscription = new Subscription;
+
   constructor(private branchService: BranchService, private dialog: MatDialog) {
     this.dataSource = new MatTableDataSource<Branch>;
   }
-  
+
   ngOnInit(): void {
+    this.branchService.setPaginatedBranchesSubject();
     this.getBranchDetails();
   }
 
-  getBranchDetails(){
-    this.branchService.paginatedBranches$.subscribe({
+  getBranchDetails() {
+    const branchSubscription = this.branchService.paginatedBranches$.subscribe({
       next: (paginatedBranches) => {
+        this.totalBranches = paginatedBranches.totalElements;
         this.dataSource.data = paginatedBranches.content;
-      }
-    })
-  }
-  
-  openBranchDialogForm() {
-    const dialogRef = this.dialog.open(BranchDialogFormComponent, { disableClose: true });
-  }
-
-  addBranchSection(branchId: string, sectionId: string) {
-    this.branchService.addSection(branchId, sectionId).subscribe({
-      error: (HttpErrorResponse) => {
-        alert('Error Occured Retry Later');
       }
     })
   }
@@ -50,6 +42,20 @@ export class BranchLayoutComponent implements OnInit {
   onPageChange(event: PageEvent): void {
     this.pageNumber = event.pageIndex;
     this.pageSize = event.pageSize;
-    //this.getEventDetails();
+    this.branchService.setPaginatedBranchesSubject(this.pageNumber, this.pageSize);
+    this.getBranchDetails();
   }
+  
+  openBranchDialogForm() {
+    const dialogRef = this.dialog.open(BranchDialogFormComponent, { disableClose: true });
+  }
+
+  ngOnDestroy() {
+
+    if (this.branchSubscription) {
+      this.branchSubscription.unsubscribe();
+    }
+    
+  }
+
 }

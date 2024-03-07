@@ -18,9 +18,12 @@ import { InvestmentDialogFormComponent } from '../investment-dialog-form/investm
 export class FinancialManagementComponent {
   displayedColumnsForBranchWiseAnalysis: string[] = ['Serial Number', 'Branch Name', 'Total COGS', 'Total Revenue', 'Profit / Loss'];
   displayedColumnsForSectionWiseAnalysis: string[] = ['Serial Number', 'Section Name', 'Total COGS', 'Total Revenue', 'Profit / Loss'];
-  pageNumber: number = 0;
-  pageSize: number = 10;
-  totalResults: number = 0;
+  branchPageNumber: number = 0;
+  branchPageSize: number = 10;
+  sectionPageNumber: number = 0;
+  sectionPageSize: number = 10;
+  totalBranchWiseResults: number = 0;
+  totalSectionWiseResults: number =0;
   branchWiseAnalysis: MatTableDataSource<IncomeStatement>;
   sectionWiseAnalysis: MatTableDataSource<IncomeStatement>;
   totalRevenue: number = 0;
@@ -67,36 +70,38 @@ export class FinancialManagementComponent {
   }
 
   getBranchWiseAnalysis() {
-      this.billService.getBranchWiseAnalysis().subscribe({
+      this.billService.getBranchWiseAnalysis(this.branchPageNumber, this.branchPageSize).subscribe({
         next: (paginatedBanchWiseAnalysis) => {
           this.branchWiseAnalysis.data = paginatedBanchWiseAnalysis.content;
+          this.totalBranchWiseResults = paginatedBanchWiseAnalysis.totalElements;
         }
       })
   }
 
   getSectionWiseAnalysis() {
-    this.billService.getSectionWiseAnalysis().subscribe({
+    this.billService.getSectionWiseAnalysis(this.sectionPageNumber, this.sectionPageSize).subscribe({
       next: (paginatedSectionWiseAnalysis) => {
         this.sectionWiseAnalysis.data = paginatedSectionWiseAnalysis.content;
+        this.totalSectionWiseResults = paginatedSectionWiseAnalysis.totalElements;
       }
     })
   }
 
   onBranchWisePageChange(event: PageEvent): void {
-    this.pageNumber = event.pageIndex;
-    this.pageSize = event.pageSize;
-    this.getSectionWiseAnalysis();
+    this.branchPageNumber = event.pageIndex;
+    this.branchPageSize = event.pageSize;
     this.getBranchWiseAnalysis();
   }
 
   onSectionWisePageChange(event: PageEvent): void {
-
+    this.sectionPageNumber = event.pageIndex;
+    this.sectionPageSize = event.pageSize;
+    this.getSectionWiseAnalysis();
   }
 
   onRowClicked(branchId: string, sectionId: string){
-    this.router.navigate(['/component-b'], { 
+    this.router.navigate(['admin/section-wise-analysis-for-branch'], { 
       queryParams: { sectionId, branchId }
     });
   }
-
 }

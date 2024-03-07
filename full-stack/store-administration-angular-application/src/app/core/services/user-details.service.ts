@@ -33,16 +33,17 @@ export class UserDetailsService {
     return this.loginResponseSubject;
   }
 
-  getPaginatedUserDetails(branchId: string, page: number, size: number): Observable<PaginatedResponse<UserDetails>> {
+  getPaginatedUserDetails(page: number, size: number, branchId: string, searchByName: string): Observable<PaginatedResponse<UserDetails>> {
     const params = new HttpParams()
       .set('pageNo', page.toString())
       .set('pageSize', size.toString())
-      .set('branchId', branchId);
+      .set('branchId', branchId)
+      .set('searchByName', searchByName);      
     return this.http.get<PaginatedResponse<UserDetails>>(`${environment.API_URL}${Constants.API_END_POINT.USERS}`, { params: params });
   }
 
-  setPaginatedUsersSubject(branchId: string, page: number, size: number) {
-    this.getPaginatedUserDetails(branchId, page, size).
+  setPaginatedUsersSubject(page: number = 0, size: number = 10, branchId: string = '', searchByName: string = '') {
+    this.getPaginatedUserDetails(page, size, branchId, searchByName).
       subscribe({
         next: (paginatedUsers) => {
           this.paginatedUsers.next(paginatedUsers);

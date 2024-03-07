@@ -1,6 +1,7 @@
 package com.project.storeadministration.repository;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,27 +29,31 @@ public class CustomProductRepository {
 
     if (search != null && !search.isEmpty()) {
       query.addCriteria(Criteria.where("product.name").regex(search, "i"));
-  }
+    }
     List<Product> products = mongoTemplate.find(query, Product.class);
 
     return products;
   }
 
-  public Page<Product> getProductDetails(String branchId, String sectionId, Pageable pageable) {
+  public Page<Product> getProductDetails(String branchId, String sectionId, String searchByName, Pageable pageable) {
     Query query = new Query();
 
-    if (branchId != null) {
-      query.addCriteria(Criteria.where("product.sectionId").is(sectionId));
+    if (branchId != null && !branchId.isEmpty()) {
+      query.addCriteria(Criteria.where("branch._id").is(branchId));
     }
 
-    if (sectionId != null) {
-      query.addCriteria(Criteria.where("product.sectionId").is(sectionId));
+    if (sectionId != null && !sectionId.isEmpty()) {
+      query.addCriteria(Criteria.where("section._id").is(sectionId));
+    }
+
+    if (searchByName != null && !searchByName.isEmpty()) {
+      query.addCriteria(Criteria.where("productName").regex(searchByName, "i"));
     }
 
     long total = mongoTemplate.count(query, Product.class);
 
     List<Product> products = mongoTemplate.find(query, Product.class);
-
     return new PageImpl<>(products, pageable, total);
+
   }
 }

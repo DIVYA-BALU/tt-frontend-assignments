@@ -19,7 +19,12 @@ import { ProductDialogFormComponent } from './product-dialog-form/product-dialog
 import { ProductLayoutComponent } from './product-layout/product-layout.component';
 import { UserEnrollmentDialogFormComponent } from './user-enrollment-dialog-form/user-enrollment-dialog-form.component';
 import { InvestmentDialogFormComponent } from './investment-dialog-form/investment-dialog-form.component';
-
+import { BillComponent } from './bill/bill.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import { SectionWiseAnalysisComponent } from './section-wise-analysis/section-wise-analysis.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +38,9 @@ import { InvestmentDialogFormComponent } from './investment-dialog-form/investme
     ProductLayoutComponent,
     ProductDialogFormComponent,
     UserEnrollmentDialogFormComponent,
-    InvestmentDialogFormComponent
+    InvestmentDialogFormComponent,
+    BillComponent,
+    SectionWiseAnalysisComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +51,11 @@ import { InvestmentDialogFormComponent } from './investment-dialog-form/investme
     MatDialogModule,
     MatProgressSpinnerModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule,
+    MatFormFieldModule, 
+    MatInputModule,
+    MatSelectModule
   ]
 })
 export class AdminModule { }

@@ -20,6 +20,7 @@ export class EmployeeManagentComponent implements OnInit {
   dataSource: MatTableDataSource<UserDetails>;
   branches: Branch[] = [];
   branchId: string = '';
+  searchByName: string ='';
 
   constructor(private dialog: MatDialog, private userDetailsService: UserDetailsService, private branchService: BranchService) {
     this.dataSource = new MatTableDataSource<UserDetails>;
@@ -27,8 +28,8 @@ export class EmployeeManagentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllBranches();
-    // this.userDetailsService.setPaginatedUsersSubject('', this.pageNumber, this.pageSize);
-   this.getUserDetails();
+    this.userDetailsService.setPaginatedUsersSubject(this.pageNumber, this.pageSize, this.branchId, this.searchByName);
+    this.getUserDetails(); 
   }
 
   getAllBranches() {
@@ -55,11 +56,10 @@ export class EmployeeManagentComponent implements OnInit {
   onPageChange(event: PageEvent): void {
     this.pageNumber = event.pageIndex;
     this.pageSize = event.pageSize;
-    this.getUserDetails();
+    this.userDetailsService.setPaginatedUsersSubject(this.pageNumber, this.pageSize, this.branchId, this.searchByName);
   }
   
-  onBranchDropdownChange(event: Event){
-    this.userDetailsService.setPaginatedUsersSubject(this.branchId, this.pageNumber, this.pageSize);
-    this.getUserDetails();
+  onSearchFilterChange() {
+    this.userDetailsService.setPaginatedUsersSubject(this.pageNumber, this.pageSize, this.branchId, this.searchByName);
   }
 }

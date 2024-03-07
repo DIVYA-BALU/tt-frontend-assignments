@@ -64,6 +64,7 @@ export class ProductDialogFormComponent implements OnInit{
       next: () => {
         this.isLoading = false,
         this.closeProductDialogForm();
+        this.productCreationForm.reset();
         this.productService.setPaginatedProductsSubject();
         this.dialog.open(PopUpComponent, {
           data: {

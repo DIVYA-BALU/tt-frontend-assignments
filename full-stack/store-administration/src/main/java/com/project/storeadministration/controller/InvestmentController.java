@@ -29,7 +29,6 @@ public class InvestmentController {
 
   @PostMapping
   public ResponseEntity<Investment> saveInvestment(@RequestBody Investment investment){
-    System.out.println(investment);
     return new ResponseEntity<Investment>(investmentService.saveInvestment(investment),HttpStatus.OK);
   }
 }

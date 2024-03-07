@@ -1,13 +1,22 @@
-<p>employee-managent works!</p>
 <div class="button-div">
   <button mat-button (click)="openEnrollUserForm()">Enroll User</button>
 </div>
 
-<div>
-  <label for="branch">Branch</label>
-  <select [(ngModel)]="branchId" id="branch" (change)="onBranchDropdownChange($event)">
-    <option *ngFor="let branch of branches" [ngValue]="branch._id">{{ branch.name }}</option>
-  </select>
+<div class = "search-and-filter-div">
+  <mat-form-field class="example-form-field">
+    <mat-label>Search By User Name</mat-label>
+    <input matInput type="text" [(ngModel)]="searchByName" (ngModelChange)="onSearchFilterChange()">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Filter By Branch</mat-label>
+    <mat-select [(ngModel)]="branchId" id="branch" >
+      <mat-option *ngFor="let branch of branches" [value]="branch._id" (click)="onSearchFilterChange()">
+        {{branch.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
 </div>
 
 <div class="table-div">

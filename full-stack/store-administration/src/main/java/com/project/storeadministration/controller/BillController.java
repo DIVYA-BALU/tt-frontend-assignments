@@ -1,5 +1,8 @@
 package com.project.storeadministration.controller;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -37,8 +40,9 @@ public class BillController {
 
   @GetMapping("/branchWiseAnalysis")
   public ResponseEntity<Page<IncomeStatement>> getBranchWiseAnalysis(@RequestParam(defaultValue = "0") int pageNo,
-  @RequestParam(defaultValue = "10") int pageSize) {
-    return new ResponseEntity<Page<IncomeStatement>>(billService.getBranchWiseIncomeStatement(pageNo, pageSize), HttpStatus.OK);
+      @RequestParam(defaultValue = "10") int pageSize) {
+    return new ResponseEntity<Page<IncomeStatement>>(billService.getBranchWiseIncomeStatement(pageNo, pageSize),
+        HttpStatus.OK);
   }
 
   @GetMapping("/sectionWiseAnalysis")
@@ -47,4 +51,8 @@ public class BillController {
     return new ResponseEntity<Page<IncomeStatement>>(billService.getSectionWiseIncomeStatement(pageNo, pageSize), HttpStatus.OK);
   }
 
+  @GetMapping("/sectionWiseAnalysisForBranch")
+  public ResponseEntity<List<IncomeStatement>> getSectionWiseIncomeStatementForBranch(@RequestParam String branchId,@RequestParam(required =false) LocalDate date){
+    return new ResponseEntity<List<IncomeStatement>>(billService.getSectionWiseStatementForBranch(branchId,date), HttpStatus.OK);
+  }
 }

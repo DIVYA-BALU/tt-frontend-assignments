@@ -29,11 +29,6 @@ public class ProductController {
   @Autowired
   private ProductService productService;
 
-  @GetMapping("/hello")
-  public String hello() {
-    return "Hello Products";
-  }
-
   @PostMapping
   public ResponseEntity<Product> saveProduct(@RequestBody Product product) {
     return new ResponseEntity<Product>(productService.saveProduct(product), HttpStatus.OK);
@@ -55,10 +50,10 @@ public class ProductController {
   @GetMapping("/page")
   public ResponseEntity<Page<Product>> getProductDetails(@RequestParam(defaultValue = "0") int pageNo,
       @RequestParam(defaultValue = "10") int pageSize, @RequestParam(required = false) String branchId,
-      @RequestParam(required = false) String sectionId)
+      @RequestParam(required = false) String sectionId, @RequestParam(required = false) String  searchByName)
       throws CustomException {
     return new ResponseEntity<Page<Product>>(
-        productService.getProductDetails(pageNo, pageSize, branchId, sectionId), HttpStatus.OK);
+        productService.getProductDetails(pageNo, pageSize, branchId, sectionId, searchByName), HttpStatus.OK);
   }
 
   @PostMapping("/{productId}/updateQuantity")

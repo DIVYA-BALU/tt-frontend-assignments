@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -22,12 +22,18 @@ export class BillService {
     return this.http.get<Revenue>(`${environment.API_URL}${Constants.API_END_POINT.BILLS}/revenue`);
   }
 
-  getSectionWiseAnalysis(): Observable<PaginatedResponse<IncomeStatement>> {
-    return this.http.get<PaginatedResponse<IncomeStatement>>(`${environment.API_URL}${Constants.API_END_POINT.BILLS}/sectionWiseAnalysis`);
+  getSectionWiseAnalysis(page: number = 0, size: number = 10): Observable<PaginatedResponse<IncomeStatement>> {
+    const params = new HttpParams()
+    .set('pageNo', page.toString())
+    .set('pageSize', size.toString());
+    return this.http.get<PaginatedResponse<IncomeStatement>>(`${environment.API_URL}${Constants.API_END_POINT.BILLS}/sectionWiseAnalysis`,  { params: params });
   }
 
-  getBranchWiseAnalysis(): Observable<PaginatedResponse<IncomeStatement>> {
-    return this.http.get<PaginatedResponse<IncomeStatement>>(`${environment.API_URL}${Constants.API_END_POINT.BILLS}/branchWiseAnalysis`);
+  getBranchWiseAnalysis(page: number = 0, size: number = 10): Observable<PaginatedResponse<IncomeStatement>> {
+    const params = new HttpParams()
+    .set('pageNo', page.toString())
+    .set('pageSize', size.toString());
+    return this.http.get<PaginatedResponse<IncomeStatement>>(`${environment.API_URL}${Constants.API_END_POINT.BILLS}/branchWiseAnalysis`, { params: params });
   }
 
   getSectionWiseAnalysisForBranch(): Observable<PaginatedResponse<IncomeStatement>> {

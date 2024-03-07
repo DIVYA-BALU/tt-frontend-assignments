@@ -1,17 +1,19 @@
 <div class="form-div">
   <h1>FILL SECTION DETAIL</h1>
+
   <form [formGroup]="sectionCreationForm" (ngSubmit)="submit()">
+
     <div>
       <label for="sectionName">Section Name:</label>
       <input type="text" id="sectionName" formControlName="name">
       <div *ngIf="sectionCreationForm.get('sectionName')?.invalid && sectionCreationForm.get('sectionName')?.touched">
         <span *ngIf="sectionCreationForm.get('branchName')?.hasError('required')">Section Name is required</span>
       </div>
-    </div>
-    <mat-spinner diameter="32" *ngIf="isLoading"></mat-spinner>
-    <div>
+      
       <button type="submit" [disabled]="sectionCreationForm.invalid || isLoading">Save</button>
       <button type="button" (click)="closeSectionDialogForm()">Close</button>
     </div>
+    
   </form>
+
 </div>

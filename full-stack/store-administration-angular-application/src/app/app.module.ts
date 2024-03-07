@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutComponent } from './pages/admin/layout/layout.component';
 import {MatListModule} from '@angular/material/list';
 import { PopUpComponent } from './pages/pop-up/pop-up.component';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,7 @@ import { PopUpComponent } from './pages/pop-up/pop-up.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
-
+    MatInputModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor,multi: true}],
   bootstrap: [AppComponent]
