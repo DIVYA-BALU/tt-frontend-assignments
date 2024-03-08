@@ -1,0 +1,152 @@
+<!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ms-auto fw-medium text-center">
+          <li class="nav-item me-5"><a class="nav-link" aria-current="page" href="/home">Home</a></li>
+          <li class="nav-item me-5"><a class="nav-link" href="#">Voting History</a></li>
+          <li class="nav-item me-5"><a class="nav-link" href="#">Notification</a></li>
+          <li class="nav-item me-5"><a class="nav-link" href="/profile">Profile</a></li>
+        </div>
+      </div>
+    </div>
+  </nav> -->
+
+  <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary shadow-sm">
+    <!-- navbar container -->
+    <div class="container-fluid">
+
+      <!-- logo -->
+      <a class="navbar-brand" routerLink="/home"><img src="../../../assets/logo.png" alt="" width="200px"></a>
+      <!-- logo ends-->
+  
+      <!-- Collapse control button -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Collapse control button ends-->
+  
+      <!-- collapsable navbar contents -->
+      <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 fw-medium text-center">
+          <li class="nav-item me-md-3" *ngIf="userId!=='admin'">
+            <a class="nav-link anim selected" routerLink="/home"
+              routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a>
+          </li>
+          <!-- <li class="nav-item me-3">
+            <a class="nav-link anim" routerLinkActive="active" routerLink="/voting">Voting History</a>
+          </li>
+          <li class="nav-item me-3">
+            <a class="nav-link anim" routerLinkActive="active" routerLink="/about">Notifications</a>
+          </li> -->
+          <!-- <li class="nav-item ">
+            <a class="nav-link " routerLinkActive="active">
+              <i class="bi bi-bell px-2 py-1 rounded logout"></i>
+            </a>
+          </li> -->
+
+          <li class="nav-item me-md-1" *ngIf="userId!=='admin'">
+            <a class="nav-link anim" routerLinkActive="active" routerLink="/make-payments">
+              Pay your Taxes
+            </a>
+          </li>
+          
+          <li class="nav-item me-md-1" *ngIf="userId!=='admin'">
+            <a class="nav-link anim" routerLinkActive="active" routerLink="/history">
+              Poll History
+            </a>
+          </li>
+
+          <li class="nav-item me-md-1" *ngIf="userId!=='admin'">
+            <a class="nav-link anim" routerLinkActive="active" routerLink="/profile">
+              <i class="bi bi-person-circle"></i> {{username}}
+            </a>
+          </li>
+
+          <li class="nav-item me-md-1 location" *ngIf="userId!=='admin'">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="modal" data-bs-target="#LocationModal">
+              {{userLocation}}
+            </a>
+          </li>
+          <!-- <li class="nav-item dropstart ms-md-1">
+            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-bell px-2 py-1 rounded logout"></i>
+            </a>
+            <ul class="dropdown-menu mt-md-5 me-md-n1">
+              <li><a class="dropdown-item"  data-bs-toggle="modal" data-bs-target="#detailsNavModal" (click)="setIssue(issue)" style="text-wrap: wrap;">A New issue is been raised in
+                your locality(Coimbatore).<b class="fw-semibold"> Click to view it</b></a></li>
+              <li><a class="dropdown-item" href="#" style="text-wrap: wrap;">A New issue is been raised in
+                your locality(Coimbatore). <b class="fw-semibold"> Click to view it</b></a></li>
+              <li><a class="dropdown-item disable bg-body-tertiary" href="#" style="text-wrap: wrap;">A New issue is been raised in
+                your locality(Coimbatore). <b class="fw-semibold"> Click to view it</b></a></li>
+            </ul>
+          </li> -->
+          <li class="nav-item me-md-3">
+            <a class="nav-link " routerLinkActive="active" (click)="logout()">
+              <i class="bi bi-box-arrow-right px-2 py-1 rounded logout"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- collapsable navbar contents ends-->
+  
+    </div>
+    <!-- navbar container ends-->
+  
+  </nav>
+
+
+<!-- Modal -->
+<div class="modal fade" id="LocationModal" tabindex="-1" aria-labelledby="LocationModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Change Location</h1>
+      </div>
+      <div class="modal-body">
+        <label class="fw-bold mb-1" for="location">New Location</label>
+        <input class="form-control w-100" type="text" name="location" placeholder="Enter your new Location" [(ngModel)]="location.location">
+        <div *ngIf="locations.length>1">
+          <hr>
+          <h6>Suggestions</h6>
+          <span *ngFor="let location of locations">
+            <p class="badge badge-pill mx-1" *ngIf="location.location!=userLocation" (click)="addLocation(location.location)">{{location.location}}</p>
+          </span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cancelLocation()">Cancel</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="updateLocation()">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--Details Modal -->
+<div class="modal fade" id="detailsNavModal" tabindex="-1" aria-labelledby="detailsNavModallabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="detailsNavModallabel">Issue Details</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="resetUrl()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex justify-content-center">
+          <img *ngIf="url" class="img-fluid img-thumbnail" style="height: 300px; width: fit-content;" [src]="url" alt="No images are there">
+        </div>
+        <h6 class="my-3"><b>Issue ID: </b>{{issue.issueId}}</h6>
+        <h6 class="my-3"><b>Issue Type: </b>{{issue.issueType}}</h6>
+        <h6 class="my-3"><b>Issue Location: </b>{{issue.location}}</h6>
+        <h6 class="my-3"><b>Landmark: </b>{{issue.landmark}}</h6>
+        <h6  class="mt-3"><b>Issue Description: </b></h6>
+        <p>{{issue.issue}}</p>
+      </div>
+    </div>
+  </div>
+</div>

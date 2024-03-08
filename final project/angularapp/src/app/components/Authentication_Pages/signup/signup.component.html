@@ -1,0 +1,39 @@
+<div class="container-fluid d-flex p-2 align-items-center justify-content-center" style="height: 100vh; width: 100vw; background-color: rgb(241, 241, 241);">
+  <span class="logo"><img src="../../../../assets/logo.png" alt="" width="280"></span>
+    <div class="card bg" style="width: 25rem;">
+      <div class="card-body p-4">
+        <h5 class="card-title text-center fs-3 pb-2 fw-semibold">SIGN-UP</h5>
+        <form [formGroup]="signupForm" (ngSubmit)="signup()">
+            <label class="pb-2 fs-5" for="userName">Email</label>
+            <br>
+            <input class="form-control w-100 login-input" formControlName="userName" type="text" name="userName" placeholder="Enter your email">
+            <span class="float-end text-danger m-0" *ngIf="signupForm.controls['userName'].dirty && signupForm.hasError('required','userName')">*email is required</span>
+            <span class="float-end text-danger m-0" *ngIf="signupForm.controls['userName'].hasError('pattern')">*email is invalid</span>
+            <br>
+            <label class="pb-2 fs-5" for="Location">Location</label>
+            <br>
+            <input class="form-control w-100 login-input" formControlName="location" type="text" name="location" placeholder="Enter your Location">
+            <span class="float-end text-danger m-0" *ngIf="signupForm.controls['location'].dirty && signupForm.hasError('required','location')">*location is required</span>
+            <br>
+            <label class="pb-2 fs-5" for="userPassword">Password</label>
+            <br>
+            <input class="form-control w-100 login-input" formControlName="userPassword" [type]="type" name="userPassword" placeholder="Enter your password">
+            <span class="float-end text-danger m-0" *ngIf="signupForm.controls['userPassword'].dirty && signupForm.hasError('required','userPassword')">*password is required</span>
+            <span class="float-end text-danger m-0" *ngIf="signupForm.controls['userPassword'].hasError('minlength')">*Requires atleast 8 characters</span>
+            <br>
+            <label class="pb-2 fs-5" for="password2">Confirm Password</label>
+            <br>
+            <input class="form-control w-100 login-input" formControlName="confirmPassword" [type]="type" name="password2" placeholder="Re-enter your password">
+            <span class="float-end text-danger m-0" *ngIf="signupForm.errors?.['passwordmismatcherror']">*Passwords doesn't match</span>
+            <br>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" (click)="onpassclick()" unchecked>
+              <label class="form-check-label">Show Password</label>
+            </div>
+            <br>
+            <button class="btn login-btn btn-primary mb-2 w-100" [disabled]="signupForm.invalid">Sign - up</button>
+        </form>
+        <p class="text-center m-0" style="font-size: small;">Already have an account? <a routerLink="/login" style="text-decoration: none;">Login</a></p>
+      </div>
+    </div>
+  </div>

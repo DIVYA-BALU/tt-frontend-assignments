@@ -1,0 +1,29 @@
+<app-navbar></app-navbar>
+<div class="container-fluid px-md-5 px-3" >
+  <h4 class="mt-4 text-center py-2 bg-info-subtle" style="box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;">RAISE YOUR ISSUE</h4>
+  <div class="mt-4">
+    <label for="formFile" class="form-label">Upload Image</label>
+    <input class="form-control" type="file" accept="Image/*" id="formFile" (change)="onChange($event)">
+  </div>
+
+  <form #addForm="ngForm"(ngSubmit)="onAddIssue(addForm)">
+    <div class="form-group mt-4">
+        <label for="landmark" class="form-label">Landmark</label>
+        <input type="text" ngModel name="landmark"class="form-control" id="landmark" placeholder="Enter landmark" required>
+    </div>
+    <div class="form-group mt-4">
+        <label for="issueType" class="form-label">Issue Type</label>
+        <input type="text" ngModel name="issueType"class="form-control" id="issueType" placeholder="Enter Issue Type" required>
+    </div>
+    <div class="form-group mt-4">
+        <label for="issue" class="form-label">Issue</label>
+        <textarea style="height: 100px;" type="text" ngModel name="issue"class="form-control" id="issue" placeholder="Enter Issue" required></textarea>
+    </div>
+    
+    <div class="mt-md-5 mt-3 float-end">
+        <button type="button" class="btn btn-secondary mx-1" routerLink="/profile">Cancel</button>
+        <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary mx-1">Upload Issue</button>
+    </div>
+  </form>
+
+</div>

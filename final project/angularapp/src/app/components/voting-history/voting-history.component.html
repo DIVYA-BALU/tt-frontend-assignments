@@ -1,0 +1,67 @@
+<app-navbar></app-navbar>
+<div class="container-fluid px-md-5 px-3" >
+    <h4 class="mt-4 text-center py-2 bg-info-subtle" style="box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;">Your Vote History</h4>
+    <div class="row">
+        <div class="col-12 col-md-6" *ngFor="let poll of polls">
+            <div class="card my-3" style="background-color: rgb(232, 254, 254);">
+                <div class="card-body">
+                    <p class="mb-0">Voted as <b>'{{poll.pollOption}}'</b> for an issue with issue ID : {{poll.issueId}}</p>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#detailsHistoryModal" (click)="setIssue(poll.issueId)">More info</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Details Modal -->
+<div class="modal fade" id="detailsHistoryModal" tabindex="-1" aria-labelledby="detailsHistoryModallabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="detailsHistoryModalLabel">Issue Details</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="resetUrl()" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h6 class="my-3"><b>Issue Location: </b>{{issue.location}}, {{issue.landmark}}</h6>
+          <h6  class="mt-3"><b>Issue Description: </b></h6>
+          <span class="badge bg-primary mb-1">{{issue.issueType}}</span>
+          <p style="text-align: justify;">{{issue.issue}}</p>
+          <div class="row">
+            <div class="col-12 col-md-5" *ngIf="issue.image==='yes'">
+              <div class="d-flex justify-content-center">
+                <img *ngIf="url" class="img-fluid img-thumbnail" style="height: 300px; width: fit-content;" [src]="url" alt="No images are there">
+              </div>
+            </div>
+            <div class="col">
+              <!--Poll Container Starts-->
+              <div class="container mt-5 poll-container">
+                <div class="poll-question">How do you see this issue?<span class="ps-1 text-danger" style="font-size: 15px;">*Already voted</span></div>
+                <ul class="poll-options">
+                  <li class="poll-option">
+                    <div class="progress my-3 disabled" style="height: 25px;" role="progressbar">
+                      <span class="option ps-2">Severe</span>
+                      <span class="percentage pe-2">{{severePercent}}%</span>
+                      <div class="progress-bar bg-opacity-50 progress-bar-striped progress-bar-animated" [style]="severeWidth"></div>
+                    </div>
+                    <div class="progress my-3 disabled" style="height: 25px;" role="progressbar">
+                      <span class="option ps-2">Moderate</span>
+                      <span class="percentage pe-2">{{moderatePercent}}%</span>
+                      <div class="progress-bar bg-opacity-50 progress-bar-striped progress-bar-animated" [style]="moderateWidth"></div>
+                    </div>
+                    <div class="progress my-3 disabled" style="height: 25px;" role="progressbar">
+                      <span class="option ps-2">Mild</span>
+                      <span class="percentage pe-2">{{mildPercent}}%</span>
+                      <div class="progress-bar bg-opacity-50 progress-bar-striped progress-bar-animated" [style]="mildWidth"></div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <!--Poll Container Ends-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,84 @@
+<!-- PAYMENT -->
+<app-navbar></app-navbar>
+
+<div
+  class="card bg p-3 mt-5 mx-5"
+  [ngClass]="{'form-div': true}"
+  
+>
+  <h4 class="text-center">Pay your taxes easily</h4>
+</div>
+
+<div class="card bg p-3 mt-5 mx-5" [ngClass]="{'payment-form': true}">
+  <h4 class="text-center">Make your payments</h4>
+
+  <form
+    [formGroup]="orderForm"
+    class="p-4"
+    (ngSubmit)="createTransaction(orderForm)"
+  >
+    <div class="mb-3">
+      <label for="name" class="form-label">Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        formControlName="name"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="mobile" class="form-label">Mobile:</label>
+      <input
+        type="tel"
+        class="form-control"
+        id="mobile"
+        formControlName="mobile"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email:</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        formControlName="email"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="district" class="form-label">District:</label>
+      <select
+        class="form-select"
+        id="district"
+        formControlName="district"
+        required
+      >
+        <option value="" disabled selected>Select District</option>
+        <option value="district1">Chennai</option>
+        <option value="district2">Coimbatore</option>
+        <option value="district3">Trichy</option>
+        <option value="district4">Madurai</option>
+        <option value="district5">Kanyakumari</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="taxType" class="form-label">Tax Type:</label>
+      <select
+        class="form-select"
+        id="taxType"
+        formControlName="taxType"
+        required
+      >
+        <option value="" disabled selected>Select Tax Type</option>
+        <option value="taxType1">Property Tax</option>
+        <option value="taxType2">Water Tax</option>
+        <option value="taxType3">Profession Tax</option>
+        <option value="taxType3">Non Tax</option>
+        <option value="taxType3">Trade Tax</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
