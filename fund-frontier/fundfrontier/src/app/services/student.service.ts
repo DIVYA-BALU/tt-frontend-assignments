@@ -23,11 +23,11 @@ export class StudentService {
     return this.http.post<Application>(`${this.studentUrl}/save`, application);
   }
 
-  getStudents(pageNo: number, pageSize: number): Observable<Page<Application>> {
+  getStudents(pageNo: number, pageSize: number): Observable<Page<Studentdetails>> {
     const param = new HttpParams()
                   .set('pageNo',pageNo)
                   .set('pageSize',pageSize);
-    return this.http.get<Page<Application>>(`${this.studentUrl}/getallapproved`,{params: param});
+    return this.http.get<Page<Studentdetails>>(`${this.studentUrl}/getallapproved`,{params: param});
   }
 
   getAllPending(
@@ -63,8 +63,8 @@ export class StudentService {
     );
   }
 
-  viewStudent(email: string): Observable<Application> {
-    return this.http.get<Application>(`${this.studentUrl}/get/${email}`);
+  viewStudent(email: string): Observable<Studentdetails> {
+    return this.http.get<Studentdetails>(`${this.studentUrl}/get/${email}`);
   }
 
   getstories(pageNo: number, pageSize: number): Observable<Page<Successstory>> {
@@ -99,6 +99,6 @@ export class StudentService {
   }
 
   getRaisedAmount(email: string): Observable<Studentfunds> {
-    return this.http.get<Studentfunds>(`${this.studentFundUrl}/update/${email}`);
+    return this.http.get<Studentfunds>(`${this.studentFundUrl}/getstudent/${email}`);
   }
 }

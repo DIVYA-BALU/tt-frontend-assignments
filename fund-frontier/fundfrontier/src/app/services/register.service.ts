@@ -15,7 +15,7 @@ export class RegisterService {
   register(registerForm: Register): Observable<Register> {
     return this.http.post<Register>(this.regUrl,registerForm);
   }
-  findUser(id:string) {
-    return this.http.get<Register>(`http://localhost:8080/api/user/get/${id}`)
+  findUser(email:string) {
+    return this.http.get<Register>(`http://localhost:8080/api/user/get/${email}`)
   }
 }

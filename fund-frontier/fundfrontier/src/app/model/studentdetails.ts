@@ -23,10 +23,12 @@ export interface Studentdetails {
   course: string;
   studentIdentityProof: File;
   studentId: string;
-  fundRequired: string;
+  fundRequired: number;
   feeDetails: File;
   endDate: string;
   shortStory: string;
   status: string;
   reason: string;
+  fundRaised: number;
+  raisedPercent: number
 }

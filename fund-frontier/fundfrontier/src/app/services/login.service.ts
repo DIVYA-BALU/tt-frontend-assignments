@@ -21,8 +21,10 @@ export class LoginService {
   userRole = new BehaviorSubject<string>('');
 
   constructor(private http:HttpClient) {
+    if(localStorage.getItem('accessToken')) {
     this.getLoginStatus();
     this.getRole();
+    }
    }
 
   login(email:string, password:string) : Observable<LoginResponse> {

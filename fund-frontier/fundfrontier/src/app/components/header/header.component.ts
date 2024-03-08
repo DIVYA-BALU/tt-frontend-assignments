@@ -20,11 +20,14 @@ ngOnInit() {
       this.loggedin = data;
     }
   )
+
+  if(this.loggedin){
   this.loginService.getRole().subscribe(
     (data) => {
       this.role = data;
     }
   )
+  }
 }
 
 }

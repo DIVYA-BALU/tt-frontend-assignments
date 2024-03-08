@@ -27,4 +27,5 @@ export interface Application {
   shortStory:string;
   status:string;
   reason:string;
+  fundRaised: number;
 }

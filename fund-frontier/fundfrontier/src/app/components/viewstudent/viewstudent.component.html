@@ -15,6 +15,18 @@
 <div>
     <h2>My story</h2>
     <h3 class="story">{{student.shortStory}}</h3>
+    <div>
+    <label id="example-name-label" class="example-name-label">Value</label>
+      <label class="example-value-label">{{value}}</label>
+    <mat-slider
+        class="example-margin"
+        max=100
+        min=20
+        step=1
+        >
+      <input matSliderThumb [(ngModel)]="value">
+    </mat-slider>
+</div>
     <button mat-button> Pay {{student.fundRequired}}</button>
 </div>
 </body>
