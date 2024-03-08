@@ -7,7 +7,7 @@ import com.project.crowdfund.model.Funds;
 
 public interface FundsService {
 
-    Funds saveFunds(Funds funds, Double amount);
+    Funds saveFunds(Funds funds);
 
     Page<Funds> getAllFunds(Integer pageNo, Integer pageSize);
     

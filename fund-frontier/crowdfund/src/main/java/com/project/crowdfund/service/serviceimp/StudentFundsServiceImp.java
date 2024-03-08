@@ -36,5 +36,12 @@ public class StudentFundsServiceImp implements StudentFundsService{
     public StudentFunds getStudent(String email) {
        return studentFundsRepository.findByStudentEmail(email);
     }
+
+    @Override
+    public void addAmount(String studentEmail, Double studentAmount) {
+        StudentFunds studentFunds = studentFundsRepository.findByStudentEmail(studentEmail);
+        studentFunds.setAmount(studentAmount+studentFunds.getAmount());
+        studentFundsRepository.save(studentFunds);
+    }
     
 }

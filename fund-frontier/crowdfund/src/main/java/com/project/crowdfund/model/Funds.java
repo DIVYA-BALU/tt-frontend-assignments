@@ -1,6 +1,6 @@
 package com.project.crowdfund.model;
 
-import java.math.BigDecimal;
+
 import java.sql.Date;
 
 import org.springframework.data.annotation.Id;
@@ -17,8 +17,8 @@ public class Funds {
     private String _id;
     private String funderEmail;
     private String studentEmail;
-    private BigDecimal totalAmount;
+    private Double totalAmount;
     private Date date;
-    private BigDecimal studentAmount;
-    private BigDecimal maintainenceAmount;
+    private Double studentAmount;
+    private Double maintainenceAmount;
 }

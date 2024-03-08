@@ -24,8 +24,8 @@ public class FundsController {
     private final FundsService fundsService;
 
     @PostMapping("/save")
-    public ResponseEntity<Funds> saveFunds(@RequestBody Funds funds, @RequestParam Double amount){
-        return ResponseEntity.ok(fundsService.saveFunds(funds, amount));
+    public ResponseEntity<Funds> saveFunds(@RequestBody Funds funds){
+        return ResponseEntity.ok(fundsService.saveFunds(funds));
     }
 
     @GetMapping("/getall")
