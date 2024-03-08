@@ -15,12 +15,12 @@
   padding-left: 30px;
   padding-right: 10px;
 
-  span{
+  span {
     display: flex;
     justify-content: right;
 
-    a{
-        color: black;
+    a {
+      color: black;
     }
   }
 }
@@ -34,7 +34,6 @@
   // padding-right: 30px;
   border-right: 1px solid $tertiary-color;
   border-left: 1px solid $tertiary-color;
-
 }
 
 .example-card {
@@ -53,8 +52,8 @@
     color: black;
   }
 
-  .subtitle{
-  font-family: $font-family;
+  .subtitle {
+    font-family: $font-family;
   }
 }
 
@@ -63,14 +62,14 @@
   flex-direction: row;
 }
 
-.user-news{
+.user-news {
   margin-top: 50px;
   margin-left: 50px;
   width: 90%;
   border: 1px solid grey;
 }
 
-.card{
+.card {
   display: flex;
   flex-direction: row;
   flex: 1;
@@ -80,38 +79,47 @@
   // width: 90%;
 }
 
-.para{
+.para {
   padding: 40px;
 }
 
-.button{
+.button {
   padding-top: 20px;
   background-color: transparent;
 
-  button{
+  button {
     box-sizing: border-box;
     padding: 20px;
     font-family: $font-family;
   }
 
-  button:hover{
+  button:hover {
     cursor: pointer;
-  box-shadow: 3px 3px 6px 6px $tertiary-color;
+    box-shadow: 3px 3px 6px 6px $tertiary-color;
   }
 }
 
 /* carousel.component.css */
-.top{
-display: flex;
-flex-direction: row;
-}
-
-.carousel {
+.top {
   display: flex;
   flex-direction: row;
-  align-items: center;
+}
 
-.carousel-img {
+.tab {
+  margin-left: 20px;
   width: 40%;
 }
+
+.link {
+  display: block;
+  padding: 10px;
+  font-size: 10px;
+  text-decoration: none;
+  color: black;
+  border-bottom: 1px solid $tertiary-color;
+  margin-bottom: 10px;
+}
+
+.link:hover {
+  text-decoration: underline;
 }

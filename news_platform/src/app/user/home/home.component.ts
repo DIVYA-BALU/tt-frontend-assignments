@@ -3,6 +3,8 @@ import { HomeService } from './home.service';
 import { ShortReads } from 'src/app/model/ShortReads';
 import { Article } from 'src/app/model/Article';
 import { Router } from '@angular/router';
+import { News } from 'src/app/model/News';
+import { DailyNewsService } from '../daily-news/daily-news.service';
 
 @Component({
   selector: 'app-home',
@@ -11,17 +13,16 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit{
 
-  images: string[] = ['/assets/image1.jpg', '/assets/image2.jpg', '/assets/image3.jpg', '/assets/image4.jpg', '/assets/image5.jpg'];
-  currentIndex: number = 0;
-
   shortReads: ShortReads[] = [];
   articles: Article[] = [];
+  newsContents!: News[];
 
-  constructor(private homeService: HomeService, private route: Router) {}
+    constructor(private homeService: HomeService, private route: Router, private dailynewsService: DailyNewsService) {}
 
   ngOnInit(){
     this.getShortReads(0, 2);
     this.getArticle(0, 2);
+    this.getDailyNews();
   }
  
   getShortReads(pageIndex: number, pageSize: number){
@@ -40,11 +41,10 @@ export class HomeComponent implements OnInit{
     this.route.navigate(['/user/form']);
   }
 
-  prev(): void {
-    this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+  getDailyNews() {
+    this.dailynewsService.getDailyNews().subscribe((data) => {
+      this.newsContents = data.slice(0, 10);
+    });
   }
-
-  next(): void {
-    this.currentIndex = (this.currentIndex + 1) % this.images.length;
-  }
+  
 }

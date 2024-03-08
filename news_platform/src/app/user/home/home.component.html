@@ -38,15 +38,21 @@
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen
       ></iframe>
-      <!-- <div class="carousel">
-        <button (click)="prev()"><i class="fa-solid fa-backward"></i></button>
-        <img
-          [src]="images[currentIndex]"
-          alt="carousel-image"
-          class="carousel-img"
-        />
-        <button (click)="next()"><i class="fa-solid fa-forward"></i></button>
-      </div> -->
+      <mat-tab-group
+        mat-stretch-tabs="false"
+        mat-align-tabs="start"
+        class="tab"
+      >
+        <mat-tab label="Top News">Content 1</mat-tab>
+        <mat-tab label="Latest News">
+          <a
+            class="link"
+            *ngFor="let news of newsContents"
+            [routerLink]="['/user/display-news', news.id]"
+            >{{ news.title }}</a
+          >
+        </mat-tab>
+      </mat-tab-group>
     </div>
   </div>
   <div class="div-section">

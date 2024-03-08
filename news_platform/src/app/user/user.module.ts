@@ -31,6 +31,7 @@ import { BreakingNewsComponent } from './breaking-news/breaking-news.component';
 import {MatChipsModule} from '@angular/material/chips';
 import { SensationalNewsComponent } from './sensational-news/sensational-news.component';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 @NgModule({
@@ -68,7 +69,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatBottomSheetModule,
     MatProgressSpinnerModule,
     MatChipsModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatTabsModule
   ],
   providers: [
     {
