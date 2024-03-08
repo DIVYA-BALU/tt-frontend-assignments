@@ -1,32 +1,27 @@
-<body >
-<div class="ind-student">
-    <div>
+<body>
+    <div class="student">
         <img src={{student.profilePhoto}} alt="student">
     </div>
-    
-    <div class="info">
+
+    <div class="info student">
         <h3>{{student.firstName}} {{student.lastName}}</h3>
         <h3>{{student.school}}</h3>
         <h3>{{student.collegeName}}</h3>
         <h3>{{student.course}} {{student.yearOfStudy}}</h3>
         <h3>Total funding needed : {{student.fundRequired}}</h3>
     </div>
-</div>
-<div>
-    <h2>My story</h2>
-    <h3 class="story">{{student.shortStory}}</h3>
-    <div>
-    <label id="example-name-label" class="example-name-label">Value</label>
-      <label class="example-value-label">{{value}}</label>
-    <mat-slider
-        class="example-margin"
-        max=100
-        min=20
-        step=1
-        >
-      <input matSliderThumb [(ngModel)]="value">
-    </mat-slider>
-</div>
-    <button mat-button> Pay {{student.fundRequired}}</button>
-</div>
+    <div class="student">
+        <h2>My story</h2>
+        <h3 class="story">{{student.shortStory}}</h3>
+
+    </div>
+    <div class="student">
+        <label class="example-value-label">Amount : {{value}}</label>
+        <mat-slider class="example-margin" max=100000 min=0 step=100>
+            <input matSliderThumb [(ngModel)]="value">
+        </mat-slider>
+    </div>
+    <div class="student">
+        <button mat-button (click)="payment()"> Pay {{value}}</button>
+    </div>
 </body>

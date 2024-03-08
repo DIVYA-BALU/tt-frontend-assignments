@@ -19,11 +19,13 @@ export class LoginService {
 
   loginStatus = new BehaviorSubject<boolean>(false);
   userRole = new BehaviorSubject<string>('');
+  userEmail = new BehaviorSubject<string>('');
 
   constructor(private http:HttpClient) {
     if(localStorage.getItem('accessToken')) {
     this.getLoginStatus();
     this.getRole();
+    this.getuserEmail();
     }
    }
 
@@ -37,6 +39,7 @@ export class LoginService {
     if(status) {
     this.isLoggedin = true;
     this.loginStatus.next(this.isLoggedin);
+    this.getUser();
     localStorage.setItem("isloggedin","true")
     localStorage.setItem("accessToken", token)
     }else {
@@ -51,6 +54,8 @@ export class LoginService {
    this.http.get<User>(this.userUrl).subscribe(
     (response) => {  
       this.userRole.next(response.role.role);
+      this.userEmail.next(response.email);
+      
     }
    );
   }
@@ -58,6 +63,10 @@ export class LoginService {
   getRole () {
     this.getUser();
     return this.userRole.asObservable();
+  }
+
+  getuserEmail() {
+    return this.userEmail.asObservable();
   }
 
   isAuthenticated():boolean {

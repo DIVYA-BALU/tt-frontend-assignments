@@ -17,8 +17,19 @@ img {
 body {
     background-image: url("../../../assets/images/indstudent.jpeg");
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .story {
     margin-bottom: 0;
+}
+
+.example-value-label {
+    display: block;
+}
+
+.student {
+    margin-left: 350px;
 }

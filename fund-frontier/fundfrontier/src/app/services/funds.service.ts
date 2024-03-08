@@ -20,4 +20,8 @@ export class FundsService {
     return this.http.get<Page<Funds>>(`${this.fundUrl}/getall`,{params: param});
   }
 
+  saveFund(funds: Funds):Observable<Funds> {
+    return this.http.post<Funds>(`${this.fundUrl}/save`,funds);
+  }
+  
 }
