@@ -1,0 +1,13 @@
+<div class="spinner-container"  *appRoutehide="spinner">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+  
+  <div class="container" *ngIf="!spinner">
+    <div class="main-content">
+      <div *ngFor="let news of newsContents" class="card">
+        <img src="{{ news.images[0] }}" alt="" />
+        <a [routerLink]="['/user/breaking-news', news.id]">{{ news.title }}</a>
+      </div>
+    </div>
+  </div>
+  

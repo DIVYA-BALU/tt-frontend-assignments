@@ -34,5 +34,8 @@ export const environment = {
   dailyNewsUrl: "http://localhost:8080/news/get-today-news",
   userNewsUrl: 'http://localhost:8080/usernews/addMyNews',
   getNewsByIdUrl: "http://localhost:8080/news/get-News",
-  increaseNewsUrl: "http://localhost:8080/news/increaseViews"
+  increaseNewsUrl: "http://localhost:8080/news/increaseViews",
+  getBreakingNewsUrl: "http://localhost:8080/news/get-breaking-news",
+  getCategoryNewsUrl: "http://localhost:8080/news/category-news",
+  getSensationalNewsUrl: "http://localhost:8080/news/get-sensational-news",
 };

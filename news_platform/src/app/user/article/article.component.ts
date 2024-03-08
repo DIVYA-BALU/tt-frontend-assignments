@@ -15,6 +15,7 @@ export class ArticleComponent {
   constructor(private homeService: HomeService) {}
 
   ngOnInit(){
+    this.showSpinner();
     this.getArticle(this.pageIndex, 5);
   }
   
@@ -28,5 +29,14 @@ export class ArticleComponent {
 
   loadMore(){
     this.getArticle(++this.pageIndex, 5);
+  }
+
+  spinner!: boolean;
+
+  showSpinner(){
+    this.spinner = true;
+    setTimeout(() => {
+      this.spinner = false;
+    }, 2000);
   }
 }

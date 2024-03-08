@@ -14,6 +14,8 @@ import { DailyNewsComponent } from './daily-news/daily-news.component';
 import { FormComponent } from './form/form.component';
 import { DisplayNewsComponent } from './display-news/display-news.component';
 import { CategoryComponent } from './category/category.component';
+import { BreakingNewsComponent } from './breaking-news/breaking-news.component';
+import { SensationalNewsComponent } from './sensational-news/sensational-news.component';
 
 const routes: Routes = [
   {
@@ -67,6 +69,14 @@ const routes: Routes = [
       {
         path: 'daily-news',
         component: DailyNewsComponent
+      },
+      {
+        path: 'breaking-news',
+        component: BreakingNewsComponent
+      },
+      {
+        path: 'sensatinal-news',
+        component: SensationalNewsComponent
       },
       {
         path: 'form',

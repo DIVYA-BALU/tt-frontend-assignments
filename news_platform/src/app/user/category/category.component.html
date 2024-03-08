@@ -1,3 +1,17 @@
 <div class="container">
-    <p>category works!</p>
+    <div class="category-container">
+        <mat-chip-listbox aria-label="Fish selection">
+            <mat-chip-option *ngFor="let category of categories" (click)="select(category)">
+                {{ category }}
+            </mat-chip-option>
+          </mat-chip-listbox>
+    </div>
+    <div class="content">
+        <div class="main-content">
+            <div *ngFor="let news of newsContents" class="card">
+              <img src="{{ news.images[0] }}" alt="" />
+              <a [routerLink]="['/user/display-news', news.id]">{{ news.title }}</a>
+            </div>
+          </div>
+    </div>
 </div>

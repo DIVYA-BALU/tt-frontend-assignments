@@ -43,7 +43,7 @@
     margin-right: 10px;
   }
 
-  button {
+  .logout {
     background-color: transparent;
     border: none;
     font-size: 20px;
@@ -59,6 +59,18 @@
     margin-top: 20px;
     font-family: $font-family;
     margin-right: 10px;
+  }
+  .subscribe {
+    // background-color: $secondary-color;
+    background-color: transparent;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px;
+    cursor: pointer;
+    // border: none;
+    font-family: $font-family;
+    color: black;
+    // border: 1px solid $secondary-color;
   }
 }
 

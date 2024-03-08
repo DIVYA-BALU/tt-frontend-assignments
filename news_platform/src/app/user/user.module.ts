@@ -27,6 +27,9 @@ import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { DisplayNewsComponent } from './display-news/display-news.component';
 import { CategoryComponent } from './category/category.component';
+import { BreakingNewsComponent } from './breaking-news/breaking-news.component';
+import {MatChipsModule} from '@angular/material/chips';
+import { SensationalNewsComponent } from './sensational-news/sensational-news.component';
 
 
 @NgModule({
@@ -42,7 +45,9 @@ import { CategoryComponent } from './category/category.component';
     DailyNewsComponent,
     FormComponent,
     DisplayNewsComponent,
-    CategoryComponent
+    CategoryComponent,
+    BreakingNewsComponent,
+    SensationalNewsComponent
   ],
   imports: [
     CommonModule,
@@ -60,7 +65,8 @@ import { CategoryComponent } from './category/category.component';
     RoutehideModule,
     MatTooltipModule,
     MatBottomSheetModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatChipsModule
   ],
   providers: [
     {

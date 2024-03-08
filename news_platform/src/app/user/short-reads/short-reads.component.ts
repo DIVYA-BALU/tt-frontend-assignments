@@ -15,6 +15,7 @@ export class ShortReadsComponent {
   constructor(private homeService: HomeService) {}
 
   ngOnInit(){
+    this.showSpinner();
     this.getShortReads(this.pageIndex, 5);
   }
   
@@ -28,5 +29,14 @@ export class ShortReadsComponent {
 
   loadMore(){
     this.getShortReads(++this.pageIndex, 5);
+  }
+
+  spinner!: boolean;
+
+  showSpinner(){
+    this.spinner = true;
+    setTimeout(() => {
+      this.spinner = false;
+    }, 2000);
   }
 }

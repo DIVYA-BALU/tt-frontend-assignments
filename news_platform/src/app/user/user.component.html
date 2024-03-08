@@ -5,17 +5,21 @@
         <i class="fa-solid fa-bars"></i>
       </button> -->
       <span class="logo">
-        <img src="/favicon.ico" alt="logo">
+        <img src="/favicon.ico" alt="logo" />
       </span>
       InsightNow
     </div>
     <div class="example-spacer"></div>
+    <!-- <div class="subscribe">
+      <button type="button" (click)="subscribe()">Subscribe</button>
+    </div> -->
     <div class="icon" *appRoutehide="logged">
+      <button type="button" (click)="subscribe()" class="subscribe">Subscribe</button>
       <h4>Hi, name</h4>
       <a routerLink="profile">
         <i class="fa fa-user" aria-hidden="true"></i>
       </a>
-      <button type="button" (click)="logout()">
+      <button type="button" (click)="logout()" class="logout">
         <i class="fa-solid fa-right-from-bracket"></i>
       </button>
     </div>
@@ -31,16 +35,24 @@
       <div class="header">
         <div class="space"></div>
         <div class="topics">
+          <a routerLink="home">Home</a>
           <a routerLink="topics">Research topics</a>
           <a routerLink="daily-news">Daily news</a>
-          <a routerLink="">Sensational</a>
-          <a routerLink="">Short reads</a>
-          <a routerLink="">Articles</a>
+          <a routerLink="sensatinal-news">Sensational</a>
+          <a routerLink="short-reads">Short reads</a>
+          <a routerLink="article">Articles</a>
           <a routerLink="">Stock prices</a>
-          <a routerLink="">Breaking news</a>
+          <a routerLink="breaking-news">Breaking news</a>
         </div>
         <div class="search">
-          <input type="text" name="search" id="search" placeholder="Search anything" (keyup)="onSearch()" [(ngModel)]="inputText"/>
+          <input
+            type="text"
+            name="search"
+            id="search"
+            placeholder="Search anything"
+            (keyup)="onSearch()"
+            [(ngModel)]="inputText"
+          />
           <button type="button">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>

@@ -32,9 +32,9 @@ export class UserComponent {
   }
 
   logout() {
+    this.route.navigate(['/login']);
     localStorage.clear();
     this.sharedService.setLogout();
-    this.route.navigate(['/login']);
   }
 
   login() {
@@ -65,5 +65,9 @@ export class UserComponent {
     }, 1000);
     
     this.route.navigate(['user/search']);
+  }
+
+  OnClick(){
+    this.route.navigate(['user/home']);
   }
 }
