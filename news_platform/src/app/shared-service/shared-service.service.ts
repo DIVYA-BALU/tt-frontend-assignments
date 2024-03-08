@@ -17,6 +17,9 @@ export class SharedServiceService {
   searchValue: BehaviorSubject<string> = new BehaviorSubject<string>('');
   searchValueData = this.searchValue.asObservable();
 
+  badgeValue: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  badgeValueData$ = this.badgeValue.asObservable();
+
   constructor() {
     this.setLogin();
     this.setLogout();
@@ -48,5 +51,9 @@ export class SharedServiceService {
 
   setSearchValue(value: string){
     this.searchValue.next(value);
+  }
+
+  setBadge(val: boolean){
+    this.badgeValue.next(val);
   }
 }

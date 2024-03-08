@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ShortReadsDTO } from 'src/app/model/ShortReadsDTO';
 import { CreateShortReadsService } from './create-short-reads.service';
+import { SharedServiceService } from 'src/app/shared-service/shared-service.service';
 
 @Component({
   selector: 'app-create-short-reads',
@@ -37,7 +38,7 @@ export class CreateShortReadsComponent {
   shortReads!: ShortReadsDTO;
   image!: File;
 
-  constructor(private createShortReadsService: CreateShortReadsService) {}
+  constructor(private createShortReadsService: CreateShortReadsService, private sharedService: SharedServiceService) {}
 
   ngOnInit() {
     this.shortReadsForm = new FormGroup({
@@ -55,6 +56,7 @@ export class CreateShortReadsComponent {
     this.createShortReadsService.createShortReads(this.shortReads).subscribe(
       (data) => {
         this.status = data;
+        this.sharedService.setBadge(true);
       },
       (error) => {
         this.status = error.error;

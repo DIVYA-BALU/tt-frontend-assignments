@@ -28,12 +28,26 @@
     </span>
   </div>
   <div class="div-section1">
-    <p>section</p>
-    <p>section</p>
-    <p>section</p>
-    <p>section</p>
-    <p>section</p>
-    <p>section</p>
+    <div class="top">
+      <iframe
+        width="500"
+        height="250"
+        src="https://www.youtube.com/embed/8WXH_Q6B4Ig?si=8FJGbeYFyIFEQ7NZ"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+      <!-- <div class="carousel">
+        <button (click)="prev()"><i class="fa-solid fa-backward"></i></button>
+        <img
+          [src]="images[currentIndex]"
+          alt="carousel-image"
+          class="carousel-img"
+        />
+        <button (click)="next()"><i class="fa-solid fa-forward"></i></button>
+      </div> -->
+    </div>
   </div>
   <div class="div-section">
     <div *ngFor="let article of articles">

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Article } from 'src/app/model/Article';
 import { HomeService } from '../home/home.service';
+import { SharedServiceService } from 'src/app/shared-service/shared-service.service';
 
 @Component({
   selector: 'app-article',
@@ -12,11 +13,13 @@ export class ArticleComponent {
   articles: Article[] = [];
   pageIndex: number = 0;
 
-  constructor(private homeService: HomeService) {}
+    constructor(private homeService: HomeService, 
+      private sharedService: SharedServiceService) {}
 
   ngOnInit(){
     this.showSpinner();
     this.getArticle(this.pageIndex, 5);
+    this.sharedService.setBadge(false);
   }
   
   getArticle(pageIndex: number, pageSize: number){

@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CategoryService } from './category.service';
 import { News } from 'src/app/model/News';
 import { BehaviorSubject } from 'rxjs';
+import { SharedServiceService } from 'src/app/shared-service/shared-service.service';
 
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.scss']
 })
-export class CategoryComponent{
+export class CategoryComponent implements OnInit{
 
   categories: string[] = [
     'ENTERTAINMENT',
@@ -28,8 +29,12 @@ export class CategoryComponent{
   selectedValue!: string;
   newsContents!: News[];
 
-  constructor(private categoryService: CategoryService){}
+  constructor(private categoryService: CategoryService, private sharedService: SharedServiceService){}
 
+  ngOnInit(): void {
+      this.sharedService.setBadge(false);
+  }
+  
   select(val: string){
     this.selectedValue = val;
     this.getNews();

@@ -20,6 +20,7 @@
     "@angular/platform-browser": "^15.2.0",
     "@angular/platform-browser-dynamic": "^15.2.0",
     "@angular/router": "^15.2.0",
+    "@coreui/angular": "^1.0.10",
     "@fortawesome/fontawesome-free": "^6.5.1",
     "@tinymce/tinymce-angular": "^7.0.0",
     "bootstrap": "^5.3.3",

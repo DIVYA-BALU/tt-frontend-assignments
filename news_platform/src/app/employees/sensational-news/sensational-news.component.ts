@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NewsDTO } from 'src/app/model/NewDTO';
 import { CreateNewsService } from '../create-news/create-news.service';
+import { SharedServiceService } from 'src/app/shared-service/shared-service.service';
 
 @Component({
   selector: 'app-sensational-news',
@@ -27,7 +28,7 @@ export class SensationalNewsComponent {
   news!: NewsDTO;
   files: File[] = [];
 
-  constructor(private createNewsService: CreateNewsService) {}
+  constructor(private createNewsService: CreateNewsService, private sharedService: SharedServiceService) {}
 
   ngOnInit() {
     this.newsForm = new FormGroup({
@@ -46,6 +47,7 @@ export class SensationalNewsComponent {
     this.createNewsService.createNews(this.news).subscribe(
       (data) => {
         this.status = data;
+        this.sharedService.setBadge(true);
       },
       (error) => {
         this.status = error.error;

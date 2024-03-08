@@ -14,7 +14,9 @@
       <button type="button" (click)="subscribe()">Subscribe</button>
     </div> -->
     <div class="icon" *appRoutehide="logged">
-      <button type="button" (click)="subscribe()" class="subscribe">Subscribe</button>
+      <button type="button" (click)="subscribe()" class="subscribe">
+        Subscribe
+      </button>
       <h4>Hi, name</h4>
       <a routerLink="profile">
         <i class="fa fa-user" aria-hidden="true"></i>
@@ -35,14 +37,14 @@
       <div class="header">
         <div class="space"></div>
         <div class="topics">
-          <a routerLink="home">Home</a>
-          <a routerLink="topics">Research topics</a>
-          <a routerLink="daily-news">Daily news</a>
-          <a routerLink="sensatinal-news">Sensational</a>
-          <a routerLink="short-reads">Short reads</a>
-          <a routerLink="article">Articles</a>
-          <a routerLink="">Stock prices</a>
-          <a routerLink="breaking-news">Breaking news</a>
+            <a routerLink="home">Home</a>
+            <a routerLink="topics">Research topics</a>
+            <a routerLink="daily-news" matBadge="1" matBadgeOverlap="false" [matBadgeHidden]="!showBadge">Daily news</a>
+            <a routerLink="sensatinal-news" matBadge="1" matBadgeOverlap="false" [matBadgeHidden]="!showBadge">Sensational</a>
+            <a routerLink="short-reads" matBadge="1" matBadgeOverlap="false" [matBadgeHidden]="!showBadge">Short reads</a>
+            <a routerLink="article" matBadge="1" matBadgeOverlap="false" [matBadgeHidden]="!showBadge">Articles</a>
+            <a routerLink="">Stock prices</a>
+            <a routerLink="breaking-news" matBadge="1" matBadgeOverlap="false" [matBadgeHidden]="!showBadge">Breaking news</a>
         </div>
         <div class="search">
           <input

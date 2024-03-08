@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { SharedServiceService } from '../shared-service/shared-service.service';
 import { Router } from '@angular/router';
 import { UserService } from './user.service';
-import { BehaviorSubject, debounce } from 'rxjs';
 
 @Component({
   selector: 'app-user',
@@ -11,7 +10,7 @@ import { BehaviorSubject, debounce } from 'rxjs';
 })
 export class UserComponent {
   logged!: boolean;
-  panelOpenState = false;
+  showBadge!: boolean;
 
   constructor(
     private sharedService: SharedServiceService,
@@ -29,6 +28,12 @@ export class UserComponent {
       this.logged = data;
       console.log(this.logged);
     });
+
+    this.sharedService.badgeValueData$.subscribe((data) => {
+      this.showBadge = data;
+      console.log(this.showBadge);
+      
+    })
   }
 
   logout() {

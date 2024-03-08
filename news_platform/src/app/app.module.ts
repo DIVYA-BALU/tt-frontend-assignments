@@ -26,7 +26,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     PagenotfoundComponent,
     ProfileComponent,
     SuccessSnackBarComponent,
-    FailureSnackBarComponent
+    FailureSnackBarComponent,
   ],
   imports: [
     BrowserModule,

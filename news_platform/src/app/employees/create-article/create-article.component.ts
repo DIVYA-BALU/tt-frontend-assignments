@@ -1,13 +1,12 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import {
-  FormArray,
-  FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
 import { Article } from 'src/app/model/ArticleDTO';
 import { CreateArticleService } from './create-article.service';
+import { SharedServiceService } from 'src/app/shared-service/shared-service.service';
 
 @Component({
   selector: 'app-create-article',
@@ -43,7 +42,7 @@ export class CreateArticleComponent {
   article!: Article;
   files: File[] = [];
 
-  constructor(private createArticleService: CreateArticleService) {}
+  constructor(private createArticleService: CreateArticleService, private sharedService: SharedServiceService) {}
 
   ngOnInit() {
     this.articleForm = new FormGroup({
@@ -61,6 +60,7 @@ export class CreateArticleComponent {
     this.createArticleService.createArticle(this.article).subscribe(
       (data) => {
         this.status = data;
+        this.sharedService.setBadge(true);
       },
       (error) => {
         this.status = error.error;

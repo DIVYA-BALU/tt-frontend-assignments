@@ -1,34 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { News } from 'src/app/model/News';
 import { DailyNewsService } from './daily-news.service';
+import { SharedServiceService } from 'src/app/shared-service/shared-service.service';
 
 @Component({
   selector: 'app-daily-news',
   templateUrl: './daily-news.component.html',
-  styleUrls: ['./daily-news.component.scss']
+  styleUrls: ['./daily-news.component.scss'],
 })
-export class DailyNewsComponent implements OnInit{
-
+export class DailyNewsComponent implements OnInit {
   newsContents!: News[];
 
-  constructor(private dailynewsService: DailyNewsService){}
+  constructor(
+    private dailynewsService: DailyNewsService,
+    private sharedService: SharedServiceService
+  ) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.showSpinner();
     this.getDailyNews();
+    this.sharedService.setBadge(false);
   }
 
-  getDailyNews(){
-    this.dailynewsService.getDailyNews().subscribe( (data) => {
+  getDailyNews() {
+    this.dailynewsService.getDailyNews().subscribe((data) => {
       this.newsContents = data;
       console.log(this.newsContents);
-      
-    })
+    });
   }
 
   spinner!: boolean;
 
-  showSpinner(){
+  showSpinner() {
     this.spinner = true;
     setTimeout(() => {
       this.spinner = false;

@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit{
 
+  images: string[] = ['/assets/image1.jpg', '/assets/image2.jpg', '/assets/image3.jpg', '/assets/image4.jpg', '/assets/image5.jpg'];
+  currentIndex: number = 0;
+
   shortReads: ShortReads[] = [];
   articles: Article[] = [];
 
@@ -35,5 +38,13 @@ export class HomeComponent implements OnInit{
 
   onClick(){
     this.route.navigate(['/user/form']);
+  }
+
+  prev(): void {
+    this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+  }
+
+  next(): void {
+    this.currentIndex = (this.currentIndex + 1) % this.images.length;
   }
 }

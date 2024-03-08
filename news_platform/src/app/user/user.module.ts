@@ -30,6 +30,7 @@ import { CategoryComponent } from './category/category.component';
 import { BreakingNewsComponent } from './breaking-news/breaking-news.component';
 import {MatChipsModule} from '@angular/material/chips';
 import { SensationalNewsComponent } from './sensational-news/sensational-news.component';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 @NgModule({
@@ -47,7 +48,7 @@ import { SensationalNewsComponent } from './sensational-news/sensational-news.co
     DisplayNewsComponent,
     CategoryComponent,
     BreakingNewsComponent,
-    SensationalNewsComponent
+    SensationalNewsComponent,
   ],
   imports: [
     CommonModule,
@@ -66,7 +67,8 @@ import { SensationalNewsComponent } from './sensational-news/sensational-news.co
     MatTooltipModule,
     MatBottomSheetModule,
     MatProgressSpinnerModule,
-    MatChipsModule
+    MatChipsModule,
+    MatBadgeModule
   ],
   providers: [
     {
