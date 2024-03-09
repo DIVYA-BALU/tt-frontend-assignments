@@ -47,7 +47,7 @@ export class UserComponent {
   }
 
   subscribe() {
-    console.log('subscribe');
+   
   }
 
   signup() {

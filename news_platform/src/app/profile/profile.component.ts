@@ -1,15 +1,16 @@
-import { Component, ElementRef, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { ProfileService } from './profile.service';
 import { User } from '../model/User';
 import { FormControl, FormGroup } from '@angular/forms';
 import {MatSnackBar, MatSnackBarRef} from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit{
   user!: User;
 
   profileForm!: FormGroup;
@@ -18,7 +19,7 @@ export class ProfileComponent {
 
   durationInSeconds = 5;
 
-  constructor(private profileService: ProfileService, private _snackBar: MatSnackBar) {
+  constructor(private profileService: ProfileService, private _snackBar: MatSnackBar, private route: Router) {
     this.getProfile();
   }
 
@@ -63,6 +64,14 @@ export class ProfileComponent {
     this._snackBar.openFromComponent(PizzaPartyAnnotatedComponent, {
       duration: this.durationInSeconds * 1000,
     });
+  }
+
+  savedStories(){
+    this.route.navigate(["/user/savedstories"]);
+  }
+
+  subscription(){
+    this.route.navigate(["/user/subscription"]);
   }
 }
 

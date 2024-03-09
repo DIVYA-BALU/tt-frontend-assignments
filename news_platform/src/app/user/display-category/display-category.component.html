@@ -1,0 +1,17 @@
+<div class="container">
+  <div *ngFor="let news of sportsNews">
+    <mat-card class="card">
+      <mat-card-content>
+        <img src="{{ news.images[0] }}" alt="image" />
+        <mat-card-subtitle class="subtitle"
+          >Report | {{ news.date | date }}</mat-card-subtitle
+        >
+        <div class="content">
+          <a [routerLink]="['/user/display-news', news.id]">
+            {{ news.title }}
+          </a>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -7,13 +7,7 @@
         <div class="heading" *ngIf="news">
             <h2>{{ news.title }}</h2>
             <p>{{ news.category }}</p>
-            <p>Report | {{ news.date }}</p>
-        </div>
-        <div class="button">
-            <button mat-button matTooltip="Save for later" matTooltipClass="example-tooltip-uppercase"
-                aria-label="Button that shows a red tooltip">
-                <i class="fa-regular fa-bookmark"></i>
-            </button>
+            <p>Report | {{ news.date | date}}</p>
         </div>
     </div>
     <hr />

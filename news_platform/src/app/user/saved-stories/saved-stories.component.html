@@ -1,0 +1,18 @@
+<div class="container">
+    <div *ngFor="let article of articles">
+      <mat-card class="card">
+        <mat-card-content>
+          <img src="{{ article.images[0] }}" alt="image" />
+          <mat-card-subtitle class="subtitle"
+            >Report | {{ article.date | date }}</mat-card-subtitle
+          >
+          <div class="content">
+            <a [routerLink]="['/user/display-article', article.id]">
+              {{ article.title }}
+            </a>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  

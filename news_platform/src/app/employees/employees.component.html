@@ -20,30 +20,106 @@
 
   <mat-sidenav-container class="example-container">
     <mat-sidenav #sidenav mode="side" opened class="example-sidenav">
-      <a routerLink="createAccount" routerLinkActive="active" *appRoutehide="createAccount">ACCOUNT</a>
-      <a routerLink="user-request" routerLinkActive="active" *appRoutehide="userNews">USER REQUEST</a>
-      <a routerLink="user-news" routerLinkActive="active" *appRoutehide="userNewsApproved">USER NEWS</a>
+      <a
+        routerLink="createAccount"
+        routerLinkActive="active"
+        *appRoutehide="createAccount"
+        >ACCOUNT</a
+      >
+      <a
+        routerLink="user-request"
+        routerLinkActive="active"
+        *appRoutehide="userNews"
+        >USER REQUEST</a
+      >
+      <a
+        routerLink="user-news"
+        routerLinkActive="active"
+        *appRoutehide="userNewsApproved"
+        >USER NEWS</a
+      >
 
-      <a routerLink="display-news" routerLinkActive="active" *appRoutehide="manageNews">MANAGE NEWS</a>
-      <a routerLink="display-article" routerLinkActive="active" *appRoutehide="manageArticle">MANAGE ARTICLE</a>
-      <a routerLink="display-shortReads" routerLinkActive="active" *appRoutehide="manageShortReads">MANAGE SHORT READS</a>
+      <a
+        routerLink="display-news"
+        routerLinkActive="active"
+        *appRoutehide="manageNews"
+        >MANAGE NEWS</a
+      >
+      <a
+        routerLink="display-article"
+        routerLinkActive="active"
+        *appRoutehide="manageArticle"
+        >MANAGE ARTICLE</a
+      >
+      <a
+        routerLink="display-shortReads"
+        routerLinkActive="active"
+        *appRoutehide="manageShortReads"
+        >MANAGE SHORT READS</a
+      >
+      <a
+        routerLink="display-explainers"
+        routerLinkActive="active"
+        *appRoutehide="manageShortReads"
+        >MANAGE EXPLAINERS</a
+      >
 
-      <a routerLink="create-article" routerLinkActive="active" *appRoutehide="writeArticle"
+      <a
+        routerLink="create-article"
+        routerLinkActive="active"
+        *appRoutehide="writeArticle"
         >CREATE ARTICLE</a
       >
-      <a routerLink="rejected-article" routerLinkActive="active" *appRoutehide="seeRejectedArticle"
-        >REJECTED ARTICLE</a
-      >
 
-      <a routerLink="create-shortReads" routerLinkActive="active" *appRoutehide="writeShortReads"
+      <a
+        routerLink="create-shortReads"
+        routerLinkActive="active"
+        *appRoutehide="writeShortReads"
         >CREATE SHORT READS</a
       >
-      <a routerLink="rejected-shortReads" *appRoutehide="seeRejectedShortReads">REJECTED SHORT READS</a>
+      <a
+        routerLink="create-explainers"
+        routerLinkActive="active"
+        *appRoutehide="writeShortReads"
+        >CREATE EXPLAINERS</a
+      >
+      <a
+        routerLink="rejected-article"
+        routerLinkActive="active"
+        *appRoutehide="seeRejectedArticle"
+        >REJECTED ARTICLE</a
+      >
+      <a routerLink="rejected-shortReads" *appRoutehide="seeRejectedShortReads"
+        >REJECTED SHORT READS</a
+      >
+      <a routerLink="rejected-explainers" *appRoutehide="seeRejectedShortReads"
+        >REJECTED EXPLAINERS</a
+      >
 
-      <a routerLink="create-news" routerLinkActive="active" *appRoutehide="writeNews">CREATE NEWS</a>
-      <a routerLink="breaking-news" routerLinkActive="active" *appRoutehide="writeNews">BREAKING NEWS</a>
-      <a routerLink="sensational-news" routerLinkActive="active" *appRoutehide="writeNews">SENSATIONAL NEWS</a>
-      <a routerLink="rejected-news" routerLinkActive="active" *appRoutehide="seeRejectedNews">REJECTED NEWS</a>
+      <a
+        routerLink="create-news"
+        routerLinkActive="active"
+        *appRoutehide="writeNews"
+        >CREATE NEWS</a
+      >
+      <a
+        routerLink="breaking-news"
+        routerLinkActive="active"
+        *appRoutehide="writeNews"
+        >BREAKING NEWS</a
+      >
+      <a
+        routerLink="sensational-news"
+        routerLinkActive="active"
+        *appRoutehide="writeNews"
+        >SENSATIONAL NEWS</a
+      >
+      <a
+        routerLink="rejected-news"
+        routerLinkActive="active"
+        *appRoutehide="seeRejectedNews"
+        >REJECTED NEWS</a
+      >
     </mat-sidenav>
 
     <mat-sidenav-content class="content">

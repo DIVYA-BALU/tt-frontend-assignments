@@ -9,14 +9,11 @@
     </div>
     <div class="content-div">
       <div class="div-flex">
-        <span>Report | {{ shortRead.date }}</span>
+        <span>Report | {{ shortRead.date | date}}</span>
         <a [routerLink]="['/user/display-short-reads', shortRead.id]">
           {{ shortRead.title }}</a
         >
       </div>
-      <button mat-button matTooltip="Save for later"
-      matTooltipClass="example-tooltip-uppercase"
-      aria-label="Button that shows a red tooltip"><i class="fa-regular fa-bookmark"></i></button>
     </div>
   </div>
 </div>

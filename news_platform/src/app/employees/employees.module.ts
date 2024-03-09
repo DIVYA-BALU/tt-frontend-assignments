@@ -30,6 +30,9 @@ import { UserNewsComponent } from './user-news/user-news.component';
 import { RoutehideModule } from '../custom_directive/routehide.module';
 import { BreakingNewsComponent } from './breaking-news/breaking-news.component';
 import { SensationalNewsComponent } from './sensational-news/sensational-news.component';
+import { CreateExplainersComponent } from './create-explainers/create-explainers.component';
+import { RejectedExplainersComponent } from './rejected-explainers/rejected-explainers.component';
+import { ExplainersComponent } from './explainers/explainers.component';
 
 
 @NgModule({
@@ -50,7 +53,10 @@ import { SensationalNewsComponent } from './sensational-news/sensational-news.co
     ArticleComponent,
     UserNewsComponent,
     BreakingNewsComponent,
-    SensationalNewsComponent
+    SensationalNewsComponent,
+    CreateExplainersComponent,
+    RejectedExplainersComponent,
+    ExplainersComponent
   ],
   imports: [
     CommonModule,

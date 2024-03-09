@@ -1,0 +1,40 @@
+@import "~@fortawesome/fontawesome-free/css/all.css";
+@import "/src/styles/variables";
+
+.main-content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: left;
+  width: 80%;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid $tertiary-color;
+  width: 35%;
+  margin-right: 20px;
+  margin-bottom: 20px;
+
+  img {
+    width: 20%;
+  }
+
+  a {
+    margin-left: 10px;
+    color: black;
+    text-decoration: none;
+    font-size: 10px;
+  }
+
+  a:hover{
+    text-decoration: underline;
+  }
+}
+
+.spinner-container{
+  display: flex;
+  justify-content: center;
+}

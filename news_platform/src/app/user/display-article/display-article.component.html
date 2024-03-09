@@ -3,7 +3,7 @@
     <div class="heading" *ngIf="article">
       <h2>{{ article.title }}</h2>
       <p>{{ article.category }}</p>
-      <p>Report | {{ article.date }}</p>
+      <p>Report | {{ article.date | date }}</p>
     </div>
     <div class="button">
       <button
@@ -11,14 +11,26 @@
         matTooltip="Save for later"
         matTooltipClass="example-tooltip-uppercase"
         aria-label="Button that shows a red tooltip"
+        (click)="onSave()"
+        *ngIf="!isSaved"
       >
         <i class="fa-regular fa-bookmark"></i>
       </button>
+      <button
+        mat-button
+        matTooltip="Saved"
+        matTooltipClass="example-tooltip-uppercase"
+        aria-label="Button that shows a red tooltip"
+        (click)="unSave()"
+        *ngIf="isSaved"
+      >
+      <i class="fa-solid fa-bookmark" *ngIf="isSaved"></i>
+      </button>
     </div>
   </div>
-  <hr>
+  <hr />
   <div class="content" *ngIf="article">
-    <div *ngFor="let image of article.images">
+    <div *ngFor="let image of article.images" class="image">
       <img src="{{ image }}" alt="image" />
     </div>
     <div [innerHtml]="article.content"></div>

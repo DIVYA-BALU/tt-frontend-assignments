@@ -1,0 +1,90 @@
+<div class="form-container">
+    <form [formGroup]="explainersForm" (ngSubmit)="onSubmit()">
+      <div class="container">
+        <label for="id">Explainers Unique Id:</label>
+        <input
+          type="text"
+          name="explainersUid"
+          id="id"
+          placeholder="Ex: 20E101"
+          formControlName="explainersUid"
+        />
+        <span
+          *ngIf="(explainersForm.controls['explainersUid'].touched || explainersForm.controls['explainersUid'].dirty) && (explainersForm.controls['explainersUid'].errors?.['required'])"
+        >
+        explainers unique id is required
+        </span>
+      </div>
+  
+      <div class="container">
+        <label for="title">Title:</label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          placeholder="Ex: Benefits of Amla."
+          formControlName="title"
+        >
+        <span
+          *ngIf="(explainersForm.controls['title'].touched || explainersForm.controls['title'].dirty) && (explainersForm.controls['title'].errors?.['required'])"
+        >
+          title is required
+        </span>
+      </div>
+  
+      <div class="container img">
+        <div class="img-div">
+          <p>
+            Upload images: (name should be same as unique id 20E101)
+          </p>
+          <label for="img"><i class="fa-solid fa-cloud-arrow-up"></i></label>
+          <input
+            type="file"
+            name="images"
+            id="img"
+            accept=".jpg, .jpeg, .png"
+            (change)="uploadImages($event)"
+            formControlName="images"
+          />
+        </div>
+        <span class="span-img">
+          <p *ngIf="image">
+            {{ image.name }}
+            <button type="button" (click)="remove()">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </p>
+        </span>
+        <span
+          *ngIf="((explainersForm.controls['images'].touched || explainersForm.controls['images'].dirty) && explainersForm.controls['images'].errors?.['required'])"
+        >
+          upload image
+        </span>
+        <span *ngIf="imgError"> invalid image name format! </span>
+      </div>
+  
+      <div class="content container">
+        <label>Contents:</label>
+        <span
+          *ngIf="((explainersForm.controls['content'].touched || explainersForm.controls['content'].dirty) && explainersForm.controls['content'].errors?.['required'])"
+        >
+          content is required
+        </span>
+        <editor
+          [init]="editorConfig"
+          name="content"
+          formControlName="content"
+        ></editor>
+      </div>
+  
+      <div>
+        <button type="submit" [disabled]="explainersForm.invalid" class="submit">
+          Upload
+        </button>
+      </div>
+  
+      <div *ngIf="status">
+        {{ status }}
+      </div>
+    </form>
+  </div>

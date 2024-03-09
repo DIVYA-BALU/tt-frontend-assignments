@@ -32,6 +32,10 @@ import {MatChipsModule} from '@angular/material/chips';
 import { SensationalNewsComponent } from './sensational-news/sensational-news.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatTabsModule} from '@angular/material/tabs';
+import { TopNewsComponent } from './top-news/top-news.component';
+import { DisplayCategoryComponent } from './display-category/display-category.component';
+import { SavedStoriesComponent } from './saved-stories/saved-stories.component';
+import { SubscriptionComponent } from './subscription/subscription.component';
 
 
 @NgModule({
@@ -50,6 +54,10 @@ import {MatTabsModule} from '@angular/material/tabs';
     CategoryComponent,
     BreakingNewsComponent,
     SensationalNewsComponent,
+    TopNewsComponent,
+    DisplayCategoryComponent,
+    SavedStoriesComponent,
+    SubscriptionComponent
   ],
   imports: [
     CommonModule,

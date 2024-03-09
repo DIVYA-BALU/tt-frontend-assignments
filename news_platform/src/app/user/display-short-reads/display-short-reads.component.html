@@ -3,17 +3,7 @@
     <div class="heading" *ngIf="shortReads">
       <h2>{{ shortReads.title }}</h2>
       <p>{{ shortReads.category }}</p>
-      <p>Report | {{ shortReads.date }}</p>
-    </div>
-    <div class="button">
-      <button
-        mat-button
-        matTooltip="Save for later"
-        matTooltipClass="example-tooltip-uppercase"
-        aria-label="Button that shows a red tooltip"
-      >
-        <i class="fa-regular fa-bookmark"></i>
-      </button>
+      <p>Report | {{ shortReads.date | date}}</p>
     </div>
   </div>
   <hr>

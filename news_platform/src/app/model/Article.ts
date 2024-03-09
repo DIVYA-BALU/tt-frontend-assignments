@@ -8,4 +8,5 @@ export interface Article {
   date: Date;
   reason: string;
   status: string;
+  saved: boolean
 }

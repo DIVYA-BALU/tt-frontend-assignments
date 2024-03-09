@@ -7,5 +7,6 @@ export interface News {
   content: string;
   category: string;
   date: Date;
-  reason: string
+  reason: string;
+  isSaved: boolean
 }

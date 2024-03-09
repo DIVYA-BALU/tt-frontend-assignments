@@ -11,6 +11,8 @@ export class DisplayArticleService {
 
   url: string = environment.getArticle;
   increaseViewsUrl: string = environment.increaseArticleViews;
+  saveArticleUrl: string = environment.saveArticleUrl;
+  unsaveArticleUrl: string = environment.unsaveArticleUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -20,5 +22,13 @@ export class DisplayArticleService {
 
   increaseViews(articleId: string): void{
     this.http.post(`${this.increaseViewsUrl}/${articleId}`, {}).subscribe();
+  }
+
+  saveArtcile(id: string): Observable<string>{
+    return this.http.post(`${this.saveArticleUrl}/${id}`, {}, {responseType: 'text'});
+  }
+
+  unsaveArticle(id: string): Observable<string>{
+    return this.http.delete(`${this.unsaveArticleUrl}/${id}`, {responseType: 'text'});
   }
 }

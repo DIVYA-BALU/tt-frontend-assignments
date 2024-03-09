@@ -16,6 +16,10 @@ import { DisplayNewsComponent } from './display-news/display-news.component';
 import { CategoryComponent } from './category/category.component';
 import { BreakingNewsComponent } from './breaking-news/breaking-news.component';
 import { SensationalNewsComponent } from './sensational-news/sensational-news.component';
+import { TopNewsComponent } from './top-news/top-news.component';
+import { DisplayCategoryComponent } from './display-category/display-category.component';
+import { SavedStoriesComponent } from './saved-stories/saved-stories.component';
+import { SubscriptionComponent } from './subscription/subscription.component';
 
 const routes: Routes = [
   {
@@ -67,8 +71,17 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
+        path: 'display-category/:category',
+        component: DisplayCategoryComponent,
+        canActivate: [AuthGuard]
+      },
+      {
         path: 'daily-news',
         component: DailyNewsComponent
+      },
+      {
+        path: 'top-news',
+        component: TopNewsComponent
       },
       {
         path: 'breaking-news',
@@ -85,6 +98,14 @@ const routes: Routes = [
       {
         path: 'topics',
         component: CategoryComponent
+      },
+      {
+        path: 'savedstories',
+        component: SavedStoriesComponent
+      },
+      {
+        path: 'subscription',
+        component: SubscriptionComponent
       }
     ],
   },

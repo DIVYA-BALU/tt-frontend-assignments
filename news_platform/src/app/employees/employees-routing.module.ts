@@ -16,6 +16,9 @@ import { ArticleComponent } from './article/article.component';
 import { UserNewsComponent } from './user-news/user-news.component';
 import { BreakingNewsComponent } from './breaking-news/breaking-news.component';
 import { SensationalNewsComponent } from './sensational-news/sensational-news.component';
+import { CreateExplainersComponent } from './create-explainers/create-explainers.component';
+import { RejectedExplainersComponent } from './rejected-explainers/rejected-explainers.component';
+import { ExplainersComponent } from './explainers/explainers.component';
 
 const routes: Routes = [
   {
@@ -43,6 +46,10 @@ const routes: Routes = [
         component: ShortReadsComponent
       },
       {
+        path: 'display-explainers',
+        component: ExplainersComponent
+      },
+      {
         path: 'display-article',
         component: ArticleComponent
       },
@@ -59,8 +66,16 @@ const routes: Routes = [
         component: CreateShortReadsComponent
       },
       {
+        path: 'create-explainers',
+        component: CreateExplainersComponent
+      },
+      {
         path: 'rejected-shortReads',
         component: RejectedShortReadsComponent
+      },
+      {
+        path: 'rejected-explainers',
+        component: RejectedExplainersComponent
       },
       {
         path: 'create-news',
