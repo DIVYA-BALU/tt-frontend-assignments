@@ -1,0 +1,21 @@
+@import '/src/app/style/variables.scss';
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.card{
+    box-shadow: 10px gray;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+span{
+    margin-top: 10px;
+    margin-left: 15px;
+}
+button{
+    width: 30%;
+    height: 50px;
+    background-color: $primary_color;
+}

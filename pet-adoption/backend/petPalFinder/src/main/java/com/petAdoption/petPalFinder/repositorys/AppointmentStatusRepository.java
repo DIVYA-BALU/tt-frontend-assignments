@@ -12,4 +12,5 @@ import java.util.List;
 public interface AppointmentStatusRepository extends MongoRepository<AppointmentStatus,String>{
     List<AppointmentStatus> findByDoctorId(ObjectId doctorId);
     List<AppointmentStatus> findByRequesterId(String requesterId);
+    
 }

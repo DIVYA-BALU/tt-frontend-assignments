@@ -1,8 +1,7 @@
 .container{
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
+    display: flex; 
+    justify-content: space-around;
+    padding-top: 10px;
 }
 .image{
     margin-top: 6%;
@@ -93,4 +92,18 @@ img{
 .logout{
     display: flex;
     justify-content: space-between;
+}
+
+.history{
+    display: flex;
+    flex-direction: column;
+}
+.payment{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;    
+}
+span{
+    margin-top: 10px;
+    margin-left: 15px;
 }

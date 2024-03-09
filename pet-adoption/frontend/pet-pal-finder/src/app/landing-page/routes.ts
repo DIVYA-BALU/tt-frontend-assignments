@@ -1,6 +1,4 @@
 import { Route } from "@angular/router";
-import { HomeComponent } from "../home/home.component";
-import { VeterinaryDoctorComponent } from "../veterinary-doctor/veterinary-doctor.component";
 import { AuthGuard } from "../guards/auth.guard";
 
 export const ADMIN_ROUTES: Route[] = [

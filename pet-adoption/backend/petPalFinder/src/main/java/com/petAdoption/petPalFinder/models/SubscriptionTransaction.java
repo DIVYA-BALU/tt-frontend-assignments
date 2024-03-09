@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
@@ -25,6 +26,7 @@ public class SubscriptionTransaction {
     private Date subscribedOn;
     private Date validTill;
     private String paymentId;
+    @Indexed
     private String subscriberId;
     private ArrayList<PreviousSubscripton> history;
 

@@ -42,7 +42,8 @@ export class SubscriptionPaymentComponent {
       subscribedOn: new Date,
       validTill: new Date,
       paymentId: '',
-      subscriberId: ''
+      subscriberId: '',
+      history:null
     };
 
     openTransactionModel(response: any) {

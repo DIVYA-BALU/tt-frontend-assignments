@@ -5,6 +5,7 @@ import { jwtDecode } from 'jwt-decode';
 import { Subscription } from 'rxjs';
 import { Otp, StatusMessage, Token, User } from 'src/app/models/models';
 import { AuthService } from 'src/app/service/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-adopter-register',
@@ -28,6 +29,8 @@ export class AdopterRegisterComponent {
     role: 'ADOPTER',
   };
   private subscription: Subscription = new Subscription();
+  private otpSubscription: Subscription = new Subscription();
+  private registerSubscription: Subscription = new Subscription();
   formResponse: FormGroup = this.formBuilder.group({
     email: ['', [Validators.required, Validators.minLength(1)]],
     password: ['', [Validators.required, Validators.minLength(1)]],
@@ -36,14 +39,20 @@ export class AdopterRegisterComponent {
   });
 
   verifyEmail() {
-    if (this.formResponse.invalid || this.formResponse.value.password !== this.formResponse.value.confirmPassword) {
+    if (
+      this.formResponse.invalid ||
+      this.formResponse.value.password !==
+        this.formResponse.value.confirmPassword
+    ) {
       console.log(this.formResponse.value);
       return;
     }
+    Swal.showLoading();
     this.subscription = this.authService
       .verifyEmail(this.formResponse.value.email)
       .subscribe({
         next: (status: StatusMessage) => {
+          Swal.close();
           if (status.message === 'Mail Sent Successfully') {
             this.isOtpSend = true;
             this.otp.email = this.formResponse.value.email;
@@ -52,20 +61,19 @@ export class AdopterRegisterComponent {
             alert(status.message);
             console.log(status);
           }
-          console.log("component");
-          
+          console.log('component');
         },
       });
   }
 
   verifyOtp() {
     this.otp.otp = this.formResponse.value.otp;
-    console.log("c",this.otp);
-    
-    this.authService.verifyOtp(this.otp).subscribe({
-      next: (status:StatusMessage) => {
+    console.log('c', this.otp);
+    Swal.showLoading();
+    this.otpSubscription = this.authService.verifyOtp(this.otp).subscribe({
+      next: (status: StatusMessage) => {
         console.log(status);
-        
+        Swal.close();
         if (status.message === 'invalid otp') {
           alert(status.message);
         } else if (status.message === 'otp time has exceed') {
@@ -73,19 +81,22 @@ export class AdopterRegisterComponent {
         } else if (status.message === 'otp verified') {
           this.user.email = this.formResponse.value.email;
           this.user.password = this.formResponse.value.password;
-          this.authService
+          Swal.showLoading();
+          this.registerSubscription = this.authService
             .registerUser(this.user)
-            .subscribe({ next: (token:Token) => {
-              console.log(token);
-              
-              localStorage.setItem("token",token.token);
-              localStorage.setItem("refresh-token",token.refreshToken);
-              const tokenInfo: any = jwtDecode(token.token);
-              const role: string = tokenInfo.role[0].authority;
-              this.authService.setLogin(tokenInfo.id);
-              this.authService.setRole(role)
-            } });
-          this.router.navigate(['/pet/profile']);
+            .subscribe({
+              next: (token: Token) => {
+                console.log(token);
+                Swal.close();
+                localStorage.setItem('token', token.token);
+                localStorage.setItem('refresh-token', token.refreshToken);
+                const tokenInfo: any = jwtDecode(token.token);
+                const role: string = tokenInfo.role[0].authority;
+                this.authService.setLogin(tokenInfo.id);
+                this.authService.setRole(role);
+              },
+            });
+          this.router.navigate(['/auth/profile']);
         } else {
           alert('server down');
         }
@@ -95,6 +106,8 @@ export class AdopterRegisterComponent {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.otpSubscription.unsubscribe();
+    this.registerSubscription.unsubscribe();
   }
 
   login() {

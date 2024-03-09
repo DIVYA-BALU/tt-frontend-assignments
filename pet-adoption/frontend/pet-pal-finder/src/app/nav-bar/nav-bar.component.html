@@ -1,20 +1,39 @@
 <div class="nav-bar">
-    <a routerLink="/pet" (click)="setActiveLink('home')" [class.active]="activeLink === 'home'">
-        Home
-    </a>
-    <a *ngIf="!isVeterinaryDoctor" routerLink="/pet/doctor" (click)="setActiveLink('doctors')" [class.active]="activeLink === 'doctors'">
-        Veterinary Doctors
-    </a>
-    <a (click)="setActiveLink('status')" [class.active]="activeLink === 'status'">
-        Request Status
-    </a>
-    <a routerLink="" (click)="setActiveLink('favorites')" [class.active]="activeLink === 'favorites'">
-        Favorites
-    </a>
-    <a *ngIf="!loggedIn" routerLink="/auth" (click)="setActiveLink('login')" [class.active]="activeLink === 'login'">
-        Login
-    </a>
-    <a *ngIf="loggedIn" routerLink="/pet/profile" (click)="setActiveLink('profile')" [class.active]="activeLink === 'profile'" class="profile">
-        <img class="dp" [src]="profileUrl | imagePathConverter" alt=""> {{profileName}}
-    </a>
+  <a
+    routerLink="/pet"
+    (click)="setActiveLink('home')"
+    [class.active]="activeLink === 'home'"
+  >
+    Home
+  </a>
+  <a
+    *ngIf="!isVeterinaryDoctor"
+    routerLink="/pet/doctor"
+    (click)="setActiveLink('doctors')"
+    [class.active]="activeLink === 'doctors'"
+  >
+    Veterinary Doctors
+  </a>
+  <a (click)="setActiveLink('status')" [class.active]="activeLink === 'status'">
+    Request Status
+  </a>
+
+  <a
+    *ngIf="!loggedIn"
+    routerLink="/auth"
+    (click)="setActiveLink('login')"
+    [class.active]="activeLink === 'login'"
+  >
+    Login
+  </a>
+  <a
+    *ngIf="loggedIn"
+    routerLink="/pet/profile"
+    (click)="setActiveLink('profile')"
+    [class.active]="activeLink === 'profile'"
+    class="profile"
+  >
+    <img class="dp" [src]="profileUrl | imagePathConverter" alt="" />
+    {{ profileName }}
+  </a>
 </div>

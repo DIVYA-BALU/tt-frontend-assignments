@@ -57,6 +57,7 @@ public class AppointmentStatusServiceImpl implements AppointmentStatusService{
         List<AppointmentStatus> appointment = appointmentStatusDao.getInitiatedRequest(id,status);
         for(int  i =0;i<appointment.size();i++){
             AppointmentStatusDto appointmentStatusDto = new AppointmentStatusDto();
+            appointmentStatusDto.setReason(appointment.get(i).getReason());
             if(appointment.get(i).getRequesterType().equals("ADOPTER")){
                Adopter adopter = adopterRepository.findById(appointment.get(i).getRequesterId()).get();
                appointmentStatusDto.setLocation(adopter.getLocation());
@@ -81,7 +82,7 @@ public class AppointmentStatusServiceImpl implements AppointmentStatusService{
 
     @Override
     public List<AppointmentStatus> getRequestedUserAppoinments(String id) {
-        return appointmentStatusRepository.findByRequesterId(id);
+        return appointmentStatusDao.getStatusByRequesterId(id);
     }
 
     @Override

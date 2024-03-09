@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -28,8 +31,9 @@ public class AppointmentStatusDao {
     }
 
     public List<AppointmentStatus> getAcceptedRequest(String id){
-        Criteria criteria = Criteria.where("requesterId").is(id).andOperator(Criteria.where("status").is("accepted"));
+        Criteria criteria = Criteria.where("doctorId").is(id).andOperator(Criteria.where("status").is("accepted"));
 		Query query = new Query(criteria);
+		query.with(Sort.by(Sort.Order.desc("appointmentDate")));
         return template.find(query, AppointmentStatus.class);
     }
 
@@ -38,5 +42,12 @@ public class AppointmentStatusDao {
 		Query query = new Query(criteria);
         Update update = new Update().set("status", appointmentUpdate.getStatus()).set("appointmentDate", appointmentUpdate.getDate()).set("acceptOrRejectedDate", new Date());
         template.updateFirst(query, update, AppointmentStatus.class);
+    }
+
+    public List<AppointmentStatus> getStatusByRequesterId(String id){
+        Criteria criteria = Criteria.where("requesterId").is(id);
+		Query query = new Query(criteria);
+		query.with(Sort.by(Sort.Order.desc("appointmentDate")));
+        return template.find(query, AppointmentStatus.class);
     }
 }

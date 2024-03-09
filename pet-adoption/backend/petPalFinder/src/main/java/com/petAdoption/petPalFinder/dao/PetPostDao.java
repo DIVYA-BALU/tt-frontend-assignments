@@ -6,6 +6,9 @@ import java.util.List;
 
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.ScrollPosition.Direction;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
@@ -14,6 +17,7 @@ import org.springframework.data.mongodb.core.aggregation.FacetOperation;
 import org.springframework.data.mongodb.core.aggregation.LimitOperation;
 import org.springframework.data.mongodb.core.aggregation.MatchOperation;
 import org.springframework.data.mongodb.core.aggregation.SkipOperation;
+import org.springframework.data.mongodb.core.aggregation.SortOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.expression.spel.ast.VariableReference;
@@ -174,17 +178,18 @@ public class PetPostDao {
         MatchOperation match2 = Aggregation.match(Criteria.where("isInfected").is(isInfected.equals("true")?true:false));
         SkipOperation skip = Aggregation.skip(page*10);
         LimitOperation limit = Aggregation.limit(10);
+        SortOperation sort = Aggregation.sort(Sort.by(Order.desc("postedDate")));
         Aggregation aggregation1 ;
 
         if(isInfected.equals("")){
                 aggregation1= Aggregation.newAggregation(
                 lookupOperation,
-                match,skip,limit);
+                match,sort,skip,limit);
         }else{
                 aggregation1= Aggregation.newAggregation(
                 lookupOperation,
                 match,
-                match2,skip,limit);
+                match2,sort,skip,limit);
         }
         
         return template.aggregate(aggregation1, "pet_posts", PetPost.class).getMappedResults();

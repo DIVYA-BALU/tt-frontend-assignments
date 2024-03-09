@@ -4,15 +4,19 @@ import { PetPostService } from '../service/pet-post.service';
 import { PetPost } from '../models/models';
 import { AddPostComponent } from '../add-post/add-post.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-pet-post',
   standalone: true,
-  imports: [CommonModule,MatDialogModule],
+  imports: [CommonModule,MatDialogModule,MatIconModule,
+    MatMenuModule, ],
   templateUrl: './pet-post.component.html',
   styleUrls: ['./pet-post.component.scss']
 })
 export class PetPostComponent {
+
 
 
   constructor(public dialog: MatDialog,private petPostService:PetPostService){}
@@ -32,11 +36,24 @@ export class PetPostComponent {
     });
   }
 
+  deletePost(id: string) {
+    this.petPostService.deletePost(id).subscribe({
+      next: (val)=>{
+        console.log(val);
+        this.loadDate()
+      }
+    })
+    }
+    
+    loadDate(){
+      this.petPostService.getAnimalPostById().subscribe({next:(petPost)=>{
+        console.log(petPost);
+        
+        this.petPosts = petPost;
+      }})
+    }
+
   ngOnInit(){
-    this.petPostService.getAnimalPostById().subscribe({next:(petPost)=>{
-      console.log(petPost);
-      
-      this.petPosts = petPost;
-    }})
+   this.loadDate();
   }
 }

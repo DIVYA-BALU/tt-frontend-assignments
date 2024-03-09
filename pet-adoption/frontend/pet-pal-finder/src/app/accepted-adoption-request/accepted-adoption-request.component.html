@@ -22,8 +22,7 @@
                   <span>Gender : {{ adoptionDetail.petPostId.gender }}</span>
                 </div>
                 <div class="card">
-                    <button   type="button" (click)="updateAdoptionStatus(adoptionDetail._id||'','adopted')" class="accept">Accept</button>
-                    <button  type="button" (click)="updateAdoptionStatus(adoptionDetail._id||'','rejected')" class="reject">Reject</button>
+                    <button   type="button" (click)="click(adoptionDetail.userType,adoptionDetail.profileId)" >View Requester</button>
                 </div>
             </div>
           </div>

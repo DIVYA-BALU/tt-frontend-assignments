@@ -1,5 +1,6 @@
-<div>
-    <div *ngFor="let subscriptionPlan of subscriptionPlans">
+<div class="container">
+    Available Subscription Plans
+    <div *ngFor="let subscriptionPlan of subscriptionPlans" class="card">
         <span>Amount {{subscriptionPlan.amount}}</span>
         <span>Duration of Subscription {{subscriptionPlan.months}} Months</span>
         <button type="button" (click)="pay(subscriptionPlan)">Pay</button>

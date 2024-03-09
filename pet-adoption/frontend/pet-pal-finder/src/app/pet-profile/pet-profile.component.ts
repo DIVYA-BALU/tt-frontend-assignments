@@ -7,6 +7,7 @@ import { AuthService } from '../service/auth.service';
 import { AdoptionFormComponent } from '../adoption-form/adoption-form.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-pet-profile',
@@ -21,8 +22,10 @@ export class PetProfileComponent {
     private route: ActivatedRoute,
     private petPostService: PetPostService,
     private authService: AuthService,
-    private router:Router
+    private router: Router
   ) {}
+
+  private getSubscription: Subscription = new Subscription();
 
   petPost: PetPost = {
     _id: '',
@@ -51,7 +54,7 @@ export class PetProfileComponent {
     images: [],
     description: '',
     isAdopted: false,
-    postedDate:new Date()
+    postedDate: new Date(),
   };
 
   openDialog(
@@ -63,7 +66,10 @@ export class PetProfileComponent {
       height: '90vh',
       enterAnimationDuration,
       exitAnimationDuration,
-      data: {petPostId:this.petPost._id,posterId:this.petPost.posterId._id},
+      data: {
+        petPostId: this.petPost._id,
+        posterId: this.petPost.posterId._id,
+      },
     });
   }
 
@@ -80,8 +86,8 @@ export class PetProfileComponent {
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          this.router.navigate(['auth'])
-        } 
+          this.router.navigate(['auth']);
+        }
       });
     }
   }
@@ -89,10 +95,14 @@ export class PetProfileComponent {
   ngOnInit() {
     const id: string = this.route.snapshot.paramMap.get('id') || '';
     console.log(id);
-    this.petPostService.getPetPost(id).subscribe({
+    this.getSubscription = this.petPostService.getPetPost(id).subscribe({
       next: (val) => {
         this.petPost = val;
       },
     });
+  }
+
+  ngOnDestory() {
+    this.getSubscription.unsubscribe();
   }
 }

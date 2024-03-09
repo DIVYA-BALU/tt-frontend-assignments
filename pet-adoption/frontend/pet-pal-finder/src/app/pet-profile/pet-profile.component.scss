@@ -1,31 +1,31 @@
-@import '../style/variables.scss';
-.container{
-    padding-left: 15%;
-    padding-right: 15%;
-    padding-top: 10px;
+@import "../style/variables.scss";
+.container {
+  padding-left: 15%;
+  padding-right: 15%;
+  padding-top: 10px;
 }
-.details{
-    display: flex;
+.details {
+  display: flex;
 }
-.profile{
-    width: 40%;
-    height: 70vh;
-    margin-right: 20px;
+.profile {
+  width: 40%;
+  height: 70vh;
+  margin-right: 20px;
 }
-.card{
-    display: flex;
-    flex-direction: column;
-    width: 30%;
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
 }
-span{
-    margin-top: 10px;
-    margin-left: 15px;
+span {
+  margin-top: 10px;
+  margin-left: 15px;
 }
-button{
-    background-color: $primary-color;
-    height: 50px;
-    margin-top: 50px;
+button {
+  background-color: $primary-color;
+  height: 50px;
+  margin-top: 50px;
 }
-button:hover{
-    cursor: pointer;
+button:hover {
+  cursor: pointer;
 }

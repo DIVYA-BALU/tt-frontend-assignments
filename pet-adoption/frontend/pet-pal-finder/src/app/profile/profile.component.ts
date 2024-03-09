@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProfileService } from '../service/profile.service';
 import { AdopterProfileComponent } from '../adopter-profile/adopter-profile.component';
 import { VeterinaryDoctorProfileComponent } from '../veterinary-doctor-profile/veterinary-doctor-profile.component';
-import { ProfileDetailsComponent } from '../authentication/profile-details/profile-details.component';
+import { ProfileDetailsComponent } from '../profile-details/profile-details.component';
 
 @Component({
   selector: 'app-profile',

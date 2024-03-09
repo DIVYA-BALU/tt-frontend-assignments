@@ -1,35 +1,35 @@
-@import '../style/variables.scss';
+@import "../style/variables.scss";
 
 a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
-a:hover{
-    cursor: pointer;
+a:hover {
+  cursor: pointer;
 }
 
 a.active {
-    color: black;
+  color: black;
 }
 
-.nav-bar{
-    background-color: $primary-color;   
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    column-gap: 30px;
+.nav-bar {
+  background-color: $primary-color;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  column-gap: 30px;
 }
 .dp {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-  .profile {
-    display: flex;
-    align-items: center;
-  }
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.profile {
+  display: flex;
+  align-items: center;
+}

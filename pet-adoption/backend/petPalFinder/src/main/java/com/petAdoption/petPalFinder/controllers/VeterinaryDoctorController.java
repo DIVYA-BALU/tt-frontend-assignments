@@ -41,8 +41,8 @@ public class VeterinaryDoctorController {
     }
 
     @GetMapping("all")
-    public ResponseEntity<List<VeterinaryDoctor>> getAllDoctor() {
-        return ResponseEntity.ok(veterinaryDoctorService.getApprovedVeterinaryDoctor());
+    public ResponseEntity<List<VeterinaryDoctor>> getAllDoctor(@RequestParam String name ,@RequestParam String city,@RequestParam Integer page) {
+        return ResponseEntity.ok(veterinaryDoctorService.getApprovedVeterinaryDoctor(name,city,page));
     }
 
     @PutMapping
@@ -64,5 +64,10 @@ public class VeterinaryDoctorController {
      public ResponseEntity<StatusMessage> update(@ModelAttribute VeterinaryDoctorDto veterinaryDoctorDto) {  
         System.out.println(veterinaryDoctorDto);    
         return ResponseEntity.ok(veterinaryDoctorService.update(veterinaryDoctorDto));
+    }
+
+    @GetMapping("search")
+    public ResponseEntity<List<String>> getPetBreedsInput(@RequestParam String field, @RequestParam String value) {
+        return ResponseEntity.ok(veterinaryDoctorService.searchInput(field, value));
     }
 }

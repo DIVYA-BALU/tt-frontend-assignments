@@ -12,6 +12,7 @@
         <span>Requested Time : {{ appointmentStatus.requestedDate || date | dateConverter | date:'medium'}}</span>
         <span> Status :  {{appointmentStatus.status}}</span>
         <span *ngIf="appointmentStatus.status === 'accepted'"> Appointment Date :  {{appointmentStatus.appointmentDate || date | dateConverter | date:'medium'}}</span>
+        <button *ngIf="appointmentStatus.status === 'accepted'" (click)="visited(appointmentStatus._id || '',appointmentStatus.doctorId._id)"> visited </button>
        
       </div>
     </div>

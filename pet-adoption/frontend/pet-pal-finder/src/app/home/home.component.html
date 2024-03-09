@@ -3,17 +3,19 @@
     <form class="example-form" (ngSubmit)="search()">
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Category</mat-label>
-        <input type="text"
-               placeholder="Pick one"
-               aria-label="category"
-               matInput
-               [matAutocomplete]="auto"
-               (input)="getSearchInput()"
-               [(ngModel)]="inputValue"
-               name="search">
+        <input
+          type="text"
+          placeholder="Pick one"
+          aria-label="category"
+          matInput
+          [matAutocomplete]="auto"
+          (input)="getSearchInput()"
+          [(ngModel)]="inputValue"
+          name="search"
+        />
         <mat-autocomplete #auto="matAutocomplete">
           <mat-option *ngFor="let category of categories" [value]="category">
-            {{category}}
+            {{ category }}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
@@ -21,13 +23,16 @@
         <mat-icon>search</mat-icon>
       </button>
     </form>
-   
   </div>
   <h1>Find your Pal</h1>
 </div>
-<div *ngIf="petPosts.length === 0"> no animal is near to your location</div>
+<div *ngIf="petPosts.length === 0">no animal is near to your location</div>
 <div class="card-list">
-  <div *ngFor="let petPost of petPosts" class="card" (click)="navigate(petPost._id)">
+  <div
+    *ngFor="let petPost of petPosts"
+    class="card"
+    (click)="navigate(petPost._id)"
+  >
     <img [src]="petPost.images" alt="" />
     <span>Breed : {{ petPost.breed }}</span>
     <span>Category : {{ petPost.category }}</span>

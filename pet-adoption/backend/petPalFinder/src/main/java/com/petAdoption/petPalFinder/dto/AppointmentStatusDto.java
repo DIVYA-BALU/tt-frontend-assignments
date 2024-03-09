@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class AppointmentStatusDto {
     private AppointmentStatus appointmentStatus;
     private String profileUrl;
+    private String reason;
     private String name;
     private String email;
     private Long contactNumber;

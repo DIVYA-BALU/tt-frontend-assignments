@@ -9,6 +9,6 @@ import java.util.Date;
 
 @Repository
 public interface SubscriptionTransactionRepository extends MongoRepository<SubscriptionTransaction,String>{
-    List<SubscriptionTransaction> findBySubscriberId(String subscriberId);
+    SubscriptionTransaction findBySubscriberId(String subscriberId);
     List<SubscriptionTransaction> findByValidTillLessThanEqual(Date validTill);
 }

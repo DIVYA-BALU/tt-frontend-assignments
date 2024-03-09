@@ -25,4 +25,6 @@ public class VeterinaryDoctor {
     private long contactNumber;
     private String status;
     private Boolean isSubscribed;
+    private Double rating;
+    private Integer ratersCount;
 }

@@ -1,4 +1,42 @@
 <div class="container">
+  <div class="filter">
+    <form (ngSubmit)="search()" class="form">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>name</mat-label>
+          <input type="text"
+                 placeholder="Pick one"
+                 aria-label="name"
+                 matInput
+                 [matAutocomplete]="autoname"
+                 (input)="getNames()"
+                 [(ngModel)]="name"
+                 name="name">
+          <mat-autocomplete #autoname="matAutocomplete">
+            <mat-option *ngFor="let name of names" [value]="name">
+              {{name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>city</mat-label>
+            <input type="text"
+                   placeholder="Pick one"
+                   aria-label="city"
+                   matInput
+                   [matAutocomplete]="autocity"
+                   (input)="getcity()"
+                   [(ngModel)]="city"
+                   name="city">
+            <mat-autocomplete #autocity="matAutocomplete">
+              <mat-option *ngFor="let city of cites" [value]="city">
+                {{city}} 
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+       
+        <button mat-flat-button>Apply Filter</button>
+      </form>
+</div>
     <div class="details" *ngFor="let veterinaryDoctor of veterinaryDoctors">
       <img [src]="veterinaryDoctor.profilePhoto" alt="" class="profile"/>
       <div class="card">

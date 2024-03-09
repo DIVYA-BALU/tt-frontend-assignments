@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.petAdoption.petPalFinder.dto.PetPostDto;
+import com.petAdoption.petPalFinder.dto.StatusMessage;
 import com.petAdoption.petPalFinder.models.Location;
 import com.petAdoption.petPalFinder.models.Organization;
 import com.petAdoption.petPalFinder.models.PetPost;
@@ -64,7 +66,13 @@ public class PetPostController {
 
     @GetMapping("search-input/search")
     public ResponseEntity<List<PetPost>> searchedPets(String category, String breed,String gender, String isInfected, String city,Integer page) {
+        
         return ResponseEntity.ok(petPostService.searchedPets(category, breed, gender, isInfected, city, page));
+    }
+
+    @DeleteMapping
+    public ResponseEntity<StatusMessage> deletePost(String id) {
+        return ResponseEntity.ok(petPostService.deletePost(id));
     }
     
 }

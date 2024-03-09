@@ -27,7 +27,6 @@ public class SubscriptionTransactionServiceImpl implements SubscriptionTransacti
         StatusMessage statusMessage = new StatusMessage();
         Date date = new Date();
         Calendar cal = Calendar.getInstance();
-
         date = cal.getTime();
         System.out.println(date);
         cal.add(Calendar.DATE, subscriptionTransaction.getCurrentPlan().getMonths()*30);
@@ -68,6 +67,19 @@ public class SubscriptionTransactionServiceImpl implements SubscriptionTransacti
             subscriptionTransactionRepository.save(subscription);
 
         }
+    }
+
+    @Override
+    public Boolean isSubscriptionEnded(String SubscriberId){
+        if(subscriptionTransactionRepository.findBySubscriberId(SubscriberId).getCurrentPlan() == null){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public SubscriptionTransaction getSubscriptionDetail(String SubscriberId){
+        return subscriptionTransactionRepository.findBySubscriberId(SubscriberId);
     }
     
 }

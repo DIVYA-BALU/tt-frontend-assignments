@@ -59,8 +59,23 @@
           </mat-form-field>
         </div>
   
-        <button mat-raised-button color="primary" type="submit">update</button>
+        <button mat-flat-button  type="submit">update</button>
       </form>
     </div>
+    <div>
+      <div>Payment Details <button mat-flat-button  type="submit" (click)="payment()">Proceed to payment </button></div>
+      <div class="payment">
+        <span>Current Plan : {{subscription.currentPlan.amount}}</span>
+        <span>Subscribed On : {{subscription.subscribedOn | date | date : "medium"}}</span>
+        <span>Valid Till : {{subscription.validTill | date | date : "medium"}}</span>
+        History
+        <div class="history" *ngFor="let plan of (subscription.history === null?historys:subscription.history)">
+          <span>Amount Paid : {{plan.plan.amount}}</span>
+        <span>Validity : {{plan.plan.months}} months</span>
+        <span>Subscribed On : {{plan.subscribedOn}}</span>
+        </div>
+      </div> 
+    </div>
+    
   </div>
   

@@ -8,4 +8,6 @@ import com.petAdoption.petPalFinder.models.SubscriptionTransaction;
 public interface SubscriptionTransactionService {
     public StatusMessage subscribe(SubscriptionTransaction subscriptionTransaction);
     public void unSubscribeValidityExpiredUser(Date valiDate);
+    public SubscriptionTransaction getSubscriptionDetail(String SubscriberId);
+    public Boolean isSubscriptionEnded(String SubscriberId);
 }

@@ -1,32 +1,59 @@
 <div class="container">
-<form action="" (ngSubmit)="request()">
+  <form action="" (ngSubmit)="request()">
     <div class="page-title">Pet Pal Finder</div>
     <mat-form-field class="feild">
       <mat-label>Number Of Adults</mat-label>
-      <input type="number" matInput [(ngModel)] = "adoptionDetail.noOfAdults"name="noOfAdults" />
+      <input
+        type="number"
+        matInput
+        [(ngModel)]="adoptionDetail.noOfAdults"
+        name="noOfAdults"
+      />
     </mat-form-field>
     <mat-form-field class="feild">
       <mat-label>Number Of Children</mat-label>
-      <input type="number" matInput [(ngModel)] = "adoptionDetail.noOfChildren" name="noOfChildren"/>
+      <input
+        type="number"
+        matInput
+        [(ngModel)]="adoptionDetail.noOfChildren"
+        name="noOfChildren"
+      />
     </mat-form-field>
     Any one in the family allergy to animal
-    <mat-radio-group aria-label="Select an option" [(ngModel)] = "adoptionDetail.allergyToAnimal" name="adoptionDetail">
-        <mat-radio-button value=true  name="allergy" required>Yes</mat-radio-button>
-        <mat-radio-button value=false  name="allergy" required>No</mat-radio-button>
-      </mat-radio-group>
+    <mat-radio-group
+      aria-label="Select an option"
+      [(ngModel)]="adoptionDetail.allergyToAnimal"
+      name="adoptionDetail"
+    >
+      <mat-radio-button value="true" name="allergy" required
+        >Yes</mat-radio-button
+      >
+      <mat-radio-button value="false" name="allergy" required
+        >No</mat-radio-button
+      >
+    </mat-radio-group>
     Home type
-    <mat-radio-group aria-label="Select an option" [(ngModel)] = "adoptionDetail.homeType" name="homeType">
-        <mat-radio-button value="apartment" >Apartment</mat-radio-button>
-        <mat-radio-button value="independent house" >Independent House</mat-radio-button>
-        <mat-radio-button value="village house" >Village House</mat-radio-button>
-      </mat-radio-group>
+    <mat-radio-group
+      aria-label="Select an option"
+      [(ngModel)]="adoptionDetail.homeType"
+      name="homeType"
+    >
+      <mat-radio-button value="apartment">Apartment</mat-radio-button>
+      <mat-radio-button value="independent house"
+        >Independent House</mat-radio-button
+      >
+      <mat-radio-button value="village house">Village House</mat-radio-button>
+    </mat-radio-group>
     Every one in the family accept to buy a pet
-    <mat-radio-group aria-label="Select an option" [(ngModel)] = "adoptionDetail.familyAcceptance" name="familyAcceptance">
-        <mat-radio-button value=true >Yes</mat-radio-button>
-        <mat-radio-button value=false >No</mat-radio-button>
-      </mat-radio-group>
-    
-   
-    <button mat-raised-button color="primary" type="submit">Submit</button>
+    <mat-radio-group
+      aria-label="Select an option"
+      [(ngModel)]="adoptionDetail.familyAcceptance"
+      name="familyAcceptance"
+    >
+      <mat-radio-button value="true">Yes</mat-radio-button>
+      <mat-radio-button value="false">No</mat-radio-button>
+    </mat-radio-group>
+
+    <button mat-flat-button type="submit">Submit</button>
   </form>
 </div>

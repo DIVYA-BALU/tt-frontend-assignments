@@ -3,17 +3,19 @@ import { CommonModule } from '@angular/common';
 import { AdoptionDetail } from '../models/models';
 import { AdoptionService } from '../service/adoption.service';
 import { AuthService } from '../service/auth.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { RequesterProfileComponent } from '../requester-profile/requester-profile.component';
 
 @Component({
   selector: 'app-accepted-adoption-request',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,MatDialogModule],
   templateUrl: './accepted-adoption-request.component.html',
   styleUrls: ['./accepted-adoption-request.component.scss']
 })
 export class AcceptedAdoptionRequestComponent {
 
-  constructor(private adoptionService:AdoptionService,private authService:AuthService){}
+  constructor(private dialog:MatDialog,private adoptionService:AdoptionService,private authService:AuthService){}
 
   adoptionDetails:AdoptionDetail [] = [];
   isLoading: boolean = false;
@@ -51,14 +53,26 @@ export class AcceptedAdoptionRequestComponent {
     })
   }
 
-  updateAdoptionStatus(id: string,status: string) {
-   this.adoptionService.updateAdoptionStatus(id,status).subscribe({
-    next: (val) => {
-      console.log(val);
-      
-    }
-   })
-    }
+  click(type:string,id:string){
+    const data = {type,id}
+    this.openDialog('30ms', '30ms',data);
+  
+  }
+
+  openDialog(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string,
+    data:{type:string,id:string}
+  ): void {
+    this.dialog.open(RequesterProfileComponent, {
+    
+      enterAnimationDuration,
+      exitAnimationDuration,
+      data: data,
+    });
+  }
+
+  
 
   ngOnInit(){
     this.authService.sharedId$.subscribe({

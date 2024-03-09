@@ -1,56 +1,58 @@
 <div class="container">
-  <label>profile</label>
-  <input type="file"  (change)="getProfile($event)"/>
-  <label>certificate</label>
-  <input type="file"  (change)="getCertificate($event)"/>
-<form action="" [formGroup]="formResponse" (ngSubmit)="request()">
-  <div class="page-title">Pet Pal Finder</div>
-  <mat-form-field class="feild">
-    <mat-label>Full Name</mat-label>
-    <input type="text" matInput formControlName="name" />
-  </mat-form-field>
-  <mat-form-field class="feild">
-    <mat-label>Email</mat-label>
-    <input type="text" matInput formControlName="email" />
-  </mat-form-field>
-  <mat-form-field class="feild">
-    <mat-label>Contact Number</mat-label>
-    <input type="text" matInput formControlName="contactNumber" />
-  </mat-form-field>
-  <div formGroupName="location">
-    <mat-form-field class="feild">
-      <mat-label>Door No</mat-label>
-      <input type="text" matInput formControlName="doorNo" />
-    </mat-form-field>
-    <mat-form-field class="feild">
-      <mat-label>street</mat-label>
-      <input type="text" matInput formControlName="street" />
-    </mat-form-field>
-    <mat-form-field class="feild">
-      <mat-label>City</mat-label>
-      <input type="text" matInput formControlName="city" />
-    </mat-form-field>
-    <mat-form-field class="feild">
-      <mat-label>District</mat-label>
-      <input type="text" matInput formControlName="district" />
-    </mat-form-field>
-    <mat-form-field class="feild">
-      <mat-label>State</mat-label>
-      <input type="text" matInput formControlName="state" />
-    </mat-form-field>
-    <mat-form-field class="feild">
-      <mat-label>Country</mat-label>
-      <input type="text" matInput formControlName="country" />
-    </mat-form-field>
+  <div class="box">
+    <div class="page-title">Pet Pal Finder</div>
+    <label>Upload Profile</label>
+    <input type="file" (change)="getProfile($event)" />
+    <label>Upload Certificate</label>
+    <input type="file" (change)="getCertificate($event)" />
+    <form action="" [formGroup]="formResponse" (ngSubmit)="request()">
+      <mat-form-field class="feild">
+        <mat-label>Full Name</mat-label>
+        <input type="text" matInput formControlName="name" />
+      </mat-form-field>
+      <mat-form-field class="feild">
+        <mat-label>Email</mat-label>
+        <input type="text" matInput formControlName="email" />
+      </mat-form-field>
+      <mat-form-field class="feild">
+        <mat-label>Contact Number</mat-label>
+        <input type="text" matInput formControlName="contactNumber" />
+      </mat-form-field>
+      <div formGroupName="location">
+        <mat-form-field class="feild">
+          <mat-label>Door No</mat-label>
+          <input type="text" matInput formControlName="doorNo" />
+        </mat-form-field>
+        <mat-form-field class="feild">
+          <mat-label>street</mat-label>
+          <input type="text" matInput formControlName="street" />
+        </mat-form-field>
+        <mat-form-field class="feild">
+          <mat-label>City</mat-label>
+          <input type="text" matInput formControlName="city" />
+        </mat-form-field>
+        <mat-form-field class="feild">
+          <mat-label>District</mat-label>
+          <input type="text" matInput formControlName="district" />
+        </mat-form-field>
+        <mat-form-field class="feild">
+          <mat-label>State</mat-label>
+          <input type="text" matInput formControlName="state" />
+        </mat-form-field>
+        <mat-form-field class="feild">
+          <mat-label>Country</mat-label>
+          <input type="text" matInput formControlName="country" />
+        </mat-form-field>
+      </div>
+      <mat-form-field class="feild">
+        <mat-label>Degree</mat-label>
+        <input type="text" matInput formControlName="degree" />
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" type="submit">Register</button>
+      <hr width="100%" />
+      <div>Already have a account? <a routerLink="/auth/login">Login</a></div>
+    </form>
   </div>
-  <mat-form-field class="feild">
-    <mat-label>Degree</mat-label>
-    <input type="text" matInput formControlName="degree" />
-  </mat-form-field>
-  
-  <button mat-raised-button color="primary" type="submit">Login</button>
-  <hr width="100%" />
-  <div>New here? <a routerLink="/auth/register">SignUp</a></div>
-</form>
 </div>
 <router-outlet></router-outlet>

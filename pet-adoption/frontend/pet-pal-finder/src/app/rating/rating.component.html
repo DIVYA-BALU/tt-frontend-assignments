@@ -1,0 +1,39 @@
+<div class="heading">
+    Provide Rating
+</div>
+
+<div class="container" [class.readOnly]="readonly">
+    <fa-icon
+      [class.rated]="rating >= 5"
+      [icon]="faStar"
+      (click)="setRating(5)"
+    ></fa-icon>
+    <fa-icon
+      [class.rated]="rating >= 4"
+      [icon]="faStar"
+      (click)="setRating(4)"
+    ></fa-icon>
+  
+    <fa-icon
+      [class.rated]="rating >= 3"
+      [icon]="faStar"
+      (click)="setRating(3)"
+    ></fa-icon>
+  
+    <fa-icon
+      [class.rated]="rating >= 2"
+      [icon]="faStar"
+      (click)="setRating(2)"
+    ></fa-icon>
+  
+    <fa-icon
+      [class.rated]="rating >= 1"
+      [icon]="faStar"
+      (click)="setRating(1)"
+    ></fa-icon>
+  </div>
+
+  <div class="action-buttons">
+    <button mat-dialog-close mat-raised-button color="primary">Cancel</button>
+    <button mat-raised-button (click)="sendRating()" mat-dialog-close color="primary">Confirm</button>
+  </div>

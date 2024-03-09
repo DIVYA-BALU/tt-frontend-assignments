@@ -9,8 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.petAdoption.petPalFinder.dao.PetPostDao;
 import com.petAdoption.petPalFinder.dto.PetPostDto;
+import com.petAdoption.petPalFinder.dto.StatusMessage;
+import com.petAdoption.petPalFinder.models.DeletedPetPost;
 import com.petAdoption.petPalFinder.models.Location;
 import com.petAdoption.petPalFinder.models.PetPost;
+import com.petAdoption.petPalFinder.repositorys.AdoptionDetailRepository;
+import com.petAdoption.petPalFinder.repositorys.DeletedPetPostRepository;
 import com.petAdoption.petPalFinder.repositorys.OrganizationRepository;
 import com.petAdoption.petPalFinder.repositorys.PetPostRepository;
 import com.petAdoption.petPalFinder.services.FileService;
@@ -31,6 +35,12 @@ public class PetPostServiceImpl implements PetPostService {
     @Autowired
     OrganizationRepository organizationRepository;
 
+    @Autowired
+    DeletedPetPostRepository deletedPetPostRepository;
+
+    @Autowired
+    AdoptionDetailRepository adoptionDetailRepository;
+
     @Override
     public List<PetPost> getPostByPoster(String posterId) {
         return petPostRepository.findByPosterId(new ObjectId(posterId));
@@ -40,18 +50,18 @@ public class PetPostServiceImpl implements PetPostService {
     public PetPost savePost(PetPostDto petPostDto) {
         String url = fileService.saveFile(petPostDto.getImage(), "pet");
         PetPost petPost = PetPost.builder()
-        .category(petPostDto.getCategory())
-        .breed(petPostDto.getBreed())
-        .quantity(petPostDto.getQuantity())
-        .gender(petPostDto.getGender())
-        .weight(petPostDto.getWeight())
-        .isInfected(petPostDto.getIsInfected())
-        .posterId(organizationRepository.findById(petPostDto.getPosterId()).get() )
-        .images(url)
-        .postedDate(new Date())
-        .description(petPostDto.getDescription())
-        .isAdopted(petPostDto.getIsAdopted())
-        .build();
+                .category(petPostDto.getCategory())
+                .breed(petPostDto.getBreed())
+                .quantity(petPostDto.getQuantity())
+                .gender(petPostDto.getGender())
+                .weight(petPostDto.getWeight())
+                .isInfected(petPostDto.getIsInfected())
+                .posterId(organizationRepository.findById(petPostDto.getPosterId()).get())
+                .images(url)
+                .postedDate(new Date())
+                .description(petPostDto.getDescription())
+                .isAdopted(petPostDto.getIsAdopted())
+                .build();
         return petPostRepository.save(petPost);
     }
 
@@ -70,15 +80,35 @@ public class PetPostServiceImpl implements PetPostService {
         return petPostRepository.findById(id).get();
     }
 
-    public List<String> petBreedInput(String category,String breed){
-        return petPostDao.petBreedInput(category,breed);
+    public List<String> petBreedInput(String category, String breed) {
+        return petPostDao.petBreedInput(category, breed);
     }
 
-    public List<String> petCategoryInput(String value){
+    public List<String> petCategoryInput(String value) {
         return petPostDao.petCategoryInput(value);
     }
 
-    public List<PetPost> searchedPets(String category, String breed,String gender, String isInfected, String city,Integer page){
+    public List<PetPost> searchedPets(String category, String breed, String gender, String isInfected, String city,
+            Integer page) {
         return petPostDao.searchedPets(category, breed, gender, isInfected, city, page);
     }
+
+    @Override
+    public StatusMessage deletePost(String id) {
+        PetPost petPost = petPostRepository.findById(id).get();
+        petPostToDeletedPost(petPost);
+        adoptionDetailRepository.deleteByPetPostId(petPost);
+        StatusMessage statusMessage = new StatusMessage();
+        petPostRepository.deleteById(id);
+        statusMessage.setMessage("success");
+        return statusMessage;
+    }
+
+    void petPostToDeletedPost(PetPost petPost) {
+        DeletedPetPost deletedPetPost = DeletedPetPost.builder().breed(petPost.getBreed()).category(petPost.getCategory())
+                .description(petPost.getDescription()).images(petPost.getImages()).isAdopted(petPost.getIsAdopted()).isInfected(petPost.getIsInfected()).quantity(petPost.getQuantity())
+                .gender(petPost.getGender()).posterId(petPost.getPosterId()).postedDate(petPost.getPostedDate()).build();
+    
+        deletedPetPostRepository.save(deletedPetPost);
+            }
 }

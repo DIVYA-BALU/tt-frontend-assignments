@@ -2,14 +2,14 @@
 You Have No Pending Request
 </div>
 <ng-template #pending>
-    <div class="container">
+    <div class="container" [ngClass]="appointmentUpdate.status === 'accepted'?'green':appointmentUpdate.status === 'rejected'?'red':''">
         <div class="details" *ngFor="let appointmentStatus of appointmentStatuses">
           <img [src]="appointmentStatus.profileUrl" alt="" class="profile"/>
           <div class="card">
             Requester Details: <br>
             <span>Name : {{ appointmentStatus.name }}</span>
             <span>Contact Number : {{ appointmentStatus.contactNumber }}</span>
-            <span>Email Id : {{ appointmentStatus.email }}</span>
+            <span>Reason : {{ appointmentStatus.reason }}</span>
             
           </div>
           <div class="card">

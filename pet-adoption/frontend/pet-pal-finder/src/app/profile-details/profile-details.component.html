@@ -10,17 +10,17 @@
       </mat-menu>
     </div>
     <form class="form" [formGroup]="formResponse" (ngSubmit)="register()">
-        <label class="labels">Profile Photo</label>
-        <div class="profile">
-          
-            <img [src]="adopter.profilePhoto | imagePathConverter" alt="">
-           <input
-              type="file"
-              formControlName="image"
-              id="upload"
-              (change)="getProfile($event)"
-            /></div>
-        
+      <label class="labels">Profile Photo</label>
+      <div class="profile">
+        <img [src]="adopter.profilePhoto | imagePathConverter" alt="" />
+        <input
+          type="file"
+          formControlName="image"
+          id="upload"
+          (change)="getProfile($event)"
+        />
+      </div>
+
       <mat-form-field class="feild">
         <mat-label>Full Name</mat-label>
         <input type="text" matInput formControlName="name" />
@@ -31,12 +31,15 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="dob">
+        <input matInput [matDatepicker]="picker" formControlName="dob" />
         <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
-      
+
       <mat-form-field class="feild">
         <mat-label>Contact Number</mat-label>
         <input type="text" matInput formControlName="contactNumber" />
@@ -69,7 +72,7 @@
         </mat-form-field>
       </div>
 
-      <button mat-raised-button color="primary" type="submit">Submit</button>
+      <button mat-flat-button type="submit">Update</button>
     </form>
   </div>
 </div>

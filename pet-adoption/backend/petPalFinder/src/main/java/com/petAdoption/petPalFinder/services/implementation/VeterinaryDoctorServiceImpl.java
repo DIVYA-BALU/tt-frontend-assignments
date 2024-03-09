@@ -51,8 +51,10 @@ public class VeterinaryDoctorServiceImpl implements VeterinaryDoctorService{
             profileUrl = fileService.saveFile(veterinaryDoctorDto.getProfilePhoto(), "doctor-profile");
         }
         String certificateUrl = veterinaryDoctor.getDegreeCertificate();
+        Double rating = veterinaryDoctor.getRating();
         veterinaryDoctor = VeterinaryDoctorDtoToVeterinaryDoctor(veterinaryDoctorDto, certificateUrl, profileUrl);
         veterinaryDoctor.set_id(veterinaryDoctorDto.getId());
+        veterinaryDoctor.setRating(rating);
         veterinaryDoctorRepository.save(veterinaryDoctor);
         statusMessage.setMessage("data saved");
         return statusMessage;
@@ -64,8 +66,8 @@ public class VeterinaryDoctorServiceImpl implements VeterinaryDoctorService{
     }
 
     @Override
-    public List<VeterinaryDoctor> getApprovedVeterinaryDoctor() {
-        return veterinaryDoctorRepository.findByStatus("accepted");
+    public List<VeterinaryDoctor> getApprovedVeterinaryDoctor(String name,String city,Integer page) {
+        return veterinaryDoctorDao.recommendedVeterinaryDoctors(name,city,page);
     }
 
     @Override
@@ -98,7 +100,10 @@ public class VeterinaryDoctorServiceImpl implements VeterinaryDoctorService{
         .degreeCertificate(certificateUrl)
         .isSubscribed(veterinaryDoctorDto.getIsSubscribed().equals("true"))
         .profilePhoto(profileUrl)
+        .rating(0.00)
         .build();
     }
-    
+    public List<String> searchInput(String field, String value){
+        return veterinaryDoctorDao.searchInput(field, value);
+    }
 }

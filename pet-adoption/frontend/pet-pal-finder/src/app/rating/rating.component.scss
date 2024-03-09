@@ -1,0 +1,47 @@
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: row-reverse;
+    margin: 40px;
+    justify-content: space-between;
+  }
+  
+  .container fa-icon {
+    color: gray;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.15s;
+  }
+  
+  .container fa-icon.rated,
+  .container fa-icon:hover,
+  .container fa-icon:hover ~ fa-icon {
+    color: rgb(71, 88, 184);
+  }
+  
+  .container.readOnly fa-icon {
+    cursor: default;
+  }
+  
+  .container.readOnly fa-icon:hover:not(.rated),
+  .container.readOnly fa-icon:hover ~ fa-icon:not(.rated) {
+    color: gray;    
+  }
+  
+  
+  .heading{
+    text-align: center;
+    padding: 20px;
+    font-size: 25px;
+    font-weight: 600;
+  }
+  
+  button.mat-raised-button:hover {
+    background-color: #2b3880;
+  }
+  
+  
+  .action-buttons{
+    display: flex;
+    justify-content: space-around;
+  }

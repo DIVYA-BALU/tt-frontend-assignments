@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { PetPost } from '../models/models';
+import { Subject, debounce, debounceTime, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-search-result',
@@ -76,14 +77,24 @@ export class SearchResultComponent {
     })
     }
 
+    sub:Subject<string> = new Subject<string>();
+
     getCategory() {
-      this.searchService.categorySearchInput(this.category).subscribe({
+      this.sub.next(this.category)
+      this.sub.pipe(debounceTime(500),switchMap(
+        () => {
+          console.log("debounce");
+          
+          return this.searchService.categorySearchInput(this.category);
+        }
+      )).subscribe({
         next: (val) => {
           this.categories = val
           console.log(val);
           
         }
       })
+     
     }
 
     

@@ -7,21 +7,22 @@ import { ProfileService } from '../service/profile.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { LoginAlertService } from '../service/login-alert.service';
-import { ImagePathConverterPipe } from "../pipes/image-path-converter.pipe";
+import { ImagePathConverterPipe } from '../pipes/image-path-converter.pipe';
+import { Subscription } from 'rxjs';
 
 @Component({
-    selector: 'app-nav-bar',
-    standalone: true,
-    templateUrl: './nav-bar.component.html',
-    styleUrls: ['./nav-bar.component.scss'],
-    imports: [CommonModule, RouterModule, ImagePathConverterPipe]
+  selector: 'app-nav-bar',
+  standalone: true,
+  templateUrl: './nav-bar.component.html',
+  styleUrls: ['./nav-bar.component.scss'],
+  imports: [CommonModule, RouterModule, ImagePathConverterPipe],
 })
 export class NavBarComponent {
   constructor(
     private authService: AuthService,
     private profileService: ProfileService,
-    private loginAlertService:LoginAlertService,
-    private router:Router
+    private loginAlertService: LoginAlertService,
+    private router: Router
   ) {}
   loggedIn: boolean = false;
   isVeterinaryDoctor: boolean = false;
@@ -48,55 +49,66 @@ export class NavBarComponent {
     dob: new Date(),
   };
 
+  private idSubscription: Subscription = new Subscription();
+  private loginSubscription: Subscription = new Subscription();
+  private getSubscription: Subscription = new Subscription();
+
   setActiveLink(link: string): void {
-    if(link === 'status' && !this.authService.isAuthenticated()){
+    if (link === 'status' && !this.authService.isAuthenticated()) {
       this.loginAlertService.requestLogin();
-    }else if(link === 'status'){
+    } else if (link === 'status') {
       this.router.navigate(['pet/requests']);
     }
     this.activeLink = link;
   }
 
   ngOnInit() {
-    this.authService.sharedIsLoggedIn$.subscribe({
+    this.loginSubscription = this.authService.sharedIsLoggedIn$.subscribe({
       next: (val) => {
-        this.loggedIn = val
-      }
+        this.loggedIn = val;
+      },
     });
     if (this.loggedIn) {
-      this.authService.sharedId$.subscribe({
+      this.idSubscription = this.authService.sharedId$.subscribe({
         next: (id) => {
           console.log('auth ', id);
 
           if (this.authService.hasAccess(environment.adopter)) {
-            this.profileService.getAdopterProfile(id).subscribe({
-              next: (obj) => {
-                console.log(obj);
-                this.profileName = obj.name;
-                this.profileUrl = obj.profilePhoto;
-                this.adopter = obj;
-                this.profileService.setUser(obj);
-              },
-            });
+            this.getSubscription = this.profileService
+              .getAdopterProfile(id)
+              .subscribe({
+                next: (obj) => {
+                  console.log(obj);
+                  this.profileName = obj.name;
+                  this.profileUrl = obj.profilePhoto;
+                  this.adopter = obj;
+                  this.profileService.setUser(obj);
+                },
+              });
           } else if (this.authService.hasAccess(environment.veterinaryDoctor)) {
-            this.profileService.getVeterinaryDoctorProfile(id).subscribe({
-              next: (obj) => {
-                console.log(obj);
-                this.profileName = obj.name;
-                this.profileUrl = obj.profilePhoto;
-                // this.adopter = obj;
-                this.profileService.setUser(obj);
-              },
-            });
+            this.getSubscription = this.profileService
+              .getVeterinaryDoctorProfile(id)
+              .subscribe({
+                next: (obj) => {
+                  console.log(obj);
+                  this.profileName = obj.name;
+                  this.profileUrl = obj.profilePhoto;
+                  // this.adopter = obj;
+                  this.profileService.setUser(obj);
+                },
+              });
           }
         },
       });
-      this.profileService.sharedUser$.subscribe({
-        next: (val) => {
-          console.log(val);
-        },
-      });
-      this.isVeterinaryDoctor = this.authService.hasAccess(environment.veterinaryDoctor);
+      this.isVeterinaryDoctor = this.authService.hasAccess(
+        environment.veterinaryDoctor
+      );
     }
+  }
+
+  ngOnDestroy() {
+    this.idSubscription.unsubscribe();
+    this.loginSubscription.unsubscribe();
+    this.getSubscription.unsubscribe();
   }
 }

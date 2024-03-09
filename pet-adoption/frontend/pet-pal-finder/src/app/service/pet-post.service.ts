@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
-import { Location, PetPost } from '../models/models';
+import { Location, PetPost, StatusMessage } from '../models/models';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +46,12 @@ export class PetPostService {
 
   getPetPost(id:string){
     return this.http.get<PetPost>(
+      `${this.baseUrl}pet-post?id=${id}`,
+    );
+  }
+  
+  deletePost(id:string){
+    return this.http.delete<StatusMessage>(
       `${this.baseUrl}pet-post?id=${id}`,
     );
   }

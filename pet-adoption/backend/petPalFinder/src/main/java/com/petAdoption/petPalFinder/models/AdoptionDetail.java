@@ -27,5 +27,6 @@ public class AdoptionDetail {
     private Boolean familyAcceptance;
     private String status = "initiated";
     private String posterId;
+    private String userType;
     private Date requestDate = new Date();
 }

@@ -120,6 +120,7 @@ export interface AppointmentStatus {
 
 export interface AppointmentStatusDto {
     appointmentStatus: AppointmentStatus;
+    reason:string;
     profileUrl: string;
     name: string;
     email: string;
@@ -140,6 +141,13 @@ export interface SubscriptionTransaction {
     validTill: Date;
     paymentId: string;
     subscriberId: string;
+    history: PreviousSubscription[] | null;
+}
+
+export interface PreviousSubscription{
+     plan:SubscriptionPlan; 
+         subscribedOn:Date;
+         paymentId:string;
 }
 
 export interface AdoptionDetail {
@@ -154,6 +162,7 @@ export interface AdoptionDetail {
     posterId:string;
     status:string;
     requestDate :Date;
+    userType:string;
 }
 
 export interface AdoptionDetailDto {
@@ -167,4 +176,12 @@ export interface AdoptionDetailDto {
     homeType: string;
     familyAcceptance: boolean;
     posterId:string
+    userType:string;
+}
+
+export interface Rating {
+    _id: string;
+    veterinaryDoctorId: string;
+    rating: number;
+    raterId: string;
 }

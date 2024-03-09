@@ -10,6 +10,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AdoptionFormComponent } from './adoption-form/adoption-form.component';
 import { DateConverterPipe } from './pipes/date-converter.pipe';
 import { ImagePathConverterPipe } from './pipes/image-path-converter.pipe';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ImagePathConverterPipe } from './pipes/image-path-converter.pipe';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FontAwesomeModule,
   ],
   providers: [HttpClient,{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor,multi: true}],
   bootstrap: [AppComponent]

@@ -12,9 +12,9 @@ export class VeterinaryDoctorService {
 
   constructor(private http: HttpClient) { }
 
-  getNearByDoctors(){
+  getNearByDoctors(name:string,city:string,page:number){
     return this.http.get<VeterinaryDoctor[]>(
-      `${this.baseUrl}veterinary-doctor/all`
+      `${this.baseUrl}veterinary-doctor/all?name=${name}&city=${city}&page=${page}`
     );
   }
 
@@ -47,6 +47,12 @@ export class VeterinaryDoctorService {
   updateAppointment(appoinment:AppointmentUpdate){
     return this.http.put<StatusMessage>(
       `${this.baseUrl}appointment`,appoinment
+    );
+  }
+
+  getSearchInput(field:string,value:string){
+    return this.http.get<string[]>(
+      `${this.baseUrl}veterinary-doctor/search?field=${field}&value=${value}`
     );
   }
 }

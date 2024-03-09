@@ -29,7 +29,7 @@ public class FileServiceImpl implements FileService{
             }
         }
         else{
-            throw new RuntimeException("not image type");
+            return "";
         }
         return url;
     }

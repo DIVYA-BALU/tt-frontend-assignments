@@ -10,22 +10,22 @@
       <input type="text" matInput formControlName="email" />
     </mat-form-field>
     <mat-form-field *ngIf="!isOtpSend">
-      <mat-label >Password</mat-label>
+      <mat-label>Password</mat-label>
       <input matInput formControlName="password" type="password" />
     </mat-form-field>
     <mat-form-field *ngIf="!isOtpSend">
       <mat-label>Confirm Password</mat-label>
       <input matInput formControlName="confirmPassword" type="password" />
-    </mat-form-field >
+    </mat-form-field>
     <mat-form-field *ngIf="isOtpSend">
       <mat-label>OTP</mat-label>
       <input matInput formControlName="otp" type="password" />
     </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">
-      {{ isOtpSend ? "Verify Otp" : "Login" }}
+    <button mat-flat-button type="submit">
+      {{ isOtpSend ? "Verify Otp" : "Register" }}
     </button>
     <hr width="100%" />
-    <div>New here? <a routerLink="/auth/register">SignUp</a></div>
+    <div>Already have a account? <a routerLink="/auth/login">Login</a></div>
   </form>
 </div>
 <router-outlet></router-outlet>

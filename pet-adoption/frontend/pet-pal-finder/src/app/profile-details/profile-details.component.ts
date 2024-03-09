@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -15,9 +15,11 @@ import { Router } from '@angular/router';
 import { Adopter } from 'src/app/models/models';
 import { AuthService } from 'src/app/service/auth.service';
 import { ProfileService } from 'src/app/service/profile.service';
-import { ImagePathConverterPipe } from '../../pipes/image-path-converter.pipe';
+import { ImagePathConverterPipe } from '../pipes/image-path-converter.pipe';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile-details',
@@ -46,6 +48,12 @@ export class ProfileDetailsComponent {
   ) {}
   profile!: File;
   imgUrl: string = '';
+  userId: string = '';
+
+  private idSubscription: Subscription = new Subscription();
+  private updateSubscription: Subscription = new Subscription();
+  private getSubscription: Subscription = new Subscription();
+
   adopter: Adopter = {
     _id: '',
     name: '',
@@ -128,75 +136,82 @@ export class ProfileDetailsComponent {
     );
     formData.append('contactNumber', this.formResponse.value.contactNumber);
     console.log(this.formResponse.value);
-    this.authService.sharedId$.subscribe({
-      next: (id) => {
-        formData.append('id', id);
-        this.profileService.updateAdopterProfile(formData).subscribe({
-          next: (res) => {
-            this.route.navigate(['pet']);
-          },
-        });
-      },
-    });
+    formData.append('id', this.userId);
+    this.updateSubscription = this.profileService
+      .updateAdopterProfile(formData)
+      .subscribe({
+        next: (res) => {},
+      });
   }
 
   logout() {
     localStorage.clear();
-    this.authService.logout()
-    this.route.navigate(['pet'])
-    }
+    this.authService.logout();
+    this.route.navigate(['pet']);
+  }
 
   ngOnInit() {
-    this.authService.sharedId$.subscribe({
+    Swal.showLoading();
+    this.idSubscription = this.authService.sharedId$.subscribe({
       next: (id) => {
-        this.profileService.getAdopterProfile(id).subscribe({
-          next: (res) => {
-            this.adopter = res;
-            console.log('adopter', this.adopter);
-            this.formResponse = this.formBuilder.group({
-              name: [
-                this.adopter.name,
-                [Validators.required, Validators.minLength(1)],
-              ],
-              email: [this.adopter.email, [Validators.email]],
-              occupation: [this.adopter.occupation],
-              profilePhoto: [],
-              dob: [this.adopter.dob],
-              location: this.formBuilder.group({
-                doorNo: [
-                  this.adopter.location.doorNo,
+        this.userId = id;
+        this.getSubscription = this.profileService
+          .getAdopterProfile(this.userId)
+          .subscribe({
+            next: (res) => {
+              Swal.close();
+              this.adopter = res;
+              console.log('adopter', this.adopter);
+              this.formResponse = this.formBuilder.group({
+                name: [
+                  this.adopter.name,
                   [Validators.required, Validators.minLength(1)],
                 ],
-                street: [
-                  this.adopter.location.street,
+                email: [this.adopter.email, [Validators.email]],
+                occupation: [this.adopter.occupation],
+                profilePhoto: [],
+                dob: [this.adopter.dob],
+                location: this.formBuilder.group({
+                  doorNo: [
+                    this.adopter.location.doorNo,
+                    [Validators.required, Validators.minLength(1)],
+                  ],
+                  street: [
+                    this.adopter.location.street,
+                    [Validators.required, Validators.minLength(1)],
+                  ],
+                  city: [
+                    this.adopter.location.state,
+                    [Validators.required, Validators.minLength(1)],
+                  ],
+                  district: [
+                    this.adopter.location.district,
+                    [Validators.required, Validators.minLength(1)],
+                  ],
+                  state: [
+                    this.adopter.location.state,
+                    [Validators.required, Validators.minLength(1)],
+                  ],
+                  country: [
+                    this.adopter.location.country,
+                    [Validators.required, Validators.minLength(1)],
+                  ],
+                }),
+                contactNumber: [
+                  this.adopter.contactNumber,
                   [Validators.required, Validators.minLength(1)],
                 ],
-                city: [
-                  this.adopter.location.state,
-                  [Validators.required, Validators.minLength(1)],
-                ],
-                district: [
-                  this.adopter.location.district,
-                  [Validators.required, Validators.minLength(1)],
-                ],
-                state: [
-                  this.adopter.location.state,
-                  [Validators.required, Validators.minLength(1)],
-                ],
-                country: [
-                  this.adopter.location.country,
-                  [Validators.required, Validators.minLength(1)],
-                ],
-              }),
-              contactNumber: [
-                this.adopter.contactNumber,
-                [Validators.required, Validators.minLength(1)],
-              ],
-              image: [],
-            });
-          },
-        });
+                image: [],
+              });
+            },
+          });
       },
     });
+  }
+
+  ngOnDestroy() {
+    this.idSubscription.unsubscribe();
+    this.updateSubscription.unsubscribe();
+    this.getSubscription.unsubscribe();
   }
 }

@@ -3,18 +3,20 @@ import { CommonModule } from '@angular/common';
 import { AdoptionDetail } from '../models/models';
 import { AdoptionService } from '../service/adoption.service';
 import { AuthService } from '../service/auth.service';
+import { RequesterProfileComponent } from '../requester-profile/requester-profile.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-recived-adoption-request',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,MatDialogModule],
   templateUrl: './recived-adoption-request.component.html',
   styleUrls: ['./recived-adoption-request.component.scss']
 })
 export class RecivedAdoptionRequestComponent {
 
 
-  constructor(private adoptionService:AdoptionService,private authService:AuthService){}
+  constructor(public dialog: MatDialog,private adoptionService:AdoptionService,private authService:AuthService){}
 
   adoptionDetails:AdoptionDetail [] = [];
   isLoading: boolean = false;
@@ -39,6 +41,25 @@ export class RecivedAdoptionRequestComponent {
     }
   }
 
+  click(type:string,id:string){
+    const data = {type,id}
+    this.openDialog('30ms', '30ms',data);
+  
+  }
+
+  openDialog(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string,
+    data:{type:string,id:string}
+  ): void {
+    this.dialog.open(RequesterProfileComponent, {
+    
+      enterAnimationDuration,
+      exitAnimationDuration,
+      data: data,
+    });
+  }
+
   loadData(){
     this.isLoading = true;
     this.adoptionService.getAdoptionStatusOfPoster(this.id,'initiated',this.currentPage).subscribe({
@@ -56,7 +77,7 @@ export class RecivedAdoptionRequestComponent {
    this.adoptionService.updateAdoptionStatus(id,status).subscribe({
     next: (val) => {
       console.log(val);
-      
+      this.loadData();
     }
    })
     }
@@ -65,6 +86,7 @@ export class RecivedAdoptionRequestComponent {
     this.authService.sharedId$.subscribe({
       next: (id) => {
         this.id = id;
+        this.currentPage = 0;
         this.loadData()
       }
     })

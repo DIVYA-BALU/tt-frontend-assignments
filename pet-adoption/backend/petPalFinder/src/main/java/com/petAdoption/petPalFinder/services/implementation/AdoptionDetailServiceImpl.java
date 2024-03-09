@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.petAdoption.petPalFinder.dao.AdoptionDetailsDao;
+import com.petAdoption.petPalFinder.dao.PetPostDao;
 import com.petAdoption.petPalFinder.dto.AdoptionStatusDto;
 import com.petAdoption.petPalFinder.dto.AppointmentStatusDto;
 import com.petAdoption.petPalFinder.dto.StatusMessage;
@@ -14,6 +15,7 @@ import com.petAdoption.petPalFinder.models.Adopter;
 import com.petAdoption.petPalFinder.models.AdoptionDetail;
 import com.petAdoption.petPalFinder.models.AppointmentStatus;
 import com.petAdoption.petPalFinder.models.Organization;
+import com.petAdoption.petPalFinder.models.PetPost;
 import com.petAdoption.petPalFinder.repositorys.AdopterRepository;
 import com.petAdoption.petPalFinder.repositorys.AdoptionDetailRepository;
 import com.petAdoption.petPalFinder.repositorys.OrganizationRepository;
@@ -33,6 +35,9 @@ public class AdoptionDetailServiceImpl implements AdoptionDetailService {
 
     @Autowired
     AdoptionDetailsDao adoptionDetailsDao;
+
+    @Autowired
+    PetPostDao petPostDao;
 
     @Override
     public StatusMessage addAdoptionRequest(AdoptionDetail adoptionDetail) {
@@ -77,11 +82,21 @@ public class AdoptionDetailServiceImpl implements AdoptionDetailService {
     }
 
     @Override
-    public StatusMessage updateStatus(String posterId, String status) {
+    public StatusMessage updateStatus(String adoptionId, String status) {
         StatusMessage statusMessage = new StatusMessage();
-        adoptionDetailsDao.updateStatus(posterId, status);
+        adoptionDetailsDao.updateStatus(adoptionId, status);
         statusMessage.setMessage("success");
         return statusMessage;
     }
+
+    @Override
+    public StatusMessage cancelAdoption(String id,String petId, String status){
+        StatusMessage statusMessage = new StatusMessage();
+        adoptionDetailsDao.updateStatus(id, status);
+        statusMessage.setMessage("success");
+        return statusMessage;
+    }
+
+    
     
 }

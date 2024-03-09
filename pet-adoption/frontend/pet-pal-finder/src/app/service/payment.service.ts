@@ -22,4 +22,14 @@ export class PaymentService {
   addSubscription(subscriptionTransaction:SubscriptionTransaction){
     return this.http.post<StatusMessage>(`${environment.baseUrl}subscription`,subscriptionTransaction);
   }
+  
+  getSubscription(id:string){
+    return this.http.get<SubscriptionTransaction>(`${environment.baseUrl}subscription?subscriberId=${id}`);
+
+  }
+
+  isExpired(id:string){
+    return this.http.get<boolean>(`${environment.baseUrl}subscription/expired?subscriberId=${id}`);
+
+  }
 }
