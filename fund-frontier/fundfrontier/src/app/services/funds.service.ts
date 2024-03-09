@@ -11,17 +11,21 @@ import { Observable } from 'rxjs/internal/Observable';
 export class FundsService {
 
   fundUrl = environment.fundsBaseUrl
-  constructor(private http:HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getAllFunds(pageIndex: number, pageSize: number): Observable<Page<Funds>>{
+  getAllFunds(pageIndex: number, pageSize: number): Observable<Page<Funds>> {
     const param = new HttpParams()
-    .set('pageIndex', pageIndex)
-    .set('pageSize', pageSize);
-    return this.http.get<Page<Funds>>(`${this.fundUrl}/getall`,{params: param});
+      .set('pageIndex', pageIndex)
+      .set('pageSize', pageSize);
+    return this.http.get<Page<Funds>>(`${this.fundUrl}/getall`, { params: param });
   }
 
-  saveFund(funds: Funds):Observable<Funds> {
-    return this.http.post<Funds>(`${this.fundUrl}/save`,funds);
+  saveFund(funds: Funds): Observable<Funds> {
+    return this.http.post<Funds>(`${this.fundUrl}/save`, funds);
   }
-  
+
+  getStudentsByFunder(email: string): Observable<Funds[]> {
+    return this.http.get<Funds[]>(`${this.fundUrl}/findFunder/${email}`);
+  }
+
 }

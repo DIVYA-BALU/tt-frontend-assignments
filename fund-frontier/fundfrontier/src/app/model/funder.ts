@@ -1,5 +1,3 @@
-import { User } from "./user";
-
 export interface Funder {
     _id: string;
     firstName: string;

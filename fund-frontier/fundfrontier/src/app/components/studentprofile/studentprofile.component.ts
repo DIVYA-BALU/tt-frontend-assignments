@@ -11,7 +11,7 @@ import { StudentService } from 'src/app/services/student.service';
 })
 export class StudentprofileComponent {
 
- 
+
 
 
 }

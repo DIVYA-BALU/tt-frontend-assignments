@@ -1,18 +1,18 @@
-.tab { 
-    border: 10px solid transparent;
-    padding: 15px;
-    border-image: url('/assets/images/border.png') 30 round;
-    margin: 300px;
-    margin-top: 0px;
-  }
+.tab {
+  border: 10px solid transparent;
+  padding: 15px;
+  border-image: url('/assets/images/border.png') 30 round;
+  margin: 300px;
+  margin-top: 0px;
+}
 
-  li {
-    padding: 10px;
-    color: rgb(5, 5, 116);
-  }
+li {
+  padding: 10px;
+  color: rgb(5, 5, 116);
+}
 
-  .termsbg {
-    //margin-top: 0;
-    background-image: url('/assets/images/termsbc.jpg');
-    background-size: cover;
-  }
+.termsbg {
+  //margin-top: 0;
+  background-image: url('/assets/images/termsbc.jpg');
+  background-size: cover;
+}

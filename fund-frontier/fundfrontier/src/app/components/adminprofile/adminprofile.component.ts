@@ -9,11 +9,11 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class AdminprofileComponent {
 
-  constructor(private loginService:LoginService, private router:Router) {}
+  constructor(private loginService: LoginService, private router: Router) { }
 
-    logout() {
-      this.loginService.logout();
-      this.router.navigate(['/header/home'])
-    }
+  logout() {
+    this.loginService.logout();
+    this.router.navigate(['/header/home'])
+  }
 
 }

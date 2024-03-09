@@ -11,23 +11,23 @@ import { StudentService } from 'src/app/services/student.service';
 })
 export class StudentregistrationComponent {
 
- applicationForm!: FormGroup;
+  applicationForm!: FormGroup;
 
-  profile!:File;
-  aadhar!:File;
-  income!:File;
-  fee!:File;
-  idcard!:File;
+  profile!: File;
+  aadhar!: File;
+  income!: File;
+  fee!: File;
+  idcard!: File;
 
 
   constructor(
     private studentService: StudentService,
     private router: Router,
     private formBuilder: FormBuilder
-  ) {}
+  ) { }
 
 
-  
+
 
 
   ngOnInit() {
@@ -35,7 +35,7 @@ export class StudentregistrationComponent {
       profilePhoto: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', [Validators.required,Validators.email]],
+      email: ['', [Validators.required, Validators.email]],
       phoneNumber: ['', Validators.required],
       gender: ['', Validators.required],
       countryOfBirth: ['', Validators.required],
@@ -64,19 +64,19 @@ export class StudentregistrationComponent {
     this.profile = event.target.files[0];
   }
 
-  setAadhar(event:any) {
+  setAadhar(event: any) {
     this.aadhar = event.target.files[0];
   }
 
-  setIncome(event:any) {
+  setIncome(event: any) {
     this.income = event.target.files[0];
   }
 
-  setIdcard(event:any) {
+  setIdcard(event: any) {
     this.idcard = event.target.files[0];
   }
 
-  setFee(event:any) {
+  setFee(event: any) {
     this.fee = event.target.files[0];
   }
 
@@ -88,33 +88,33 @@ export class StudentregistrationComponent {
 
     console.log(this.applicationForm.value);
     console.log(new Date(this.applicationForm.value.dateOfBirth).toISOString());
-    
-    this.formdata.append('profilePhoto',this.profile),
-    this.formdata.append('firstName',this.applicationForm.value.firstName),
-    this.formdata.append('lastName',this.applicationForm.controls['lastName'].value),
-    this.formdata.append('email',this.applicationForm.controls['email'].value),
-    this.formdata.append('phoneNumber',this.applicationForm.controls['phoneNumber'].value),
-    this.formdata.append('gender',this.applicationForm.controls['gender'].value),
-    this.formdata.append('countryOfBirth',this.applicationForm.value.countryOfBirth),
-    this.formdata.append('countryOfResidence',this.applicationForm.controls['countryOfResidence'].value),
-    this.formdata.append('dateOfBirth',this.applicationForm.controls['dateOfBirth'].value.toISOString()),
-    this.formdata.append('address',this.applicationForm.controls['address'].value),
-    this.formdata.append('city',this.applicationForm.controls['city'].value),
-    this.formdata.append('state',this.applicationForm.controls['state'].value),
-    this.formdata.append('zipCode',this.applicationForm.controls['zipCode'].value),
-    this.formdata.append('school',this.applicationForm.controls['school'].value),
-    this.formdata.append('aadharCardProof',this.aadhar),
-    this.formdata.append('incomeProof',this.income),
-    this.formdata.append('collegeName',this.applicationForm.controls['collegeName'].value),
-    this.formdata.append('course',this.applicationForm.controls['course'].value),
-    this.formdata.append('studentIdentityProof',this.idcard),
-    this.formdata.append('studentId',this.applicationForm.controls['studentId'].value),
-    this.formdata.append('fundRequired',this.applicationForm.controls['fundRequired'].value),
-    this.formdata.append('feeDetails',this.fee),
-    this.formdata.append('endDate',this.applicationForm.controls['endDate'].value.toISOString()),
-    this.formdata.append('shortStory',this.applicationForm.controls['shortStory'].value);
-    
-    
+
+    this.formdata.append('profilePhoto', this.profile),
+      this.formdata.append('firstName', this.applicationForm.value.firstName),
+      this.formdata.append('lastName', this.applicationForm.controls['lastName'].value),
+      this.formdata.append('email', this.applicationForm.controls['email'].value),
+      this.formdata.append('phoneNumber', this.applicationForm.controls['phoneNumber'].value),
+      this.formdata.append('gender', this.applicationForm.controls['gender'].value),
+      this.formdata.append('countryOfBirth', this.applicationForm.value.countryOfBirth),
+      this.formdata.append('countryOfResidence', this.applicationForm.controls['countryOfResidence'].value),
+      this.formdata.append('dateOfBirth', this.applicationForm.controls['dateOfBirth'].value.toISOString()),
+      this.formdata.append('address', this.applicationForm.controls['address'].value),
+      this.formdata.append('city', this.applicationForm.controls['city'].value),
+      this.formdata.append('state', this.applicationForm.controls['state'].value),
+      this.formdata.append('zipCode', this.applicationForm.controls['zipCode'].value),
+      this.formdata.append('school', this.applicationForm.controls['school'].value),
+      this.formdata.append('aadharCardProof', this.aadhar),
+      this.formdata.append('incomeProof', this.income),
+      this.formdata.append('collegeName', this.applicationForm.controls['collegeName'].value),
+      this.formdata.append('course', this.applicationForm.controls['course'].value),
+      this.formdata.append('studentIdentityProof', this.idcard),
+      this.formdata.append('studentId', this.applicationForm.controls['studentId'].value),
+      this.formdata.append('fundRequired', this.applicationForm.controls['fundRequired'].value),
+      this.formdata.append('feeDetails', this.fee),
+      this.formdata.append('endDate', this.applicationForm.controls['endDate'].value.toISOString()),
+      this.formdata.append('shortStory', this.applicationForm.controls['shortStory'].value);
+
+
     this.studentService.saveApplication(this.formdata).subscribe(
       (response) => {
         this.router.navigate(['/home'])
@@ -124,6 +124,6 @@ export class StudentregistrationComponent {
 
   tabClick() {
     console.log("tab clicked");
-    
-    }
+
+  }
 }

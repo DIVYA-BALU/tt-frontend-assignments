@@ -4,7 +4,7 @@
       <ng-container matColumnDef="profilePhoto">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Profile Photo</th>
         <td mat-cell *matCellDef="let row">
-            <img src= "{{row.profilePhoto}}" alt="">
+          <img src="{{row.profilePhoto}}" alt="">
         </td>
       </ng-container>
 
@@ -77,12 +77,12 @@
 
       <ng-container matColumnDef="aadharCardProof">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Aadhar Card Proof</th>
-        <td mat-cell *matCellDef="let row"> <img src= "{{row.aadharCardProof}}" alt=""></td>
+        <td mat-cell *matCellDef="let row"> <img src="{{row.aadharCardProof}}" alt=""></td>
       </ng-container>
 
       <ng-container matColumnDef="incomeProof">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Income Proof</th>
-        <td mat-cell *matCellDef="let row"><img src= "{{ row.incomeProof }}" alt=""></td>
+        <td mat-cell *matCellDef="let row"><img src="{{ row.incomeProof }}" alt=""></td>
       </ng-container>
 
       <ng-container matColumnDef="collegeName">
@@ -97,7 +97,7 @@
 
       <ng-container matColumnDef="studentIdentityProof">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Student Identity Proof</th>
-        <td mat-cell *matCellDef="let row"><img src= "{{ row.studentIdentityProof }}" alt=""></td>
+        <td mat-cell *matCellDef="let row"><img src="{{ row.studentIdentityProof }}" alt=""></td>
       </ng-container>
 
       <ng-container matColumnDef="course">
@@ -112,8 +112,8 @@
 
       <ng-container matColumnDef="fundRequired">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Fund Required</th>
-        <td mat-cell *matCellDef="let row">{{ row.fundRequired }}</td> 
-        </ng-container>
+        <td mat-cell *matCellDef="let row">{{ row.fundRequired }}</td>
+      </ng-container>
 
       <ng-container matColumnDef="feeDetails">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Fee Details</th>
@@ -138,10 +138,10 @@
       <ng-container matColumnDef="approval">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Approval</th>
         <td mat-cell *matCellDef="let row">
-            <div class="button">
-                <button mat-button class="approve" (click)="setApproved(row.firstName,row)">Approve</button>
-                <button mat-button class="reject" >Reject</button>
-            </div>            
+          <div class="button">
+            <button mat-button class="approve" (click)="setApproved(row.firstName,row)">Approve</button>
+            <button mat-button class="reject">Reject</button>
+          </div>
         </td>
       </ng-container>
 
@@ -149,14 +149,8 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
 
-    <mat-paginator
-      #paginator
-      [length]="paginator.length"
-      [pageSize]="paginator.pageSize"
-      [pageIndex]="paginator.pageIndex"
-      (page)="nextPage($event)"
-      [pageSizeOptions]="[3, 6, 9, 100]"
-      aria-label="Select page of users"
-    ></mat-paginator>
+    <mat-paginator #paginator [length]="paginator.length" [pageSize]="paginator.pageSize"
+      [pageIndex]="paginator.pageIndex" (page)="nextPage($event)" [pageSizeOptions]="[3, 6, 9, 100]"
+      aria-label="Select page of users"></mat-paginator>
   </div>
 </div>

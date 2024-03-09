@@ -27,40 +27,40 @@ export class UpdateadminprofileComponent {
 
 
   constructor(private userService: UserService) {
-    
+
   }
 
 
-getprofile() {
-  this.userService.getUser().subscribe(
-    (data) => {
-      this.user = data;
-      
-    }
-  )
-}
+  getprofile() {
+    this.userService.getUser().subscribe(
+      (data) => {
+        this.user = data;
 
-ngOnInit() {
-  this.getprofile();
-}
+      }
+    )
+  }
 
-onProfile(profileForm: NgForm) {}
+  ngOnInit() {
+    this.getprofile();
+  }
 
-reloadPage() {
-  window.location.reload();
-}
+  onProfile(profileForm: NgForm) { }
 
-cancelUpdate() {
-  this.buttonClick = false;
-  this.updateStatus = '';
-  this.getprofile();
-}
+  reloadPage() {
+    window.location.reload();
+  }
 
-updateUser() {
-  this.userService.updateProfile(this.user).subscribe((data) => {
-    this.buttonClick = true;
-    this.updateStatus = 'Profile Updated';
-  });
-}
+  cancelUpdate() {
+    this.buttonClick = false;
+    this.updateStatus = '';
+    this.getprofile();
+  }
+
+  updateUser() {
+    this.userService.updateProfile(this.user).subscribe((data) => {
+      this.buttonClick = true;
+      this.updateStatus = 'Profile Updated';
+    });
+  }
 
 }

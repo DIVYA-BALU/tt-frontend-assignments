@@ -11,14 +11,14 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
 
-  invalidLogin: boolean = false; 
+  invalidLogin: boolean = false;
 
-  constructor(private loginService : LoginService, private router: Router) {}
+  constructor(private loginService: LoginService, private router: Router) { }
 
   onSubmit(): void {
-    this.loginService.login(this.email,this.password).subscribe(
+    this.loginService.login(this.email, this.password).subscribe(
       (response) => {
-        console.log(response);        
+        console.log(response);
         this.loginService.loggedin(true, response.token);
         this.loginService.getUser();
         this.router.navigate(['header/home'])

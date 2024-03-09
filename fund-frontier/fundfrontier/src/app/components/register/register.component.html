@@ -3,61 +3,49 @@
     <div class="form-group">
       <label>First Name:</label>
       <input type="text" name="firstName" formControlName="firstName" />
-      <div
-        *ngIf="
+      <div *ngIf="
           registerForm.controls['firstName'].invalid &&
           (registerForm.controls['firstName'].dirty ||
             registerForm.controls['firstName'].touched)
-        "
-        class="error"
-      >
-      First Name is required
-    </div>
+        " class="error">
+        First Name is required
+      </div>
     </div>
 
     <div class="form-group">
       <label>Last Name:</label>
       <input type="text" name="lastName" formControlName="lastName" />
-      <div
-        *ngIf="
+      <div *ngIf="
           registerForm.controls['lastName'].invalid &&
           (registerForm.controls['lastName'].dirty ||
             registerForm.controls['lastName'].touched)
-        "
-        class="error"
-      >
-      Last Name is required
-    </div>
+        " class="error">
+        Last Name is required
+      </div>
     </div>
 
     <div class="form-group">
       <label>Email:</label>
       <input type="text" name="email" formControlName="email" />
-      <div
-        *ngIf="
+      <div *ngIf="
           registerForm.controls['email'].invalid &&
           (registerForm.controls['email'].dirty ||
             registerForm.controls['email'].touched)
-        "
-        class="error"
-      >
-      Email is required
-    </div>
+        " class="error">
+        Email is required
+      </div>
     </div>
 
     <div class="form-group">
       <label>Password:</label>
       <input type="password" name="password" formControlName="password" />
-      <div
-        *ngIf="
+      <div *ngIf="
           registerForm.controls['password'].invalid &&
           (registerForm.controls['password'].dirty ||
             registerForm.controls['password'].touched)
-        "
-        class="error"
-      >
-      Password is required
-    </div>
+        " class="error">
+        Password is required
+      </div>
     </div>
 
     <div class="form-group">
@@ -67,16 +55,13 @@
         <option value="student">Student</option>
         <option value="funder">Funder</option>
       </select>
-      <div
-        *ngIf="
+      <div *ngIf="
           registerForm.controls['role'].invalid &&
           (registerForm.controls['role'].dirty ||
             registerForm.controls['role'].touched)
-        "
-        class="error"
-      >
-      Last Name is required
-    </div>
+        " class="error">
+        Last Name is required
+      </div>
     </div>
 
     <button type="submit">Submit</button>

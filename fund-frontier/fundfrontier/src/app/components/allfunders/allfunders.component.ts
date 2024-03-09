@@ -13,16 +13,16 @@ import { FundersService } from 'src/app/services/funders.service';
 export class AllfundersComponent {
   funders: Funder[] = [];
   displayedColumns: string[] = [
-      'firstName',
-      'lastName',
-      'email',
-      'phoneNumber',
-      'countryOfBirth',
-      'countryOfResidence',
-      'address',
-      'city',
-      'state',
-      'zipCode'      
+    'firstName',
+    'lastName',
+    'email',
+    'phoneNumber',
+    'countryOfBirth',
+    'countryOfResidence',
+    'address',
+    'city',
+    'state',
+    'zipCode'
   ]
 
   dataSource!: MatTableDataSource<Funder>;
@@ -33,31 +33,31 @@ export class AllfundersComponent {
     this.dataSource = new MatTableDataSource(this.funders)
   }
 
-ngAfterViewInit() {
-  this.paginator.page.subscribe(
-    (data) => {
-      this.getAllFunders(data.pageIndex, data.pageSize);
-    }
-  )
-  this.getAllFunders(0, 3);
-  this.cdref.detectChanges();
+  ngAfterViewInit() {
+    this.paginator.page.subscribe(
+      (data) => {
+        this.getAllFunders(data.pageIndex, data.pageSize);
+      }
+    )
+    this.getAllFunders(0, 3);
+    this.cdref.detectChanges();
 
-}
+  }
 
-nextPage(e: PageEvent) {
-  this.getAllFunders(e.pageIndex, e.pageSize);
-}
+  nextPage(e: PageEvent) {
+    this.getAllFunders(e.pageIndex, e.pageSize);
+  }
 
 
-getAllFunders(pageIndex: number, pageSize: number) {
-      this.funderService.getAllFunders(pageIndex, pageSize).subscribe(
-        (data) =>{
-          this.funders = data.content;
-          this.paginator.length = data.totalElements;
-          this.paginator.pageIndex = data.number;
-          this.paginator.pageSize = data.size;
-          this.dataSource.data = this.funders;
-        }
-      )
+  getAllFunders(pageIndex: number, pageSize: number) {
+    this.funderService.getAllFunders(pageIndex, pageSize).subscribe(
+      (data) => {
+        this.funders = data.content;
+        this.paginator.length = data.totalElements;
+        this.paginator.pageIndex = data.number;
+        this.paginator.pageSize = data.size;
+        this.dataSource.data = this.funders;
+      }
+    )
   }
 }

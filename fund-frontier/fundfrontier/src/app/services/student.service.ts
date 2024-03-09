@@ -12,12 +12,12 @@ import { Studentfunds } from '../model/studentfunds';
   providedIn: 'root',
 })
 export class StudentService {
- 
+
   studentUrl = environment.studentUrl;
   storyUrl = environment.storyUrl;
   studentFundUrl = environment.studentFundsUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   saveApplication(application: FormData): Observable<Application> {
     return this.http.post<Application>(`${this.studentUrl}/save`, application);
@@ -25,9 +25,9 @@ export class StudentService {
 
   getStudents(pageNo: number, pageSize: number): Observable<Page<Studentdetails>> {
     const param = new HttpParams()
-                  .set('pageNo',pageNo)
-                  .set('pageSize',pageSize);
-    return this.http.get<Page<Studentdetails>>(`${this.studentUrl}/getallapproved`,{params: param});
+      .set('pageNo', pageNo)
+      .set('pageSize', pageSize);
+    return this.http.get<Page<Studentdetails>>(`${this.studentUrl}/getallapproved`, { params: param });
   }
 
   getAllPending(
@@ -40,7 +40,7 @@ export class StudentService {
       .set('pageSize', pageSize);
 
     return this.http.get<Page<Studentdetails>>(
-      `${this.studentUrl}/getallpending`, {params: param}
+      `${this.studentUrl}/getallpending`, { params: param }
     );
 
   }
@@ -69,9 +69,9 @@ export class StudentService {
 
   getstories(pageNo: number, pageSize: number): Observable<Page<Successstory>> {
     const param = new HttpParams()
-                  .set('pageNo',pageNo)
-                  .set('pageSize',pageSize);
-    return this.http.get<Page<Successstory>>(`${this.storyUrl}/getall`,{params: param});
+      .set('pageNo', pageNo)
+      .set('pageSize', pageSize);
+    return this.http.get<Page<Successstory>>(`${this.storyUrl}/getall`, { params: param });
   }
 
   setApproved(
@@ -92,10 +92,10 @@ export class StudentService {
   ): Observable<Page<Studentdetails>> {
 
     const param = new HttpParams().
-    set('pageNo',pageIndex).
-    set('paseSize',pageSize);
-    
-    return this.http.get<Page<Studentdetails>>(`${this.studentUrl}/findall`,{params: param});
+      set('pageNo', pageIndex).
+      set('paseSize', pageSize);
+
+    return this.http.get<Page<Studentdetails>>(`${this.studentUrl}/findall`, { params: param });
   }
 
   getRaisedAmount(email: string): Observable<Studentfunds> {

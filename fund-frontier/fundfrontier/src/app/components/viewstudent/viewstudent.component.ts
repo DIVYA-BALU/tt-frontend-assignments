@@ -65,18 +65,13 @@ export class ViewstudentComponent {
 
   close() {
     console.log('close');
-    
+
     this.dialogRef.close();
-    }
+  }
 
-
-  
-    isFundingCompleted(): boolean {
-      return this.student.fundRaised >= this.student.fundRequired;
-    }
 
   payment() {
-    
+
     this.loginService.getLoginStatus().subscribe(
       data => {
         this.loginStatus = data;
@@ -94,55 +89,55 @@ export class ViewstudentComponent {
           console.log(this.funderEmail);
         }
       )
-      
-     if(this.funderEmail !== ''){
-      const amount: number = ((this.value * 100) + ((7.5 / 100) * this.value)*100);
-      console.log(amount);
-      
-      const RazorpayOptions = {
-        description: 'Sample Razorpay demo',
-        currency: 'INR',
-        amount: amount ,
-        name: "Divya",
-        key: 'rzp_test_dfaTwJvV84YGAu',
-        prefill: {
-          name: 'Divya Balusamy',
-          email: 'divyabalusamy559@gmail.com',
-          phone: '1234567891'
-        },
-        theme: {
-          color: '#092644'
-        },
-        handler: (response: any) => {
 
-          if (response.razorpay_payment_id) {
-            console.log('Payment successful:', response.razorpay_payment_id);
-            console.log(this.funderEmail);
-            
-            this.funds.funderEmail = this.funderEmail;
-            this.funds.studentEmail = this.student.email.email;
-            this.funds.date = new Date();
-            this.funds.totalAmount = amount;
-            this.funds.studentAmount = this.value;
-            this.funds.maintainenceAmount = (7.5 * this.value) / 100;
-            this.fundsService.saveFund(this.funds).subscribe();
+      if (this.funderEmail !== '') {
+        const amount: number = ((this.value * 100) + ((7.5 / 100) * this.value) * 100);
+        console.log(amount);
 
-          } else {
-            console.log('Payment failed or was cancelled');
-          }
-        },
-        modal: {
-          ondismiss: () => {
-            console.log('dismissed');
+        const RazorpayOptions = {
+          description: 'Sample Razorpay demo',
+          currency: 'INR',
+          amount: amount,
+          name: "Divya",
+          key: 'rzp_test_dfaTwJvV84YGAu',
+          prefill: {
+            name: 'Divya Balusamy',
+            email: 'divyabalusamy559@gmail.com',
+            phone: '1234567891'
+          },
+          theme: {
+            color: '#092644'
+          },
+          handler: (response: any) => {
 
+            if (response.razorpay_payment_id) {
+              console.log('Payment successful:', response.razorpay_payment_id);
+              console.log(this.funderEmail);
+
+              this.funds.funderEmail = this.funderEmail;
+              this.funds.studentEmail = this.student.email.email;
+              this.funds.date = new Date();
+              this.funds.totalAmount = amount;
+              this.funds.studentAmount = this.value;
+              this.funds.maintainenceAmount = (7.5 * this.value) / 100;
+              this.fundsService.saveFund(this.funds).subscribe();
+
+            } else {
+              console.log('Payment failed or was cancelled');
+            }
+          },
+          modal: {
+            ondismiss: () => {
+              console.log('dismissed');
+
+            }
           }
         }
-      }
 
-      Razorpay.open(RazorpayOptions)
+        Razorpay.open(RazorpayOptions)
+      }
     }
   }
-  }
-  }
+}
 
 

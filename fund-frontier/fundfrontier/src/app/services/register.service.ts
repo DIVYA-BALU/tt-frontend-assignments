@@ -13,9 +13,9 @@ export class RegisterService {
   constructor(private http: HttpClient) { }
 
   register(registerForm: Register): Observable<Register> {
-    return this.http.post<Register>(this.regUrl,registerForm);
+    return this.http.post<Register>(this.regUrl, registerForm);
   }
-  findUser(email:string) {
+  findUser(email: string) {
     return this.http.get<Register>(`http://localhost:8080/api/user/get/${email}`)
   }
 }

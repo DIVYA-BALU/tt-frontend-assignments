@@ -1,5 +1,32 @@
 <div class="home-image">
-  <img src="../../../assets/images/home.jpg">
+  <img class="home-image" src="../../../assets/images/home.jpg">
+</div>
+<div class="students-info">
+  <h2 class="topic">Featured students</h2>
+  <div class="students-list">
+    <mat-card class="example-card" *ngFor="let student of students">
+      <mat-card-header>
+        <mat-card-title>Student</mat-card-title>
+        <mat-card-subtitle>{{student.firstName}} {{student.lastName}}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src={{student.profilePhoto}} alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <p>
+          <strong>College : </strong>{{student.collegeName}}
+          <br>
+          <strong>Year Of Study : </strong>{{student.yearOfStudy}}
+          <br>
+          <strong>Fund to be Raised : </strong>{{student.fundRequired}}
+          <br>
+          <strong>{{student.fundRaised}} / {{student.fundRequired}} raised</strong>
+
+
+        </p>
+        <mat-progress-bar mode="determinate" [value]="student.raisedPercent"></mat-progress-bar>
+      </mat-card-content>
+    </mat-card>
+    <button mat-button class="button find-button" routerLink="/header/findstudents">Find More</button>
+  </div>
 </div>
 <div class="story">
   <div class="inner-story">

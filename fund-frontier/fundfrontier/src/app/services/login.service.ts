@@ -12,37 +12,37 @@ import { User } from '../model/user';
 })
 export class LoginService {
 
-  loginUrl =  environment.loginUrl;
+  loginUrl = environment.loginUrl;
   userUrl = environment.userUrl;
 
-  isLoggedin:boolean = false;
+  isLoggedin: boolean = false;
 
   loginStatus = new BehaviorSubject<boolean>(false);
   userRole = new BehaviorSubject<string>('');
   userEmail = new BehaviorSubject<string>('');
 
-  constructor(private http:HttpClient) {
-    if(localStorage.getItem('accessToken')) {
-    this.getLoginStatus();
-    this.getRole();
-    this.getuserEmail();
+  constructor(private http: HttpClient) {
+    if (localStorage.getItem('accessToken')) {
+      this.getLoginStatus();
+      this.getRole();
+      this.getuserEmail();
     }
-   }
-
-  login(email:string, password:string) : Observable<LoginResponse> {
-    const body = {email,password}    
-    return this.http.post<LoginResponse>(this.loginUrl,body);
   }
 
-  loggedin(status:boolean, token:string): void {
+  login(email: string, password: string): Observable<LoginResponse> {
+    const body = { email, password }
+    return this.http.post<LoginResponse>(this.loginUrl, body);
+  }
 
-    if(status) {
-    this.isLoggedin = true;
-    this.loginStatus.next(this.isLoggedin);
-    this.getUser();
-    localStorage.setItem("isloggedin","true")
-    localStorage.setItem("accessToken", token)
-    }else {
+  loggedin(status: boolean, token: string): void {
+
+    if (status) {
+      this.isLoggedin = true;
+      this.loginStatus.next(this.isLoggedin);
+      this.getUser();
+      localStorage.setItem("isloggedin", "true")
+      localStorage.setItem("accessToken", token)
+    } else {
       this.isLoggedin = false;
       localStorage.setItem('isLoggedin', 'false');
     }
@@ -50,17 +50,17 @@ export class LoginService {
   }
 
 
-  getUser(){
-   this.http.get<User>(this.userUrl).subscribe(
-    (response) => {  
-      this.userRole.next(response.role.role);
-      this.userEmail.next(response.email);
-      
-    }
-   );
+  getUser() {
+    this.http.get<User>(this.userUrl).subscribe(
+      (response) => {
+        this.userRole.next(response.role.role);
+        this.userEmail.next(response.email);
+
+      }
+    );
   }
 
-  getRole () {
+  getRole() {
     this.getUser();
     return this.userRole.asObservable();
   }
@@ -69,13 +69,13 @@ export class LoginService {
     return this.userEmail.asObservable();
   }
 
-  isAuthenticated():boolean {
+  isAuthenticated(): boolean {
     return localStorage.getItem("isloggedin") === "true";
   }
-  
+
   getLoginStatus() {
-      this.loginStatus.next(this.isAuthenticated());      
-      return this.loginStatus.asObservable();
+    this.loginStatus.next(this.isAuthenticated());
+    return this.loginStatus.asObservable();
   }
 
   logout() {

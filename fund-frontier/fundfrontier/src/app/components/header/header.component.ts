@@ -8,26 +8,26 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class HeaderComponent {
 
-  role!:string;
-  loggedin:boolean = false;
+  role!: string;
+  loggedin: boolean = false;
   constructor(private loginService: LoginService) {
 
   }
-  
-ngOnInit() {
-  this.loginService.getLoginStatus().subscribe(
-    (data) => {
-      this.loggedin = data;
-    }
-  )
 
-  if(this.loggedin){
-  this.loginService.getRole().subscribe(
-    (data) => {
-      this.role = data;
+  ngOnInit() {
+    this.loginService.getLoginStatus().subscribe(
+      (data) => {
+        this.loggedin = data;
+      }
+    )
+
+    if (this.loggedin) {
+      this.loginService.getRole().subscribe(
+        (data) => {
+          this.role = data;
+        }
+      )
     }
-  )
   }
-}
 
 }

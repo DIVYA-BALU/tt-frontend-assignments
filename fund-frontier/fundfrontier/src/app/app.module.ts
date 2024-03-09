@@ -45,10 +45,10 @@ import { AllstudentsComponent } from './components/allstudents/allstudents.compo
 import { AllfundersComponent } from './components/allfunders/allfunders.component';
 import { UpdateadminprofileComponent } from './components/updateadminprofile/updateadminprofile.component';
 import { MatTableModule } from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { StudentregistrationComponent } from './components/studentregistration/studentregistration.component';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {MatSliderModule} from '@angular/material/slider';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSliderModule } from '@angular/material/slider';
 
 
 @NgModule({
@@ -115,4 +115,4 @@ import {MatSliderModule} from '@angular/material/slider';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

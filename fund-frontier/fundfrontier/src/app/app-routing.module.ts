@@ -24,7 +24,7 @@ import { StudentregistrationComponent } from './components/studentregistration/s
 
 const routes: Routes = [
   {
-    path:"",
+    path: "",
     redirectTo: "header/home",
     pathMatch: 'full'
 
@@ -36,8 +36,9 @@ const routes: Routes = [
       {
         path: "login",
         component: LoginComponent
-      },{
-        path : "home",
+      },
+      {
+        path: "home",
         component: HomeComponent,
       },
       {
@@ -69,9 +70,9 @@ const routes: Routes = [
         component: FindstudentsComponent
       },
       {
-        path:"testimonial",
+        path: "testimonial",
         component: TestimonialComponent
-      
+
       },
       {
         path: "terms",
@@ -116,7 +117,7 @@ const routes: Routes = [
         path: "studententregistration",
         component: StudentregistrationComponent
       }
-      
+
     ]
   },
 

@@ -1,16 +1,14 @@
-
-
 <div class="card-div">
-<mat-card class="card" *ngFor="let story of stories">
+  <mat-card class="card" *ngFor="let story of stories">
     <mat-card-header class="header">
       <mat-card-title>My Story</mat-card-title>
       <mat-card-subtitle>{{story.email}}</mat-card-subtitle>
     </mat-card-header>
-   <h2>Amount Raised : {{story.amountRaised}}</h2> 
+    <h2>Amount Raised : {{story.amountRaised}}</h2>
     <mat-card-content class="content">
-        <img src="/assets/images/testimonial.jpeg">
+      <img src="/assets/images/testimonial.jpeg">
       <p>
-       {{story.story}}        
+        {{story.story}}
       </p>
     </mat-card-content>
   </mat-card>

@@ -12,22 +12,22 @@ export class FundersService {
 
   funderUrl = environment.funderBaseUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAllFunders(pageIndex: number, pageSize: number): Observable<Page<Funder>> {
-    
+
     const param = new HttpParams()
-    .set('pageNo',pageIndex)
-    .set('PageSize',pageSize);
-    
+      .set('pageNo', pageIndex)
+      .set('PageSize', pageSize);
+
     return this.http.get<Page<Funder>>(`${this.funderUrl}/findall`);
   }
 
-  getFunder():Observable<Funder> {
-      return this.http.get<Funder>(`${this.funderUrl}/getfunder`)
+  getFunder(): Observable<Funder> {
+    return this.http.get<Funder>(`${this.funderUrl}/getfunder`)
   }
 
-  updateFunder(funder: Funder) :Observable<Funder> {
-    return this.http.patch<Funder>(`${this.funderUrl}/update`,funder)
+  updateFunder(funder: Funder): Observable<Funder> {
+    return this.http.patch<Funder>(`${this.funderUrl}/update`, funder)
   }
 }

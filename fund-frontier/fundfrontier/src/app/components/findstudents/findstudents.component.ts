@@ -62,12 +62,12 @@ export class FindstudentsComponent {
     this.studentService.getStudents(pageNo, pageSize).subscribe(
       (response) => {
         response.content.forEach(
-          data => {            
+          data => {
             let details: Studentdetails = data;
             this.studentService.getRaisedAmount(data.email.email).subscribe(
-              (data) => {                
+              (data) => {
                 details.fundRaised = data.amount;
-                details.raisedPercent = (data.amount/ details.fundRequired)*100;
+                details.raisedPercent = (data.amount / details.fundRequired) * 100;
                 this.students.push(details);
               }
             )
@@ -108,9 +108,7 @@ export class FindstudentsComponent {
     return (this.amountRaised / student.fundRequired) * 100;
   }
 
-  payment(student: Application) {
 
-  }
 }
 
 export interface DialogData {

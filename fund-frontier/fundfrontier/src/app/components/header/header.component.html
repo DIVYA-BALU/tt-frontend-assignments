@@ -1,33 +1,33 @@
-    <mat-toolbar class="header">
-      <button mat-button [matMenuTriggerFor]="menu">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu" class="menu-bar">
-        <button mat-menu-item routerLink="login" >Login</button>
-        <button mat-menu-item routerLink="register">Register</button>
-        <button mat-menu-item routerLink="findstudents">Find Students</button>
-        <button mat-menu-item routerLink="home">Home</button>
-        <button mat-menu-item routerLink="aboutus">About us</button>
-        <button mat-menu-item routerLink="students">For Students</button>
-        <button mat-menu-item routerLink="funders">For Funders</button>
-        <button mat-menu-item routerLink="privacy">Privacy Policy</button>
-        <button mat-menu-item routerLink="terms">Terms and Conditions</button>
-      </mat-menu>
-      <span class="spacer">Fund Frontier</span>
-      <div class="links">
-        <a routerLink="home">Home</a>
-        <a routerLink="aboutus">About us</a>
-        <a routerLink="students">Students</a>
-        <a routerLink="funders">Funders</a>      
-        <div *ngIf="loggedin;then content"></div>
-  <ng-template #content>
-    <a *ngIf="role === 'FUNDER'"routerLink="funderprofile">Profile</a>
-    <a *ngIf="role === 'STUDENT'" routerLink="studentprofile" >Profile</a>
-    <a *ngIf="role === 'ADMIN'" routerLink="adminprofile/editadminprofile" >Profile</a>
+<mat-toolbar class="header">
+  <button mat-button [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu" class="menu-bar">
+    <button mat-menu-item routerLink="login">Login</button>
+    <button mat-menu-item routerLink="register">Register</button>
+    <button mat-menu-item routerLink="findstudents">Find Students</button>
+    <button mat-menu-item routerLink="home">Home</button>
+    <button mat-menu-item routerLink="aboutus">About us</button>
+    <button mat-menu-item routerLink="students">For Students</button>
+    <button mat-menu-item routerLink="funders">For Funders</button>
+    <button mat-menu-item routerLink="privacy">Privacy Policy</button>
+    <button mat-menu-item routerLink="terms">Terms and Conditions</button>
+  </mat-menu>
+  <span class="spacer">Fund Frontier</span>
+  <div class="links">
+    <a routerLink="home">Home</a>
+    <a routerLink="aboutus">About us</a>
+    <a routerLink="students">Students</a>
+    <a routerLink="funders">Funders</a>
+    <div *ngIf="loggedin;then content"></div>
+    <ng-template #content>
+      <a *ngIf="role === 'FUNDER'" routerLink="funderprofile">Profile</a>
+      <a *ngIf="role === 'STUDENT'" routerLink="studentprofile">Profile</a>
+      <a *ngIf="role === 'ADMIN'" routerLink="adminprofile/editadminprofile">Profile</a>
 
-  </ng-template>
-      </div>
-    </mat-toolbar>
+    </ng-template>
+  </div>
+</mat-toolbar>
 <router-outlet></router-outlet>
 <!-- <footer>
   <div class="column">

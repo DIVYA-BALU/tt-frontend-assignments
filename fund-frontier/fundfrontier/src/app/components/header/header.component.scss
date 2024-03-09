@@ -1,17 +1,17 @@
 .spacer {
-    flex: 1 1 auto;
-  }
+  flex: 1 1 auto;
+}
 
 span {
-    color:  rgb(228, 224, 224);
+  color: rgb(228, 224, 224);
 }
 
 a {
-    text-decoration: none;
-    padding: 30px;
-    padding-bottom: 20px;
-    color: rgb(228, 224, 224);
-  }
+  text-decoration: none;
+  padding: 30px;
+  padding-bottom: 20px;
+  color: rgb(228, 224, 224);
+}
 
 .header {
   background-color: rgb(21, 60, 134);
@@ -26,7 +26,6 @@ mat-icon {
 }
 
 footer {
-  //position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -44,5 +43,6 @@ footer {
   color: black;
 }
 
-
-
+a:active {
+  color: yellow;
+}

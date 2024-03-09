@@ -11,31 +11,31 @@
 }
 
 .button {
-  
+
     background-color: rgb(67, 67, 160);
     text-align: center;
-    color:white;
+    color: white;
     height: 40px;
     width: 100px;
     margin-left: 600px;
 
 }
 
-.text-bold{
+.text-bold {
     font-size: 40px;
     padding: 10px;
     color: #483ac2;
-   }
+}
 
 .text-thin {
     font-size: 30px;
     padding: 20px;
- }
+}
 
 .need {
     display: flex;
     flex-direction: row;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
     justify-content: center;
 }
 

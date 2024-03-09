@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 export class AboutusComponent {
   constructor(private router: Router) {
   }
-studentsPage() {
-  this.router.navigate(['students'])
-}
+  studentsPage() {
+    this.router.navigate(['students'])
+  }
 
 }

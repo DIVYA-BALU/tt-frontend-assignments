@@ -11,12 +11,12 @@ export class TestimonialComponent {
 
   pageNo: number = 0;
 
-  constructor(private studentService:StudentService) {
-    this.getStories(0,3)
+  constructor(private studentService: StudentService) {
+    this.getStories(0, 3)
   }
   stories: Successstory[] = [];
   getStories(pageNo: number, pageSize: number) {
-    this.studentService.getstories(pageNo,pageSize).subscribe((response) => {
+    this.studentService.getstories(pageNo, pageSize).subscribe((response) => {
       response.content.forEach(data => {
         this.stories.push(data);
       });
@@ -24,8 +24,8 @@ export class TestimonialComponent {
   }
 
   loadMore() {
-        this.getStories(++this.pageNo, 3)
-    }
-    
+    this.getStories(++this.pageNo, 3)
+  }
+
 
 }

@@ -9,14 +9,14 @@ import { RegisterService } from 'src/app/services/register.service';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  
+
   registerForm!: FormGroup;
 
   constructor(
     private registerService: RegisterService,
     private formBuilder: FormBuilder,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
@@ -30,9 +30,9 @@ export class RegisterComponent {
 
   onSubmit() {
     this.registerService.register(this.registerForm.value).subscribe((data) => {
-      if(data.role === 'funder'){
+      if (data.role === 'funder') {
         this.router.navigate(['header/funderprofile'])
-      }else if(data.role === 'student') {
+      } else if (data.role === 'student') {
         this.router.navigate(['header/studentprofile'])
       }
       this.router.navigate(['header/login'])

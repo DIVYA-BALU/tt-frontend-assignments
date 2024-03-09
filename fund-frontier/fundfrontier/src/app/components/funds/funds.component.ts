@@ -28,31 +28,31 @@ export class FundsComponent {
     this.dataSource = new MatTableDataSource(this.funds)
   }
 
-ngAfterViewInit() {
-  this.paginator.page.subscribe(
-    (data) => {
-      this.getAllFunds(data.pageIndex, data.pageSize);
-    }
-  )
-  this.getAllFunds(0, 3);
-  this.cdref.detectChanges();
+  ngAfterViewInit() {
+    this.paginator.page.subscribe(
+      (data) => {
+        this.getAllFunds(data.pageIndex, data.pageSize);
+      }
+    )
+    this.getAllFunds(0, 3);
+    this.cdref.detectChanges();
 
-}
+  }
 
-nextPage(e: PageEvent) {
-  this.getAllFunds(e.pageIndex, e.pageSize);
-}
+  nextPage(e: PageEvent) {
+    this.getAllFunds(e.pageIndex, e.pageSize);
+  }
 
 
   getAllFunds(pageIndex: number, pageSize: number) {
-      this.fundsService.getAllFunds(pageIndex, pageSize).subscribe(
-        (data) =>{
-          this.funds = data.content;
-          this.paginator.length = data.totalElements;
-          this.paginator.pageIndex = data.number;
-          this.paginator.pageSize = data.size;
-          this.dataSource.data = this.funds;
-        }
-      )
+    this.fundsService.getAllFunds(pageIndex, pageSize).subscribe(
+      (data) => {
+        this.funds = data.content;
+        this.paginator.length = data.totalElements;
+        this.paginator.pageIndex = data.number;
+        this.paginator.pageSize = data.size;
+        this.dataSource.data = this.funds;
+      }
+    )
   }
 }
