@@ -19,22 +19,7 @@ public class FundsServiceImp implements FundsService {
 
     @Override
     public Funds saveFunds(Funds funds) {
-        // final String KEY = "rzp_test_dfaTwJvV84YGAu";
-        // final String SECRET_KEY = "34LUS8qkvkNUz8HBZDBUhOtX";
-        // final String CURRENCY = "INR";
 
-        // try {
-        // JSONObject jsonObject = new JSONObject();
-        // jsonObject.put("amount", amount * 100);
-        // jsonObject.put("currency", CURRENCY);
-        // RazorpayClient razorpayClient = new RazorpayClient(KEY, SECRET_KEY);
-        // Order order = razorpayClient.orders.create(jsonObject);
-        // Double totalAmount = order.get("amount");
-        // return fundsRepository.save(funds);
-
-        // }catch (Exception e) {
-        // e.printStackTrace();
-        // }
         studentFundsService.addAmount(funds.getStudentEmail(), funds.getStudentAmount());
 
         return fundsRepository.save(funds);

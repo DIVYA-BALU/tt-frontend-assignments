@@ -10,4 +10,6 @@ public interface StudentFundsService {
     StudentFunds updateFund(StudentFunds studentFunds);
 
     StudentFunds getStudent(String email);
+
+    void addAmount(String studentEmail, Double studentAmount);
 }
