@@ -25,7 +25,7 @@ import { StudentregistrationComponent } from './components/studentregistration/s
 const routes: Routes = [
   {
     path:"",
-    redirectTo: "header/studententregistration",
+    redirectTo: "header/home",
     pathMatch: 'full'
 
   },

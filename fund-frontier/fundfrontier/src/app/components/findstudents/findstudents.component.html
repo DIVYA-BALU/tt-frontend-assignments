@@ -45,17 +45,17 @@
        <strong>Year Of Study : </strong>{{student.yearOfStudy}}
         <br>
        <strong>Fund to be Raised : </strong>{{student.fundRequired}}
+       <br>
+       <strong>{{student.fundRaised}} / {{student.fundRequired}}  raised</strong> 
+
         
       </p>
       <mat-progress-bar mode="determinate" [value] = "student.raisedPercent"></mat-progress-bar>
     </mat-card-content>
     <mat-card-actions>
-      <!-- <button mat-button (click) = "payment(student)"> Pay {{student.firstName}}</button> -->
-      <button mat-button (click)="viewStudent(student)"> Know More</button>
+     <button mat-button (click)="viewStudent(student)"> Know More</button>
     </mat-card-actions>
   </mat-card>
 </div>
 <button mat-button class="load-more" (click)="loadMore()"> Load More</button>
 </div>
-
-<!-- [value]="calculateProgressValue(student) -->

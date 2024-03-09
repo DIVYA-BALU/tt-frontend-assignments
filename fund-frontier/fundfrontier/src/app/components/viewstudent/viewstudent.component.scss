@@ -1,35 +1,46 @@
-.ind-student {
+.container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr auto;
+    gap: 20px;
+}
+
+.left-section {
     display: flex;
-    flex-direction: row;
-    padding: 20px;
+    align-items: center;
 }
 
-.info {
-    padding: 10px;
+.right-section {
+    display: flex;
+    flex-direction: column;
 }
 
-img {
-    background-size: cover;
-    height: 220px;
-    width: 250px;
+.slider-section {
+    margin-top: auto;
+}
+
+.story-section {
+    grid-column: span 2;
 }
 
 body {
-    background-image: url("../../../assets/images/indstudent.jpeg");
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    border: 10px solid transparent;
+    padding: 15px;
+    border-image: url('/assets/images/aboutus.avif') 30 round;
+    margin-right: 0px;
+    background-image: url('/assets/images/indstudent.jpeg');
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
-.story {
-    margin-bottom: 0;
+.pay-button {
+    margin-top: 10px;
+    padding: 0px 20px;
+    background-color: rgb(3, 3, 175);
+    color: white;
 }
 
-.example-value-label {
-    display: block;
+.example-margin {
+    width: 100%;
 }
 
-.student {
-    margin-left: 350px;
-}

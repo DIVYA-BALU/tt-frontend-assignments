@@ -8,6 +8,7 @@ import { FundsService } from 'src/app/services/funds.service';
 import { LoginService } from 'src/app/services/login.service';
 import { RegisterService } from 'src/app/services/register.service';
 import { StudentService } from 'src/app/services/student.service';
+import { DialogData } from '../findstudents/findstudents.component';
 
 declare var Razorpay: any;
 
@@ -19,9 +20,10 @@ declare var Razorpay: any;
 export class ViewstudentComponent {
 
 
+
   value: number = 0;
   constructor(
-    @Inject(MAT_DIALOG_DATA) public student: Studentdetails,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private dialogRef: MatDialogRef<ViewstudentComponent>,
     private studentService: StudentService,
     private registerService: RegisterService,
@@ -36,8 +38,11 @@ export class ViewstudentComponent {
 
   funderEmail: string = '';
 
+  student: Studentdetails = this.data.firstData;
+
+  balanceAmount: number = this.data.secondData;
+
   funds: Funds = {
-    _id: '',
     funderEmail: '',
     studentEmail: '',
     date: new Date(),
@@ -58,6 +63,18 @@ export class ViewstudentComponent {
     this.dialogRef.close();
   }
 
+  close() {
+    console.log('close');
+    
+    this.dialogRef.close();
+    }
+
+
+  
+    isFundingCompleted(): boolean {
+      return this.student.fundRaised >= this.student.fundRequired;
+    }
+
   payment() {
     
     this.loginService.getLoginStatus().subscribe(
@@ -77,14 +94,15 @@ export class ViewstudentComponent {
           console.log(this.funderEmail);
         }
       )
-      console.log(((this.value * 100) + ((10 / 100) * this.value)));
       
      if(this.funderEmail !== ''){
-      console.log(((this.value * 100) + ((10 / 100) * this.value)));
-        const RazorpayOptions = {
+      const amount: number = ((this.value * 100) + ((7.5 / 100) * this.value)*100);
+      console.log(amount);
+      
+      const RazorpayOptions = {
         description: 'Sample Razorpay demo',
         currency: 'INR',
-        amount: ((this.value * 100) + ((7.5 / 100) * this.value)),
+        amount: amount ,
         name: "Divya",
         key: 'rzp_test_dfaTwJvV84YGAu',
         prefill: {
@@ -93,7 +111,7 @@ export class ViewstudentComponent {
           phone: '1234567891'
         },
         theme: {
-          color: '#f37254'
+          color: '#092644'
         },
         handler: (response: any) => {
 
@@ -104,14 +122,13 @@ export class ViewstudentComponent {
             this.funds.funderEmail = this.funderEmail;
             this.funds.studentEmail = this.student.email.email;
             this.funds.date = new Date();
-            this.funds.totalAmount = this.value;
+            this.funds.totalAmount = amount;
             this.funds.studentAmount = this.value;
             this.funds.maintainenceAmount = (7.5 * this.value) / 100;
             this.fundsService.saveFund(this.funds).subscribe();
 
           } else {
             console.log('Payment failed or was cancelled');
-            // Handle failure logic here
           }
         },
         modal: {

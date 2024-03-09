@@ -1,27 +1,41 @@
+<!-- viewstudent.component.html -->
 <body>
-    <div class="student">
-        <img src={{student.profilePhoto}} alt="student">
-    </div>
-
-    <div class="info student">
-        <h3>{{student.firstName}} {{student.lastName}}</h3>
-        <h3>{{student.school}}</h3>
-        <h3>{{student.collegeName}}</h3>
-        <h3>{{student.course}} {{student.yearOfStudy}}</h3>
-        <h3>Total funding needed : {{student.fundRequired}}</h3>
-    </div>
-    <div class="student">
-        <h2>My story</h2>
-        <h3 class="story">{{student.shortStory}}</h3>
-
-    </div>
-    <div class="student">
-        <label class="example-value-label">Amount : {{value}}</label>
-        <mat-slider class="example-margin" max=100000 min=0 step=100>
+  <div>
+    <button mat-icon-button (click)="onNoClick()">
+      <mat-icon class="icon">clear</mat-icon>
+    </button>
+  </div>
+    <div class="container">
+      <div class="left-section">
+        <div class="student">
+          <img src="{{student.profilePhoto}}" alt="student">
+        </div>
+      </div>
+      <div class="right-section">
+        <div class="info student">
+          <h3>{{student.firstName}} {{student.lastName}}</h3>
+          <h3>{{student.school}}</h3>
+          <h3>{{student.collegeName}}</h3>
+          <h3>{{student.course}} {{student.yearOfStudy}}</h3>
+          <h3>Total funding needed : {{student.fundRequired}}</h3>
+        </div>
+        <div class="slider-section">
+          <label class="example-value-label">Amount : {{value}} / {{balanceAmount}}</label>
+          <br>
+          <mat-slider class="example-margin" [max]="balanceAmount" min=100 step=100>
             <input matSliderThumb [(ngModel)]="value">
-        </mat-slider>
+          </mat-slider>
+        </div>
+        <div class="student">
+            <button mat-button class="pay-button" (click)="payment()"> Pay {{value}}</button>
+        </div>
+      </div>
+      <div class="story-section">
+        <div class="student">
+          <h2>My story</h2>
+          <h3 class="story">{{student.shortStory}}</h3>
+        </div>
+      </div>
     </div>
-    <div class="student">
-        <button mat-button (click)="payment()"> Pay {{value}}</button>
-    </div>
-</body>
+  </body>
+  

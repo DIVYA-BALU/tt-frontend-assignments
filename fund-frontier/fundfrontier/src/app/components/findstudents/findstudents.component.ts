@@ -83,9 +83,12 @@ export class FindstudentsComponent {
 
   viewStudent(student: Studentdetails) {
     const dialogRef = this.dialog.open(ViewstudentComponent, {
-      width: '100%',
-      height: "100%",
-      data: student
+      height: '100%',
+      data: {
+        firstData: student,
+        secondData: student.fundRequired - student.fundRaised
+      } as DialogData,
+
     });
 
     dialogRef.afterClosed().subscribe()
@@ -101,13 +104,16 @@ export class FindstudentsComponent {
   }
 
   calculateProgressValue(student: Application) {
-    console.log(student);
 
-    // this.getRaisedAmount(student);
     return (this.amountRaised / student.fundRequired) * 100;
   }
 
   payment(student: Application) {
 
   }
+}
+
+export interface DialogData {
+  firstData: Studentdetails;
+  secondData: number;
 }
