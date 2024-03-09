@@ -42,7 +42,7 @@ import { SubscriptionPaymentComponent } from '../subscription-payment/subscripti
     MatNativeDateModule,
     MatIconModule,
     MatMenuModule,
-    MatDialogModule,  
+    MatDialogModule,
   ],
   templateUrl: './veterinary-doctor-profile.component.html',
   styleUrls: ['./veterinary-doctor-profile.component.scss'],
@@ -143,7 +143,7 @@ export class VeterinaryDoctorProfileComponent {
       data: {},
     });
   }
-  
+
   getProfile(event: any) {
     this.profile = event.target.files[0];
     this.user.profilePhoto = URL.createObjectURL(event.target.files[0]);
@@ -170,14 +170,12 @@ export class VeterinaryDoctorProfileComponent {
     formData.append('contactNumber', this.formResponse.value.contactNumber);
     formData.append('status', this.user.status);
     formData.append('isSubscribed', this.user.isSubscribed ? 'true' : 'false');
-    console.log(this.formResponse.value);
+
     this.authService.sharedId$.subscribe({
       next: (id) => {
         formData.append('id', id);
         this.profileService.updateVeterinaryDoctorProfile(formData).subscribe({
-          next: (res) => {
-            console.log('doc', res);
-          },
+          next: (res) => {},
         });
       },
     });
@@ -209,7 +207,7 @@ export class VeterinaryDoctorProfileComponent {
       next: (user) => {
         if ('isSubscribed' in user) {
           this.user = user;
-          console.log('doctor', this.user);
+
           this.formResponse = this.formBuilder.group({
             name: [
               this.user.name,
@@ -254,7 +252,6 @@ export class VeterinaryDoctorProfileComponent {
     });
     this.paymentService.getSubscription(this.user._id).subscribe({
       next: (val) => {
-        console.log(val);
         this.subscription = val;
       },
     });

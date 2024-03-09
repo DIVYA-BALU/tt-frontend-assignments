@@ -60,14 +60,13 @@ export class OrganizationRegisterComponent {
       this.formResponse.value.location.country
     );
     formData.append('contactNumber', this.formResponse.value.contactNumber);
-    console.log(this.formResponse.value);
+
     Swal.showLoading();
     this.subscription = this.authService
       .registerOrganization(formData)
       .subscribe({
         next: (res) => {
           Swal.close();
-          console.log(res);
           Swal.fire({
             title: 'Requested!',
             text: 'Please wait for the confirmation mail',

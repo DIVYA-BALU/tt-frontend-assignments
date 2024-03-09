@@ -44,7 +44,6 @@ export class AdopterRegisterComponent {
       this.formResponse.value.password !==
         this.formResponse.value.confirmPassword
     ) {
-      console.log(this.formResponse.value);
       return;
     }
     Swal.showLoading();
@@ -56,23 +55,18 @@ export class AdopterRegisterComponent {
           if (status.message === 'Mail Sent Successfully') {
             this.isOtpSend = true;
             this.otp.email = this.formResponse.value.email;
-            console.log(status);
           } else {
             alert(status.message);
-            console.log(status);
           }
-          console.log('component');
         },
       });
   }
 
   verifyOtp() {
     this.otp.otp = this.formResponse.value.otp;
-    console.log('c', this.otp);
     Swal.showLoading();
     this.otpSubscription = this.authService.verifyOtp(this.otp).subscribe({
       next: (status: StatusMessage) => {
-        console.log(status);
         Swal.close();
         if (status.message === 'invalid otp') {
           alert(status.message);
@@ -86,7 +80,6 @@ export class AdopterRegisterComponent {
             .registerUser(this.user)
             .subscribe({
               next: (token: Token) => {
-                console.log(token);
                 Swal.close();
                 localStorage.setItem('token', token.token);
                 localStorage.setItem('refresh-token', token.refreshToken);
@@ -108,12 +101,5 @@ export class AdopterRegisterComponent {
     this.subscription.unsubscribe();
     this.otpSubscription.unsubscribe();
     this.registerSubscription.unsubscribe();
-  }
-
-  login() {
-    if (this.formResponse.invalid) {
-      console.log('invalid');
-    }
-    console.log(this.formResponse.value);
   }
 }

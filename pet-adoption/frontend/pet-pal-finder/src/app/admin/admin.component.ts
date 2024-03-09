@@ -8,28 +8,27 @@ import { RegistrationRequestService } from '../service/registration-request.serv
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [CommonModule,MatTabsModule,RequestRegistrationListComponent],
+  imports: [CommonModule, MatTabsModule, RequestRegistrationListComponent],
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss']
+  styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent {
+  constructor(private registrationRequestService: RegistrationRequestService) {}
 
-  constructor(private registrationRequestService:RegistrationRequestService){}
+  organizations: Organization[] = [];
 
-  organizations:Organization[] = [];
+  veterinaryDoctors: VeterinaryDoctor[] = [];
 
-  veterinaryDoctors:VeterinaryDoctor[] = [];
-
-  ngOnInit(){
-    this.registrationRequestService.viweRequestedOrganization().subscribe({next: (res) => {
-      console.log(res);
-      
-      this.organizations = res;
-    }})
-    this.registrationRequestService.viweRequestedVeterinaryDoctor().subscribe({next: (res) => {
-      console.log(res);
-      
-      this.veterinaryDoctors = res;
-    }})
+  ngOnInit() {
+    this.registrationRequestService.viweRequestedOrganization().subscribe({
+      next: (res) => {
+        this.organizations = res;
+      },
+    });
+    this.registrationRequestService.viweRequestedVeterinaryDoctor().subscribe({
+      next: (res) => {
+        this.veterinaryDoctors = res;
+      },
+    });
   }
 }

@@ -135,7 +135,7 @@ export class ProfileDetailsComponent {
       this.formResponse.value.location.country
     );
     formData.append('contactNumber', this.formResponse.value.contactNumber);
-    console.log(this.formResponse.value);
+
     formData.append('id', this.userId);
     this.updateSubscription = this.profileService
       .updateAdopterProfile(formData)
@@ -151,7 +151,6 @@ export class ProfileDetailsComponent {
   }
 
   ngOnInit() {
-    Swal.showLoading();
     this.idSubscription = this.authService.sharedId$.subscribe({
       next: (id) => {
         this.userId = id;
@@ -159,9 +158,8 @@ export class ProfileDetailsComponent {
           .getAdopterProfile(this.userId)
           .subscribe({
             next: (res) => {
-              Swal.close();
               this.adopter = res;
-              console.log('adopter', this.adopter);
+
               this.formResponse = this.formBuilder.group({
                 name: [
                   this.adopter.name,
@@ -204,6 +202,7 @@ export class ProfileDetailsComponent {
                 image: [],
               });
             },
+
           });
       },
     });

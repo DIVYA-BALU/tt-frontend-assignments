@@ -65,7 +65,7 @@
     <div>
       <div>Payment Details <button mat-flat-button  type="submit" (click)="payment()">Proceed to payment </button></div>
       <div class="payment">
-        <span>Current Plan : {{subscription.currentPlan.amount}}</span>
+        <span>Current Plan Amount : {{subscription.currentPlan.amount}}</span>
         <span>Subscribed On : {{subscription.subscribedOn | date | date : "medium"}}</span>
         <span>Valid Till : {{subscription.validTill | date | date : "medium"}}</span>
         History

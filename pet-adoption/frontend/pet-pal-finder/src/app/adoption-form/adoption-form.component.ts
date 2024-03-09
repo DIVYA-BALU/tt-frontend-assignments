@@ -66,7 +66,6 @@ export class AdoptionFormComponent {
       .requestAdoption(this.adoptionDetail)
       .subscribe({
         next: (val) => {
-          console.log(val);
           this.dialogRef.close();
         },
       });

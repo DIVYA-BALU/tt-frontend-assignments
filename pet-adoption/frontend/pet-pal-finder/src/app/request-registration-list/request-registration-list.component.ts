@@ -8,39 +8,30 @@ import { RegistrationRequestService } from '../service/registration-request.serv
   standalone: true,
   imports: [CommonModule],
   templateUrl: './request-registration-list.component.html',
-  styleUrls: ['./request-registration-list.component.scss']
+  styleUrls: ['./request-registration-list.component.scss'],
 })
 export class RequestRegistrationListComponent {
+  constructor(private registrationRequestService: RegistrationRequestService) {}
 
-  constructor(private registrationRequestService:RegistrationRequestService){}
-
-  
-  @Input() requestVeterinaryDoctor?:VeterinaryDoctor;
-  @Input() requestOrganization?:Organization;
-  @Input() type:string='';
-  status:StatusUpdate = {
+  @Input() requestVeterinaryDoctor?: VeterinaryDoctor;
+  @Input() requestOrganization?: Organization;
+  @Input() type: string = '';
+  status: StatusUpdate = {
     id: '',
-    status: ''
+    status: '',
+  };
+
+  updateStatus(id: string | undefined, status: string) {
+    this.status.id = id || '';
+    this.status.status = status;
+    if (this.type === 'organization') {
+      this.registrationRequestService
+        .updateStatusForOrganization(this.status)
+        .subscribe({ next: (message) => {} });
+    } else {
+      this.registrationRequestService
+        .updateStatusForVeterinaryDoctor(this.status)
+        .subscribe({ next: (message) => {} });
+    }
   }
-
-  ngOnInit(){
-    console.log(this.requestVeterinaryDoctor,this.type);
-    
-  }
-
-    updateStatus(id: string|undefined,status: string) {
-      this.status.id = id || '';
-      this.status.status = status;
-      if( this.type === "organization"){
-
-        this.registrationRequestService.updateStatusForOrganization(this.status).subscribe({next: (message) =>{
-          console.log(message);
-        }})
-      }
-      else{
-        this.registrationRequestService.updateStatusForVeterinaryDoctor(this.status).subscribe({next: (message) =>{
-          console.log(message); 
-        }})
-      }
-      }
 }

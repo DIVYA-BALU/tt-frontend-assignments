@@ -94,7 +94,7 @@ export class PetProfileComponent {
 
   ngOnInit() {
     const id: string = this.route.snapshot.paramMap.get('id') || '';
-    console.log(id);
+
     this.getSubscription = this.petPostService.getPetPost(id).subscribe({
       next: (val) => {
         this.petPost = val;

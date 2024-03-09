@@ -102,14 +102,12 @@ export class VeterinaryDoctorComponent {
 
   loadData() {
     this.page++;
-    console.log('asdfghjkl');
 
     this.getUpdateSubscription = this.veterinaryDoctorService
       .getNearByDoctors(this.name, this.city, this.page)
       .subscribe({
         next: (val) => {
           this.veterinaryDoctors = [...this.veterinaryDoctors, ...val];
-          console.log(val);
         },
       });
   }
@@ -131,7 +129,6 @@ export class VeterinaryDoctorComponent {
       .subscribe({
         next: (val) => {
           this.names = val;
-          console.log(val);
         },
       });
   }
@@ -141,7 +138,6 @@ export class VeterinaryDoctorComponent {
       .subscribe({
         next: (val) => {
           this.cites = val;
-          console.log(val);
         },
       });
   }
@@ -177,7 +173,7 @@ export class VeterinaryDoctorComponent {
             this.appointment.requesterId = id;
           },
         });
-        console.log(this.appointment);
+
         this.requestSubscription = this.veterinaryDoctorService
           .requestAppointment(this.appointment)
           .subscribe({

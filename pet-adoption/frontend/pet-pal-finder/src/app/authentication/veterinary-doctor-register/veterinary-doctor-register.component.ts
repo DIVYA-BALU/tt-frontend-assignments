@@ -70,7 +70,6 @@ export class VeterinaryDoctorRegisterComponent {
     formData.append('degree', this.formResponse.value.degree);
     formData.append('degreeCertificate', this.certificate);
     formData.append('contactNumber', this.formResponse.value.contactNumber);
-    console.log(this.formResponse.value);
 
     Swal.showLoading();
     this.subscription = this.authService
@@ -78,7 +77,6 @@ export class VeterinaryDoctorRegisterComponent {
       .subscribe({
         next: (res) => {
           Swal.close();
-          console.log(res);
           Swal.fire({
             title: 'Requested!',
             text: 'Please wait for the confirmation mail',

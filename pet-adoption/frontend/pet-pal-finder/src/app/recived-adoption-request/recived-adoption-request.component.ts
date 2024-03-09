@@ -9,19 +9,21 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 @Component({
   selector: 'app-recived-adoption-request',
   standalone: true,
-  imports: [CommonModule,MatDialogModule],
+  imports: [CommonModule, MatDialogModule],
   templateUrl: './recived-adoption-request.component.html',
-  styleUrls: ['./recived-adoption-request.component.scss']
+  styleUrls: ['./recived-adoption-request.component.scss'],
 })
 export class RecivedAdoptionRequestComponent {
+  constructor(
+    public dialog: MatDialog,
+    private adoptionService: AdoptionService,
+    private authService: AuthService
+  ) {}
 
-
-  constructor(public dialog: MatDialog,private adoptionService:AdoptionService,private authService:AuthService){}
-
-  adoptionDetails:AdoptionDetail [] = [];
+  adoptionDetails: AdoptionDetail[] = [];
   isLoading: boolean = false;
   currentPage: number = 0;
-  id:string='';
+  id: string = '';
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -41,54 +43,51 @@ export class RecivedAdoptionRequestComponent {
     }
   }
 
-  click(type:string,id:string){
-    const data = {type,id}
-    this.openDialog('30ms', '30ms',data);
-  
+  click(type: string, id: string) {
+    const data = { type, id };
+    this.openDialog('30ms', '30ms', data);
   }
 
   openDialog(
     enterAnimationDuration: string,
     exitAnimationDuration: string,
-    data:{type:string,id:string}
+    data: { type: string; id: string }
   ): void {
     this.dialog.open(RequesterProfileComponent, {
-    
       enterAnimationDuration,
       exitAnimationDuration,
       data: data,
     });
   }
 
-  loadData(){
+  loadData() {
     this.isLoading = true;
-    this.adoptionService.getAdoptionStatusOfPoster(this.id,'initiated',this.currentPage).subscribe({
-      next: (val) => {
-        this.adoptionDetails = [...this.adoptionDetails, ...val]; 
-        this.isLoading = false;
-        this.currentPage++;
-        console.log(this.adoptionDetails);
-        
-      }
-    })
+    this.adoptionService
+      .getAdoptionStatusOfPoster(this.id, 'initiated', this.currentPage)
+      .subscribe({
+        next: (val) => {
+          this.adoptionDetails = [...this.adoptionDetails, ...val];
+          this.isLoading = false;
+          this.currentPage++;
+        },
+      });
   }
 
-  updateAdoptionStatus(id: string,status: string) {
-   this.adoptionService.updateAdoptionStatus(id,status).subscribe({
-    next: (val) => {
-      console.log(val);
-      this.loadData();
-    }
-   })
-    }
+  updateAdoptionStatus(id: string, status: string) {
+    this.adoptionService.updateAdoptionStatus(id, status).subscribe({
+      next: (val) => {
+        this.loadData();
+      },
+    });
+  }
 
-  ngOnInit(){
+  ngOnInit() {
     this.authService.sharedId$.subscribe({
       next: (id) => {
         this.id = id;
         this.currentPage = 0;
-        this.loadData()
-      }
-    })
+        this.loadData();
+      },
+    });
   }
 }

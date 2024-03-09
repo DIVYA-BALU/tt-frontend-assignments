@@ -5,54 +5,46 @@ import { AuthService } from './auth.service';
 import { Location, PetPost, StatusMessage } from '../models/models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PetPostService {
-
   private baseUrl: string = environment.baseUrl;
   id: string = '';
-  constructor(private authService:AuthService,private http: HttpClient) { 
-    authService.sharedId$.subscribe({next:(id)=>{
-      this.id = id;
-    }})
+  constructor(private authService: AuthService, private http: HttpClient) {
+    authService.sharedId$.subscribe({
+      next: (id) => {
+        this.id = id;
+      },
+    });
   }
 
-  getAnimalPostById(){
+  getAnimalPostById() {
     return this.http.get<PetPost[]>(
       `${this.baseUrl}pet-post/poster?posterId=${this.id}`
     );
   }
 
-  savePetPost(formData:FormData){
-    formData.append("posterId",this.id);
-    return this.http.post<PetPost>(
-      `${this.baseUrl}pet-post`,formData
-    );
+  savePetPost(formData: FormData) {
+    formData.append('posterId', this.id);
+    return this.http.post<PetPost>(`${this.baseUrl}pet-post`, formData);
   }
 
-  getNearByPet(location:Location){
-    console.log(location);
-    
+  getNearByPet(location: Location) {
     return this.http.post<any>(
-      `${this.baseUrl}pet-post/near-by-post`,location
+      `${this.baseUrl}pet-post/near-by-post`,
+      location
     );
   }
 
-  getLatestPost(){
-    return this.http.get<PetPost[]>(
-      `${this.baseUrl}pet-post/latest`,
-    );
+  getLatestPost() {
+    return this.http.get<PetPost[]>(`${this.baseUrl}pet-post/latest`);
   }
 
-  getPetPost(id:string){
-    return this.http.get<PetPost>(
-      `${this.baseUrl}pet-post?id=${id}`,
-    );
+  getPetPost(id: string) {
+    return this.http.get<PetPost>(`${this.baseUrl}pet-post?id=${id}`);
   }
-  
-  deletePost(id:string){
-    return this.http.delete<StatusMessage>(
-      `${this.baseUrl}pet-post?id=${id}`,
-    );
+
+  deletePost(id: string) {
+    return this.http.delete<StatusMessage>(`${this.baseUrl}pet-post?id=${id}`);
   }
 }

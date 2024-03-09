@@ -71,14 +71,11 @@ export class NavBarComponent {
     if (this.loggedIn) {
       this.idSubscription = this.authService.sharedId$.subscribe({
         next: (id) => {
-          console.log('auth ', id);
-
           if (this.authService.hasAccess(environment.adopter)) {
             this.getSubscription = this.profileService
               .getAdopterProfile(id)
               .subscribe({
                 next: (obj) => {
-                  console.log(obj);
                   this.profileName = obj.name;
                   this.profileUrl = obj.profilePhoto;
                   this.adopter = obj;
@@ -90,7 +87,6 @@ export class NavBarComponent {
               .getVeterinaryDoctorProfile(id)
               .subscribe({
                 next: (obj) => {
-                  console.log(obj);
                   this.profileName = obj.name;
                   this.profileUrl = obj.profilePhoto;
                   // this.adopter = obj;

@@ -58,8 +58,6 @@ export class ProfileService {
   }
 
   getVeterinaryDoctorProfile(id: string) {
-    console.log(id,"service");
-    
     return this.http.get<VeterinaryDoctor>(
       `${this.baseUrl}veterinary-doctor/profile/${id}`
     );
@@ -68,19 +66,22 @@ export class ProfileService {
   getOrganizationProfile(id: string) {
     return this.http.get<any>(`${this.baseUrl}organization/detail?id=${id}`);
   }
-  
-  setUser(user:Adopter | VeterinaryDoctor | Organization){
+
+  setUser(user: Adopter | VeterinaryDoctor | Organization) {
     this.userSubject.next(user);
   }
 
-  updateAdopterProfile(formData:FormData){
-    return this.http.put<any>(`${this.baseUrl}adopter`,formData);
+  updateAdopterProfile(formData: FormData) {
+    return this.http.put<any>(`${this.baseUrl}adopter`, formData);
   }
 
-  updateVeterinaryDoctorProfile(formData:FormData){
-    return this.http.put<any>(`${this.baseUrl}veterinary-doctor/update`, formData);
+  updateVeterinaryDoctorProfile(formData: FormData) {
+    return this.http.put<any>(
+      `${this.baseUrl}veterinary-doctor/update`,
+      formData
+    );
   }
-  updateOrganizationProfile(formData:FormData){
+  updateOrganizationProfile(formData: FormData) {
     return this.http.put<any>(`${this.baseUrl}organization/update`, formData);
   }
 }

@@ -47,7 +47,7 @@ export class AcceptedAdoptionRequestComponent {
         this.adoptionDetails = [...this.adoptionDetails, ...val]; 
         this.isLoading = false;
         this.currentPage++;
-        console.log(this.adoptionDetails);
+      
         
       }
     })

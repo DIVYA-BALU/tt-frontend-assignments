@@ -9,42 +9,36 @@ import { RatingService } from '../service/rating.service';
 @Component({
   selector: 'app-rating',
   standalone: true,
-  imports: [CommonModule,FontAwesomeModule],
+  imports: [CommonModule, FontAwesomeModule],
   templateUrl: './rating.component.html',
-  styleUrls: ['./rating.component.scss']
+  styleUrls: ['./rating.component.scss'],
 })
 export class RatingComponent {
-
   faStar = faStar;
 
-  constructor( public dialogRef: MatDialogRef<RatingComponent>,
-    @Inject(MAT_DIALOG_DATA) public data:Rating,
-    private ratingService:RatingService ){}
-
- 
+  constructor(
+    public dialogRef: MatDialogRef<RatingComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Rating,
+    private ratingService: RatingService
+  ) {}
 
   @Input() rating: number = 0;
   @Input() readonly: boolean = false;
 
   setRating(value: number) {
     if (this.readonly) return;
-    this.rating = value; 
+    this.rating = value;
   }
 
   sendRating() {
-    this.data.rating = this.rating
-    console.log(this.rating);
-    this.ratingService.addRating(this.data).subscribe({
-      next:(val) => {
-        console.log(val);
-        this.dialogRef.close()
-        
-      }
-    })
-    }
+    this.data.rating = this.rating;
 
-  ngOnInit(){
-    console.log(this.data);
-    
+    this.ratingService.addRating(this.data).subscribe({
+      next: (val) => {
+        this.dialogRef.close();
+      },
+    });
   }
+
+ 
 }

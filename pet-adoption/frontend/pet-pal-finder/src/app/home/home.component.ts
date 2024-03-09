@@ -47,7 +47,6 @@ export class HomeComponent {
 
   petPosts: PetPost[] = [];
   ngOnInit() {
-    console.log('home');
     if (this.authService.isAuthenticated()) {
       this.idSubscription = this.authService.sharedId$.subscribe({
         next: (id) => {
@@ -60,7 +59,6 @@ export class HomeComponent {
                     .getNearByPet(obj.location)
                     .subscribe({
                       next: (val: any) => {
-                        console.log('adoptr', val);
                         this.petPosts = val;
                       },
                     });
@@ -75,7 +73,6 @@ export class HomeComponent {
                     .getNearByPet(obj.location)
                     .subscribe({
                       next: (val: any) => {
-                        console.log('veti', val);
                         this.petPosts = val;
                       },
                     });
@@ -100,14 +97,11 @@ export class HomeComponent {
       .subscribe({
         next: (val) => {
           this.categories = val;
-          console.log(val);
         },
       });
   }
 
   navigate(id: string) {
-    console.log(id);
-
     this.route.navigate(['pet/pet-profile', id]);
   }
 

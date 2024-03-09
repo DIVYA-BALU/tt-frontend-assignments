@@ -35,8 +35,8 @@ export class PendingDoctorRequestComponent {
   date = '';
 
   ngOnInit() {
-    Swal.showLoading()
-    
+    Swal.showLoading();
+
     this.authService.sharedId$.subscribe({
       next: (id) => {
         this.veterinaryDoctorService
@@ -44,8 +44,6 @@ export class PendingDoctorRequestComponent {
           .subscribe({
             next: (val) => {
               Swal.close();
-              console.log(val);
-
               this.appointmentStatuses = val;
             },
           });
@@ -53,7 +51,7 @@ export class PendingDoctorRequestComponent {
     });
   }
 
-  loadData(){
+  loadData() {
     this.authService.sharedId$.subscribe({
       next: (id) => {
         this.veterinaryDoctorService
@@ -61,7 +59,6 @@ export class PendingDoctorRequestComponent {
           .subscribe({
             next: (val) => {
               Swal.close();
-              console.log(val);
 
               this.appointmentStatuses = val;
             },
@@ -73,13 +70,12 @@ export class PendingDoctorRequestComponent {
     this.appointmentUpdate.id = id;
     this.appointmentUpdate.status = status;
     this.appointmentUpdate.date = new Date(this.date + 'T' + this.time);
-    console.log(this.time, this.appointmentUpdate);
+
     this.veterinaryDoctorService
       .updateAppointment(this.appointmentUpdate)
       .subscribe({
         next: (val) => {
-          console.log(val);
-          this.loadData()
+          this.loadData();
         },
       });
   }

@@ -27,32 +27,32 @@ export class LoginComponent {
 
   login() {
     if (this.formResponse.invalid) {
-      console.log('invalid');
+      alert('invalid input');
+      return;
     }
-    console.log(this.formResponse.value);
     Swal.showLoading();
-    this.subscription = this.authService.login(this.formResponse.value).subscribe({
-      next: (token) => {
-        Swal.close();
-        console.log(token);
-        localStorage.setItem('token', token.token);
-        const tokenInfo: any = jwtDecode(token.token);
-        const role: string = tokenInfo.role[0].authority;
-        this.authService.setLogin(tokenInfo.id);
-        this.authService.setRole(role);
-        if (role === environment.admin) {
-          this.route.navigate(['admin']);
-        } else if (role === environment.organization) {
-          this.route.navigate(['organization']);
-        } else if (
-          role === environment.adopter ||
-          role === environment.veterinaryDoctor
-        ) {
-          this.route.navigate(['pet']);
-        }
-        console.log(role);
-      },
-    });
+    this.subscription = this.authService
+      .login(this.formResponse.value)
+      .subscribe({
+        next: (token) => {
+          Swal.close();
+          localStorage.setItem('token', token.token);
+          const tokenInfo: any = jwtDecode(token.token);
+          const role: string = tokenInfo.role[0].authority;
+          this.authService.setLogin(tokenInfo.id);
+          this.authService.setRole(role);
+          if (role === environment.admin) {
+            this.route.navigate(['admin']);
+          } else if (role === environment.organization) {
+            this.route.navigate(['organization']);
+          } else if (
+            role === environment.adopter ||
+            role === environment.veterinaryDoctor
+          ) {
+            this.route.navigate(['pet']);
+          }
+        },
+      });
   }
 
   ngOnDestroy() {

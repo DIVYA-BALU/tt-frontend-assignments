@@ -39,7 +39,7 @@ export class PetPostComponent {
   deletePost(id: string) {
     this.petPostService.deletePost(id).subscribe({
       next: (val)=>{
-        console.log(val);
+     
         this.loadDate()
       }
     })
@@ -47,7 +47,7 @@ export class PetPostComponent {
     
     loadDate(){
       this.petPostService.getAnimalPostById().subscribe({next:(petPost)=>{
-        console.log(petPost);
+        (petPost);
         
         this.petPosts = petPost;
       }})
