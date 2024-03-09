@@ -23,18 +23,18 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/user")
 public class UserController {
-    
+
     private final UserService userService;
     private final JwtService jwtService;
-    
-    //@PreAuthorize("hasRole('ADMIN')")
+
+    // @PreAuthorize("hasRole('ADMIN')")
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/all")
     public ResponseEntity<Page<Users>> getAllUsers(@RequestParam(defaultValue = "0") Integer pageNo,
-    @RequestParam(defaultValue = "10") Integer pageSize) {
-        return ResponseEntity.ok(userService.getAllUsers(pageNo,pageSize));
+            @RequestParam(defaultValue = "10") Integer pageSize) {
+        return ResponseEntity.ok(userService.getAllUsers(pageNo, pageSize));
     }
-    
+
     @GetMapping("/get/{id}")
     public ResponseEntity<Users> getUser(@PathVariable String id) {
         return ResponseEntity.ok(userService.getUser(id));
@@ -42,7 +42,7 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/getuser")
-    public ResponseEntity<Users> getUserByemail( HttpServletRequest request){
+    public ResponseEntity<Users> getUserByemail(HttpServletRequest request) {
         String authorizationHeader = request.getHeader("Authorization");
         String jwt = authorizationHeader.substring(7);
         String userEmail = jwtService.extractUserName(jwt);
@@ -54,7 +54,7 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserRole(email));
     }
 
-    @PatchMapping("/update") 
+    @PatchMapping("/update")
     public ResponseEntity<Users> updateUser(@RequestBody Users request) {
         return ResponseEntity.ok(userService.updateUser(request));
     }

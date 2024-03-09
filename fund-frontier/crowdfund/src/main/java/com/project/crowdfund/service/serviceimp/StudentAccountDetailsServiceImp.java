@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class StudentAccountDetailsServiceImp implements StudentAccountDetailsService{
+public class StudentAccountDetailsServiceImp implements StudentAccountDetailsService {
 
     private final StudentAccountDetailsRepository studentAccountDetailsRepository;
 
@@ -23,8 +23,9 @@ public class StudentAccountDetailsServiceImp implements StudentAccountDetailsSer
 
     @Override
     public StudentAccountDetails getStudentAccountDetails(String email) {
-       
-        return studentAccountDetailsRepository.findByEmail(email);}
+
+        return studentAccountDetailsRepository.findByEmail(email);
+    }
 
     @Override
     public List<StudentAccountDetails> findAll() {
@@ -35,5 +36,5 @@ public class StudentAccountDetailsServiceImp implements StudentAccountDetailsSer
     public StudentAccountDetails updateStudentAccountDetails(StudentAccountDetails studentAccountDetails) {
         return studentAccountDetailsRepository.save(studentAccountDetails);
     }
-    
+
 }

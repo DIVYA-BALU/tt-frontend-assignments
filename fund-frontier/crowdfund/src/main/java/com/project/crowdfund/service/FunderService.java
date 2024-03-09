@@ -1,6 +1,5 @@
 package com.project.crowdfund.service;
 
-
 import org.springframework.data.domain.Page;
 
 import com.project.crowdfund.dto.FunderDto;
@@ -20,5 +19,5 @@ public interface FunderService {
     Funder save(RequestDto user);
 
     Funder getFunderByEmail(String userEmail);
-    
+
 }

@@ -1,6 +1,5 @@
 package com.project.crowdfund.service.serviceimp;
 
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,51 +22,50 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImp implements UserService{
+public class UserServiceImp implements UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final RoleRepository roleRepository;
-    private final FunderService funderService ;
+    private final FunderService funderService;
 
     @Override
     public Users save(RequestDto request) {
-        if(userRepository.findByEmail(request.getEmail()).isPresent()) {
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new EmailAlreadyExistsException("Email already exists");
-         }
+        }
 
         Users user = Users.builder()
-                    .email(request.getEmail())
-                    .firstName(request.getFirstName())
-                    .lastName(request.getLastName())
-                    .password(passwordEncoder.encode(request.getPassword()))
-                    .role(roleRepository.findByRole(request.getRole().toUpperCase()))
-                    .build();    
+                .email(request.getEmail())
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .role(roleRepository.findByRole(request.getRole().toUpperCase()))
+                .build();
 
-        userRepository.save(user);   
-         System.out.println(request.getRole());
+        userRepository.save(user);
+        System.out.println(request.getRole());
 
-        if(request.getRole().equals("funder")) {
+        if (request.getRole().equals("funder")) {
             System.out.println(request.getRole());
             funderService.save(request);
         }
-        
+
         return user;
     }
-    
+
     @Override
     public LoginResponse login(LoginRequest request) {
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
-        );
+                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
         var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
         String token = jwtService.generateToken(user);
 
         return LoginResponse.builder()
-                            .token(token)
-                            .build();
+                .token(token)
+                .build();
     }
 
     @Override
@@ -84,7 +82,7 @@ public class UserServiceImp implements UserService{
 
     @Override
     public Users getUserByEmail(String userEmail) {
-       return userRepository.findByEmail(userEmail).get();
+        return userRepository.findByEmail(userEmail).get();
     }
 
     public Role getUserRole(String email) {
@@ -99,5 +97,4 @@ public class UserServiceImp implements UserService{
         return userRepository.save(request);
     }
 
-    
 }

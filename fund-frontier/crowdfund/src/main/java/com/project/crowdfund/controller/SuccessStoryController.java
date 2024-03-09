@@ -22,23 +22,23 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/successstory")
 
 public class SuccessStoryController {
-    
+
     private final SuccessStoryService successStoryService;
 
     @PostMapping("/save")
-    public ResponseEntity<SuccessStory> saveSuccessStory(@RequestBody SuccessStory successStory){
+    public ResponseEntity<SuccessStory> saveSuccessStory(@RequestBody SuccessStory successStory) {
         return ResponseEntity.ok(successStoryService.saveSuccessStory(successStory));
     }
-   
+
     @GetMapping("/getall")
-    public ResponseEntity<Page<SuccessStory>> getAllSuccessStory(@RequestParam(defaultValue = "0") Integer pageNo, @RequestParam(defaultValue = "3") Integer pageSize){
-        return ResponseEntity.ok(successStoryService.getAllSuccessStory(pageNo,pageSize));
+    public ResponseEntity<Page<SuccessStory>> getAllSuccessStory(@RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "3") Integer pageSize) {
+        return ResponseEntity.ok(successStoryService.getAllSuccessStory(pageNo, pageSize));
     }
 
     @PatchMapping("/update")
-    public ResponseEntity<SuccessStory> updateSuccessStory(@RequestBody SuccessStory successStory){
+    public ResponseEntity<SuccessStory> updateSuccessStory(@RequestBody SuccessStory successStory) {
         return ResponseEntity.ok(successStoryService.updateSuccessStory(successStory));
     }
-
 
 }

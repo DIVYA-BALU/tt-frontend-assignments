@@ -62,16 +62,13 @@ public class StudentServiceImp implements StudentService {
         String aadharfpath = path + aadhar;
         String incomefpath = path + income;
         String studentidfpath = path + studentId;
-        String feesfpath = path + fees ;
+        String feesfpath = path + fees;
 
         String profilePath = uploads + profile;
         String aadharPath = uploads + aadhar;
         String incomePath = uploads + income;
         String studentIdPath = uploads + studentId;
         String feesPath = uploads + fees;
-        
-
-      
 
         Users user = userRepository.findByEmail(student.getEmail()).get();
         System.out.println(user.getEmail());
@@ -103,10 +100,9 @@ public class StudentServiceImp implements StudentService {
                 .endDate(localDateTime2)
                 .shortStory(student.getShortStory())
                 .status("Pending")
-                .build();        
+                .build();
 
-
-        Student savedStudent =  studentRepository.save(std);
+        Student savedStudent = studentRepository.save(std);
 
         Files.copy(student.getProfilePhoto().getInputStream(), Paths.get(profilePath));
         Files.copy(student.getAadharCardProof().getInputStream(), Paths.get(aadharPath));
@@ -114,7 +110,7 @@ public class StudentServiceImp implements StudentService {
         Files.copy(student.getStudentIdentityProof().getInputStream(), Paths.get(studentIdPath));
         Files.copy(student.getFeeDetails().getInputStream(), Paths.get(feesPath));
 
-        sendMail(student.getEmail(), savedStudent.getFirstName()+" "+savedStudent.getLastName());
+        sendMail(student.getEmail(), savedStudent.getFirstName() + " " + savedStudent.getLastName());
 
         return savedStudent;
 
@@ -141,38 +137,42 @@ public class StudentServiceImp implements StudentService {
     @Override
     public Page<Student> getAllApproved(int pageNo, int pageSize) {
         PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
-        Page<Student> pagingStudent = studentRepository.findByStatus("Approved",pageRequest);
+        Page<Student> pagingStudent = studentRepository.findByStatus("Approved", pageRequest);
         return pagingStudent;
     }
 
     @Override
     public Page<Student> getAllPending(Integer pageNo, Integer pageSize) {
         PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
-        Page<Student> pagingStudent = studentRepository.findByStatus("Pending",pageRequest);
-        //System.out.println(studentRepository.findByStatus("Approved"));
-        return pagingStudent;  
+        Page<Student> pagingStudent = studentRepository.findByStatus("Pending", pageRequest);
+        // System.out.println(studentRepository.findByStatus("Approved"));
+        return pagingStudent;
     }
 
-    private String sendMail(String email, String name){
-     try {
-            SimpleMailMessage mailMessage
-                = new SimpleMailMessage();
- 
+    private String sendMail(String email, String name) {
+        try {
+            SimpleMailMessage mailMessage = new SimpleMailMessage();
+
             String mailText = "Dear " + name + ",\n" + //
                     "\n" + //
-                    "Thank you for submitting your application to FundFrontier. We have received your request, and it is currently under review.\n" + //
+                    "Thank you for submitting your application to FundFrontier. We have received your request, and it is currently under review.\n"
+                    + //
                     "\n" + //
                     "We want to assure you that our team is diligently working on processing your application.\n" + //
                     "\n" + //
                     "What's Next:\n" + //
                     "\n" + //
-                    "Patience is Appreciated: The review process may take some time as we carefully evaluate each application. We appreciate your patience during this period.\n" + //
+                    "Patience is Appreciated: The review process may take some time as we carefully evaluate each application. We appreciate your patience during this period.\n"
+                    + //
                     "\n" + //
-                    "Stay Connected: We will notify you via email as soon as a decision has been made regarding your application. In the meantime, if you have any questions or need further information, feel free to reach out to us at contact@fundfrontier.com.\n" + //
+                    "Stay Connected: We will notify you via email as soon as a decision has been made regarding your application. In the meantime, if you have any questions or need further information, feel free to reach out to us at contact@fundfrontier.com.\n"
+                    + //
                     "\n" + //
-                    "We understand that waiting can be challenging, but please know that we are committed to providing a thorough and thoughtful review of your application.\n" + //
+                    "We understand that waiting can be challenging, but please know that we are committed to providing a thorough and thoughtful review of your application.\n"
+                    + //
                     "\n" + //
-                    "Thank you for choosing FundFrontier. We look forward to the possibility of having you as part of our program.\n" + //
+                    "Thank you for choosing FundFrontier. We look forward to the possibility of having you as part of our program.\n"
+                    + //
                     "\n" + //
                     "Best regards,\n" + //
                     "\n" + //
@@ -181,10 +181,10 @@ public class StudentServiceImp implements StudentService {
             mailMessage.setTo(email);
             mailMessage.setText(mailText);
             mailMessage.setSubject("Your Request is Under Review - Thank You for Applying!");
- 
+
             javaMailSender.send(mailMessage);
             return "Mail Sent Successfully...";
-        }catch (Exception e) {
+        } catch (Exception e) {
             return "Error while Sending Mail";
         }
     }
@@ -192,36 +192,38 @@ public class StudentServiceImp implements StudentService {
     @Override
     public Student setApproved(String name, Student request) {
         System.out.println(request);
-        Student  student = studentRepository.findByEmail(request.getEmail());
+        Student student = studentRepository.findByEmail(request.getEmail());
         student.setStatus("Approved");
         studentFundsService.saveAmount(student);
         studentRepository.save(student);
         try {
-            SimpleMailMessage mailMessage
-                = new SimpleMailMessage();
- 
-            String mailText = "Dear "+ name + ",\n" + //
-            "\n" + //
-            "We are thrilled to inform you that your application to FundFrontier has been accepted! Welcome to the FundFrontier community.\n" + //
-            "\n" + //
-            "Your journey with us begins now. Whether you are raising funds for a project or supporting others, we're here to support and empower your crowdfunding experience.\n" + //
-            "\n" + //
-            "If you have any questions or need assistance, please feel free to reach out to our support team at [support@fundfrontier.com].\n" + //
-            "\n" + //
-            "Congratulations once again, and thank you for being a part of FundFrontier!\n" + //
-            "\n" + //
-            "Best regards,\n" + //
-            "\n" + //
-            "The FundFrontier Team";
+            SimpleMailMessage mailMessage = new SimpleMailMessage();
+
+            String mailText = "Dear " + name + ",\n" + //
+                    "\n" + //
+                    "We are thrilled to inform you that your application to FundFrontier has been accepted! Welcome to the FundFrontier community.\n"
+                    + //
+                    "\n" + //
+                    "Your journey with us begins now. Whether you are raising funds for a project or supporting others, we're here to support and empower your crowdfunding experience.\n"
+                    + //
+                    "\n" + //
+                    "If you have any questions or need assistance, please feel free to reach out to our support team at [support@fundfrontier.com].\n"
+                    + //
+                    "\n" + //
+                    "Congratulations once again, and thank you for being a part of FundFrontier!\n" + //
+                    "\n" + //
+                    "Best regards,\n" + //
+                    "\n" + //
+                    "The FundFrontier Team";
 
             mailMessage.setFrom(sender);
             mailMessage.setTo(request.getEmail().getEmail());
             mailMessage.setText(mailText);
             mailMessage.setSubject("Congratulations! Your Application Has Been Accepted");
- 
+
             javaMailSender.send(mailMessage);
             return student;
-        }catch (Exception e) {
+        } catch (Exception e) {
             return student;
         }
     }
@@ -230,37 +232,39 @@ public class StudentServiceImp implements StudentService {
 
         String email = student.getEmail();
         Student std = Student.builder()
-                      .status("Rejected")
-                      .build();
+                .status("Rejected")
+                .build();
         studentRepository.save(std);
-        
+
         try {
-            SimpleMailMessage mailMessage
-                = new SimpleMailMessage();
- 
-            String mailText = "Dear " + student.getFirstName()+" "+ student.getLastName()+ ",\n" + //
-            "\n" + //
-            "We regret to inform you that your application to FundFrontier has been carefully reviewed, and unfortunately, it has not been accepted at this time.\n" + //
-            "\n" + //
-            student.getReason()+//
-            "\n" + //
-            "We appreciate your interest in FundFrontier and value the effort you put into your application. Our team had to make tough decisions, and unfortunately, we are unable to proceed with your application at this time.\n" + //
-            "\n" + //
-            "If you have any specific feedback or questions about the decision, please don't hesitate to reach out to our support team at [support@fundfrontier.com].\n" + //
-            "\n" + //
-            "Thank you for considering FundFrontier, and we wish you success in your future endeavors.\n" + //
-            "\n" + //
-            "Best regards,\n" + //
-            "The FundFrontier Team";
+            SimpleMailMessage mailMessage = new SimpleMailMessage();
+
+            String mailText = "Dear " + student.getFirstName() + " " + student.getLastName() + ",\n" + //
+                    "\n" + //
+                    "We regret to inform you that your application to FundFrontier has been carefully reviewed, and unfortunately, it has not been accepted at this time.\n"
+                    + //
+                    "\n" + //
+                    student.getReason() + //
+                    "\n" + //
+                    "We appreciate your interest in FundFrontier and value the effort you put into your application. Our team had to make tough decisions, and unfortunately, we are unable to proceed with your application at this time.\n"
+                    + //
+                    "\n" + //
+                    "If you have any specific feedback or questions about the decision, please don't hesitate to reach out to our support team at [support@fundfrontier.com].\n"
+                    + //
+                    "\n" + //
+                    "Thank you for considering FundFrontier, and we wish you success in your future endeavors.\n" + //
+                    "\n" + //
+                    "Best regards,\n" + //
+                    "The FundFrontier Team";
 
             mailMessage.setFrom(sender);
             mailMessage.setTo(email);
             mailMessage.setText(mailText);
             mailMessage.setSubject("Notification Regarding Your FundFrontier Application");
- 
+
             javaMailSender.send(mailMessage);
             return "Mail Sent Successfully...";
-        }catch (Exception e) {
+        } catch (Exception e) {
             return "Error while Sending Mail";
         }
     }
@@ -272,28 +276,27 @@ public class StudentServiceImp implements StudentService {
 
         String profile = file.getOriginalFilename();
         String profilePath = uploads + profile;
-        Files.copy(file.getInputStream(),Paths.get(profilePath),StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(file.getInputStream(), Paths.get(profilePath), StandardCopyOption.REPLACE_EXISTING);
         student.setProfilePhoto(profilePath);
         studentRepository.save(student);
 
         return "profile updated";
-        
+
     }
 
     @Override
     public List<Student> searchByGroup(String group) {
-       return studentRepository.findByCourse(group);
+        return studentRepository.findByCourse(group);
     }
 
     @Override
     public List<Student> searchByYear(String year) {
-       return studentRepository.findByYearOfStudy(year);
+        return studentRepository.findByYearOfStudy(year);
     }
 
     @Override
     public List<Student> searchByCollege(String college) {
-      return studentRepository.findByCollegeName(college);
+        return studentRepository.findByCollegeName(college);
     }
-    
 
 }

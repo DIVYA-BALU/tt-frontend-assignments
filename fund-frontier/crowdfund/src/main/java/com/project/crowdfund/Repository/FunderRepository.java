@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import com.project.crowdfund.model.Funder;
 
 @Repository
-public interface FunderRepository extends MongoRepository<Funder,String>{
+public interface FunderRepository extends MongoRepository<Funder, String> {
 
     Funder findByEmail(String email);
-    
+
 }

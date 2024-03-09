@@ -14,12 +14,12 @@ public interface UserService {
 
     LoginResponse login(LoginRequest user);
 
-    Page<Users> getAllUsers(Integer pageNo,Integer pageSize);
+    Page<Users> getAllUsers(Integer pageNo, Integer pageSize);
 
     Users getUser(String id);
 
     Users getUserByEmail(String userEmail);
-    
+
     Role getUserRole(String email);
 
     Users updateUser(Users request);

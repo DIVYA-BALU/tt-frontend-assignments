@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.project.crowdfund.model.Users;
 
-
 @Repository
 public interface UserRepository extends MongoRepository<Users, String> {
 
@@ -15,6 +14,6 @@ public interface UserRepository extends MongoRepository<Users, String> {
 
     public boolean existsByEmail(String email);
 
-    public Users  findBy_id(String _id);
+    public Users findBy_id(String _id);
 
 }

@@ -1,5 +1,7 @@
 package com.project.crowdfund.service.serviceimp;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -30,6 +32,11 @@ public class FundsServiceImp implements FundsService {
         PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
         Page<Funds> pagingFunds = fundsRepository.findAll(pageRequest);
         return pagingFunds;
+    }
+
+    @Override
+    public List<Funds> getStudentsByFunder(String email) {
+        return fundsRepository.findByFunderEmail(email);
     }
 
 }

@@ -1,6 +1,5 @@
 package com.project.crowdfund.service.serviceimp;
 
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -13,10 +12,10 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class SuccessStoryServiceImp implements SuccessStoryService{
+public class SuccessStoryServiceImp implements SuccessStoryService {
 
-    private final  SuccessStoryRepository successStoryRepository;
-    
+    private final SuccessStoryRepository successStoryRepository;
+
     @Override
     public SuccessStory saveSuccessStory(SuccessStory successStory) {
         return successStoryRepository.save(successStory);
@@ -33,5 +32,5 @@ public class SuccessStoryServiceImp implements SuccessStoryService{
     public SuccessStory updateSuccessStory(SuccessStory successStory) {
         return successStoryRepository.save(successStory);
     }
-    
+
 }

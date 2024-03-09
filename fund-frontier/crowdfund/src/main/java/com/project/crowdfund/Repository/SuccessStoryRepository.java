@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.project.crowdfund.model.SuccessStory;
 
 @Repository
-public interface SuccessStoryRepository extends MongoRepository<SuccessStory,String>{
-    
+public interface SuccessStoryRepository extends MongoRepository<SuccessStory, String> {
+
 }

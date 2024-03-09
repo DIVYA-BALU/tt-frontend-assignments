@@ -14,27 +14,27 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class FunderServiceImp implements FunderService{
+public class FunderServiceImp implements FunderService {
 
     private final FunderRepository funderRepository;
 
     @Override
-    public Funder saveFunder(FunderDto funderDto) {   
+    public Funder saveFunder(FunderDto funderDto) {
 
         Funder funder = Funder.builder()
-                        ._id(funderDto.get_id())
-                        .firstName(funderDto.getFirstName())
-                        .lastName(funderDto.getLastName())
-                        .email(funderDto.getEmail())
-                        .phoneNumber(funderDto.getPhoneNumber())
-                        .countryOfBirth(funderDto.getCountryOfBirth())
-                        .countryOfResidence(funderDto.getCountryOfResidence())
-                        .address(funderDto.getAddress())
-                        .city(funderDto.getCity())
-                        .state(funderDto.getState())
-                        .zipCode(funderDto.getZipCode())
-                        .occupation(funderDto.getOccupation())
-                        .build();
+                ._id(funderDto.get_id())
+                .firstName(funderDto.getFirstName())
+                .lastName(funderDto.getLastName())
+                .email(funderDto.getEmail())
+                .phoneNumber(funderDto.getPhoneNumber())
+                .countryOfBirth(funderDto.getCountryOfBirth())
+                .countryOfResidence(funderDto.getCountryOfResidence())
+                .address(funderDto.getAddress())
+                .city(funderDto.getCity())
+                .state(funderDto.getState())
+                .zipCode(funderDto.getZipCode())
+                .occupation(funderDto.getOccupation())
+                .build();
         return funderRepository.save(funder);
     }
 
@@ -55,27 +55,27 @@ public class FunderServiceImp implements FunderService{
         return saveFunder(funderDto);
     }
 
-    public Funder save(RequestDto user) {   
+    public Funder save(RequestDto user) {
 
         Funder funder = Funder.builder()
-                        .firstName(user.getFirstName())
-                        .lastName(user.getLastName())
-                        .email(user.getEmail())
-                        .phoneNumber("")
-                        .countryOfBirth("")
-                        .countryOfResidence("")
-                        .address("")
-                        .city("")
-                        .state("")
-                        .zipCode("")
-                        .occupation("")
-                        .build();
-                        System.out.println(funder);
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .email(user.getEmail())
+                .phoneNumber("")
+                .countryOfBirth("")
+                .countryOfResidence("")
+                .address("")
+                .city("")
+                .state("")
+                .zipCode("")
+                .occupation("")
+                .build();
+        System.out.println(funder);
         return funderRepository.save(funder);
     }
 
     @Override
     public Funder getFunderByEmail(String userEmail) {
         return funderRepository.findByEmail(userEmail);
-        }
+    }
 }

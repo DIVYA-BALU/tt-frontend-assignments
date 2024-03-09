@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class AuthController {
 
     private final UserService userService;
-    
+
     @PostMapping("/register")
     public ResponseEntity<Users> signup(@RequestBody RequestDto request) {
         return ResponseEntity.ok(userService.save(request));
@@ -30,7 +30,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest user) {
-       return ResponseEntity.ok( userService.login(user));
+        return ResponseEntity.ok(userService.login(user));
     }
-    
+
 }

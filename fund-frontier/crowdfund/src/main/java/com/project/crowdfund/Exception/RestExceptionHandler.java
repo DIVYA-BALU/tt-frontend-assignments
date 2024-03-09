@@ -11,5 +11,5 @@ public class RestExceptionHandler {
     public ResponseEntity<?> emailAlreadyExists() {
         return ResponseEntity.badRequest().body("Email already exists");
     }
-    
+
 }

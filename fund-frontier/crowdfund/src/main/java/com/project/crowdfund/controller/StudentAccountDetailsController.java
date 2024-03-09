@@ -23,22 +23,24 @@ public class StudentAccountDetailsController {
     private final StudentAccountDetailsService studentAccountDetailsService;
 
     @PostMapping("/save")
-    public ResponseEntity<StudentAccountDetails> saveStudentAccountDetails(@RequestBody StudentAccountDetails studentAccountDetails){
+    public ResponseEntity<StudentAccountDetails> saveStudentAccountDetails(
+            @RequestBody StudentAccountDetails studentAccountDetails) {
         return ResponseEntity.ok(studentAccountDetailsService.saveStudentAccountDetails(studentAccountDetails));
     }
 
     @GetMapping("/get/{email}")
-    public ResponseEntity<StudentAccountDetails> getStudentAccountDetails(@PathVariable String email){
+    public ResponseEntity<StudentAccountDetails> getStudentAccountDetails(@PathVariable String email) {
         return ResponseEntity.ok(studentAccountDetailsService.getStudentAccountDetails(email));
     }
 
     @GetMapping("/findall")
-    public ResponseEntity<List<StudentAccountDetails>> findAll(){
-        return ResponseEntity.ok( studentAccountDetailsService.findAll());
+    public ResponseEntity<List<StudentAccountDetails>> findAll() {
+        return ResponseEntity.ok(studentAccountDetailsService.findAll());
     }
 
     @PatchMapping("/update")
-    public ResponseEntity<StudentAccountDetails> updateStudentAccountDetails(@RequestBody StudentAccountDetails studentAccountDetails){
+    public ResponseEntity<StudentAccountDetails> updateStudentAccountDetails(
+            @RequestBody StudentAccountDetails studentAccountDetails) {
         return ResponseEntity.ok(studentAccountDetailsService.updateStudentAccountDetails(studentAccountDetails));
     }
 

@@ -13,5 +13,5 @@ public interface StudentAccountDetailsService {
     List<StudentAccountDetails> findAll();
 
     StudentAccountDetails updateStudentAccountDetails(StudentAccountDetails studentAccountDetails);
-    
+
 }

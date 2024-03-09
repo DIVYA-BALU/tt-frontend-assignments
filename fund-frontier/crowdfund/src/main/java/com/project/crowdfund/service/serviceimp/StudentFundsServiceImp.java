@@ -11,17 +11,17 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class StudentFundsServiceImp implements StudentFundsService{
+public class StudentFundsServiceImp implements StudentFundsService {
 
     private final StudentFundsRepository studentFundsRepository;
-    
+
     @Override
     public StudentFunds saveAmount(Student student) {
 
         StudentFunds studentFund = StudentFunds.builder()
-        .studentEmail(student.getEmail().getEmail())
-        .amount(0.00)
-        .build();
+                .studentEmail(student.getEmail().getEmail())
+                .amount(0.00)
+                .build();
         System.out.println(studentFund);
         studentFundsRepository.save(studentFund);
         return studentFund;
@@ -29,19 +29,19 @@ public class StudentFundsServiceImp implements StudentFundsService{
 
     @Override
     public StudentFunds updateFund(StudentFunds studentFunds) {
-       return studentFundsRepository.save(studentFunds);
+        return studentFundsRepository.save(studentFunds);
     }
 
     @Override
     public StudentFunds getStudent(String email) {
-       return studentFundsRepository.findByStudentEmail(email);
+        return studentFundsRepository.findByStudentEmail(email);
     }
 
     @Override
     public void addAmount(String studentEmail, Double studentAmount) {
         StudentFunds studentFunds = studentFundsRepository.findByStudentEmail(studentEmail);
-        studentFunds.setAmount(studentAmount+studentFunds.getAmount());
+        studentFunds.setAmount(studentAmount + studentFunds.getAmount());
         studentFundsRepository.save(studentFunds);
     }
-    
+
 }

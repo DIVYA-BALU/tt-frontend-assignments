@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import com.project.crowdfund.model.StudentAccountDetails;
 
 @Repository
-public interface StudentAccountDetailsRepository extends MongoRepository<StudentAccountDetails,String>{
+public interface StudentAccountDetailsRepository extends MongoRepository<StudentAccountDetails, String> {
 
     StudentAccountDetails findByEmail(String email);
-    
+
 }

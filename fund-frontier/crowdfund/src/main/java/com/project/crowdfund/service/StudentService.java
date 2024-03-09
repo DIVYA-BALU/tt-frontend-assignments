@@ -25,7 +25,7 @@ public interface StudentService {
 
     String setRejected(StudentDto student);
 
-    String updateProfile(MultipartFile file,String email) throws IOException;
+    String updateProfile(MultipartFile file, String email) throws IOException;
 
     List<Student> searchByGroup(String group);
 
@@ -34,6 +34,5 @@ public interface StudentService {
     List<Student> searchByCollege(String college);
 
     Page<Student> getAllPending(Integer pageNo, Integer pageSize);
-    
 
 }

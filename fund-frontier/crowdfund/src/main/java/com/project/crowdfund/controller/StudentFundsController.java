@@ -23,10 +23,10 @@ public class StudentFundsController {
     private final StudentFundsService studentFundsService;
 
     @PutMapping("/update")
-    public ResponseEntity<StudentFunds> updateFund(@RequestBody StudentFunds studentFunds){
+    public ResponseEntity<StudentFunds> updateFund(@RequestBody StudentFunds studentFunds) {
         return ResponseEntity.ok(studentFundsService.updateFund(studentFunds));
     }
-    
+
     @GetMapping("/getstudent/{email}")
     public ResponseEntity<StudentFunds> getStudent(@PathVariable String email) {
         return ResponseEntity.ok(studentFundsService.getStudent(email));

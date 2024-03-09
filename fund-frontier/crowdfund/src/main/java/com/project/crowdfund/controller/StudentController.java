@@ -32,37 +32,37 @@ public class StudentController {
     private final StudentService studentService;
 
     @PostMapping("/save")
-    public ResponseEntity<Student> saveStudent(@ModelAttribute StudentDto student) throws IOException{
+    public ResponseEntity<Student> saveStudent(@ModelAttribute StudentDto student) throws IOException {
         System.out.println(student.getProfilePhoto());
         return ResponseEntity.ok(studentService.saveStudent(student));
     }
 
     @GetMapping("/get/{email}")
-    public ResponseEntity<Student> getStudent(@PathVariable String email){
+    public ResponseEntity<Student> getStudent(@PathVariable String email) {
         return ResponseEntity.ok(studentService.getStudent(email));
     }
 
     @PatchMapping("/update")
-    public ResponseEntity<Student> updateStudent(@RequestBody Student student){
+    public ResponseEntity<Student> updateStudent(@RequestBody Student student) {
         return ResponseEntity.ok(studentService.updateStudent(student));
     }
 
     @GetMapping("/findall")
     public ResponseEntity<Page<Student>> findAll(@RequestParam(defaultValue = "0") Integer pageNo,
-    @RequestParam(defaultValue = "10") Integer pageSize){
-        return ResponseEntity.ok(studentService.findAll(pageNo,pageSize));
+            @RequestParam(defaultValue = "10") Integer pageSize) {
+        return ResponseEntity.ok(studentService.findAll(pageNo, pageSize));
     }
 
     @GetMapping("/getallapproved")
     public ResponseEntity<Page<Student>> getAllApproved(@RequestParam(defaultValue = "0") Integer pageNo,
-    @RequestParam(defaultValue = "10") Integer pageSize){
+            @RequestParam(defaultValue = "10") Integer pageSize) {
         System.out.println("called");
         return ResponseEntity.ok(studentService.getAllApproved(pageNo, pageSize));
     }
 
     @GetMapping("/getallpending")
     public ResponseEntity<Page<Student>> getAllPending(@RequestParam(defaultValue = "0") Integer pageNo,
-    @RequestParam(defaultValue = "10") Integer pageSize){
+            @RequestParam(defaultValue = "10") Integer pageSize) {
         System.out.println("called");
         return ResponseEntity.ok(studentService.getAllPending(pageNo, pageSize));
     }
@@ -80,8 +80,9 @@ public class StudentController {
     }
 
     @PatchMapping("/updateProfile")
-    public ResponseEntity<String> updateProfile(@RequestParam MultipartFile file, @RequestParam String email) throws IOException{
-        return ResponseEntity.ok(studentService.updateProfile(file,email));
+    public ResponseEntity<String> updateProfile(@RequestParam MultipartFile file, @RequestParam String email)
+            throws IOException {
+        return ResponseEntity.ok(studentService.updateProfile(file, email));
     }
 
     @GetMapping("/searchbygroup/{group}")
