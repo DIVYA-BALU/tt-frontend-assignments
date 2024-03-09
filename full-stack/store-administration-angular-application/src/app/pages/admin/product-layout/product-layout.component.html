@@ -3,34 +3,34 @@
 </div>
 
 <div class="search-and-filters">
-  
+
   <mat-form-field class="example-form-field">
     <mat-label>Search By Product Name</mat-label>
     <input matInput type="text" [(ngModel)]="searchByName" (ngModelChange)="onSearchFilterChange()">
   </mat-form-field>
-  
+
   <mat-form-field appearance="fill">
     <mat-label>Filter By Branch</mat-label>
     <mat-select [(ngModel)]="branchId">
-      <mat-option [value]="">All branches</mat-option>
-      <mat-option *ngFor="let branch of branches" [value]="branch._id" (click)="onSearchFilterChange()">
+      <mat-option [value]="" appRole requiredRole="ADMIN" (click)="onSearchFilterChange()">All branches</mat-option>
+      <mat-option *ngFor="let branch of branches" [value]="branch._id" (click)="onSearchFilterChange()"
+        appBranch requiredBranchId={{branch._id}}>
         {{branch.name}}
       </mat-option>
     </mat-select>
   </mat-form-field>
-  
+
   <mat-form-field appearance="fill">
     <mat-label>Filter By Section</mat-label>
     <mat-select [(ngModel)]="sectionId">
-      <mat-option [value]="">All sections</mat-option>
+      <mat-option [value]="" (click)="onSearchFilterChange()">All sections</mat-option>
       <mat-option *ngFor="let section of sections" [value]="section._id" (click)="onSearchFilterChange()">
         {{section.name}}
       </mat-option>
     </mat-select>
   </mat-form-field>
-  
-</div>
 
+</div>
 
 <div class="table-div">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -39,12 +39,12 @@
         <th mat-header-cell *matHeaderCellDef> S.No </th>
         <td mat-cell *matCellDef="let i = index"> {{i+1}} </td>
       </ng-container>
-      
+
       <ng-container matColumnDef="Product Name">
         <th mat-header-cell *matHeaderCellDef> Product Name </th>
         <td mat-cell *matCellDef="let product"> {{product.productName}} </td>
       </ng-container>
-      
+
       <ng-container matColumnDef="Branch">
         <th mat-header-cell *matHeaderCellDef> Branch </th>
         <td mat-cell *matCellDef="let product"> {{product.branch.name}} </td>
@@ -95,7 +95,7 @@
   </table>
 </div>
 <mat-paginator [length]="totalProducts" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page"
-(page)="onPageChange($event)">
+  (page)="onPageChange($event)">
 </mat-paginator>
 <div class="make-bill">
   <button mat-button (click)="makeBill()">Make Bill</button>

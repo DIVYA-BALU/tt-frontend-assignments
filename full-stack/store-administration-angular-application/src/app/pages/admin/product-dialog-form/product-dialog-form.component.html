@@ -1,6 +1,6 @@
 <div class="form-div">
   <h1>FILL PRODUCT DETAILS</h1>
-  <form [formGroup]="productCreationForm" (ngSubmit)="submit()">
+  <form [formGroup]="productCreationForm">
     <div>
       <label for="productName">Product Name:</label>
       <input type="text" id="productName" formControlName="productName">
@@ -49,7 +49,7 @@
     </div>
     <div>
       <mat-spinner diameter="32" *ngIf="isLoading"></mat-spinner>
-      <button type="submit" [disabled]="productCreationForm.invalid || isLoading">Save</button>
+      <button type="submit" [disabled]="productCreationForm.invalid || isLoading" (click)="submit()"  >Save</button>
       <button type="button" (click)="closeProductDialogForm()">Close</button>
     </div>
   </form>

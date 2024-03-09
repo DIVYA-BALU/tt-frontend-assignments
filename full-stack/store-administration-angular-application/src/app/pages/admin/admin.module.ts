@@ -25,6 +25,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { SectionWiseAnalysisComponent } from './section-wise-analysis/section-wise-analysis.component';
+import { DateWiseAnalysisComponent } from './date-wise-analysis/date-wise-analysis.component';
+import { PermissionDirective } from 'src/app/directives/permission.directive';
+import { BranchDirective } from 'src/app/directives/branch.directive';
+import { RoleDirective } from 'src/app/directives/role.directive';
+import { MatButtonModule } from '@angular/material/button';
+import { UserUpdateFormComponent } from './user-update-form/user-update-form.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +46,12 @@ import { SectionWiseAnalysisComponent } from './section-wise-analysis/section-wi
     UserEnrollmentDialogFormComponent,
     InvestmentDialogFormComponent,
     BillComponent,
-    SectionWiseAnalysisComponent
+    SectionWiseAnalysisComponent,
+    DateWiseAnalysisComponent,
+    PermissionDirective,
+    BranchDirective,
+    RoleDirective,
+    UserUpdateFormComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +66,8 @@ import { SectionWiseAnalysisComponent } from './section-wise-analysis/section-wi
     MatIconModule,
     MatFormFieldModule, 
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatButtonModule
   ]
 })
 export class AdminModule { }

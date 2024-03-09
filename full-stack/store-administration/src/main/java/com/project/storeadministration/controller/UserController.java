@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +46,11 @@ public class UserController {
     return userService.enrollUser(request, signUp);
   }
 
+  @PutMapping
+  public ResponseEntity<User> updateUser(@RequestBody User user) throws CustomException {
+    return new ResponseEntity<User>(userService.updateUser(user), HttpStatus.OK);
+  }
+
   @PatchMapping("/{userId}/updateSection/{sectionId}")
   public ResponseEntity<User> updateSection(@PathVariable String userId, @PathVariable String sectionId) {
     return new ResponseEntity<User>(userService.updateSection(userId, sectionId), HttpStatus.OK);
@@ -55,6 +61,6 @@ public class UserController {
       @RequestParam(defaultValue = "10") int pageSize, @RequestParam String branchId, @RequestParam String searchByName)
       throws CustomException {
     return new ResponseEntity<Page<User>>(
-        userService.getUsers(pageNo, pageSize, branchId), HttpStatus.OK);
+        userService.getUsers(pageNo, pageSize, branchId, searchByName), HttpStatus.OK);
   }
 }

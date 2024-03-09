@@ -7,11 +7,9 @@
     <div>
       <label for="branchName">Branch Name:</label>
       <input type="text" id="branchName" formControlName="name">
-
-      <div *ngIf="branchCreationForm.get('branchName')?.invalid && branchCreationForm.get('branchName')?.touched">
-        <span *ngIf="branchCreationForm.get('branchName')?.hasError('required')">Branch Name is required</span>
+      <div *ngIf="branchCreationForm.get('name')?.invalid && branchCreationForm.get('branchName')?.touched">
+        <span *ngIf="branchCreationForm.get('name')?.hasError('required')">Branch Name is required</span>
       </div>
-
     </div>
 
     <div>

@@ -10,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.aggregation.ArithmeticOperators;
-import org.springframework.data.mongodb.core.aggregation.ArithmeticOperators.Multiply;
+import org.springframework.data.mongodb.core.aggregation.MatchOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Repository;
 
@@ -97,52 +99,104 @@ public class CustomBillRepository {
     AggregationResults<IncomeStatement> results = mongoTemplate.aggregate(aggregation, "bills",
         IncomeStatement.class);
 
-    List<IncomeStatement> IncomeStatements = results.getMappedResults();
+    List<IncomeStatement> incomeStatements = results.getMappedResults();
 
     int pageSize = pageable.getPageSize();
     int currentPage = pageable.getPageNumber();
     int startItem = currentPage * pageSize;
     List<IncomeStatement> paginatedList;
 
-    for (IncomeStatement statement : IncomeStatements) {
+    for (IncomeStatement statement : incomeStatements) {
       Section section = sectionRepository.findById(statement.getSectionId()).orElse(null);
       if (section != null) {
         statement.setSectionName(section.getName());
       }
     }
 
-    if (IncomeStatements.size() < startItem) {
+    if (incomeStatements.size() < startItem) {
       paginatedList = Collections.emptyList();
     } else {
-      int toIndex = Math.min(startItem + pageSize, IncomeStatements.size());
-      paginatedList = IncomeStatements.subList(startItem, toIndex);
+      int toIndex = Math.min(startItem + pageSize, incomeStatements.size());
+      paginatedList = incomeStatements.subList(startItem, toIndex);
     }
 
-    return new PageImpl<>(paginatedList, PageRequest.of(currentPage, pageSize), IncomeStatements.size());
+    return new PageImpl<>(paginatedList, PageRequest.of(currentPage, pageSize), incomeStatements.size());
   }
 
-  public List<IncomeStatement> getSectionWiseIncomeStatementForBranch(String branchId, LocalDate date) {
+  public Page<IncomeStatement> getSectionWiseIncomeStatementForBranch(Pageable pageable, String branchId) {
     Aggregation aggregation = Aggregation.newAggregation(
-      Aggregation.match(Criteria.where("products.branch").is(branchId)),
-      Aggregation.unwind("billItems"),
-      Aggregation.lookup("products", "billItems.product", "_id", "products"),
-      Aggregation.unwind("products"),
-      Aggregation.group("products.branch", "products.section")
-            .first("products.branch").as("branchId")
+        Aggregation.unwind("billItems"),
+        Aggregation.match(Criteria.where("branchId").is(branchId)),
+        Aggregation.lookup("products", "billItems.product", "_id", "products"),
+        Aggregation.unwind("products"),
+        Aggregation.group("products.branch", "products.section")
+            .first("products.branch._id").as("branchId")
             .first("products.branch.name").as("branchName")
             .first("products.section").as("sectionId")
-            .sum(Multiply.valueOf("$billItems.quantity").multiplyBy("$products.price")).as("revenue")
-            .sum(Multiply.valueOf("$billItems.quantity").multiplyBy("$products.cogs")).as("cogs"),
-            Aggregation.project()
-            .andExpression("_id.branchId").as("branchId")
-            .andExpression("branchName").as("branchName")
-            .andExpression("_id.sectionId").as("sectionId")
-            .and("revenue").as("revenue")
-            .and("cogs").as("cogs")
+            .sum(
+                ArithmeticOperators.Multiply.valueOf("$billItems.quantity").multiplyBy("$products.price"))
+            .as("revenue")
+            .sum(
+                ArithmeticOperators.Multiply.valueOf("$billItems.quantity").multiplyBy("$products.cogs"))
+            .as("cogs"));
+
+    AggregationResults<IncomeStatement> results = mongoTemplate.aggregate(aggregation, "bills", IncomeStatement.class);
+    List<IncomeStatement> incomeStatements = results.getMappedResults();
+
+    int pageSize = pageable.getPageSize();
+    int currentPage = pageable.getPageNumber();
+    int startItem = currentPage * pageSize;
+    List<IncomeStatement> pageIncomeStatements;
+
+    if (incomeStatements.size() < startItem) {
+      pageIncomeStatements = Collections.emptyList();
+    } else {
+      int toIndex = Math.min(startItem + pageSize, incomeStatements.size());
+      pageIncomeStatements = incomeStatements.subList(startItem, toIndex);
+    }
+
+    for (IncomeStatement statement : pageIncomeStatements) {
+      Section section = sectionRepository.findById(statement.getSectionId()).orElse(null);
+      if (section != null) {
+        statement.setSectionName(section.getName());
+      }
+    }
+
+    return new PageImpl<>(pageIncomeStatements, pageable, incomeStatements.size());
+  }
+
+  public Page<IncomeStatement> getDateWiseIncomeStatementForSection(Pageable pageable, String branchId,
+      String sectionId) {
+    Aggregation aggregation = Aggregation.newAggregation(
+        Aggregation.match(Criteria.where("branchId").is(branchId)
+            .and("sectionId").is(sectionId)),
+        Aggregation.unwind("billItems"),
+        Aggregation.group("billItems.date")
+            .first("billItems.date").as("date")
+            .sum(
+                ArithmeticOperators.Multiply.valueOf("$billItems.quantity").multiplyBy("$billItems.product.price"))
+            .as("revenue")
+            .sum(
+                ArithmeticOperators.Multiply.valueOf("$billItems.quantity").multiplyBy("$billItems.product.cogs"))
+            .as("cogs"),
+        Aggregation.sort(Sort.by(Sort.Direction.DESC, "date"))
     );
 
     AggregationResults<IncomeStatement> results = mongoTemplate.aggregate(aggregation, "bills", IncomeStatement.class);
-    return results.getMappedResults();
-}
+    List<IncomeStatement> incomeStatements = results.getMappedResults();
 
+    int pageSize = pageable.getPageSize();
+    int currentPage = pageable.getPageNumber();
+    int startItem = currentPage * pageSize;
+    List<IncomeStatement> pageIncomeStatements;
+
+    if (incomeStatements.size() < startItem) {
+      pageIncomeStatements = Collections.emptyList();
+    } else {
+      int toIndex = Math.min(startItem + pageSize, incomeStatements.size());
+      pageIncomeStatements = incomeStatements.subList(startItem, toIndex);
+    }
+
+    return new PageImpl<>(pageIncomeStatements, pageable, incomeStatements.size());
+  }
 }

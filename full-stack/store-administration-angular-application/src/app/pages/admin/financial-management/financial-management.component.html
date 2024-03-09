@@ -38,7 +38,7 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumnsForBranchWiseAnalysis"></tr>
     <tr mat-row *matRowDef="let incomeStatement; columns: displayedColumnsForBranchWiseAnalysis"
-      (click)="onRowClicked(incomeStatement.sectionId, incomeStatement.branchId)">
+      (click)="onRowClicked(incomeStatement.branchId,incomeStatement.branchName)">
     </tr>
   </table>
 

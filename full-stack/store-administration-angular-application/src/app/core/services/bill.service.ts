@@ -24,19 +24,32 @@ export class BillService {
 
   getSectionWiseAnalysis(page: number = 0, size: number = 10): Observable<PaginatedResponse<IncomeStatement>> {
     const params = new HttpParams()
-    .set('pageNo', page.toString())
-    .set('pageSize', size.toString());
-    return this.http.get<PaginatedResponse<IncomeStatement>>(`${environment.API_URL}${Constants.API_END_POINT.BILLS}/sectionWiseAnalysis`,  { params: params });
+      .set('pageNo', page.toString())
+      .set('pageSize', size.toString());
+    return this.http.get<PaginatedResponse<IncomeStatement>>(`${environment.API_URL}${Constants.API_END_POINT.BILLS}/sectionWiseAnalysis`, { params: params });
   }
 
   getBranchWiseAnalysis(page: number = 0, size: number = 10): Observable<PaginatedResponse<IncomeStatement>> {
     const params = new HttpParams()
-    .set('pageNo', page.toString())
-    .set('pageSize', size.toString());
+      .set('pageNo', page.toString())
+      .set('pageSize', size.toString());
     return this.http.get<PaginatedResponse<IncomeStatement>>(`${environment.API_URL}${Constants.API_END_POINT.BILLS}/branchWiseAnalysis`, { params: params });
   }
 
-  getSectionWiseAnalysisForBranch(): Observable<PaginatedResponse<IncomeStatement>> {
-    return this.http.get<PaginatedResponse<IncomeStatement>>(`${environment.API_URL}${Constants.API_END_POINT.BILLS}/sectionWiseAnalysisForBranch`);
+  getSectionWiseAnalysisForBranch(page: number, size: number, branchId: string): Observable<PaginatedResponse<IncomeStatement>> {
+    const params = new HttpParams()
+      .set('branchId', branchId)
+      .set('pageNo', page.toString())
+      .set('pageSize', size.toString());
+    return this.http.get<PaginatedResponse<IncomeStatement>>(`${environment.API_URL}${Constants.API_END_POINT.BILLS}/sectionWiseAnalysisForBranch`, { params: params });
+  }
+
+  getDateWiseAnalysisForSection(page: number, size: number, branchId: string, sectionId: string): Observable<PaginatedResponse<IncomeStatement>> {
+    const params = new HttpParams()
+      .set('branchId', branchId)
+      .set('sectionId', sectionId)
+      .set('pageNo', page.toString())
+      .set('pageSize', size.toString());
+    return this.http.get<PaginatedResponse<IncomeStatement>>(`${environment.API_URL}${Constants.API_END_POINT.BILLS}/dateWiseAnalysisForBranch`, { params: params });
   }
 }

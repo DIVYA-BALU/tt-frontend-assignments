@@ -22,7 +22,7 @@ export class AuthService {
     if(loginResponseString !== null)
     {
       this.isLoggedIn = true;
-      userDetailsService.setLoginResponseSubject(JSON.parse(loginResponseString));
+      this.userDetailsService.setLoginResponseSubject(JSON.parse(loginResponseString));
     }
 
   }
@@ -35,6 +35,7 @@ export class AuthService {
     ).pipe(
       tap((loginResponse: LoginResponse) => {
         localStorage.setItem("loginResponse", JSON.stringify(loginResponse));
+        this.userDetailsService.setLoginResponseSubject(loginResponse);
         this.isLoggedIn = true;
       }),
       catchError((error) => {

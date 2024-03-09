@@ -99,9 +99,8 @@ export class FinancialManagementComponent {
     this.getSectionWiseAnalysis();
   }
 
-  onRowClicked(branchId: string, sectionId: string){
+  onRowClicked(branchId: string, branchName: string){
     this.router.navigate(['admin/section-wise-analysis-for-branch'], { 
-      queryParams: { sectionId, branchId }
-    });
+      queryParams: { branchId: branchId, branchName: branchName }    });
   }
 }

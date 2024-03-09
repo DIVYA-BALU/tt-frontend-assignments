@@ -11,6 +11,7 @@ import { Constants } from '../constants/Constants';
 export class UserDetailsService {
 
   private loginResponseSubject: BehaviorSubject<LoginResponse> = new BehaviorSubject<LoginResponse>(new LoginResponse("", [], "", "", new Role("", "", []), []));
+  public loginResponseSubject$: Observable<LoginResponse> = this.loginResponseSubject.asObservable();
   private paginatedUsers: BehaviorSubject<PaginatedResponse<UserDetails>> = new BehaviorSubject<PaginatedResponse<UserDetails>>({
     content: [],
     pageable: {
@@ -29,16 +30,12 @@ export class UserDetailsService {
     this.loginResponseSubject.next(loginResponse);
   }
 
-  getLoginResponseSubject(): BehaviorSubject<LoginResponse> {
-    return this.loginResponseSubject;
-  }
-
   getPaginatedUserDetails(page: number, size: number, branchId: string, searchByName: string): Observable<PaginatedResponse<UserDetails>> {
     const params = new HttpParams()
       .set('pageNo', page.toString())
       .set('pageSize', size.toString())
       .set('branchId', branchId)
-      .set('searchByName', searchByName);      
+      .set('searchByName', searchByName);
     return this.http.get<PaginatedResponse<UserDetails>>(`${environment.API_URL}${Constants.API_END_POINT.USERS}`, { params: params });
   }
 
@@ -56,5 +53,9 @@ export class UserDetailsService {
         }
       });
     ;
+  }
+
+  updateUser(userDetails: UserDetails): Observable<User> {
+    return this.http.put<User>(`${environment.API_URL}${Constants.API_END_POINT.USERS}`, userDetails);
   }
 }

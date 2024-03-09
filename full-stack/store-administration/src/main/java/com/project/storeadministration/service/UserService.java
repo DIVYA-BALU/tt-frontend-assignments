@@ -17,5 +17,7 @@ public interface UserService {
 
   User updateSection(String userId, String sectionId);
 
-  Page<User> getUsers(int pageNo, int pageSize, String branchId);
+  Page<User> getUsers(int pageNo, int pageSize, String branchId, String searchByName);
+
+  User updateUser(User user);
 }

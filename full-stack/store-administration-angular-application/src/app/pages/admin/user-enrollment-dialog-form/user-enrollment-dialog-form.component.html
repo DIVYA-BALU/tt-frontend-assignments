@@ -1,8 +1,8 @@
 <div class="form-div">
-  <p>ENTER USER DETAILS</p>
+  <h1>ENTER USER DETAILS</h1>
   <form [formGroup]="enrollUserForm" (ngSubmit)="submit()">
     <div>
-      <label for="name">Username:</label>
+      <label for="name">Name:</label>
       <input type="text" id="name" formControlName="name">
       <div *ngIf="enrollUserForm.get('name')?.invalid && enrollUserForm.get('name')?.touched">
         <span *ngIf="enrollUserForm.get('name')?.hasError('required')">Username is required.</span>
@@ -16,6 +16,7 @@
         <span *ngIf="enrollUserForm.get('emailId')?.hasError('email')">Please enter a valid emailId.</span>
       </div>
     </div>
+
     <div>
       <label for="password">Password:</label>
       <input type="password" id="password" formControlName="password">
@@ -26,7 +27,7 @@
     <div>
       <label for="branch">Branch</label>
       <select formControlName="branchId" id="branch">
-        <option *ngFor="let branch of branches" [ngValue]="branch._id">{{ branch.name }}</option>
+        <option *ngFor="let branch of branches" [ngValue]="branch._id" appBranch requiredBranchId={{branch._id}}>{{ branch.name }}</option>
       </select>
     </div>
     <div>

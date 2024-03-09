@@ -84,6 +84,7 @@ export interface UserDetails {
   branchesId: string[];
   role: Role;
   joiningDate: string; 
+  permissions: Permission[] ;
   employmentHistory: EmploymentDetail[];
 }
 
@@ -139,6 +140,8 @@ export interface Product {
 export interface Bill {
   billItems: BillItem[];
   totalPrice: number;
+  sectionId: string;
+  branchId: string;
 }
 
 export interface BillItem {

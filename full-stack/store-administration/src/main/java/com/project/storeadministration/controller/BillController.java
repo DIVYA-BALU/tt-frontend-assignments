@@ -47,12 +47,24 @@ public class BillController {
 
   @GetMapping("/sectionWiseAnalysis")
   public ResponseEntity<Page<IncomeStatement>> getSectionWiseAnalysis(@RequestParam(defaultValue = "0") int pageNo,
-  @RequestParam(defaultValue = "10") int pageSize) {
-    return new ResponseEntity<Page<IncomeStatement>>(billService.getSectionWiseIncomeStatement(pageNo, pageSize), HttpStatus.OK);
+      @RequestParam(defaultValue = "10") int pageSize) {
+    return new ResponseEntity<Page<IncomeStatement>>(billService.getSectionWiseIncomeStatement(pageNo, pageSize),
+        HttpStatus.OK);
   }
 
   @GetMapping("/sectionWiseAnalysisForBranch")
-  public ResponseEntity<List<IncomeStatement>> getSectionWiseIncomeStatementForBranch(@RequestParam String branchId,@RequestParam(required =false) LocalDate date){
-    return new ResponseEntity<List<IncomeStatement>>(billService.getSectionWiseStatementForBranch(branchId,date), HttpStatus.OK);
+  public ResponseEntity<Page<IncomeStatement>> getSectionWiseIncomeStatementForBranch(
+      @RequestParam(defaultValue = "0") int pageNo,
+      @RequestParam(defaultValue = "10") int pageSize, @RequestParam String branchId) {
+    return new ResponseEntity<Page<IncomeStatement>>(
+        billService.getSectionWiseStatementForBranch(pageNo, pageSize, branchId), HttpStatus.OK);
+  }
+
+  @GetMapping("dateWiseAnalysisForBranch")
+  public ResponseEntity<Page<IncomeStatement>> getDateWiseIncomeStatementForBranch(
+      @RequestParam(defaultValue = "0") int pageNo,
+      @RequestParam(defaultValue = "10") int pageSize, @RequestParam String branchId,  @RequestParam String sectionId) {
+    return new ResponseEntity<Page<IncomeStatement>>(
+        billService.getDateWiseIncomeStatementForSection(pageNo, pageSize, branchId, sectionId), HttpStatus.OK);
   }
 }

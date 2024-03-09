@@ -19,6 +19,9 @@ public interface BillService {
 
   Page<IncomeStatement> getSectionWiseIncomeStatement(int pageNo, int pageSize);
 
-  List<IncomeStatement> getSectionWiseStatementForBranch(String branchId, LocalDate date);
+  Page<IncomeStatement> getSectionWiseStatementForBranch(int pageNo, int pageSize, String branchId);
+
+  Page<IncomeStatement> getDateWiseIncomeStatementForSection(int pageNo, int pageSize, String branchId,
+      String sectionId);
   
 }

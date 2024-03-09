@@ -33,7 +33,9 @@ export class ProductLayoutComponent {
 
   bill: Bill = {
     billItems: [],
-    totalPrice: 0
+    totalPrice: 0,
+    sectionId: '',
+    branchId: ''
   };
   makeBillButton: Boolean = false;
   clickedButtons: Set<string> = new Set();
@@ -72,8 +74,7 @@ export class ProductLayoutComponent {
   onPageChange(event: PageEvent): void {
     this.pageNumber = event.pageIndex;
     this.pageSize = event.pageSize;
-    this.productService.setPaginatedProductsSubject(this.pageNumber, this.pageSize, this.searchByName);
-    this.getProductDetails();
+    this.productService.setPaginatedProductsSubject(this.pageNumber, this.pageSize, this.searchByName, this.branchId, this.sectionId);
   }
 
   getProductDetails() {
@@ -132,7 +133,9 @@ export class ProductLayoutComponent {
       })
       const billCopy: Bill = {
         billItems: [...this.bill.billItems],
-        totalPrice: this.bill.totalPrice
+        totalPrice: this.bill.totalPrice,
+        sectionId: this.sectionId,
+        branchId: this.branchId
       };
       this.dialog.open(BillComponent, {
         data: { bill: billCopy }

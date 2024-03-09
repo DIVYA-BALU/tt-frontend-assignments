@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PermissionDirective } from './directives/permission.directive';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { HeaderComponent } from './pages/shared/header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -23,10 +22,9 @@ import {MatInputModule} from '@angular/material/input';
   declarations: [
     AppComponent,
     HeaderComponent,
-    PermissionDirective,
     LoginComponent,
     LayoutComponent,
-    PopUpComponent
+    PopUpComponent,
   ],
   imports: [
     BrowserModule,

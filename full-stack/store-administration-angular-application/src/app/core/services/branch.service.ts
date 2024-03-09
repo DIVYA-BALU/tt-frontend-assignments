@@ -87,7 +87,7 @@ export class BranchService {
   ngOnDestroy() {
 
     if (this.paginatedBranchesSubscription) {
-      this.branchesSubscription.unsubscribe();
+      this.paginatedBranchesSubscription.unsubscribe();
     }
 
     if (this.branchesSubscription) {

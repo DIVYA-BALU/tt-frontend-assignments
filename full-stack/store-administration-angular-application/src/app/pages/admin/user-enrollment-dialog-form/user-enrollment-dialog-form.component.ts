@@ -51,8 +51,6 @@ export class UserEnrollmentDialogFormComponent {
 
   submit() {
     this.isLoading = true;
-    console.log(this.enrollUserForm.value);
-
     this.authService.enrollUser(this.enrollUserForm.value).subscribe({
       next: () => {
         this.isLoading = false;

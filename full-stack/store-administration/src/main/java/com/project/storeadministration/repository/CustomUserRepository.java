@@ -27,8 +27,17 @@ public class CustomUserRepository {
     return mongoTemplate.findOne(query, User.class);
   }
 
-  public Page<User> getUsers(String branchId, Pageable pageable) {
-    Query query = new Query(Criteria.where("branchesId").in(branchId));
+  public Page<User> getUsers(String branchId, String searchByName, Pageable pageable) {
+    Query query = new Query();
+
+    if (searchByName != null && !searchByName.isEmpty()) {
+      query.addCriteria(Criteria.where("name").regex(searchByName, "i"));
+    }
+
+    if (branchId != null && !branchId.isEmpty()) {
+      query.addCriteria(Criteria.where("branchesId").in(branchId));
+    }
+
     query.fields().exclude("password");
     long total = mongoTemplate.count(query, User.class);
     query.with(pageable);

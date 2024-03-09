@@ -115,8 +115,13 @@ public class UserServiceImplemetation implements UserService {
   }
 
   @Override
-  public Page<User> getUsers(int pageNo, int pageSize, String branchId) {
+  public Page<User> getUsers(int pageNo, int pageSize, String branchId, String searchByName) {
     PageRequest pageable = PageRequest.of(pageNo, pageSize);
-    return customUserRepository.getUsers(branchId, pageable);
+    return customUserRepository.getUsers(branchId, searchByName, pageable);
+  }
+
+  @Override
+  public User updateUser(User user) {
+   return userRepository.save(user);
   }
 }

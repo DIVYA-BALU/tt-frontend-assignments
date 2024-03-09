@@ -33,14 +33,13 @@ public class BillServiceImpl implements BillService {
 
   @Autowired
   private ProductService productService;
-  
+
   @Override
   public Bill saveBill(Bill bill) {
     bill.setDate(LocalDate.now());
     List<BillItem> billItems = bill.getBillItems();
-    for(BillItem billItem: billItems)
-    {
-      productService.updateQuantity(billItem.getProduct().get_id(),-billItem.getQuantity());
+    for (BillItem billItem : billItems) {
+      productService.updateQuantity(billItem.getProduct().get_id(), -billItem.getQuantity());
     }
     return billRepository.save(bill);
   }
@@ -49,7 +48,7 @@ public class BillServiceImpl implements BillService {
   public Revenue getRevenue() {
     return new Revenue(customBillRepository.getRevenue());
   }
-  
+
   @Override
   public Page<IncomeStatement> getBranchWiseIncomeStatement(int pageNo, int pageSize) {
     PageRequest pageable = PageRequest.of(pageNo, pageSize);
@@ -61,10 +60,17 @@ public class BillServiceImpl implements BillService {
     PageRequest pageable = PageRequest.of(pageNo, pageSize);
     return customBillRepository.getSectionWiseIncomeStatement(pageable);
   }
-  
+
   @Override
-  public List<IncomeStatement> getSectionWiseStatementForBranch(String branchId, LocalDate date) {
-    return customBillRepository.getSectionWiseIncomeStatementForBranch(branchId, date);
+  public Page<IncomeStatement> getSectionWiseStatementForBranch(int pageNo, int pageSize, String branchId) {
+    PageRequest pageable = PageRequest.of(pageNo, pageSize);
+    return customBillRepository.getSectionWiseIncomeStatementForBranch(pageable, branchId);
   }
 
+  @Override
+  public Page<IncomeStatement> getDateWiseIncomeStatementForSection(int pageNo, int pageSize, String branchId,
+      String sectionId) {
+        PageRequest pageable = PageRequest.of(pageNo, pageSize);
+        return customBillRepository.getDateWiseIncomeStatementForSection(pageable, branchId, sectionId);
+  }
 }
