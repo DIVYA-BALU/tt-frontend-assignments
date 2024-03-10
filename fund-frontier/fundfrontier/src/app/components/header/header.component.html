@@ -21,32 +21,40 @@
     <a routerLink="funders">Funders</a>
     <div *ngIf="loggedin;then content"></div>
     <ng-template #content>
-      <a *ngIf="role === 'FUNDER'" routerLink="funderprofile">Profile</a>
-      <a *ngIf="role === 'STUDENT'" routerLink="studentprofile">Profile</a>
+      <a *ngIf="role === 'FUNDER'" routerLink="funderprofile/updatefunder">Profile</a>
+      <a *ngIf="role === 'STUDENT'" routerLink="studentprofile/updatestudent">Profile</a>
       <a *ngIf="role === 'ADMIN'" routerLink="adminprofile/editadminprofile">Profile</a>
 
     </ng-template>
   </div>
 </mat-toolbar>
 <router-outlet></router-outlet>
-<!-- <footer>
+
+<footer>
   <div class="column">
     <h3>ABOUT</h3>
     <h4>The FundFrontier Trust: IT1831.2017</h4>
+    <p>We are dedicated to empowering individuals through education and financial support.</p>
     <a routerLink="aboutus">About Us</a>
     <br>
-    <a routerLink="">Terms and Conditions</a>
+    <a routerLink="terms">Terms and Conditions</a>
     <br>
-    <a routerLink="">Privacy Policy</a>
+    <a routerLink="privacy">Privacy Policy</a>
   </div>
 
   <div class="column">
     <h3>QUICK LINKS</h3>
-   
+    <a routerLink="home">Home</a>
+    <br>
+    <a routerLink="students">Students</a>
+    <br>
+    <a routerLink="funders">Funders</a>
   </div>
 
   <div class="column">
     <h3>CONTACT</h3>
-   
+    <p>Email: info@fundfrontier.com</p>
+    <p>Phone: +1 (123) 456-7890</p>
+    <p>Address: 123 Main Street, Cityville, Country</p>
   </div>
-</footer> -->
+</footer>

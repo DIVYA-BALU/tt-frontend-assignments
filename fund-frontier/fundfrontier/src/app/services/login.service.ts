@@ -39,7 +39,6 @@ export class LoginService {
     if (status) {
       this.isLoggedin = true;
       this.loginStatus.next(this.isLoggedin);
-      this.getUser();
       localStorage.setItem("isloggedin", "true")
       localStorage.setItem("accessToken", token)
     } else {
@@ -55,7 +54,6 @@ export class LoginService {
       (response) => {
         this.userRole.next(response.role.role);
         this.userEmail.next(response.email);
-
       }
     );
   }
@@ -65,7 +63,7 @@ export class LoginService {
     return this.userRole.asObservable();
   }
 
-  getuserEmail() {
+  getuserEmail() {     
     return this.userEmail.asObservable();
   }
 

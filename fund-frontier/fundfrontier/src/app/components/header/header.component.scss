@@ -25,24 +25,38 @@ mat-icon {
   text-align: center;
 }
 
-footer {
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  background-color: #483ac2;
-}
-
-.column {
-  flex: 1;
-  margin-right: 20px;
-}
 
 .column a {
   color: black;
 }
 
-a:active {
-  color: yellow;
+
+footer {
+  display: flex;
+  justify-content: space-around;
+  background-color: #52689b;
+  padding: 20px;
 }
+
+.column {
+  flex: 1;
+  text-align: left;
+  max-width: 300px;
+  margin-right: 20px;
+  padding-right: 20px;
+  border-right: 1px solid black;
+}
+
+.column:last-child {
+  border-right: none;
+}
+
+h3 {
+  color: #0e1488;
+}
+
+h4 {
+  font-weight: normal;
+  color: #eeeeef; 
+}
+

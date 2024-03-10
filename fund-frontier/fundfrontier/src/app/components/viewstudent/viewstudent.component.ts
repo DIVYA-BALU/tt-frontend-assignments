@@ -42,6 +42,8 @@ export class ViewstudentComponent {
 
   balanceAmount: number = this.data.secondData;
 
+  role: string = '';
+
   funds: Funds = {
     funderEmail: '',
     studentEmail: '',
@@ -78,33 +80,32 @@ export class ViewstudentComponent {
       }
     )
 
-    if (!this.loginStatus) {
+    this.loginService.getRole().subscribe(
+      (data) => {
+          this.role = data;
+          console.log(data);
+          
+      }
+    )
+    if (!this.loginStatus || this.role !== 'FUNDER') {
       this.dialogRef.close();
-      this.router.navigate(['/header/login'])
+      this.router.navigate(['/header/register'])
     }
     else {
       this.loginService.getuserEmail().subscribe(
         (data) => {
           this.funderEmail = data;
-          console.log(this.funderEmail);
         }
       )
 
       if (this.funderEmail !== '') {
         const amount: number = ((this.value * 100) + ((7.5 / 100) * this.value) * 100);
-        console.log(amount);
 
         const RazorpayOptions = {
           description: 'Sample Razorpay demo',
           currency: 'INR',
           amount: amount,
-          name: "Divya",
           key: 'rzp_test_dfaTwJvV84YGAu',
-          prefill: {
-            name: 'Divya Balusamy',
-            email: 'divyabalusamy559@gmail.com',
-            phone: '1234567891'
-          },
           theme: {
             color: '#092644'
           },
@@ -117,7 +118,7 @@ export class ViewstudentComponent {
               this.funds.funderEmail = this.funderEmail;
               this.funds.studentEmail = this.student.email.email;
               this.funds.date = new Date();
-              this.funds.totalAmount = amount;
+              this.funds.totalAmount = this.value + (7.5 * this.value) / 100 ;
               this.funds.studentAmount = this.value;
               this.funds.maintainenceAmount = (7.5 * this.value) / 100;
               this.fundsService.saveFund(this.funds).subscribe();

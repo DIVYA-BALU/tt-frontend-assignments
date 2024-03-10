@@ -28,42 +28,62 @@ export class FindstudentsComponent {
     this.getAllStudents(0, 3);
   }
 
-  // getStudentsByYear() {
-  //   if(this.year){
-  //     this.studentService.getStudentsByYear(this.year).subscribe(
-  //       (response) => {
-  //         this.students = response;
+  getStudentsByYear() {
+    this.students = [];
+    if(this.year){
+      this.studentService.getStudentsByYear(this.year).subscribe(
+        (response) => {
+          response.forEach(data =>{
+            this.addToStudents(data);
+           })
 
-  //       }
-  //     )
-  //   }
-  // }
+        }
+      )
+    }
+  }
 
-  // getStudentsByCourse() {
-  //   if(this.course){
-  //     this.studentService.getStudentsByCourse(this.course).subscribe(
-  //       (response) => {
-  //         this.students = response;
-  //       }
-  //     )
-  //   }
-  // }
+  getStudentsByCourse() {
+    this.students = [];
+    if(this.course){
+      this.studentService.getStudentsByCourse(this.course).subscribe(
+        (response) => {
+          response.forEach(data =>{
+            this.addToStudents(data);
+           })
+        }
+      )
+    }
+  }
 
-  // getStudentsByCollege() {
-  //   if(this.college){
-  //     this.studentService.getStudentsByCollege(this.college).subscribe(
-  //       (response) => {
-  //         this.students = response;
-  //       }
-  //     )
-  //   }
-  // }
+  getStudentsByCollege() {
+    this.students = [];
+    if(this.college){
+      this.studentService.getStudentsByCollege(this.college).subscribe(
+        (response) => {
+         response.forEach(data =>{
+          this.addToStudents(data);
+         })
+        }
+      )
+    }
+  }
+
   getAllStudents(pageNo: number, pageSize: number) {
     this.studentService.getStudents(pageNo, pageSize).subscribe(
       (response) => {
         response.content.forEach(
           data => {
-            let details: Studentdetails = data;
+            this.addToStudents(data);
+          }
+        )
+
+      }
+    )
+  }
+
+
+  addToStudents(data: Studentdetails) {
+    let details: Studentdetails = data;
             this.studentService.getRaisedAmount(data.email.email).subscribe(
               (data) => {
                 details.fundRaised = data.amount;
@@ -71,14 +91,6 @@ export class FindstudentsComponent {
                 this.students.push(details);
               }
             )
-
-
-
-          }
-        )
-
-      }
-    )
   }
 
   viewStudent(student: Studentdetails) {

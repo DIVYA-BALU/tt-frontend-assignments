@@ -1,5 +1,6 @@
 <div class="loginbg">
 
+  <div class="space"></div>
   <div class="login">
     <form #loginForm="ngForm" (ngSubmit)="loginForm.valid && onSubmit()">
       <div class="form-group">
@@ -24,7 +25,7 @@
         Invalid User Credentials
       </div>
       <p class="register-link">
-        Not a user? <a routerLink="/register">Register</a>
+        Not a user? <a routerLink="/header/register">Register</a>
       </p>
     </form>
   </div>

@@ -122,8 +122,4 @@ export class StudentregistrationComponent {
     )
   }
 
-  tabClick() {
-    console.log("tab clicked");
-
-  }
 }

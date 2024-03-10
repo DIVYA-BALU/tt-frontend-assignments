@@ -2,7 +2,7 @@ import { User } from "./user";
 
 export interface Studentdetails {
   _id: string;
-  profilePhoto: File;
+  profilePhoto: File | null;
   firstName: string;
   lastName: string;
   email: User;
@@ -16,19 +16,19 @@ export interface Studentdetails {
   state: string;
   zipCode: number;
   school: string;
-  aadharCardProof: File;
-  incomeProof: File;
+  aadharCardProof: File | null;
+  incomeProof: File | null;
   collegeName: string;
   yearOfStudy: string;
   course: string;
-  studentIdentityProof: File;
+  studentIdentityProof: File | null;
   studentId: string;
   fundRequired: number;
-  feeDetails: File;
+  feeDetails: File | null;
   endDate: string;
   shortStory: string;
   status: string;
   reason: string;
   fundRaised: number;
-  raisedPercent: number
+  raisedPercent: number;
 }

@@ -21,6 +21,7 @@ export class LoginComponent {
         console.log(response);
         this.loginService.loggedin(true, response.token);
         this.loginService.getUser();
+        this.loginService.getuserEmail()
         this.router.navigate(['header/home'])
       }
     )

@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="image">
+        <img *ngIf="student.profilePhoto" [src]="student.profilePhoto" alt="Profile Photo">
+        <mat-icon class="edit-icon" (click)="openFileInput()">edit</mat-icon>
+        <input type="file" id="fileinput" style="display: none" (change)="onFileSelected($event)">
+    </div>
+    <div class="education">
+        <h2>Education</h2>
+        <ul>
+            <li>School: {{student.school}}</li>
+            <li>College: {{student.collegeName}}</li>
+            <li>Course: {{student.course}}</li>
+            <li>Year of Study: {{student.yearOfStudy}}</li>
+        </ul>
+    </div>
+    <div class="funds">
+        <h2>Funds</h2>
+        <ul>
+            <li>Email:  {{student.email.email}}</li>
+            <li>Fund Required: {{student.fundRequired}}</li>
+            <li>Fund Raised: {{student.fundRaised}}</li>
+        </ul>
+    </div>
+</div>

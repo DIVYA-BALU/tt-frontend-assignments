@@ -21,6 +21,10 @@ import { AllstudentsComponent } from './components/allstudents/allstudents.compo
 import { AllfundersComponent } from './components/allfunders/allfunders.component';
 import { UpdateadminprofileComponent } from './components/updateadminprofile/updateadminprofile.component';
 import { StudentregistrationComponent } from './components/studentregistration/studentregistration.component';
+import { UpdatestudentprofileComponent } from './components/updatestudentprofile/updatestudentprofile.component';
+import { StorycreationComponent } from './components/storycreation/storycreation.component';
+import { UpdatefunderprofileComponent } from './components/updatefunderprofile/updatefunderprofile.component';
+import { FundedstudentsComponent } from './components/fundedstudents/fundedstudents.component';
 
 const routes: Routes = [
   {
@@ -59,11 +63,31 @@ const routes: Routes = [
       },
       {
         path: "studentprofile",
-        component: StudentprofileComponent
+        component: StudentprofileComponent,
+        children: [
+          {
+            path: "updatestudent",
+            component: UpdatestudentprofileComponent
+          },
+          {
+            path: "createstory",
+            component: StorycreationComponent
+          }
+        ]
       },
       {
         path: "funderprofile",
-        component: FunderprofileComponent
+        component: FunderprofileComponent,
+        children: [
+          {
+            path: "updatefunder",
+            component: UpdatefunderprofileComponent
+          },
+          {
+            path: "fundedstudents",
+            component: FundedstudentsComponent
+          }
+        ]
       },
       {
         path: "findstudents",
@@ -117,7 +141,6 @@ const routes: Routes = [
         path: "studententregistration",
         component: StudentregistrationComponent
       }
-
     ]
   },
 

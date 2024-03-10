@@ -1,94 +1,22 @@
 
-
-<!-- <div class="border-image">
-  <mat-tab-group>
-    <mat-tab label="Edit Profile">
-        
-      <table>
-        <tr class="top-row">
-          <td class="td">
-            <mat-form-field class="example-full-width">
-                <mat-label>First Name </mat-label>
-                <input matInput value = {{funder.firstName}}  [(ngModel)]="funder.firstName">
-              </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field class="example-full-width">
-                <mat-label>Last Name </mat-label>
-                <input matInput value={{funder.lastName}} [(ngModel)]="funder.lastName">
-              </mat-form-field>
-          </td>
-        </tr>
-        <tr>
-          <td class="td">
-            <mat-form-field class="example-full-width">
-                <mat-label>Email (disabled)</mat-label>
-                <input matInput disabled value={{funder.email}} [(ngModel)]="funder.email">
-              </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field class="example-full-width">
-                <mat-label>Phone Number</mat-label>
-                <input matInput value={{funder.phoneNumber}} [(ngModel)]="funder.phoneNumber">
-              </mat-form-field>
-          </td>
-        </tr>
-        <tr>
-          <td class="td">
-            <mat-form-field class="example-full-width">
-                <mat-label>Birth Country</mat-label>
-                <input matInput value={{funder.countryOfBirth}} [(ngModel)]="funder.countryOfBirth">
-              </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field class="example-full-width">
-                <mat-label>Country of Residence</mat-label>
-                <input matInput value={{funder.countryOfResidence}} [(ngModel)]="funder.countryOfResidence">
-              </mat-form-field>
-          </td>
-        </tr>
-        <tr>
-          <td class="td">
-            <mat-form-field class="example-full-width">
-                <mat-label>Address</mat-label>
-                <input matInput value={{funder.address}} [(ngModel)]="funder.address">
-              </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field class="example-full-width">
-                <mat-label>City</mat-label>
-                <input matInput value={{funder.city}} [(ngModel)]="funder.city">
-              </mat-form-field>
-          </td>
-        </tr>
-        <tr>
-          <td class="td">
-            <mat-form-field class="example-full-width">
-                <mat-label>State</mat-label>
-                <input matInput value={{funder.state}} [(ngModel)]="funder.state">
-              </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field class="example-full-width">
-                <mat-label>Zip Code</mat-label>
-                <input matInput value={{funder.zipCode}} [(ngModel)]="funder.zipCode">
-              </mat-form-field>
-          </td>
-        </tr>
-        <tr>
-          <td class="td">
-            <mat-form-field class="example-full-width">
-                <mat-label>Occupation</mat-label>
-                <input matInput value={{funder.occupation}} [(ngModel)]="funder.occupation"> 
-              </mat-form-field>
-          </td>
-          <td>
-            <button mat-button class="update-button" (click)="UpdateFunder()">Update</button>
-          </td>
-        </tr>
-      </table>
-    </mat-tab>
-    <mat-tab label="Second"> Content 2 </mat-tab>
-  </mat-tab-group>
-</div> -->
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" class="nav" opened>
+    <mat-nav-list>
+      <a mat-list-item routerLink="updatestudent">
+        <span class="custom-drawer"><mat-icon>account_circle</mat-icon> Profile</span>
+      </a>      
+      <a mat-list-item routerLink="/header/studentprofile/createstory">
+        <span class="custom-drawer">
+          <mat-icon>check_circle</mat-icon> Success Story
+        </span>
+      </a>
+      <a mat-list-item (click)="logout()">
+        <span class="custom-drawer"><mat-icon>logout</mat-icon> Logout</span>
+      </a>
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
 

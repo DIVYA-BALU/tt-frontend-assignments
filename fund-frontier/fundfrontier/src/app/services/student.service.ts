@@ -45,20 +45,20 @@ export class StudentService {
 
   }
 
-  getStudentsByYear(year: string): Observable<Application[]> {
-    return this.http.get<Application[]>(
+  getStudentsByYear(year: string): Observable<Studentdetails[]> {
+    return this.http.get<Studentdetails[]>(
       `${this.studentUrl}/searchbyyear/${year}`
     );
   }
 
-  getStudentsByCourse(course: string): Observable<Application[]> {
-    return this.http.get<Application[]>(
+  getStudentsByCourse(course: string): Observable<Studentdetails[]> {
+    return this.http.get<Studentdetails[]>(
       `${this.studentUrl}/searchbygroup/${course}`
     );
   }
 
-  getStudentsByCollege(college: string): Observable<Application[]> {
-    return this.http.get<Application[]>(
+  getStudentsByCollege(college: string): Observable<Studentdetails[]> {
+    return this.http.get<Studentdetails[]>(
       `${this.studentUrl}/searchbycollege/${college}`
     );
   }
@@ -100,5 +100,15 @@ export class StudentService {
 
   getRaisedAmount(email: string): Observable<Studentfunds> {
     return this.http.get<Studentfunds>(`${this.studentFundUrl}/getstudent/${email}`);
+  }
+
+  updateProfile(profilePhoto: File, email: string): Observable<Studentdetails> {
+    const formData = new FormData();
+    formData.append('file', profilePhoto);
+    return this.http.patch<Studentdetails>(`${this.studentUrl}/updateProfile/${email}`, formData)
+  }
+
+  addStory(story: Successstory): Observable<Successstory> {
+    return this.http.post<Successstory>(`${this.storyUrl}/save`,story);
   }
 }

@@ -41,6 +41,13 @@ button {
    margin-bottom: 0;
    flex-direction: row;
    padding: 10px;
+   flex-wrap: wrap;
+   justify-content: space-around;
+}
+
+.find-button {
+   align-self: center;
+   margin-top: 10px;
 }
 
 .topic {

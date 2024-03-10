@@ -1,0 +1,15 @@
+
+<form [formGroup]="storyForm" (ngSubmit)="onSubmit()">
+
+<mat-form-field class="example-full-width">
+    <mat-label>Email</mat-label>
+    <input matInput disabled value="{{email}}">
+  </mat-form-field>
+<mat-form-field appearance="fill">
+    <mat-label>Your Story</mat-label>
+    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="5" cdkAutosizeMaxRows="10" value="{{story.story}}" formControlName="story"></textarea>
+  </mat-form-field>
+
+  <button type="submit" mat-button class="button">Add Story</button>
+
+</form>

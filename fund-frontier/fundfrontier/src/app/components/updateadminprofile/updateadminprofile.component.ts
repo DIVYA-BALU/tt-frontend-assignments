@@ -25,7 +25,6 @@ export class UpdateadminprofileComponent {
     }
   };
 
-
   constructor(private userService: UserService) {
 
   }
@@ -52,7 +51,7 @@ export class UpdateadminprofileComponent {
 
   cancelUpdate() {
     this.buttonClick = false;
-    this.updateStatus = '';
+    this.updateStatus = '';  
     this.getprofile();
   }
 

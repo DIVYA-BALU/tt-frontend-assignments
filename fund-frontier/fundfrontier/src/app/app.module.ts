@@ -49,6 +49,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { StudentregistrationComponent } from './components/studentregistration/studentregistration.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSliderModule } from '@angular/material/slider';
+import { UpdatestudentprofileComponent } from './components/updatestudentprofile/updatestudentprofile.component';
+import { StorycreationComponent } from './components/storycreation/storycreation.component';
+import { UpdatefunderprofileComponent } from './components/updatefunderprofile/updatefunderprofile.component';
+import { FundedstudentsComponent } from './components/fundedstudents/fundedstudents.component';
 
 
 @NgModule({
@@ -76,6 +80,10 @@ import { MatSliderModule } from '@angular/material/slider';
     AllfundersComponent,
     UpdateadminprofileComponent,
     StudentregistrationComponent,
+    UpdatestudentprofileComponent,
+    StorycreationComponent,
+    UpdatefunderprofileComponent,
+    FundedstudentsComponent,
   ],
   imports: [
     BrowserModule,

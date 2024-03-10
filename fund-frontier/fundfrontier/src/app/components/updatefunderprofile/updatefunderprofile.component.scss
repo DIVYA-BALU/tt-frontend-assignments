@@ -1,0 +1,27 @@
+.border-image {
+    border: 10px solid transparent;
+    padding: 15px;
+    border-image: url('/assets/images/aboutus.avif') 30 round;
+
+}
+
+.example-full-width {
+    width: 500px;
+
+}
+
+tr {
+    display: flex;
+}
+
+.update-button {
+    margin-top: 20px;
+    color: white;
+    background-color: rgb(23, 23, 196);
+    padding: 20px 40px;
+    margin-left: 100px;
+}
+
+.top-row {
+    margin-top: 8px;
+}
