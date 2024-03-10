@@ -5,6 +5,7 @@ import { Bill, BillItem } from 'src/app/core/models/API.model';
 import { BillService } from 'src/app/core/services/bill.service';
 import { PopUpComponent } from '../../pop-up/pop-up.component';
 import { ProductService } from 'src/app/core/services/product.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-bill',
@@ -16,13 +17,15 @@ export class BillComponent {
   displayedColumns: string[] = ['Serial Number', 'Product Name', 'Price', 'Quantity', 'Total Price'];
   dataSource: MatTableDataSource<BillItem>;
 
+  private subscription: Subscription = new Subscription;
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: { bill: Bill }, private dialog: MatDialog, private billService: BillService, private productService: ProductService) {
     this.dataSource = new MatTableDataSource<BillItem>(data.bill.billItems);
     this.bill = data.bill;
   }
 
   saveBill() {
-    this.billService.saveBill(this.bill).subscribe({
+    const subscription = this.billService.saveBill(this.bill).subscribe({
       next: () => {
         this.dialog.open(PopUpComponent, {
           data: {
@@ -35,5 +38,13 @@ export class BillComponent {
         alert('Error Occured Retry Later');
       }
     })
+  }
+
+  ngOnDestroy() {
+
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+
   }
 }

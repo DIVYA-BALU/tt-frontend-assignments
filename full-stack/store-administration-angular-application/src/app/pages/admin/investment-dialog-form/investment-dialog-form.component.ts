@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { InvestmentService } from 'src/app/core/services/investment.service';
 import { PopUpComponent } from '../../pop-up/pop-up.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-investment-dialog-form',
@@ -13,6 +14,7 @@ export class InvestmentDialogFormComponent {
 
   isLoading: boolean = false;
   investmentForm: FormGroup;
+  private subscription: Subscription = new Subscription;
 
   constructor(private fb: FormBuilder, private dialog: MatDialog, private investmentService: InvestmentService) {
     this.investmentForm = this.fb.group({
@@ -33,7 +35,7 @@ export class InvestmentDialogFormComponent {
 
   submit() {
     this.isLoading = true;
-    this.investmentService.saveInvestment(this.investmentForm.value).subscribe({
+    const subscription = this.investmentService.saveInvestment(this.investmentForm.value).subscribe({
       next: () => {
         this.isLoading = false,
         this.closeInvestmentDialogForm();
@@ -56,5 +58,13 @@ export class InvestmentDialogFormComponent {
     console.log('in closeInvestment From');
     this.investmentForm.reset();
     this.dialog.closeAll();
+  }
+
+  ngOnDestroy() {
+
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+
   }
 }

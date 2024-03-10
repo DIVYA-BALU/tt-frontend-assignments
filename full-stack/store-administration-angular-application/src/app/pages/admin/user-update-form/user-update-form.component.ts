@@ -7,6 +7,7 @@ import { RolePermissionService } from 'src/app/core/services/role-permission.ser
 import { UserDetailsService } from 'src/app/core/services/user-details.service';
 import { PopUpComponent } from '../../pop-up/pop-up.component';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-update-form',
@@ -20,6 +21,11 @@ export class UserUpdateFormComponent {
   availablePermissions: Permission[] = [];
   otherPermissions: Permission[] = [];
   availableBranches: Branch[] = [];
+
+  private rolesSubscription: Subscription = new Subscription;
+  private permissionsSubscription: Subscription = new Subscription;
+  private branchesSubscription: Subscription = new Subscription;
+  private updateUserSubscription: Subscription = new Subscription;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: UserDetails, private formBuilder: FormBuilder, private rolepermissionService: RolePermissionService, private userDetailsService: UserDetailsService, private branchService: BranchService, private dialog: MatDialog) { }
 
@@ -35,7 +41,7 @@ export class UserUpdateFormComponent {
       branchesId: this.formBuilder.array([], this.branchesValidator())
     });
 
-    this.rolepermissionService.getAllRoles().subscribe({
+    const rolesSubscription = this.rolepermissionService.getAllRoles().subscribe({
       next: (roles) => {
         console.log(roles);
 
@@ -44,14 +50,14 @@ export class UserUpdateFormComponent {
       }
     });
 
-    this.rolepermissionService.getAllPermissions().subscribe({
+    const permissionsSubscription = this.rolepermissionService.getAllPermissions().subscribe({
       next: (permissions) => {
         this.availablePermissions = permissions;
         this.userDetailsForm.setControl('permissions', this.buildPermissionsCheckboxes1());
       }
     })
 
-    this.branchService.getAllBranches().subscribe({
+    const branchesSubscription = this.branchService.getAllBranches().subscribe({
       next: (branches) => {
         this.availableBranches = branches;
         this.userDetailsForm.setControl('branchesId', this.buildBranchesCheckboxes());
@@ -82,15 +88,15 @@ export class UserUpdateFormComponent {
   }
 
   buildPermissionsCheckboxes1() {
-    
+
     const availablePermissionNames = this.availablePermissions.map(permission => permission.name);
     const dataPermissionNames = this.data.permissions?.map(permission => permission.name) ?? [];
-  
+
     const checkboxes = availablePermissionNames.map(permissionName => {
       const isChecked = dataPermissionNames.includes(permissionName);
       return this.formBuilder.control(isChecked);
     });
-    
+
     return this.formBuilder.array(checkboxes);
   }
 
@@ -99,35 +105,32 @@ export class UserUpdateFormComponent {
     return !rolePermissions.find((rolePermission: Permission) => rolePermission._id === permission._id);
   }
 
-branchesValidator(): ValidatorFn {
-  return (formArray: AbstractControl): { [key: string]: any } | null => {
-    if (!formArray || !(formArray instanceof FormArray)) {
-      return { invalidFormArray: true };
-    }
-    const selectedBranches = (formArray as FormArray).controls.filter(control => control && control.value);
-    return selectedBranches.length > 0 ? null : { noBranchSelected: true };
-  };
-}
+  branchesValidator(): ValidatorFn {
+    return (formArray: AbstractControl): { [key: string]: any } | null => {
+      if (!formArray || !(formArray instanceof FormArray)) {
+        return { invalidFormArray: true };
+      }
+      const selectedBranches = (formArray as FormArray).controls.filter(control => control && control.value);
+      return selectedBranches.length > 0 ? null : { noBranchSelected: true };
+    };
+  }
 
   onSubmit() {
-    console.log(this.userDetailsForm.value);
 
     const selectedBranches = this.userDetailsForm.value.branchesId
-    .map((checked: boolean, index: number) => checked ? this.availableBranches[index]?._id : null)
-    .filter((value: string | null) => value !== null);
+      .map((checked: boolean, index: number) => checked ? this.availableBranches[index]?._id : null)
+      .filter((value: string | null) => value !== null);
 
-  this.userDetailsForm.value.branchesId = selectedBranches;
+    this.userDetailsForm.value.branchesId = selectedBranches;
 
-  const selectedPermissions = this.userDetailsForm.value.permissions
-    .map((checked: boolean, index: number) => checked ? this.availablePermissions[index] : null)
-    .filter((value: Permission | null) => value !== null);
+    const selectedPermissions = this.userDetailsForm.value.permissions
+      .map((checked: boolean, index: number) => checked ? this.availablePermissions[index] : null)
+      .filter((value: Permission | null) => value !== null);
 
-  this.userDetailsForm.value.permissions = selectedPermissions;
+    this.userDetailsForm.value.permissions = selectedPermissions;
 
-  console.log(this.userDetailsForm.value.role);
-  
     if (this.userDetailsForm.value.branchesId.length > 0 || this.userDetailsForm.value.role.name === 'ADMIN') {
-      this.userDetailsService.updateUser(this.userDetailsForm.value).subscribe({
+      const updateUserSubscription = this.userDetailsService.updateUser(this.userDetailsForm.value).subscribe({
         next: () => {
           this.userDetailsService.setPaginatedUsersSubject();
           this.dialog.open(PopUpComponent, {
@@ -135,7 +138,7 @@ branchesValidator(): ValidatorFn {
               message: 'User Updated Successfully',
             },
           });
-        },error: () => {
+        }, error: () => {
           this.dialog.open(PopUpComponent, {
             data: {
               message: 'Error Occured',
@@ -145,7 +148,7 @@ branchesValidator(): ValidatorFn {
       }
       );
     }
-    else{
+    else {
       this.dialog.open(PopUpComponent, {
         data: {
           message: 'Branch Field is needed',
@@ -157,4 +160,20 @@ branchesValidator(): ValidatorFn {
   closeUpdateUserForm() {
     this.dialog.closeAll();
   }
+
+  ngOnDestroy() {
+    if (this.rolesSubscription) {
+      this.rolesSubscription.unsubscribe();
+    }
+    if (this.permissionsSubscription) {
+      this.permissionsSubscription.unsubscribe();
+    }
+    if (this.branchesSubscription) {
+      this.branchesSubscription.unsubscribe();
+    }
+    if (this.updateUserSubscription) {
+      this.updateUserSubscription.unsubscribe();
+    }
+  }
+
 }

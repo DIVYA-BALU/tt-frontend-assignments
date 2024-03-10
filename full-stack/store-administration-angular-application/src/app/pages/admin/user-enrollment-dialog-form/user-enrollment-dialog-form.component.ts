@@ -8,6 +8,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Branch } from 'src/app/core/models/API.model';
 import { BranchService } from 'src/app/core/services/branch.service';
 import { UserDetailsService } from 'src/app/core/services/user-details.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-enrollment-dialog-form',
@@ -19,6 +20,9 @@ export class UserEnrollmentDialogFormComponent {
   enrollUserForm: FormGroup;
   branches: Branch[] = [];
   roles: string[] = ['Employee', 'Manager'];
+
+  private branchesSubscription: Subscription = new Subscription;
+  private enrollUserSubscription: Subscription = new Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -41,7 +45,7 @@ export class UserEnrollmentDialogFormComponent {
   }
 
   getAllBranches() {
-    this.branchService.getAllBranches().subscribe({
+    const branchesSubscription = this.branchService.getAllBranches().subscribe({
       next: (branches) => this.branches = branches,
       error: (HttpErrorResponse) => {
         alert('Error Occured Retry Later');
@@ -51,7 +55,7 @@ export class UserEnrollmentDialogFormComponent {
 
   submit() {
     this.isLoading = true;
-    this.authService.enrollUser(this.enrollUserForm.value).subscribe({
+    const enrollUserSubscription = this.authService.enrollUser(this.enrollUserForm.value).subscribe({
       next: () => {
         this.isLoading = false;
         this.userDetailsService.setPaginatedUsersSubject();
@@ -87,4 +91,14 @@ export class UserEnrollmentDialogFormComponent {
   closeEnrollUserForm() {
     this.dialog.closeAll();
   }
+
+  ngOnDestroy() {
+    if (this.branchesSubscription) {
+      this.branchesSubscription.unsubscribe();
+    }
+    if (this.enrollUserSubscription) {
+      this.enrollUserSubscription.unsubscribe();
+    }
+  }
+
 }

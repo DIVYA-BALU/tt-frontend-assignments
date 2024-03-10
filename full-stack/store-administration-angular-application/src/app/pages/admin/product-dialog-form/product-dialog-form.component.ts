@@ -7,6 +7,7 @@ import { BranchService } from 'src/app/core/services/branch.service';
 import { ProductService } from 'src/app/core/services/product.service';
 import { SectionService } from 'src/app/core/services/section.service';
 import { PopUpComponent } from '../../pop-up/pop-up.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-dialog-form',
@@ -14,7 +15,7 @@ import { PopUpComponent } from '../../pop-up/pop-up.component';
   styleUrls: ['./product-dialog-form.component.scss']
 })
 
-export class ProductDialogFormComponent implements OnInit{
+export class ProductDialogFormComponent implements OnInit {
 
   productCreationForm: FormGroup;
   isLoading: boolean = false;
@@ -22,25 +23,29 @@ export class ProductDialogFormComponent implements OnInit{
   branches: Branch[] = [];
   productsData: { branch: Branch, quantity: number, price: number }[] = [];
 
-  constructor(private fb: FormBuilder, private productService: ProductService,private branchService: BranchService, private dialog: MatDialog, private sectionService: SectionService) {
+  private sectionsSubscription: Subscription = new Subscription;
+  private branchesSubscription: Subscription = new Subscription;
+  private productSubscription: Subscription = new Subscription;
+
+  constructor(private fb: FormBuilder, private productService: ProductService, private branchService: BranchService, private dialog: MatDialog, private sectionService: SectionService) {
     this.productCreationForm = this.fb.group({
       productName: ['', [Validators.required]],
       branch: [null, Validators.required],
       section: [null, Validators.required],
-      cogs:['',[Validators.required,this.validateNumber]],
-      totalQuantity:['',[Validators.required,this.validateNumber]],
-      price:['',[Validators.required,this.validateNumber]],
+      cogs: ['', [Validators.required, this.validateNumber]],
+      totalQuantity: ['', [Validators.required, this.validateNumber]],
+      price: ['', [Validators.required, this.validateNumber]],
     })
   }
 
-  ngOnInit(){
-    this.sectionService.getAllSections().subscribe({
+  ngOnInit() {
+    const sectionsSubscription = this.sectionService.getAllSections().subscribe({
       next: (sections) => this.sections = sections,
       error: (HttpErrorResponse) => {
         alert('Error Occured Retry Later');
       }
     })
-    this.branchService.getAllBranches().subscribe({
+    const branchesSubscription = this.branchService.getAllBranches().subscribe({
       next: (branches) => this.branches = branches,
       error: (HttpErrorResponse) => {
         alert('Error Occured Retry Later');
@@ -60,10 +65,10 @@ export class ProductDialogFormComponent implements OnInit{
 
   submit() {
     this.isLoading = true;
-    this.productService.saveProducts(this.productCreationForm.value).subscribe({
+    const productSubscription = this.productService.saveProducts(this.productCreationForm.value).subscribe({
       next: () => {
         this.isLoading = false,
-        this.closeProductDialogForm();
+          this.closeProductDialogForm();
         this.productCreationForm.reset();
         this.productService.setPaginatedProductsSubject();
         this.dialog.open(PopUpComponent, {
@@ -79,7 +84,21 @@ export class ProductDialogFormComponent implements OnInit{
     })
   }
 
-  closeProductDialogForm(){
+  closeProductDialogForm() {
     this.dialog.closeAll();
   }
+
+  ngOnDestroy() {
+
+    if (this.sectionsSubscription) {
+      this.sectionsSubscription.unsubscribe();
+    }
+    if (this.branchesSubscription) {
+      this.branchesSubscription.unsubscribe();
+    }
+    if (this.productSubscription) {
+      this.productSubscription.unsubscribe();
+    }
+  }
+
 }

@@ -47,7 +47,7 @@ export class BranchLayoutComponent implements OnInit {
   }
   
   openBranchDialogForm() {
-    const dialogRef = this.dialog.open(BranchDialogFormComponent, { disableClose: true });
+    this.dialog.open(BranchDialogFormComponent, { disableClose: true });
   }
 
   ngOnDestroy() {

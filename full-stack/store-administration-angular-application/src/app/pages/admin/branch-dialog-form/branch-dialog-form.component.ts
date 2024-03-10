@@ -61,7 +61,7 @@ export class BranchDialogFormComponent {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-    
+
   }
 
 }

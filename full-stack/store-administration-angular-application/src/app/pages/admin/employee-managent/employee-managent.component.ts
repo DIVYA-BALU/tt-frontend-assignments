@@ -7,6 +7,7 @@ import { UserDetailsService } from 'src/app/core/services/user-details.service';
 import { PageEvent } from '@angular/material/paginator';
 import { BranchService } from 'src/app/core/services/branch.service';
 import { UserUpdateFormComponent } from '../user-update-form/user-update-form.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-employee-managent',
@@ -23,6 +24,11 @@ export class EmployeeManagentComponent implements OnInit {
   branchId: string = '';
   searchByName: string = '';
 
+  private subscription: Subscription = new Subscription;
+  private loginResponseSubscription: Subscription = new Subscription;
+  private branchesSubscription: Subscription = new Subscription;
+  private usersSubscription: Subscription = new Subscription;
+
   constructor(private dialog: MatDialog, private userDetailsService: UserDetailsService, private branchService: BranchService) {
     this.dataSource = new MatTableDataSource<UserDetails>;
   }
@@ -30,18 +36,20 @@ export class EmployeeManagentComponent implements OnInit {
   ngOnInit(): void {
     this.getAllBranches();
 
-    this.userDetailsService.loginResponseSubject$.subscribe({
+    const subscription = this.userDetailsService.loginResponseSubject$.subscribe({
       next: (loginResponse) => {
-        if (loginResponse.role.name === 'ADMIN'){
+
+        if (loginResponse.role.name === 'ADMIN') {
           this.userDetailsService.setPaginatedUsersSubject(this.pageNumber, this.pageSize, this.branchId, this.searchByName);
           this.getUserDetails();
         }
+
       }
     })
   }
 
   getAllBranches() {
-    this.branchService.getAllBranches().subscribe({
+    const branchesSubscription = this.branchService.getAllBranches().subscribe({
       next: (branches) => this.branches = branches,
       error: (HttpErrorResponse) => {
         alert('Error Occured Retry Later');
@@ -50,7 +58,7 @@ export class EmployeeManagentComponent implements OnInit {
   }
 
   getUserDetails() {
-    this.userDetailsService.paginatedUsers$.subscribe({
+    const usersSubscription = this.userDetailsService.paginatedUsers$.subscribe({
       next: (paginatedUsers) => {
         this.dataSource.data = paginatedUsers.content;
         this.totalUsers = paginatedUsers.totalElements;
@@ -59,7 +67,7 @@ export class EmployeeManagentComponent implements OnInit {
   }
 
   openEnrollUserForm() {
-    const dialogRef = this.dialog.open(UserEnrollmentDialogFormComponent, { disableClose: true });
+    this.dialog.open(UserEnrollmentDialogFormComponent, { disableClose: true });
   }
 
   onPageChange(event: PageEvent): void {
@@ -70,23 +78,41 @@ export class EmployeeManagentComponent implements OnInit {
 
   onSearchFilterChange() {
     this.getUserDetails();
-    this.userDetailsService.loginResponseSubject$.subscribe({
+    const loginResponseSubscription = this.userDetailsService.loginResponseSubject$.subscribe({
       next: (loginResponse) => {
+
         if (loginResponse.role.name === 'ADMIN')
-        this.userDetailsService.setPaginatedUsersSubject(this.pageNumber, this.pageSize, this.branchId, this.searchByName);
+          this.userDetailsService.setPaginatedUsersSubject(this.pageNumber, this.pageSize, this.branchId, this.searchByName);
         else {
           if (this.branchId !== '')
-          this.userDetailsService.setPaginatedUsersSubject(this.pageNumber, this.pageSize, this.branchId, this.searchByName);
+            this.userDetailsService.setPaginatedUsersSubject(this.pageNumber, this.pageSize, this.branchId, this.searchByName);
         }
+
       }
     })
   }
 
   update(userDetails: UserDetails) {
-    console.log(userDetails);
-    const dialogRef = this.dialog.open(UserUpdateFormComponent, {
-       disableClose: true ,
-       data: userDetails
-      });
+    this.dialog.open(UserUpdateFormComponent, {
+      disableClose: true,
+      data: userDetails
+    });
   }
+
+  ngOnDestroy() {
+
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+    if (this.loginResponseSubscription) {
+      this.loginResponseSubscription.unsubscribe();
+    }
+    if (this.branchesSubscription) {
+      this.branchesSubscription.unsubscribe();
+    }
+    if (this.usersSubscription) {
+      this.usersSubscription.unsubscribe();
+    }
+  }
+
 }

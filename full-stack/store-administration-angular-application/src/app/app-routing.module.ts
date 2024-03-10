@@ -4,6 +4,7 @@ import { LayoutComponent } from './pages/admin/layout/layout.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ProductLayoutComponent } from './pages/admin/product-layout/product-layout.component';
 import { ManagerLayoutComponent } from './pages/admin/manager-layout/manager-layout.component';
+import { AuthGuard } from './core/guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -11,14 +12,17 @@ const routes: Routes = [
   },
   {
     path: 'admin', component: LayoutComponent,
-    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule)
+    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'employee', component: ProductLayoutComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'manager', component: ManagerLayoutComponent,
-    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule)
+    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule),
+    canActivate: [AuthGuard]
   },
 
 ];

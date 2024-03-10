@@ -31,16 +31,18 @@ export class ProductService {
   }
 
   setPaginatedProductsSubject(page: number = 0, size: number = 10, searchByName: string = '', branchId: string = '', sectionId: string = '') {
-    this.getPaginatedProducts(page, size, searchByName, branchId, sectionId).
+    const subscription = this.getPaginatedProducts(page, size, searchByName, branchId, sectionId).
       subscribe({
         next: (paginatedSections) => {
           this.paginatedProducts.next(paginatedSections);
         },
         error: (error: HttpErrorResponse) => {
+
           if (error.status === 404)
             alert('Unable to connect to the server');
           else
             alert(`${error.status} found`);
+          
         }
       });
   }
@@ -53,5 +55,12 @@ export class ProductService {
       .set('branchId', branchId)
       .set('sectionId', sectionId);
     return this.http.get<PaginatedResponse<Product>>(`${environment.API_URL}${Constants.API_END_POINT.PRODUCTS}/page`, { params: params });
+  }
+
+  ngOnDestroy() {
+
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

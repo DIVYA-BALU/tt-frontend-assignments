@@ -8,6 +8,7 @@ import { InvestmentService } from 'src/app/core/services/investment.service';
 import { IncomeStatement } from 'src/app/core/models/API.model';
 import { Router } from '@angular/router';
 import { InvestmentDialogFormComponent } from '../investment-dialog-form/investment-dialog-form.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-financial-management',
@@ -23,11 +24,16 @@ export class FinancialManagementComponent {
   sectionPageNumber: number = 0;
   sectionPageSize: number = 10;
   totalBranchWiseResults: number = 0;
-  totalSectionWiseResults: number =0;
+  totalSectionWiseResults: number = 0;
   branchWiseAnalysis: MatTableDataSource<IncomeStatement>;
   sectionWiseAnalysis: MatTableDataSource<IncomeStatement>;
   totalRevenue: number = 0;
   totalInvestment: number = 0;
+
+  private revenueSubscription: Subscription = new Subscription;
+  private totalInvestmentSubscription: Subscription = new Subscription;
+  private branchWiseAnalysisSubscription: Subscription = new Subscription;
+  private sectionWiseAnalysisSubscription: Subscription = new Subscription;
 
   constructor(private billService: BillService, private investmentService: InvestmentService, private dialog: MatDialog, private router: Router) {
     this.branchWiseAnalysis = new MatTableDataSource<IncomeStatement>;
@@ -42,7 +48,7 @@ export class FinancialManagementComponent {
   }
 
   getTotalRevenueAndInvestment() {
-    this.billService.getRevenue().subscribe({
+    const revenueSubscription = this.billService.getRevenue().subscribe({
       next: (revenue) => { this.totalRevenue = revenue.totalRevenue },
       error: () => {
         this.dialog.open(PopUpComponent, {
@@ -53,7 +59,7 @@ export class FinancialManagementComponent {
       }
     })
 
-    this.investmentService.totalInvestment$.subscribe({
+    const totalInvestmentSubscription = this.investmentService.totalInvestment$.subscribe({
       next: (investment) => this.totalInvestment = investment.amount,
       error: () => {
         this.dialog.open(PopUpComponent, {
@@ -65,21 +71,21 @@ export class FinancialManagementComponent {
     })
   }
 
-  openProductDialogForm(){
-    const dialogRef = this.dialog.open(InvestmentDialogFormComponent, { disableClose: true });
+  openProductDialogForm() {
+    this.dialog.open(InvestmentDialogFormComponent, { disableClose: true });
   }
 
   getBranchWiseAnalysis() {
-      this.billService.getBranchWiseAnalysis(this.branchPageNumber, this.branchPageSize).subscribe({
-        next: (paginatedBanchWiseAnalysis) => {
-          this.branchWiseAnalysis.data = paginatedBanchWiseAnalysis.content;
-          this.totalBranchWiseResults = paginatedBanchWiseAnalysis.totalElements;
-        }
-      })
+    const branchWiseAnalysisSubscription = this.billService.getBranchWiseAnalysis(this.branchPageNumber, this.branchPageSize).subscribe({
+      next: (paginatedBanchWiseAnalysis) => {
+        this.branchWiseAnalysis.data = paginatedBanchWiseAnalysis.content;
+        this.totalBranchWiseResults = paginatedBanchWiseAnalysis.totalElements;
+      }
+    })
   }
 
   getSectionWiseAnalysis() {
-    this.billService.getSectionWiseAnalysis(this.sectionPageNumber, this.sectionPageSize).subscribe({
+    const sectionWiseAnalysisSubscription = this.billService.getSectionWiseAnalysis(this.sectionPageNumber, this.sectionPageSize).subscribe({
       next: (paginatedSectionWiseAnalysis) => {
         this.sectionWiseAnalysis.data = paginatedSectionWiseAnalysis.content;
         this.totalSectionWiseResults = paginatedSectionWiseAnalysis.totalElements;
@@ -99,8 +105,25 @@ export class FinancialManagementComponent {
     this.getSectionWiseAnalysis();
   }
 
-  onRowClicked(branchId: string, branchName: string){
-    this.router.navigate(['admin/section-wise-analysis-for-branch'], { 
-      queryParams: { branchId: branchId, branchName: branchName }    });
+  onRowClicked(branchId: string, branchName: string) {
+    this.router.navigate(['admin/section-wise-analysis-for-branch'], {
+      queryParams: { branchId: branchId, branchName: branchName }
+    });
   }
+
+  ngOnDestroy() {
+    if (this.revenueSubscription) {
+      this.revenueSubscription.unsubscribe();
+    }
+    if (this.totalInvestmentSubscription) {
+      this.totalInvestmentSubscription.unsubscribe();
+    }
+    if (this.branchWiseAnalysisSubscription) {
+      this.branchWiseAnalysisSubscription.unsubscribe();
+    }
+    if (this.sectionWiseAnalysisSubscription) {
+      this.sectionWiseAnalysisSubscription.unsubscribe();
+    }
+  }
+  
 }

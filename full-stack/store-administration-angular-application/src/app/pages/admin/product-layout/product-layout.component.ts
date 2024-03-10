@@ -30,7 +30,12 @@ export class ProductLayoutComponent {
   branchId: string = "";
   sectionId: string = "";
   dataSource: MatTableDataSource<Product>;
+
   private subscription: Subscription = new Subscription;
+  private sectionsSubscription: Subscription = new Subscription;
+  private loginResponseSubscription: Subscription = new Subscription;
+  private productsSubscription: Subscription = new Subscription;
+  private branchesSubscription: Subscription = new Subscription;
 
   bill: Bill = {
     billItems: [],
@@ -47,7 +52,7 @@ export class ProductLayoutComponent {
 
   ngOnInit(): void {
   
-    this.userDetailsService.loginResponseSubject$.subscribe({
+    const subscription = this.userDetailsService.loginResponseSubject$.subscribe({
       next: (loginResponse) => {
         if (loginResponse.role.name === 'ADMIN'){
           this.productService.setPaginatedProductsSubject();
@@ -55,7 +60,7 @@ export class ProductLayoutComponent {
         }
       }
     })
-    this.sectionService.setSectionsSubject();
+    const sectionsSubscription = this.sectionService.setSectionsSubject();
     this.sectionService.sections$.subscribe({
       next: (sections) => this.sections = sections,
       error: (HttpErrorResponse) => {
@@ -64,7 +69,7 @@ export class ProductLayoutComponent {
     })
 
     this.branchService.setBranchesSubject();
-    this.branchService.branches$.subscribe({
+    const branchesSubscription = this.branchService.branches$.subscribe({
       next: (branches) => this.branches = branches,
       error: (HttpErrorResponse) => {
         alert('Error Occured Retry Later');
@@ -74,7 +79,7 @@ export class ProductLayoutComponent {
 
   onSearchFilterChange() {
     this.getProductDetails();
-    this.userDetailsService.loginResponseSubject$.subscribe({
+    const loginResponseSubscription = this.userDetailsService.loginResponseSubject$.subscribe({
       next: (loginResponse) => {
         if (loginResponse.role.name === 'ADMIN')
           this.productService.setPaginatedProductsSubject(this.pageNumber, this.pageSize, this.searchByName, this.branchId, this.sectionId);
@@ -93,7 +98,7 @@ export class ProductLayoutComponent {
   }
 
   getProductDetails() {  
-    const subscription = this.productService.paginatedProducts$.subscribe({
+    const productsSubscription = this.productService.paginatedProducts$.subscribe({
       next: (paginatedProducts) => {
         this.dataSource.data = paginatedProducts.content;
         this.totalProducts = paginatedProducts.totalElements;
@@ -160,15 +165,26 @@ export class ProductLayoutComponent {
   }
 
   openProductDialogForm() {
-    const dialogRef = this.dialog.open(ProductDialogFormComponent, { disableClose: true });
+    this.dialog.open(ProductDialogFormComponent, { disableClose: true });
   }
 
   ngOnDestroy() {
-
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-
+    if (this.sectionsSubscription) {
+      this.sectionsSubscription.unsubscribe();
+    }
+    if (this.loginResponseSubscription) {
+      this.loginResponseSubscription.unsubscribe();
+    }
+    if (this.productsSubscription) {
+      this.productsSubscription.unsubscribe();
+    }
+    if (this.branchesSubscription) {
+      this.branchesSubscription.unsubscribe();
+    }
   }
+  
 
 }

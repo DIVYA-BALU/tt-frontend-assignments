@@ -23,6 +23,7 @@ export class SectionService {
   public paginationSections$: Observable<PaginatedResponse<Section>> = this.paginationSections.asObservable();
   
   private subscription: Subscription = new Subscription;
+  private paginationSubscription: Subscription = new Subscription;
   
   private sections: BehaviorSubject<Section[]> = new BehaviorSubject<Section[]>([]);
 
@@ -44,16 +45,18 @@ export class SectionService {
 
   setPaginationSectionsSubject(page: number = 0, size: number = 10) {
 
-    const subscription = this.getPaginationSections(page, size).
+    const paginationSubscription = this.getPaginationSections(page, size).
       subscribe({
         next: (paginationSections) => {
           this.paginationSections.next(paginationSections);
         },
         error: (error: HttpErrorResponse) => {
+
           if (error.status === 404)
             alert('Unable to connect to the server');
           else
             alert(`${error.status} found`);
+
         }
       });
     ;
@@ -70,10 +73,12 @@ export class SectionService {
           this.sections.next(sections);
         },
         error: (error: HttpErrorResponse) => {
+
           if (error.status === 404)
             alert('Unable to connect to the server');
           else
             alert(`${error.status} found`);
+          
         }
       });
     ;
@@ -81,10 +86,13 @@ export class SectionService {
 
   ngOnDestroy() {
 
+    if (this.paginationSubscription) {
+      this.paginationSubscription.unsubscribe();
+    }
+
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
 
   }
-
 }

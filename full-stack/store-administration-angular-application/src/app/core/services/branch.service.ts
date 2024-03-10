@@ -75,10 +75,12 @@ export class BranchService {
           this.branches.next(branches);
         },
         error: (error: HttpErrorResponse) => {
+
           if (error.status === 404)
             alert('Unable to connect to the server');
           else
             alert(`${error.status} found`);
+          
         }
       });
     ;

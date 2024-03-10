@@ -47,7 +47,7 @@ export class SectionLayoutComponent {
   }
 
   openSectionDialogForm() {
-    const dialogRef = this.dialog.open(SectionDialogFormComponent, { disableClose: true });
+    this.dialog.open(SectionDialogFormComponent, { disableClose: true });
   }
 
   ngOnDestroy() {

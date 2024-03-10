@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { IncomeStatement } from 'src/app/core/models/API.model';
 import { BillService } from 'src/app/core/services/bill.service';
 
@@ -21,19 +22,20 @@ export class DateWiseAnalysisComponent {
   pageNumber: number = 0;
   pageSize: number = 10;
   totalDates: number = 0;
+  private subscription: Subscription = new Subscription;
 
-  constructor(private billservice: BillService, private route: ActivatedRoute){
+  constructor(private billservice: BillService, private route: ActivatedRoute) {
     this.dateWiseAnalysisForSection = new MatTableDataSource<IncomeStatement>;
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe({
+    const subscription = this.route.queryParams.subscribe({
       next: (params) => {
         this.sectionId = params['sectionId'];
         this.sectionName = params['sectionName'];
         this.branchId = params['branchId'];
         this.branchName = params['branchName'];
-        this.getDateWiseAnalysisForSection();        
+        this.getDateWiseAnalysisForSection();
       }
     })
   }
@@ -41,7 +43,7 @@ export class DateWiseAnalysisComponent {
   onPageChange(event: PageEvent): void {
     this.pageNumber = event.pageIndex;
     this.pageSize = event.pageSize;
-    this.getDateWiseAnalysisForSection();        
+    this.getDateWiseAnalysisForSection();
   }
 
   getDateWiseAnalysisForSection() {
@@ -53,4 +55,11 @@ export class DateWiseAnalysisComponent {
     })
   }
 
+  ngOnDestroy() {
+
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+
+  }
 }

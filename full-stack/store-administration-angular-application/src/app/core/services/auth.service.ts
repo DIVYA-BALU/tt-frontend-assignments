@@ -15,12 +15,11 @@ export class AuthService {
   isLoggedIn: boolean;
 
   constructor(private http: HttpClient, private userDetailsService: UserDetailsService, private router: Router) {
-    
-    this.isLoggedIn = false;
-    const loginResponseString= localStorage.getItem('loginResponse');
 
-    if(loginResponseString !== null)
-    {
+    this.isLoggedIn = false;
+    const loginResponseString = localStorage.getItem('loginResponse');
+
+    if (loginResponseString !== null) {
       this.isLoggedIn = true;
       this.userDetailsService.setLoginResponseSubject(JSON.parse(loginResponseString));
     }
