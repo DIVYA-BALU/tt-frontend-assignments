@@ -30,8 +30,6 @@ export class UserUpdateFormComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: UserDetails, private formBuilder: FormBuilder, private rolepermissionService: RolePermissionService, private userDetailsService: UserDetailsService, private branchService: BranchService, private dialog: MatDialog) { }
 
   ngOnInit() {
-    console.log(this.data);
-
     this.userDetailsForm = this.formBuilder.group({
       _id: [this.data._id],
       name: [this.data.name, [Validators.required]],
@@ -43,8 +41,6 @@ export class UserUpdateFormComponent {
 
     const rolesSubscription = this.rolepermissionService.getAllRoles().subscribe({
       next: (roles) => {
-        console.log(roles);
-
         this.availableRoles = roles;
         this.userDetailsForm.setControl('roles', this.buildRolesCheckboxes());
       }

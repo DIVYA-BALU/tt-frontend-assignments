@@ -18,8 +18,6 @@ export class InvestmentService {
   constructor(private http: HttpClient) { }
 
   saveInvestment(investment: Investment): Observable<Investment> {
-    console.log(investment);
-
     return this.http.post<Investment>(
       `${environment.API_URL}${Constants.API_END_POINT.INVESTMENTS}`,
       investment

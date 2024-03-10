@@ -24,9 +24,7 @@ export class PermissionDirective {
     })
   }
 
-  checkPermission(loginResponse: LoginResponse, requiredPermission: string) {   
-    console.log(requiredPermission);
-     
+  checkPermission(loginResponse: LoginResponse, requiredPermission: string) {        
     const permissions: Permission[] = loginResponse.permissions.concat(loginResponse.role?.permissions ?? []);    
     if (!permissions.some(permission => permission.name === requiredPermission)) {
       this.el.nativeElement.style.display = 'none';

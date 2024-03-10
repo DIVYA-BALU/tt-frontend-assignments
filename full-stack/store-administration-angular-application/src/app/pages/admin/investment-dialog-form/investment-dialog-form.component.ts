@@ -55,7 +55,6 @@ export class InvestmentDialogFormComponent {
   }
 
   closeInvestmentDialogForm() {
-    console.log('in closeInvestment From');
     this.investmentForm.reset();
     this.dialog.closeAll();
   }

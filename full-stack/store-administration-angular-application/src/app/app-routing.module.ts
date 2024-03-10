@@ -17,6 +17,7 @@ const routes: Routes = [
   },
   {
     path: 'employee', component: ProductLayoutComponent,
+    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule),
     canActivate: [AuthGuard]
   },
   {
