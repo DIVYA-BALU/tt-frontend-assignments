@@ -52,7 +52,7 @@ public class AuthenticationService {
                 new UsernamePasswordAuthenticationToken(request.getUserName(), request.getUserPassword()));
         System.out.println(request);
         
-        var user = userRepo.findByUsername(request.getUserName()).orElseThrow();
+        var user = userRepo.findByUserName(request.getUserName()).orElseThrow();
 
         Map<String, Object> extraClaims = new HashMap<>();
         extraClaims.put("Authorities", user.getAuthorities());
@@ -64,4 +64,5 @@ public class AuthenticationService {
 
         return AuthenticationResponse.builder().token(jwtToken).build();
     }
+    
 }
