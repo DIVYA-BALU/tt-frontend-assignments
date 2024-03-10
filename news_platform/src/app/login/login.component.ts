@@ -31,12 +31,16 @@ export class LoginComponent {
       this.profileService.getProfile().subscribe((data) => {
         localStorage.setItem("Role", data.role.roleName)
         localStorage.setItem("Permission", JSON.stringify(data.authorities))
+        console.log(data.suscribedEndDate);
+        
+        localStorage.setItem("suscribedEndDate", JSON.stringify(data.suscribedEndDate))
         if (data.role.roleName === 'USER') {
           this.route.navigate(['/user'])
         }else {
           this.route.navigate(['/employee'])
         }
         this.sharedService.setPermission();
+        this.sharedService.setSubscribed();
       });
     },
     (error) => {

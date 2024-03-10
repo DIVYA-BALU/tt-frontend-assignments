@@ -14,7 +14,7 @@
       <button type="button" (click)="subscribe()">Subscribe</button>
     </div> -->
     <div class="icon" *appRoutehide="logged">
-      <button type="button" (click)="subscribe()" class="subscribe">
+      <button type="button" (click)="subscribe()" class="subscribe" *appRoutehide="!subscribed">
         Subscribe
       </button>
       <h4>Hi, name</h4>
@@ -26,7 +26,7 @@
       </button>
     </div>
     <div class="side-div" *appRoutehide="!logged">
-      <button type="button" (click)="subscribe()">Subscribe</button>
+      <button type="button" (click)="subscribe()" *appRoutehide="!subscribed">Subscribe</button>
       <button type="button" (click)="login()">Login</button>
       <button type="button" (click)="signup()">Signup</button>
     </div>

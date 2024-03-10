@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="logo">
+    <img src="/favicon.ico" alt="logo" />
+    InsightNow Prime Deal
+  </div>
+  <div class="paragraph">
+    <p class="first-para">
+      Invest Smarter & Lead Stronger with our Steal Deal.
+    </p>
+    <p class="second-para">
+      Discover smart market tools, investment ideas, & exclusive business
+      stories.
+    </p>
+    <p class="discount">Discount Applied! <i class="fa-solid fa-gift"></i></p>
+  </div>
+  <div class="card">
+    <mat-card class="example-card">
+      <mat-card-header class="header">
+        <div class="title">1-Month</div>
+        <div class="save">Save 30%</div>
+        <div class="amount">
+          <p class="amount1">500</p>
+          <p class="amount2">350/month</p>
+        </div>
+        <div class="bill">Billed amount: {{ 350 | currency : "INR" }}</div>
+        <div class="button">
+          <button mat-button (click)="onPay()">Continue to Pay</button>
+        </div>
+      </mat-card-header>
+      <mat-card-content class="content">
+        <ul>
+          <li>Get Daily News Tailored Just for You!</li>
+          <li>Stay Updated with Breaking Stories!</li>
+          <li>Your Custom News Feed!</li>
+          <li>Tailored Stocks Reports</li>
+        </ul>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

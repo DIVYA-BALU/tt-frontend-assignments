@@ -20,10 +20,16 @@ export class SharedServiceService {
   badgeValue: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   badgeValueData$ = this.badgeValue.asObservable();
 
+  subscribedValue: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
+  subscribedValueData$ = this.subscribedValue.asObservable();
+
   constructor() {
     this.setLogin();
     this.setLogout();
-    this.setPermission();    
+    this.setPermission();
+    this.setSubscribed();
   }
 
   setLogin() {
@@ -49,11 +55,31 @@ export class SharedServiceService {
     return localStorage.getItem('accessToken');
   }
 
-  setSearchValue(value: string){
+  setSearchValue(value: string) {
     this.searchValue.next(value);
   }
 
-  setBadge(val: boolean){
+  setBadge(val: boolean) {
     this.badgeValue.next(val);
+  }
+
+  isSubscribed() {
+    const storedDateString = localStorage.getItem('suscribedEndDate');
+    if (storedDateString) {
+      const storedDate = new Date(storedDateString);
+      const today = new Date();
+      if (storedDate.toDateString() === today.toDateString()) {
+        return false;
+      } else if (storedDateString === null) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  setSubscribed() {
+    if (this.isSubscribed()) {
+      this.subscribedValue.next(true);
+    }
   }
 }

@@ -19,7 +19,8 @@ import { SensationalNewsComponent } from './sensational-news/sensational-news.co
 import { TopNewsComponent } from './top-news/top-news.component';
 import { DisplayCategoryComponent } from './display-category/display-category.component';
 import { SavedStoriesComponent } from './saved-stories/saved-stories.component';
-import { SubscriptionComponent } from './subscription/subscription.component';
+import { SubscriptionPageComponent } from './subscription-page/subscription-page.component';
+import { SubscribeGuard } from '../guard/subscribe.guard';
 
 const routes: Routes = [
   {
@@ -68,7 +69,7 @@ const routes: Routes = [
       {
         path: 'display-news/:id',
         component: DisplayNewsComponent,
-        canActivate: [AuthGuard]
+        canActivate: [SubscribeGuard]
       },
       {
         path: 'display-category/:category',
@@ -85,15 +86,18 @@ const routes: Routes = [
       },
       {
         path: 'breaking-news',
-        component: BreakingNewsComponent
+        component: BreakingNewsComponent,
+        canActivate: [SubscribeGuard]
       },
       {
         path: 'sensatinal-news',
-        component: SensationalNewsComponent
+        component: SensationalNewsComponent,
+        canActivate: [SubscribeGuard]
       },
       {
         path: 'form',
-        component: FormComponent
+        component: FormComponent,
+        canActivate: [SubscribeGuard]
       },
       {
         path: 'topics',
@@ -104,8 +108,9 @@ const routes: Routes = [
         component: SavedStoriesComponent
       },
       {
-        path: 'subscription',
-        component: SubscriptionComponent
+        path: 'mySubscription',
+        component: SubscriptionPageComponent,
+        canActivate: [SubscribeGuard]
       }
     ],
   },

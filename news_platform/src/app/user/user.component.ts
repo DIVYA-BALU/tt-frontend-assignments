@@ -11,6 +11,7 @@ import { UserService } from './user.service';
 export class UserComponent {
   logged!: boolean;
   showBadge!: boolean;
+  subscribed!: boolean;
 
   constructor(
     private sharedService: SharedServiceService,
@@ -29,10 +30,15 @@ export class UserComponent {
       console.log(this.logged);
     });
 
+    this.sharedService.subscribedValueData$.subscribe( (data) => {
+      this.subscribed = data;
+      console.log("sub", this.subscribed);
+      
+    })
+
     this.sharedService.badgeValueData$.subscribe((data) => {
       this.showBadge = data;
       console.log(this.showBadge);
-      
     })
   }
 
@@ -47,7 +53,7 @@ export class UserComponent {
   }
 
   subscribe() {
-   
+    this.route.navigate(['/subscription']);
   }
 
   signup() {

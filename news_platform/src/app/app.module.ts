@@ -19,6 +19,7 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { SuccessSnackBarComponent } from './success-snack-bar/success-snack-bar.component';
 import { FailureSnackBarComponent } from './failure-snack-bar/failure-snack-bar.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { SubscriptionComponent } from './subscription/subscription.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ProfileComponent,
     SuccessSnackBarComponent,
     FailureSnackBarComponent,
+    SubscriptionComponent
   ],
   imports: [
     BrowserModule,

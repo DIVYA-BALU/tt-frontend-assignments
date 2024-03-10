@@ -10,8 +10,7 @@ export interface User{
     phoneNo: string;
     occupation: string;
     location: string;
-    isSubscribed: boolean;
-    subscriptionEndDate: Date;
+    suscribedEndDate: Date;
     role: Role;
     rolePermission: RolePermission[];
     authorities: Authority[]

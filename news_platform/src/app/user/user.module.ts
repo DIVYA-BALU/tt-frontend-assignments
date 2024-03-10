@@ -35,7 +35,9 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { TopNewsComponent } from './top-news/top-news.component';
 import { DisplayCategoryComponent } from './display-category/display-category.component';
 import { SavedStoriesComponent } from './saved-stories/saved-stories.component';
-import { SubscriptionComponent } from './subscription/subscription.component';
+import { SubscriptionPageComponent } from './subscription-page/subscription-page.component';
+import { MatTableModule } from '@angular/material/table';
+import { SubscribeBottomSheetComponent } from './subscribe-bottom-sheet/subscribe-bottom-sheet.component';
 
 
 @NgModule({
@@ -57,7 +59,8 @@ import { SubscriptionComponent } from './subscription/subscription.component';
     TopNewsComponent,
     DisplayCategoryComponent,
     SavedStoriesComponent,
-    SubscriptionComponent
+    SubscriptionPageComponent,
+    SubscribeBottomSheetComponent
   ],
   imports: [
     CommonModule,
@@ -78,7 +81,8 @@ import { SubscriptionComponent } from './subscription/subscription.component';
     MatProgressSpinnerModule,
     MatChipsModule,
     MatBadgeModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTableModule
   ],
   providers: [
     {

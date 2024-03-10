@@ -11,14 +11,13 @@ export class AuthGuard implements CanActivate {
 
   logged!: boolean ;
 
-  constructor(private sharedService: SharedServiceService, private route: Router, private _bottomSheet: MatBottomSheet){}
+  constructor(private sharedService: SharedServiceService, private _bottomSheet: MatBottomSheet){}
 
   canActivate(): boolean{
     this.sharedService.loginStatusData.subscribe((data) => {
       if (data) {
         this.logged = true;
       }else{
-        // this.route.navigate(["/user/login-botton-sheet"])
         this.logged = false;
         this._bottomSheet.open(LoginBottomSheetComponent);
       }

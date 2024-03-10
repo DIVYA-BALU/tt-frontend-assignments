@@ -32,6 +32,7 @@ export class SignupComponent {
       this.sharedService.loginStatusData.subscribe( data => {
         if (data === true) {
           this.profileService.getProfile().subscribe((data) => {
+        localStorage.setItem("suscribedEndDate", JSON.stringify(data.suscribedEndDate))
             if (data.role.roleName === 'USER') {
               localStorage.setItem("Role", data.role.roleName);
               localStorage.setItem("Permission", JSON.stringify(data.authorities))

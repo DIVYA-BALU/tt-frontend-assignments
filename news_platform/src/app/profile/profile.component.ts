@@ -71,7 +71,7 @@ export class ProfileComponent implements OnInit{
   }
 
   subscription(){
-    this.route.navigate(["/user/subscription"]);
+    this.route.navigate(["/user/mySubscription"]);
   }
 }
 
