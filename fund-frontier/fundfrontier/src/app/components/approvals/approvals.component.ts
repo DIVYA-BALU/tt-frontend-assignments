@@ -11,6 +11,7 @@ import { StudentService } from 'src/app/services/student.service';
   styleUrls: ['./approvals.component.scss']
 })
 export class ApprovalsComponent {
+
   studentdetails: Studentdetails[] = [];
   displayedColumns: string[] = [
     'profilePhoto',
@@ -85,4 +86,11 @@ export class ApprovalsComponent {
     )
   }
 
+  setRejected( student: Studentdetails) {
+    this.studentService.setRejected( student).subscribe(
+      () => {
+        this.getAllPending(0, 3);
+      }
+    )
+    }
 }

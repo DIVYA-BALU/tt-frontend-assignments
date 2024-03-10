@@ -86,6 +86,9 @@ export class StudentService {
     );
   }
 
+  setRejected(student: Studentdetails): Observable<Studentdetails> {
+    return this.http.patch<Studentdetails>(`${this.studentUrl}/rejected`, student,)
+  }
   getAllStudents(
     pageIndex: number,
     pageSize: number
@@ -109,6 +112,6 @@ export class StudentService {
   }
 
   addStory(story: Successstory): Observable<Successstory> {
-    return this.http.post<Successstory>(`${this.storyUrl}/save`,story);
+    return this.http.post<Successstory>(`${this.storyUrl}/save`, story);
   }
 }

@@ -117,7 +117,7 @@ export class StudentregistrationComponent {
 
     this.studentService.saveApplication(this.formdata).subscribe(
       (response) => {
-        this.router.navigate(['/home'])
+        this.router.navigate(['/header/home'])
       }
     )
   }
