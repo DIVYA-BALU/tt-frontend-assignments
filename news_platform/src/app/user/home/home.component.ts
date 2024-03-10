@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { News } from 'src/app/model/News';
 import { DailyNewsService } from '../daily-news/daily-news.service';
 import { CommonService } from '../display-category/common-service.service';
+import { Explainers } from 'src/app/model/Explainers';
 
 @Component({
   selector: 'app-home',
@@ -21,6 +22,7 @@ export class HomeComponent implements OnInit{
   allNews!: News[];
   sportsNews!: News[];
   entainmentNews!: News[];
+  explainers!: Explainers[];
 
   constructor(private homeService: HomeService, private route: Router, private dailynewsService: DailyNewsService, private commonService: CommonService) {}
 
@@ -32,6 +34,7 @@ export class HomeComponent implements OnInit{
     this.getAllNews();
     this.getSportsNews();
     this.getEntainmentNews();
+    this.getExplainers();
   }
  
   getShortReads(pageIndex: number, pageSize: number){
@@ -78,5 +81,11 @@ export class HomeComponent implements OnInit{
     this.commonService.getCategoryNews('ENTERTAINMENT').subscribe((data) => {
       this.entainmentNews = data.slice(0,5);
     });
+  }
+
+  getExplainers(){
+    this.homeService.getExplainer(0, 5).subscribe( (data) => {
+      this.explainers = data.content;
+    })
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { SharedServiceService } from '../shared-service/shared-service.service';
 import { Router } from '@angular/router';
 import { UserService } from './user.service';
@@ -23,6 +23,11 @@ export class UserComponent {
   }
 
   inputText: string = '';
+  @ViewChild('trading') content!: ElementRef;
+  script!: any;
+
+  @ViewChild('trading1') content1!: ElementRef;
+  script1!: any;
 
   ngOnInit(){
     this.sharedService.loginStatusData.subscribe((data) => {
@@ -40,6 +45,14 @@ export class UserComponent {
       this.showBadge = data;
       console.log(this.showBadge);
     })
+
+    this.loadTradingViewWidget();
+    this.loadTradingViewWidget1();
+  }
+
+  ngAfterViewInit() {
+    this.content.nativeElement.appendChild(this.script);
+    this.content1.nativeElement.appendChild(this.script1);
   }
 
   logout() {
@@ -80,5 +93,78 @@ export class UserComponent {
 
   OnClick(){
     this.route.navigate(['user/home']);
+  }
+
+  loadTradingViewWidget() {
+    this.script = document.createElement('script');
+    this.script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
+    this.script.async = true;
+    this.script.innerHTML = `
+      {
+        "symbols": [
+          {
+            "proName": "FOREXCOM:SPXUSD",
+            "title": "S&P 500 Index"
+          },
+          {
+            "proName": "FOREXCOM:NSXUSD",
+            "title": "US 100 Cash CFD"
+          },
+          {
+            "proName": "FX_IDC:EURUSD",
+            "title": "EUR to USD"
+          },
+          {
+            "proName": "BITSTAMP:BTCUSD",
+            "title": "Bitcoin"
+          },
+          {
+            "proName": "BITSTAMP:ETHUSD",
+            "title": "Ethereum"
+          }
+        ],
+        "showSymbolLogo": true,
+        "isTransparent": false,
+        "displayMode": "adaptive",
+        "colorTheme": "light",
+        "locale": "en"
+      }
+    `;
+  }
+
+  loadTradingViewWidget1() {
+    this.script1 = document.createElement('script');
+    this.script1.src = 'https://s3.tradingview.com/external-embedding/embed-widget-tickers.js';
+    this.script1.async = true;
+    this.script1.innerHTML = `
+      {
+        "symbols": [
+          {
+            "proName": "FOREXCOM:SPXUSD",
+            "title": "S&P 500 Index"
+          },
+          {
+            "proName": "FOREXCOM:NSXUSD",
+            "title": "US 100 Cash CFD"
+          },
+          {
+            "proName": "FX_IDC:EURUSD",
+            "title": "EUR to USD"
+          },
+          {
+            "proName": "BITSTAMP:BTCUSD",
+            "title": "Bitcoin"
+          },
+          {
+            "proName": "BITSTAMP:ETHUSD",
+            "title": "Ethereum"
+          }
+        ],
+        "isTransparent": false,
+        "showSymbolLogo": true,
+        "colorTheme": "light",
+        "locale": "en"
+      }
+    `;
   }
 }

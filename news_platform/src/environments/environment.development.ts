@@ -55,5 +55,5 @@ export const environment = {
   unsaveArticleUrl: "http://localhost:8080/saveforlater/unsaveArticle",
   getSaveArticleUrl: "http://localhost:8080/saveforlater/getAllSaved",
   createTransactionUrl: "http://localhost:8080/transaction/createTransaction",
-  getTransactionUrl: "http://localhost:8080/transaction/GetTransaction",
+  getTransactionUrl: "http://localhost:8080/transaction/GetTransaction"
 };

@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="header">
+      <div class="heading" *ngIf="explainer">
+        <h2>{{ explainer.title }}</h2>
+        <p>Report | {{ explainer.date | date}}</p>
+      </div>
+    </div>
+    <hr>
+    <div class="content" *ngIf="explainer">
+      <img src="{{ explainer.image }}" alt="image" />
+      <div [innerHtml]="explainer.content"></div>
+    </div>
+  </div>
+  

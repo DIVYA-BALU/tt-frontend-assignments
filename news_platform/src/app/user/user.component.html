@@ -1,20 +1,23 @@
 <ng-container>
   <mat-toolbar class="example-header">
     <div class="heading">
-      <!-- <button mat-button>
-        <i class="fa-solid fa-bars"></i>
-      </button> -->
       <span class="logo">
         <img src="/favicon.ico" alt="logo" />
       </span>
       InsightNow
     </div>
-    <div class="example-spacer"></div>
-    <!-- <div class="subscribe">
-      <button type="button" (click)="subscribe()">Subscribe</button>
-    </div> -->
+    <div class="example-spacer">
+      <div id="trading-tickers-container" class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget" #trading1></div>
+      </div>
+    </div>
     <div class="icon" *appRoutehide="logged">
-      <button type="button" (click)="subscribe()" class="subscribe" *appRoutehide="!subscribed">
+      <button
+        type="button"
+        (click)="subscribe()"
+        class="subscribe"
+        *appRoutehide="!subscribed"
+      >
         Subscribe
       </button>
       <h4>Hi, name</h4>
@@ -26,7 +29,7 @@
       </button>
     </div>
     <div class="side-div" *appRoutehide="!logged">
-      <button type="button" (click)="subscribe()" *appRoutehide="!subscribed">Subscribe</button>
+      <button type="button" (click)="subscribe()">Subscribe</button>
       <button type="button" (click)="login()">Login</button>
       <button type="button" (click)="signup()">Signup</button>
     </div>
@@ -37,14 +40,44 @@
       <div class="header">
         <div class="space"></div>
         <div class="topics">
-            <a routerLink="home">Home</a>
-            <a routerLink="topics">Research topics</a>
-            <a routerLink="daily-news" matBadge="1" matBadgeOverlap="false" [matBadgeHidden]="!showBadge">Daily news</a>
-            <a routerLink="sensatinal-news" matBadge="1" matBadgeOverlap="false" [matBadgeHidden]="!showBadge">Sensational</a>
-            <a routerLink="short-reads" matBadge="1" matBadgeOverlap="false" [matBadgeHidden]="!showBadge">Short reads</a>
-            <a routerLink="article" matBadge="1" matBadgeOverlap="false" [matBadgeHidden]="!showBadge">Articles</a>
-            <a routerLink="">Stock prices</a>
-            <a routerLink="breaking-news" matBadge="1" matBadgeOverlap="false" [matBadgeHidden]="!showBadge">Breaking news</a>
+          <a routerLink="home">Home</a>
+          <a routerLink="topics">Research topics</a>
+          <a
+            routerLink="daily-news"
+            matBadge="1"
+            matBadgeOverlap="false"
+            [matBadgeHidden]="!showBadge"
+            >Daily news</a
+          >
+          <a
+            routerLink="sensatinal-news"
+            matBadge="1"
+            matBadgeOverlap="false"
+            [matBadgeHidden]="!showBadge"
+            >Sensational</a
+          >
+          <a
+            routerLink="short-reads"
+            matBadge="1"
+            matBadgeOverlap="false"
+            [matBadgeHidden]="!showBadge"
+            >Short reads</a
+          >
+          <a
+            routerLink="article"
+            matBadge="1"
+            matBadgeOverlap="false"
+            [matBadgeHidden]="!showBadge"
+            >Articles</a
+          >
+          <a routerLink="trade">Stock prices</a>
+          <a
+            routerLink="breaking-news"
+            matBadge="1"
+            matBadgeOverlap="false"
+            [matBadgeHidden]="!showBadge"
+            >Breaking news</a
+          >
         </div>
         <div class="search">
           <input
@@ -60,23 +93,23 @@
           </button>
         </div>
       </div>
+      <div id="trading-ticker-tape-container" class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget" #trading></div>
+      </div>
       <div class="main-content">
         <router-outlet></router-outlet>
       </div>
+
+      <div class="footer">
+          <div class="heading">
+            <span class="logo">
+              <img src="/favicon.ico" alt="logo" />
+            </span>
+            InsightNow
+          </div>
+        <p>&copy; 2024 InsightNow. All rights reserved.</p>
+      </div>
+      
     </mat-sidenav-content>
   </mat-sidenav-container>
-
-  <!-- <mat-toolbar class="example-footer">
-    <div class="address">
-    <div class="heading">
-      <span class="logo">
-        <img src="/favicon.ico" alt="logo">
-      </span>
-      InsightNow
-    </div>
-    <div>
-      <p>kamaraj nagar, jedarpalayam , namakkal, 637213</p>
-    </div>
-  </div>
-  </mat-toolbar> -->
 </ng-container>

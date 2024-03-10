@@ -4,9 +4,7 @@
       <mat-card class="example-card">
         <mat-card-content>
           <img src="{{ shortRead.image }}" alt="image" />
-          <mat-card-subtitle class="subtitle"
-            >Report | {{ shortRead.date | date }}</mat-card-subtitle
-          >
+          <mat-card-subtitle class="subtitle">Report | {{ shortRead.date | date }}</mat-card-subtitle>
           <div class="content">
             <a [routerLink]="['/user/display-short-reads', shortRead.id]">
               {{ shortRead.title }}
@@ -22,47 +20,30 @@
   <div class="div-section1">
     <div class="top">
       <div class="video">
-        <iframe
-          width="500"
-          height="250"
-          src="https://www.youtube.com/embed/8WXH_Q6B4Ig?si=8FJGbeYFyIFEQ7NZ"
-          title="YouTube video player"
-          frameborder="0"
+        <iframe width="500" height="250" src="https://www.youtube.com/embed/8WXH_Q6B4Ig?si=8FJGbeYFyIFEQ7NZ"
+          title="YouTube video player" frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-        ></iframe>
+          allowfullscreen></iframe>
         <div class="main-content">
           <div *ngFor="let news of allNews" class="news-card">
             <img src="{{ news.images[0] }}" alt="" />
             <a [routerLink]="['/user/display-news', news.id]">{{
               news.title
-            }}</a>
+              }}</a>
           </div>
         </div>
       </div>
-      <mat-tab-group
-        mat-stretch-tabs="false"
-        mat-align-tabs="start"
-        class="tab"
-      >
+      <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" class="tab">
         <mat-tab label="Top News">
-          <a
-            class="link"
-            *ngFor="let news of topNews"
-            [routerLink]="['/user/display-news', news.id]"
-            >{{ news.title }}</a
-          >
+          <a class="link" *ngFor="let news of topNews" [routerLink]="['/user/display-news', news.id]">{{ news.title
+            }}</a>
           <p>
             <a routerLink="/user/top-news">More top News>></a>
           </p>
         </mat-tab>
         <mat-tab label="Latest News">
-          <a
-            class="link"
-            *ngFor="let news of newsContents"
-            [routerLink]="['/user/display-news', news.id]"
-            >{{ news.title }}</a
-          >
+          <a class="link" *ngFor="let news of newsContents" [routerLink]="['/user/display-news', news.id]">{{ news.title
+            }}</a>
           <p>
             <a routerLink="/user/daily-news">More daily News>></a>
           </p>
@@ -75,9 +56,7 @@
       <mat-card class="example-card">
         <mat-card-content>
           <img src="{{ article.images[0] }}" alt="image" />
-          <mat-card-subtitle class="subtitle"
-            >Report | {{ article.date | date }}</mat-card-subtitle
-          >
+          <mat-card-subtitle class="subtitle">Report | {{ article.date | date }}</mat-card-subtitle>
           <div class="content">
             <a [routerLink]="['/user/display-article', article.id]">
               {{ article.title }}
@@ -111,9 +90,7 @@
       <mat-card class="sports-card">
         <mat-card-content>
           <img src="{{ sports.images[0] }}" alt="image" />
-          <mat-card-subtitle class="subtitle"
-            >Report | {{ sports.date | date }}</mat-card-subtitle
-          >
+          <mat-card-subtitle class="subtitle">Report | {{ sports.date | date }}</mat-card-subtitle>
           <div class="content">
             <a [routerLink]="['/user/display-news', sports.id]">
               {{ sports.title }}
@@ -132,9 +109,7 @@
       <mat-card class="sports-card">
         <mat-card-content>
           <img src="{{ entainment.images[0] }}" alt="image" />
-          <mat-card-subtitle class="subtitle"
-            >Report | {{ entainment.date | date }}</mat-card-subtitle
-          >
+          <mat-card-subtitle class="subtitle">Report | {{ entainment.date | date }}</mat-card-subtitle>
           <div class="content">
             <a [routerLink]="['/user/display-news', entainment.id]">
               {{ entainment.title }}
@@ -147,8 +122,27 @@
   <p>
     <a [routerLink]="['/user/display-category', 'ENTERTAINMENT']">See more>></a>
   </p>
+  <h1>Explainers</h1>
+  <div class="sports">
+    <div *ngFor="let explainer of explainers" class="sports-cards">
+      <mat-card class="sports-card">
+        <mat-card-content>
+          <img src="{{ explainer.image }}" alt="image" />
+          <mat-card-subtitle class="subtitle">Report | {{ explainer.date | date }}</mat-card-subtitle>
+          <div class="content">
+            <a [routerLink]="['/user/display-explainers', explainer.id]">
+              {{ explainer.title }}
+            </a>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <p>
+    <a routerLink='/user/explainers'>See more>></a>
+  </p>
 </div>
 
-<div class="populars-div">
+<div class="explainers">
 
 </div>

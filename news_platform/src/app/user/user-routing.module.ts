@@ -21,6 +21,9 @@ import { DisplayCategoryComponent } from './display-category/display-category.co
 import { SavedStoriesComponent } from './saved-stories/saved-stories.component';
 import { SubscriptionPageComponent } from './subscription-page/subscription-page.component';
 import { SubscribeGuard } from '../guard/subscribe.guard';
+import { TradingComponent } from './trading/trading.component';
+import { ExplainersComponent } from './explainers/explainers.component';
+import { DisplayExplainerComponent } from './display-explainer/display-explainer.component';
 
 const routes: Routes = [
   {
@@ -49,8 +52,17 @@ const routes: Routes = [
         component: ShortReadsComponent
       },
       {
+        path: 'explainers',
+        component: ExplainersComponent
+      },
+      {
         path: 'display-short-reads/:id',
         component: DisplayShortReadsComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'display-explainers/:id',
+        component: DisplayExplainerComponent,
         canActivate: [AuthGuard]
       },
       {
@@ -110,6 +122,11 @@ const routes: Routes = [
       {
         path: 'mySubscription',
         component: SubscriptionPageComponent,
+        canActivate: [SubscribeGuard]
+      },
+      {
+        path: 'trade',
+        component: TradingComponent,
         canActivate: [SubscribeGuard]
       }
     ],

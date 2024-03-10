@@ -1,0 +1,20 @@
+<div class="container">
+    <div *ngFor="let explainer of explainers">
+      <mat-card class="card">
+        <mat-card-content>
+          <img src="{{ explainer.image }}" alt="image" />
+          <mat-card-subtitle class="subtitle"
+            >Report | {{ explainer.date | date }}</mat-card-subtitle
+          >
+          <div class="content">
+            <a [routerLink]="['/user/display-explainers', explainer.id]">
+              {{ explainer.title }}
+            </a>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="button">
+    <button type="button" (click)="loadMore()">Load more...</button>
+  </div>

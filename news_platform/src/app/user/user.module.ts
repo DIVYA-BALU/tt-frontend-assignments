@@ -38,6 +38,9 @@ import { SavedStoriesComponent } from './saved-stories/saved-stories.component';
 import { SubscriptionPageComponent } from './subscription-page/subscription-page.component';
 import { MatTableModule } from '@angular/material/table';
 import { SubscribeBottomSheetComponent } from './subscribe-bottom-sheet/subscribe-bottom-sheet.component';
+import { TradingComponent } from './trading/trading.component';
+import { ExplainersComponent } from './explainers/explainers.component';
+import { DisplayExplainerComponent } from './display-explainer/display-explainer.component';
 
 
 @NgModule({
@@ -60,7 +63,10 @@ import { SubscribeBottomSheetComponent } from './subscribe-bottom-sheet/subscrib
     DisplayCategoryComponent,
     SavedStoriesComponent,
     SubscriptionPageComponent,
-    SubscribeBottomSheetComponent
+    SubscribeBottomSheetComponent,
+    TradingComponent,
+    ExplainersComponent,
+    DisplayExplainerComponent
   ],
   imports: [
     CommonModule,
