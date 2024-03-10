@@ -23,7 +23,7 @@ public interface StudentService {
 
     Student setApproved(String name, Student request);
 
-    String setRejected(StudentDto student);
+    Student setRejected(Student student);
 
     Student updateProfile(MultipartFile file, String email) throws IOException;
 

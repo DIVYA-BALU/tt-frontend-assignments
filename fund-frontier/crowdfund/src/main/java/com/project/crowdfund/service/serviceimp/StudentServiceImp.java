@@ -227,13 +227,10 @@ public class StudentServiceImp implements StudentService {
         }
     }
 
-    public String setRejected(StudentDto student) {
+    public Student setRejected(Student student) {
 
-        String email = student.getEmail();
-        Student std = Student.builder()
-                .status("Rejected")
-                .build();
-        studentRepository.save(std);
+        student.setStatus("Rejected");
+        studentRepository.save(student);
 
         try {
             SimpleMailMessage mailMessage = new SimpleMailMessage();
@@ -242,8 +239,6 @@ public class StudentServiceImp implements StudentService {
                     "\n" + //
                     "We regret to inform you that your application to FundFrontier has been carefully reviewed, and unfortunately, it has not been accepted at this time.\n"
                     + //
-                    "\n" + //
-                    student.getReason() + //
                     "\n" + //
                     "We appreciate your interest in FundFrontier and value the effort you put into your application. Our team had to make tough decisions, and unfortunately, we are unable to proceed with your application at this time.\n"
                     + //
@@ -257,14 +252,14 @@ public class StudentServiceImp implements StudentService {
                     "The FundFrontier Team";
 
             mailMessage.setFrom(sender);
-            mailMessage.setTo(email);
+            mailMessage.setTo(student.getEmail().getEmail());
             mailMessage.setText(mailText);
             mailMessage.setSubject("Notification Regarding Your FundFrontier Application");
 
             javaMailSender.send(mailMessage);
-            return "Mail Sent Successfully...";
+            return student;
         } catch (Exception e) {
-            return "Error while Sending Mail";
+            return student;
         }
     }
 

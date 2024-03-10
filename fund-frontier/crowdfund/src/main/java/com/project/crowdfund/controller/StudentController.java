@@ -74,7 +74,7 @@ public class StudentController {
     }
 
     @PatchMapping("/rejected")
-    public ResponseEntity<String> setRejected(@RequestBody StudentDto student) {
+    public ResponseEntity<Student> setRejected(@RequestBody Student student) {
         return ResponseEntity.ok(studentService.setRejected(student));
     }
 
