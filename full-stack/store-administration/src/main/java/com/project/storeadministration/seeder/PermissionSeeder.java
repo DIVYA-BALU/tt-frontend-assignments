@@ -23,10 +23,9 @@ public class PermissionSeeder implements CommandLineRunner{
                 "FinancialManagement",
                 "AddInvestment",
                 "StoreDetailsManagement",
-                "Biller",
-                "EmployeeManagement",
-                "EmployeeSectionAllocation",
-                "MarkAttendance"
+                "ViewProducts",
+                "Billing",
+                "EmployeeManagement"
         );
 
         for (String permissionName : permissionNames) {

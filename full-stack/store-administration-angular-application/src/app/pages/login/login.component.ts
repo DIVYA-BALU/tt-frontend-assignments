@@ -31,11 +31,11 @@ export class LoginComponent {
           this.userDetailsService.setLoginResponseSubject(loginResponse);
 
           if (loginResponse.role.name === 'ADMIN') {
-            this.router.navigate(['/admin']);
+            this.router.navigate(['/admin/store-management']);
           }
 
           if (loginResponse.role.name === 'MANAGER')
-            this.router.navigate(['/manager']);
+            this.router.navigate(['/manager/products']);
 
           if (loginResponse.role.name === 'EMPLOYEE')
             this.router.navigate(['/employee']);

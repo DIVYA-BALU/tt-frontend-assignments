@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="sidenav-div">
+    <mat-list role="list">
+      <mat-list-item routerLink ="products">
+        Products 
+      </mat-list-item>
+      <mat-list-item routerLink ="employee-management">
+        Employees
+      </mat-list-item>
+      <div appPermission requiredPermission="FinancialManagement">
+        <mat-list-item routerLink ="financial-management">
+          Financial management
+        </mat-list-item>
+      </div>
+    </mat-list>
+  </div>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -1,7 +1,10 @@
 <div class="button-div">
-  <button mat-button (click)="openProductDialogForm()">Create Product</button>
+  <button mat-button appPermission requiredPermission="StoreDetailsManagement" (click)="openProductDialogForm()">Create Product</button>
 </div>
 
+<div class="heading">
+  <h1 appRole requiredRole="EMPLOYEE">BILLING PAGE</h1>
+</div>
 <div class="search-and-filters">
 
   <mat-form-field class="example-form-field">
@@ -23,7 +26,7 @@
   <mat-form-field appearance="fill">
     <mat-label>Filter By Section</mat-label>
     <mat-select [(ngModel)]="sectionId">
-      <mat-option [value]="" (click)="onSearchFilterChange()">All sections</mat-option>
+      <mat-option [value]="" appRole requiredRole="ADMIN" (click)="onSearchFilterChange()">All sections</mat-option>
       <mat-option *ngFor="let section of sections" [value]="section._id" (click)="onSearchFilterChange()">
         {{section.name}}
       </mat-option>
@@ -55,9 +58,9 @@
         <td mat-cell *matCellDef="let product"> {{product.section.name}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="COGS">
-        <th mat-header-cell *matHeaderCellDef> COGS </th>
-        <td mat-cell *matCellDef="let product"> {{product.cogs}} </td>
+      <ng-container matColumnDef="COGS" >
+        <th mat-header-cell *matHeaderCellDef appRole requiredRole="ADMIN"> COGS </th>
+        <td mat-cell *matCellDef="let product" appRole requiredRole="ADMIN"> {{product.cogs}} </td>
       </ng-container>
 
       <ng-container matColumnDef="Price">
@@ -76,13 +79,12 @@
       </ng-container>
 
       <ng-container matColumnDef="SelectedQuantity">
-        <th mat-header-cell *matHeaderCellDef> Selected Quantity </th>
-        <td mat-cell *matCellDef="let product">
+        <th mat-header-cell *matHeaderCellDef appPermission requiredPermission="Billing"> Selected Quantity </th>
+        <td mat-cell *matCellDef="let product" appPermission requiredPermission="Billing">
           <select id="quantity" #quantityDropdown>
             <option *ngFor="let quantity of availableQuantities(product)" [value]="quantity">{{ quantity }}</option>
           </select>
           <button mat-raised-button color="primary"
-            [ngClass]="{'clicked-button': clickedButtons.has(product._id) && !(quantityDropdown.value === '0')}"
             (click)="addToBill(product,quantityDropdown.value)">
             Add to Bill
           </button>
@@ -98,5 +100,5 @@
   (page)="onPageChange($event)">
 </mat-paginator>
 <div class="make-bill">
-  <button mat-button (click)="makeBill()">Make Bill</button>
+  <button mat-button (click)="makeBill()" appPermission requiredPermission="Billing">Make Bill</button>
 </div>

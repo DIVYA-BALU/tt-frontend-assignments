@@ -59,10 +59,10 @@
         </div>
       </div>
   
-      <div>
+      <div >
         <button mat-raised-button color="primary" type="submit" [disabled]="userDetailsForm.invalid" (click)="onSubmit()">Save</button>
+        <button mat-raised-button color="primary" (click)="closeUpdateUserForm()" class="close-button">Close</button>
       </div>
-      <button mat-raised-button color="primary" (click)="closeUpdateUserForm()" class="close-button">Close</button>
     </form>
   </div>
 </mat-dialog-content>

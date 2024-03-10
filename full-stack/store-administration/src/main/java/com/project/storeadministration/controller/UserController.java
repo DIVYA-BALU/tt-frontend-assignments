@@ -48,6 +48,7 @@ public class UserController {
 
   @PutMapping
   public ResponseEntity<User> updateUser(@RequestBody User user) throws CustomException {
+    System.out.println(user);
     return new ResponseEntity<User>(userService.updateUser(user), HttpStatus.OK);
   }
 

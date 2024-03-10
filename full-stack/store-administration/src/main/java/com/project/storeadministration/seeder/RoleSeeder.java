@@ -32,16 +32,16 @@ public class RoleSeeder implements CommandLineRunner {
         "FinancialManagement",
         "AddInvestment",
         "StoreDetailsManagement",
-        "EmployeeManagement",
-        "EmployeeSectionAllocation");
+        "ViewProducts",
+        "EmployeeManagement");
     List<String> managerPermissionNames = Arrays.asList(
         "StoreDetailsManagement",
-        "Biller",
-        "EmployeeManagement",
-        "EmployeeSectionAllocation",
-        "MarkAttendance");
+        "ViewProducts",
+        "Billing",
+        "EmployeeManagement");
     List<String> employeePermissionNames = Arrays.asList(
-        "MarkAttendance");
+        "ViewProducts",
+        "Billing");
 
     Role admin = createRoleWithPermissions("ADMIN", adminPermissionNames);
     roleRepository.save(admin);

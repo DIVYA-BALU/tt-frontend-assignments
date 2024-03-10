@@ -31,6 +31,8 @@ import { BranchDirective } from 'src/app/directives/branch.directive';
 import { RoleDirective } from 'src/app/directives/role.directive';
 import { MatButtonModule } from '@angular/material/button';
 import { UserUpdateFormComponent } from './user-update-form/user-update-form.component';
+import { ManagerLayoutComponent } from './manager-layout/manager-layout.component';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,8 @@ import { UserUpdateFormComponent } from './user-update-form/user-update-form.com
     PermissionDirective,
     BranchDirective,
     RoleDirective,
-    UserUpdateFormComponent
+    UserUpdateFormComponent,
+    ManagerLayoutComponent
   ],
   imports: [
     CommonModule,
@@ -62,6 +65,7 @@ import { UserUpdateFormComponent } from './user-update-form/user-update-form.com
     MatDialogModule,
     MatProgressSpinnerModule,
     FormsModule,
+    MatListModule,
     ReactiveFormsModule,
     MatIconModule,
     MatFormFieldModule, 

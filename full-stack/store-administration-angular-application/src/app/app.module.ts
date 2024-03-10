@@ -17,6 +17,9 @@ import { LayoutComponent } from './pages/admin/layout/layout.component';
 import {MatListModule} from '@angular/material/list';
 import { PopUpComponent } from './pages/pop-up/pop-up.component';
 import {MatInputModule} from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -33,11 +36,14 @@ import {MatInputModule} from '@angular/material/input';
     FormsModule,
     MatToolbarModule,
     MatIconModule,
+    MatDialogModule,
+    MatTooltipModule,
     MatMenuModule,
     MatProgressSpinnerModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatSelectModule,
     MatInputModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor,multi: true}],

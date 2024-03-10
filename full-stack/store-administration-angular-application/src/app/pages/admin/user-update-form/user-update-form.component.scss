@@ -21,7 +21,6 @@ $close-button: rgba(255, 54, 54, 0.726);
 
 label {
   display: block;
-  margin-bottom: 5px;
 }
 
 
@@ -31,6 +30,7 @@ input[type="checkbox"] {
 
 
 button[type="submit"]{
+  margin-top: 20px;
   margin-left: 35px 15px;
   padding: 10px 30px;
   background-color:$save-button;
@@ -42,6 +42,7 @@ button[type="submit"]{
 
 .close-button {
   background-color: $close-button;
+  margin-top: 20px;
   margin-left: 35px 15px;
   padding: 10px 30px;
   border: none;
@@ -49,9 +50,9 @@ button[type="submit"]{
   cursor: pointer;
 }
 
-.branches-div {
-  margin-top: 20px;
-}
+// .branches-div {
+//   margin-top: 20px;
+// }
 
 h1, h2 {
   margin-bottom: 10px;
@@ -61,7 +62,8 @@ span {
   color: red;
   font-size: 12px;
 }
+
 .branches-div {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
 }

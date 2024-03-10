@@ -7,10 +7,6 @@ $save-button-hover: rgb(78, 146, 78);
 $save-button: rgb(38, 205, 127);
 $list-button: rgba(61, 219, 219, 0.579);
 
-.clicked-button {
-  background-color: $save-button;
-}
-
 .button-div,
 .make-bill {
   display: flex;
@@ -52,5 +48,10 @@ $list-button: rgba(61, 219, 219, 0.579);
 .search-and-filters {
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+
+.heading {
+  display: flex;
   justify-content: center;
 }

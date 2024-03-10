@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 import { BillComponent } from '../bill/bill.component';
 import { SectionService } from 'src/app/core/services/section.service';
 import { BranchService } from 'src/app/core/services/branch.service';
+import { UserDetailsService } from 'src/app/core/services/user-details.service';
 
 @Component({
   selector: 'app-product-layout',
@@ -27,7 +28,7 @@ export class ProductLayoutComponent {
   sections: Section[] = [];
   branches: Branch[] = [];
   branchId: string = "";
-  sectionId: string ="";
+  sectionId: string = "";
   dataSource: MatTableDataSource<Product>;
   private subscription: Subscription = new Subscription;
 
@@ -38,17 +39,22 @@ export class ProductLayoutComponent {
     branchId: ''
   };
   makeBillButton: Boolean = false;
-  clickedButtons: Set<string> = new Set();
   searchByName: string = '';
 
-  constructor(private billService: BillService, private sectionService: SectionService, private branchService: BranchService, private productService: ProductService, private dialog: MatDialog, private cdr: ChangeDetectorRef) {
+  constructor(private billService: BillService, private sectionService: SectionService, private branchService: BranchService, private productService: ProductService, private dialog: MatDialog, private cdr: ChangeDetectorRef, private userDetailsService: UserDetailsService) {
     this.dataSource = new MatTableDataSource<Product>;
   }
 
   ngOnInit(): void {
-
-    this.productService.setPaginatedProductsSubject();
-    this.getProductDetails();
+  
+    this.userDetailsService.loginResponseSubject$.subscribe({
+      next: (loginResponse) => {
+        if (loginResponse.role.name === 'ADMIN'){
+          this.productService.setPaginatedProductsSubject();
+          this.getProductDetails();
+        }
+      }
+    })
     this.sectionService.setSectionsSubject();
     this.sectionService.sections$.subscribe({
       next: (sections) => this.sections = sections,
@@ -64,11 +70,20 @@ export class ProductLayoutComponent {
         alert('Error Occured Retry Later');
       }
     })
-
   }
 
   onSearchFilterChange() {
-    this.productService.setPaginatedProductsSubject(this.pageNumber, this.pageSize, this.searchByName, this.branchId, this.sectionId);
+    this.getProductDetails();
+    this.userDetailsService.loginResponseSubject$.subscribe({
+      next: (loginResponse) => {
+        if (loginResponse.role.name === 'ADMIN')
+          this.productService.setPaginatedProductsSubject(this.pageNumber, this.pageSize, this.searchByName, this.branchId, this.sectionId);
+        else {
+          if (this.branchId !== '' && this.sectionId !== '')
+            this.productService.setPaginatedProductsSubject(this.pageNumber, this.pageSize, this.searchByName, this.branchId, this.sectionId);
+        }
+      }
+    })
   }
 
   onPageChange(event: PageEvent): void {
@@ -77,7 +92,7 @@ export class ProductLayoutComponent {
     this.productService.setPaginatedProductsSubject(this.pageNumber, this.pageSize, this.searchByName, this.branchId, this.sectionId);
   }
 
-  getProductDetails() {
+  getProductDetails() {  
     const subscription = this.productService.paginatedProducts$.subscribe({
       next: (paginatedProducts) => {
         this.dataSource.data = paginatedProducts.content;
@@ -98,7 +113,6 @@ export class ProductLayoutComponent {
 
   addToBill(product: Product, selectedQuantity: string): void {
 
-    this.clickedButtons.add(product._id);
     const quantity = parseInt(selectedQuantity);
     const itemIndex = this.bill.billItems.findIndex(item => item.product === product);
 
@@ -142,7 +156,6 @@ export class ProductLayoutComponent {
       });
       this.bill.billItems = [];
       this.bill.totalPrice = 0;
-      this.clickedButtons.clear();
     }
   }
 

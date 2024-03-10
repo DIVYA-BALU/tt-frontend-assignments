@@ -29,7 +29,7 @@ public class BillController {
   private BillService billService;
 
   @PostMapping
-  public ResponseEntity<Bill> saveBranch(@RequestBody Bill bill) {
+  public ResponseEntity<Bill> saveBill(@RequestBody Bill bill) {
     return new ResponseEntity<Bill>(billService.saveBill(bill), HttpStatus.OK);
   }
 

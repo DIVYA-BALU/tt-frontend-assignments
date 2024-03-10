@@ -29,8 +29,15 @@ export class EmployeeManagentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllBranches();
-    this.userDetailsService.setPaginatedUsersSubject(this.pageNumber, this.pageSize, this.branchId, this.searchByName);
-    this.getUserDetails();
+
+    this.userDetailsService.loginResponseSubject$.subscribe({
+      next: (loginResponse) => {
+        if (loginResponse.role.name === 'ADMIN'){
+          this.userDetailsService.setPaginatedUsersSubject(this.pageNumber, this.pageSize, this.branchId, this.searchByName);
+          this.getUserDetails();
+        }
+      }
+    })
   }
 
   getAllBranches() {
@@ -46,6 +53,7 @@ export class EmployeeManagentComponent implements OnInit {
     this.userDetailsService.paginatedUsers$.subscribe({
       next: (paginatedUsers) => {
         this.dataSource.data = paginatedUsers.content;
+        this.totalUsers = paginatedUsers.totalElements;
       }
     })
   }
@@ -61,7 +69,17 @@ export class EmployeeManagentComponent implements OnInit {
   }
 
   onSearchFilterChange() {
-    this.userDetailsService.setPaginatedUsersSubject(this.pageNumber, this.pageSize, this.branchId, this.searchByName);
+    this.getUserDetails();
+    this.userDetailsService.loginResponseSubject$.subscribe({
+      next: (loginResponse) => {
+        if (loginResponse.role.name === 'ADMIN')
+        this.userDetailsService.setPaginatedUsersSubject(this.pageNumber, this.pageSize, this.branchId, this.searchByName);
+        else {
+          if (this.branchId !== '')
+          this.userDetailsService.setPaginatedUsersSubject(this.pageNumber, this.pageSize, this.branchId, this.searchByName);
+        }
+      }
+    })
   }
 
   update(userDetails: UserDetails) {

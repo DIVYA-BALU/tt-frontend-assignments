@@ -9,6 +9,7 @@ $list-button: rgba(61, 219, 219, 0.579);
 
 .button-div {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-top: 20px;
@@ -26,7 +27,17 @@ $list-button: rgba(61, 219, 219, 0.579);
 }
 
 .table-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top:50px;
   padding-bottom: 20px;
-  width: 35%;
-  margin-left: 320px;
+  width: 50%;
+}
+
+.table{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

@@ -122,6 +122,12 @@ public class UserServiceImplemetation implements UserService {
 
   @Override
   public User updateUser(User user) {
-   return userRepository.save(user);
+    User existingUser = userRepository.findBy_id(user.get_id()).get();
+    existingUser.setEmailId(user.getEmailId());
+    existingUser.setName(user.getName());
+    existingUser.setRole(user.getRole());
+    existingUser.setPermissions(user.getPermissions());
+    existingUser.setBranchesId(user.getBranchesId());
+    return userRepository.save(existingUser);
   }
 }

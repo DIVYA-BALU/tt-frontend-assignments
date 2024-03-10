@@ -6,6 +6,7 @@ import { BranchService } from 'src/app/core/services/branch.service';
 import { RolePermissionService } from 'src/app/core/services/role-permission.service';
 import { UserDetailsService } from 'src/app/core/services/user-details.service';
 import { PopUpComponent } from '../../pop-up/pop-up.component';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-user-update-form',
@@ -46,7 +47,7 @@ export class UserUpdateFormComponent {
     this.rolepermissionService.getAllPermissions().subscribe({
       next: (permissions) => {
         this.availablePermissions = permissions;
-        this.userDetailsForm.setControl('permissions', this.buildPermissionsCheckboxes());
+        this.userDetailsForm.setControl('permissions', this.buildPermissionsCheckboxes1());
       }
     })
 
@@ -68,15 +69,28 @@ export class UserUpdateFormComponent {
 
   buildBranchesCheckboxes() {
     const checkboxes = this.availableBranches.map(branch => {
-      return this.formBuilder.control(this.data.branchesId.includes(branch._id));
+      return this.formBuilder.control(this.data.branchesId?.includes(branch._id));
     });
     return this.formBuilder.array(checkboxes);
   }
 
   buildPermissionsCheckboxes() {
     const checkboxes = this.availablePermissions.map(permission => {
-      return this.formBuilder.control(this.data.permissions.includes(permission));
+      return this.formBuilder.control(this.data.permissions?.includes(permission));
     });
+    return this.formBuilder.array(checkboxes);
+  }
+
+  buildPermissionsCheckboxes1() {
+    
+    const availablePermissionNames = this.availablePermissions.map(permission => permission.name);
+    const dataPermissionNames = this.data.permissions?.map(permission => permission.name) ?? [];
+  
+    const checkboxes = availablePermissionNames.map(permissionName => {
+      const isChecked = dataPermissionNames.includes(permissionName);
+      return this.formBuilder.control(isChecked);
+    });
+    
     return this.formBuilder.array(checkboxes);
   }
 
@@ -110,14 +124,9 @@ branchesValidator(): ValidatorFn {
 
   this.userDetailsForm.value.permissions = selectedPermissions;
 
-
-  const selectedRoles = this.userDetailsForm.value.roles
-    .map((checked: boolean, index: number) => checked ? this.availableRoles[index] : null)
-    .filter((value: Role | null) => value !== null);
-
-  this.userDetailsForm.value.roles = selectedRoles;
-
-    if (this.userDetailsForm.value.branchesId.length > 0) {
+  console.log(this.userDetailsForm.value.role);
+  
+    if (this.userDetailsForm.value.branchesId.length > 0 || this.userDetailsForm.value.role.name === 'ADMIN') {
       this.userDetailsService.updateUser(this.userDetailsForm.value).subscribe({
         next: () => {
           this.userDetailsService.setPaginatedUsersSubject();

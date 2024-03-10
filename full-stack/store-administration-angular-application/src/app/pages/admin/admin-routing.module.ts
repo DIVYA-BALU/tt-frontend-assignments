@@ -5,6 +5,7 @@ import { FinancialManagementComponent } from './financial-management/financial-m
 import { EmployeeManagentComponent } from './employee-managent/employee-managent.component';
 import { SectionWiseAnalysisComponent } from './section-wise-analysis/section-wise-analysis.component';
 import { DateWiseAnalysisComponent } from './date-wise-analysis/date-wise-analysis.component';
+import { ProductLayoutComponent } from './product-layout/product-layout.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,9 @@ const routes: Routes = [
   },
   {
     path: 'date-wise-analysis-for-section', component: DateWiseAnalysisComponent
+  },
+  {
+    path: 'products', component: ProductLayoutComponent
   }
 ];
 

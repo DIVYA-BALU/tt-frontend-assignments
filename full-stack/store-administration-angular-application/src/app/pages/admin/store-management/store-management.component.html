@@ -1,10 +1,10 @@
 <mat-tab-group>
-  <mat-tab label="Branch Details">
+  <mat-tab label="Branch Details" appRole requiredRole = "ADMIN">
       <div class="table-div"> 
         <app-branch-layout></app-branch-layout> 
       </div>
     </mat-tab>
-    <mat-tab label="Section Details"> 
+    <mat-tab label="Section Details" appRole requiredRole = "ADMIN"> 
       <div class="section-table-div"> 
       <app-section-layout></app-section-layout>
     </div>

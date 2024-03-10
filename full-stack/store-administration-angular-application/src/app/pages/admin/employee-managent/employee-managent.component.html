@@ -12,7 +12,8 @@
     <mat-label>Filter By Branch</mat-label>
     <mat-select [(ngModel)]="branchId" id="branch" >
       <mat-option [value]="" appRole requiredRole="ADMIN" (click)="onSearchFilterChange()">All branches</mat-option>
-      <mat-option *ngFor="let branch of branches" [value]="branch._id" (click)="onSearchFilterChange()">
+      <mat-option *ngFor="let branch of branches" [value]="branch._id" (click)="onSearchFilterChange()"
+      appBranch requiredBranchId={{branch._id}}>
         {{branch.name}}
       </mat-option>
     </mat-select>

@@ -20,14 +20,18 @@ export class PermissionDirective {
 
   ngOnInit() {
     const permissionsSubscription = this.userDetailsService.loginResponseSubject$.subscribe({
-      next: (loginResponse) => this.checkPermission(loginResponse.permissions, this.requiredPermission)
+      next: (loginResponse) => this.checkPermission(loginResponse, this.requiredPermission)
     })
   }
 
-  checkPermission(permissions: Permission[], requiredPermission: string) {
+  checkPermission(loginResponse: LoginResponse, requiredPermission: string) {   
+    console.log(requiredPermission);
+     
+    const permissions: Permission[] = loginResponse.permissions.concat(loginResponse.role?.permissions ?? []);    
     if (!permissions.some(permission => permission.name === requiredPermission)) {
       this.el.nativeElement.style.display = 'none';
     }
+
   }
 
   ngOnDestroy() {

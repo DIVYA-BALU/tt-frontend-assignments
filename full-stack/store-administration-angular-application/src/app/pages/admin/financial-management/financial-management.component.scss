@@ -12,7 +12,6 @@ $list-button: rgba(61, 219, 219, 0.579);
   align-items: center;
   justify-content: center;
   margin-top: 20px;
-  margin-bottom: 50px;
 }
 
 .button-div button {
@@ -25,11 +24,16 @@ $list-button: rgba(61, 219, 219, 0.579);
   cursor: pointer;
 }
 
-.numbers-div {
+.title-div {
+  margin-top: 30px;
   font-size: large;
   font-weight: bolder;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.table-div{
+  padding-bottom: 20px;
 }

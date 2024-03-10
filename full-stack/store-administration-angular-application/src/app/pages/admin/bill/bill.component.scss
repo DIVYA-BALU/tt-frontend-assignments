@@ -1,0 +1,19 @@
+$save-button: rgb(38, 205, 127);
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: $save-button;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+div {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+

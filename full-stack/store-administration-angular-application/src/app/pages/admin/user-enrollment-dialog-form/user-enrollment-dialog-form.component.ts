@@ -54,6 +54,7 @@ export class UserEnrollmentDialogFormComponent {
     this.authService.enrollUser(this.enrollUserForm.value).subscribe({
       next: () => {
         this.isLoading = false;
+        this.userDetailsService.setPaginatedUsersSubject();
         this.dialog.open(PopUpComponent, {
           data: {
             message: `${this.enrollUserForm.value.role} added successfully`
