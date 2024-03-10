@@ -28,7 +28,7 @@ public class SecurityConfiguration {
                                         "/static/**",
                                         "/location/**",
                                         "/poll/**",
-                                        "/users/**",
+                                        "/user/**",
                                         "/pay/**").permitAll()
                 ).sessionManagement(management -> management
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

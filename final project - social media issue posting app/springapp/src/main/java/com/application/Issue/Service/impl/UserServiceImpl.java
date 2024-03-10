@@ -1,6 +1,7 @@
 package com.application.Issue.Service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,23 +31,25 @@ public class UserServiceImpl implements UserService {
         return (List<User>)userRepo.findAll();
     }
 
-    //  String username = user.getEmail();
-    //  return userRepo.findByEmail(username);
-    // public User findUserByName(String username) {
-    //     return userRepo.findByUserName(username);
-    // }
-
     public User findUser(String userId) {
         return userRepo.findById(userId).orElse(null);
     }
 
-    public User updateUserPassword(User user, String userPassword) {
-        user.setUserPassword(userPassword);
-        return userRepo.save(user);
+    public User findUserByName(String userName) {
+        Optional<User> userOptional = userRepo.findByUserName(userName);
+        return userOptional.orElse(null);
     }
 
     public User updateLocation(User user, String location) {
         user.setLocation(location);
         return userRepo.save(user);
     }
+
+    @Override
+    public User updateUserPassword(User user, String newPassword) {
+        user.setUserPassword(newPassword);
+        return userRepo.save(user);
+    }
+
+
 }

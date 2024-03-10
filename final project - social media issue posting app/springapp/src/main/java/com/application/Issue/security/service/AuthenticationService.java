@@ -7,11 +7,14 @@ import java.util.Map;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.application.Issue.exception.NotFoundException;
 import com.application.Issue.security.auth.AuthenticationRequest;
 import com.application.Issue.security.auth.AuthenticationResponse;
+import com.application.Issue.security.auth.ForgotPasswordRequest;
 import com.application.Issue.security.auth.RegisterRequest;
 import com.application.Issue.security.repository.UserRepository;
 import com.application.Issue.security.user.Role;
@@ -25,6 +28,7 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authManager;
+    private final TwoFactorAuthenticationService tfaService;
 
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()
@@ -32,7 +36,12 @@ public class AuthenticationService {
                 .location(request.getLocation().toLowerCase())
                 .userPassword(passwordEncoder.encode(request.getUserPassword()))
                 .role(Role.PUBLIC)
+                .mfaEnabled(request.isMfaEnabled())
                 .build();
+        
+        if (request.isMfaEnabled()) {
+            user.setSecret(tfaService.generateNewSecret());
+        }
 
         userRepo.save(user);
 
@@ -43,7 +52,11 @@ public class AuthenticationService {
 
         System.out.println(user.getAuthorities());
         String jwtToken = jwtService.generateToken(extraClaims, user);
-        return AuthenticationResponse.builder().token(jwtToken).build();
+        return AuthenticationResponse.builder()
+                .secretImageUri(tfaService.generateQrCodeImageUri(user.getSecret()))
+                .token(jwtToken)
+                .mfaEnabled(user.isMfaEnabled())
+                .build();
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
@@ -64,5 +77,23 @@ public class AuthenticationService {
 
         return AuthenticationResponse.builder().token(jwtToken).build();
     }
+
+    public void updateUserPassword(ForgotPasswordRequest request) {
+        User user = userRepo.findByUserName(request.getUserName())
+                             .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                             
+        if (!request.getUserPassword().equals(request.getConfirmPassword())) {
+            throw new IllegalArgumentException("New password and confirm password do not match");
+        }
+
+        // Update user's password
+        user.setUserPassword(passwordEncoder.encode(request.getUserPassword()));
+        userRepo.save(user);
+    }
     
+    // public void updatePassword(String userName, String newPassword) {
+    //     User user = userRepo.findByUserName(userName).orElseThrow(() -> new NotFoundException("User not found"));
+    //     user.setUserPassword(passwordEncoder.encode(newPassword));
+    //     userRepo.save(user);
+    // }
 }

@@ -16,7 +16,10 @@ export class ForgotpassComponent {
   forgotpasswordForm!: FormGroup;
   submitted = false;
 
-  constructor(private fb: FormBuilder,private userService:UserService,private router:Router) {
+  constructor(private fb: FormBuilder, 
+    private userService: UserService,
+    private router: Router) {
+
   }
 
   ngOnInit(): void {
@@ -25,9 +28,10 @@ export class ForgotpassComponent {
       userPassword: new FormControl(null, [Validators.required, Validators.minLength(8)]),
       confirmPassword: new FormControl(null)
     },
-      {
-        validators: passwordmatch
-      })
+
+    {
+      validators: passwordmatch
+    })
   }
 
   onpassclick() {
@@ -42,14 +46,13 @@ export class ForgotpassComponent {
 
   forgotpass() {
     this.userService.forgotPassUser(this.forgotpasswordForm).subscribe(
-        data => {
+      data => {
         alert("Password Update Successfull. Please login to continue...");
-        delay(3000)
         this.router.navigate(['/login'])
       }, 
       error => {
-        alert("Username doesn't exists...");
-    }
+        alert("Unable to change password");
+      }
     );
   }
 

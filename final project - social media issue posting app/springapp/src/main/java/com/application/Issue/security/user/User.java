@@ -28,6 +28,9 @@ public class User implements UserDetails {
     private String userPassword;
     private Role role;
 
+    private boolean mfaEnabled;
+    private String secret;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));

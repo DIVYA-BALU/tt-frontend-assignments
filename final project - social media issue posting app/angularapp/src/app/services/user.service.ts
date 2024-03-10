@@ -27,13 +27,13 @@ export class UserService {
     return this.httpClient.post(url, loginForm.value);
   }
 
-  forgotPassUser(forgotpasswordForm:FormGroup):Observable<any>{
-    let url = `${this.baseUrl}/passUpdate`;
+  forgotPassUser(forgotpasswordForm: FormGroup): Observable<any>{
+    const url = `${this.authUrl}/passUpdate`;
     return this.httpClient.put(url, forgotpasswordForm.value);
   }
 
-  updateUserLocation(id:string, location:string):Observable<any>{
-    let url = `${this.baseUrl}/locationUpdate/${id}/${location}`;
+  updateUserLocation(id: string, location: string):Observable<any>{
+    const url = `${this.baseUrl}/locationUpdate/${id}/${location}`;
     return this.httpClient.put(url,null);
   }
 

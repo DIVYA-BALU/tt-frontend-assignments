@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,17 +42,6 @@ public class UserController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    
-    // @PutMapping("/passUpdate")
-    // public ResponseEntity<User> updateUserPassword(String username, String newPass){
-    //     User userDetail = userService.findUserByName(username);
-    //     if (userDetail != null) {
-    //         userDetail.setUserPassword(newPass);
-    //         User updatedUser = userRepo.save(userDetail);
-    //         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
-    //     }
-    //     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    // }
 
     @PutMapping("/locationUpdate/{id}/{location}")
     public ResponseEntity<User> updateLocation(@PathVariable("id") String id, @PathVariable("location") String location){
