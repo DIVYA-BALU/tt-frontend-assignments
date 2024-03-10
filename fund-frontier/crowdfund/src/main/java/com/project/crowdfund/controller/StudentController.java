@@ -67,7 +67,6 @@ public class StudentController {
         return ResponseEntity.ok(studentService.getAllPending(pageNo, pageSize));
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("/approved/{name}")
     public ResponseEntity<Student> setApproved(@PathVariable String name, @RequestBody Student request) {
         System.out.println(request);
@@ -79,8 +78,8 @@ public class StudentController {
         return ResponseEntity.ok(studentService.setRejected(student));
     }
 
-    @PatchMapping("/updateProfile")
-    public ResponseEntity<String> updateProfile(@RequestParam MultipartFile file, @RequestParam String email)
+    @PatchMapping("/updateProfile/{email}")
+    public ResponseEntity<Student> updateProfile(@RequestParam("file")  MultipartFile file, @PathVariable String email)
             throws IOException {
         return ResponseEntity.ok(studentService.updateProfile(file, email));
     }

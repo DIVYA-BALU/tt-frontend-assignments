@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.project.crowdfund.model.Role;
 import com.project.crowdfund.model.Users;
 import com.project.crowdfund.service.UserService;
@@ -58,4 +59,5 @@ public class UserController {
     public ResponseEntity<Users> updateUser(@RequestBody Users request) {
         return ResponseEntity.ok(userService.updateUser(request));
     }
+
 }

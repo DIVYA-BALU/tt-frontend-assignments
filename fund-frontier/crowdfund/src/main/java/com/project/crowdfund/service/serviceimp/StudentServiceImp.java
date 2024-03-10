@@ -145,7 +145,6 @@ public class StudentServiceImp implements StudentService {
     public Page<Student> getAllPending(Integer pageNo, Integer pageSize) {
         PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
         Page<Student> pagingStudent = studentRepository.findByStatus("Pending", pageRequest);
-        // System.out.println(studentRepository.findByStatus("Approved"));
         return pagingStudent;
     }
 
@@ -270,17 +269,20 @@ public class StudentServiceImp implements StudentService {
     }
 
     @Override
-    public String updateProfile(MultipartFile file, String email) throws IOException {
+    public Student updateProfile(MultipartFile file, String email) throws IOException {
+
         Users user = userRepository.findByEmail(email).get();
         Student student = studentRepository.findByEmail(user);
 
         String profile = file.getOriginalFilename();
         String profilePath = uploads + profile;
-        Files.copy(file.getInputStream(), Paths.get(profilePath), StandardCopyOption.REPLACE_EXISTING);
-        student.setProfilePhoto(profilePath);
+        String profilefpath = path + profile;
+        student.setProfilePhoto(profilefpath);
         studentRepository.save(student);
+        Files.copy(file.getInputStream(), Paths.get(profilePath), StandardCopyOption.REPLACE_EXISTING);
+        
 
-        return "profile updated";
+        return student;
 
     }
 

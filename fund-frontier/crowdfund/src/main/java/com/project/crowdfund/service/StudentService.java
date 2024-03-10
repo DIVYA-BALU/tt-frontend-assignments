@@ -25,7 +25,7 @@ public interface StudentService {
 
     String setRejected(StudentDto student);
 
-    String updateProfile(MultipartFile file, String email) throws IOException;
+    Student updateProfile(MultipartFile file, String email) throws IOException;
 
     List<Student> searchByGroup(String group);
 
