@@ -3,6 +3,7 @@ package com.petAdoption.petPalFinder.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -40,13 +41,13 @@ public class PetPostController {
     }
 
     @PostMapping("near-by-post")
-    public ResponseEntity<List<PetPost>> nearByPost(@RequestBody Location location) {
-        return ResponseEntity.ok(petPostService.getNearByPost(location));
+    public ResponseEntity<List<PetPost>> nearByPost(@RequestBody Location location,@RequestParam Integer page) {
+        return ResponseEntity.ok(petPostService.getNearByPost(location,page));
     }
 
     @GetMapping("latest")
-    public ResponseEntity<List<PetPost>> getLatestPost() {
-        return ResponseEntity.ok(petPostService.getLatestPost());
+    public ResponseEntity<List<PetPost>> getLatestPost(@RequestParam Integer page) {
+        return ResponseEntity.ok(petPostService.getLatestPost(page).getContent());
     }
 
     @GetMapping

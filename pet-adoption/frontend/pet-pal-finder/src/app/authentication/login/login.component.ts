@@ -52,7 +52,15 @@ export class LoginComponent {
             this.route.navigate(['pet']);
           }
         },
-      });
+        error:()=>{
+          Swal.fire({
+            title: 'Invalid Credential!',
+            text: 'Please check the mail id and password',
+            icon: 'error',
+          })
+        }
+      },
+      );
   }
 
   ngOnDestroy() {

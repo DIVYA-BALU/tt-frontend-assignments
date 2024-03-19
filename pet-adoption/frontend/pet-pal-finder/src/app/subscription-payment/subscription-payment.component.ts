@@ -10,6 +10,7 @@ import {
 } from '../models/models';
 import { AuthService } from '../service/auth.service';
 import { ProfileService } from '../service/profile.service';
+import { Router } from '@angular/router';
 declare const Razorpay: any;
 
 @Component({
@@ -25,7 +26,8 @@ export class SubscriptionPaymentComponent {
     public dialogRef: MatDialogRef<SubscriptionPaymentComponent>,
     @Inject(MAT_DIALOG_DATA) public id: string,
     private formBuilder: FormBuilder,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private router:Router
   ) {}
 
   subscriptionPlans: SubscriptionPlan[] = [];
@@ -59,7 +61,7 @@ export class SubscriptionPaymentComponent {
       amount: response.amount,
       currency: response.currency,
       name: 'PetPalFinder',
-      description: 'Payment of online shopping',
+      description: 'Subscription for doctor',
       image:
         'https://img.freepik.com/free-vector/mobile-bank-users-transferring-money-currency-conversion-tiny-people-online-payment-cartoon-illustration_74855-14454.jpg',
       prefill: {
@@ -73,7 +75,7 @@ export class SubscriptionPaymentComponent {
         else alert('Payment failed..');
       },
       notes: {
-        address: 'Book the person and Cook your food',
+        address: 'Subscribe and get requests',
       },
       theme: {
         color: '#F37254',
@@ -92,7 +94,11 @@ export class SubscriptionPaymentComponent {
     this.subscription.subscriberId = this.doctor?._id || '';
     this.paymentService
       .addSubscription(this.subscription)
-      .subscribe({ next: (val) => {} });
+      .subscribe({ next: (val) => {
+        this.dialogRef.close();
+        this.router.navigate(["pet/profile"])
+        window.location.reload();
+      } });
   }
 
   pay(subscriptionPlan: SubscriptionPlan) {

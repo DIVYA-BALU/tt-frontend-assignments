@@ -5,22 +5,28 @@ import { AdoptionService } from '../service/adoption.service';
 import { AuthService } from '../service/auth.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { RequesterProfileComponent } from '../requester-profile/requester-profile.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-accepted-adoption-request',
   standalone: true,
-  imports: [CommonModule,MatDialogModule],
+  imports: [CommonModule, MatDialogModule],
   templateUrl: './accepted-adoption-request.component.html',
-  styleUrls: ['./accepted-adoption-request.component.scss']
+  styleUrls: ['./accepted-adoption-request.component.scss'],
 })
 export class AcceptedAdoptionRequestComponent {
+  constructor(
+    private dialog: MatDialog,
+    private adoptionService: AdoptionService,
+    private authService: AuthService
+  ) {}
 
-  constructor(private dialog:MatDialog,private adoptionService:AdoptionService,private authService:AuthService){}
-
-  adoptionDetails:AdoptionDetail [] = [];
+  adoptionDetails: AdoptionDetail[] = [];
   isLoading: boolean = false;
   currentPage: number = 0;
-  id:string='';
+  id: string = '';
+  private idSubscription: Subscription = new Subscription();
+  private statusSubscription: Subscription = new Subscription();
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -40,46 +46,47 @@ export class AcceptedAdoptionRequestComponent {
     }
   }
 
-  loadData(){
+  loadData() {
     this.isLoading = true;
-    this.adoptionService.getAdoptionStatusOfPoster(this.id,'accepted',this.currentPage).subscribe({
-      next: (val) => {
-        this.adoptionDetails = [...this.adoptionDetails, ...val]; 
-        this.isLoading = false;
-        this.currentPage++;
-      
-        
-      }
-    })
+    this.statusSubscription = this.adoptionService
+      .getAdoptionStatusOfPoster(this.id, 'accepted', this.currentPage)
+      .subscribe({
+        next: (val) => {
+          this.adoptionDetails = [...this.adoptionDetails, ...val];
+          this.isLoading = false;
+          this.currentPage++;
+        },
+      });
   }
 
-  click(type:string,id:string){
-    const data = {type,id}
-    this.openDialog('30ms', '30ms',data);
-  
+  click(type: string, id: string) {
+    const data = { type, id };
+    this.openDialog('30ms', '30ms', data);
   }
 
   openDialog(
     enterAnimationDuration: string,
     exitAnimationDuration: string,
-    data:{type:string,id:string}
+    data: { type: string; id: string }
   ): void {
     this.dialog.open(RequesterProfileComponent, {
-    
       enterAnimationDuration,
       exitAnimationDuration,
       data: data,
     });
   }
 
-  
-
-  ngOnInit(){
-    this.authService.sharedId$.subscribe({
+  ngOnInit() {
+    this.idSubscription = this.authService.sharedId$.subscribe({
       next: (id) => {
         this.id = id;
-        this.loadData()
-      }
-    })
+        this.loadData();
+      },
+    });
+  }
+
+  ngOnDestory() {
+    this.idSubscription.unsubscribe();
+    this.statusSubscription.unsubscribe();
   }
 }

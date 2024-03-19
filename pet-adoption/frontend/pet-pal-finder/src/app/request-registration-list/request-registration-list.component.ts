@@ -2,11 +2,12 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Organization, StatusUpdate, VeterinaryDoctor } from '../models/models';
 import { RegistrationRequestService } from '../service/registration-request.service';
+import { DoctorRegistrationRequestCardComponent } from '../doctor-registration-request-card/doctor-registration-request-card.component';
 
 @Component({
   selector: 'app-request-registration-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,DoctorRegistrationRequestCardComponent],
   templateUrl: './request-registration-list.component.html',
   styleUrls: ['./request-registration-list.component.scss'],
 })

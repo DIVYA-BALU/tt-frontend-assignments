@@ -27,6 +27,10 @@ public class AppointmentStatusDao {
     public List<AppointmentStatus> getInitiatedRequest(String id,String status){
         Criteria criteria = Criteria.where("doctorId").is(new ObjectId(id)).andOperator(Criteria.where("status").is(status));
 		Query query = new Query(criteria);
+        if(status.equals("accepted"))
+        query.with(Sort.by(Sort.Order.asc("appointmentDate")));
+        else
+        query.with(Sort.by(Sort.Order.asc("requestedDate")));
         return template.find(query, AppointmentStatus.class);
     }
 
@@ -47,7 +51,7 @@ public class AppointmentStatusDao {
     public List<AppointmentStatus> getStatusByRequesterId(String id){
         Criteria criteria = Criteria.where("requesterId").is(id);
 		Query query = new Query(criteria);
-		query.with(Sort.by(Sort.Order.desc("appointmentDate")));
+		query.with(Sort.by(Sort.Order.desc("requestedDate")));
         return template.find(query, AppointmentStatus.class);
     }
 }

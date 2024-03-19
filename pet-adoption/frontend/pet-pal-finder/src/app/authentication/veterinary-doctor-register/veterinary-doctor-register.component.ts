@@ -32,7 +32,7 @@ export class VeterinaryDoctorRegisterComponent {
       country: ['', [Validators.required, Validators.minLength(1)]],
     }),
     degree: ['', [Validators.required, Validators.minLength(1)]],
-    contactNumber: ['', [Validators.required, Validators.minLength(1)]],
+    contactNumber: ['', [Validators.required, Validators.min(1)]],
   });
 
   profile: File | null = null;
@@ -47,10 +47,16 @@ export class VeterinaryDoctorRegisterComponent {
   }
 
   request() {
-    if (this.profile === null || this.certificate === null) {
-      alert('please add the profile');
+    if (this.profile === null || this.certificate === null || this.formResponse.invalid) {
+      Swal.fire({
+        title: 'Invalid Input!',
+        text: 'Please fill all the details appropriately',
+        icon: 'error',
+      });
       return;
     }
+    console.log( this.formResponse.invalid);
+    
     const formData: FormData = new FormData();
     formData.append('name', this.formResponse.value.name);
     formData.append('email', this.formResponse.value.email);
@@ -77,6 +83,14 @@ export class VeterinaryDoctorRegisterComponent {
       .subscribe({
         next: (res) => {
           Swal.close();
+          if(res.message === 'Email Already Exist'){
+            Swal.fire({
+              title: 'Failed!',
+              text: 'Email Already Exist',
+              icon: 'error',
+            });
+            return
+          }
           Swal.fire({
             title: 'Requested!',
             text: 'Please wait for the confirmation mail',

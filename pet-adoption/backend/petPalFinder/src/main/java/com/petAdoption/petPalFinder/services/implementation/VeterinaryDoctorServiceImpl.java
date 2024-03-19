@@ -10,6 +10,7 @@ import com.petAdoption.petPalFinder.dto.StatusMessage;
 import com.petAdoption.petPalFinder.dto.StatusUpdateDto;
 import com.petAdoption.petPalFinder.dto.VeterinaryDoctorDto;
 import com.petAdoption.petPalFinder.models.VeterinaryDoctor;
+import com.petAdoption.petPalFinder.repositorys.UserRepository;
 import com.petAdoption.petPalFinder.repositorys.VeterinaryDoctorRepository;
 import com.petAdoption.petPalFinder.services.EmailVerificationService;
 import com.petAdoption.petPalFinder.services.FileService;
@@ -17,6 +18,9 @@ import com.petAdoption.petPalFinder.services.VeterinaryDoctorService;
 
 @Service
 public class VeterinaryDoctorServiceImpl implements VeterinaryDoctorService{
+
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     VeterinaryDoctorRepository veterinaryDoctorRepository;
@@ -33,6 +37,10 @@ public class VeterinaryDoctorServiceImpl implements VeterinaryDoctorService{
     @Override
     public StatusMessage save(VeterinaryDoctorDto veterinaryDoctorDto) {
         StatusMessage statusMessage = new StatusMessage();
+        if(userRepository.existsByEmail(veterinaryDoctorDto.getEmail())){
+            statusMessage.setMessage("Email Already Exist");
+            return statusMessage;
+        }
         String profileUrl = fileService.saveFile(veterinaryDoctorDto.getProfilePhoto(), "doctor-profile");
         String certificateUrl = fileService.saveFile(veterinaryDoctorDto.getDegreeCertificate(), "doctor-certificate");
         VeterinaryDoctor veterinaryDoctor = VeterinaryDoctorDtoToVeterinaryDoctor(veterinaryDoctorDto, certificateUrl, profileUrl);

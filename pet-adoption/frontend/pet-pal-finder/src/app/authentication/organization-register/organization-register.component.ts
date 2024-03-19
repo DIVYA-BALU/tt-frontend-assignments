@@ -29,7 +29,7 @@ export class OrganizationRegisterComponent {
       state: ['', [Validators.required, Validators.minLength(1)]],
       country: ['', [Validators.required, Validators.minLength(1)]],
     }),
-    contactNumber: ['', [Validators.required, Validators.minLength(1)]],
+    contactNumber: ['', [Validators.required, Validators.minLength(1),Validators.min(0)]],
   });
 
   file: File | null = null;
@@ -39,8 +39,12 @@ export class OrganizationRegisterComponent {
   }
 
   request() {
-    if (this.file === null) {
-      alert('please add the profile');
+    if (this.file === null || this.formResponse.invalid) {
+      Swal.fire({
+        title: 'Invalid Input!',
+        text: 'Please fill all the details appropriately',
+        icon: 'error',
+      });
       return;
     }
     const formData: FormData = new FormData();
@@ -67,6 +71,14 @@ export class OrganizationRegisterComponent {
       .subscribe({
         next: (res) => {
           Swal.close();
+          if(res.message === 'Email Already Exist'){
+            Swal.fire({
+              title: 'Failed!',
+              text: 'Email Already Exist',
+              icon: 'error',
+            });
+            return
+          }
           Swal.fire({
             title: 'Requested!',
             text: 'Please wait for the confirmation mail',

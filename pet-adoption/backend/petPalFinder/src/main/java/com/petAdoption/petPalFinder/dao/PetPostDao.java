@@ -23,8 +23,12 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.expression.spel.ast.VariableReference;
 import org.springframework.stereotype.Repository;
 
+import com.mongodb.client.AggregateIterable;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoIterable;
 import com.petAdoption.petPalFinder.models.AppointmentStatus;
 import com.petAdoption.petPalFinder.models.Location;
+import com.petAdoption.petPalFinder.models.Organization;
 import com.petAdoption.petPalFinder.models.Pet;
 import com.petAdoption.petPalFinder.models.PetPost;
 
@@ -89,8 +93,8 @@ public class PetPostDao {
 
     }
 
-    public List<PetPost> nearByPetPost1(Location location){
-
+    public List<PetPost> nearByPetPost1(Location location, Integer page){
+        Integer limit = 8;
        List<Document> arr = Arrays.asList(new Document("$lookup", 
     new Document("from", "organizations")
             .append("localField", "posterId")
@@ -98,41 +102,41 @@ public class PetPostDao {
             .append("as", "result")), 
     new Document("$facet", 
     new Document("key1Result", Arrays.asList(new Document("$match", 
-                new Document("result.location.street", "street1")
-                        .append("result.location.city", "undefined")
-                        .append("result.location.district", "undefined")
-                        .append("result.location.state", "undefined")
-                        .append("result.location.country", "undefined"))))
+                new Document("result.location.street", location.getStreet())
+                        .append("result.location.city",location.getCity())
+                        .append("result.location.district",location.getDistrict())
+                        .append("result.location.state",location.getState())
+                        .append("result.location.country",location.getCountry()))))
             .append("key2Result", Arrays.asList(new Document("$match", 
-                new Document("result.location.city", "city1")
-                        .append("result.location.district", "district1")
-                        .append("result.location.state", "state1")
-                        .append("result.location.country", "country1")
+                new Document("result.location.city", location.getCity())
+                        .append("result.location.district", location.getDistrict())
+                        .append("result.location.state", location.getState())
+                        .append("result.location.country", location.getCountry())
                         .append("result.location.street", 
                 new Document("$not", 
-                new Document("$regex", "street2"))))))
+                new Document("$regex",location.getStreet()))))))
             .append("key3Result", Arrays.asList(new Document("$match", 
-                new Document("result.location.district", "district1")
-                        .append("result.location.state", "state1")
-                        .append("result.location.country", "country1")
+                new Document("result.location.district", location.getDistrict())
+                        .append("result.location.state", location.getState())
+                        .append("result.location.country", location.getCountry())
                         .append("result.location.street", 
                 new Document("$not", 
-                new Document("$regex", "street2")))
+                new Document("$regex", location.getStreet())))
                         .append("result.location.city", 
                 new Document("$not", 
-                new Document("$regex", "city1"))))))
+                new Document("$regex", location.getCity()))))))
             .append("key4Result", Arrays.asList(new Document("$match", 
-                new Document("result.location.state", "state1")
-                        .append("result.location.country", "country1")
+                new Document("result.location.state", location.getState())
+                        .append("result.location.country", location.getCountry())
                         .append("result.location.street", 
                 new Document("$not", 
-                new Document("$regex", "street2")))
+                new Document("$regex", location.getStreet())))
                         .append("result.location.city", 
                 new Document("$not", 
-                new Document("$regex", "city1")))
+                new Document("$regex", location.getCity())))
                         .append("result.location.district", 
                 new Document("$not", 
-                new Document("$regex", "district1"))))))), 
+                new Document("$regex", location.getDistrict()))))))), 
     new Document("$project", 
     new Document("result", 
     new Document("$concatArrays", Arrays.asList(new Document("$ifNull", Arrays.asList("$key1Result", Arrays.asList())), 
@@ -141,10 +145,36 @@ public class PetPostDao {
                     new Document("$ifNull", Arrays.asList("$key4Result", Arrays.asList())))))), 
     new Document("$unwind", "$result"), 
     new Document("$replaceRoot", 
-    new Document("newRoot", "$result")));
-       
-    System.out.println(arr);
-    return null;
+    new Document("newRoot", "$result")), 
+    new Document("$skip", page*limit), 
+    new Document("$limit", limit));
+
+   AggregateIterable<Document> output = template.getCollection("pet_posts").aggregate(arr);
+//    MongoCursor<PetPost> b = output.map(val -> new PetPost(
+//         val.get("_id",String.class),
+//         val.get("category",String.class),
+//         val.get("breed",String.class),
+//         val.get("quantity",Integer.class),
+//         val.get("gender",String.class),
+//         val.get("weight",Double.class),
+//         val.get("isInfected",Boolean.class),
+//         val.get("posterId",Organization.class),
+//         val.get("images",String.class),
+//         val.get("description",String.class),
+//         val.get("isAdopted",Boolean.class),
+//         val.get("postedDate",Date.class)
+//    )).iterator();
+   AggregateIterable<PetPost>  petPosts= template.getCollection("pet_posts").aggregate(arr,PetPost.class);
+   AggregateIterable<List> a = template.getCollection("pet_posts").aggregate(arr,List.class);
+   List<PetPost> pet = new ArrayList<>();
+   for (Document dbObject : output) {
+        var post = template
+        .getConverter()
+        .read(PetPost.class, dbObject);
+        pet.add(post);
+    }
+    System.out.println(template.getCollection("pet_posts").aggregate(arr));
+    return pet;
 
    }
 

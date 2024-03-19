@@ -11,12 +11,16 @@ import com.petAdoption.petPalFinder.dto.StatusMessage;
 import com.petAdoption.petPalFinder.dto.StatusUpdateDto;
 import com.petAdoption.petPalFinder.models.Organization;
 import com.petAdoption.petPalFinder.repositorys.OrganizationRepository;
+import com.petAdoption.petPalFinder.repositorys.UserRepository;
 import com.petAdoption.petPalFinder.services.EmailVerificationService;
 import com.petAdoption.petPalFinder.services.FileService;
 import com.petAdoption.petPalFinder.services.OrganizationService;
 
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
+
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     OrganizationRepository organizationRepository;
@@ -33,6 +37,10 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Override
     public StatusMessage save(OrganizationRegistrationDto organizationRegistrationDto) {
         StatusMessage statusMessage = new StatusMessage();
+        if(userRepository.existsByEmail(organizationRegistrationDto.getEmail())){
+            statusMessage.setMessage("Email Already Exist");
+            return statusMessage;
+        }
         Organization organization = OrganizationDtoToOrganization(organizationRegistrationDto);
         organizationRepository.save(organization);
         statusMessage.setMessage("data saved");

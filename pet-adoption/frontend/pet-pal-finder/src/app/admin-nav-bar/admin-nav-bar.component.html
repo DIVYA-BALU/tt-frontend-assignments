@@ -1,0 +1,27 @@
+<div class="nav-bar">
+    <a
+      routerLink="/admin"
+      (click)="setActiveLink('home')"
+      [class.active]="activeLink === 'home'"
+    >
+      Home
+    </a>
+    <a
+      routerLink="/admin/doctor"
+      (click)="setActiveLink('doctors-request')"
+      [class.active]="activeLink === 'doctors-request'"
+    >
+    Doctors Request
+    </a>
+    <a  routerLink="organization" (click)="setActiveLink('organization-request')" [class.active]="activeLink === 'organization-request'">
+        Organization Request
+    </a>
+    <a (click)="setActiveLink('logout')">
+        Logout
+    </a>
+  
+    
+  </div>
+  <div>
+    <router-outlet></router-outlet>
+  </div>

@@ -29,15 +29,15 @@ export class PetPostService {
     return this.http.post<PetPost>(`${this.baseUrl}pet-post`, formData);
   }
 
-  getNearByPet(location: Location) {
+  getNearByPet(location: Location, page:number) {
     return this.http.post<any>(
-      `${this.baseUrl}pet-post/near-by-post`,
+      `${this.baseUrl}pet-post/near-by-post?page=${page}`,
       location
     );
   }
 
-  getLatestPost() {
-    return this.http.get<PetPost[]>(`${this.baseUrl}pet-post/latest`);
+  getLatestPost(page:number) {
+    return this.http.get<PetPost[]>(`${this.baseUrl}pet-post/latest?page=${page}`);
   }
 
   getPetPost(id: string) {

@@ -1,4 +1,5 @@
 <div class="container" >
+  <div *ngIf=""></div>
   <div class="list" [ngClass]="status.status === 'accepted'?'green':status.status === 'rejected'?'red':''">
     <img
       [src]="

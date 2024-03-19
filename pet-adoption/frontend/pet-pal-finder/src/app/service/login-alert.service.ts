@@ -3,13 +3,12 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginAlertService {
+  constructor(private router: Router) {}
 
-  constructor(private router:Router) { }
-
-  requestLogin(){
+  requestLogin() {
     Swal.fire({
       icon: 'warning',
       title: 'No Access',
@@ -19,8 +18,8 @@ export class LoginAlertService {
       text: 'Login to Access this feature',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.router.navigate(['auth'])
-      } 
+        this.router.navigate(['auth']);
+      }
     });
   }
 }

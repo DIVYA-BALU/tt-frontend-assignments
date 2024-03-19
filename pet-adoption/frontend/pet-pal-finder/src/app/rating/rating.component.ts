@@ -32,7 +32,8 @@ export class RatingComponent {
 
   sendRating() {
     this.data.rating = this.rating;
-
+    console.log(this.rating);
+    
     this.ratingService.addRating(this.data).subscribe({
       next: (val) => {
         this.dialogRef.close();

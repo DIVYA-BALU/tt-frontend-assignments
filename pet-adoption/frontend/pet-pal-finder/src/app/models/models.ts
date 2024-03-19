@@ -185,3 +185,24 @@ export interface Rating {
     rating: number;
     raterId: string;
 }
+
+export interface UserDto {
+    email: string;
+    role: string;
+    profileId: string;
+}
+
+export interface UserListDto {
+    user: UserDto[];
+    count: number;
+}
+
+export interface MonthWiseRevenue {
+    month: number;
+    revenue: number;
+}
+
+export interface YearWiseRevenue {
+    year: number;
+    revenue: number;
+}

@@ -39,6 +39,10 @@ public class SubscriptionTransactionServiceImpl implements SubscriptionTransacti
         Date endDate = new Date();
         endDate = cal.getTime();
         System.out.println(endDate);
+        SubscriptionTransaction subscriptionTransaction2 = subscriptionTransactionRepository.findBySubscriberId(subscriptionTransaction.getSubscriberId());
+        if (subscriptionTransaction2!=null) {
+            subscriptionTransaction.set_id(subscriptionTransaction2.get_id());
+        }
         subscriptionTransaction.setSubscribedOn(date);
         subscriptionTransaction.setValidTill(endDate);
         subscriptionTransactionRepository.save(subscriptionTransaction);
@@ -72,13 +76,19 @@ public class SubscriptionTransactionServiceImpl implements SubscriptionTransacti
     @Override
     public Boolean isSubscriptionEnded(String SubscriberId){
         if(subscriptionTransactionRepository.findBySubscriberId(SubscriberId).getCurrentPlan() == null){
+           
             return true;
         }
+        System.out.println(subscriptionTransactionRepository.findBySubscriberId(SubscriberId).getCurrentPlan());
         return false;
     }
 
     @Override
     public SubscriptionTransaction getSubscriptionDetail(String SubscriberId){
+        SubscriptionTransaction subscriptionTransaction = subscriptionTransactionRepository.findBySubscriberId(SubscriberId);
+        if (subscriptionTransaction == null) {
+            return new SubscriptionTransaction();
+        }
         return subscriptionTransactionRepository.findBySubscriberId(SubscriberId);
     }
     

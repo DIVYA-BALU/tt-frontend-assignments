@@ -5,6 +5,11 @@ import java.util.Date;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 
 import com.petAdoption.petPalFinder.dao.PetPostDao;
@@ -66,13 +71,14 @@ public class PetPostServiceImpl implements PetPostService {
     }
 
     @Override
-    public List<PetPost> getNearByPost(Location location) {
-        return petPostDao.nearByPetPost(location);
+    public List<PetPost> getNearByPost(Location location,Integer page) {
+        return petPostDao.nearByPetPost1(location,page);
     }
 
     @Override
-    public List<PetPost> getLatestPost() {
-        return petPostRepository.findAll();
+    public Page<PetPost> getLatestPost(Integer page) {
+        Pageable pageable = PageRequest.of(page, 8,Sort.by(Order.desc("postedDate")));
+        return petPostRepository.findAll(pageable);
     }
 
     @Override

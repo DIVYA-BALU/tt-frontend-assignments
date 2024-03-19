@@ -70,12 +70,27 @@ export class PendingDoctorRequestComponent {
     this.appointmentUpdate.id = id;
     this.appointmentUpdate.status = status;
     this.appointmentUpdate.date = new Date(this.date + 'T' + this.time);
-
+    if(status === 'accepted' && (this.date === '' ||  this.time==='')){
+      Swal.fire({
+        title: 'Invalid!',
+        text: 'Please choose the appointment date and time',
+        icon: 'error',
+      })
+      return;
+    }Swal.showLoading();
     this.veterinaryDoctorService
       .updateAppointment(this.appointmentUpdate)
       .subscribe({
         next: (val) => {
-          this.loadData();
+          Swal.close();
+          Swal.fire({
+            title: 'Updated!',
+            icon: 'success',
+          }).then(()=>{
+
+            this.loadData();
+          })
+         
         },
       });
   }

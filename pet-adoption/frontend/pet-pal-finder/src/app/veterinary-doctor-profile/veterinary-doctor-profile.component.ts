@@ -91,7 +91,7 @@ export class VeterinaryDoctorProfileComponent {
     private paymentService: PaymentService,
     public dialog: MatDialog
   ) {}
-  profile!: File;
+  profile: File | null = null;
   imgUrl: string = '';
 
   formResponse: FormGroup = this.formBuilder.group({
@@ -108,7 +108,7 @@ export class VeterinaryDoctorProfileComponent {
         [Validators.required, Validators.minLength(1)],
       ],
       city: [
-        this.user.location.state,
+        this.user.location.city,
         [Validators.required, Validators.minLength(1)],
       ],
       district: [
@@ -150,9 +150,17 @@ export class VeterinaryDoctorProfileComponent {
   }
 
   register() {
+    if(this.formResponse.invalid){
+      Swal.fire({
+        title: 'Invalid Input!',
+        text: 'Please fill all the details appropriately',
+        icon: 'error',
+      });
+      return;
+    }
     const formData: FormData = new FormData();
     formData.append('name', this.formResponse.value.name);
-    formData.append('profilePhoto', this.profile);
+    formData.append('profilePhoto', this.profile === null?new Blob([]):this.profile);
     formData.append('occupation', this.formResponse.value.occupation);
     formData.append('dob', this.formResponse.value.dob);
     formData.append('location.doorNo', this.formResponse.value.location.doorNo);
@@ -175,7 +183,12 @@ export class VeterinaryDoctorProfileComponent {
       next: (id) => {
         formData.append('id', id);
         this.profileService.updateVeterinaryDoctorProfile(formData).subscribe({
-          next: (res) => {},
+          next: (res) => {
+            Swal.fire({
+              title: 'Updated!',
+              icon: 'success',
+            });
+          },
         });
       },
     });
@@ -188,19 +201,7 @@ export class VeterinaryDoctorProfileComponent {
   }
 
   payment() {
-    this.paymentService.isExpired(this.user._id).subscribe({
-      next: (val) => {
-        if (val === true) {
-          this.openDialog('30ms', '30ms');
-        } else {
-          Swal.fire({
-            title: 'Pack is Still Valid',
-            text: 'Please do the payment after validation ends',
-            icon: 'error',
-          });
-        }
-      },
-    });
+    this.openDialog('30ms', '30ms');
   }
   ngOnInit() {
     this.profileService.sharedUser$.subscribe({
@@ -225,7 +226,7 @@ export class VeterinaryDoctorProfileComponent {
                 [Validators.required, Validators.minLength(1)],
               ],
               city: [
-                this.user.location.state,
+                this.user.location.city,
                 [Validators.required, Validators.minLength(1)],
               ],
               district: [
@@ -252,8 +253,13 @@ export class VeterinaryDoctorProfileComponent {
     });
     this.paymentService.getSubscription(this.user._id).subscribe({
       next: (val) => {
+        console.log(val);
+
         this.subscription = val;
       },
     });
   }
 }
+
+
+

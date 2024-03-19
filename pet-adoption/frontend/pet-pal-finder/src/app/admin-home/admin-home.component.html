@@ -1,0 +1,74 @@
+<div class = "revenue">
+  
+  <div id="year-chart" class="chart">
+    Overall revenue
+  </div>
+  <div id="month-chart" class="chart">
+    Year wise revenue
+  </div>
+</div>
+
+<h1>User Details</h1>
+<div class="user-detail">
+  <div class="user">
+    <mat-form-field appearance="fill">
+      <mat-label>Role</mat-label>
+      <mat-select [(ngModel)]="role" name="food" (selectionChange)="loadUser(role)">
+        <mat-option *ngFor="let role of roles" [value]="role" >
+          {{role}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+        <table mat-table [dataSource]="users" class="mat-elevation-z8">
+      <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef>Role</th>
+        <td mat-cell *matCellDef="let element">{{ element.role }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        (click)="viewProfile(row)"
+        class="row"
+      ></tr>
+    </table>
+    <br />
+    <div>
+      <mat-paginator
+        [length]="length"
+        [pageSizeOptions]="[10, 50, 100]"
+        aria-label="Select page"
+        (page)="reload($event)"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+  <div class="details">
+    <span>Click on email to view the user details</span>
+    <div class="card" *ngIf="userDetail._id !== '' ">
+    <img [src]="url" alt="">
+    <span>Name: {{userDetail.name}}</span>
+   
+
+        <span>Location Details:</span>
+        <span> Street : {{ userDetail.location.street }}</span>
+        <span> City : {{ userDetail.location.city }}</span>
+        <span> District : {{ userDetail.location.district }}</span>
+        <span> State : {{ userDetail.location.state }}</span>
+        <span> Country : {{ userDetail.location.country  }}</span>
+        
+    </div>
+  </div>
+</div>

@@ -65,11 +65,11 @@ export class AuthService {
   }
 
   registerOrganization(formData: FormData): Observable<StatusMessage> {
-    return this.http.post<any>(`${this.baseUrl}organization`, formData);
+    return this.http.post<StatusMessage>(`${this.baseUrl}organization`, formData);
   }
 
   registerVeterinaryDoctor(formData: FormData) {
-    return this.http.post<any>(`${this.baseUrl}veterinary-doctor`, formData);
+    return this.http.post<StatusMessage>(`${this.baseUrl}veterinary-doctor`, formData);
   }
 
   setLogin(id: string) {

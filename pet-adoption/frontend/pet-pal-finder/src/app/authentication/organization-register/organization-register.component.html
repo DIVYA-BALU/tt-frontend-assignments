@@ -1,9 +1,9 @@
 <div class="container">
   <div class="box">
     <div class="page-title">Pet Pal Finder</div>
-    <label>Add Profile Photo</label>
-    <input type="file" (change)="getImage($event)" />
+    <input type="file" (change)="getImage($event)" #profileEl hidden/>
     <form action="" [formGroup]="formResponse" (ngSubmit)="request()">
+      <div class="file" (click)="profileEl.click()">{{file === null?'Upload organization image*':file.name}}</div>
       <mat-form-field class="feild">
         <mat-label>Full Name</mat-label>
         <input type="text" matInput formControlName="name" />
@@ -14,7 +14,7 @@
       </mat-form-field>
       <mat-form-field class="feild">
         <mat-label>Contact Number</mat-label>
-        <input type="text" matInput formControlName="contactNumber" />
+        <input type="number" matInput formControlName="contactNumber" />
       </mat-form-field>
       <div formGroupName="location">
         <mat-form-field class="feild">

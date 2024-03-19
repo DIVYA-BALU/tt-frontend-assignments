@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../service/auth.service';
 import { PetPostService } from '../service/pet-post.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-post',
@@ -37,6 +38,8 @@ export class AddPostComponent {
     private formBuilder: FormBuilder,
     private petPostService: PetPostService
   ) {}
+
+  private postSubscription: Subscription = new Subscription();
 
   formResponse: FormGroup = this.formBuilder.group({
     category: ['', [Validators.required, Validators.minLength(1)]],
@@ -65,10 +68,14 @@ export class AddPostComponent {
     formData.append('isInfected', this.formResponse.value.isInfected);
     formData.append('description', this.formResponse.value.description);
 
-    this.petPostService.savePetPost(formData).subscribe({
+    this.postSubscription = this.petPostService.savePetPost(formData).subscribe({
       next: (res) => {
         this.dialogRef.close();
       },
     });
+  }
+  
+  ngOnDestory(){
+    this.postSubscription.unsubscribe();
   }
 }

@@ -192,6 +192,13 @@ export class VeterinaryDoctorComponent {
               });
             },
           });
+      }else{
+        Swal.fire({
+          title: 'Request Not Send',
+          text: 'Please fill the reason',
+          confirmButtonColor: '#ffd740',
+          icon: 'error',
+        });
       }
     } else {
       this.loginAlert.requestLogin();

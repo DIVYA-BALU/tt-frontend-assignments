@@ -1,6 +1,6 @@
-<div *ngIf="!isSubscribed">
+<div *ngIf="!isSubscribed" class="unsubscribed">
     It looks like currently you have not subscribed to view and accept the request please subscribe 
-    <button type="button" (click)="click()">Proceed to payment</button>
+    <button mat-flat-button type="button" (click)="click()">Proceed to payment</button>
 </div>
 <div *ngIf="isSubscribed">
 <mat-drawer-container class="container" autosize>
