@@ -54,6 +54,8 @@ export class SectionLayoutComponent {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+
+    this.sectionService.unSubscribeAll();
   }
 
 }

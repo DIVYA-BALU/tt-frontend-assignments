@@ -110,6 +110,9 @@ export class EmployeeManagentComponent implements OnInit {
     if (this.usersSubscription) {
       this.usersSubscription.unsubscribe();
     }
+
+    this.branchService.unSubscribeAll();
+    this.userDetailsService.unSubscribeAll();
   }
 
 }

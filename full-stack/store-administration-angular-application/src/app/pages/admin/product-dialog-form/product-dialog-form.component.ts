@@ -104,6 +104,10 @@ export class ProductDialogFormComponent implements OnInit {
     if (this.productSubscription) {
       this.productSubscription.unsubscribe();
     }
+
+        this.productService.unSubscribeAll();
+        this.sectionService.unSubscribeAll();
+        this.branchService.unSubscribeAll();
   }
 
 }

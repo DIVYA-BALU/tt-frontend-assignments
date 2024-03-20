@@ -109,6 +109,8 @@ export class FinancialManagementComponent {
     if (this.sectionWiseAnalysisSubscription) {
       this.sectionWiseAnalysisSubscription.unsubscribe();
     }
+
+    this.investmentService.unSubscribeAll();
   }
   
 }

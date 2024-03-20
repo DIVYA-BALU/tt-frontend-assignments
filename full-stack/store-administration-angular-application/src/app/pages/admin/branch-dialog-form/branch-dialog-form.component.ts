@@ -65,6 +65,7 @@ export class BranchDialogFormComponent {
       this.subscription.unsubscribe();
     }
 
+    this.branchService.unSubscribeAll();
   }
 
 }

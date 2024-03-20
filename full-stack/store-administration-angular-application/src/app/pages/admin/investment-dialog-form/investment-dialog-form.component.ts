@@ -66,5 +66,6 @@ export class InvestmentDialogFormComponent {
       this.subscription.unsubscribe();
     }
 
+    this.investmentService.unSubscribeAll();
   }
 }

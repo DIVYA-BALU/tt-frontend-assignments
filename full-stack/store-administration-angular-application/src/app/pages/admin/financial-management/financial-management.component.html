@@ -23,15 +23,15 @@
       <td mat-cell *matCellDef="let incomeStatement"> {{incomeStatement.branchName}} </td>
     </ng-container>
     <ng-container matColumnDef="Total COGS">
-      <th mat-header-cell *matHeaderCellDef> Total COGS </th>
+      <th mat-header-cell *matHeaderCellDef> Total COGS in Rs.</th>
       <td mat-cell *matCellDef="let incomeStatement"> {{incomeStatement.cogs}} </td>
     </ng-container>
     <ng-container matColumnDef="Total Revenue">
-      <th mat-header-cell *matHeaderCellDef> Total Revenue </th>
+      <th mat-header-cell *matHeaderCellDef> Total Revenue in Rs.</th>
       <td mat-cell *matCellDef="let incomeStatement"> {{incomeStatement.revenue}} </td>
     </ng-container>
     <ng-container matColumnDef="Profit / Loss">
-      <th mat-header-cell *matHeaderCellDef> Profit / Loss </th>
+      <th mat-header-cell *matHeaderCellDef> Profit / Loss in Rs. </th>
       <td mat-cell *matCellDef="let incomeStatement" [class.green-background]="incomeStatement.revenue - incomeStatement.cogs >= 0"
         [class.red-background]="incomeStatement.revenue - incomeStatement.cogs !>= 0" > {{incomeStatement.revenue-incomeStatement.cogs}} </td>
     </ng-container>
@@ -58,15 +58,15 @@ aria-label="Select page" (page)="onBranchWisePageChange($event)">
       <td mat-cell *matCellDef="let incomeStatement"> {{incomeStatement.sectionName}} </td>
     </ng-container>
     <ng-container matColumnDef="Total COGS">
-      <th mat-header-cell *matHeaderCellDef> Total COGS </th>
+      <th mat-header-cell *matHeaderCellDef> Total COGS in Rs.</th>
       <td mat-cell *matCellDef="let incomeStatement"> {{incomeStatement.cogs}} </td>
     </ng-container>
     <ng-container matColumnDef="Total Revenue">
-      <th mat-header-cell *matHeaderCellDef> Total Revenue </th>
+      <th mat-header-cell *matHeaderCellDef> Total Revenue in Rs.</th>
       <td mat-cell *matCellDef="let incomeStatement"> {{incomeStatement.revenue}} </td>
     </ng-container>
     <ng-container matColumnDef="Profit / Loss">
-      <th mat-header-cell *matHeaderCellDef> Profit / Loss </th>
+      <th mat-header-cell *matHeaderCellDef> Profit / Loss in Rs.</th>
       <td mat-cell *matCellDef="let incomeStatement" [class.green-background]="incomeStatement.revenue - incomeStatement.cogs >= 0"> {{incomeStatement.revenue-incomeStatement.cogs}} </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumnsForSectionWiseAnalysis"></tr>

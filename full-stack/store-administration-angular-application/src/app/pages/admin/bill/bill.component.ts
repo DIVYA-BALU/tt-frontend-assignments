@@ -123,5 +123,6 @@ export class BillComponent {
       this.billSubscription.unsubscribe();
     }
 
+    this.productService.unSubscribeAll();
   }
 }

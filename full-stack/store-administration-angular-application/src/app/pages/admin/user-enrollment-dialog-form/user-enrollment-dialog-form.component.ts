@@ -100,6 +100,9 @@ export class UserEnrollmentDialogFormComponent {
     if (this.enrollUserSubscription) {
       this.enrollUserSubscription.unsubscribe();
     }
+
+    this.branchService.unSubscribeAll();
+    this.userDetailsService.unSubscribeAll();
   }
 
 }

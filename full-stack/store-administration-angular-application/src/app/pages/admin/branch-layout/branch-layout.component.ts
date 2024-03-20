@@ -54,6 +54,8 @@ export class BranchLayoutComponent implements OnInit {
     if (this.branchSubscription) {
       this.branchSubscription.unsubscribe();
     }
+
+    this.branchService.unSubscribeAll();
     
   }
 

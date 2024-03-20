@@ -141,6 +141,9 @@ export class UserUpdateFormComponent {
     if (this.updateUserSubscription) {
       this.updateUserSubscription.unsubscribe();
     }
+
+    this.userDetailsService.unSubscribeAll();
+    this.branchService.unSubscribeAll();
   }
 
 }

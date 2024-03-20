@@ -42,7 +42,7 @@ export class ProductLayoutComponent {
   makeBillButton: Boolean = false;
   searchByName: string = '';
 
-  constructor(private billService: BillService, private sectionService: SectionService, private branchService: BranchService, private productService: ProductService, private dialog: MatDialog, private cdr: ChangeDetectorRef, private userDetailsService: UserDetailsService) {
+  constructor(private billService: BillService, private sectionService: SectionService, private branchService: BranchService, private productService: ProductService, private dialog: MatDialog,private userDetailsService: UserDetailsService) {
     this.dataSource = new MatTableDataSource<Product>;
   }
 
@@ -168,5 +168,9 @@ export class ProductLayoutComponent {
     if (this.branchesSubscription) {
       this.branchesSubscription.unsubscribe();
     }
+
+    this.productService.unSubscribeAll();
+    this.sectionService.unSubscribeAll();
+    this.branchService.unSubscribeAll();
   }
 }

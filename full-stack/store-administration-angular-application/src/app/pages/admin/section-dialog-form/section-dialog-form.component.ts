@@ -53,6 +53,7 @@ export class SectionDialogFormComponent {
       this.subscription.unsubscribe();
     }
     
+    this.sectionService.unSubscribeAll();
   }
 
 }
