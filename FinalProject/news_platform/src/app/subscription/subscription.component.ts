@@ -49,7 +49,6 @@ export class SubscriptionComponent implements OnDestroy {
       },
       modal: {
         ondismiss: () => {
-          console.log('dismissed');
         },
       },
     };

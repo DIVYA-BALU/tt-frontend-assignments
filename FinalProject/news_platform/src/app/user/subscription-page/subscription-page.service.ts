@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { SubscriptionResponse } from 'src/app/model/SubscriptionResponse';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -17,7 +18,7 @@ export class SubscriptionPageService {
     return this.http.post(`${this.url}/${id}`, {});
   }
 
-  getTransaction(): Observable<any> {
-    return this.http.get<any>(this.getUrl);
+  getTransaction(): Observable<SubscriptionResponse[]> {
+    return this.http.get<SubscriptionResponse[]>(this.getUrl);
   }
 }

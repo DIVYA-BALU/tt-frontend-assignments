@@ -116,7 +116,6 @@ export class DisplayArticleComponent implements OnDestroy, OnInit {
             icon: 'success',
           });
           this.savedArticle = false;
-          console.log(this.savedArticle);
         },
         (error) => {
           Swal.fire({

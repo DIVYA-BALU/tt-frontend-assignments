@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SubscriptionPageService } from './subscription-page.service';
 import { Subscription } from 'rxjs';
+import { SubscriptionResponse } from 'src/app/model/SubscriptionResponse';
 
 @Component({
   selector: 'app-subscription-page',
@@ -10,7 +11,7 @@ import { Subscription } from 'rxjs';
 export class SubscriptionPageComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   displayedColumns: string[] = ['paymentId', 'startDate', 'endDate'];
-  dataSource: any = [];
+  dataSource: SubscriptionResponse[] = [];
 
   constructor(private subscriptionpageService: SubscriptionPageService) {}
 
@@ -22,7 +23,7 @@ export class SubscriptionPageComponent implements OnInit, OnDestroy {
     this.subscription = this.subscriptionpageService
       .getTransaction()
       .subscribe((data) => {
-        this.dataSource = [data];
+        this.dataSource = data;
       });
   }
 

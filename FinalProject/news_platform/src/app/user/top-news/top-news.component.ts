@@ -23,7 +23,6 @@ export class TopNewsComponent implements OnDestroy {
   getTopNews() {
     this.subscription = this.homeService.getTopNews().subscribe((data) => {
       this.newsContents = data;
-      console.log(this.newsContents);
     });
   }
 

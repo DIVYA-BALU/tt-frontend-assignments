@@ -14,8 +14,6 @@ export class SearchService {
   constructor(private http: HttpClient) { }
 
   getSearchValue(value: string): Observable<News[]>{
-    console.log(`${this.url}/${value}`);
-    
     return this.http.get<News[]>(`${this.url}/${value}`);
   }
 }

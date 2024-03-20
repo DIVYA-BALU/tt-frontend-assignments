@@ -14,8 +14,6 @@ export class CreateShortReadsService {
   constructor(private http: HttpClient) {}
 
   createShortReads(shortReads: ShortReadsDTO): Observable<string> {
-    console.log(shortReads);
-
     const formData: FormData = new FormData();
     formData.append('shortReadsUid', shortReads.shortReadsUid);
     formData.append('title', shortReads.title);

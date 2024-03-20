@@ -109,7 +109,6 @@ export class CreateArticleComponent implements OnInit, OnDestroy {
 
   remove(index: number) {
     this.files.splice(index, 1);
-    console.log(this.files);
   }
 
   ngOnDestroy(): void {

@@ -93,7 +93,6 @@ export class SensationalNewsComponent implements OnInit, OnDestroy {
 
   remove(index: number) {
     this.files.splice(index, 1);
-    console.log(this.files);
   }
 
   ngOnDestroy(): void {

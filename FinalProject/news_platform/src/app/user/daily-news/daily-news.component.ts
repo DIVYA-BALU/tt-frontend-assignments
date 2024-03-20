@@ -29,7 +29,6 @@ export class DailyNewsComponent implements OnInit, OnDestroy {
       .getDailyNews()
       .subscribe((data) => {
         this.newsContents = data;
-        console.log(this.newsContents);
       });
   }
 

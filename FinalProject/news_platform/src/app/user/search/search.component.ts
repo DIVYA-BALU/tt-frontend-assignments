@@ -32,7 +32,6 @@ export class SearchComponent implements OnDestroy {
     this.subscriptions.push(
       this.searchService.getSearchValue(value).subscribe((data) => {
         this.news = data;
-        console.log(this.news);
       })
     );
   }

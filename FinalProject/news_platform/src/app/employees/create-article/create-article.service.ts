@@ -13,7 +13,6 @@ export class CreateArticleService {
   constructor(private http: HttpClient) {}
 
   createArticle(article: Article): Observable<string> {
-    console.log(article);
 
     const formData: FormData = new FormData();
     formData.append('articleUid', article.articleUid);

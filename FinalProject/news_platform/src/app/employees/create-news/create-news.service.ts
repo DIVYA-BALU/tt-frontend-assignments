@@ -13,8 +13,6 @@ export class CreateNewsService {
   constructor(private http: HttpClient) {}
 
   createNews(news: NewsDTO): Observable<string> {
-    console.log(news);
-
     const formData: FormData = new FormData();
     formData.append('newsUid', news.newsUid);
     formData.append('title', news.title);
