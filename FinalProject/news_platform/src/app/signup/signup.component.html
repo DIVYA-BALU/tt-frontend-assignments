@@ -12,7 +12,7 @@
       />
     </div>
     <span
-      *ngIf="signupForm.controls['firstName']?.touched && signupForm.controls['firstName'].errors?.['required']"
+      *ngIf="(signupForm.controls['firstName']?.touched || signupForm.controls['firstName']?.dirty) && signupForm.controls['firstName'].errors?.['required']"
     >
       First name is required
     </span>

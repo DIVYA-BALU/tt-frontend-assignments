@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SharedServiceService } from '../shared-service/shared-service.service';
 import { Router } from '@angular/router';
 import { Authority } from '../model/Authority';
@@ -8,7 +8,7 @@ import { Authority } from '../model/Authority';
   templateUrl: './employees.component.html',
   styleUrls: ['./employees.component.scss'],
 })
-export class EmployeesComponent {
+export class EmployeesComponent implements OnInit{
   authorities: Authority[] = [];
 
   constructor(

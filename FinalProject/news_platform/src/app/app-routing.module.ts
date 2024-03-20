@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { RoleGuard } from './guard/role.guard';
 import { SubscriptionComponent } from './subscription/subscription.component';
-import { SubscriptionPageComponent } from './user/subscription-page/subscription-page.component';
 import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
@@ -25,7 +24,7 @@ const routes: Routes = [
   {
     path: 'user',
     loadChildren: () =>
-      import('./user/user.module').then((module) => module.UserModule),
+      import('./user/user.module').then((module) => module.UserModule)
   },
   {
     path: 'employee',
@@ -38,11 +37,6 @@ const routes: Routes = [
   {
     path: 'subscription',
     component: SubscriptionComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'subscription-page',
-    component: SubscriptionPageComponent,
     canActivate: [AuthGuard]
   },
   {

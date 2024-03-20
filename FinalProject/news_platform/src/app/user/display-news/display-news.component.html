@@ -1,20 +1,65 @@
 <div class="spinner-container" *appRoutehide="spinner">
-    <mat-spinner diameter="50"></mat-spinner>
-  </div>
+  <mat-spinner diameter="50"></mat-spinner>
+</div>
 
 <div class="container" *appRoutehide="!spinner">
-    <div class="header">
-        <div class="heading" *ngIf="news">
-            <h2>{{ news.title }}</h2>
-            <p>{{ news.category }}</p>
-            <p>Report | {{ news.date | date}}</p>
-        </div>
+  <div class="header">
+    <div class="heading" *ngIf="news">
+      <h2>{{ news.title }}</h2>
+      <p>{{ news.category.categoryName }}</p>
+      <p>Report | {{ news.date | date }}</p>
     </div>
-    <hr />
-    <div class="content" *ngIf="news">
-        <div *ngFor="let image of news.images" class="image">
-            <img src="{{ image }}" alt="image" />
-        </div>
-        <div [innerHtml]="news.content"></div>
+  </div>
+  <hr />
+  <div class="content" *ngIf="news">
+    <div class="synopsis">
+      <h3 class="head">Synopsis:</h3>
+      <p>{{ news.synopsis }}</p>
     </div>
+    <div *ngFor="let image of news.images" class="image">
+      <img src="{{ image }}" alt="image" />
+    </div>
+    <div [innerHtml]="news.content" *appRoutehide="isSubscribed"></div>
+  </div>
+
+  <div *appRoutehide="!spinner">
+    <div *appRoutehide="!isSubscribed" class="subscribe">
+      <div class="sub-container">
+        <div class="subscribe-container">
+          <h1>Want to read full story?</h1>
+          <p>Unlock the story and enjoy members-only benefits</p>
+
+          <div class="offers">
+            <mat-card class="example-card">
+              <div class="card-head">
+                <img mat-card-sm-image src="/assets/daily-news.jpeg" />
+                <div class="title">Get Daily News</div>
+              </div>
+            </mat-card>
+            <mat-card class="example-card">
+              <div class="card-head">
+                <img mat-card-sm-image src="/assets/breaking-news.jpg" />
+                <div class="title">Stay updated with breaking stories!</div>
+              </div>
+            </mat-card>
+            <mat-card class="example-card">
+              <div class="card-head">
+                <img mat-card-sm-image src="/assets/news-feed.png" />
+                <div class="title">Custom News Feed</div>
+              </div>
+            </mat-card>
+            <mat-card class="example-card">
+              <div class="card-head">
+                <img mat-card-sm-image src="/assets/stock.jpg" />
+                <div class="title">Get Stock Reports</div>
+              </div>
+            </mat-card>
+          </div>
+          <div class="button">
+            <button type="button" (click)="onClick()">Subscribe Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

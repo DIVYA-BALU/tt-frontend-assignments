@@ -1,17 +1,24 @@
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 import { UserRequestService } from './user-request.service';
 import { UserNews } from 'src/app/model/UserNews';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-request',
   templateUrl: './user-request.component.html',
   styleUrls: ['./user-request.component.scss'],
 })
-export class UserRequestComponent {
+export class UserRequestComponent implements OnDestroy {
+  subscriptions: Subscription[] = [];
   usernews: UserNews[] = [];
 
   displayedColumns: string[] = [
@@ -46,23 +53,25 @@ export class UserRequestComponent {
   }
 
   getNews(pageIndex: number, pageSize: number) {
-    this.userRequestService
-      .getUserNews(pageIndex, pageSize)
-      .subscribe((data) => {
-        this.usernews = data.content;
-        this.paginator.length = data.totalElements;
-        this.paginator.pageIndex = data.number;
-        this.paginator.pageSize = data.size;
-        this.dataSource.data = this.usernews;
-        console.log(data.content);
-        
-      });
+    this.subscriptions.push(
+      this.userRequestService
+        .getUserNews(pageIndex, pageSize)
+        .subscribe((data) => {
+          this.usernews = data.content;
+          this.paginator.length = data.totalElements;
+          this.paginator.pageIndex = data.number;
+          this.paginator.pageSize = data.size;
+          this.dataSource.data = this.usernews;
+        })
+    );
   }
 
   ngAfterViewInit() {
-    this.paginator.page.subscribe((data) => {
-      this.getNews(data.pageIndex, data.pageSize);
-    });
+    this.subscriptions.push(
+      this.paginator.page.subscribe((data) => {
+        this.getNews(data.pageIndex, data.pageSize);
+      })
+    );
     this.getNews(0, 3);
     this.cdref.detectChanges();
   }
@@ -72,17 +81,21 @@ export class UserRequestComponent {
   }
 
   onAccept(id: string) {
-    this.userRequestService.onAccept(id).subscribe((data) => {
-      console.log(data);
-      this.getNews(0, 3);
-    });
+    this.subscriptions.push(
+      this.userRequestService.onAccept(id).subscribe((data) => {
+        console.log(data);
+        this.getNews(0, 3);
+      })
+    );
   }
 
   onReject(id: string, reason: string) {
-    this.userRequestService.onReject(id, reason).subscribe((data) => {
-      console.log(data);
-      this.getNews(0, 3);
-    });
+    this.subscriptions.push(
+      this.userRequestService.onReject(id, reason).subscribe((data) => {
+        console.log(data);
+        this.getNews(0, 3);
+      })
+    );
   }
 
   openDialog(id: string): void {
@@ -93,10 +106,18 @@ export class UserRequestComponent {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.onReject(result.id, result.reason);
-      }
+    this.subscriptions.push(
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          this.onReject(result.id, result.reason);
+        }
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((data) => {
+      data.unsubscribe();
     });
   }
 }

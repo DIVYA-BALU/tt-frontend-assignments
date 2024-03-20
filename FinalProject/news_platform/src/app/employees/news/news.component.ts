@@ -1,18 +1,24 @@
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { NewsDTO } from 'src/app/model/NewDTO';
 import { NewsService } from './news.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
-  styleUrls: ['./news.component.scss']
+  styleUrls: ['./news.component.scss'],
 })
-export class NewsComponent {
-
+export class NewsComponent implements OnDestroy {
+  subscriptions: Subscription[] = [];
   pendingNews: NewsDTO[] = [];
 
   displayedColumns: string[] = [
@@ -34,26 +40,34 @@ export class NewsComponent {
   status: string = '';
 
   totalElements: number = 0;
-  pageSize: number = 3; 
+  pageSize: number = 3;
 
-  constructor(private newsService: NewsService, public dialog: MatDialog, private cdref: ChangeDetectorRef){
+  constructor(
+    private newsService: NewsService,
+    public dialog: MatDialog,
+    private cdref: ChangeDetectorRef
+  ) {
     this.dataSource = new MatTableDataSource(this.pendingNews);
   }
 
-  getPendingNews(pageIndex: number, pageSize: number){
-    this.newsService.getPendingNews(pageIndex, pageSize).subscribe( (data) => {
-      this.pendingNews = data.content;
-      this.paginator.length = data.totalElements;
-      this.paginator.pageIndex = data.number;
-      this.paginator.pageSize = data.size;
-      this.dataSource.data = this.pendingNews;
-    })
+  getPendingNews(pageIndex: number, pageSize: number) {
+    this.subscriptions.push(
+      this.newsService.getPendingNews(pageIndex, pageSize).subscribe((data) => {
+        this.pendingNews = data.content;
+        this.paginator.length = data.totalElements;
+        this.paginator.pageIndex = data.number;
+        this.paginator.pageSize = data.size;
+        this.dataSource.data = this.pendingNews;
+      })
+    );
   }
 
   ngAfterViewInit() {
-    this.paginator.page.subscribe((data) => {
-      this.getPendingNews(data.pageIndex, data.pageSize);
-    })
+    this.subscriptions.push(
+      this.paginator.page.subscribe((data) => {
+        this.getPendingNews(data.pageIndex, data.pageSize);
+      })
+    );
     this.getPendingNews(0, 3);
     this.cdref.detectChanges();
   }
@@ -63,17 +77,21 @@ export class NewsComponent {
   }
 
   onAccept(id: string) {
-    this.newsService.onAccept(id).subscribe((data) => {
-      console.log(data);
-      this.getPendingNews(0, 3);
-    });
+    this.subscriptions.push(
+      this.newsService.onAccept(id).subscribe((data) => {
+        console.log(data);
+        this.getPendingNews(0, 3);
+      })
+    );
   }
 
   onReject(id: string, reason: string) {
-    this.newsService.onReject(id, reason).subscribe((data) => {
-      console.log(data);
-      this.getPendingNews(0, 3);
-    });
+    this.subscriptions.push(
+      this.newsService.onReject(id, reason).subscribe((data) => {
+        console.log(data);
+        this.getPendingNews(0, 3);
+      })
+    );
   }
 
   openDialog(id: string): void {
@@ -84,10 +102,18 @@ export class NewsComponent {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.onReject(result.id, result.reason);
-      }
+    this.subscriptions.push(
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          this.onReject(result.id, result.reason);
+        }
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((data) => {
+      data.unsubscribe();
     });
   }
 }

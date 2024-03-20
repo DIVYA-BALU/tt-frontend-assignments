@@ -1,19 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NewsDTO } from 'src/app/model/NewDTO';
 import { CreateNewsService } from '../create-news/create-news.service';
 import { SharedServiceService } from 'src/app/shared-service/shared-service.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-breaking-news',
   templateUrl: './breaking-news.component.html',
-  styleUrls: ['./breaking-news.component.scss']
+  styleUrls: ['./breaking-news.component.scss'],
 })
-export class BreakingNewsComponent {
+export class BreakingNewsComponent implements OnInit, OnDestroy {
+  subscription: Subscription = new Subscription();
 
-  categories: string[] = [
-    'BREAKING NEWS',
-  ];
+  categories: string[] = ['BREAKING NEWS'];
 
   editorConfig = {
     base_url: '/tinymce',
@@ -28,7 +28,10 @@ export class BreakingNewsComponent {
   news!: NewsDTO;
   files: File[] = [];
 
-  constructor(private createNewsService: CreateNewsService, private sharedService: SharedServiceService) {}
+  constructor(
+    private createNewsService: CreateNewsService,
+    private sharedService: SharedServiceService
+  ) {}
 
   ngOnInit() {
     this.newsForm = new FormGroup({
@@ -44,7 +47,7 @@ export class BreakingNewsComponent {
   onSubmit() {
     this.news = this.newsForm.value;
     this.news.images = this.files;
-    this.createNewsService.createNews(this.news).subscribe(
+    this.subscription = this.createNewsService.createNews(this.news).subscribe(
       (data) => {
         this.status = data;
         this.sharedService.setBadge(true);
@@ -59,10 +62,13 @@ export class BreakingNewsComponent {
 
   uploadImages(e: any) {
     for (let i = 0; i < e.target.files.length; i++) {
-      if ((this.newsForm.controls['newsUid'].value) && (e.target.files[i].name).includes(this.newsForm.controls['newsUid'].value)) {
+      if (
+        this.newsForm.controls['newsUid'].value &&
+        e.target.files[i].name.includes(this.newsForm.controls['newsUid'].value)
+      ) {
         this.files.push(e.target.files[i]);
         this.imgError = '';
-      }else{
+      } else {
         this.imgError = 'error';
       }
     }
@@ -71,5 +77,9 @@ export class BreakingNewsComponent {
   remove(index: number) {
     this.files.splice(index, 1);
     console.log(this.files);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

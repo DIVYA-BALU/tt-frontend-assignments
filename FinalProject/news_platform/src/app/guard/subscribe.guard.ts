@@ -1,14 +1,8 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  RouterStateSnapshot,
-  UrlTree,
-} from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanActivate, Router } from '@angular/router';
 import { SharedServiceService } from '../shared-service/shared-service.service';
-import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { SubscribeBottomSheetComponent } from '../user/subscribe-bottom-sheet/subscribe-bottom-sheet.component';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { SubscribeDialogComponent } from '../user/subscribe-dialog/subscribe-dialog.component';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +10,11 @@ import { SubscribeBottomSheetComponent } from '../user/subscribe-bottom-sheet/su
 export class SubscribeGuard implements CanActivate {
   subscribed!: boolean;
 
-  constructor(private sharedService: SharedServiceService, private _bottomSheet: MatBottomSheet) {}
+  constructor(
+    private sharedService: SharedServiceService,
+    public dialog: MatDialog,
+    private route: Router
+  ) {}
 
   canActivate() {
     this.sharedService.subscribedValueData$.subscribe((data) => {
@@ -24,7 +22,11 @@ export class SubscribeGuard implements CanActivate {
         this.subscribed = true;
       } else {
         this.subscribed = false;
-        this._bottomSheet.open(SubscribeBottomSheetComponent);
+        this.dialog.open(SubscribeDialogComponent, {
+          enterAnimationDuration: '1000ms',
+          exitAnimationDuration: '1000ms',
+        });
+        this.route.navigate(['/user/home']);
       }
     });
     return this.subscribed;

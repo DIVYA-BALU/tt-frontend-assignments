@@ -21,21 +21,127 @@
   }
 }
 
-.content {
+.content,
+.subscribe {
   padding: 20px;
+  position: absolute;
   img {
     width: 20%;
+    margin-top: 20px;
     margin-bottom: 30px;
+  }
+  div {
+    font-family: $font-family;
   }
 }
 
-.image{
+.image {
   display: inline;
   margin-right: 10px;
 }
 
+.synopsis {
+  padding: 20px;
+  background-color: rgba(163, 224, 244, 0.288);
+}
 
-.spinner-container{
+.head {
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.subscribe {
+  background-color: white;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  margin-top: 450px;
+  box-shadow: 4px 4px 5px 5px rgb(224, 233, 237);
+  display: flex;
+  flex-direction: column;
+  padding-left: 300px;
+}
+
+.sub-container {
+  background-color: white;
+  box-shadow: 4px 4px 7px 2px rgba(0, 0, 0, 0.4);
+  padding: 10px;
+  width: 70%;
+}
+
+.subscribe-container {
+  border: 10px solid rgba(163, 224, 244, 0.288);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px;
+  h1 {
+    text-align: center;
+    font-family: $font-family;
+    font-weight: bolder;
+  }
+  p {
+    text-align: center;
+  }
+}
+
+.offers {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.example-card{
+  width: 40%;
+  margin-left: 50px;
+  margin-bottom: 20px;
+
+  .card-head{
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+  }
+
+  img{
+    margin: 0px;
+    width: 30%;
+  }
+
+  .title{
+    padding-left: 20px;
+    width: 70%;
+    font-family: $font-family;
+    font-size: 15px;
+    padding-top: 20px;
+  }
+}
+
+.button{
+  width: 25%;
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-left: 300px;
+  cursor: pointer;
+  border: 1px solid black;
+
+  button{
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    font-family: $font-family;
+    cursor: pointer;
+  }
+}
+
+.button:hover{
+  box-shadow: 4px 4px 7px 2px rgba(0, 0, 0, 0.4);
+}
+
+.spinner-container {
   display: flex;
   justify-content: center;
 }

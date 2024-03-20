@@ -37,10 +37,10 @@ import { DisplayCategoryComponent } from './display-category/display-category.co
 import { SavedStoriesComponent } from './saved-stories/saved-stories.component';
 import { SubscriptionPageComponent } from './subscription-page/subscription-page.component';
 import { MatTableModule } from '@angular/material/table';
-import { SubscribeBottomSheetComponent } from './subscribe-bottom-sheet/subscribe-bottom-sheet.component';
 import { TradingComponent } from './trading/trading.component';
 import { ExplainersComponent } from './explainers/explainers.component';
 import { DisplayExplainerComponent } from './display-explainer/display-explainer.component';
+import { SubscribeDialogComponent } from './subscribe-dialog/subscribe-dialog.component';
 
 
 @NgModule({
@@ -63,10 +63,10 @@ import { DisplayExplainerComponent } from './display-explainer/display-explainer
     DisplayCategoryComponent,
     SavedStoriesComponent,
     SubscriptionPageComponent,
-    SubscribeBottomSheetComponent,
     TradingComponent,
     ExplainersComponent,
-    DisplayExplainerComponent
+    DisplayExplainerComponent,
+    SubscribeDialogComponent
   ],
   imports: [
     CommonModule,

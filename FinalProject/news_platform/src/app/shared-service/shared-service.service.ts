@@ -65,13 +65,17 @@ export class SharedServiceService {
 
   isSubscribed() {
     const storedDateString = localStorage.getItem('suscribedEndDate');
-    if (storedDateString) {
-      const storedDate = new Date(storedDateString);
-      const today = new Date();
-      if (storedDate.toDateString() === today.toDateString()) {
-        return false;
-      } else if (storedDateString === null) {
-        return false;
+    const subscribed = localStorage.getItem('subscribed');
+
+    if (subscribed === 'false') {
+      return false;
+    } else {
+      if (storedDateString) {
+        const today = new Date();
+        const endDate = new Date(JSON.parse(storedDateString));
+        if (endDate < today) {
+          return false;
+        }
       }
     }
     return true;
@@ -80,6 +84,8 @@ export class SharedServiceService {
   setSubscribed() {
     if (this.isSubscribed()) {
       this.subscribedValue.next(true);
+    } else {
+      this.subscribedValue.next(false);
     }
   }
 }

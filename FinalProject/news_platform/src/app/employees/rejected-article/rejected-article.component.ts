@@ -1,17 +1,23 @@
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Article } from 'src/app/model/Article';
 import { RejectedArticleService } from './rejected-article.service';
 import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-rejected-article',
   templateUrl: './rejected-article.component.html',
-  styleUrls: ['./rejected-article.component.scss']
+  styleUrls: ['./rejected-article.component.scss'],
 })
-export class RejectedArticleComponent {
-
+export class RejectedArticleComponent implements OnDestroy {
+  subscriptions: Subscription[] = [];
   rejectedArticle: Article[] = [];
 
   displayedColumns: string[] = [
@@ -21,7 +27,7 @@ export class RejectedArticleComponent {
     'images',
     'content',
     'date',
-    'reason'
+    'reason',
   ];
 
   dataSource!: MatTableDataSource<Article>;
@@ -32,31 +38,47 @@ export class RejectedArticleComponent {
   status: string = '';
 
   totalElements: number = 0;
-  pageSize: number = 3; 
+  pageSize: number = 3;
 
-  constructor(private rejectedArticleService: RejectedArticleService, public dialog: MatDialog, private cdref: ChangeDetectorRef){
+  constructor(
+    private rejectedArticleService: RejectedArticleService,
+    public dialog: MatDialog,
+    private cdref: ChangeDetectorRef
+  ) {
     this.dataSource = new MatTableDataSource(this.rejectedArticle);
   }
 
-  getRejectedArticle(pageIndex: number, pageSize: number){
-    this.rejectedArticleService.getRejectedArticle(pageIndex, pageSize).subscribe( (data) => {
-      this.rejectedArticle = data.content;
-      this.paginator.length = data.totalElements;
-      this.paginator.pageIndex = data.number;
-      this.paginator.pageSize = data.size;
-      this.dataSource.data = this.rejectedArticle;
-    })
+  getRejectedArticle(pageIndex: number, pageSize: number) {
+    this.subscriptions.push(
+      this.rejectedArticleService
+        .getRejectedArticle(pageIndex, pageSize)
+        .subscribe((data) => {
+          this.rejectedArticle = data.content;
+          this.paginator.length = data.totalElements;
+          this.paginator.pageIndex = data.number;
+          this.paginator.pageSize = data.size;
+          this.dataSource.data = this.rejectedArticle;
+        })
+    );
   }
 
   ngAfterViewInit() {
-    this.paginator.page.subscribe((data) => {
-      this.getRejectedArticle(data.pageIndex, data.pageSize);
-    })
+    this.subscriptions.push(
+      this.paginator.page.subscribe((data) => {
+        this.getRejectedArticle(data.pageIndex, data.pageSize);
+      })
+    );
     this.getRejectedArticle(0, 3);
     this.cdref.detectChanges();
   }
 
   nextPage(e: PageEvent) {
     this.getRejectedArticle(e.pageIndex, e.pageSize);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((data) => {
+      data.unsubscribe();
+    });
   }
 }

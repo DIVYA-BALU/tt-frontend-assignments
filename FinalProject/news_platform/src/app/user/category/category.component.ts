@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CategoryService } from './category.service';
 import { News } from 'src/app/model/News';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { SharedServiceService } from 'src/app/shared-service/shared-service.service';
 
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss']
+  styleUrls: ['./category.component.scss'],
 })
-export class CategoryComponent implements OnInit{
-
+export class CategoryComponent implements OnInit, OnDestroy {
+  subscription: Subscription = new Subscription();
   categories: string[] = [
     'ENTERTAINMENT',
     'SPORTS',
@@ -29,20 +29,29 @@ export class CategoryComponent implements OnInit{
   selectedValue!: string;
   newsContents!: News[];
 
-  constructor(private categoryService: CategoryService, private sharedService: SharedServiceService){}
+  constructor(
+    private categoryService: CategoryService,
+    private sharedService: SharedServiceService
+  ) {}
 
   ngOnInit(): void {
-      this.sharedService.setBadge(false);
+    this.sharedService.setBadge(false);
   }
-  
-  select(val: string){
+
+  select(val: string) {
     this.selectedValue = val;
     this.getNews();
   }
 
-  getNews(){
-    this.categoryService.getNews(this.selectedValue).subscribe( (data) => {
-      this.newsContents = data;
-    })
+  getNews() {
+    this.subscription = this.categoryService
+      .getNews(this.selectedValue)
+      .subscribe((data) => {
+        this.newsContents = data;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

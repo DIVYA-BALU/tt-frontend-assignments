@@ -1,11 +1,11 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-trading',
   templateUrl: './trading.component.html',
   styleUrls: ['./trading.component.scss'],
 })
-export class TradingComponent {
+export class TradingComponent implements OnInit{
   constructor() {}
 
   ngOnInit(): void {

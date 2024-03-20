@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { News } from 'src/app/model/News';
 import { BreakingNewsService } from './breaking-news.service';
 import { SharedServiceService } from 'src/app/shared-service/shared-service.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-breaking-news',
   templateUrl: './breaking-news.component.html',
   styleUrls: ['./breaking-news.component.scss'],
 })
-export class BreakingNewsComponent {
+export class BreakingNewsComponent implements OnInit, OnDestroy {
+  subscription: Subscription = new Subscription();
   newsContents!: News[];
 
   constructor(
@@ -23,9 +25,11 @@ export class BreakingNewsComponent {
   }
 
   getBreakingNews() {
-    this.breakingnewsService.getBreakingNews().subscribe((data) => {
-      this.newsContents = data;
-    });
+    this.subscription = this.breakingnewsService
+      .getBreakingNews()
+      .subscribe((data) => {
+        this.newsContents = data;
+      });
   }
 
   spinner!: boolean;
@@ -35,5 +39,9 @@ export class BreakingNewsComponent {
     setTimeout(() => {
       this.spinner = false;
     }, 2000);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

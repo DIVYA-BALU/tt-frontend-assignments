@@ -1,19 +1,18 @@
-import { Component } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Article } from 'src/app/model/ArticleDTO';
 import { CreateArticleService } from './create-article.service';
 import { SharedServiceService } from 'src/app/shared-service/shared-service.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create-article',
   templateUrl: './create-article.component.html',
   styleUrls: ['./create-article.component.scss'],
 })
-export class CreateArticleComponent {
+export class CreateArticleComponent implements OnInit, OnDestroy {
+  subscription: Subscription = new Subscription();
+
   categories: string[] = [
     'ENTERTAINMENT',
     'SPORTS',
@@ -42,7 +41,10 @@ export class CreateArticleComponent {
   article!: Article;
   files: File[] = [];
 
-  constructor(private createArticleService: CreateArticleService, private sharedService: SharedServiceService) {}
+  constructor(
+    private createArticleService: CreateArticleService,
+    private sharedService: SharedServiceService
+  ) {}
 
   ngOnInit() {
     this.articleForm = new FormGroup({
@@ -57,25 +59,32 @@ export class CreateArticleComponent {
   onSubmit() {
     this.article = this.articleForm.value;
     this.article.images = this.files;
-    this.createArticleService.createArticle(this.article).subscribe(
-      (data) => {
-        this.status = data;
-        this.sharedService.setBadge(true);
-      },
-      (error) => {
-        this.status = error.error;
-      }
-    );
+    this.subscription = this.createArticleService
+      .createArticle(this.article)
+      .subscribe(
+        (data) => {
+          this.status = data;
+          this.sharedService.setBadge(true);
+        },
+        (error) => {
+          this.status = error.error;
+        }
+      );
   }
 
   imgError: string = '';
 
   uploadImages(e: any) {
     for (let i = 0; i < e.target.files.length; i++) {
-      if ((this.articleForm.controls['articleUid'].value) && (e.target.files[i].name).includes(this.articleForm.controls['articleUid'].value)) {
+      if (
+        this.articleForm.controls['articleUid'].value &&
+        e.target.files[i].name.includes(
+          this.articleForm.controls['articleUid'].value
+        )
+      ) {
         this.files.push(e.target.files[i]);
         this.imgError = '';
-      }else{
+      } else {
         this.imgError = 'error';
       }
     }
@@ -84,5 +93,9 @@ export class CreateArticleComponent {
   remove(index: number) {
     this.files.splice(index, 1);
     console.log(this.files);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

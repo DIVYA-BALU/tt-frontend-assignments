@@ -1,24 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserNewsDTO } from 'src/app/model/user-news-dto';
+import { UserNewsDTO } from 'src/app/model/UserNewsDTO';
 import { FormService } from './form.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SuccessSnackBarComponent } from 'src/app/success-snack-bar/success-snack-bar.component';
-import { FailureSnackBarComponent } from 'src/app/failure-snack-bar/failure-snack-bar.component';
+import Swal from 'sweetalert2';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
 })
-export class FormComponent implements OnInit {
+export class FormComponent implements OnInit, OnDestroy {
   newsForm!: FormGroup;
   durationInSeconds = 5;
   files: File[] = [];
+  subscription: Subscription = new Subscription();
 
   news!: UserNewsDTO;
 
-  constructor(private formService: FormService, private _snackBar: MatSnackBar) {}
+  constructor(private formService: FormService) {}
 
   editorConfig = {
     base_url: '/tinymce',
@@ -36,26 +36,50 @@ export class FormComponent implements OnInit {
     });
   }
 
-  onSubmit(){
+  onSubmit() {
     this.news = this.newsForm.value;
     this.news.images = this.files;
-    this.formService.createMyNews(this.news).subscribe( (data) => {
-      // this.status = data;
-      this.openSuccessSnackBar();
-    },
-    (error) => {
-      this.openFailureSnackBar();
-    })
+    this.subscription = this.formService.createMyNews(this.news).subscribe(
+      (data) => {
+        Swal.fire({
+          title: 'Thank you!',
+          text: 'Your form has been submitted successfully!',
+          icon: 'success',
+        });
+        this.newsForm = new FormGroup({
+          name: new FormControl('', Validators.required),
+          email: new FormControl('', Validators.required),
+          phoneNo: new FormControl('', Validators.required),
+          content: new FormControl('', Validators.required),
+        });
+        this.files = [];
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        });
+      }
+    );
   }
 
   imgError: string = '';
 
-  uploadImages(e: any){
+  uploadImages(e: any) {
     for (let i = 0; i < e.target.files.length; i++) {
-      if ((e.target.files[i].name).includes(new Date().toLocaleDateString('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' }))) {
+      if (
+        e.target.files[i].name.includes(
+          new Date().toLocaleDateString('en-CA', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+          })
+        )
+      ) {
         this.files.push(e.target.files[i]);
         this.imgError = '';
-      }else{
+      } else {
         this.imgError = 'error';
       }
     }
@@ -63,18 +87,9 @@ export class FormComponent implements OnInit {
 
   remove(index: number) {
     this.files.splice(index, 1);
-    console.log(this.files);
   }
 
-  openSuccessSnackBar() {
-    this._snackBar.openFromComponent(SuccessSnackBarComponent, {
-      duration: this.durationInSeconds * 1000,
-    });
-  }
-
-  openFailureSnackBar() {
-    this._snackBar.openFromComponent(FailureSnackBarComponent, {
-      duration: this.durationInSeconds * 1000,
-    });
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

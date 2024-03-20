@@ -1,15 +1,23 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ShortReadsDTO } from 'src/app/model/ShortReadsDTO';
 import { CreateShortReadsService } from './create-short-reads.service';
 import { SharedServiceService } from 'src/app/shared-service/shared-service.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create-short-reads',
   templateUrl: './create-short-reads.component.html',
   styleUrls: ['./create-short-reads.component.scss'],
 })
-export class CreateShortReadsComponent {
+export class CreateShortReadsComponent implements OnInit, OnDestroy {
+  subscription: Subscription = new Subscription();
   categories: string[] = [
     'ENTERTAINMENT',
     'SPORTS',
@@ -38,7 +46,10 @@ export class CreateShortReadsComponent {
   shortReads!: ShortReadsDTO;
   image!: File;
 
-  constructor(private createShortReadsService: CreateShortReadsService, private sharedService: SharedServiceService) {}
+  constructor(
+    private createShortReadsService: CreateShortReadsService,
+    private sharedService: SharedServiceService
+  ) {}
 
   ngOnInit() {
     this.shortReadsForm = new FormGroup({
@@ -53,15 +64,17 @@ export class CreateShortReadsComponent {
   onSubmit() {
     this.shortReads = this.shortReadsForm.value;
     this.shortReads.image = this.image;
-    this.createShortReadsService.createShortReads(this.shortReads).subscribe(
-      (data) => {
-        this.status = data;
-        this.sharedService.setBadge(true);
-      },
-      (error) => {
-        this.status = error.error;
-      }
-    );
+    this.subscription = this.createShortReadsService
+      .createShortReads(this.shortReads)
+      .subscribe(
+        (data) => {
+          this.status = data;
+          this.sharedService.setBadge(true);
+        },
+        (error) => {
+          this.status = error.error;
+        }
+      );
   }
 
   imgError: string = '';
@@ -82,5 +95,9 @@ export class CreateShortReadsComponent {
 
   remove() {
     //  this.image = null;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

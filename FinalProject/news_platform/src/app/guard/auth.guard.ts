@@ -9,20 +9,15 @@ import { LoginBottomSheetComponent } from '../user/login-bottom-sheet/login-bott
 })
 export class AuthGuard implements CanActivate {
 
-  logged!: boolean ;
-
-  constructor(private sharedService: SharedServiceService, private _bottomSheet: MatBottomSheet){}
+  constructor(private sharedService: SharedServiceService, private _bottomSheet: MatBottomSheet, private route: Router){}
 
   canActivate(): boolean{
     this.sharedService.loginStatusData.subscribe((data) => {
-      if (data) {
-        this.logged = true;
-      }else{
-        this.logged = false;
+      if (!data) {
         this._bottomSheet.open(LoginBottomSheetComponent);
       }
     })
-    return this.logged;
+    return true;
   }
   
 }

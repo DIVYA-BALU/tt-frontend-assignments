@@ -16,8 +16,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
-import { SuccessSnackBarComponent } from './success-snack-bar/success-snack-bar.component';
-import { FailureSnackBarComponent } from './failure-snack-bar/failure-snack-bar.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SubscriptionComponent } from './subscription/subscription.component';
 
@@ -26,8 +24,6 @@ import { SubscriptionComponent } from './subscription/subscription.component';
     AppComponent,
     PagenotfoundComponent,
     ProfileComponent,
-    SuccessSnackBarComponent,
-    FailureSnackBarComponent,
     SubscriptionComponent
   ],
   imports: [

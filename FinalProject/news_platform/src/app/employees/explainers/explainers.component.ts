@@ -1,17 +1,25 @@
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Explainers } from 'src/app/model/Explainers';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { ExplainersService } from './explainers.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-explainers',
   templateUrl: './explainers.component.html',
-  styleUrls: ['./explainers.component.scss']
+  styleUrls: ['./explainers.component.scss'],
 })
-export class ExplainersComponent {
+export class ExplainersComponent implements OnDestroy {
+  subscriptions: Subscription[] = [];
 
   pendingExplainers: Explainers[] = [];
 
@@ -21,7 +29,7 @@ export class ExplainersComponent {
     'images',
     'content',
     'date',
-    'approval'
+    'approval',
   ];
 
   dataSource!: MatTableDataSource<Explainers>;
@@ -32,26 +40,36 @@ export class ExplainersComponent {
   status: string = '';
 
   totalElements: number = 0;
-  pageSize: number = 3; 
+  pageSize: number = 3;
 
-  constructor(private explainersService: ExplainersService, public dialog: MatDialog, private cdref: ChangeDetectorRef){
+  constructor(
+    private explainersService: ExplainersService,
+    public dialog: MatDialog,
+    private cdref: ChangeDetectorRef
+  ) {
     this.dataSource = new MatTableDataSource(this.pendingExplainers);
   }
 
-  getPendingExplainers(pageIndex: number, pageSize: number){
-    this.explainersService.getPendingExplainers(pageIndex, pageSize).subscribe( (data) => {
-      this.pendingExplainers = data.content;
-      this.paginator.length = data.totalElements;
-      this.paginator.pageIndex = data.number;
-      this.paginator.pageSize = data.size;
-      this.dataSource.data = this.pendingExplainers;
-    })
+  getPendingExplainers(pageIndex: number, pageSize: number) {
+    this.subscriptions.push(
+      this.explainersService
+        .getPendingExplainers(pageIndex, pageSize)
+        .subscribe((data) => {
+          this.pendingExplainers = data.content;
+          this.paginator.length = data.totalElements;
+          this.paginator.pageIndex = data.number;
+          this.paginator.pageSize = data.size;
+          this.dataSource.data = this.pendingExplainers;
+        })
+    );
   }
 
   ngAfterViewInit() {
-    this.paginator.page.subscribe((data) => {
-      this.getPendingExplainers(data.pageIndex, data.pageSize);
-    })
+    this.subscriptions.push(
+      this.paginator.page.subscribe((data) => {
+        this.getPendingExplainers(data.pageIndex, data.pageSize);
+      })
+    );
     this.getPendingExplainers(0, 3);
     this.cdref.detectChanges();
   }
@@ -61,16 +79,20 @@ export class ExplainersComponent {
   }
 
   onAccept(id: string) {
-    this.explainersService.onAccept(id).subscribe((data) => {
-      console.log(data);
-      this.getPendingExplainers(0, 3);
-    });
+    this.subscriptions.push(
+      this.explainersService.onAccept(id).subscribe((data) => {
+        console.log(data);
+        this.getPendingExplainers(0, 3);
+      })
+    );
   }
 
   onReject(id: string, reason: string) {
-    this.explainersService.onReject(id, reason).subscribe((data) => {
-      this.getPendingExplainers(0, 3);
-    });
+    this.subscriptions.push(
+      this.explainersService.onReject(id, reason).subscribe((data) => {
+        this.getPendingExplainers(0, 3);
+      })
+    );
   }
 
   openDialog(id: string): void {
@@ -81,10 +103,18 @@ export class ExplainersComponent {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.onReject(result.id, result.reason);
-      }
+    this.subscriptions.push(
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          this.onReject(result.id, result.reason);
+        }
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((data) => {
+      data.unsubscribe();
     });
   }
 }

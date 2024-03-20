@@ -1,79 +1,141 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from 'src/app/model/Article';
 import { DisplayArticleService } from './display-article.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SuccessSnackBarComponent } from 'src/app/success-snack-bar/success-snack-bar.component';
-import { FailureSnackBarComponent } from 'src/app/failure-snack-bar/failure-snack-bar.component';
+import Swal from 'sweetalert2';
+import { SavedStoriesService } from '../saved-stories/saved-stories.service';
+import { SharedServiceService } from 'src/app/shared-service/shared-service.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-display-article',
   templateUrl: './display-article.component.html',
-  styleUrls: ['./display-article.component.scss']
+  styleUrls: ['./display-article.component.scss'],
 })
-export class DisplayArticleComponent {
-
+export class DisplayArticleComponent implements OnDestroy, OnInit {
   articleId: string = '';
   article!: Article;
-  durationInSeconds!: number;
-  isSaved!: boolean;
+  savedArticle!: boolean;
+  isSubscribed!: boolean;
+  subscriptions: Subscription[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private displayService: DisplayArticleService,
-    private _snackBar: MatSnackBar
+    private savedStoriesService: SavedStoriesService,
+    private router: Router,
+    private sharedService: SharedServiceService
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe((_value) => {
-      this.articleId = _value['id'];
-      this.getArticle();
-      this.increaseViews();
-    });
+    this.subscriptions.push(
+      this.route.params.subscribe((_value) => {
+        this.articleId = _value['id'];
+        this.getArticle();
+        this.increaseViews();
+        this.getSavedArticle();
+      })
+    );
   }
 
   getArticle() {
-    this.displayService.getArticle(this.articleId).subscribe((data) => {
-      if (data) {
-        this.article = data;
-        this.isSaved = this.article.saved;
-      }
-    });
+    this.subscriptions.push(
+      this.displayService.getArticle(this.articleId).subscribe((data) => {
+        if (data) {
+          this.article = data;
+        }
+
+        this.sharedService.subscribedValueData$.subscribe((data) => {
+          const date1 = new Date(this.article.date);
+          const date2 = new Date();
+
+          const areDatesEqual = date1.getDate() === date2.getDate();
+          const areMonthEqual = date1.getMonth() === date2.getMonth();
+          const areYearEqual = date1.getFullYear() === date2.getFullYear();
+
+          if (
+            data === false &&
+            areDatesEqual &&
+            areMonthEqual &&
+            areYearEqual
+          ) {
+            this.isSubscribed = false;
+          } else {
+            this.isSubscribed = true;
+          }
+        });
+      })
+    );
   }
 
-  increaseViews(){
+  increaseViews() {
     this.displayService.increaseViews(this.articleId);
   }
 
-  onSave(){
-    this.displayService.saveArtcile(this.articleId).subscribe( (data) => {
-      this.openSuccessSnackBar();
-      this.getArticle();
-    },
-    (error) => {
-      this.openFailureSnackBar();
-    })
+  onSave() {
+    this.subscriptions.push(
+      this.displayService.saveArtcile(this.articleId).subscribe(
+        (data) => {
+          Swal.fire({
+            title: 'Thank you!',
+            text: 'Article saved successfully!',
+            icon: 'success',
+          });
+          this.getSavedArticle();
+        },
+        (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+          });
+        }
+      )
+    );
   }
 
-  unSave(){
-    this.displayService.unsaveArticle(this.articleId).subscribe( (data) => {
-      this.openSuccessSnackBar();
-      this.getArticle();
-    },
-    (error) => {
-      this.openFailureSnackBar();
-    })
+  getSavedArticle() {
+    this.subscriptions.push(
+      this.savedStoriesService.getSavedArticle().subscribe((data) => {
+        data.forEach((value) => {
+          if (value.article.id === this.articleId) {
+            this.savedArticle = true;
+          }
+        });
+      })
+    );
   }
 
-  openSuccessSnackBar() {
-    this._snackBar.openFromComponent(SuccessSnackBarComponent, {
-      duration: this.durationInSeconds * 1000,
-    });
+  unSave() {
+    this.subscriptions.push(
+      this.displayService.unsaveArticle(this.articleId).subscribe(
+        (data) => {
+          Swal.fire({
+            title: 'Thank you!',
+            text: 'Article unsaved successfully!',
+            icon: 'success',
+          });
+          this.savedArticle = false;
+          console.log(this.savedArticle);
+        },
+        (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+          });
+        }
+      )
+    );
   }
 
-  openFailureSnackBar() {
-    this._snackBar.openFromComponent(FailureSnackBarComponent, {
-      duration: this.durationInSeconds * 1000,
+  onClick() {
+    this.router.navigate(['/subscription']);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((data) => {
+      data.unsubscribe();
     });
   }
 }

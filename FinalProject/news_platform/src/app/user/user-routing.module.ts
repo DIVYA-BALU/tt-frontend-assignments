@@ -42,6 +42,7 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'search',
@@ -81,7 +82,7 @@ const routes: Routes = [
       {
         path: 'display-news/:id',
         component: DisplayNewsComponent,
-        canActivate: [SubscribeGuard]
+        canActivate: [AuthGuard]
       },
       {
         path: 'display-category/:category',
@@ -90,7 +91,8 @@ const routes: Routes = [
       },
       {
         path: 'daily-news',
-        component: DailyNewsComponent
+        component: DailyNewsComponent,
+        canActivate: [AuthGuard, SubscribeGuard]
       },
       {
         path: 'top-news',
@@ -99,17 +101,17 @@ const routes: Routes = [
       {
         path: 'breaking-news',
         component: BreakingNewsComponent,
-        canActivate: [SubscribeGuard]
+        canActivate: [AuthGuard, SubscribeGuard]
       },
       {
         path: 'sensatinal-news',
         component: SensationalNewsComponent,
-        canActivate: [SubscribeGuard]
+        canActivate: [AuthGuard, SubscribeGuard]
       },
       {
         path: 'form',
         component: FormComponent,
-        canActivate: [SubscribeGuard]
+        canActivate: [AuthGuard, SubscribeGuard]
       },
       {
         path: 'topics',
@@ -117,7 +119,8 @@ const routes: Routes = [
       },
       {
         path: 'savedstories',
-        component: SavedStoriesComponent
+        component: SavedStoriesComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'mySubscription',
@@ -127,7 +130,7 @@ const routes: Routes = [
       {
         path: 'trade',
         component: TradingComponent,
-        canActivate: [SubscribeGuard]
+        canActivate: [AuthGuard, SubscribeGuard]
       }
     ],
   },

@@ -1,4 +1,4 @@
-import { Component, Inject, ViewChild } from '@angular/core';
+import { Component, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { CreateAccountService } from './account.service';
 
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -12,18 +12,18 @@ import {
 import { FormControl } from '@angular/forms';
 import { User } from 'src/app/model/User';
 import { UserDTO } from 'src/app/model/UserDTO';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SuccessSnackBarComponent } from 'src/app/success-snack-bar/success-snack-bar.component';
-import { FailureSnackBarComponent } from 'src/app/failure-snack-bar/failure-snack-bar.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.scss'],
 })
-export class AccountComponent {
+export class AccountComponent implements OnDestroy {
   durationInSeconds: number = 5;
   users: User[] = [];
+
+  subscriptions: Subscription[] = [];
 
   filterControl = new FormControl('');
 
@@ -42,11 +42,12 @@ export class AccountComponent {
   status: string = '';
 
   totalElements: number = 0;
-  pageSize: number = 3;  
+  pageSize: number = 3;
 
   constructor(
     private accountService: CreateAccountService,
-    public dialog: MatDialog, private cdref: ChangeDetectorRef, private _snackBar: MatSnackBar
+    public dialog: MatDialog,
+    private cdref: ChangeDetectorRef
   ) {
     this.dataSource = new MatTableDataSource(this.users);
   }
@@ -62,44 +63,48 @@ export class AccountComponent {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      this.createUser(result);
-      this.getUsers(0, 3);
-    });
+    this.subscriptions.push(
+      dialogRef.afterClosed().subscribe((result) => {
+        this.createUser(result);
+        this.getUsers(0, 3);
+      })
+    );
   }
 
   getUsers(pageIndex: number, pageSize: number) {
-    this.accountService
-      .getAllUsers(pageIndex, pageSize)
-      .subscribe((data) => {
+    this.subscriptions.push(
+      this.accountService.getAllUsers(pageIndex, pageSize).subscribe((data) => {
         this.users = data.content;
         this.paginator.length = data.totalElements;
         this.paginator.pageIndex = data.number;
         this.paginator.pageSize = data.size;
         this.dataSource.data = this.users;
-      });
+      })
+    );
   }
 
-  createUser(user: UserDTO){
-    this.accountService.createAccount(user).subscribe( (data) => {
-      this.status = data;
-      this.openSuccessSnackBar();
-    },
-    (error) => {
-      this.status = error.error;
-      this.openFailureSnackBar();
-    })
+  createUser(user: UserDTO) {
+    this.subscriptions.push(
+      this.accountService.createAccount(user).subscribe(
+        (data) => {
+          this.status = data;
+        },
+        (error) => {
+          this.status = error.error;
+        }
+      )
+    );
   }
 
   ngAfterViewInit() {
-    this.paginator.page.subscribe((data) => {
-      this.getUsers(data.pageIndex, data.pageSize);
-    })
+    this.subscriptions.push(
+      this.paginator.page.subscribe((data) => {
+        this.getUsers(data.pageIndex, data.pageSize);
+      })
+    );
     this.getUsers(0, 3);
     this.cdref.detectChanges();
   }
-
-
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -114,15 +119,9 @@ export class AccountComponent {
     this.getUsers(e.pageIndex, e.pageSize);
   }
 
-  openSuccessSnackBar() {
-    this._snackBar.openFromComponent(SuccessSnackBarComponent, {
-      duration: this.durationInSeconds * 1000,
-    });
-  }
-
-  openFailureSnackBar() {
-    this._snackBar.openFromComponent(FailureSnackBarComponent, {
-      duration: this.durationInSeconds * 1000,
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((data) => {
+      data.unsubscribe();
     });
   }
 }

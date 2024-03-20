@@ -1,15 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ExplainersDTO } from 'src/app/model/ExplainersDTO';
 import { CreateExplainersService } from './create-explainers.service';
 import { SharedServiceService } from 'src/app/shared-service/shared-service.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create-explainers',
   templateUrl: './create-explainers.component.html',
-  styleUrls: ['./create-explainers.component.scss']
+  styleUrls: ['./create-explainers.component.scss'],
 })
-export class CreateExplainersComponent {
+export class CreateExplainersComponent implements OnDestroy, OnInit {
+  subscription: Subscription = new Subscription();
 
   categories: string[] = [
     'ENTERTAINMENT',
@@ -39,7 +41,10 @@ export class CreateExplainersComponent {
   explainers!: ExplainersDTO;
   image!: File;
 
-  constructor(private createExplainersService: CreateExplainersService, private sharedService: SharedServiceService) {}
+  constructor(
+    private createExplainersService: CreateExplainersService,
+    private sharedService: SharedServiceService
+  ) {}
 
   ngOnInit() {
     this.explainersForm = new FormGroup({
@@ -53,15 +58,17 @@ export class CreateExplainersComponent {
   onSubmit() {
     this.explainers = this.explainersForm.value;
     this.explainers.image = this.image;
-    this.createExplainersService.createExplainers(this.explainers).subscribe(
-      (data) => {
-        this.status = data;
-        this.sharedService.setBadge(true);
-      },
-      (error) => {
-        this.status = error.error;
-      }
-    );
+    this.subscription = this.createExplainersService
+      .createExplainers(this.explainers)
+      .subscribe(
+        (data) => {
+          this.status = data;
+          this.sharedService.setBadge(true);
+        },
+        (error) => {
+          this.status = error.error;
+        }
+      );
   }
 
   imgError: string = '';
@@ -82,5 +89,9 @@ export class CreateExplainersComponent {
 
   remove() {
     //  this.image = null;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

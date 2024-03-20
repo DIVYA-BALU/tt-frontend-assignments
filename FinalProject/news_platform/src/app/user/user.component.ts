@@ -1,26 +1,28 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { SharedServiceService } from '../shared-service/shared-service.service';
 import { Router } from '@angular/router';
 import { UserService } from './user.service';
+import Swal from 'sweetalert2';
+import { ProfileService } from '../profile/profile.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
 })
-export class UserComponent {
+export class UserComponent implements OnDestroy {
   logged!: boolean;
   showBadge!: boolean;
   subscribed!: boolean;
+  name!: string;
+  subscriptions: Subscription[] = [];
 
   constructor(
     private sharedService: SharedServiceService,
     private route: Router,
-    private userService: UserService
-  ) {
-
-    // this.getStocks();
-  }
+    private profileService: ProfileService
+  ) {}
 
   inputText: string = '';
   @ViewChild('trading') content!: ElementRef;
@@ -29,25 +31,37 @@ export class UserComponent {
   @ViewChild('trading1') content1!: ElementRef;
   script1!: any;
 
-  ngOnInit(){
-    this.sharedService.loginStatusData.subscribe((data) => {
-      this.logged = data;
-      console.log(this.logged);
-    });
+  ngOnInit() {
+    this.subscriptions.push(
+      this.sharedService.loginStatusData.subscribe((data) => {
+        this.logged = data;
+      })
+    );
 
-    this.sharedService.subscribedValueData$.subscribe( (data) => {
-      this.subscribed = data;
-      console.log("sub", this.subscribed);
-      
-    })
+    this.subscriptions.push(
+      this.sharedService.subscribedValueData$.subscribe((data) => {
+        this.subscribed = data;
+      })
+    );
 
-    this.sharedService.badgeValueData$.subscribe((data) => {
-      this.showBadge = data;
-      console.log(this.showBadge);
-    })
+    this.subscriptions.push(
+      this.sharedService.badgeValueData$.subscribe((data) => {
+        this.showBadge = data;
+      })
+    );
+
+    this.getProfile();
 
     this.loadTradingViewWidget();
     this.loadTradingViewWidget1();
+  }
+
+  getProfile() {
+    this.subscriptions.push(
+      this.profileService.getProfile().subscribe((data) => {
+        this.name = data.firstName;
+      })
+    );
   }
 
   ngAfterViewInit() {
@@ -56,9 +70,13 @@ export class UserComponent {
   }
 
   logout() {
-    this.route.navigate(['/login']);
     localStorage.clear();
     this.sharedService.setLogout();
+    Swal.fire({
+      text: 'You are successfully logged out!',
+      icon: 'success',
+    });
+    this.route.navigate(['/login']);
   }
 
   login() {
@@ -73,31 +91,25 @@ export class UserComponent {
     this.route.navigate(['/signup']);
   }
 
-  getStocks(){
-    this.userService.getStocks().subscribe( (data) => {
-      console.log(data);
-    })
-  }
-
   timer: any;
 
-  onSearch(){
-
-   clearTimeout(this.timer);
+  onSearch() {
+    clearTimeout(this.timer);
     this.timer = setTimeout(() => {
       this.sharedService.setSearchValue(this.inputText);
     }, 1000);
-    
+
     this.route.navigate(['user/search']);
   }
 
-  OnClick(){
+  OnClick() {
     this.route.navigate(['user/home']);
   }
 
   loadTradingViewWidget() {
     this.script = document.createElement('script');
-    this.script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
+    this.script.src =
+      'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
     this.script.async = true;
     this.script.innerHTML = `
       {
@@ -134,7 +146,8 @@ export class UserComponent {
 
   loadTradingViewWidget1() {
     this.script1 = document.createElement('script');
-    this.script1.src = 'https://s3.tradingview.com/external-embedding/embed-widget-tickers.js';
+    this.script1.src =
+      'https://s3.tradingview.com/external-embedding/embed-widget-tickers.js';
     this.script1.async = true;
     this.script1.innerHTML = `
       {
@@ -166,5 +179,11 @@ export class UserComponent {
         "locale": "en"
       }
     `;
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((data) => {
+      data.unsubscribe();
+    });
   }
 }

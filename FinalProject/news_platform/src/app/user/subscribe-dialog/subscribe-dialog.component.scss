@@ -1,0 +1,95 @@
+@import "~@fortawesome/fontawesome-free/css/all.css";
+@import "/src/styles/variables";
+
+.sub-container {
+  padding: 50px;
+}
+
+.subscribe-container {
+  border: 10px solid rgba(163, 224, 244, 0.288);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px;
+  h1 {
+    text-align: center;
+    font-family: $font-family;
+    font-weight: bolder;
+    margin-top: 20px;
+  }
+  p {
+    text-align: center;
+  }
+
+  div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.offers {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.example-card {
+  width: 40%;
+  margin-left: 50px;
+  margin-bottom: 20px;
+
+  .card-head {
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+  }
+
+  img {
+    margin: 0px;
+    width: 30%;
+  }
+
+  .title {
+    width: 70%;
+    font-family: $font-family;
+    font-size: 15px;
+    padding-top: 20px;
+  }
+}
+
+.save {
+  width: 20%;
+  background-color: rgb(212, 250, 222);
+  padding: 5px;
+  text-align: center;
+  color: green;
+  margin-bottom: 20px;
+  margin-left: 430px;
+  font-weight: bolder;
+}
+
+.button {
+  width: 20%;
+  padding-left: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  cursor: pointer;
+  border: 1px solid black;
+  margin-left: 430px;
+
+  button {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    font-family: $font-family;
+    cursor: pointer;
+    font-weight: bolder;
+  }
+}
+
+.button:hover {
+  box-shadow: 4px 4px 7px 2px rgba(0, 0, 0, 0.4);
+}

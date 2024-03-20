@@ -1,3 +1,5 @@
+import { Status } from "./Status";
+
 export interface Explainers {
     id: string;
     explainersUid: string;
@@ -6,6 +8,6 @@ export interface Explainers {
     content: string;
     date: Date;
     reason: string;
-    status: string;
+    status: Status;
   }
   

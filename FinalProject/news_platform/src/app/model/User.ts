@@ -10,8 +10,9 @@ export interface User{
     phoneNo: string;
     occupation: string;
     location: string;
+    createdDate: Date;
     suscribedEndDate: Date;
     role: Role;
-    rolePermission: RolePermission[];
+    rolePermissions: RolePermission[];
     authorities: Authority[]
 }

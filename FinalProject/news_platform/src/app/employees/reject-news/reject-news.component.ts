@@ -1,17 +1,23 @@
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 import { RejectNewsService } from './reject-news.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { NewsDTO } from 'src/app/model/NewDTO';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-reject-news',
   templateUrl: './reject-news.component.html',
-  styleUrls: ['./reject-news.component.scss']
+  styleUrls: ['./reject-news.component.scss'],
 })
-export class RejectNewsComponent {
-
+export class RejectNewsComponent implements OnDestroy {
+  subscriptions: Subscription[] = [];
   rejectedNews: NewsDTO[] = [];
 
   displayedColumns: string[] = [
@@ -21,7 +27,7 @@ export class RejectNewsComponent {
     'content',
     'category',
     'date',
-    'reason'
+    'reason',
   ];
 
   dataSource!: MatTableDataSource<NewsDTO>;
@@ -32,31 +38,47 @@ export class RejectNewsComponent {
   status: string = '';
 
   totalElements: number = 0;
-  pageSize: number = 3; 
+  pageSize: number = 3;
 
-  constructor(private rejectedNewsService: RejectNewsService, public dialog: MatDialog, private cdref: ChangeDetectorRef){
+  constructor(
+    private rejectedNewsService: RejectNewsService,
+    public dialog: MatDialog,
+    private cdref: ChangeDetectorRef
+  ) {
     this.dataSource = new MatTableDataSource(this.rejectedNews);
   }
 
-  getRejectedNews(pageIndex: number, pageSize: number){
-    this.rejectedNewsService.getRejectedNews(pageIndex, pageSize).subscribe( (data) => {
-      this.rejectedNews = data.content;
-      this.paginator.length = data.totalElements;
-      this.paginator.pageIndex = data.number;
-      this.paginator.pageSize = data.size;
-      this.dataSource.data = this.rejectedNews;
-    })
+  getRejectedNews(pageIndex: number, pageSize: number) {
+    this.subscriptions.push(
+      this.rejectedNewsService
+        .getRejectedNews(pageIndex, pageSize)
+        .subscribe((data) => {
+          this.rejectedNews = data.content;
+          this.paginator.length = data.totalElements;
+          this.paginator.pageIndex = data.number;
+          this.paginator.pageSize = data.size;
+          this.dataSource.data = this.rejectedNews;
+        })
+    );
   }
 
   ngAfterViewInit() {
-    this.paginator.page.subscribe((data) => {
-      this.getRejectedNews(data.pageIndex, data.pageSize);
-    })
+    this.subscriptions.push(
+      this.paginator.page.subscribe((data) => {
+        this.getRejectedNews(data.pageIndex, data.pageSize);
+      })
+    );
     this.getRejectedNews(0, 3);
     this.cdref.detectChanges();
   }
 
   nextPage(e: PageEvent) {
     this.getRejectedNews(e.pageIndex, e.pageSize);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((data) => {
+      data.unsubscribe();
+    });
   }
 }

@@ -1,3 +1,5 @@
+import { Status } from "./Status";
+
 export interface UserNews {
   id: string
   name: string;
@@ -6,5 +8,5 @@ export interface UserNews {
   images: string[];
   date: Date;
   content: string;
-  status: string;
+  status: Status;
 }

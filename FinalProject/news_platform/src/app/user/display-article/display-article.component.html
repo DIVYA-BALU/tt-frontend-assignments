@@ -2,7 +2,7 @@
   <div class="header">
     <div class="heading" *ngIf="article">
       <h2>{{ article.title }}</h2>
-      <p>{{ article.category }}</p>
+      <p>{{ article.category.categoryName }}</p>
       <p>Report | {{ article.date | date }}</p>
     </div>
     <div class="button">
@@ -12,7 +12,7 @@
         matTooltipClass="example-tooltip-uppercase"
         aria-label="Button that shows a red tooltip"
         (click)="onSave()"
-        *ngIf="!isSaved"
+        *ngIf="!savedArticle"
       >
         <i class="fa-regular fa-bookmark"></i>
       </button>
@@ -22,9 +22,9 @@
         matTooltipClass="example-tooltip-uppercase"
         aria-label="Button that shows a red tooltip"
         (click)="unSave()"
-        *ngIf="isSaved"
+        *ngIf="savedArticle"
       >
-      <i class="fa-solid fa-bookmark" *ngIf="isSaved"></i>
+        <i class="fa-solid fa-bookmark"></i>
       </button>
     </div>
   </div>
@@ -33,6 +33,44 @@
     <div *ngFor="let image of article.images" class="image">
       <img src="{{ image }}" alt="image" />
     </div>
-    <div [innerHtml]="article.content"></div>
+    <div [innerHtml]="article.content" *appRoutehide="isSubscribed"></div>
+  </div>
+  <div *appRoutehide="!isSubscribed" class="subscribe">
+    <div class="sub-container">
+      <div class="subscribe-container">
+        <h1>Want to read full story?</h1>
+        <p>Unlock the story and enjoy members-only benefits</p>
+
+        <div class="offers">
+          <mat-card class="example-card">
+            <div class="card-head">
+              <img mat-card-sm-image src="/assets/daily-news.jpeg" />
+              <div class="title">Get Daily News</div>
+            </div>
+          </mat-card>
+          <mat-card class="example-card">
+            <div class="card-head">
+              <img mat-card-sm-image src="/assets/breaking-news.jpg" />
+              <div class="title">Stay updated with breaking stories!</div>
+            </div>
+          </mat-card>
+          <mat-card class="example-card">
+            <div class="card-head">
+              <img mat-card-sm-image src="/assets/news-feed.png" />
+              <div class="title">Custom News Feed</div>
+            </div>
+          </mat-card>
+          <mat-card class="example-card">
+            <div class="card-head">
+              <img mat-card-sm-image src="/assets/stock.jpg" />
+              <div class="title">Get Stock Reports</div>
+            </div>
+          </mat-card>
+        </div>
+        <div class="button1">
+          <button type="button" (click)="onClick()">Subscribe Now</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

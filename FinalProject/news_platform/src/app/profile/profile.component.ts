@@ -1,25 +1,24 @@
-import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProfileService } from './profile.service';
 import { User } from '../model/User';
 import { FormControl, FormGroup } from '@angular/forms';
-import {MatSnackBar, MatSnackBarRef} from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent implements OnInit{
+export class ProfileComponent implements OnInit, OnDestroy {
   user!: User;
-
+  subscriptions: Subscription[] = [];
   profileForm!: FormGroup;
 
   status: string = '';
 
-  durationInSeconds = 5;
-
-  constructor(private profileService: ProfileService, private _snackBar: MatSnackBar, private route: Router) {
+  constructor(private profileService: ProfileService, private route: Router) {
     this.getProfile();
   }
 
@@ -35,51 +34,53 @@ export class ProfileComponent implements OnInit{
   }
 
   getProfile() {
-    this.profileService.getProfile().subscribe((data) => {
-      this.user = data;
-
-      this.profileForm = new FormGroup({
-        firstName: new FormControl(this.user.firstName),
-        lastName: new FormControl(this.user.lastName),
-        email: new FormControl(this.user.email),
-        phoneNo: new FormControl(this.user.phoneNo),
-        occupation: new FormControl(this.user.occupation),
-        location: new FormControl(this.user.location),
-      });
-    });
-  }
-
-  onSave() {
-    this.profileService.updateProfile(this.profileForm.value).subscribe(
-      (data) => {
-        this.status = data;
-      },
-      (error) => {
-        this.status = error.error;
-      }
+    this.subscriptions.push(
+      this.profileService.getProfile().subscribe((data) => {
+        this.user = data;
+        this.profileForm = new FormGroup({
+          firstName: new FormControl(this.user.firstName),
+          lastName: new FormControl(this.user.lastName),
+          email: new FormControl(this.user.email),
+          phoneNo: new FormControl(this.user.phoneNo),
+          occupation: new FormControl(this.user.occupation),
+          location: new FormControl(this.user.location),
+        });
+      })
     );
   }
 
-  openSnackBar() {
-    this._snackBar.openFromComponent(PizzaPartyAnnotatedComponent, {
-      duration: this.durationInSeconds * 1000,
+  onSave() {
+    this.subscriptions.push(
+      this.profileService.updateProfile(this.profileForm.value).subscribe(
+        (data) => {
+          Swal.fire({
+            title: 'Thank you!',
+            text: 'Profile updated successfully!',
+            icon: 'success',
+          });
+        },
+        (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+          });
+        }
+      )
+    );
+  }
+
+  savedStories() {
+    this.route.navigate(['/user/savedstories']);
+  }
+
+  subscription() {
+    this.route.navigate(['/user/mySubscription']);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((data) => {
+      data.unsubscribe();
     });
   }
-
-  savedStories(){
-    this.route.navigate(["/user/savedstories"]);
-  }
-
-  subscription(){
-    this.route.navigate(["/user/mySubscription"]);
-  }
-}
-
-@Component({
-  selector: 'snack-bar-annotated-component-example-snack',
-  templateUrl: 'snack-bar-annotated-component-example-snack.html',
-  styleUrls: ['./snack-bar-annotated-component-example-snack.scss']
-})
-export class PizzaPartyAnnotatedComponent {
-  snackBarRef = inject(MatSnackBarRef);
 }

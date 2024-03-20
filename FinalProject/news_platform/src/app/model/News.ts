@@ -1,3 +1,6 @@
+import { Category } from "./Category";
+import { Status } from "./Status";
+
 export interface News {
   id: string;
   newsUid: string;
@@ -5,8 +8,8 @@ export interface News {
   synopsis: string;
   images: string[];
   content: string;
-  category: string;
+  category: Category;
   date: Date;
   reason: string;
-  isSaved: boolean
+  status: Status
 }
