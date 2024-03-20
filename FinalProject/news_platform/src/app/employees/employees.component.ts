@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SharedServiceService } from '../shared-service/shared-service.service';
 import { Router } from '@angular/router';
 import { Authority } from '../model/Authority';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-employees',
@@ -21,6 +22,10 @@ export class EmployeesComponent implements OnInit{
   logout() {
     localStorage.clear();
     this.sharedService.setLogout();
+    Swal.fire({
+      text: 'You are successfully logged out!',
+      icon: 'success',
+    });
     this.route.navigate(['/login']);
   }
 

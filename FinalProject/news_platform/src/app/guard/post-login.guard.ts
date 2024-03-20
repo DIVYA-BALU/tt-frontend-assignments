@@ -25,7 +25,6 @@ export class PostLoginGuard implements CanActivate {
         this.route.navigate(['/user/home']);
         this.isLogged = false;
       } else if (data && this.isEmployee) {
-        // this.route.navigate(['/employee']);
         this.isLogged = false;
       } else {
         this.isLogged = true;
