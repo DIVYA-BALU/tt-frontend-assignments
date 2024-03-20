@@ -12,6 +12,9 @@ import { Explainers } from 'src/app/model/Explainers';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { ExplainersService } from './explainers.service';
 import { Subscription } from 'rxjs';
+import { ContentDialogDataComponent } from '../content-dialog-data/content-dialog-data.component';
+import Swal from 'sweetalert2';
+import { DialogueImageComponent } from '../dialogue-image/dialogue-image.component';
 
 @Component({
   selector: 'app-explainers',
@@ -81,8 +84,19 @@ export class ExplainersComponent implements OnDestroy {
   onAccept(id: string) {
     this.subscriptions.push(
       this.explainersService.onAccept(id).subscribe((data) => {
-        console.log(data);
+        Swal.fire({
+          title: 'Great Job!',
+          text: 'Your action has been completed!',
+          icon: 'success',
+        });
         this.getPendingExplainers(0, 3);
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        });
       })
     );
   }
@@ -90,7 +104,19 @@ export class ExplainersComponent implements OnDestroy {
   onReject(id: string, reason: string) {
     this.subscriptions.push(
       this.explainersService.onReject(id, reason).subscribe((data) => {
+        Swal.fire({
+          title: 'Great Job!',
+          text: 'Your action has been completed!',
+          icon: 'success',
+        });
         this.getPendingExplainers(0, 3);
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        });
       })
     );
   }
@@ -110,6 +136,22 @@ export class ExplainersComponent implements OnDestroy {
         }
       })
     );
+  }
+
+  openDialog1(content: string){
+    this.dialog.open(ContentDialogDataComponent, {
+      data: {
+        content: content
+      }      
+    });
+  }
+
+  openDialog2(images: string){
+    this.dialog.open(DialogueImageComponent, {
+      data: {
+        images: images
+      }      
+    });
   }
 
   ngOnDestroy(): void {

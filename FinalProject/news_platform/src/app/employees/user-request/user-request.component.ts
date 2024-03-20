@@ -11,6 +11,10 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { Subscription } from 'rxjs';
+import { DialogDataExampleDialog } from '../account/account.component';
+import { ContentDialogDataComponent } from '../content-dialog-data/content-dialog-data.component';
+import Swal from 'sweetalert2';
+import { DialogueImageComponent } from '../dialogue-image/dialogue-image.component';
 
 @Component({
   selector: 'app-user-request',
@@ -83,8 +87,19 @@ export class UserRequestComponent implements OnDestroy {
   onAccept(id: string) {
     this.subscriptions.push(
       this.userRequestService.onAccept(id).subscribe((data) => {
-        console.log(data);
+        Swal.fire({
+          title: 'Great Job!',
+          text: 'Your action has been completed!',
+          icon: 'success',
+        });
         this.getNews(0, 3);
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        });
       })
     );
   }
@@ -92,8 +107,19 @@ export class UserRequestComponent implements OnDestroy {
   onReject(id: string, reason: string) {
     this.subscriptions.push(
       this.userRequestService.onReject(id, reason).subscribe((data) => {
-        console.log(data);
+        Swal.fire({
+          title: 'Great Job!',
+          text: 'Your action has been completed!',
+          icon: 'success',
+        });
         this.getNews(0, 3);
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        });
       })
     );
   }
@@ -118,6 +144,22 @@ export class UserRequestComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.subscriptions.forEach((data) => {
       data.unsubscribe();
+    });
+  }
+
+  openDialog1(content: string){
+    this.dialog.open(ContentDialogDataComponent, {
+      data: {
+        content: content
+      }      
+    });
+  }
+
+  openDialog2(images: string){
+    this.dialog.open(DialogueImageComponent, {
+      data: {
+        images: images
+      }      
     });
   }
 }

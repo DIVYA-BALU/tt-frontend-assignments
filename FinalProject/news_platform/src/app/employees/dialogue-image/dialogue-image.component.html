@@ -1,0 +1,8 @@
+<div class="content">
+  <div class="container">
+    <div *ngFor="let image of data.images" class="image">
+      <img src="{{ image }}" alt="image" />
+    </div>
+  </div>
+  <button mat-button (click)="onNoClick()">Close</button>
+</div>

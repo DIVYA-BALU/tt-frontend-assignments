@@ -4,6 +4,7 @@ import { Article } from 'src/app/model/ArticleDTO';
 import { CreateArticleService } from './create-article.service';
 import { SharedServiceService } from 'src/app/shared-service/shared-service.service';
 import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-article',
@@ -63,11 +64,27 @@ export class CreateArticleComponent implements OnInit, OnDestroy {
       .createArticle(this.article)
       .subscribe(
         (data) => {
-          this.status = data;
+          Swal.fire({
+            title: 'Great Job!',
+            text: 'Submitted Successfully!',
+            icon: 'success',
+          });
+          this.articleForm = new FormGroup({
+            articleUid: new FormControl('', Validators.required),
+            title: new FormControl('', Validators.required),
+            content: new FormControl('', Validators.required),
+            category: new FormControl('', Validators.required),
+            images: new FormControl('', Validators.required),
+          });
+          this.files = [];
           this.sharedService.setBadge(true);
         },
         (error) => {
-          this.status = error.error;
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+          });
         }
       );
   }

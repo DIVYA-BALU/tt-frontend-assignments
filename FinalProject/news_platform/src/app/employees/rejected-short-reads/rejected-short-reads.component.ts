@@ -10,6 +10,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ShortReads } from 'src/app/model/ShortReads';
 import { RejectedShortReadsService } from './rejected-short-reads.service';
 import { Subscription } from 'rxjs';
+import { ContentDialogDataComponent } from '../content-dialog-data/content-dialog-data.component';
+import { DialogueImageComponent } from '../dialogue-image/dialogue-image.component';
 
 @Component({
   selector: 'app-rejected-short-reads',
@@ -74,6 +76,22 @@ export class RejectedShortReadsComponent implements OnDestroy {
 
   nextPage(e: PageEvent) {
     this.getRejectedShortReads(e.pageIndex, e.pageSize);
+  }
+
+  openDialog1(content: string){
+    this.dialog.open(ContentDialogDataComponent, {
+      data: {
+        content: content
+      }      
+    });
+  }
+
+  openDialog2(images: string){
+    this.dialog.open(DialogueImageComponent, {
+      data: {
+        images: images
+      }      
+    });
   }
 
   ngOnDestroy(): void {

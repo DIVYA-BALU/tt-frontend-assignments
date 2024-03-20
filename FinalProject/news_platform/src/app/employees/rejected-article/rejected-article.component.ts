@@ -10,6 +10,8 @@ import { Article } from 'src/app/model/Article';
 import { RejectedArticleService } from './rejected-article.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { ContentDialogDataComponent } from '../content-dialog-data/content-dialog-data.component';
+import { DialogueImageComponent } from '../dialogue-image/dialogue-image.component';
 
 @Component({
   selector: 'app-rejected-article',
@@ -74,6 +76,22 @@ export class RejectedArticleComponent implements OnDestroy {
 
   nextPage(e: PageEvent) {
     this.getRejectedArticle(e.pageIndex, e.pageSize);
+  }
+
+  openDialog1(content: string){
+    this.dialog.open(ContentDialogDataComponent, {
+      data: {
+        content: content
+      }      
+    });
+  }
+
+  openDialog2(images: string){
+    this.dialog.open(DialogueImageComponent, {
+      data: {
+        images: images
+      }      
+    });
   }
 
   ngOnDestroy(): void {

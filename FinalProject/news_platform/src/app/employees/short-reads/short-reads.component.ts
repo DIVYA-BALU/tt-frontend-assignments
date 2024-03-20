@@ -11,6 +11,9 @@ import { ShortReadsService } from './short-reads.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { Subscription } from 'rxjs';
+import { ContentDialogDataComponent } from '../content-dialog-data/content-dialog-data.component';
+import Swal from 'sweetalert2';
+import { DialogueImageComponent } from '../dialogue-image/dialogue-image.component';
 
 @Component({
   selector: 'app-short-reads',
@@ -80,16 +83,55 @@ export class ShortReadsComponent implements OnDestroy {
   onAccept(id: string) {
     this.subscriptions.push(
       this.shortReadsService.onAccept(id).subscribe((data) => {
-        console.log(data);
+        Swal.fire({
+          title: 'Great Job!',
+          text: 'Your action has been completed!',
+          icon: 'success',
+        });
         this.getPendingShortReads(0, 3);
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        });
       })
     );
+  }
+
+  openDialog1(content: string){
+    this.dialog.open(ContentDialogDataComponent, {
+      data: {
+        content: content
+      }      
+    });
+  }
+
+  openDialog2(images: string){
+    this.dialog.open(DialogueImageComponent, {
+      data: {
+        images: images
+      }      
+    });
   }
 
   onReject(id: string, reason: string) {
     this.subscriptions.push(
       this.shortReadsService.onReject(id, reason).subscribe((data) => {
+        Swal.fire({
+          title: 'Great Job!',
+          text: 'Your action has been completed!',
+          icon: 'success',
+        });
         this.getPendingShortReads(0, 3);
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        });
       })
     );
   }

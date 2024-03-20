@@ -10,6 +10,7 @@ import { ShortReadsDTO } from 'src/app/model/ShortReadsDTO';
 import { CreateShortReadsService } from './create-short-reads.service';
 import { SharedServiceService } from 'src/app/shared-service/shared-service.service';
 import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-short-reads',
@@ -44,7 +45,7 @@ export class CreateShortReadsComponent implements OnInit, OnDestroy {
   shortReadsForm!: FormGroup;
 
   shortReads!: ShortReadsDTO;
-  image!: File;
+  image!: File | null;
 
   constructor(
     private createShortReadsService: CreateShortReadsService,
@@ -63,16 +64,33 @@ export class CreateShortReadsComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.shortReads = this.shortReadsForm.value;
-    this.shortReads.image = this.image;
+    if (this.image) {
+      this.shortReads.image = this.image;
+    }
     this.subscription = this.createShortReadsService
       .createShortReads(this.shortReads)
       .subscribe(
         (data) => {
-          this.status = data;
+          Swal.fire({
+            title: 'Great Job!',
+            text: 'Submitted Successfully!',
+            icon: 'success',
+          });
+          this.shortReadsForm = new FormGroup({
+            shortReadsUid: new FormControl('', Validators.required),
+            title: new FormControl('', Validators.required),
+            content: new FormControl('', Validators.required),
+            category: new FormControl('', Validators.required),
+          });
+          this.image = null;
           this.sharedService.setBadge(true);
         },
         (error) => {
-          this.status = error.error;
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+          });
         }
       );
   }
@@ -94,7 +112,7 @@ export class CreateShortReadsComponent implements OnInit, OnDestroy {
   }
 
   remove() {
-    //  this.image = null;
+    this.image = null;
   }
 
   ngOnDestroy(): void {

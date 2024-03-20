@@ -4,6 +4,7 @@ import { ExplainersDTO } from 'src/app/model/ExplainersDTO';
 import { CreateExplainersService } from './create-explainers.service';
 import { SharedServiceService } from 'src/app/shared-service/shared-service.service';
 import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-explainers',
@@ -39,7 +40,7 @@ export class CreateExplainersComponent implements OnDestroy, OnInit {
   explainersForm!: FormGroup;
 
   explainers!: ExplainersDTO;
-  image!: File;
+  image!: File | null;
 
   constructor(
     private createExplainersService: CreateExplainersService,
@@ -51,22 +52,39 @@ export class CreateExplainersComponent implements OnDestroy, OnInit {
       explainersUid: new FormControl('', Validators.required),
       title: new FormControl('', Validators.required),
       content: new FormControl('', Validators.required),
-      images: new FormControl('', Validators.required),
+      image: new FormControl('', Validators.required),
     });
   }
 
   onSubmit() {
     this.explainers = this.explainersForm.value;
-    this.explainers.image = this.image;
+    if (this.image) {
+      this.explainers.image = this.image;
+    }
     this.subscription = this.createExplainersService
       .createExplainers(this.explainers)
       .subscribe(
         (data) => {
-          this.status = data;
+          Swal.fire({
+            title: 'Great Job!',
+            text: 'Submitted Successfully!',
+            icon: 'success',
+          });
+          this.explainersForm = new FormGroup({
+            explainersUid: new FormControl('', Validators.required),
+            title: new FormControl('', Validators.required),
+            content: new FormControl('', Validators.required),
+            image: new FormControl('', Validators.required),
+          });
+          this.image = null;
           this.sharedService.setBadge(true);
         },
         (error) => {
-          this.status = error.error;
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+          });
         }
       );
   }
@@ -88,7 +106,7 @@ export class CreateExplainersComponent implements OnDestroy, OnInit {
   }
 
   remove() {
-    //  this.image = null;
+    this.image = null;
   }
 
   ngOnDestroy(): void {

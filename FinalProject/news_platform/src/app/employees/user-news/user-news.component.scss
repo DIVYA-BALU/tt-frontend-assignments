@@ -4,7 +4,6 @@
 .container {
   padding-left: 30px;
   padding-top: 40px;
-  width: fit-content;
 }
 
 .table-container {
@@ -14,7 +13,6 @@
 }
 
 td {
-  text-align: left;
   font-family: $font-family;
 }
 
@@ -33,16 +31,18 @@ ul {
 
 .button{
   background-color: $secondary-color;
-  height: 50px;
+  padding: 5px;
   cursor: pointer;
   border: none;
   text-align: center;
   color: white;
   font-family: $font-family;
-  border-radius: 10px;
   margin-right: 10px;
 }
 
-.button:hover {
-  box-shadow: 2px 2px 1px 1px $secondary-color;
+button {
+  background-color: transparent;
+  padding: 5px;
+  font-family: $font-family;
+  cursor: pointer;
 }

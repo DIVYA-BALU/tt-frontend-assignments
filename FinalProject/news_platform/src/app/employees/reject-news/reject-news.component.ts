@@ -10,6 +10,8 @@ import { NewsDTO } from 'src/app/model/NewDTO';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { ContentDialogDataComponent } from '../content-dialog-data/content-dialog-data.component';
+import { DialogueImageComponent } from '../dialogue-image/dialogue-image.component';
 
 @Component({
   selector: 'app-reject-news',
@@ -74,6 +76,22 @@ export class RejectNewsComponent implements OnDestroy {
 
   nextPage(e: PageEvent) {
     this.getRejectedNews(e.pageIndex, e.pageSize);
+  }
+
+  openDialog1(content: string){
+    this.dialog.open(ContentDialogDataComponent, {
+      data: {
+        content: content
+      }      
+    });
+  }
+
+  openDialog2(images: string){
+    this.dialog.open(DialogueImageComponent, {
+      data: {
+        images: images
+      }      
+    });
   }
 
   ngOnDestroy(): void {

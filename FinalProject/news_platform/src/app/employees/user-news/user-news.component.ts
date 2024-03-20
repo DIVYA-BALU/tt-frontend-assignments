@@ -10,6 +10,9 @@ import { UserNews } from 'src/app/model/UserNews';
 import { UserNewsService } from './user-news.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { ContentDialogDataComponent } from '../content-dialog-data/content-dialog-data.component';
+import Swal from 'sweetalert2';
+import { DialogueImageComponent } from '../dialogue-image/dialogue-image.component';
 
 @Component({
   selector: 'app-user-news',
@@ -20,7 +23,7 @@ export class UserNewsComponent implements OnDestroy {
   subscriptions: Subscription[] = [];
   usernews: UserNews[] = [];
 
-  displayedColumns: string[] = ['id', 'images', 'date', 'content', 'status'];
+  displayedColumns: string[] = ['id', 'images', 'date', 'content', 'status', 'approval'];
 
   dataSource!: MatTableDataSource<UserNews>;
 
@@ -67,6 +70,42 @@ export class UserNewsComponent implements OnDestroy {
 
   nextPage(e: PageEvent) {
     this.getNews(e.pageIndex, e.pageSize);
+  }
+
+  openDialog1(content: string){
+    this.dialog.open(ContentDialogDataComponent, {
+      data: {
+        content: content
+      }      
+    });
+  }
+
+  openDialog2(images: string){
+    this.dialog.open(DialogueImageComponent, {
+      data: {
+        images: images
+      }      
+    });
+  }
+
+  onComplete(id: string) {
+    this.subscriptions.push(
+      this.userNewsService.completeNews(id).subscribe((data) => {
+        Swal.fire({
+          title: 'Great Job!',
+          text: 'Your action has been completed!',
+          icon: 'success',
+        });
+        this.getNews(0, 3);
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        });
+      })
+    )
   }
 
   ngOnDestroy(): void {

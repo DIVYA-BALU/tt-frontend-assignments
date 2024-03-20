@@ -12,7 +12,7 @@ import { CreateShortReadsComponent } from './create-short-reads/create-short-rea
 import { RejectedShortReadsComponent } from './rejected-short-reads/rejected-short-reads.component';
 import { CreateNewsComponent } from './create-news/create-news.component';
 import { RejectNewsComponent } from './reject-news/reject-news.component';
-import { AccountComponent, DialogOverviewExampleDialog } from './account/account.component';
+import { AccountComponent, DialogDataExampleDialog, DialogOverviewExampleDialog } from './account/account.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
@@ -33,6 +33,9 @@ import { SensationalNewsComponent } from './sensational-news/sensational-news.co
 import { CreateExplainersComponent } from './create-explainers/create-explainers.component';
 import { RejectedExplainersComponent } from './rejected-explainers/rejected-explainers.component';
 import { ExplainersComponent } from './explainers/explainers.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ContentDialogDataComponent } from './content-dialog-data/content-dialog-data.component';
+import { DialogueImageComponent } from './dialogue-image/dialogue-image.component';
 
 
 @NgModule({
@@ -48,6 +51,7 @@ import { ExplainersComponent } from './explainers/explainers.component';
     RejectNewsComponent,
     AccountComponent,
     DialogOverviewExampleDialog,
+    DialogDataExampleDialog,
     DialogBoxComponent,
     ShortReadsComponent,
     ArticleComponent,
@@ -56,7 +60,9 @@ import { ExplainersComponent } from './explainers/explainers.component';
     SensationalNewsComponent,
     CreateExplainersComponent,
     RejectedExplainersComponent,
-    ExplainersComponent
+    ExplainersComponent,
+    ContentDialogDataComponent,
+    DialogueImageComponent
   ],
   imports: [
     CommonModule,
@@ -73,7 +79,8 @@ import { ExplainersComponent } from './explainers/explainers.component';
     FormsModule,
     EditorModule,
     ReactiveFormsModule,
-    RoutehideModule
+    RoutehideModule,
+    MatTooltipModule
   ],
   providers: [
     {

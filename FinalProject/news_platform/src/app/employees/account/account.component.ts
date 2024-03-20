@@ -13,6 +13,8 @@ import { FormControl } from '@angular/forms';
 import { User } from 'src/app/model/User';
 import { UserDTO } from 'src/app/model/UserDTO';
 import { Subscription } from 'rxjs';
+import { Authority } from 'src/app/model/Authority';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-account',
@@ -31,8 +33,7 @@ export class AccountComponent implements OnDestroy {
     'firstname',
     'email',
     'role',
-    'permission',
-    'add permission',
+    'permission'
   ];
   dataSource!: MatTableDataSource<User>;
 
@@ -87,10 +88,18 @@ export class AccountComponent implements OnDestroy {
     this.subscriptions.push(
       this.accountService.createAccount(user).subscribe(
         (data) => {
-          this.status = data;
+          Swal.fire({
+            title: 'Thank you!',
+            text: 'Created account successfully!',
+            icon: 'success',
+          });
         },
         (error) => {
-          this.status = error.error;
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+          });
         }
       )
     );
@@ -124,6 +133,14 @@ export class AccountComponent implements OnDestroy {
       data.unsubscribe();
     });
   }
+
+  openDialog1(authorities: Authority[]) {
+    this.dialog.open(DialogDataExampleDialog, {
+      data: {
+        permissions: authorities
+      },
+    });
+  }
 }
 
 @Component({
@@ -135,6 +152,22 @@ export class DialogOverviewExampleDialog {
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
     @Inject(MAT_DIALOG_DATA) public data: UserDTO
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}
+
+@Component({
+  selector: 'dialog-data-example-dialog',
+  templateUrl: 'dialog-data-example-dialog.html',
+  styleUrls: ['dialog-data-example-dialog.scss'],
+})
+export class DialogDataExampleDialog {
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: {permissions: Authority[]}
   ) {}
 
   onNoClick(): void {

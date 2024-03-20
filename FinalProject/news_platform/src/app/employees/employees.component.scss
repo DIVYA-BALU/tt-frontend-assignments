@@ -1,35 +1,50 @@
 @import "~@fortawesome/fontawesome-free/css/all.css";
 @import "/src/styles/variables";
 
-.heading {
-  color: white;
+.example-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  right: 0;
+  padding-top: 20px;
   font-family: $font-family;
-  font-size: 30px;
-  margin-top: 20px;
-  width: 10%;
+  border-bottom: 1px solid $tertiary-color;
+  height: 80px;
+}
 
-  button{
-    font-size: 20px;
-  }
+.heading {
+  font-size: 30px;
+  width: 30%;
+  padding-left: 20px;
+}
+
+.logo img {
+  height: 25px;
+}
+
+.example-spacer {
+  width: 45%;
 }
 
 .icon {
   display: flex;
-  color: white;
-  width: 20%;
+  justify-content: left;
   align-items: center;
+  width: 25%;
+  margin-left: 280px;
 
   a {
     font-size: 20px;
-    color: white;
+    color: black;
     margin-right: 10px;
   }
 
   button {
     background-color: transparent;
     border: none;
-    color: white;
     font-size: 20px;
+    font-family: $font-family;
     margin-top: 5px;
   }
 
@@ -42,27 +57,33 @@
     font-family: $font-family;
     margin-right: 10px;
   }
+
+  .bar{
+    margin-left: 80px;
+  }
 }
 
 .example-container {
   position: absolute;
-  top: 70px;
-  bottom: 0px;
+  top: 80px;
+  bottom: 0;
   left: 0;
   right: 0;
+  background-color: white;
 }
 
 .example-sidenav {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: $primary-color;
-  color: white;
+  background-color: white;
+  color: black;
   padding-top: 50px;
   width: 20%;
+  border: 1px solid black;
 
   a {
-    color: white;
+    color: black;
     text-decoration: none;
     display: grid;
     font-family: $font-family;
@@ -72,27 +93,5 @@
 }
 
 .active {
-  box-shadow: 3px 3px 12px 12px $secondary-color;
+  background-color: rgba(163, 224, 244, 0.288);
 }
-
-.example-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: $primary-color;
-}
-
-.example-spacer {
-  width: 70%;
-}
-
-// button{
-//     position: fixed;
-//     display: flex;
-//     margin: 100px 34px 24px 80px;
-//     z-index: 152 !important;
-//     background-color: red;
-//     justify-content: center;
-
-// }

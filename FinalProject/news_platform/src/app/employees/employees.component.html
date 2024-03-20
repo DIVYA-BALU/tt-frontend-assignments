@@ -1,25 +1,37 @@
 <ng-container>
   <mat-toolbar class="example-header">
     <div class="heading">
-      <button mat-button (click)="sidenav.toggle()">
-        <i class="fa-solid fa-bars"></i>
-      </button>
+      <span class="logo">
+        <img src="/favicon.ico" alt="logo" />
+      </span>
       InsightNow
     </div>
-    <div class="example-spacer"></div>
+    <div class="example-spacer">
+      <div id="trading-tickers-container" class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget" #trading1></div>
+      </div>
+    </div>
     <div class="icon">
-      <h4>Hi, {{ name }}</h4>
+      <h4>Hi, {{name | titlecase}}</h4>
       <a routerLink="profile">
         <i class="fa fa-user" aria-hidden="true"></i>
       </a>
-      <button type="button" (click)="logout()">
+      <button type="button" (click)="logout()" class="logout">
         <i class="fa-solid fa-right-from-bracket"></i>
+      </button>
+      <button type="button" class="bar" (click)="sidenav.toggle()" matTooltip="Toggle Sidebar">
+      <i class="fa-solid fa-bars-staggered"></i>
       </button>
     </div>
   </mat-toolbar>
 
-  <mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav mode="side" opened class="example-sidenav">
+  <mat-sidenav-container class="example-container" hasBackdrop=false>
+    <mat-sidenav #sidenav mode="over" position="end" opened class="example-sidenav">
+      <!-- <a
+        routerLink=""
+        routerLinkActive="active"
+        >DASHBOARD</a
+      > -->
       <a
         routerLink="createAccount"
         routerLinkActive="active"

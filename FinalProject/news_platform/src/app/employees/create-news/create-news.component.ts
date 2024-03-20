@@ -4,6 +4,7 @@ import { NewsDTO } from 'src/app/model/NewDTO';
 import { CreateNewsService } from './create-news.service';
 import { SharedServiceService } from 'src/app/shared-service/shared-service.service';
 import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-news',
@@ -62,11 +63,27 @@ export class CreateNewsComponent implements OnInit, OnDestroy {
     this.news.images = this.files;
     this.subscription = this.createNewsService.createNews(this.news).subscribe(
       (data) => {
-        this.status = data;
+        Swal.fire({
+          title: 'Great Job!',
+          text: 'Submitted Successfully!',
+          icon: 'success',
+        });
+        this.newsForm = new FormGroup({
+          newsUid: new FormControl('', Validators.required),
+          title: new FormControl('', Validators.required),
+          synopsis: new FormControl('', Validators.required),
+          content: new FormControl('', Validators.required),
+          category: new FormControl('', Validators.required)
+        });
+        this.files = [];
         this.sharedService.setBadge(true);
       },
       (error) => {
-        this.status = error.error;
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        });
       }
     );
   }

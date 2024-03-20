@@ -11,18 +11,19 @@ import { environment } from 'src/environments/environment.development';
 export class UserNewsService {
   
   url: string = environment.getUserNewsAcceptedUrl;
+  completeNewsUrl: string = environment.userNewsCompleteUrl;
 
   constructor(private http: HttpClient) { }
 
   getUserNews(pageIndex: number, pageSize: number): Observable<Page<UserNews>> {
-
-    console.log("came");
-    
     const param = new HttpParams()
     .set('pageIndex', pageIndex)
     .set('pageSize', pageSize);
-    
     return this.http.get<Page<UserNews>>(this.url, { params : param});
+  }
+
+  completeNews(id: string): Observable<string> {
+    return this.http.put(`${this.completeNewsUrl}/${id}`, {}, { responseType: 'text'});
   }
 
 }

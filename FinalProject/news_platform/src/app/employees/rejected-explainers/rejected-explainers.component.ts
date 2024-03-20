@@ -10,6 +10,8 @@ import { Explainers } from 'src/app/model/Explainers';
 import { RejectedExplainersService } from './rejected-explainers.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { ContentDialogDataComponent } from '../content-dialog-data/content-dialog-data.component';
+import { DialogueImageComponent } from '../dialogue-image/dialogue-image.component';
 
 @Component({
   selector: 'app-rejected-explainers',
@@ -73,6 +75,22 @@ export class RejectedExplainersComponent implements OnDestroy {
 
   nextPage(e: PageEvent) {
     this.getRejectedExplainers(e.pageIndex, e.pageSize);
+  }
+
+  openDialog1(content: string){
+    this.dialog.open(ContentDialogDataComponent, {
+      data: {
+        content: content
+      }      
+    });
+  }
+
+  openDialog2(images: string){
+    this.dialog.open(DialogueImageComponent, {
+      data: {
+        images: images
+      }      
+    });
   }
 
   ngOnDestroy(): void {

@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   user!: User;
   subscriptions: Subscription[] = [];
   profileForm!: FormGroup;
+  role!: boolean;
 
   status: string = '';
 
@@ -45,6 +46,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
           occupation: new FormControl(this.user.occupation),
           location: new FormControl(this.user.location),
         });
+        this.role = this.user.role.roleName === 'USER' ;
       })
     );
   }
