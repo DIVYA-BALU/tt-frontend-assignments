@@ -9,12 +9,23 @@ import { SharedServiceService } from '../shared-service/shared-service.service';
 export class PostLoginGuard implements CanActivate {
 
   isLogged!: boolean;
+  isEmployee!: boolean;
   constructor(private sharedService: SharedServiceService, private route: Router){}
 
   canActivate(): boolean {
+
+    if (localStorage.getItem("Role") === 'USER') {
+      this.isEmployee = false;
+    } else {
+      this.isEmployee = true;
+    }
+
     this.sharedService.loginStatusData.subscribe((data) => {
-      if (data) {
+      if (data && !this.isEmployee) {
         this.route.navigate(['/user/home']);
+        this.isLogged = false;
+      } else if (data && this.isEmployee) {
+        // this.route.navigate(['/employee']);
         this.isLogged = false;
       } else {
         this.isLogged = true;
