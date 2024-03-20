@@ -35,7 +35,7 @@ public class CustomUserRepository {
     }
 
     if (branchId != null && !branchId.isEmpty()) {
-      query.addCriteria(Criteria.where("branchesId").in(branchId));
+      query.addCriteria(Criteria.where("branchIds").in(branchId));
     }
 
     query.fields().exclude("password");

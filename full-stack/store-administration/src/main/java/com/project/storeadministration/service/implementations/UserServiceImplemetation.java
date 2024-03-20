@@ -71,7 +71,7 @@ public class UserServiceImplemetation implements UserService {
         .name(request.getName())
         .password(passwordEncoder.encode(request.getPassword()))
         .role(userRole)
-        .branchesId(new ArrayList<>(Arrays.asList(request.getBranchId())))
+        .branchIds(new ArrayList<>(Arrays.asList(request.getBranchId())))
         .joiningDate(LocalDate.now())
         .permissions(new ArrayList<>())
         .build();
@@ -82,7 +82,7 @@ public class UserServiceImplemetation implements UserService {
       LoginResponse response = LoginResponse.builder()
           .jwt(jwtService.generateToken(user))
           .userEmail(user.getEmailId())
-          .branchesId(user.getBranchesId())
+          .branchIds(user.getBranchIds())
           .role(userRole)
           .build();
 
@@ -101,7 +101,7 @@ public class UserServiceImplemetation implements UserService {
     LoginResponse response = LoginResponse.builder()
         .jwt(jwtService.generateToken(user))
         .userEmail(user.getEmailId())
-        .branchesId(user.getBranchesId())
+        .branchIds(user.getBranchIds())
         .role(user.getRole())
         .permissions(user.getPermissions())
         .build();
@@ -127,7 +127,7 @@ public class UserServiceImplemetation implements UserService {
     existingUser.setName(user.getName());
     existingUser.setRole(user.getRole());
     existingUser.setPermissions(user.getPermissions());
-    existingUser.setBranchesId(user.getBranchesId());
+    existingUser.setBranchIds(user.getBranchIds());
     return userRepository.save(existingUser);
   }
 }

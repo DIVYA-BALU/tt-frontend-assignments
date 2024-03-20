@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Constants } from '../constants/Constants';
 import { Bill, IncomeStatement, PaginatedResponse, Revenue } from '../models/API.model';
@@ -10,8 +10,14 @@ import { Bill, IncomeStatement, PaginatedResponse, Revenue } from '../models/API
 })
 export class BillService {
 
-  constructor(private http: HttpClient) {
+  public billSubject: BehaviorSubject<Bill> = new BehaviorSubject<Bill>(new Bill([], 0, '', ''));
+  public billSubject$: Observable<Bill> = this.billSubject.asObservable();
 
+  constructor(private http: HttpClient) {
+  }
+
+  setBillSubject(bill: Bill) {
+    this.billSubject.next(bill);
   }
 
   saveBill(bill: Bill): Observable<Bill> {

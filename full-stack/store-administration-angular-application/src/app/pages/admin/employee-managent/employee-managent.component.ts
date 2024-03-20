@@ -36,7 +36,7 @@ export class EmployeeManagentComponent implements OnInit {
   ngOnInit(): void {
     this.getAllBranches();
 
-    const subscription = this.userDetailsService.loginResponseSubject$.subscribe({
+    this.subscription = this.userDetailsService.loginResponseSubject$.subscribe({
       next: (loginResponse) => {
 
         if (loginResponse.role.name === 'ADMIN') {
@@ -49,16 +49,13 @@ export class EmployeeManagentComponent implements OnInit {
   }
 
   getAllBranches() {
-    const branchesSubscription = this.branchService.getAllBranches().subscribe({
-      next: (branches) => this.branches = branches,
-      error: (HttpErrorResponse) => {
-        alert('Error Occured Retry Later');
-      }
+    this.branchesSubscription = this.branchService.getAllBranches().subscribe({
+      next: (branches) => this.branches = branches
     })
   }
 
   getUserDetails() {
-    const usersSubscription = this.userDetailsService.paginatedUsers$.subscribe({
+    this.usersSubscription = this.userDetailsService.paginatedUsers$.subscribe({
       next: (paginatedUsers) => {
         this.dataSource.data = paginatedUsers.content;
         this.totalUsers = paginatedUsers.totalElements;
@@ -78,7 +75,7 @@ export class EmployeeManagentComponent implements OnInit {
 
   onSearchFilterChange() {
     this.getUserDetails();
-    const loginResponseSubscription = this.userDetailsService.loginResponseSubject$.subscribe({
+    this.loginResponseSubscription = this.userDetailsService.loginResponseSubject$.subscribe({
       next: (loginResponse) => {
 
         if (loginResponse.role.name === 'ADMIN')

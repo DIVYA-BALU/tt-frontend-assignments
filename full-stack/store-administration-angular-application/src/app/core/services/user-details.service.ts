@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, tap } from 'rxjs';
 import { LoginResponse, PaginatedResponse, Role, User, UserDetails } from '../models/API.model';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 import { Constants } from '../constants/Constants';
 
@@ -22,8 +22,7 @@ export class UserDetailsService {
     totalElements: 0
   });
   public paginatedUsers$: Observable<PaginatedResponse<UserDetails>> = this.paginatedUsers.asObservable();
-
-  private subscription: Subscription = new Subscription;
+  private paginatedUsersSubscription: Subscription = new Subscription;
 
   constructor(private http: HttpClient) {
   }
@@ -42,32 +41,18 @@ export class UserDetailsService {
   }
 
   setPaginatedUsersSubject(page: number = 0, size: number = 10, branchId: string = '', searchByName: string = '') {
-    const subscription = this.getPaginatedUserDetails(page, size, branchId, searchByName).
-      subscribe({
-        next: (paginatedUsers) => {
-          this.paginatedUsers.next(paginatedUsers);
-        },
-        error: (error: HttpErrorResponse) => {
-
-          if (error.status === 404)
-            alert('Unable to connect to the server');
-          else
-            alert(`${error.status} found`);
-
-        }
+    this.paginatedUsersSubscription = this.getPaginatedUserDetails(page, size, branchId, searchByName)
+      .subscribe((paginatedUsers) => {
+        this.paginatedUsers.next(paginatedUsers);
       });
-    ;
   }
 
   updateUser(userDetails: UserDetails): Observable<User> {
     return this.http.put<User>(`${environment.API_URL}${Constants.API_END_POINT.USERS}`, userDetails);
   }
 
-  ngOnDestroy() {
-
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-
+  unSubscribeAll() {
+    if (this.paginatedUsersSubscription)
+      this.paginatedUsersSubscription.unsubscribe();
   }
 }

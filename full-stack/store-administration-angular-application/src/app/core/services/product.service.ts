@@ -1,6 +1,6 @@
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription, tap } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { Constants } from '../constants/Constants';
 import { PaginatedResponse, Product } from '../models/API.model';
@@ -10,18 +10,13 @@ import { PaginatedResponse, Product } from '../models/API.model';
 })
 export class ProductService {
 
-  private paginatedProducts: BehaviorSubject<PaginatedResponse<Product>> = new BehaviorSubject<PaginatedResponse<Product>>({
-    content: [],
-    pageable: {
-      pageNumber: 0,
-      pageSize: 10
-    },
-    totalPages: 0,
-    totalElements: 0
-  });
+  private paginatedProducts: Subject<PaginatedResponse<Product>> = new Subject<PaginatedResponse<Product>>();
 
-  private subscription: Subscription = new Subscription;
+  branchId: string = '';
+  sectionId: string = '';
+
   public paginatedProducts$: Observable<PaginatedResponse<Product>> = this.paginatedProducts.asObservable();
+  private paginatedProductsSubscription: Subscription = new Subscription;
 
   constructor(private http: HttpClient) {
   }
@@ -31,19 +26,9 @@ export class ProductService {
   }
 
   setPaginatedProductsSubject(page: number = 0, size: number = 10, searchByName: string = '', branchId: string = '', sectionId: string = '') {
-    const subscription = this.getPaginatedProducts(page, size, searchByName, branchId, sectionId).
-      subscribe({
-        next: (paginatedSections) => {
-          this.paginatedProducts.next(paginatedSections);
-        },
-        error: (error: HttpErrorResponse) => {
-
-          if (error.status === 404)
-            alert('Unable to connect to the server');
-          else
-            alert(`${error.status} found`);
-          
-        }
+    this.paginatedProductsSubscription = this.getPaginatedProducts(page, size, searchByName, branchId, sectionId)
+      .subscribe((paginatedProducts) => {
+        this.paginatedProducts.next(paginatedProducts);
       });
   }
 
@@ -57,10 +42,9 @@ export class ProductService {
     return this.http.get<PaginatedResponse<Product>>(`${environment.API_URL}${Constants.API_END_POINT.PRODUCTS}/page`, { params: params });
   }
 
-  ngOnDestroy() {
-
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+  unSubscribeAll() {
+    if (this.paginatedProductsSubscription) {
+      this.paginatedProductsSubscription.unsubscribe();
     }
   }
 }

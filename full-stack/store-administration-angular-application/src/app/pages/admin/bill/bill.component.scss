@@ -1,13 +1,36 @@
-$save-button: rgb(38, 205, 127);
+$save-button: rgb(0, 187, 100);
+$primary-color: rgba(21, 159, 104, 0.97);
+$close-button: rgba(255, 54, 54, 0.726);
 
-button {
-  margin-top: 20px;
-  padding: 10px 20px;
+.save-button {
+  width: 100px;
+  height: 35px;
   background-color: $save-button;
   color: white;
-  border: none;
+  border-color: azure;
+  border-width: 3px;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.cancel-button {
+  width: 100px;
+  height: 35px;
+  background-color: $close-button;
+  border-radius: 4px;
+  border-width: 3px;  
+  border-color: azure;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+}
+
+.remove-button {
+  background-color: $close-button;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  color: white;
 }
 
 div {
@@ -17,3 +40,55 @@ div {
   justify-content: center;
 }
 
+.title-div {
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.total-price {
+  margin-top: 30px;
+}
+
+.mat-mdc-table .mdc-data-table__header-row {
+  height: 30px;
+}
+
+.mat-mdc-table .mdc-data-table__row {
+  height: 35px;
+}
+
+.mat-mdc-table .mat-mdc-header-cell.mdc-data-table__header-cell {
+  background-color: $primary-color;
+}
+
+.slide {
+  margin-bottom: 20px;
+}
+
+.mat-mdc-slide-toggle.mat-accent {
+  --mdc-switch-selected-focus-state-layer-color: #a8ffcec1;
+  --mdc-switch-selected-handle-color: #218653;
+  --mdc-switch-selected-hover-state-layer-color: #218653;
+  --mdc-switch-selected-pressed-state-layer-color: #218653;
+  --mdc-switch-selected-focus-handle-color: #218653;
+  --mdc-switch-selected-hover-handle-color: #218653;
+  --mdc-switch-selected-pressed-handle-color: #218653;
+  --mdc-switch-selected-focus-track-color: #a8ffcec1;
+  --mdc-switch-selected-hover-track-color: #a8ffcec1;
+  --mdc-switch-selected-pressed-track-color: #a8ffcec1;
+  --mdc-switch-selected-track-color: #a8ffcec1;
+}
+
+.mdc-data-table__cell,
+.mdc-data-table__header-cell {
+  padding: 0 0 0 0;
+}
+
+.buttons-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

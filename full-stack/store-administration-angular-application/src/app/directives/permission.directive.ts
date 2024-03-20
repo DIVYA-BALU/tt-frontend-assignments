@@ -9,7 +9,6 @@ import { Subscription } from 'rxjs';
 export class PermissionDirective {
 
   private permissionsSubscription: Subscription = new Subscription;
-  private branchIdSubscription: Subscription = new Subscription;
 
   @Input() requiredPermission: string = '';
 
@@ -19,7 +18,7 @@ export class PermissionDirective {
   ) { }
 
   ngOnInit() {
-    const permissionsSubscription = this.userDetailsService.loginResponseSubject$.subscribe({
+    this.permissionsSubscription = this.userDetailsService.loginResponseSubject$.subscribe({
       next: (loginResponse) => this.checkPermission(loginResponse, this.requiredPermission)
     })
   }

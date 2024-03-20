@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './pages/admin/layout/layout.component';
 import { LoginComponent } from './pages/login/login.component';
-import { ProductLayoutComponent } from './pages/admin/product-layout/product-layout.component';
 import { ManagerLayoutComponent } from './pages/admin/manager-layout/manager-layout.component';
 import { AuthGuard } from './core/guard/auth.guard';
+import { ProductsBillingComponent } from './pages/admin/products-billing/products-billing.component';
 
 const routes: Routes = [
   {
@@ -16,7 +16,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'employee', component: ProductLayoutComponent,
+    path: 'employee', component: ProductsBillingComponent,
     loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule),
     canActivate: [AuthGuard]
   },

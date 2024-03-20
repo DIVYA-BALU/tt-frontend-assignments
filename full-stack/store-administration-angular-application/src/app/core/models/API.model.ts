@@ -1,14 +1,14 @@
 export class LoginResponse {
   userEmail: string;
-  branchesId: string[];
+  branchIds: string[];
   sectionId: string;
   jwt: string;
   role: Role;
   permissions: Permission[];
 
-  constructor(userEmail: string, branchesId: string[], sectionId: string, jwt: string, role: Role, permissions: Permission[]) {
+  constructor(userEmail: string, branchIds: string[], sectionId: string, jwt: string, role: Role, permissions: Permission[]) {
     this.userEmail = userEmail;
-    this.branchesId = branchesId;
+    this.branchIds = branchIds;
     this.sectionId = sectionId;
     this.jwt = jwt;
     this.role = role;
@@ -81,10 +81,10 @@ export interface UserDetails {
   _id: string;
   emailId: string;
   name: string;
-  branchesId: string[];
+  branchIds: string[];
   role: Role;
-  joiningDate: string; 
-  permissions: Permission[] ;
+  joiningDate: string;
+  permissions: Permission[];
   employmentHistory: EmploymentDetail[];
 }
 
@@ -117,7 +117,7 @@ export interface SectionDetail {
 }
 
 export interface PaginatedResponse<T> {
-  content: T[]; 
+  content: T[];
   pageable: {
     pageNumber: number;
     pageSize: number;
@@ -142,6 +142,15 @@ export interface Bill {
   totalPrice: number;
   sectionId: string;
   branchId: string;
+}
+
+export class Bill {
+  constructor(
+    public billItems: BillItem[],
+    public totalPrice: number,
+    public sectionId: string,
+    public branchId: string
+  ) { }
 }
 
 export interface BillItem {

@@ -1,16 +1,21 @@
-<mat-tab-group>
+<div class="heading">
+  <h1>
+    STORE MANAGEMENT
+  </h1>
+</div>
+<mat-tab-group (selectedIndexChange)="tabChanged($event)">
   <mat-tab label="Branch Details" appRole requiredRole = "ADMIN">
-      <div class="table-div"> 
+      <div class="table-div" *ngIf="selectedTabIndex === 0"> 
         <app-branch-layout></app-branch-layout> 
       </div>
     </mat-tab>
     <mat-tab label="Section Details" appRole requiredRole = "ADMIN"> 
-      <div class="section-table-div"> 
+      <div class="section-table-div" *ngIf="selectedTabIndex === 1"> 
       <app-section-layout></app-section-layout>
     </div>
     </mat-tab>
     <mat-tab label="Product Details"> 
-      <div class="table-div"> 
+      <div class="table-div" *ngIf="selectedTabIndex === 2"> 
       <app-product-layout></app-product-layout>
     </div>
     </mat-tab>

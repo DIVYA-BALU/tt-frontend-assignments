@@ -1,6 +1,6 @@
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription, catchError, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, tap } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { Constants } from '../constants/Constants';
 import { Branch, NewBranch, PaginatedResponse } from '../models/API.model';
@@ -8,6 +8,7 @@ import { Branch, NewBranch, PaginatedResponse } from '../models/API.model';
 @Injectable({
   providedIn: 'root'
 })
+
 export class BranchService {
 
   private paginatedBranches: BehaviorSubject<PaginatedResponse<Branch>> = new BehaviorSubject<PaginatedResponse<Branch>>({
@@ -20,13 +21,12 @@ export class BranchService {
     totalElements: 0
   });
 
-  private branchesSubscription: Subscription = new Subscription;
-  private paginatedBranchesSubscription: Subscription = new Subscription;
-
   public paginatedBranches$: Observable<PaginatedResponse<Branch>> = this.paginatedBranches.asObservable();
 
   private branches: BehaviorSubject<Branch[]> = new BehaviorSubject<Branch[]>([]);
   public branches$: Observable<Branch[]> = this.branches.asObservable();
+  private paginatedBranchesSubscription: Subscription = new Subscription;
+  private branchesSubscription: Subscription = new Subscription;
 
   constructor(private http: HttpClient) {
   }
@@ -46,22 +46,9 @@ export class BranchService {
   }
 
   setPaginatedBranchesSubject(page: number = 0, size: number = 10) {
-
-    const paginatedBranchesSubscription = this.getPaginatedBranches(page, size).
-      subscribe({
-        next: (paginatedBranches) => {
-          this.paginatedBranches.next(paginatedBranches);
-        },
-        error: (error: HttpErrorResponse) => {
-
-          if (error.status === 404)
-            alert('Unable to connect to the server');
-          else
-            alert(`${error.status} found`);
-
-        }
-      });
-    ;
+    this.paginatedBranchesSubscription = this.getPaginatedBranches(page, size).subscribe({
+      next: (paginatedBranches) => this.paginatedBranches.next(paginatedBranches)
+    });
   }
 
   getAllBranches(): Observable<Branch[]> {
@@ -69,32 +56,18 @@ export class BranchService {
   }
 
   setBranchesSubject() {
-    const subscription = this.getAllBranches().
-      subscribe({
-        next: (branches) => {
-          this.branches.next(branches);
-        },
-        error: (error: HttpErrorResponse) => {
-
-          if (error.status === 404)
-            alert('Unable to connect to the server');
-          else
-            alert(`${error.status} found`);
-          
-        }
-      });
-    ;
+    this.branchesSubscription = this.getAllBranches().subscribe({
+      next: (branches) => this.branches.next(branches)
+    });
   }
-  
-  ngOnDestroy() {
 
-    if (this.paginatedBranchesSubscription) {
-      this.paginatedBranchesSubscription.unsubscribe();
-    }
-
+  unSubscribeAll() {
     if (this.branchesSubscription) {
       this.branchesSubscription.unsubscribe();
     }
 
+    if (this.paginatedBranchesSubscription) {
+      this.paginatedBranchesSubscription.unsubscribe();
+    }
   }
 }

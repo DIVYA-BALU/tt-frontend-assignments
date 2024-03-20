@@ -14,3 +14,17 @@ div{
   justify-content: center;
   align-items: center;
 }
+
+span{
+  margin-right: 10px;
+}
+
+.icon{
+  background:none;
+  border: none;
+  color: white;
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+  height: 50px;
+}

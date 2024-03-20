@@ -1,13 +1,12 @@
 import { Component, Inject } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Branch, Permission, Role, UserDetails } from 'src/app/core/models/API.model';
 import { BranchService } from 'src/app/core/services/branch.service';
 import { RolePermissionService } from 'src/app/core/services/role-permission.service';
 import { UserDetailsService } from 'src/app/core/services/user-details.service';
-import { PopUpComponent } from '../../pop-up/pop-up.component';
-import { AuthService } from 'src/app/core/services/auth.service';
 import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-update-form',
@@ -36,27 +35,27 @@ export class UserUpdateFormComponent {
       emailId: [this.data.emailId, [Validators.required, Validators.email]],
       role: [this.data.role],
       permissions: this.formBuilder.array([]),
-      branchesId: this.formBuilder.array([], this.branchesValidator())
+      branchIds: this.formBuilder.array([])
     });
 
-    const rolesSubscription = this.rolepermissionService.getAllRoles().subscribe({
+    this.rolesSubscription = this.rolepermissionService.getAllRoles().subscribe({
       next: (roles) => {
         this.availableRoles = roles;
         this.userDetailsForm.setControl('roles', this.buildRolesCheckboxes());
       }
     });
 
-    const permissionsSubscription = this.rolepermissionService.getAllPermissions().subscribe({
+    this.permissionsSubscription = this.rolepermissionService.getAllPermissions().subscribe({
       next: (permissions) => {
         this.availablePermissions = permissions;
-        this.userDetailsForm.setControl('permissions', this.buildPermissionsCheckboxes1());
+        this.userDetailsForm.setControl('permissions', this.buildPermissionsCheckboxes());
       }
     })
 
-    const branchesSubscription = this.branchService.getAllBranches().subscribe({
+    this.branchesSubscription = this.branchService.getAllBranches().subscribe({
       next: (branches) => {
         this.availableBranches = branches;
-        this.userDetailsForm.setControl('branchesId', this.buildBranchesCheckboxes());
+        this.userDetailsForm.setControl('branchIds', this.buildBranchesCheckboxes());
       }
     })
 
@@ -71,19 +70,12 @@ export class UserUpdateFormComponent {
 
   buildBranchesCheckboxes() {
     const checkboxes = this.availableBranches.map(branch => {
-      return this.formBuilder.control(this.data.branchesId?.includes(branch._id));
+      return this.formBuilder.control(this.data.branchIds?.includes(branch._id));
     });
     return this.formBuilder.array(checkboxes);
   }
 
   buildPermissionsCheckboxes() {
-    const checkboxes = this.availablePermissions.map(permission => {
-      return this.formBuilder.control(this.data.permissions?.includes(permission));
-    });
-    return this.formBuilder.array(checkboxes);
-  }
-
-  buildPermissionsCheckboxes1() {
 
     const availablePermissionNames = this.availablePermissions.map(permission => permission.name);
     const dataPermissionNames = this.data.permissions?.map(permission => permission.name) ?? [];
@@ -101,23 +93,13 @@ export class UserUpdateFormComponent {
     return !rolePermissions.find((rolePermission: Permission) => rolePermission._id === permission._id);
   }
 
-  branchesValidator(): ValidatorFn {
-    return (formArray: AbstractControl): { [key: string]: any } | null => {
-      if (!formArray || !(formArray instanceof FormArray)) {
-        return { invalidFormArray: true };
-      }
-      const selectedBranches = (formArray as FormArray).controls.filter(control => control && control.value);
-      return selectedBranches.length > 0 ? null : { noBranchSelected: true };
-    };
-  }
-
   onSubmit() {
 
-    const selectedBranches = this.userDetailsForm.value.branchesId
+    const selectedBranches = this.userDetailsForm.value.branchIds
       .map((checked: boolean, index: number) => checked ? this.availableBranches[index]?._id : null)
       .filter((value: string | null) => value !== null);
 
-    this.userDetailsForm.value.branchesId = selectedBranches;
+    this.userDetailsForm.value.branchIds = selectedBranches;
 
     const selectedPermissions = this.userDetailsForm.value.permissions
       .map((checked: boolean, index: number) => checked ? this.availablePermissions[index] : null)
@@ -125,31 +107,20 @@ export class UserUpdateFormComponent {
 
     this.userDetailsForm.value.permissions = selectedPermissions;
 
-    if (this.userDetailsForm.value.branchesId.length > 0 || this.userDetailsForm.value.role.name === 'ADMIN') {
-      const updateUserSubscription = this.userDetailsService.updateUser(this.userDetailsForm.value).subscribe({
+    if (this.userDetailsForm.value.branchIds.length > 0 || this.userDetailsForm.value.role.name === 'ADMIN') {
+      this.updateUserSubscription = this.userDetailsService.updateUser(this.userDetailsForm.value).subscribe({
         next: () => {
+          this.closeUpdateUserForm();
           this.userDetailsService.setPaginatedUsersSubject();
-          this.dialog.open(PopUpComponent, {
-            data: {
-              message: 'User Updated Successfully',
-            },
-          });
+          Swal.fire('User Updated Successfully');
         }, error: () => {
-          this.dialog.open(PopUpComponent, {
-            data: {
-              message: 'Error Occured',
-            },
-          });
+          Swal.fire('Error Occured');
         }
       }
       );
     }
     else {
-      this.dialog.open(PopUpComponent, {
-        data: {
-          message: 'Branch Field is needed',
-        },
-      });
+      Swal.fire('Branch Field required');
     }
   }
 

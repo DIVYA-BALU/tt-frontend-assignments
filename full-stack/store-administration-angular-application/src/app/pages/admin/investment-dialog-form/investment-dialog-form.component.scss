@@ -40,7 +40,6 @@ span {
 }
 
 button[type="submit"]{
-  margin-left: 35px 15px;
   padding: 10px 30px;
   background-color:$save-button;
   color: white;
@@ -51,10 +50,14 @@ button[type="submit"]{
 
 button {
   background-color: $close-button;
-  margin-top: 5px;
-  margin-left: 35px 15px;
+  margin-left: 8px;
+  margin-right: 8px;
   padding: 10px 30px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.form-elements{
+  margin-top: 20px;
 }

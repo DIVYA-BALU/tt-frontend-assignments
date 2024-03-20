@@ -1,40 +1,52 @@
+<div class="title-div">
+  <h2>BILL</h2>
+  <h2>DATE: {{currentDate | date:'dd/MM/yyyy' }}</h2>
+</div>
+<div class="slide">
+  <mat-slide-toggle (click)="editButtonClick()">
+    Enable Edit
+  </mat-slide-toggle>
+</div>
 <div>
-  <h2>Bill</h2>
-
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
     <ng-container matColumnDef="Serial Number">
       <th mat-header-cell *matHeaderCellDef> S.No </th>
       <td mat-cell *matCellDef="let i = index"> {{i+1}} </td>
     </ng-container>
-
     <ng-container matColumnDef="Product Name">
       <th mat-header-cell *matHeaderCellDef> Product Name </th>
       <td mat-cell *matCellDef="let item"> {{item.product.productName}} </td>
     </ng-container>
-
     <ng-container matColumnDef="Price">
-      <th mat-header-cell *matHeaderCellDef> Price </th>
+      <th mat-header-cell *matHeaderCellDef> Price in Rs.</th>
       <td mat-cell *matCellDef="let item"> {{item.product.price}} </td>
     </ng-container>
-
     <ng-container matColumnDef="Quantity">
       <th mat-header-cell *matHeaderCellDef> Quantity </th>
-      <td mat-cell *matCellDef="let item"> {{item.quantity}} </td>
+      <td mat-cell *matCellDef="let item"> {{item.quantity}}
+        <select id="quantity" #quantityDropdown (change)="addToBill(item.product, quantityDropdown.value)" *ngIf="edit">
+          <option *ngFor="let quantity of availableQuantities(item.product)" [value]="quantity">{{ quantity }}</option>
+        </select>
+      </td>
     </ng-container>
-
     <ng-container matColumnDef="Total Price">
       <th mat-header-cell *matHeaderCellDef> Total Price </th>
       <td mat-cell *matCellDef="let item"> {{item.quantity * item.product.price}} </td>
     </ng-container>
-
+    <ng-container matColumnDef="Remove">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let item">
+        <button class="remove-button" (click)="removeProduct(item.product)" *ngIf="edit">X</button>
+      </td>
+    </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-
 </div>
-
-<p>Total Price: {{ bill.totalPrice }}</p>
-<div>
-  <button type = "buton" (click)="saveBill()">Confirm Bill</button>
+<div class="total-price">
+  <h3>Total Price: {{bill.totalPrice}}</h3>
+</div>
+<div class="buttons-div">
+  <button class="cancel-button" type="button" (click)="cancelBill()">Cancel Bill</button>
+  <button class="save-button" type="submit" (click)="saveBill()">Confirm Bill</button>
 </div>

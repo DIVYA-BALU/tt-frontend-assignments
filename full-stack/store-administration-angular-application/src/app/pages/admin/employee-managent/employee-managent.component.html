@@ -1,65 +1,62 @@
-<div class="button-div">
-  <button mat-button (click)="openEnrollUserForm()">Enroll User</button>
+<div class="heading">
+  <h1>
+    EMPLOYEE MANAGEMENT
+  </h1>
 </div>
-
-<div class = "search-and-filter-div">
+<div class="search-and-filter-div">
   <mat-form-field class="example-form-field">
     <mat-label>Search By User Name</mat-label>
     <input matInput type="text" [(ngModel)]="searchByName" (ngModelChange)="onSearchFilterChange()">
   </mat-form-field>
-
   <mat-form-field appearance="fill">
     <mat-label>Filter By Branch</mat-label>
-    <mat-select [(ngModel)]="branchId" id="branch" >
+    <mat-select [(ngModel)]="branchId" id="branch">
       <mat-option [value]="" appRole requiredRole="ADMIN" (click)="onSearchFilterChange()">All branches</mat-option>
-      <mat-option *ngFor="let branch of branches" [value]="branch._id" (click)="onSearchFilterChange()"
-      appBranch requiredBranchId={{branch._id}}>
+      <mat-option *ngFor="let branch of branches" [value]="branch._id" (click)="onSearchFilterChange()" appBranch
+        requiredBranchId={{branch._id}}>
         {{branch.name}}
       </mat-option>
     </mat-select>
   </mat-form-field>
-
 </div>
-
 <div class="table-div">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    
     <ng-container matColumnDef="Serial Number">
       <th mat-header-cell *matHeaderCellDef> S.No </th>
-    <td mat-cell *matCellDef="let i = index"> {{i+1}} </td>
-  </ng-container>
-  
-  <ng-container matColumnDef="User Name">
-    <th mat-header-cell *matHeaderCellDef> User Name </th>
-    <td mat-cell *matCellDef="let userDetails"> {{userDetails.name}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="EmailId">
-    <th mat-header-cell *matHeaderCellDef> Email Id </th>
-    <td mat-cell *matCellDef="let userDetails"> {{userDetails.emailId}} </td>
-  </ng-container>
-  
-  <ng-container matColumnDef="Role">
-    <th mat-header-cell *matHeaderCellDef> Role </th>
-    <td mat-cell *matCellDef="let userDetails"> {{userDetails.role.name}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="Joining Date">
-    <th mat-header-cell *matHeaderCellDef> Joining Date </th>
-    <td mat-cell *matCellDef="let userDetails"> {{userDetails.joiningDate}} </td>
-  </ng-container>
-  
-  <ng-container matColumnDef="Update User">
-    <th mat-header-cell *matHeaderCellDef> Update User </th>
-    <td mat-cell *matCellDef="let userDetails"> 
-      <button mat-button  (click)="update(userDetails)">Update</button>
-       </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-<mat-paginator [length]="totalUsers" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page"
-  (page)="onPageChange($event)">
-</mat-paginator>
+      <td mat-cell *matCellDef="let i = index"> {{i+1}} </td>
+    </ng-container>
+    <ng-container matColumnDef="User Name">
+      <th mat-header-cell *matHeaderCellDef> User Name </th>
+      <td mat-cell *matCellDef="let userDetails"> {{userDetails.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="EmailId">
+      <th mat-header-cell *matHeaderCellDef> Email Id </th>
+      <td mat-cell *matCellDef="let userDetails"> {{userDetails.emailId}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Role">
+      <th mat-header-cell *matHeaderCellDef> Role </th>
+      <td mat-cell *matCellDef="let userDetails"> {{userDetails.role.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Joining Date">
+      <th mat-header-cell *matHeaderCellDef> Joining Date </th>
+      <td mat-cell *matCellDef="let userDetails"> {{userDetails.joiningDate}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Update User">
+      <th mat-header-cell *matHeaderCellDef> Update User </th>
+      <td mat-cell *matCellDef="let userDetails">
+        <button mat-button (click)="update(userDetails)">Update</button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+<br>
+<div>
+  <mat-paginator [length]="totalUsers" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page"
+    (page)="onPageChange($event)">
+  </mat-paginator>
+</div>
+<div class="button-div">
+  <button mat-button (click)="openEnrollUserForm()">Enroll User</button>
 </div>

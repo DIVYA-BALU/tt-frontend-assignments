@@ -21,7 +21,7 @@ public class CustomProductRepository {
   private MongoTemplate mongoTemplate;
 
   public List<Product> getProductDetails(String branchId, String sectionId, String search) {
-    Query query = new Query(Criteria.where("product.branchesId").is(branchId));
+    Query query = new Query(Criteria.where("product.branchIds").is(branchId));
 
     if (sectionId != null) {
       query.addCriteria(Criteria.where("product.sectionId").is(sectionId));
@@ -51,6 +51,8 @@ public class CustomProductRepository {
     }
 
     long total = mongoTemplate.count(query, Product.class);
+
+    query.with(pageable);
 
     List<Product> products = mongoTemplate.find(query, Product.class);
     return new PageImpl<>(products, pageable, total);

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription, catchError, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, tap } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { Constants } from '../constants/Constants';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Investment } from '../models/API.model';
 
 @Injectable({
@@ -12,8 +12,7 @@ export class InvestmentService {
 
   private totalInvestment: BehaviorSubject<Investment> = new BehaviorSubject<Investment>({ _id: '', amount: 0, description: '' });
   public totalInvestment$: Observable<Investment> = this.totalInvestment.asObservable();
-
-  private subscription: Subscription = new Subscription;
+  private totalInvestmentSubscription: Subscription = new Subscription;
 
   constructor(private http: HttpClient) { }
 
@@ -29,25 +28,17 @@ export class InvestmentService {
   }
 
   setTotalInvestmentSubject() {
-    const subscription = this.getTotalInvestment().subscribe({
-      next: (totalInvestment) => this.totalInvestment.next(totalInvestment),
-      error: (error: HttpErrorResponse) => {
-
-        if (error.status === 404)
-          alert('Unable to connect to the server');
-        else
-          alert(`${error.status} found`);
-
+    this.totalInvestmentSubscription = this.getTotalInvestment().subscribe({
+      next: (totalInvestment) => {
+        this.totalInvestment.next(totalInvestment);
       }
-    })
+    });
   }
 
-  ngOnDestroy() {
-
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+  unSubscribeAll() {
+    if (this.totalInvestmentSubscription) {
+      this.totalInvestmentSubscription.unsubscribe();
     }
-
   }
 
 }

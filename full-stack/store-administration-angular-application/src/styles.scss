@@ -1,4 +1,90 @@
 /* You can add global styles to this file, and also import other style files */
+$primary-color1: rgba(21, 159, 104, 0.97);
+$primary-color: rgba(21, 159, 104, 0.837);
+$secondary-color: green;
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-toolbar.mat-primary {
+background-color: $primary-color;
+}
+
+.mat-mdc-table .mat-mdc-header-cell.mdc-data-table__header-cell {
+  background-color: $primary-color;
+  color: azure;
+}
+
+.mat-mdc-tab:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label, .mat-mdc-tab-link:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label {
+  color: $primary-color;
+}
+
+.mdc-tab__ripple::before, .mat-mdc-tab .mat-ripple-element, .mat-mdc-tab-header-pagination .mat-ripple-element, .mat-mdc-tab-link .mat-ripple-element {
+  background-color: $primary-color
+}
+
+.mat-mdc-tab:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline, .mat-mdc-tab-link:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline {
+  border-color: $primary-color
+}
+
+.mat-mdc-paginator-outer-container {
+  background-color: rgba(248, 248, 208, 0.188);
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: #c2e3ae52;
+  border-radius: 10px;
+}
+
+.mat-primary .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+  color: rgba(0, 0, 0, 0.753);
+}
+
+.mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after, .mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-minimal::after {
+  border-color: $primary-color;
+}
+
+.mdc-text-field--filled .mdc-line-ripple::after {
+  border-bottom-color: $primary-color
+}
+
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: $primary-color;
+}
+
+.mat-mdc-form-field.mat-focused.mat-primary .mat-mdc-select-arrow {
+  color: $primary-color
+}
+
+.mdc-list-item--selected .mdc-list-item__primary-text, .mdc-list-item--activated .mdc-list-item__primary-text {
+  color: $primary-color
+}
+
+.mat-mdc-form-field .mat-mdc-paginator-page-size-select .ng-tns-c40-4 .mat-mdc-form-field-type-mat-select .mat-form-field-appearance-outline .mat-primary .ng-star-inserted .mat-focused
+.mat-mdc-text-field-wrapper .mdc-text-field .ng-tns-c40-4 .mdc-text-field--outlined .mdc-text-field--no-label .mdc-text-field--focused{
+  color: $primary-color
+}
+
+// .mdc-dialog-container .mdc-dialog__container .mat-mdc-dialog-container .mdc-dialog__surface {
+//   max-height: 1000px;
+// }
+
+.mat-mdc-dialog-content {
+  display: block;
+  max-height: 80vh !important;
+}
+
+.mat-mdc-table .mdc-data-table__header-row .bill-table {
+  height: 30px;
+}
+
+.mat-mdc-table .mdc-data-table__header-row{
+  height: 40px;
+}
+
+.mat-mdc-dialog-container {
+  --mdc-dialog-container-color: rgb(232, 251, 230);
+  --mdc-dialog-with-divider-divider-color: rgba(0, 0, 0, 0.12);
+  --mdc-dialog-subhead-color: rgba(0, 0, 0, 0.87);
+  --mdc-dialog-supporting-text-color: rgba(0, 0, 0, 0.6);
+}

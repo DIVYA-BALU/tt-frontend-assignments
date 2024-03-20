@@ -8,18 +8,17 @@ $save-button: rgb(38, 205, 127);
 $list-button: rgba(61, 219, 219, 0.579);
 
 h1 {
-  margin-top: 50px;
+  margin-top: 10px;
   text-align: center;
   font-weight: bold;
 }
 
 .form-div {
-  max-width: 350px;
-  margin: 0 auto;
+  max-width: 270px;
+  margin: 50px auto;
   padding: 30px;
-  background-color: $form-color;
-  border-radius: 10px;
-  color: black;
+  background-color: rgb(232, 251, 230);
+  border-radius: 5px;
   flex-direction: column;
   text-align: center;
 }
@@ -30,8 +29,10 @@ h1 {
 }
 
 .form-div label {
-  margin-bottom: 10px;
+  width: auto;
+  margin-bottom: 15px;
   font-weight: bold;
+  font-size: 16px;
 }
 
 .form-div input[type="text"],
@@ -42,6 +43,7 @@ h1 {
   border-radius: 8px;
   background-color: white;
   font-size: 16px;
+  width: 150px;
 }
 
 .form-div input[type="text"]:focus,
@@ -49,13 +51,20 @@ h1 {
   outline: none;
 }
 
-.form-div div {
-  margin-bottom: 20px;
+.inputs {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .form-div span {
   color: #ff4d4d;
   font-size: 14px;
+}
+
+.indication{
+  padding-left: 80px;
 }
 
 .form-div button[type="submit"] {
@@ -66,18 +75,18 @@ h1 {
   color: #fff;
   font-size: 18px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  margin-top: 20px;
 }
 
 .form-div button[type="submit"]:hover {
   background-color: darken($save-button, 20%);
 }
 
-.form-div button[type="submit"]:disabled {
-  background-color: primary;
-  cursor: not-allowed;
-}
-
 .form-div button[type="submit"]:active {
   background-color: lighten($save-button, 20%);
+}
+
+.main-div{
+  height: 100%;
+  width: 100%;
 }

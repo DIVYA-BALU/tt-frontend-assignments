@@ -13,6 +13,7 @@ import { BillComponent } from '../bill/bill.component';
 import { SectionService } from 'src/app/core/services/section.service';
 import { BranchService } from 'src/app/core/services/branch.service';
 import { UserDetailsService } from 'src/app/core/services/user-details.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-layout',
@@ -30,19 +31,14 @@ export class ProductLayoutComponent {
   branchId: string = "";
   sectionId: string = "";
   dataSource: MatTableDataSource<Product>;
+  roleName: string = "";
+  selectedIndex: number = 0;
 
-  private subscription: Subscription = new Subscription;
   private sectionsSubscription: Subscription = new Subscription;
   private loginResponseSubscription: Subscription = new Subscription;
   private productsSubscription: Subscription = new Subscription;
   private branchesSubscription: Subscription = new Subscription;
 
-  bill: Bill = {
-    billItems: [],
-    totalPrice: 0,
-    sectionId: '',
-    branchId: ''
-  };
   makeBillButton: Boolean = false;
   searchByName: string = '';
 
@@ -51,44 +47,54 @@ export class ProductLayoutComponent {
   }
 
   ngOnInit(): void {
-  
-    const subscription = this.userDetailsService.loginResponseSubject$.subscribe({
-      next: (loginResponse) => {
-        if (loginResponse.role.name === 'ADMIN'){
-          this.productService.setPaginatedProductsSubject();
-          this.getProductDetails();
-        }
-      }
-    })
-    const sectionsSubscription = this.sectionService.setSectionsSubject();
-    this.sectionService.sections$.subscribe({
-      next: (sections) => this.sections = sections,
-      error: (HttpErrorResponse) => {
-        alert('Error Occured Retry Later');
-      }
-    })
 
-    this.branchService.setBranchesSubject();
-    const branchesSubscription = this.branchService.branches$.subscribe({
-      next: (branches) => this.branches = branches,
-      error: (HttpErrorResponse) => {
-        alert('Error Occured Retry Later');
+    this.loginResponseSubscription = this.userDetailsService.loginResponseSubject$.subscribe({
+      next: (loginResponse) => {
+        this.roleName = loginResponse.role.name;
+        if (loginResponse.role.name === 'ADMIN') {
+          this.productService.setPaginatedProductsSubject();
+        }
+        this.getProductDetails();
       }
     })
   }
 
   onSearchFilterChange() {
-    this.getProductDetails();
-    const loginResponseSubscription = this.userDetailsService.loginResponseSubject$.subscribe({
-      next: (loginResponse) => {
-        if (loginResponse.role.name === 'ADMIN')
-          this.productService.setPaginatedProductsSubject(this.pageNumber, this.pageSize, this.searchByName, this.branchId, this.sectionId);
-        else {
-          if (this.branchId !== '' && this.sectionId !== '')
-            this.productService.setPaginatedProductsSubject(this.pageNumber, this.pageSize, this.searchByName, this.branchId, this.sectionId);
-        }
+
+    if (this.roleName === 'ADMIN')
+      this.productService.setPaginatedProductsSubject(this.pageNumber, this.pageSize, this.searchByName, this.branchId, this.sectionId);
+    else {
+      if (this.branchId !== '' && this.sectionId !== '') {
+        this.productService.branchId = this.branchId;
+        this.productService.sectionId = this.sectionId;
+        this.productService.setPaginatedProductsSubject(this.pageNumber, this.pageSize, this.searchByName, this.branchId, this.sectionId);
       }
-    })
+    }
+
+  }
+
+  onSectionSelectClick() {
+    if (this.sections.length === 0) {
+      this.sectionService.setSectionsSubject();
+      this.sectionsSubscription = this.sectionService.sections$.subscribe({
+        next: (sections) => this.sections = sections,
+        error: () => {
+          Swal.fire('Error Occured');
+        }
+      })
+    }
+  }
+
+  onBranchSelectClick() {
+    if (this.branches.length === 0) {
+      this.branchService.setBranchesSubject();
+      this.branchesSubscription = this.branchService.branches$.subscribe({
+        next: (branches) => this.branches = branches,
+        error: () => {
+          Swal.fire('Error Occured');
+        }
+      })
+    }
   }
 
   onPageChange(event: PageEvent): void {
@@ -97,8 +103,8 @@ export class ProductLayoutComponent {
     this.productService.setPaginatedProductsSubject(this.pageNumber, this.pageSize, this.searchByName, this.branchId, this.sectionId);
   }
 
-  getProductDetails() {  
-    const productsSubscription = this.productService.paginatedProducts$.subscribe({
+  getProductDetails() {
+    this.productsSubscription = this.productService.paginatedProducts$.subscribe({
       next: (paginatedProducts) => {
         this.dataSource.data = paginatedProducts.content;
         this.totalProducts = paginatedProducts.totalElements;
@@ -117,51 +123,28 @@ export class ProductLayoutComponent {
   }
 
   addToBill(product: Product, selectedQuantity: string): void {
+    const bill = this.billService.billSubject.value;
 
     const quantity = parseInt(selectedQuantity);
-    const itemIndex = this.bill.billItems.findIndex(item => item.product === product);
+    const itemIndex = bill.billItems.findIndex(item => item.product._id === product._id);
 
     if (itemIndex !== -1) {
 
       if (quantity === 0) {
-        this.bill.billItems.splice(itemIndex, 1);
+        bill.billItems.splice(itemIndex, 1);
       } else {
-        this.bill.billItems[itemIndex].quantity = quantity;
+        bill.billItems[itemIndex].quantity = quantity;
       }
 
+    } else if (quantity !== 0) {
+      bill.billItems.push({ product: product, quantity: quantity });
     }
+    bill.totalPrice = 0;
+    bill.billItems.forEach((item) => {
+      bill.totalPrice += item.product.price * item.quantity;
+    })
 
-    else if (quantity !== 0) {
-      this.bill.billItems.push({ product: product, quantity: quantity });
-    }
-
-  }
-
-  makeBill() {
-
-    if (this.bill.billItems.length === 0) {
-      this.dialog.open(PopUpComponent, {
-        data: {
-          message: 'No products Selected'
-        }
-      })
-    }
-    else {
-      this.bill.billItems.forEach((item) => {
-        this.bill.totalPrice += item.product.price * item.quantity;
-      })
-      const billCopy: Bill = {
-        billItems: [...this.bill.billItems],
-        totalPrice: this.bill.totalPrice,
-        sectionId: this.sectionId,
-        branchId: this.branchId
-      };
-      this.dialog.open(BillComponent, {
-        data: { bill: billCopy }
-      });
-      this.bill.billItems = [];
-      this.bill.totalPrice = 0;
-    }
+    this.billService.setBillSubject(bill);
   }
 
   openProductDialogForm() {
@@ -169,9 +152,10 @@ export class ProductLayoutComponent {
   }
 
   ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+
+
+    console.log("ondestroy");
+
     if (this.sectionsSubscription) {
       this.sectionsSubscription.unsubscribe();
     }
@@ -185,6 +169,4 @@ export class ProductLayoutComponent {
       this.branchesSubscription.unsubscribe();
     }
   }
-  
-
 }

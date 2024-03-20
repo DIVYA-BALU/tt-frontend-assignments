@@ -1,11 +1,10 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, tap, throwError } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { Constants } from '../constants/Constants';
 import { EnrollUserRequest, LoginRequest, LoginResponse, User } from '../models/API.model';
 import { UserDetailsService } from './user-details.service';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +13,7 @@ export class AuthService {
 
   isLoggedIn: boolean;
 
-  constructor(private http: HttpClient, private userDetailsService: UserDetailsService, private router: Router) {
+  constructor(private http: HttpClient, private userDetailsService: UserDetailsService) {
 
     this.isLoggedIn = false;
     const loginResponseString = localStorage.getItem('loginResponse');
@@ -36,9 +35,6 @@ export class AuthService {
         localStorage.setItem("loginResponse", JSON.stringify(loginResponse));
         this.userDetailsService.setLoginResponseSubject(loginResponse);
         this.isLoggedIn = true;
-      }),
-      catchError((error) => {
-        return throwError(() => error);
       })
     );
 

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { InvestmentService } from 'src/app/core/services/investment.service';
 import { PopUpComponent } from '../../pop-up/pop-up.component';
 import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-investment-dialog-form',
@@ -35,7 +36,7 @@ export class InvestmentDialogFormComponent {
 
   submit() {
     this.isLoading = true;
-    const subscription = this.investmentService.saveInvestment(this.investmentForm.value).subscribe({
+    this.subscription = this.investmentService.saveInvestment(this.investmentForm.value).subscribe({
       next: () => {
         this.isLoading = false,
         this.closeInvestmentDialogForm();
@@ -47,9 +48,9 @@ export class InvestmentDialogFormComponent {
           },
         });
       },
-      error: (HttpErrorResponse) => {
+      error: () => {
         this.isLoading = false;
-        alert('Error Occured Retry Later');
+        Swal.fire('Error Occured Retry Later');
       }
     })
   }

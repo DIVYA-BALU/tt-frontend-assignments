@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { SectionService } from 'src/app/core/services/section.service';
-import { PopUpComponent } from '../../pop-up/pop-up.component';
 import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-section-dialog-form',
@@ -27,25 +27,17 @@ export class SectionDialogFormComponent {
   submit() {
 
     this.isLoading = true;
-    const subscription = this.sectionService.saveSection(this.sectionCreationForm.value).subscribe({
+    this.subscription = this.sectionService.saveSection(this.sectionCreationForm.value).subscribe({
       next: () => {
         this.isLoading = false,
         this.sectionService.setPaginationSectionsSubject();
         this.sectionService.setSectionsSubject();
         this.closeSectionDialogForm();
-        this.dialog.open(PopUpComponent, {
-          data: {
-            message: 'Section Saved Successfuly',
-          },
-        });
+        Swal.fire('Section Saved Successfuly');
       },
-      error: (HttpErrorResponse) => {
+      error: () => {
         this.isLoading = false;
-        this.dialog.open(PopUpComponent, {
-          data: {
-            message: 'Error occured',
-          },
-        });
+        Swal.fire('Error Occured');
       }
     });
 

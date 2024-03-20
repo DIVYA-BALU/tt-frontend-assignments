@@ -22,7 +22,7 @@ export class HeaderComponent {
 
   ngOnInit() {
 
-    const loginResponseSubscription = this.userDetailsService.loginResponseSubject$.subscribe({
+    this.loginResponseSubscription = this.userDetailsService.loginResponseSubject$.subscribe({
       next: (loginResponse) => {
         this.userEmail = loginResponse.userEmail,
           this.role = loginResponse.role.name

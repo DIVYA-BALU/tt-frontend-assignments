@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { PopUpComponent } from '../../pop-up/pop-up.component';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -9,6 +8,7 @@ import { Branch } from 'src/app/core/models/API.model';
 import { BranchService } from 'src/app/core/services/branch.service';
 import { UserDetailsService } from 'src/app/core/services/user-details.service';
 import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-enrollment-dialog-form',
@@ -17,6 +17,7 @@ import { Subscription } from 'rxjs';
 })
 export class UserEnrollmentDialogFormComponent {
   isLoading: boolean = false;
+  isSaveClicked: boolean = false;
   enrollUserForm: FormGroup;
   branches: Branch[] = [];
   roles: string[] = ['Employee', 'Manager'];
@@ -28,14 +29,13 @@ export class UserEnrollmentDialogFormComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private branchService: BranchService,
-    private router: Router,
     private dialog: MatDialog,
     private userDetailsService: UserDetailsService) {
     this.enrollUserForm = this.fb.group({
       emailId: ['', [Validators.required, Validators.email]],
       name: ['', [Validators.required, Validators.maxLength(15)]],
       password: ['', Validators.required],
-      branchId: [null, Validators.required],
+      branchId: ['', Validators.required],
       role: ['', Validators.required]
     });
   }
@@ -45,17 +45,26 @@ export class UserEnrollmentDialogFormComponent {
   }
 
   getAllBranches() {
-    const branchesSubscription = this.branchService.getAllBranches().subscribe({
+    this.branchesSubscription = this.branchService.getAllBranches().subscribe({
       next: (branches) => this.branches = branches,
-      error: (HttpErrorResponse) => {
-        alert('Error Occured Retry Later');
+      error: () => {
+        Swal.fire('Section Saved Successfuly');
       }
     })
   }
 
   submit() {
+
     this.isLoading = true;
-    const enrollUserSubscription = this.authService.enrollUser(this.enrollUserForm.value).subscribe({
+    this.isSaveClicked = true;
+
+    if(this.enrollUserForm.invalid)
+    {
+      this.isLoading = false;
+      return;
+    }
+
+    this.enrollUserSubscription = this.authService.enrollUser(this.enrollUserForm.value).subscribe({
       next: () => {
         this.isLoading = false;
         this.userDetailsService.setPaginatedUsersSubject();
@@ -70,18 +79,10 @@ export class UserEnrollmentDialogFormComponent {
         this.isLoading = false;
 
         if (error.status === 406) {
-          this.dialog.open(PopUpComponent, {
-            data: {
-              message: `Email Id Already exists`
-            },
-          });
+          Swal.fire('Email Id Already Exists');
         }
         else {
-          this.dialog.open(PopUpComponent, {
-            data: {
-              message: `${error.status} found`
-            },
-          });
+          Swal.fire('Error Occured');
         }
 
       }

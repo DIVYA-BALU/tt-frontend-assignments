@@ -1,8 +1,8 @@
 <mat-toolbar color="primary" class="custom-toolbar">
-  <span>Store Administration</span>
+  <span>Store Minder</span>
   <div *ngIf="isLoggedIn()">
     <span>{{userEmail}} - {{role}}</span>
-    <button mat-icon-button [matMenuTriggerFor]="menu" class="mat-icon-button">
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="mat-icon-button" class="icon">
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">

@@ -28,7 +28,7 @@ public class CustomAttendanceDetailRepository {
 
   public Page<AttendanceDetail> getAttendanceDetails(String branchId, String sectionId, LocalDate date,
       Pageable pageable) {
-    Query query = new Query(Criteria.where("user.branchesId").in(branchId).and("date").is(date));
+    Query query = new Query(Criteria.where("user.branchIds").in(branchId).and("date").is(date));
     if (sectionId != null) {
       query.addCriteria(Criteria.where("user.sectionId").is(sectionId));
     }

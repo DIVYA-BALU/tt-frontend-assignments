@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { BranchService } from 'src/app/core/services/branch.service';
 import { BranchDialogFormComponent } from '../branch-dialog-form/branch-dialog-form.component';
-import { Branch, PaginatedResponse } from 'src/app/core/models/API.model';
+import { Branch } from 'src/app/core/models/API.model';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -31,7 +30,7 @@ export class BranchLayoutComponent implements OnInit {
   }
 
   getBranchDetails() {
-    const branchSubscription = this.branchService.paginatedBranches$.subscribe({
+    this.branchSubscription = this.branchService.paginatedBranches$.subscribe({
       next: (paginatedBranches) => {
         this.totalBranches = paginatedBranches.totalElements;
         this.dataSource.data = paginatedBranches.content;

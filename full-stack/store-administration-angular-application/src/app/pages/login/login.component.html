@@ -1,31 +1,28 @@
-<h1>Login Page</h1>
+<div class="main-div">
 
-<div class="form-div">
+  <div class="form-div">
+    <h1>LOGIN</h1>
 
-  <form [formGroup]="loginForm" (ngSubmit)="login()">
-
-    <div>
-      <label for="emailId">Email Id:</label>
-      <input type="text" id="emailId" formControlName="emailId" autocomplete="off">
-
-      <div *ngIf="loginForm.get('emailId')?.invalid && loginForm.get('emailId')?.touched">
-        <span *ngIf="loginForm.get('emailId')?.hasError('required')">EmailId is required</span>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="inputs">
+        <label for="emailId">Email Id :</label>
+        <input type="text" id="emailId" formControlName="emailId" placeholder="Enter your email" autocomplete="off">
+      </div>
+      <div class="indication"
+        *ngIf="loginForm.get('emailId')?.invalid && (loginForm.get('emailId')?.touched || isLoginClicked)">
+        <span *ngIf="loginForm.get('emailId')?.hasError('required')">Email Id is required</span>
         <span *ngIf="loginForm.get('emailId')?.hasError('email')">Please enter a valid emailId.</span>
       </div>
-
-    </div>
-
-    <div>
-
-      <label for="password">Password:</label>
-      <input type="password" id="password" formControlName="password" autocomplete="off">
-
-      <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+      <div class="inputs">
+        <label for="password">Password :</label>
+        <input type="password" id="password" formControlName="password" placeholder="Enter your password"
+          autocomplete="off">
+      </div>
+      <div class="indication"
+        *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.touched || isLoginClicked)">
         <span *ngIf="loginForm.get('password')?.hasError('required')">Password is required.</span>
       </div>
-
-    </div>
-    
-    <button type="submit" [disabled]="loginForm.invalid || isLoading">Login</button>
-  </form>
+      <button type="submit" [disabled]="isLoading">Login</button>
+    </form>
+  </div>
 </div>

@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { BillService } from 'src/app/core/services/bill.service';
-import { PopUpComponent } from '../../pop-up/pop-up.component';
 import { InvestmentService } from 'src/app/core/services/investment.service';
 import { IncomeStatement } from 'src/app/core/models/API.model';
 import { Router } from '@angular/router';
@@ -48,26 +47,12 @@ export class FinancialManagementComponent {
   }
 
   getTotalRevenueAndInvestment() {
-    const revenueSubscription = this.billService.getRevenue().subscribe({
-      next: (revenue) => { this.totalRevenue = revenue.totalRevenue },
-      error: () => {
-        this.dialog.open(PopUpComponent, {
-          data: {
-            message: 'Error occured retry after sometime',
-          },
-        });
-      }
+    this.revenueSubscription = this.billService.getRevenue().subscribe({
+      next: (revenue) => { this.totalRevenue = revenue.totalRevenue }
     })
 
-    const totalInvestmentSubscription = this.investmentService.totalInvestment$.subscribe({
-      next: (investment) => this.totalInvestment = investment.amount,
-      error: () => {
-        this.dialog.open(PopUpComponent, {
-          data: {
-            message: 'Error occured retry after sometime',
-          },
-        });
-      }
+    this.totalInvestmentSubscription = this.investmentService.totalInvestment$.subscribe({
+      next: (investment) => this.totalInvestment = investment.amount
     })
   }
 
@@ -76,7 +61,7 @@ export class FinancialManagementComponent {
   }
 
   getBranchWiseAnalysis() {
-    const branchWiseAnalysisSubscription = this.billService.getBranchWiseAnalysis(this.branchPageNumber, this.branchPageSize).subscribe({
+    this.branchWiseAnalysisSubscription = this.billService.getBranchWiseAnalysis(this.branchPageNumber, this.branchPageSize).subscribe({
       next: (paginatedBanchWiseAnalysis) => {
         this.branchWiseAnalysis.data = paginatedBanchWiseAnalysis.content;
         this.totalBranchWiseResults = paginatedBanchWiseAnalysis.totalElements;
@@ -85,7 +70,7 @@ export class FinancialManagementComponent {
   }
 
   getSectionWiseAnalysis() {
-    const sectionWiseAnalysisSubscription = this.billService.getSectionWiseAnalysis(this.sectionPageNumber, this.sectionPageSize).subscribe({
+    this.sectionWiseAnalysisSubscription = this.billService.getSectionWiseAnalysis(this.sectionPageNumber, this.sectionPageSize).subscribe({
       next: (paginatedSectionWiseAnalysis) => {
         this.sectionWiseAnalysis.data = paginatedSectionWiseAnalysis.content;
         this.totalSectionWiseResults = paginatedSectionWiseAnalysis.totalElements;

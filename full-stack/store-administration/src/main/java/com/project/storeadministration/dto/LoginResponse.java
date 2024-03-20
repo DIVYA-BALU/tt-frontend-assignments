@@ -18,10 +18,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class LoginResponse {
   private String userEmail;
-  private List<String> branchesId;
+  private List<String> branchIds;
   private String sectionId;
   private String jwt;
-  @DocumentReference(collection =  "roles")
+  @DocumentReference(collection = "roles")
   private Role role;
   @DocumentReference(collection = "permissions")
   private List<Permission> permissions;

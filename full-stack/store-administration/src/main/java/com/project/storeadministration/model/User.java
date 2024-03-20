@@ -28,7 +28,7 @@ public class User implements UserDetails {
   private String emailId;
   private String name;
   private String password;
-  private List<String> branchesId;
+  private List<String> branchIds;
   @DocumentReference(collection = "roles")
   private Role role;
   @DocumentReference(collection = "permissions")

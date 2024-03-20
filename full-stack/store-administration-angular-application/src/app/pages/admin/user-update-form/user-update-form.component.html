@@ -1,19 +1,18 @@
 <mat-dialog-content class="mat-typography">
-
-  <h1>UPDATE USER DETAILS</h1>
   <div class="form-div">
+    <h1>UPDATE USER DETAILS</h1>
     <form [formGroup]="userDetailsForm" >
-      <div>
-        <mat-form-field appearance="fill">
-          <mat-label>Name</mat-label>
-          <input matInput formControlName="name">
-        </mat-form-field>
-        <div *ngIf="userDetailsForm.get('name')?.invalid">
+      <div class="row-div">
+        <div class="form-elements">
+          <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name">
+          </mat-form-field>
+          <div *ngIf="userDetailsForm.get('name')?.invalid">
           <span *ngIf="userDetailsForm.get('name')?.hasError('required')">Username is required.</span>
         </div>
       </div>
-  
-      <div>
+      <div class="form-elements">
         <mat-form-field appearance="fill">
           <mat-label>Email Id</mat-label>
           <input matInput formControlName="emailId">
@@ -23,8 +22,7 @@
           <span *ngIf="userDetailsForm.get('emailId')?.hasError('email')">Please enter a valid emailId.</span>
         </div>
       </div>
-  
-      <div>
+      <div class="form-elements">
         <mat-form-field appearance="fill">
           <mat-label>Role</mat-label>
           <mat-select formControlName="role" #selectedRole>
@@ -32,13 +30,24 @@
           </mat-select>
         </mat-form-field>
       </div>
-  
-      <div>
+    </div>
+    <div class="second-row-div">
+      <div formArrayName="branchIds" class="second-row-elements">
+        <h2>Branches</h2>
+        <div class="branches-div" *ngFor="let branch of availableBranches; let i = index">
+          <label>
+            <input type="checkbox" [formControlName]="i" formControlName="branchIds">{{ branch.name }}
+          </label>
+        </div>
+        <div *ngIf="userDetailsForm.get('branchIds')?.invalid">
+          <span *ngIf="userDetailsForm.get('branchIds')?.hasError('required')">Branch is required.</span>
+        </div>
+      </div>
+      <div class="second-row-elements">
         <h2>{{selectedRole.value.name}} permissions</h2>
         <p *ngFor="let permission of selectedRole.value.permissions">{{permission.name}}</p>
       </div>
-  
-      <div formArrayName="permissions">
+      <div formArrayName="permissions" class="second-row-elements">
         <h2>Additional Permissions</h2>
         <div *ngFor="let permission of availablePermissions; let i = index">
           <label *ngIf = checkRolePermission(permission)>
@@ -46,20 +55,8 @@
           </label>
         </div>
       </div>
-  
-      <div formArrayName="branchesId">
-        <h2>Branches</h2>
-        <div class="branches-div" *ngFor="let branch of availableBranches; let i = index">
-          <label>
-            <input type="checkbox" [formControlName]="i" formControlName="branchesId">{{ branch.name }}
-          </label>
-        </div>
-        <div *ngIf="userDetailsForm.get('branchesId')?.invalid">
-          <span *ngIf="userDetailsForm.get('branchesId')?.hasError('required')">Branch is required.</span>
-        </div>
-      </div>
-  
-      <div >
+    </div>
+      <div class="form-elements" >
         <button mat-raised-button color="primary" type="submit" [disabled]="userDetailsForm.invalid" (click)="onSubmit()">Save</button>
         <button mat-raised-button color="primary" (click)="closeUpdateUserForm()" class="close-button">Close</button>
       </div>

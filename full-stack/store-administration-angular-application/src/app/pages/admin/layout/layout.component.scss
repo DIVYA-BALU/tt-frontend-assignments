@@ -1,10 +1,14 @@
+$primary-color: rgb(61, 61, 138);
+
 .container {
   display: flex;
+  background-color: rgba(248, 248, 208, 0.188);
 }
 
 .sidenav-div {
   flex: 0 0 auto;
   width: 220px;
+  background-color: #c2e3aebd;
 }
 
 .content {
@@ -25,5 +29,5 @@
 
 .content{
   margin: 30px 20px 20px 20px;
-  
+
 }

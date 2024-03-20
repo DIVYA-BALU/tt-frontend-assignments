@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IncomeStatement } from 'src/app/core/models/API.model';
 import { BillService } from 'src/app/core/services/bill.service';
@@ -25,12 +25,12 @@ export class SectionWiseAnalysisComponent {
   private sectionWiseAnalysisSubscription: Subscription = new Subscription;
 
 
-  constructor(private billservice: BillService, private route: ActivatedRoute, private router: Router) {
+  constructor(private billservice: BillService, private route: ActivatedRoute) {
     this.sectionWiseAnalysisForBranch = new MatTableDataSource<IncomeStatement>;
   }
 
   ngOnInit() {
-    const subscription = this.route.queryParams.subscribe({
+    this.subscription = this.route.queryParams.subscribe({
       next: (params) => {
         this.branchId = params['branchId'];
         this.branchName = params['branchName'];
@@ -46,7 +46,7 @@ export class SectionWiseAnalysisComponent {
   }
 
   getSectionWiseAnalysisForBranch() {
-    const sectionWiseAnalysisSubscription = this.billservice.getSectionWiseAnalysisForBranch(this.pageNumber, this.pageSize, this.branchId).subscribe({
+    this.sectionWiseAnalysisSubscription = this.billservice.getSectionWiseAnalysisForBranch(this.pageNumber, this.pageSize, this.branchId).subscribe({
       next: (sectionWiseAnalysisForBranch) => {
         this.sectionWiseAnalysisForBranch.data = sectionWiseAnalysisForBranch.content;
         this.totalSections = sectionWiseAnalysisForBranch.totalElements;
@@ -54,21 +54,11 @@ export class SectionWiseAnalysisComponent {
     })
   }
 
-  onRowClicked(sectionId: string, sectionName: string) {
-    this.router.navigate(['admin/date-wise-analysis-for-section'], {
-      queryParams: {
-        sectionId: sectionId,
-        sectionName: sectionName,
-        branchId: this.branchId,
-        branchName: this.branchName
-      }
-    });
-  }
-
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+
     if (this.sectionWiseAnalysisSubscription) {
       this.sectionWiseAnalysisSubscription.unsubscribe();
     }

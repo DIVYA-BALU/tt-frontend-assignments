@@ -31,7 +31,7 @@ export class SectionLayoutComponent {
   }
 
   getSectionDetails() {
-    const subscription = this.sectionService.paginationSections$.subscribe({
+    this.subscription = this.sectionService.paginationSections$.subscribe({
       next: (paginationSection) => {
         this.dataSource.data = paginationSection.content;
         this.totalSections = paginationSection.totalElements;
@@ -51,11 +51,9 @@ export class SectionLayoutComponent {
   }
 
   ngOnDestroy() {
-
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-
   }
 
 }

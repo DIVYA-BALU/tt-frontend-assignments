@@ -25,7 +25,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { SectionWiseAnalysisComponent } from './section-wise-analysis/section-wise-analysis.component';
-import { DateWiseAnalysisComponent } from './date-wise-analysis/date-wise-analysis.component';
 import { PermissionDirective } from 'src/app/directives/permission.directive';
 import { BranchDirective } from 'src/app/directives/branch.directive';
 import { RoleDirective } from 'src/app/directives/role.directive';
@@ -33,6 +32,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { UserUpdateFormComponent } from './user-update-form/user-update-form.component';
 import { ManagerLayoutComponent } from './manager-layout/manager-layout.component';
 import {MatListModule} from '@angular/material/list';
+import { ProductsBillingComponent } from './products-billing/products-billing.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -49,12 +50,12 @@ import {MatListModule} from '@angular/material/list';
     InvestmentDialogFormComponent,
     BillComponent,
     SectionWiseAnalysisComponent,
-    DateWiseAnalysisComponent,
     PermissionDirective,
     BranchDirective,
     RoleDirective,
     UserUpdateFormComponent,
-    ManagerLayoutComponent
+    ManagerLayoutComponent,
+    ProductsBillingComponent
   ],
   imports: [
     CommonModule,
@@ -64,6 +65,7 @@ import {MatListModule} from '@angular/material/list';
     MatPaginatorModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    MatSlideToggleModule,
     FormsModule,
     MatListModule,
     ReactiveFormsModule,

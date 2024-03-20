@@ -1,49 +1,126 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Bill, BillItem } from 'src/app/core/models/API.model';
+import { Bill, BillItem, Product } from 'src/app/core/models/API.model';
 import { BillService } from 'src/app/core/services/bill.service';
-import { PopUpComponent } from '../../pop-up/pop-up.component';
 import { ProductService } from 'src/app/core/services/product.service';
 import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-bill',
   templateUrl: './bill.component.html',
   styleUrls: ['./bill.component.scss']
 })
+
 export class BillComponent {
-  bill: Bill;
-  displayedColumns: string[] = ['Serial Number', 'Product Name', 'Price', 'Quantity', 'Total Price'];
+  displayedColumns: string[] = ['Serial Number', 'Product Name', 'Price', 'Quantity', 'Total Price', 'Remove'];
   dataSource: MatTableDataSource<BillItem>;
+  bill: Bill = new Bill([], 0, '', '');
+  currentDate: Date;
+  edit: boolean = false;
+  private initialBillSubscription: Subscription = new Subscription;
+  private billSubscription: Subscription = new Subscription;
 
-  private subscription: Subscription = new Subscription;
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { bill: Bill }, private dialog: MatDialog, private billService: BillService, private productService: ProductService) {
-    this.dataSource = new MatTableDataSource<BillItem>(data.bill.billItems);
-    this.bill = data.bill;
-  }
-
-  saveBill() {
-    const subscription = this.billService.saveBill(this.bill).subscribe({
-      next: () => {
-        this.dialog.open(PopUpComponent, {
-          data: {
-            message: `Bill Saved Successfully.Please Collect Total Bill Amount: ${this.bill.totalPrice} `,
-          },
-        });
-        this.productService.setPaginatedProductsSubject();
-      },
-      error: () => {
-        alert('Error Occured Retry Later');
+  constructor(private billService: BillService, private productService: ProductService) {
+    this.currentDate = new Date();
+    this.dataSource = new MatTableDataSource<BillItem>();
+    this.initialBillSubscription = this.billService.billSubject$.subscribe({
+      next: (billSubject) => {
+        this.bill = billSubject;
+        this.dataSource = new MatTableDataSource<BillItem>(billSubject.billItems);
       }
     })
   }
 
+  availableQuantities(product: Product): number[] {
+    const quantities: number[] = [];
+
+    for (let i = 0; i <= product.availableQuantity; i++) {
+      quantities.push(i);
+    }
+
+    return quantities;
+  }
+
+  addToBill(product: Product, selectedQuantity: string): void {
+    const bill = this.billService.billSubject.value;
+
+    const quantity = parseInt(selectedQuantity);
+    const itemIndex = bill.billItems.findIndex(item => item.product._id === product._id);
+
+    if (itemIndex !== -1) {
+
+      if (quantity === 0) {
+        bill.billItems.splice(itemIndex, 1);
+      } else {
+        bill.billItems[itemIndex].quantity = quantity;
+      }
+
+    } else if (quantity !== 0) {
+      bill.billItems.push({ product: product, quantity: quantity });
+    }
+
+    bill.totalPrice = 0;
+    bill.billItems.forEach((item) => {
+      bill.totalPrice += item.product.price * item.quantity;
+    })
+
+    this.billService.setBillSubject(bill);
+  }
+
+  removeProduct(product: Product) {
+    const bill = this.billService.billSubject.value;
+    const itemIndex = bill.billItems.findIndex(item => item.product._id === product._id);
+    bill.billItems.splice(itemIndex, 1);
+    bill.totalPrice = 0;
+    bill.billItems.forEach((item) => {
+      bill.totalPrice += item.product.price * item.quantity;
+    })
+    this.billService.setBillSubject(bill);
+  }
+
+  saveBill() {
+
+    if (this.bill.billItems.length === 0) {
+      Swal.fire('No Products Selected');
+      return;
+    }
+
+    this.billSubscription = this.billService.saveBill(this.bill).subscribe({
+      next: () => {
+        Swal.fire('Bill Saved');
+        this.productService.setPaginatedProductsSubject(0, 10, '', this.productService.branchId, this.productService.sectionId);
+        this.billService.setBillSubject(new Bill([], 0, '', ''));
+      },
+      error: () => {
+        Swal.fire('Error Occured Retry Later');
+      }
+    })
+  }
+
+  editButtonClick() {
+    this.edit = !this.edit;
+  }
+
+  cancelBill() {
+
+    if (this.bill.billItems.length === 0) {
+      Swal.fire('No Products Selected');
+      return;
+    }
+
+    this.billService.setBillSubject(new Bill([], 0, '', ''));
+    Swal.fire('Bill Cancelled');
+  }
+
   ngOnDestroy() {
 
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+    if (this.initialBillSubscription) {
+      this.initialBillSubscription.unsubscribe();
+    }
+
+    if (this.billSubscription) {
+      this.billSubscription.unsubscribe();
     }
 
   }

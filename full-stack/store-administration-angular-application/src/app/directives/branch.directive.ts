@@ -1,6 +1,6 @@
 import { Directive, ElementRef, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { UserDetailsService } from '../core/services/user-details.service';
-import { RoleDirective } from './role.directive';
+import { Subscription } from 'rxjs';
 
 @Directive({
   selector: '[appBranch]'
@@ -8,6 +8,7 @@ import { RoleDirective } from './role.directive';
 export class BranchDirective implements OnInit {
 
   @Input() requiredBranchId: string = '';
+  private branchIdSubscription: Subscription = new Subscription;
 
   constructor(
     private el: ElementRef,
@@ -15,21 +16,28 @@ export class BranchDirective implements OnInit {
   ) { }
 
   ngOnInit() {
-    const branchIdSubscription = this.userDetailsService.loginResponseSubject$.subscribe({
+    this.branchIdSubscription = this.userDetailsService.loginResponseSubject$.subscribe({
       next: (loginResponse) => {
         if (loginResponse.role.name !== 'ADMIN')
-          this.checkBranchId(loginResponse.branchesId, this.requiredBranchId)
+          this.checkBranchId(loginResponse.branchIds, this.requiredBranchId)
       }
     })
 
   }
 
-  checkBranchId(branchesId: string[], requiredbranchId: string) {
-    if (!branchesId) {
+  checkBranchId(branchIds: string[], requiredbranchId: string) {
+    if (!branchIds) {
       this.el.nativeElement.style.display = 'none';
     }
-    else if (!branchesId.some(branchId => branchId === requiredbranchId)) {
+    else if (!branchIds.some(branchId => branchId === requiredbranchId)) {
       this.el.nativeElement.style.display = 'none';
     }
+  }
+
+  ngOnDestroy(){
+
+    if(this.branchIdSubscription)
+    this.branchIdSubscription.unsubscribe();
+
   }
 }

@@ -1,33 +1,26 @@
 <div class="form-div">
-
   <h1>FILL BRANCH DETAILS</h1>
-
   <form [formGroup]="branchCreationForm" (ngSubmit)="submit()">
-
-    <div>
+    <div class="form-elements">
       <label for="branchName">Branch Name:</label>
-      <input type="text" id="branchName" formControlName="name">
-      <div *ngIf="branchCreationForm.get('name')?.invalid && branchCreationForm.get('branchName')?.touched">
+      <input type="text" id="branchName" placeholder="Enter Branch Name" formControlName="name" autocomplete="off">
+      <div class="indication"
+        *ngIf="branchCreationForm.get('name')?.invalid && (branchCreationForm.get('name')?.touched || isSaveButtonClicked())">
         <span *ngIf="branchCreationForm.get('name')?.hasError('required')">Branch Name is required</span>
       </div>
     </div>
-
-    <div>
+    <div class="form-elements">
       <label for="location">Location:</label>
-      <input type="text" id="location" formControlName="location">
-
-      <div *ngIf="branchCreationForm.get('location')?.invalid && branchCreationForm.get('location')?.touched">
+      <input type="text" id="location" placeholder="Enter Branch Location" formControlName="location"
+        autocomplete="off">
+      <div class="indication"
+        *ngIf="branchCreationForm.get('location')?.invalid && (branchCreationForm.get('location')?.touched || isSaveButtonClicked())">
         <span *ngIf="branchCreationForm.get('location')?.hasError('required')">Location is required.</span>
       </div>
-
     </div>
-
-    <div class="spinner-button-div">
-      <mat-spinner diameter="32" *ngIf="isLoading"></mat-spinner>
-      <button type="submit" [disabled]="branchCreationForm.invalid || isLoading">Save</button>
+    <div class="form-elements">
+      <button type="submit" [disabled]=isLoading>Save</button>
       <button type="button" (click)="closeBranchDialogForm()">Close</button>
     </div>
-    
   </form>
-
 </div>

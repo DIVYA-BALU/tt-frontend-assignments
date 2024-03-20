@@ -1,13 +1,12 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Branch, Product, Section } from 'src/app/core/models/API.model';
+import { Branch, Section } from 'src/app/core/models/API.model';
 import { BranchService } from 'src/app/core/services/branch.service';
 import { ProductService } from 'src/app/core/services/product.service';
 import { SectionService } from 'src/app/core/services/section.service';
-import { PopUpComponent } from '../../pop-up/pop-up.component';
 import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-dialog-form',
@@ -19,6 +18,7 @@ export class ProductDialogFormComponent implements OnInit {
 
   productCreationForm: FormGroup;
   isLoading: boolean = false;
+  isSaveButtonClicked: boolean = false;
   sections: Section[] = [];
   branches: Branch[] = [];
   productsData: { branch: Branch, quantity: number, price: number }[] = [];
@@ -30,8 +30,8 @@ export class ProductDialogFormComponent implements OnInit {
   constructor(private fb: FormBuilder, private productService: ProductService, private branchService: BranchService, private dialog: MatDialog, private sectionService: SectionService) {
     this.productCreationForm = this.fb.group({
       productName: ['', [Validators.required]],
-      branch: [null, Validators.required],
-      section: [null, Validators.required],
+      branch: ['', Validators.required],
+      section: ['', Validators.required],
       cogs: ['', [Validators.required, this.validateNumber]],
       totalQuantity: ['', [Validators.required, this.validateNumber]],
       price: ['', [Validators.required, this.validateNumber]],
@@ -39,16 +39,16 @@ export class ProductDialogFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    const sectionsSubscription = this.sectionService.getAllSections().subscribe({
+    this.sectionsSubscription = this.sectionService.getAllSections().subscribe({
       next: (sections) => this.sections = sections,
-      error: (HttpErrorResponse) => {
-        alert('Error Occured Retry Later');
+      error: () => {
+        Swal.fire('Error Occured');
       }
     })
-    const branchesSubscription = this.branchService.getAllBranches().subscribe({
+    this.branchesSubscription = this.branchService.getAllBranches().subscribe({
       next: (branches) => this.branches = branches,
-      error: (HttpErrorResponse) => {
-        alert('Error Occured Retry Later');
+      error: () => {
+        Swal.fire('Error Occured');
       }
     })
   }
@@ -64,22 +64,27 @@ export class ProductDialogFormComponent implements OnInit {
   }
 
   submit() {
+
     this.isLoading = true;
-    const productSubscription = this.productService.saveProducts(this.productCreationForm.value).subscribe({
+    this.isSaveButtonClicked = true;
+
+    if(this.productCreationForm.invalid)
+    {
+      this.isLoading = false;
+      return;
+    }
+    
+    this.productSubscription = this.productService.saveProducts(this.productCreationForm.value).subscribe({
       next: () => {
         this.isLoading = false,
           this.closeProductDialogForm();
         this.productCreationForm.reset();
         this.productService.setPaginatedProductsSubject();
-        this.dialog.open(PopUpComponent, {
-          data: {
-            message: 'Product Saved Successfully',
-          },
-        });
+        Swal.fire('Product Saved Successfully');
       },
-      error: (HttpErrorResponse) => {
+      error: () => {
         this.isLoading = false;
-        alert('Error Occured Retry Later');
+        Swal.fire('Error Occured');
       }
     })
   }

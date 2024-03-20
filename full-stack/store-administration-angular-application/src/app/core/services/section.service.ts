@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, tap } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { Constants } from '../constants/Constants';
 import { PaginatedResponse, Section } from '../models/API.model';
@@ -21,13 +21,12 @@ export class SectionService {
   });
 
   public paginationSections$: Observable<PaginatedResponse<Section>> = this.paginationSections.asObservable();
-  
-  private subscription: Subscription = new Subscription;
-  private paginationSubscription: Subscription = new Subscription;
-  
+
   private sections: BehaviorSubject<Section[]> = new BehaviorSubject<Section[]>([]);
 
   public sections$: Observable<Section[]> = this.sections.asObservable();
+  private sectionsSubscription: Subscription = new Subscription;
+  private paginationSectionsSubscription: Subscription = new Subscription;
 
   constructor(private http: HttpClient) {
   }
@@ -44,22 +43,10 @@ export class SectionService {
   }
 
   setPaginationSectionsSubject(page: number = 0, size: number = 10) {
-
-    const paginationSubscription = this.getPaginationSections(page, size).
-      subscribe({
-        next: (paginationSections) => {
-          this.paginationSections.next(paginationSections);
-        },
-        error: (error: HttpErrorResponse) => {
-
-          if (error.status === 404)
-            alert('Unable to connect to the server');
-          else
-            alert(`${error.status} found`);
-
-        }
+    this.paginationSectionsSubscription = this.getPaginationSections(page, size)
+      .subscribe((paginationSections) => {
+        this.paginationSections.next(paginationSections);
       });
-    ;
   }
 
   getAllSections(): Observable<Section[]> {
@@ -67,32 +54,17 @@ export class SectionService {
   }
 
   setSectionsSubject() {
-    const subscription = this.getAllSections().
-      subscribe({
-        next: (sections) => {
-          this.sections.next(sections);
-        },
-        error: (error: HttpErrorResponse) => {
-
-          if (error.status === 404)
-            alert('Unable to connect to the server');
-          else
-            alert(`${error.status} found`);
-          
-        }
+    this.sectionsSubscription = this.getAllSections()
+      .subscribe((sections) => {
+        this.sections.next(sections);
       });
-    ;
   }
 
-  ngOnDestroy() {
+  unSubscribeAll() {
+    if (this.sectionsSubscription)
+      this.sectionsSubscription.unsubscribe();
 
-    if (this.paginationSubscription) {
-      this.paginationSubscription.unsubscribe();
-    }
-
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-
+    if (this.paginationSectionsSubscription)
+      this.paginationSectionsSubscription.unsubscribe();
   }
 }

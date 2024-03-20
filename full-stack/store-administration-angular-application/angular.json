@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "storeadministration-angular-application": {
+    "store-minder": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/storeadministration-angular-application",
+            "outputPath": "dist/store-minder",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "storeadministration-angular-application:build:production"
+              "browserTarget": "store-minder:build:production"
             },
             "development": {
-              "browserTarget": "storeadministration-angular-application:build:development"
+              "browserTarget": "store-minder:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "storeadministration-angular-application:build"
+            "browserTarget": "store-minder:build"
           }
         },
         "test": {

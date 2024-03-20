@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./store-management.component.scss']
 })
 export class StoreManagementComponent {
-
+  selectedTabIndex: number = 0;
+  
+  tabChanged(index: number) {
+    this.selectedTabIndex = index;
+  }
 }
