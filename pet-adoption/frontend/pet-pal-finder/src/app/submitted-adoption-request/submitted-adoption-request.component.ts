@@ -35,7 +35,7 @@ export class SubmittedAdoptionRequestComponent {
     });
   }
 
-  ngOnDestory() {
+  ngOnDestroy() {
     this.idSubscription.unsubscribe();
     this.getSubscription.unsubscribe();
   }

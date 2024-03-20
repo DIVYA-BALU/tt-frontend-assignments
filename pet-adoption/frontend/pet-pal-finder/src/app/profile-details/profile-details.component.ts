@@ -117,7 +117,7 @@ export class ProfileDetailsComponent {
   }
 
   register() {
-    if(this.formResponse.invalid){
+    if (this.formResponse.invalid) {
       Swal.fire({
         title: 'Invalid Input!',
         text: 'Please fill all the details appropriately',
@@ -127,7 +127,10 @@ export class ProfileDetailsComponent {
     }
     const formData: FormData = new FormData();
     formData.append('name', this.formResponse.value.name);
-    formData.append('profilePhoto', this.profile === null?new Blob([]):this.profile);
+    formData.append(
+      'profilePhoto',
+      this.profile === null ? new Blob([]) : this.profile
+    );
     formData.append('occupation', this.formResponse.value.occupation);
     formData.append('dob', this.formResponse.value.dob);
     formData.append('location.doorNo', this.formResponse.value.location.doorNo);
@@ -210,7 +213,6 @@ export class ProfileDetailsComponent {
                 image: [],
               });
             },
-
           });
       },
     });

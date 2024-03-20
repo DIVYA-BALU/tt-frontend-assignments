@@ -83,7 +83,7 @@ export class HomeComponent {
     //       },
     //     });
     // }else{
-      this.getPostSubscription = this.petPostService
+    this.getPostSubscription = this.petPostService
       .getLatestPost(this.page)
       .subscribe({
         next: (val) => {
@@ -123,7 +123,7 @@ export class HomeComponent {
     //     },
     //   });
     // } else {
-      this.loadData();
+    this.loadData();
     // }
 
     this.getSearchInput();
@@ -146,7 +146,7 @@ export class HomeComponent {
     this.route.navigate(['pet/search', this.inputValue]);
   }
 
-  ngOnDestory() {
+  ngOnDestroy() {
     this.idSubscription.unsubscribe();
     this.userSubscription.unsubscribe();
     this.getPostSubscription.unsubscribe();

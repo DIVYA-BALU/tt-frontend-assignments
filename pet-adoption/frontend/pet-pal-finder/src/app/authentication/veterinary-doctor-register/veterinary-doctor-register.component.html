@@ -1,14 +1,25 @@
 <div class="container">
   <div class="box">
     <div class="page-title">Pet Pal Finder</div>
-    
-    <input type="file" (change)="getProfile($event)" #profileEl hidden/>
 
-    <input type="file" (change)="getCertificate($event)" #certificateEl hidden/>
+    <input type="file" (change)="getProfile($event)" #profileEl hidden />
+
+    <input
+      type="file"
+      (change)="getCertificate($event)"
+      #certificateEl
+      hidden
+    />
     <form action="" [formGroup]="formResponse" (ngSubmit)="request()">
-      <div class="file" (click)="profileEl.click()">{{profile === null?'Upload profile image*':profile.name}}</div>
-      <div class="file" (click)="certificateEl.click()">{{certificate === null?'Upload certificate image*':certificate.name}}</div>
-      
+      <div class="file" (click)="profileEl.click()">
+        {{ profile === null ? "Upload profile image*" : profile.name }}
+      </div>
+      <div class="file" (click)="certificateEl.click()">
+        {{
+          certificate === null ? "Upload certificate image*" : certificate.name
+        }}
+      </div>
+
       <mat-form-field class="feild">
         <mat-label>Full Name</mat-label>
         <input type="text" matInput formControlName="name" />

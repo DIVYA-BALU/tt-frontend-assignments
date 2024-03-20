@@ -2,18 +2,15 @@ import { Component } from '@angular/core';
 import { CommonModule, Time } from '@angular/common';
 import { AuthService } from '../service/auth.service';
 import { VeterinaryDoctorService } from '../service/veterinary-doctor.service';
-import {
-  AppointmentStatus,
-  AppointmentStatusDto,
-  AppointmentUpdate,
-} from '../models/models';
+import { AppointmentStatusDto } from '../models/models';
 import Swal from 'sweetalert2';
-import { FormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { PendingDoctorRequestCardComponent } from '../pending-doctor-request-card/pending-doctor-request-card.component';
 
 @Component({
   selector: 'app-pending-doctor-request',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, PendingDoctorRequestCardComponent],
   templateUrl: './pending-doctor-request.component.html',
   styleUrls: ['./pending-doctor-request.component.scss'],
 })
@@ -22,76 +19,33 @@ export class PendingDoctorRequestComponent {
     private veterinaryDoctorService: VeterinaryDoctorService,
     private authService: AuthService
   ) {}
+  private requestSubscription: Subscription = new Subscription();
+  private idSubscription: Subscription = new Subscription();
 
   appointmentStatuses: AppointmentStatusDto[] = [];
 
-  appointmentUpdate: AppointmentUpdate = {
-    id: '',
-    status: '',
-    date: new Date(),
-  };
-
-  time = '';
-  date = '';
-
   ngOnInit() {
     Swal.showLoading();
-
-    this.authService.sharedId$.subscribe({
-      next: (id) => {
-        this.veterinaryDoctorService
-          .getReceivedRequest(id, 'initiated')
-          .subscribe({
-            next: (val) => {
-              Swal.close();
-              this.appointmentStatuses = val;
-            },
-          });
-      },
-    });
+    this.loadData();
   }
 
   loadData() {
-    this.authService.sharedId$.subscribe({
+    this.idSubscription = this.authService.sharedId$.subscribe({
       next: (id) => {
-        this.veterinaryDoctorService
+        this.requestSubscription = this.veterinaryDoctorService
           .getReceivedRequest(id, 'initiated')
           .subscribe({
             next: (val) => {
               Swal.close();
-
               this.appointmentStatuses = val;
             },
           });
       },
     });
   }
-  acceptAppointment(id: string, status: string) {
-    this.appointmentUpdate.id = id;
-    this.appointmentUpdate.status = status;
-    this.appointmentUpdate.date = new Date(this.date + 'T' + this.time);
-    if(status === 'accepted' && (this.date === '' ||  this.time==='')){
-      Swal.fire({
-        title: 'Invalid!',
-        text: 'Please choose the appointment date and time',
-        icon: 'error',
-      })
-      return;
-    }Swal.showLoading();
-    this.veterinaryDoctorService
-      .updateAppointment(this.appointmentUpdate)
-      .subscribe({
-        next: (val) => {
-          Swal.close();
-          Swal.fire({
-            title: 'Updated!',
-            icon: 'success',
-          }).then(()=>{
 
-            this.loadData();
-          })
-         
-        },
-      });
+  ngOnDestroy() {
+    this.idSubscription.unsubscribe();
+    this.requestSubscription.unsubscribe();
   }
 }

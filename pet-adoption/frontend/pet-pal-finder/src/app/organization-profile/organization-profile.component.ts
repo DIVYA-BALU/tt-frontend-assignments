@@ -21,6 +21,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ImagePathConverterPipe } from '../pipes/image-path-converter.pipe';
 import { Organization } from '../models/models';
 import { ProfileService } from '../service/profile.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-organization-profile',
@@ -51,7 +52,9 @@ export class OrganizationProfileComponent {
     private router: Router,
     private profileService: ProfileService
   ) {}
-
+  private getSubscription: Subscription = new Subscription();
+  private idSubscription: Subscription = new Subscription();
+  private updateSubscription: Subscription = new Subscription();
   organization: Organization = {
     _id: '',
     name: '',
@@ -135,7 +138,7 @@ export class OrganizationProfileComponent {
     formData.append('contactNumber', this.formResponse.value.contactNumber);
     formData.append('id', this.organization._id);
 
-    this.profileService
+    this.updateSubscription = this.profileService
       .updateOrganizationProfile(formData)
       .subscribe({ next: (res) => {} });
   }
@@ -146,51 +149,59 @@ export class OrganizationProfileComponent {
     this.router.navigate(['pet']);
   }
   ngOnInit() {
-    this.authService.sharedId$.subscribe({
+    this.idSubscription = this.authService.sharedId$.subscribe({
       next: (id) => {
-        this.profileService.getOrganizationProfile(id).subscribe({
-          next: (val) => {
-            this.organization = val;
-            this.formResponse = this.formBuilder.group({
-              name: [
-                this.organization.name,
-                [Validators.required, Validators.minLength(1)],
-              ],
-              image: [],
-              location: this.formBuilder.group({
-                doorNo: [
-                  this.organization.location.doorNo,
+        this.getSubscription = this.profileService
+          .getOrganizationProfile(id)
+          .subscribe({
+            next: (val) => {
+              this.organization = val;
+              this.formResponse = this.formBuilder.group({
+                name: [
+                  this.organization.name,
                   [Validators.required, Validators.minLength(1)],
                 ],
-                street: [
-                  this.organization.location.street,
+                image: [],
+                location: this.formBuilder.group({
+                  doorNo: [
+                    this.organization.location.doorNo,
+                    [Validators.required, Validators.minLength(1)],
+                  ],
+                  street: [
+                    this.organization.location.street,
+                    [Validators.required, Validators.minLength(1)],
+                  ],
+                  city: [
+                    this.organization.location.city,
+                    [Validators.required, Validators.minLength(1)],
+                  ],
+                  district: [
+                    this.organization.location.district,
+                    [Validators.required, Validators.minLength(1)],
+                  ],
+                  state: [
+                    this.organization.location.state,
+                    [Validators.required, Validators.minLength(1)],
+                  ],
+                  country: [
+                    this.organization.location.country,
+                    [Validators.required, Validators.minLength(1)],
+                  ],
+                }),
+                contactNumber: [
+                  this.organization.contactNumber,
                   [Validators.required, Validators.minLength(1)],
                 ],
-                city: [
-                  this.organization.location.city,
-                  [Validators.required, Validators.minLength(1)],
-                ],
-                district: [
-                  this.organization.location.district,
-                  [Validators.required, Validators.minLength(1)],
-                ],
-                state: [
-                  this.organization.location.state,
-                  [Validators.required, Validators.minLength(1)],
-                ],
-                country: [
-                  this.organization.location.country,
-                  [Validators.required, Validators.minLength(1)],
-                ],
-              }),
-              contactNumber: [
-                this.organization.contactNumber,
-                [Validators.required, Validators.minLength(1)],
-              ],
-            });
-          },
-        });
+              });
+            },
+          });
       },
     });
+  }
+
+  ngOnDestroy() {
+    this.idSubscription.unsubscribe();
+    this.getSubscription.unsubscribe();
+    this.updateSubscription.unsubscribe();
   }
 }

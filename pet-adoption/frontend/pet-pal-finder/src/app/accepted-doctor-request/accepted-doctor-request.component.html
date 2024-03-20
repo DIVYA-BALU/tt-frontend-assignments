@@ -1,4 +1,4 @@
-<div *ngIf="appointmentStatuses.length === 0; else pending">
+<div *ngIf="appointmentStatuses.length === 0; else pending" class="empty">
   You Have No Appointment
 </div>
 <ng-template #pending>

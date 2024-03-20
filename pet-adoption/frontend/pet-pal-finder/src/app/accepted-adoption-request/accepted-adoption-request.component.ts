@@ -85,7 +85,7 @@ export class AcceptedAdoptionRequestComponent {
     });
   }
 
-  ngOnDestory() {
+  ngOnDestroy() {
     this.idSubscription.unsubscribe();
     this.statusSubscription.unsubscribe();
   }

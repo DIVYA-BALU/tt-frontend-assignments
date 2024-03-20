@@ -47,7 +47,11 @@ export class VeterinaryDoctorRegisterComponent {
   }
 
   request() {
-    if (this.profile === null || this.certificate === null || this.formResponse.invalid) {
+    if (
+      this.profile === null ||
+      this.certificate === null ||
+      this.formResponse.invalid
+    ) {
       Swal.fire({
         title: 'Invalid Input!',
         text: 'Please fill all the details appropriately',
@@ -55,8 +59,8 @@ export class VeterinaryDoctorRegisterComponent {
       });
       return;
     }
-    console.log( this.formResponse.invalid);
-    
+    console.log(this.formResponse.invalid);
+
     const formData: FormData = new FormData();
     formData.append('name', this.formResponse.value.name);
     formData.append('email', this.formResponse.value.email);
@@ -83,13 +87,13 @@ export class VeterinaryDoctorRegisterComponent {
       .subscribe({
         next: (res) => {
           Swal.close();
-          if(res.message === 'Email Already Exist'){
+          if (res.message === 'Email Already Exist') {
             Swal.fire({
               title: 'Failed!',
               text: 'Email Already Exist',
               icon: 'error',
             });
-            return
+            return;
           }
           Swal.fire({
             title: 'Requested!',
@@ -105,7 +109,7 @@ export class VeterinaryDoctorRegisterComponent {
       });
   }
 
-  ngOnDestory() {
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 }

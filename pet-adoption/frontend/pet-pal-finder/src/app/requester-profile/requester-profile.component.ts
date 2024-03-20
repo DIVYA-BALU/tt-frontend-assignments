@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProfileService } from '../service/profile.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Adopter, Organization, VeterinaryDoctor } from '../models/models';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-requester-profile',
@@ -19,20 +20,29 @@ export class RequesterProfileComponent {
   ) {}
 
   profile: Adopter | VeterinaryDoctor | undefined;
+  private getSubscription: Subscription = new Subscription();
 
   ngOnInit() {
     if (this.data.type === 'adopter') {
-      this.profileService.getAdopterProfile(this.data.id).subscribe({
-        next: (val) => {
-          this.profile = val;
-        },
-      });
+      this.getSubscription = this.profileService
+        .getAdopterProfile(this.data.id)
+        .subscribe({
+          next: (val) => {
+            this.profile = val;
+          },
+        });
     } else {
-      this.profileService.getVeterinaryDoctorProfile(this.data.id).subscribe({
-        next: (val) => {
-          this.profile = val;
-        },
-      });
+      this.getSubscription = this.profileService
+        .getVeterinaryDoctorProfile(this.data.id)
+        .subscribe({
+          next: (val) => {
+            this.profile = val;
+          },
+        });
     }
+  }
+
+  ngOnDestroy() {
+    this.getSubscription.unsubscribe();
   }
 }

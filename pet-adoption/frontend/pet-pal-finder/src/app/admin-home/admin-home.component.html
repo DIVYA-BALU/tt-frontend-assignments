@@ -1,11 +1,6 @@
-<div class = "revenue">
-  
-  <div id="year-chart" class="chart">
-    Overall revenue
-  </div>
-  <div id="month-chart" class="chart">
-    Year wise revenue
-  </div>
+<div class="revenue">
+  <div id="year-chart" class="chart">Overall revenue</div>
+  <div id="month-chart" class="chart">Year wise revenue</div>
 </div>
 
 <h1>User Details</h1>
@@ -13,14 +8,18 @@
   <div class="user">
     <mat-form-field appearance="fill">
       <mat-label>Role</mat-label>
-      <mat-select [(ngModel)]="role" name="food" (selectionChange)="loadUser(role)">
-        <mat-option *ngFor="let role of roles" [value]="role" >
-          {{role}}
+      <mat-select
+        [(ngModel)]="role"
+        name="food"
+        (selectionChange)="loadUser(role)"
+      >
+        <mat-option *ngFor="let role of roles" [value]="role">
+          {{ role }}
         </mat-option>
       </mat-select>
     </mat-form-field>
-  
-        <table mat-table [dataSource]="users" class="mat-elevation-z8">
+
+    <table mat-table [dataSource]="users" class="mat-elevation-z8">
       <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
@@ -57,18 +56,16 @@
   </div>
   <div class="details">
     <span>Click on email to view the user details</span>
-    <div class="card" *ngIf="userDetail._id !== '' ">
-    <img [src]="url" alt="">
-    <span>Name: {{userDetail.name}}</span>
-   
+    <div class="card" *ngIf="userDetail._id !== ''">
+      <img [src]="url" alt="" />
+      <span>Name: {{ userDetail.name }}</span>
 
-        <span>Location Details:</span>
-        <span> Street : {{ userDetail.location.street }}</span>
-        <span> City : {{ userDetail.location.city }}</span>
-        <span> District : {{ userDetail.location.district }}</span>
-        <span> State : {{ userDetail.location.state }}</span>
-        <span> Country : {{ userDetail.location.country  }}</span>
-        
+      <span>Location Details:</span>
+      <span> Street : {{ userDetail.location.street }}</span>
+      <span> City : {{ userDetail.location.city }}</span>
+      <span> District : {{ userDetail.location.district }}</span>
+      <span> State : {{ userDetail.location.state }}</span>
+      <span> Country : {{ userDetail.location.country }}</span>
     </div>
   </div>
 </div>

@@ -27,6 +27,7 @@ import { PaymentService } from '../service/payment.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 import { SubscriptionPaymentComponent } from '../subscription-payment/subscription-payment.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-veterinary-doctor-profile',
@@ -67,6 +68,11 @@ export class VeterinaryDoctorProfileComponent {
     status: '',
     isSubscribed: false,
   };
+
+  private idSubscription: Subscription = new Subscription();
+  private getSubscription: Subscription = new Subscription();
+  private updateSubscription: Subscription = new Subscription();
+  private userSubscription: Subscription = new Subscription();
 
   subscription: SubscriptionTransaction = {
     _id: null,
@@ -150,7 +156,7 @@ export class VeterinaryDoctorProfileComponent {
   }
 
   register() {
-    if(this.formResponse.invalid){
+    if (this.formResponse.invalid) {
       Swal.fire({
         title: 'Invalid Input!',
         text: 'Please fill all the details appropriately',
@@ -160,7 +166,10 @@ export class VeterinaryDoctorProfileComponent {
     }
     const formData: FormData = new FormData();
     formData.append('name', this.formResponse.value.name);
-    formData.append('profilePhoto', this.profile === null?new Blob([]):this.profile);
+    formData.append(
+      'profilePhoto',
+      this.profile === null ? new Blob([]) : this.profile
+    );
     formData.append('occupation', this.formResponse.value.occupation);
     formData.append('dob', this.formResponse.value.dob);
     formData.append('location.doorNo', this.formResponse.value.location.doorNo);
@@ -179,17 +188,19 @@ export class VeterinaryDoctorProfileComponent {
     formData.append('status', this.user.status);
     formData.append('isSubscribed', this.user.isSubscribed ? 'true' : 'false');
 
-    this.authService.sharedId$.subscribe({
+    this.idSubscription = this.authService.sharedId$.subscribe({
       next: (id) => {
         formData.append('id', id);
-        this.profileService.updateVeterinaryDoctorProfile(formData).subscribe({
-          next: (res) => {
-            Swal.fire({
-              title: 'Updated!',
-              icon: 'success',
-            });
-          },
-        });
+        this.updateSubscription = this.profileService
+          .updateVeterinaryDoctorProfile(formData)
+          .subscribe({
+            next: (res) => {
+              Swal.fire({
+                title: 'Updated!',
+                icon: 'success',
+              });
+            },
+          });
       },
     });
   }
@@ -204,7 +215,7 @@ export class VeterinaryDoctorProfileComponent {
     this.openDialog('30ms', '30ms');
   }
   ngOnInit() {
-    this.profileService.sharedUser$.subscribe({
+    this.userSubscription = this.profileService.sharedUser$.subscribe({
       next: (user) => {
         if ('isSubscribed' in user) {
           this.user = user;
@@ -251,15 +262,21 @@ export class VeterinaryDoctorProfileComponent {
         }
       },
     });
-    this.paymentService.getSubscription(this.user._id).subscribe({
-      next: (val) => {
-        console.log(val);
+    this.getSubscription = this.paymentService
+      .getSubscription(this.user._id)
+      .subscribe({
+        next: (val) => {
+          console.log(val);
 
-        this.subscription = val;
-      },
-    });
+          this.subscription = val;
+        },
+      });
+  }
+
+  ngOnDestroy() {
+    this.idSubscription.unsubscribe();
+    this.getSubscription.unsubscribe();
+    this.updateSubscription.unsubscribe();
+    this.userSubscription.unsubscribe();
   }
 }
-
-
-

@@ -86,7 +86,7 @@ export class AdoptionFormComponent {
     });
   }
 
-  ngOnDestory() {
+  ngOnDestroy() {
     this.idSubscription.unsubscribe();
     this.adoptSubscription.unsubscribe();
   }

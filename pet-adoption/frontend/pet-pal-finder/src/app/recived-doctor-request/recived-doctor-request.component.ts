@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { VeterinaryDoctorService } from '../service/veterinary-doctor.service';
-import { AuthService } from '../service/auth.service';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { PendingDoctorRequestComponent } from '../pending-doctor-request/pending-doctor-request.component';
 import { AcceptedDoctorRequestComponent } from '../accepted-doctor-request/accepted-doctor-request.component';
@@ -11,6 +9,8 @@ import { Adopter, Organization, VeterinaryDoctor } from '../models/models';
 import { SubscriptionPaymentComponent } from '../subscription-payment/subscription-payment.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { Subscription } from 'rxjs';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 declare const Razorpay: any;
 
 @Component({
@@ -19,10 +19,11 @@ declare const Razorpay: any;
   imports: [
     CommonModule,
     MatSidenavModule,
+    MatDatepickerModule,
     PendingDoctorRequestComponent,
     AcceptedDoctorRequestComponent,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   templateUrl: './recived-doctor-request.component.html',
   styleUrls: ['./recived-doctor-request.component.scss'],
@@ -30,6 +31,7 @@ declare const Razorpay: any;
 export class RecivedDoctorRequestComponent {
   isSubscribed: boolean = false;
 
+  private idSubscription: Subscription = new Subscription();
   currentTab: string = 'pending';
   tabChange(tab: string) {
     this.currentTab = tab;
@@ -58,12 +60,16 @@ export class RecivedDoctorRequestComponent {
   }
 
   ngOnInit() {
-    this.profileService.sharedUser$.subscribe({
+    this.idSubscription = this.profileService.sharedUser$.subscribe({
       next: (user: VeterinaryDoctor | Adopter | Organization) => {
         if ('isSubscribed' in user) {
           this.isSubscribed = user.isSubscribed;
         }
       },
     });
+  }
+
+  ngOnDestroy() {
+    this.idSubscription.unsubscribe();
   }
 }

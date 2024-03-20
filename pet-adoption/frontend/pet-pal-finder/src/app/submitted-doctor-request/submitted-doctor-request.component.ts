@@ -6,13 +6,13 @@ import { AuthService } from '../service/auth.service';
 import { DateConverterPipe } from '../pipes/date-converter.pipe';
 import { RatingComponent } from '../rating/rating.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-submitted-doctor-request',
   standalone: true,
-  imports: [CommonModule, DateConverterPipe, MatDialogModule],
+  imports: [CommonModule, DateConverterPipe, MatDialogModule, MatButtonModule],
   templateUrl: './submitted-doctor-request.component.html',
   styleUrls: ['./submitted-doctor-request.component.scss'],
 })

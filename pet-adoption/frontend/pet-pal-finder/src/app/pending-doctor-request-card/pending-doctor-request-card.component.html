@@ -1,0 +1,70 @@
+<div class="container" *ngIf="pending">
+  <div class="details">
+    <img [src]="appointmentStatus?.profileUrl" alt="" class="profile" />
+    <div class="card">
+      Requester Details: <br />
+      <span>Name : {{ appointmentStatus?.name }}</span>
+      <span>Contact Number : {{ appointmentStatus?.contactNumber }}</span>
+      <span>Reason : {{ appointmentStatus?.reason }}</span>
+    </div>
+    <div class="card">
+      Location Details: <br />
+      <span>Street : {{ appointmentStatus?.location?.street }}</span>
+      <span>City : {{ appointmentStatus?.location?.city }}</span>
+      <span>District : {{ appointmentStatus?.location?.district }}</span>
+      <span>State : {{ appointmentStatus?.location?.state }}</span>
+      <span>Country : {{ appointmentStatus?.location?.country }}</span>
+    </div>
+    <div class="appointment">
+      <mat-form-field color="accent" appearance="fill">
+        <mat-label>Choose Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          [min]="minDate"
+          [(ngModel)]="date"
+        />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2 color="primary"></mat-datepicker>
+      </mat-form-field>
+
+      <input
+        placeholder="Choose Time"
+        type="time"
+        [(ngModel)]="time"
+        name="`time${appointmentStatus?._id}`"
+        class="time"
+      />
+    </div>
+    <div class="card">
+      <button
+        type="button"
+        (click)="
+          acceptAppointment(
+            appointmentStatus?.appointmentStatus?._id || '',
+            'accepted'
+          )
+        "
+        class="accept"
+      >
+        Accept
+      </button>
+      <button
+        type="button"
+        (click)="
+          acceptAppointment(
+            appointmentStatus?.appointmentStatus?._id || '',
+            'rejected'
+          )
+        "
+        class="reject"
+      >
+        Reject
+      </button>
+    </div>
+  </div>
+</div>

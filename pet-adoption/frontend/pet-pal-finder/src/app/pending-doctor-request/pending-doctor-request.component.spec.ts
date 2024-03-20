@@ -8,9 +8,8 @@ describe('PendingDoctorRequestComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ PendingDoctorRequestComponent ]
-    })
-    .compileComponents();
+      imports: [PendingDoctorRequestComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PendingDoctorRequestComponent);
     component = fixture.componentInstance;

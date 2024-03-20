@@ -1,24 +1,23 @@
 <div *ngIf="!isSubscribed" class="unsubscribed">
-    It looks like currently you have not subscribed to view and accept the request please subscribe 
-    <button mat-flat-button type="button" (click)="click()">Proceed to payment</button>
+  It looks like currently you have not subscribed to view and accept the request
+  please subscribe
+  <button mat-flat-button type="button" (click)="click()">
+    Proceed to payment
+  </button>
 </div>
 <div *ngIf="isSubscribed">
-<mat-drawer-container class="container" autosize>
+  <mat-drawer-container class="container" autosize>
     <mat-drawer mode="side" opened>
-        <div (click)="tabChange('pending')" class="tab">
-            Pending Request
-        </div>
-        <div (click)="tabChange('accepted')" class="tab">
-            Accepted Request
-        </div>
+      <div (click)="tabChange('pending')" class="tab" [ngClass]="currentTab === 'pending'?'tab-color':''">Pending Request</div>
+      <div (click)="tabChange('accepted')" class="tab" [ngClass]="currentTab === 'accepted'?'tab-color':''">Accepted Request</div>
     </mat-drawer>
-    <mat-drawer-content >
-        <div *ngIf="currentTab === 'pending'" class="appointment">
-            <app-pending-doctor-request></app-pending-doctor-request>
-        </div>
-        <div *ngIf="currentTab === 'accepted'" class="appointment">
-            <app-accepted-doctor-request></app-accepted-doctor-request>
-        </div>
+    <mat-drawer-content>
+      <div *ngIf="currentTab === 'pending'" class="appointment">
+        <app-pending-doctor-request></app-pending-doctor-request>
+      </div>
+      <div *ngIf="currentTab === 'accepted'" class="appointment">
+        <app-accepted-doctor-request></app-accepted-doctor-request>
+      </div>
     </mat-drawer-content>
   </mat-drawer-container>
 </div>

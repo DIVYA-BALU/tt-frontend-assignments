@@ -11,7 +11,9 @@ import com.petAdoption.petPalFinder.dao.VeterinaryDoctorDao;
 import com.petAdoption.petPalFinder.dto.StatusMessage;
 import com.petAdoption.petPalFinder.models.PreviousSubscripton;
 import com.petAdoption.petPalFinder.models.SubscriptionTransaction;
+import com.petAdoption.petPalFinder.models.WebsiteRevenue;
 import com.petAdoption.petPalFinder.repositorys.SubscriptionTransactionRepository;
+import com.petAdoption.petPalFinder.repositorys.WebsiteRevenueRepository;
 import com.petAdoption.petPalFinder.services.SubscriptionTransactionService;
 
 @Service
@@ -21,6 +23,9 @@ public class SubscriptionTransactionServiceImpl implements SubscriptionTransacti
 
     @Autowired
     VeterinaryDoctorDao veterinaryDoctorDao;
+
+    @Autowired
+    WebsiteRevenueRepository websiteRevenueRepository;
 
     @Override
     public StatusMessage subscribe(SubscriptionTransaction subscriptionTransaction) {
@@ -47,6 +52,11 @@ public class SubscriptionTransactionServiceImpl implements SubscriptionTransacti
         subscriptionTransaction.setValidTill(endDate);
         subscriptionTransactionRepository.save(subscriptionTransaction);
         veterinaryDoctorDao.updateSubscription(subscriptionTransaction.getSubscriberId(),true);
+        WebsiteRevenue websiteRevenue = new WebsiteRevenue();
+        websiteRevenue.setAmount(subscriptionTransaction.getCurrentPlan().getAmount());
+        websiteRevenue.setDate(new Date());
+        websiteRevenue.setUserId(subscriptionTransaction.get_id());
+        websiteRevenueRepository.save(websiteRevenue);
         statusMessage.setMessage("success");
         return statusMessage;
     }

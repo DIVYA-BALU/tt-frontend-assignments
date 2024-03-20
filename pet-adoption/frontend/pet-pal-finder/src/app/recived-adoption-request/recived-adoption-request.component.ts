@@ -5,6 +5,7 @@ import { AdoptionService } from '../service/adoption.service';
 import { AuthService } from '../service/auth.service';
 import { RequesterProfileComponent } from '../requester-profile/requester-profile.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-recived-adoption-request',
@@ -24,6 +25,9 @@ export class RecivedAdoptionRequestComponent {
   isLoading: boolean = false;
   currentPage: number = 0;
   id: string = '';
+  private requestSubscription: Subscription = new Subscription();
+  private updateSubscription: Subscription = new Subscription();
+  private idSubscription: Subscription = new Subscription();
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -62,7 +66,7 @@ export class RecivedAdoptionRequestComponent {
 
   loadData() {
     this.isLoading = true;
-    this.adoptionService
+    this.requestSubscription = this.adoptionService
       .getAdoptionStatusOfPoster(this.id, 'initiated', this.currentPage)
       .subscribe({
         next: (val) => {
@@ -74,20 +78,28 @@ export class RecivedAdoptionRequestComponent {
   }
 
   updateAdoptionStatus(id: string, status: string) {
-    this.adoptionService.updateAdoptionStatus(id, status).subscribe({
-      next: (val) => {
-        this.loadData();
-      },
-    });
+    this.updateSubscription = this.adoptionService
+      .updateAdoptionStatus(id, status)
+      .subscribe({
+        next: (val) => {
+          this.loadData();
+        },
+      });
   }
 
   ngOnInit() {
-    this.authService.sharedId$.subscribe({
+    this.idSubscription = this.authService.sharedId$.subscribe({
       next: (id) => {
         this.id = id;
         this.currentPage = 0;
         this.loadData();
       },
     });
+  }
+
+  ngOnDestroy() {
+    this.idSubscription.unsubscribe();
+    this.requestSubscription.unsubscribe();
+    this.updateSubscription.unsubscribe();
   }
 }

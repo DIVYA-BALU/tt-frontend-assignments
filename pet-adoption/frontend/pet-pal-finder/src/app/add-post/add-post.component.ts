@@ -74,8 +74,8 @@ export class AddPostComponent {
       },
     });
   }
-  
-  ngOnDestory(){
+
+  ngOnDestroy(){
     this.postSubscription.unsubscribe();
   }
 }

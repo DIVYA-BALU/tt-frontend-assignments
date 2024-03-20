@@ -11,11 +11,17 @@
       <div *ngFor="let petPost of petPosts" class="card">
         <div class="header">
           <span>Category : {{ petPost.category }}</span>
-          <button mat-icon-button [matMenuTriggerFor]="menu" class="logout-menu">
+          <button
+            mat-icon-button
+            [matMenuTriggerFor]="menu"
+            class="logout-menu"
+          >
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="deletePost(petPost._id)">Delete</button>
+            <button mat-menu-item (click)="deletePost(petPost._id)">
+              Delete
+            </button>
           </mat-menu>
         </div>
         <img [src]="petPost.images" alt="" />

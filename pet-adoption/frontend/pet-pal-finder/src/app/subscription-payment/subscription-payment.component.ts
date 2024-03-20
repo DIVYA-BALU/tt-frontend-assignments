@@ -11,6 +11,7 @@ import {
 import { AuthService } from '../service/auth.service';
 import { ProfileService } from '../service/profile.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 declare const Razorpay: any;
 
 @Component({
@@ -27,7 +28,7 @@ export class SubscriptionPaymentComponent {
     @Inject(MAT_DIALOG_DATA) public id: string,
     private formBuilder: FormBuilder,
     private profileService: ProfileService,
-    private router:Router
+    private router: Router
   ) {}
 
   subscriptionPlans: SubscriptionPlan[] = [];
@@ -37,6 +38,10 @@ export class SubscriptionPaymentComponent {
     amount: 0,
     months: 0,
   };
+  private idSubscription: Subscription = new Subscription();
+  private getUpdateSubscription: Subscription = new Subscription();
+  private orderSubscription: Subscription = new Subscription();
+  private paymentSubscription: Subscription = new Subscription();
 
   doctor?: VeterinaryDoctor;
 
@@ -92,36 +97,47 @@ export class SubscriptionPaymentComponent {
     this.subscription.currentPlan = this.plan;
     this.subscription.paymentId = response.razorpay_payment_id;
     this.subscription.subscriberId = this.doctor?._id || '';
-    this.paymentService
+    this.paymentSubscription = this.paymentService
       .addSubscription(this.subscription)
-      .subscribe({ next: (val) => {
-        this.dialogRef.close();
-        this.router.navigate(["pet/profile"])
-        window.location.reload();
-      } });
+      .subscribe({
+        next: (val) => {
+          this.dialogRef.close();
+          this.router.navigate(['pet/profile']);
+          window.location.reload();
+        },
+      });
   }
 
   pay(subscriptionPlan: SubscriptionPlan) {
     this.plan = subscriptionPlan;
-    this.paymentService.createOrder(subscriptionPlan.amount).subscribe({
-      next: (data) => {
-        this.openTransactionModel(data);
-      },
-    });
+    this.orderSubscription = this.paymentService
+      .createOrder(subscriptionPlan.amount)
+      .subscribe({
+        next: (data) => {
+          this.openTransactionModel(data);
+        },
+      });
   }
 
   ngOnInit() {
-    this.profileService.sharedUser$.subscribe({
+    this.idSubscription = this.profileService.sharedUser$.subscribe({
       next: (val) => {
         if ('isSubscribed' in val) {
           this.doctor = val;
         }
       },
     });
-    this.paymentService.getPlANS().subscribe({
+    this.getUpdateSubscription = this.paymentService.getPlANS().subscribe({
       next: (val) => {
         this.subscriptionPlans = val;
       },
     });
+  }
+
+  ngOnDestroy() {
+    this.getUpdateSubscription.unsubscribe();
+    this.paymentSubscription.unsubscribe();
+    this.orderSubscription.unsubscribe();
+    this.idSubscription.unsubscribe();
   }
 }

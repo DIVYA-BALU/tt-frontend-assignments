@@ -102,7 +102,7 @@ export class PetProfileComponent {
     });
   }
 
-  ngOnDestory() {
+  ngOnDestroy() {
     this.getSubscription.unsubscribe();
   }
 }

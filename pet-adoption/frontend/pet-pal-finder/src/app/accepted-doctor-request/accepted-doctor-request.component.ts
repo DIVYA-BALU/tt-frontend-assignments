@@ -35,7 +35,7 @@ export class AcceptedDoctorRequestComponent {
       },
     });
   }
-  ngOnDestory() {
+  ngOnDestroy() {
     this.idSubscription.unsubscribe();
     this.requestSubscription.unsubscribe();
   }

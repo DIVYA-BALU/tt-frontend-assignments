@@ -1,57 +1,57 @@
-<div *ngIf="veterinaryDoctors.length === 0" class="empty">No pending request</div>
+<div *ngIf="veterinaryDoctors.length === 0" class="empty">
+  No pending request
+</div>
 <div *ngFor="let veterinaryDoctor of veterinaryDoctors">
-<div class="container" *ngIf="veterinaryDoctor !== null">
-  <div
-    class="list"
-    [ngClass]="
-      currentStatus === 'accepted'
-        ? 'green'
-        : currentStatus === 'rejected'
-        ? 'red'
-        : ''
-    "
-  >
-    <img [src]="veterinaryDoctor?.degreeCertificate" alt="" />
-    <div class="details">
-      <div class="profile">
-        <img class="dp" [src]="veterinaryDoctor?.profilePhoto" alt="" />
-        {{ veterinaryDoctor?.name }}
+  <div class="container" *ngIf="veterinaryDoctor !== null">
+    <div
+      class="list"
+      [ngClass]="
+        currentStatus === 'accepted'
+          ? 'green'
+          : currentStatus === 'rejected'
+          ? 'red'
+          : ''
+      "
+    >
+      <img [src]="veterinaryDoctor?.degreeCertificate" alt="" />
+      <div class="details">
+        <div class="profile">
+          <img class="dp" [src]="veterinaryDoctor?.profilePhoto" alt="" />
+          {{ veterinaryDoctor?.name }}
+        </div>
+        <span>Degree : {{ veterinaryDoctor?.degree }}</span>
+        <span> Email ID : {{ veterinaryDoctor?.email }}</span>
+        <span> Contact Number : {{ veterinaryDoctor?.contactNumber }}</span>
       </div>
-      <span>Degree : {{ veterinaryDoctor?.degree }}</span>
-      <span> Email ID : {{ veterinaryDoctor?.email }}</span>
-      <span>
-        Contact Number : {{ veterinaryDoctor?.contactNumber }}</span
-      >
-    </div>
-    <div class="location">
-      Location Details
-      <span> Door No : {{ veterinaryDoctor?.location?.doorNo }}</span>
-      <span> Street : {{ veterinaryDoctor?.location?.street }}</span>
-      <span> City : {{ veterinaryDoctor?.location?.city }}</span>
-      <span> District : {{ veterinaryDoctor?.location?.district }}</span>
-      <span> State : {{ veterinaryDoctor?.location?.state }}</span>
-      <span> Country : {{ veterinaryDoctor?.location?.country }}</span>
-    </div>
-    <div class="status">
-      <div class="pending" *ngIf="currentStatus === 'pending'">
-        <button
-          type="button"
-          (click)="updateStatus(veterinaryDoctor?._id, 'accepted')"
-          class="accept"
-        >
-          Accept
-        </button>
-        <button
-          type="button"
-          (click)="updateStatus(veterinaryDoctor?._id, 'rejected')"
-          class="reject"
-        >
-          Reject
-        </button>
+      <div class="location">
+        Location Details
+        <span> Door No : {{ veterinaryDoctor?.location?.doorNo }}</span>
+        <span> Street : {{ veterinaryDoctor?.location?.street }}</span>
+        <span> City : {{ veterinaryDoctor?.location?.city }}</span>
+        <span> District : {{ veterinaryDoctor?.location?.district }}</span>
+        <span> State : {{ veterinaryDoctor?.location?.state }}</span>
+        <span> Country : {{ veterinaryDoctor?.location?.country }}</span>
       </div>
-      <div *ngIf="currentStatus === 'accepted'">Accepted</div>
-      <div *ngIf="currentStatus === 'rejected'">Rejected</div>
+      <div class="status">
+        <div class="pending" *ngIf="currentStatus === 'pending'">
+          <button
+            type="button"
+            (click)="updateStatus(veterinaryDoctor?._id, 'accepted')"
+            class="accept"
+          >
+            Accept
+          </button>
+          <button
+            type="button"
+            (click)="updateStatus(veterinaryDoctor?._id, 'rejected')"
+            class="reject"
+          >
+            Reject
+          </button>
+        </div>
+        <div *ngIf="currentStatus === 'accepted'">Accepted</div>
+        <div *ngIf="currentStatus === 'rejected'">Rejected</div>
+      </div>
     </div>
   </div>
-</div>
 </div>

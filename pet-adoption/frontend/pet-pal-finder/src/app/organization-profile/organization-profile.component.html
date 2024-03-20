@@ -1,65 +1,67 @@
 <div class="container">
-    <div class="registerBox">
-        <div class="logout">
-            <h1 class="head">Profile Details</h1>
-            <button mat-icon-button [matMenuTriggerFor]="menu" class="logout-menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="logout()">Logout</button>
-            </mat-menu>
-          </div>
-      <form class="form" [formGroup]="formResponse" (ngSubmit)="update()">
-          <label class="labels">Profile Photo</label>
-          <div class="profile">
-            
-              <img [src]="organization.organizationPhoto | imagePathConverter" alt="">
-             <input
-                type="file"
-                formControlName="image"
-                id="upload"
-                (change)="getImage($event)"
-              /></div>
-          
-        <mat-form-field class="feild">
-          <mat-label>Organization Name</mat-label>
-          <input type="text" matInput formControlName="name" />
-        </mat-form-field>
-        
-        <mat-form-field class="feild">
-          <mat-label>Contact Number</mat-label>
-          <input type="text" matInput formControlName="contactNumber" />
-        </mat-form-field>
-        Location Details
-        <div formGroupName="location" class="location">
-          <mat-form-field class="feild">
-            <mat-label>Door No</mat-label>
-            <input type="text" matInput formControlName="doorNo" />
-          </mat-form-field>
-          <mat-form-field class="feild">
-            <mat-label>street</mat-label>
-            <input type="text" matInput formControlName="street" />
-          </mat-form-field>
-          <mat-form-field class="feild">
-            <mat-label>City</mat-label>
-            <input type="text" matInput formControlName="city" />
-          </mat-form-field>
-          <mat-form-field class="feild">
-            <mat-label>District</mat-label>
-            <input type="text" matInput formControlName="district" />
-          </mat-form-field>
-          <mat-form-field class="feild">
-            <mat-label>State</mat-label>
-            <input type="text" matInput formControlName="state" />
-          </mat-form-field>
-          <mat-form-field class="feild">
-            <mat-label>Country</mat-label>
-            <input type="text" matInput formControlName="country" />
-          </mat-form-field>
-        </div>
-  
-        <button mat-flat-button type="submit">Update</button>
-      </form>
+  <div class="registerBox">
+    <div class="logout">
+      <h1 class="head">Profile Details</h1>
+      <button mat-icon-button [matMenuTriggerFor]="menu" class="logout-menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()">Logout</button>
+      </mat-menu>
     </div>
+    <form class="form" [formGroup]="formResponse" (ngSubmit)="update()">
+      <label class="labels">Profile Photo</label>
+      <div class="profile">
+        <img
+          [src]="organization.organizationPhoto | imagePathConverter"
+          alt=""
+        />
+        <input
+          type="file"
+          formControlName="image"
+          id="upload"
+          (change)="getImage($event)"
+        />
+      </div>
+
+      <mat-form-field class="feild">
+        <mat-label>Organization Name</mat-label>
+        <input type="text" matInput formControlName="name" />
+      </mat-form-field>
+
+      <mat-form-field class="feild">
+        <mat-label>Contact Number</mat-label>
+        <input type="text" matInput formControlName="contactNumber" />
+      </mat-form-field>
+      Location Details
+      <div formGroupName="location" class="location">
+        <mat-form-field class="feild">
+          <mat-label>Door No</mat-label>
+          <input type="text" matInput formControlName="doorNo" />
+        </mat-form-field>
+        <mat-form-field class="feild">
+          <mat-label>street</mat-label>
+          <input type="text" matInput formControlName="street" />
+        </mat-form-field>
+        <mat-form-field class="feild">
+          <mat-label>City</mat-label>
+          <input type="text" matInput formControlName="city" />
+        </mat-form-field>
+        <mat-form-field class="feild">
+          <mat-label>District</mat-label>
+          <input type="text" matInput formControlName="district" />
+        </mat-form-field>
+        <mat-form-field class="feild">
+          <mat-label>State</mat-label>
+          <input type="text" matInput formControlName="state" />
+        </mat-form-field>
+        <mat-form-field class="feild">
+          <mat-label>Country</mat-label>
+          <input type="text" matInput formControlName="country" />
+        </mat-form-field>
+      </div>
+
+      <button mat-flat-button type="submit">Update</button>
+    </form>
   </div>
-  
+</div>

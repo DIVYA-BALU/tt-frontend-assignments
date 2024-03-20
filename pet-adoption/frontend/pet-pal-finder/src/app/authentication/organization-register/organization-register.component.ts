@@ -29,7 +29,10 @@ export class OrganizationRegisterComponent {
       state: ['', [Validators.required, Validators.minLength(1)]],
       country: ['', [Validators.required, Validators.minLength(1)]],
     }),
-    contactNumber: ['', [Validators.required, Validators.minLength(1),Validators.min(0)]],
+    contactNumber: [
+      '',
+      [Validators.required, Validators.minLength(1), Validators.min(0)],
+    ],
   });
 
   file: File | null = null;
@@ -71,13 +74,13 @@ export class OrganizationRegisterComponent {
       .subscribe({
         next: (res) => {
           Swal.close();
-          if(res.message === 'Email Already Exist'){
+          if (res.message === 'Email Already Exist') {
             Swal.fire({
               title: 'Failed!',
               text: 'Email Already Exist',
               icon: 'error',
             });
-            return
+            return;
           }
           Swal.fire({
             title: 'Requested!',
@@ -93,7 +96,7 @@ export class OrganizationRegisterComponent {
       });
   }
 
-  ngOnDestory() {
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 }
