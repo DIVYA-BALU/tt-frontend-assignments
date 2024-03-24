@@ -1,8 +1,20 @@
-<div class="spinner-container">
-  <mat-spinner *appRoutehide="spinner" diameter="50"></mat-spinner>
-</div>
-
-<div class="container" *ngIf="!spinner">
+<div class="container">
+  <div class="contents" *ngIf="newsDatas.length > 0">
+    <div class="newsContent">
+      <div class="title">
+        {{ newsDatas[index].title }}
+      </div>
+      <div class="date">
+        {{ newsDatas[index].publishedAt | date}}
+      </div>
+      <div class="desc">
+        {{ newsDatas[index].description }}
+      </div>
+    </div>
+    <div class="image">
+      <img src="{{ newsDatas[index].urlToImage }}" alt="" />
+    </div>
+  </div>
   <div class="main-content">
     <div *ngFor="let news of newsContents" class="card">
       <img src="{{ news.images[0] }}" alt="" />

@@ -69,13 +69,7 @@ export class CreateArticleComponent implements OnInit, OnDestroy {
             text: 'Submitted Successfully!',
             icon: 'success',
           });
-          this.articleForm = new FormGroup({
-            articleUid: new FormControl('', Validators.required),
-            title: new FormControl('', Validators.required),
-            content: new FormControl('', Validators.required),
-            category: new FormControl('', Validators.required),
-            images: new FormControl('', Validators.required),
-          });
+          this.articleForm.reset();
           this.files = [];
           this.sharedService.setBadge(true);
         },

@@ -1,8 +1,4 @@
-<div class="spinner-container" *appRoutehide="spinner">
-  <mat-spinner diameter="50"></mat-spinner>
-</div>
-
-<div class="container" *appRoutehide="!spinner">
+<div class="container">
   <div class="header">
     <div class="heading" *ngIf="news">
       <h2>{{ news.title }}</h2>
@@ -22,7 +18,7 @@
     <div [innerHtml]="news.content" *appRoutehide="isSubscribed"></div>
   </div>
 
-  <div *appRoutehide="!spinner">
+  <div>
     <div *appRoutehide="!isSubscribed" class="subscribe">
       <div class="sub-container">
         <div class="subscribe-container">

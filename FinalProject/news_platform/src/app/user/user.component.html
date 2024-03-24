@@ -85,11 +85,11 @@
             name="search"
             id="search"
             placeholder="Search anything"
-            (keyup)="onSearch()"
+            (keyup.enter)="onSearch()"
             [(ngModel)]="inputText"
           />
           <button type="button">
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <i class="fa-solid fa-magnifying-glass" (click)="onSearch()"></i>
           </button>
         </div>
       </div>

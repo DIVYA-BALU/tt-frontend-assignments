@@ -70,12 +70,7 @@ export class CreateExplainersComponent implements OnDestroy, OnInit {
             text: 'Submitted Successfully!',
             icon: 'success',
           });
-          this.explainersForm = new FormGroup({
-            explainersUid: new FormControl('', Validators.required),
-            title: new FormControl('', Validators.required),
-            content: new FormControl('', Validators.required),
-            image: new FormControl('', Validators.required),
-          });
+          this.explainersForm.reset();
           this.image = null;
           this.sharedService.setBadge(true);
         },

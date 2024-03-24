@@ -8,6 +8,7 @@ import { DailyNewsService } from '../daily-news/daily-news.service';
 import { CommonService } from '../display-category/common-service.service';
 import { Explainers } from 'src/app/model/Explainers';
 import { Subscription } from 'rxjs';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,20 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
+  newsVideos: string[] = [
+    "https://www.youtube.com/embed/PJjnbPOSDDg?si=i5gYq1GO2WIhia1y",
+    "https://www.youtube.com/embed/8WXH_Q6B4Ig?si=8FJGbeYFyIFEQ7NZ",
+    "https://www.youtube.com/embed/MEU2ZF2iaAM?si=_p5oxy46u9CKS7EH",
+    "https://www.youtube.com/embed/kBQSsFFSfJg?si=4BPH49Ob8Ta3Rn-r",
+    "https://www.youtube.com/embed/deJU4BxQ8mE?si=-WiGIw1izx3GnXlW",
+    "https://www.youtube.com/embed/UDBrwN2CAAE?si=b8XbsTSL7uMQt3po",
+    "https://www.youtube.com/embed/-fMmOfHst3A?si=3G_1BgZfWGOZTA6m",
+    "https://www.youtube.com/embed/MqeMxqGvMuQ?si=2FgDUZW6dsx57iK5",
+    "https://www.youtube.com/embed/nhzO6EqWLqo?si=HUGIWMBSPoenO8Os",
+    "https://www.youtube.com/embed/BgROEavwqak?si=hs30_N2OWihSfNLA",
+    "https://www.youtube.com/embed/BgROEavwqak?si=vNU-SB_3izOf-Zlq"
+  ];
+  selectedUrl!: SafeUrl;
   shortReads: ShortReads[] = [];
   articles: Article[] = [];
   newsContents!: News[];
@@ -29,10 +44,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     private homeService: HomeService,
     private route: Router,
     private dailynewsService: DailyNewsService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit() {
+    this.randomVideoGenerator();
     this.getShortReads(0, 2);
     this.getArticle(0, 2);
     this.getDailyNews();
@@ -41,6 +58,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getSportsNews();
     this.getEntainmentNews();
     this.getExplainers();
+  }
+
+  randomVideoGenerator() {
+    this.selectedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.newsVideos[Math.floor(Math.random() * 12)]);
   }
 
   getShortReads(pageIndex: number, pageSize: number) {

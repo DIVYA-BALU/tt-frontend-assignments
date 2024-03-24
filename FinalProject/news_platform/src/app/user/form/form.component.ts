@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserNewsDTO } from 'src/app/model/UserNewsDTO';
 import { FormService } from './form.service';
@@ -20,6 +20,8 @@ export class FormComponent implements OnInit, OnDestroy {
 
   constructor(private formService: FormService) {}
 
+  @ViewChild('button') button!: ElementRef<HTMLButtonElement>;
+
   editorConfig = {
     base_url: '/tinymce',
     suffix: '.min',
@@ -30,28 +32,25 @@ export class FormComponent implements OnInit, OnDestroy {
     this.newsForm = new FormGroup({
       name: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
-      phoneNo: new FormControl('', Validators.required),
-      images: new FormControl('', Validators.required),
+      phoneNo: new FormControl('', [Validators.required, Validators.pattern(/^\d{10}$/)]),
       content: new FormControl('', Validators.required),
     });
   }
 
   onSubmit() {
     this.news = this.newsForm.value;
-    this.news.images = this.files;
+    if (this.files) {
+      this.news.images = this.files;
+    }
+    this.button.nativeElement.disabled = true;
     this.subscription = this.formService.createMyNews(this.news).subscribe(
       (data) => {
         Swal.fire({
           title: 'Thank you!',
           text: 'Your form has been submitted successfully!',
           icon: 'success',
-        });
-        this.newsForm = new FormGroup({
-          name: new FormControl('', Validators.required),
-          email: new FormControl('', Validators.required),
-          phoneNo: new FormControl('', Validators.required),
-          content: new FormControl('', Validators.required),
-        });
+        })
+        this.newsForm.reset();
         this.files = [];
       },
       (error) => {
@@ -68,20 +67,8 @@ export class FormComponent implements OnInit, OnDestroy {
 
   uploadImages(e: any) {
     for (let i = 0; i < e.target.files.length; i++) {
-      if (
-        e.target.files[i].name.includes(
-          new Date().toLocaleDateString('en-CA', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-          })
-        )
-      ) {
         this.files.push(e.target.files[i]);
         this.imgError = '';
-      } else {
-        this.imgError = 'error';
-      }
     }
   }
 

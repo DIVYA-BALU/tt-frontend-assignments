@@ -11,6 +11,8 @@ import { Subscription } from 'rxjs';
 })
 export class DailyNewsComponent implements OnInit, OnDestroy {
   newsContents!: News[];
+  newsObj!: any;
+  newsDatas: any[] = [];
   subscription: Subscription = new Subscription();
 
   constructor(
@@ -19,26 +21,42 @@ export class DailyNewsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.showSpinner();
     this.getDailyNews();
+    this.getDailyNewsApi();
     this.sharedService.setBadge(false);
   }
 
   getDailyNews() {
-    this.subscription = this.dailynewsService
-      .getDailyNews()
-      .subscribe((data) => {
+    this.subscription.add(
+      this.dailynewsService.getDailyNews().subscribe((data) => {
         this.newsContents = data;
-      });
+      })
+    );
   }
 
-  spinner!: boolean;
+  getDailyNewsApi() {
+    this.subscription.add(
+      this.dailynewsService.getDailyNewsApi().subscribe((data) => {
+        this.newsDatas = data.articles;
+        console.log(this.newsDatas);
+        this.displayNews();
+      })
+    );
+  }
 
-  showSpinner() {
-    this.spinner = true;
-    setTimeout(() => {
-      this.spinner = false;
-    }, 2000);
+  timer!: any;
+  index: number = 0;
+
+  displayNews() {
+    this.timer = setTimeout(() => {
+      if (this.index === this.newsDatas.length-1) {
+        this.index = 0;
+      } else {
+        this.index++;
+      }
+
+      this.displayNews();
+    }, 5000);
   }
 
   ngOnDestroy(): void {

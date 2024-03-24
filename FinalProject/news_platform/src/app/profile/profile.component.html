@@ -1,6 +1,7 @@
 <div class="top-div" *ngIf="role">
 <button type="button" (click)="savedStories()">Saved Stories</button>
 <button type="button" (click)="subscription()">My Subscription</button>
+<button type="button" (click)="myNews()"> My News</button>
 </div>
 <div class="form-container">
   <form [formGroup]="profileForm" (ngSubmit)="onSave()">

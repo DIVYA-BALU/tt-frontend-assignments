@@ -20,7 +20,6 @@ export class ShortReadsComponent implements OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.showSpinner();
     this.getShortReads(this.pageIndex, 5);
     this.sharedService.setBadge(false);
   }
@@ -30,22 +29,16 @@ export class ShortReadsComponent implements OnDestroy {
       .getShortReads(pageIndex, pageSize)
       .subscribe((data) => {
         data.content.forEach((data) => {
-          this.shortReads.push(data);
+          this.shortReads.push(data);          
         });
+        console.log(data);
+        
+        console.log(this.shortReads);
       });
   }
 
   loadMore() {
     this.getShortReads(++this.pageIndex, 5);
-  }
-
-  spinner!: boolean;
-
-  showSpinner() {
-    this.spinner = true;
-    setTimeout(() => {
-      this.spinner = false;
-    }, 2000);
   }
 
   ngOnDestroy(): void {

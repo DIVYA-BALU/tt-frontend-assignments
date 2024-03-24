@@ -1,8 +1,4 @@
-<div class="spinner-container">
-    <mat-spinner *appRoutehide="spinner" diameter="50"></mat-spinner>
-  </div>
-  
-  <div class="container" *ngIf="!spinner">
+<div class="container">
     <div class="main-content">
       <div *ngFor="let news of newsContents" class="card">
         <img src="{{ news.images[0] }}" alt="" />

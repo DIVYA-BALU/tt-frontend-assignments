@@ -76,12 +76,7 @@ export class CreateShortReadsComponent implements OnInit, OnDestroy {
             text: 'Submitted Successfully!',
             icon: 'success',
           });
-          this.shortReadsForm = new FormGroup({
-            shortReadsUid: new FormControl('', Validators.required),
-            title: new FormControl('', Validators.required),
-            content: new FormControl('', Validators.required),
-            category: new FormControl('', Validators.required),
-          });
+          this.shortReadsForm.reset();
           this.image = null;
           this.sharedService.setBadge(true);
         },

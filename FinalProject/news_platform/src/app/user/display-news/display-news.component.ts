@@ -31,7 +31,6 @@ export class DisplayNewsComponent implements OnDestroy {
         this.increaseViews();
       })
     );
-    this.showSpinner();
   }
 
   getNews() {
@@ -66,15 +65,6 @@ export class DisplayNewsComponent implements OnDestroy {
 
   increaseViews() {
     this.displayService.increaseViews(this.newsId);
-  }
-
-  spinner!: boolean;
-
-  showSpinner() {
-    this.spinner = true;
-    setTimeout(() => {
-      this.spinner = false;
-    }, 2000);
   }
 
   onClick() {

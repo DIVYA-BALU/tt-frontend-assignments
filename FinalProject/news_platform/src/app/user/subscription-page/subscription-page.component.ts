@@ -12,6 +12,7 @@ export class SubscriptionPageComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   displayedColumns: string[] = ['paymentId', 'startDate', 'endDate'];
   dataSource: SubscriptionResponse[] = [];
+  subscriptionResponses: SubscriptionResponse[] =[];
 
   constructor(private subscriptionpageService: SubscriptionPageService) {}
 
@@ -23,7 +24,8 @@ export class SubscriptionPageComponent implements OnInit, OnDestroy {
     this.subscription = this.subscriptionpageService
       .getTransaction()
       .subscribe((data) => {
-        this.dataSource = data;
+        this.subscriptionResponses.push(data);
+        this.dataSource = this.subscriptionResponses;
       });
   }
 

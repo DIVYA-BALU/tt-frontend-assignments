@@ -20,7 +20,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.showSpinner();
     this.getArticle(this.pageIndex, 5);
     this.sharedService.setBadge(false);
   }
@@ -37,15 +36,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
   loadMore() {
     this.getArticle(++this.pageIndex, 5);
-  }
-
-  spinner!: boolean;
-
-  showSpinner() {
-    this.spinner = true;
-    setTimeout(() => {
-      this.spinner = false;
-    }, 2000);
   }
 
   ngOnDestroy(): void {

@@ -16,7 +16,6 @@ export class TopNewsComponent implements OnDestroy {
   constructor(private homeService: HomeService) {}
 
   ngOnInit() {
-    this.showSpinner();
     this.getTopNews();
   }
 
@@ -25,16 +24,7 @@ export class TopNewsComponent implements OnDestroy {
       this.newsContents = data;
     });
   }
-
-  spinner!: boolean;
-
-  showSpinner() {
-    this.spinner = true;
-    setTimeout(() => {
-      this.spinner = false;
-    }, 2000);
-  }
-
+  
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

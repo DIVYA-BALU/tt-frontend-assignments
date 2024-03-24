@@ -12,11 +12,16 @@
   margin-bottom: 20px;
 }
 
+.required {
+  margin-bottom: 10px;
+}
+
 label {
   margin-right: 10px;
 }
 
 input[type="text"],
+input[type="tel"],
 select {
   margin-right: 20px;
   font-family: $font-family;
@@ -85,4 +90,5 @@ input[type="file"] {
 
 button[disabled] {
   cursor: not-allowed;
+  opacity: 0.2;
 }

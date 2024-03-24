@@ -91,14 +91,8 @@ export class UserComponent implements OnDestroy {
     this.route.navigate(['/signup']);
   }
 
-  timer: any;
-
   onSearch() {
-    clearTimeout(this.timer);
-    this.timer = setTimeout(() => {
-      this.sharedService.setSearchValue(this.inputText);
-    }, 1000);
-
+    this.sharedService.setSearchValue(this.inputText);
     this.route.navigate(['user/search']);
   }
 

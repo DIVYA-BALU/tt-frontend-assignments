@@ -41,6 +41,7 @@ import { TradingComponent } from './trading/trading.component';
 import { ExplainersComponent } from './explainers/explainers.component';
 import { DisplayExplainerComponent } from './display-explainer/display-explainer.component';
 import { SubscribeDialogComponent } from './subscribe-dialog/subscribe-dialog.component';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 
 @NgModule({
@@ -88,7 +89,8 @@ import { SubscribeDialogComponent } from './subscribe-dialog/subscribe-dialog.co
     MatChipsModule,
     MatBadgeModule,
     MatTabsModule,
-    MatTableModule
+    MatTableModule,
+    ScrollingModule
   ],
   providers: [
     {

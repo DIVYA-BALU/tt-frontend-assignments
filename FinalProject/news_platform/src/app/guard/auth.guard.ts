@@ -9,15 +9,21 @@ import { LoginBottomSheetComponent } from '../user/login-bottom-sheet/login-bott
 })
 export class AuthGuard implements CanActivate {
 
+  isLogged!: boolean;
+
   constructor(private sharedService: SharedServiceService, private _bottomSheet: MatBottomSheet, private route: Router){}
 
   canActivate(): boolean{
     this.sharedService.loginStatusData.subscribe((data) => {
       if (!data) {
         this._bottomSheet.open(LoginBottomSheetComponent);
+        this.isLogged = false;
+        // this.route.navigate(['/user/home']);
+      } else {
+        this.isLogged = true;
       }
     })
-    return true;
+    return this.isLogged;
   }
   
 }

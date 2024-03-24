@@ -1,8 +1,5 @@
-<div class="spinner-container" *appRoutehide="spinner">
-  <mat-spinner diameter="50"></mat-spinner>
-</div>
-
-<div class="container"  *appRoutehide="!spinner">
+<div class="container">
+<!-- <cdk-virtual-scroll-viewport appendOnly itemSize="5" class="example-viewport"> -->
   <div *ngFor="let shortRead of shortReads" class="card">
     <div class="img-div">
       <img src="{{ shortRead.image }}" alt="img" />
@@ -17,6 +14,8 @@
     </div>
   </div>
 </div>
-<div class="button"  *appRoutehide="!spinner">
+
+<div class="button">
   <button type="button" (click)="loadMore()">Load more...</button>
 </div>
+<!-- </cdk-virtual-scroll-viewport> -->

@@ -55,14 +55,7 @@ export class BreakingNewsComponent implements OnInit, OnDestroy {
           text: 'Submitted Successfully!',
           icon: 'success',
         });
-        this.newsForm = new FormGroup({
-          newsUid: new FormControl('', Validators.required),
-          title: new FormControl('', Validators.required),
-          synopsis: new FormControl('', Validators.required),
-          content: new FormControl('', Validators.required),
-          category: new FormControl('', Validators.required),
-          images: new FormControl('', Validators.required),
-        });
+        this.newsForm.reset();
         this.files = [];
         this.sharedService.setBadge(true);
       },

@@ -18,7 +18,7 @@ export class SubscriptionPageService {
     return this.http.post(`${this.url}/${id}`, {});
   }
 
-  getTransaction(): Observable<SubscriptionResponse[]> {
-    return this.http.get<SubscriptionResponse[]>(this.getUrl);
+  getTransaction(): Observable<SubscriptionResponse> {
+    return this.http.get<SubscriptionResponse>(this.getUrl);
   }
 }

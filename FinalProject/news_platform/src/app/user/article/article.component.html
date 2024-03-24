@@ -1,8 +1,4 @@
-<div class="spinner-container" *appRoutehide="spinner">
-  <mat-spinner diameter="50"></mat-spinner>
-</div>
-
-<div class="container" *appRoutehide="!spinner">
+<div class="container">
     <div *ngFor="let article of articles" class="card">
       <div class="img-div">
         <img src="{{ article.images[0] }}" alt="img" />
@@ -17,7 +13,7 @@
       </div>
     </div>
   </div>
-  <div class="button" *appRoutehide="!spinner">
+  <div class="button">
     <button type="button" (click)="loadMore()">Load more...</button>
   </div>
   

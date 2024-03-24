@@ -1,7 +1,11 @@
 <div class="form-container">
   <form [formGroup]="newsForm" (ngSubmit)="onSubmit()">
+    <div class="required">
+      <span>*</span> indicates that this field is required.
+    </div>
     <div class="container">
-      <label for="name">Name:</label>
+      <label for="name">Name</label>
+      <span>*</span>
       <input
         type="text"
         name="name"
@@ -17,7 +21,8 @@
     </div>
 
     <div class="container">
-      <label for="email">Email:</label>
+      <label for="email">Email</label>
+      <span>*</span>
       <input
         type="text"
         name="email"
@@ -33,22 +38,28 @@
     </div>
 
     <div class="container">
-      <label for="phoneNo">Phone no:</label>
+      <label for="phoneNo">Phone no</label>
+      <span>*</span>
       <input
-        type="text"
+        type="tel"
         name="phoneNo"
         id="phoneNo"
         placeholder="Ex: 9876543211"
         formControlName="phoneNo"
       />
+      <span
+        *ngIf="(newsForm.controls['phoneNo'].touched || newsForm.controls['phoneNo'].dirty) && (newsForm.controls['phoneNo'].errors?.['required'])"
+      >
+        PhoneNo is required
+      </span>
+      <span *ngIf="(newsForm.controls['phoneNo'].errors?.['pattern'])">
+        PhoneNo should contain only 10 digits
+      </span>
     </div>
 
     <div class="container img">
       <div class="img-div">
-        <p>
-          Upload images: (name should be same as unique id, if multiple
-          2024-03-07-(1), 2024-03-07-(2))
-        </p>
+        <p>Upload images:</p>
         <label for="img"><i class="fa-solid fa-cloud-arrow-up"></i></label>
         <input
           type="file"
@@ -56,7 +67,6 @@
           id="img"
           accept=".jpg, .jpeg, .png, .mp4"
           (change)="uploadImages($event)"
-          formControlName="images"
         />
       </div>
       <span *ngFor="let file of files; let i = index" class="span-img">
@@ -67,16 +77,11 @@
           </button>
         </p>
       </span>
-      <span
-        *ngIf="((newsForm.controls['images'].touched || newsForm.controls['images'].dirty) && newsForm.controls['images'].errors?.['required'])"
-      >
-        upload image
-      </span>
-      <span *ngIf="imgError"> invalid image name format! </span>
     </div>
 
     <div class="content container">
-      <label>News contents:</label>
+      <label>News contents</label>
+      <span>*</span>
       <span
         *ngIf="((newsForm.controls['content'].touched || newsForm.controls['content'].dirty) && newsForm.controls['content'].errors?.['required'])"
       >
@@ -90,8 +95,13 @@
     </div>
 
     <div>
-      <button type="submit" [disabled]="newsForm.invalid" class="submit">
-        Upload
+      <button
+        type="submit"
+        [disabled]="newsForm.invalid"
+        class="submit"
+        #button
+      >
+        Submit
       </button>
     </div>
   </form>

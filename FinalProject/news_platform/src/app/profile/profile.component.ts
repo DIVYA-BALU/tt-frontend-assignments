@@ -80,6 +80,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.route.navigate(['/user/mySubscription']);
   }
 
+  myNews() {
+    this.route.navigate(['/user/form'])
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach((data) => {
       data.unsubscribe();

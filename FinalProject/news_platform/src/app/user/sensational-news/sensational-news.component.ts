@@ -19,7 +19,6 @@ export class SensationalNewsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.showSpinner();
     this.getSensationalNews();
     this.sharedService.setBadge(false);
   }
@@ -30,15 +29,6 @@ export class SensationalNewsComponent implements OnInit, OnDestroy {
       .subscribe((data) => {
         this.newsContents = data;
       });
-  }
-
-  spinner!: boolean;
-
-  showSpinner() {
-    this.spinner = true;
-    setTimeout(() => {
-      this.spinner = false;
-    }, 2000);
   }
 
   ngOnDestroy(): void {
