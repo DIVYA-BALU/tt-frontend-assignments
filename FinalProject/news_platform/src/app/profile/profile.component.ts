@@ -1,54 +1,80 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { ProfileService } from './profile.service';
 import { User } from '../model/User';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent implements OnInit, OnDestroy {
+export class ProfileComponent implements OnDestroy {
   user!: User;
   subscriptions: Subscription[] = [];
-  profileForm!: FormGroup;
-  role!: boolean;
-
   status: string = '';
 
-  constructor(private profileService: ProfileService, private route: Router) {
+  constructor(
+    private profileService: ProfileService,
+    public dialog: MatDialog
+  ) {
     this.getProfile();
-  }
-
-  ngOnInit() {
-    this.profileForm = new FormGroup({
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
-      email: new FormControl(''),
-      phoneNo: new FormControl(''),
-      occupation: new FormControl(''),
-      location: new FormControl(''),
-    });
   }
 
   getProfile() {
     this.subscriptions.push(
       this.profileService.getProfile().subscribe((data) => {
         this.user = data;
-        this.profileForm = new FormGroup({
-          firstName: new FormControl(this.user.firstName),
-          lastName: new FormControl(this.user.lastName),
-          email: new FormControl(this.user.email),
-          phoneNo: new FormControl(this.user.phoneNo),
-          occupation: new FormControl(this.user.occupation),
-          location: new FormControl(this.user.location),
-        });
-        this.role = this.user.role.roleName === 'USER' ;
       })
     );
+  }
+
+  openDialog() {
+    this.dialog
+      .open(DialogDataExampleDialog, {
+        data: this.user,
+      })
+      .afterClosed()
+      .subscribe(() => {
+        this.getProfile();
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((data) => {
+      data.unsubscribe();
+    });
+  }
+}
+
+@Component({
+  selector: 'dialog-data-example-dialog',
+  templateUrl: 'dialog-data-example-dialog.html',
+  styleUrls: ['dialog-data-example-dialog.scss'],
+})
+export class DialogDataExampleDialog {
+  profileForm!: FormGroup;
+  subscriptions: Subscription[] = [];
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: User,
+    private profileService: ProfileService
+  ) {}
+
+  ngOnInit() {
+    this.profileForm = new FormGroup({
+      firstName: new FormControl(this.data.firstName),
+      lastName: new FormControl(this.data.lastName),
+      email: new FormControl(this.data.email),
+      phoneNo: new FormControl(
+        this.data.phoneNo,
+        Validators.pattern(/^\d{10}$/)
+      ),
+      occupation: new FormControl(this.data.occupation),
+      location: new FormControl(this.data.location),
+    });
   }
 
   onSave() {
@@ -70,23 +96,5 @@ export class ProfileComponent implements OnInit, OnDestroy {
         }
       )
     );
-  }
-
-  savedStories() {
-    this.route.navigate(['/user/savedstories']);
-  }
-
-  subscription() {
-    this.route.navigate(['/user/mySubscription']);
-  }
-
-  myNews() {
-    this.route.navigate(['/user/form'])
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((data) => {
-      data.unsubscribe();
-    });
   }
 }

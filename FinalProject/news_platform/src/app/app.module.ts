@@ -9,7 +9,7 @@ import { AuthInterceptor } from './auth.interceptor';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import {MatCardModule} from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ProfileComponent } from './profile/profile.component';
+import { DialogDataExampleDialog, ProfileComponent } from './profile/profile.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -18,13 +18,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SubscriptionComponent } from './subscription/subscription.component';
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
     AppComponent,
     PagenotfoundComponent,
     ProfileComponent,
-    SubscriptionComponent
+    SubscriptionComponent,
+    DialogDataExampleDialog
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,11 @@ import { SubscriptionComponent } from './subscription/subscription.component';
     MatDialogModule,
     MatButtonModule,
     MatBottomSheetModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    InfiniteScrollModule,
+    MatCardModule,
+    MatDividerModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

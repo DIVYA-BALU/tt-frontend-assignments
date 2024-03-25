@@ -1,59 +1,51 @@
-@import '~@fortawesome/fontawesome-free/css/all.css';
-@import '/src/styles/variables';
+@import "~@fortawesome/fontawesome-free/css/all.css";
+@import "/src/styles/variables";
 
-.top-div{
-    margin-left: 70px;
-    button {
-        background-color: $secondary-color;
-        height: 50px;
-        width: 10%;
-        cursor: pointer;
-        border: none;
-        text-align: center;
-        margin-right: 10px;
-        color: white;
-    }
+.container {
+  display: flex;
+  justify-content: center;
 }
 
-.form-container {
-    margin: 70px;
-    width: 60%;
-    padding: 30px;
-    box-shadow: 3px 3px 5px 5px rgb(193, 199, 201);
+.example-card {
+  width: 40%;
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
-.form-container table{
+.head {
+  margin-bottom: 10px;
+  font-family: $font-family;
+  justify-content: center;
+}
+
+.subtitle {
+  font-family: $font-family;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 30px;
+}
+
+.info-div {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid $tertiary-color;
+  width: 50%;
+  box-sizing: border-box;
+  margin-bottom: 5px;
+
+  h3 {
     font-family: $font-family;
-    font-size: 15px;
-    width: 100%
+  }
+
+  p {
+    color: $tertiary-color;
+  }
 }
 
-.form-container table input {
-    margin-top: 7px;
-    margin-bottom: 15px;
-    width: 100%;
-    height: 30px;
-    border: 1px solid grey;
-    outline: none;
-    box-sizing: border-box;
-    padding-left: 20px;
-}
-
-.form-container div input:focus {
-    padding-left: 20px;
-}
-
-.form-container .button-div{
-    margin-bottom: 0px;
-}
-
-.form-container table button {
-    background-color: $secondary-color;
-    height: 50px;
-    width: 30%;
-    cursor: pointer;
-    border: none;
-    text-align: center;
-    margin-right: 10px;
-    color: white;
+.edit {
+  font-size: 20px;
 }

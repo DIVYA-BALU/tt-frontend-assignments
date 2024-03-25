@@ -175,6 +175,22 @@ export class UserComponent implements OnDestroy {
     `;
   }
 
+  savedStories() {
+    this.route.navigate(['/user/savedstories']);
+  }
+
+  subscription() {
+    this.route.navigate(['/user/mySubscription']);
+  }
+
+  profile() {
+    this.route.navigate(['/user/profile']);
+  }
+
+  submitNews() {
+    this.route.navigate(['/user/form'])
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach((data) => {
       data.unsubscribe();

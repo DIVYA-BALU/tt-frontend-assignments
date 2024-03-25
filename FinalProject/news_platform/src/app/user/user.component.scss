@@ -32,7 +32,7 @@
   width: 25%;
   margin-left: 280px;
 
-  a {
+  button {
     font-size: 20px;
     color: black;
     margin-right: 10px;
@@ -42,7 +42,6 @@
     background-color: transparent;
     border: none;
     font-size: 20px;
-    font-family: $font-family;
     margin-top: 5px;
   }
 
@@ -66,11 +65,16 @@
   }
 }
 
+.menu-button {
+  font-family: $font-family;
+}
+
 .side-div {
   width: 25%;
   display: flex;
   justify-content: center;
   align-items: center;
+  
   button {
     background-color: transparent;
     margin-left: 10px;

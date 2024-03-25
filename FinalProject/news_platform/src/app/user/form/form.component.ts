@@ -1,4 +1,10 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserNewsDTO } from 'src/app/model/UserNewsDTO';
 import { FormService } from './form.service';
@@ -32,7 +38,10 @@ export class FormComponent implements OnInit, OnDestroy {
     this.newsForm = new FormGroup({
       name: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
-      phoneNo: new FormControl('', [Validators.required, Validators.pattern(/^\d{10}$/)]),
+      phoneNo: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^\d{10}$/),
+      ]),
       content: new FormControl('', Validators.required),
     });
   }
@@ -49,26 +58,26 @@ export class FormComponent implements OnInit, OnDestroy {
           title: 'Thank you!',
           text: 'Your form has been submitted successfully!',
           icon: 'success',
-        })
-        this.newsForm.reset();
-        this.files = [];
+        }).then(() => {
+          this.newsForm.reset();
+          this.files = [];
+        });
       },
       (error) => {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'Something went wrong!',
+        }).then(() => {
+          this.button.nativeElement.disabled = false;
         });
       }
     );
   }
 
-  imgError: string = '';
-
   uploadImages(e: any) {
     for (let i = 0; i < e.target.files.length; i++) {
-        this.files.push(e.target.files[i]);
-        this.imgError = '';
+      this.files.push(e.target.files[i]);
     }
   }
 

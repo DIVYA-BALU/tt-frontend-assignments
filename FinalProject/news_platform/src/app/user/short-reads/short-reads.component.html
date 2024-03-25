@@ -1,12 +1,17 @@
-<div class="container">
-<!-- <cdk-virtual-scroll-viewport appendOnly itemSize="5" class="example-viewport"> -->
+<div
+  class="container"
+  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="0"
+  (scrolled)="onScroll()"
+>
   <div *ngFor="let shortRead of shortReads" class="card">
     <div class="img-div">
       <img src="{{ shortRead.image }}" alt="img" />
     </div>
     <div class="content-div">
       <div class="div-flex">
-        <span>Report | {{ shortRead.date | date}}</span>
+        <span>Report | {{ shortRead.date | date }}</span>
         <a [routerLink]="['/user/display-short-reads', shortRead.id]">
           {{ shortRead.title }}</a
         >
@@ -18,4 +23,3 @@
 <div class="button">
   <button type="button" (click)="loadMore()">Load more...</button>
 </div>
-<!-- </cdk-virtual-scroll-viewport> -->

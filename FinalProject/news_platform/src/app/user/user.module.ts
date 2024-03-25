@@ -41,7 +41,8 @@ import { TradingComponent } from './trading/trading.component';
 import { ExplainersComponent } from './explainers/explainers.component';
 import { DisplayExplainerComponent } from './display-explainer/display-explainer.component';
 import { SubscribeDialogComponent } from './subscribe-dialog/subscribe-dialog.component';
-import {ScrollingModule} from '@angular/cdk/scrolling';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 @NgModule({
@@ -90,7 +91,9 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     MatBadgeModule,
     MatTabsModule,
     MatTableModule,
-    ScrollingModule
+    InfiniteScrollModule,
+    MatMenuModule,
+    MatTooltipModule
   ],
   providers: [
     {

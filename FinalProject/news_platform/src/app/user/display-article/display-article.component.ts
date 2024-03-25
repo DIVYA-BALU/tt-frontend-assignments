@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { SavedStoriesService } from '../saved-stories/saved-stories.service';
 import { SharedServiceService } from 'src/app/shared-service/shared-service.service';
 import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-display-article',
@@ -24,7 +25,8 @@ export class DisplayArticleComponent implements OnDestroy, OnInit {
     private displayService: DisplayArticleService,
     private savedStoriesService: SavedStoriesService,
     private router: Router,
-    private sharedService: SharedServiceService
+    private sharedService: SharedServiceService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -76,19 +78,8 @@ export class DisplayArticleComponent implements OnDestroy, OnInit {
     this.subscriptions.push(
       this.displayService.saveArtcile(this.articleId).subscribe(
         (data) => {
-          Swal.fire({
-            title: 'Thank you!',
-            text: 'Article saved successfully!',
-            icon: 'success',
-          });
+          this.openSnackBar();
           this.getSavedArticle();
-        },
-        (error) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!',
-          });
         }
       )
     );
@@ -110,22 +101,19 @@ export class DisplayArticleComponent implements OnDestroy, OnInit {
     this.subscriptions.push(
       this.displayService.unsaveArticle(this.articleId).subscribe(
         (data) => {
-          Swal.fire({
-            title: 'Thank you!',
-            text: 'Article unsaved successfully!',
-            icon: 'success',
-          });
+          this.openSnackBar();
           this.savedArticle = false;
-        },
-        (error) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!',
-          });
         }
       )
     );
+  }
+
+  durationInSeconds = 2;
+
+  openSnackBar() {
+    this._snackBar.openFromComponent(PizzaPartyComponent, {
+      duration: this.durationInSeconds * 1000,
+    });
   }
 
   onClick() {
@@ -138,3 +126,16 @@ export class DisplayArticleComponent implements OnDestroy, OnInit {
     });
   }
 }
+
+@Component({
+  selector: 'snack-bar-component-example-snack',
+  templateUrl: 'snack-bar-component-example-snack.html',
+  styles: [
+    `
+    .example-pizza-party {
+      color: hotpink;
+    }
+  `,
+  ],
+})
+export class PizzaPartyComponent {}

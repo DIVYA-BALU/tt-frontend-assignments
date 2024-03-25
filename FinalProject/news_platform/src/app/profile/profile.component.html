@@ -1,71 +1,38 @@
-<div class="top-div" *ngIf="role">
-<button type="button" (click)="savedStories()">Saved Stories</button>
-<button type="button" (click)="subscription()">My Subscription</button>
-<button type="button" (click)="myNews()"> My News</button>
-</div>
-<div class="form-container">
-  <form [formGroup]="profileForm" (ngSubmit)="onSave()">
-    <table>
-      <tr>
-        <td>
-          <label for="fname">First name:</label>
-          <input
-            type="text"
-            name="firstName"
-            id="fname"
-            formControlName="firstName"
-          />
-        </td>
-        <td>
-          <label for="lname">Last name:</label>
-          <input
-            type="text"
-            name="lastName"
-            id="lname"
-            formControlName="lastName"
-          />
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <label for="email">Email:</label>
-          <input type="text" name="email" id="email" formControlName="email" />
-        </td>
-        <td>
-          <label for="pno">Phone no:</label>
-          <input
-            type="text"
-            name="phoneNo"
-            id="pno"
-            formControlName="phoneNo"
-          />
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <label for="occupation">Occupation:</label>
-          <input
-            type="text"
-            name="occupation"
-            id="occupation"
-            formControlName="occupation"
-          />
-        </td>
-        <td>
-          <label for="location">Location:</label>
-          <input
-            type="text"
-            name="location"
-            id="location"
-            formControlName="location"
-          />
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <button type="submit">SAVE</button>
-        </td>
-      </tr>
-    </table>
-  </form>
+<div class="container">
+  <mat-card class="example-card" *ngIf="user">
+    <mat-card-header class="head">
+      <mat-card-subtitle class="subtitle">About</mat-card-subtitle>
+    </mat-card-header>
+
+    <div class="content">
+      <div class="info-div">
+        <h3>First Name:</h3>
+        <p>{{user.firstName}}</p>
+      </div>
+      <div class="info-div">
+        <h3>Last Name:</h3>
+        <p>{{user.lastName}}</p>
+      </div>
+      <div class="info-div">
+        <h3>Email:</h3>
+        <p>{{user.email}}</p>
+      </div>
+      <div class="info-div">
+        <h3>Phone No:</h3>
+        <p>{{user.phoneNo}}</p>
+      </div>
+      <div class="info-div">
+        <h3>Occupation:</h3>
+        <p>{{user.occupation}}</p>
+      </div>
+      <div class="info-div">
+        <h3>Location:</h3>
+        <p>{{user.location}}</p>
+      </div>
+
+      <mat-card-actions>
+        <button mat-button class="edit" (click)="openDialog()"><i class="fa-regular fa-pen-to-square"></i></button>
+      </mat-card-actions>
+    </div>
+  </mat-card>
 </div>

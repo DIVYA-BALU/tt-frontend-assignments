@@ -20,10 +20,14 @@
       >
         Subscribe
       </button>
-      <h4>Hi, {{name | titlecase}}</h4>
-      <a routerLink="profile">
-        <i class="fa fa-user" aria-hidden="true"></i>
-      </a>
+      <h4>Hi, {{ name | titlecase }}</h4>
+      <button mat-button [matMenuTriggerFor]="menu"><i class="fa fa-user" aria-hidden="true"></i></button>
+      <mat-menu #menu="matMenu" class="menu-button">
+        <button mat-menu-item (click)="profile()" class="menu-button">My Profile</button>
+        <button mat-menu-item (click)="savedStories()" class="menu-button">Saved Stories</button>
+        <button mat-menu-item (click)="subscription()" class="menu-button">My Subscription</button>
+        <button mat-menu-item (click)="submitNews()" class="menu-button">My News</button>
+      </mat-menu>
       <button type="button" (click)="logout()" class="logout">
         <i class="fa-solid fa-right-from-bracket"></i>
       </button>
@@ -93,7 +97,10 @@
           </button>
         </div>
       </div>
-      <div id="trading-ticker-tape-container" class="tradingview-widget-container">
+      <div
+        id="trading-ticker-tape-container"
+        class="tradingview-widget-container"
+      >
         <div class="tradingview-widget-container__widget" #trading></div>
       </div>
       <div class="main-content">
@@ -101,15 +108,14 @@
       </div>
 
       <div class="footer">
-          <div class="heading">
-            <span class="logo">
-              <img src="/favicon.ico" alt="logo" />
-            </span>
-            InsightNow
-          </div>
+        <div class="heading">
+          <span class="logo">
+            <img src="/favicon.ico" alt="logo" />
+          </span>
+          InsightNow
+        </div>
         <p>&copy; 2024 InsightNow. All rights reserved.</p>
       </div>
-      
     </mat-sidenav-content>
   </mat-sidenav-container>
 </ng-container>
